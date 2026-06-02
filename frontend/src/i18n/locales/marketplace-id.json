@@ -171,7 +171,8 @@
       "dummyContent": "Konten Dummy",
       "preview": "Pratinjau",
       "buyNow": "Beli Sekarang",
-      "viewDetails": "Lihat Detail"
+      "viewDetails": "Lihat Detail",
+      "dummyNotForSale": "Hanya Pratinjau"
     },
     "nfa101": {
       "sectionLabel": "Edukasi",
@@ -280,6 +281,12 @@
         "prev": "Sebelumnya",
         "next": "Berikutnya",
         "page": "Halaman {{page}} dari {{pages}}"
+      },
+      "status": {
+        "active": "Aktif",
+        "ended": "Berakhir",
+        "sold": "Terjual",
+        "cancelled": "Dibatalkan"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "Sebelumnya",
         "next": "Berikutnya",
         "page": "Halaman {{page}} dari {{pages}}"
-      }
+      },
+      "status": {
+        "open": "Buka",
+        "accepted": "Diterima",
+        "completed": "Selesai",
+        "cancelled": "Dibatalkan",
+        "expired": "Kedaluwarsa"
+      },
+      "openOfferText": "Beri saya penawaran"
     },
     "quests": {
       "heading": "Papan Misi",
@@ -499,6 +514,13 @@
         "prev": "Sebelumnya",
         "next": "Berikutnya",
         "page": "Halaman {{page}} dari {{pages}}"
+      },
+      "status": {
+        "open": "Buka",
+        "claimed": "Diklaim",
+        "completed": "Selesai",
+        "cancelled": "Dibatalkan",
+        "expired": "Kedaluwarsa"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "Beli Sekarang",
       "listNow": "Daftar Sekarang",
       "yourListed": "{{type}} Anda (Terdaftar)",
-      "notAvailable": "Tidak Tersedia"
+      "notAvailable": "Tidak Tersedia",
+      "dummyNotForSale": "Pratinjau — Tidak Tersedia untuk Dibeli"
     },
     "fundModal": {
       "title": "USDC tidak mencukupi",

@@ -1119,6 +1119,31 @@
     "pairing": "กำลังจับคู่...",
     "unavailableNow": "ไม่พร้อมใช้งานในขณะนี้",
     "pairDevice": "จับคู่อุปกรณ์",
-    "vrInteractionMode": "โหมด VR · เร็วๆ นี้"
+    "vrInteractionMode": "โหมด VR · เร็วๆ นี้",
+    "eventStatus": {
+      "eventOngoing": "กิจกรรมกำลังดำเนินอยู่",
+      "endsIn": "สิ้นสุดใน",
+      "startsIn": "เริ่มใน",
+      "resetsDaily": "รีเซ็ตรายวัน",
+      "seasonEndsIn": "ฤดูกาลสิ้นสุดใน"
+    },
+    "eventItems": {
+      "inviteFriends": "เชิญเพื่อน",
+      "landBaseOversight": "การดูแลฐาน",
+      "questsTrail": "เส้นทางภารกิจ",
+      "contractKiller": "นักฆ่าสัญญา",
+      "mazedMission": "ภารกิจในเขาวงกต",
+      "flamingAsteroid": "ดาวเคราะห์น้อยเพลิง",
+      "refiningMaster": "ปรมาจารย์การกลั่น",
+      "starGaze": "ดูดาว",
+      "dailyLoginBonus": "โบนัสเข้าสู่ระบบรายวัน",
+      "battlePass": "บัตรผ่านการต่อสู้",
+      "allianceWar": "สงครามพันธมิตร",
+      "weeklyChallenge": "ความท้าทายรายสัปดาห์",
+      "galacticCup": "กาแลคติกคัพ",
+      "speedRacingTournament": "การแข่งขันความเร็ว",
+      "overlordChampionship": "แชมเปี้ยนชิพโอเวอร์ลอร์ด"
+    },
+    "eventDetailPlaceholder": "รายละเอียดกิจกรรมทั้งหมด รางวัล และตัวเลือกการเข้าร่วมจะพร้อมใช้งานเมื่อกิจกรรมนี้เปิดตัว"
   }
 }

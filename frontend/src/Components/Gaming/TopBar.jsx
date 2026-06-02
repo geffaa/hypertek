@@ -12,6 +12,7 @@ import { logout } from "../../Redux/AuthSlice";
 import symbol from "../../assets/images/login/Symbol.svg.png";
 import useMobileLandscape from "../../hooks/useMobileLandscape";
 import { Rocket } from "lucide-react";
+import i18n from "../../i18n/index.js";
 
 // Per-game resource values (mock — replace with API per game)
 const GAME_RESOURCES = {
@@ -156,6 +157,47 @@ const MARKET_ITEMS = [
   { key: "quest",       label: "Quest",       tab: "quests"    },
 ];
 
+const LANG_LIST = [
+  { code: "en",    cc: "us", label: "English"         },
+  { code: "fr",    cc: "fr", label: "Français"        },
+  { code: "it",    cc: "it", label: "Italiano"        },
+  { code: "de",    cc: "de", label: "Deutsch"         },
+  { code: "es",    cc: "es", label: "Español"         },
+  { code: "ru",    cc: "ru", label: "Русский"         },
+  { code: "ko",    cc: "kr", label: "한국어"           },
+  { code: "ja",    cc: "jp", label: "日本語"           },
+  { code: "pt",    cc: "br", label: "Português"       },
+  { code: "ar",    cc: "sa", label: "العربية"         },
+  { code: "ms",    cc: "my", label: "Melayu"          },
+  { code: "no",    cc: "no", label: "Norsk"           },
+  { code: "nl",    cc: "nl", label: "Nederlands"      },
+  { code: "th",    cc: "th", label: "ไทย"             },
+  { code: "tr",    cc: "tr", label: "Türkçe"          },
+  { code: "vi",    cc: "vn", label: "Việt"            },
+  { code: "id",    cc: "id", label: "Indonesia"       },
+  { code: "zh",    cc: "cn", label: "简体中文"         },
+  { code: "zh-TW", cc: "tw", label: "繁體中文"         },
+  { code: "sv",    cc: "se", label: "Svenska"         },
+  { code: "he",    cc: "il", label: "עברית"           },
+  { code: "da",    cc: "dk", label: "Dansk"           },
+  { code: "ro",    cc: "ro", label: "Română"          },
+  { code: "fil",   cc: "ph", label: "Filipino"        },
+  { code: "hi",    cc: "in", label: "हिंदी"            },
+  { code: "pl",    cc: "pl", label: "Polski"          },
+  { code: "el",    cc: "gr", label: "Ελληνικά"        },
+];
+
+const LangFlag = ({ cc, size = 20 }) => (
+  <img
+    src={`https://flagcdn.com/w${size}/${cc}.png`}
+    srcSet={`https://flagcdn.com/w${size * 2}/${cc}.png 2x`}
+    width={size}
+    height={Math.round(size * 0.75)}
+    alt=""
+    style={{ objectFit: "cover", borderRadius: 2, display: "block", flexShrink: 0 }}
+  />
+);
+
 const CSS = `
   .res-slot {
     transition: background 0.15s, color 0.15s;
@@ -193,6 +235,11 @@ const CSS = `
     to   { opacity: 1; transform: scale(1); }
   }
   .wallet-modal { animation: walletModalFade 0.22s ease both; }
+
+  .lang-dropdown::-webkit-scrollbar { width: 3px; }
+  .lang-dropdown::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+  .lang-dropdown::-webkit-scrollbar-thumb { background: rgba(0,212,255,0.35); border-radius: 2px; }
+  .lang-dropdown::-webkit-scrollbar-thumb:hover { background: rgba(0,212,255,0.65); }
 
   .sections-scroll::-webkit-scrollbar { width: 3px; }
   .sections-scroll::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
@@ -395,7 +442,7 @@ export default function TopBar({ activeGame }) {
     ...NAV_BTN_BASE,
     height: isMobile ? "26px" : "clamp(28px,3.8vh,42px)",
     padding: isMobile ? "0 8px" : "0 10px",
-    fontSize: isMobile ? "clamp(7px,0.7vw,9px)" : "clamp(8px,0.72vw,11px)",
+    fontSize: isMobile ? "clamp(6px,0.62vw,8px)" : "clamp(7px,0.65vw,10px)",
   };
 
   // ── Resource dropdown ────────────────────────────────────────────
@@ -452,6 +499,19 @@ export default function TopBar({ activeGame }) {
   const openCat  = (id) => { clearTimeout(catTimer.current); setActiveCat(id); };
   const closeCat = ()   => { catTimer.current = setTimeout(() => setActiveCat(null), 200); };
 
+  // ── Language dropdown ─────────────────────────────────────────────
+  const [langOpen, setLangOpen] = useState(false);
+  const [currentLang, setCurrentLang] = useState(i18n.language || "en");
+  const langRef = useRef(null);
+
+  const handleLangSelect = (code) => {
+    i18n.changeLanguage(code);
+    setCurrentLang(code);
+    setLangOpen(false);
+  };
+
+  const activeLang = LANG_LIST.find(l => l.code === currentLang) || LANG_LIST[0];
+
   // ── Wallet modal ─────────────────────────────────────────────────
   const [walletOpen, setWalletOpen] = useState(false);
   const [account, setAccount] = useState(null);
@@ -474,6 +534,8 @@ export default function TopBar({ activeGame }) {
       if (vrShipRef.current && !vrShipRef.current.contains(e.target)) {
         setVrShipOpen(false); setVrShipPairing(false); setVrShipPairDone(false);
       }
+      if (langRef.current && !langRef.current.contains(e.target))
+        setLangOpen(false);
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
@@ -841,11 +903,12 @@ export default function TopBar({ activeGame }) {
         <div ref={resBarRef} style={{
           flex: 1, height: isMobile ? "26px" : "clamp(28px,3.8vh,42px)",
           display: "flex", alignItems: "stretch",
-          background: "rgba(255,255,255,0.12)",
-          border: "1px solid rgba(255,255,255,0.24)",
+          background: "rgba(4,12,28,0.78)",
+          border: "1px solid rgba(255,255,255,0.18)",
           borderRadius: "3px",
           backdropFilter: "blur(14px)",
           WebkitBackdropFilter: "blur(14px)",
+          boxShadow: "0 2px 12px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.07)",
           overflow: "visible",
           minWidth: 0, position: "relative",
         }}>
@@ -857,13 +920,12 @@ export default function TopBar({ activeGame }) {
               {/* slot button */}
               <div
                 className="res-slot"
-                data-tooltip={t(`hud.resourceLabels.${r.id.toLowerCase()}`, r.label)}
                 onClick={() => setActiveRes(activeRes === r.id ? null : r.id)}
                 style={{
                   height: "100%", display: "flex", alignItems: "center",
                   gap: "5px", padding: "0 8px", cursor: "pointer",
-                  borderRight: i < RESOURCES.length - 1 ? "1px solid rgba(0,212,255,0.1)" : "none",
-                  background: activeRes === r.id ? "rgba(0,212,255,0.09)" : "transparent",
+                  borderRight: i < RESOURCES.length - 1 ? "1px solid rgba(0,212,255,0.12)" : "none",
+                  background: activeRes === r.id ? "rgba(0,212,255,0.12)" : "transparent",
                 }}
               >
                 <img
@@ -882,7 +944,8 @@ export default function TopBar({ activeGame }) {
                       fontFamily: "Orbitron,sans-serif",
                       fontSize: "clamp(6px,0.55vw,8px)",
                       letterSpacing: "0.08em",
-                      color: "rgba(255,255,255,0.75)",
+                      color: "rgba(255,255,255,0.92)",
+                      textShadow: "0 0 8px rgba(0,0,0,0.9), 0 1px 2px rgba(0,0,0,0.8)",
                       textTransform: "uppercase",
                       lineHeight: 1, marginBottom: "2px",
                       whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
@@ -892,7 +955,7 @@ export default function TopBar({ activeGame }) {
                     fontFamily: "Orbitron,sans-serif",
                     fontSize: isMobile ? "clamp(7px,0.7vw,9px)" : "clamp(9px,0.78vw,12px)",
                     fontWeight: "bold", letterSpacing: "0.05em",
-                    color: r.color, textShadow: `0 0 6px ${r.color}88`,
+                    color: r.color, textShadow: `0 0 8px ${r.color}cc, 0 1px 3px rgba(0,0,0,0.9)`,
                     whiteSpace: "nowrap", lineHeight: 1,
                   }}>{r.value}</div>
                 </div>
@@ -1034,6 +1097,82 @@ export default function TopBar({ activeGame }) {
         >
           {connected ? (shortAddr || t("hud.connected", "CONNECTED")) : t("hud.wallet", "WALLET")}
         </button>
+
+        {/* 5. LANGUAGE selector */}
+        <div ref={langRef} style={{ position: "relative", flexShrink: 0 }}>
+          <button
+            className="res-slot"
+            onClick={() => setLangOpen(o => !o)}
+            style={{
+              ...NAV_BTN,
+              padding: isMobile ? "0 6px" : "0 8px",
+              display: "flex", alignItems: "center", gap: "4px",
+            }}
+          >
+            <LangFlag cc={activeLang.cc} size={isMobile ? 16 : 20} />
+            <span style={{
+              fontSize: "8px",
+              transition: "transform 0.18s",
+              transform: langOpen ? "rotate(180deg)" : "rotate(0deg)",
+            }}>▼</span>
+          </button>
+
+          {langOpen && (
+            <div className="market-dropdown lang-dropdown" style={{
+              position: "absolute",
+              top: "calc(100% + 6px)",
+              right: 0,
+              width: isMobile ? 220 : 280,
+              maxHeight: isMobile ? 260 : 360,
+              overflowY: "auto",
+              background: "rgba(3,10,24,0.97)",
+              border: "1px solid rgba(0,212,255,0.3)",
+              borderRadius: 4,
+              backdropFilter: "blur(16px)",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.7), 0 0 20px rgba(0,212,255,0.08)",
+              zIndex: 100,
+              padding: "6px",
+              scrollbarWidth: "thin",
+              scrollbarColor: "rgba(0,212,255,0.35) rgba(0,0,0,0.2)",
+            }}>
+              <div style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "4px",
+              }}>
+                {LANG_LIST.map(lang => {
+                  const isActive = lang.code === currentLang;
+                  return (
+                    <button
+                      key={lang.code}
+                      onClick={() => handleLangSelect(lang.code)}
+                      className="market-dropdown-item"
+                      style={{
+                        display: "flex", alignItems: "center", gap: "8px",
+                        padding: isMobile ? "7px 8px" : "9px 10px",
+                        background: isActive ? "rgba(0,212,255,0.15)" : "transparent",
+                        border: isActive ? "1px solid rgba(0,212,255,0.4)" : "1px solid transparent",
+                        borderRadius: 4,
+                        cursor: "pointer",
+                        color: isActive ? "#00D4FF" : "rgba(200,225,240,0.9)",
+                        fontFamily: "Orbitron,sans-serif",
+                        fontSize: isMobile ? 9 : 11,
+                        letterSpacing: "0.05em",
+                        textAlign: "left",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      <LangFlag cc={lang.cc} size={20} />
+                      <span style={{ overflow: "hidden", textOverflow: "ellipsis" }}>{lang.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
 
       </div>
 

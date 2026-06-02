@@ -45,7 +45,7 @@ function AuctionDetailPopup({ auction, imgSrc, onClose, onBid, onInstantBuy }) {
           <span className={`absolute top-2.5 left-2.5 px-2 py-0.5 rounded text-[9px] font-bold uppercase
             ${auction.status === "active" ? "text-green-300" : auction.status === "ended" ? "text-red-400" : "text-white/40"}`}
             style={{ background: "rgba(0,0,0,0.6)", border: "1px solid rgba(255,255,255,0.12)" }}>
-            {auction.status}
+            {t(`marketplace.auctions.status.${auction.status}`, auction.status)}
           </span>
           {auction.isNFA && (
             <span className="absolute top-2.5 right-8 px-1.5 py-0.5 rounded text-[9px] font-bold text-white"
@@ -63,7 +63,7 @@ function AuctionDetailPopup({ auction, imgSrc, onClose, onBid, onInstantBuy }) {
               {auction.category && (
                 <span className="px-1.5 py-0.5 rounded text-[9px] font-semibold capitalize"
                   style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.5)" }}>
-                  {auction.category}
+                  {tCat(auction.category, t)}
                 </span>
               )}
               <span className="text-white/25 text-[10px]">{bidCount} {t("marketplace.auctions.detail.bids")}</span>
@@ -245,7 +245,7 @@ function BidModal({ auction, onClose, onSuccess, wallet }) {
                   {auction.category && (
                     <span className="inline-block mt-1 px-1.5 py-0.5 rounded text-[9px] font-semibold capitalize"
                       style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.5)" }}>
-                      {auction.category}
+                      {tCat(auction.category, t)}
                     </span>
                   )}
                   {auction.description && (
@@ -759,7 +759,7 @@ function AuctionCard({ auction, onBid, onInstantBuy }) {
           {auction.category && (
             <span className="px-1.5 py-0.5 rounded text-[9px] font-semibold capitalize"
               style={{ background: "rgba(0,0,0,0.55)", border: "1px solid rgba(255,255,255,0.18)", color: "rgba(255,255,255,0.7)" }}>
-              {auction.category}
+              {tCat(auction.category, t)}
             </span>
           )}
           {isUrgent && (
@@ -769,7 +769,7 @@ function AuctionCard({ auction, onBid, onInstantBuy }) {
             </span>
           )}
         </div>
-        <span className={`absolute top-2 right-2 text-[10px] font-bold uppercase ${statusColor}`}>{auction.status}</span>
+        <span className={`absolute top-2 right-2 text-[10px] font-bold uppercase ${statusColor}`}>{t(`marketplace.auctions.status.${auction.status}`, auction.status)}</span>
         <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none"
           style={{ background: "rgba(0,0,0,0.35)" }}>
           <span className="text-white/70 text-[10px] font-semibold bg-black/60 px-2 py-1 rounded">
@@ -849,6 +849,28 @@ function InvestorBanner() {
   );
 }
 
+// ── Category i18n helper ──────────────────────────────────────────────────────
+const CAT_KEY = {
+  "skins":          "skins",
+  "military badges":"militaryBadges",
+  "specialists":    "specialists",
+  "weapons":        "weapons",
+  "body armour":    "bodyArmour",
+  "spaceships":     "spaceships",
+  "racing vehicles":"racingVehicles",
+  "vehicles":       "racingVehicles",
+  "artwork":        "artwork",
+  "land & bases":   "landAndBases",
+  "land and bases": "landAndBases",
+  "general":        "general",
+  "badges":         "militaryBadges",
+};
+function tCat(cat, t) {
+  if (!cat) return "";
+  const key = CAT_KEY[cat.toLowerCase()];
+  return key ? t(`marketplace.general.categories.${key}`, cat) : cat;
+}
+
 // ── Static preview data ───────────────────────────────────────────────────────
 const now = Date.now();
 const PREVIEW_AUCTIONS = [
@@ -923,7 +945,7 @@ export default function AuctionsTab() {
                 style={filter === f
                   ? { background: "rgba(0,42,168,0.8)", border: "1px solid rgba(0,80,255,0.5)", color: "#fff" }
                   : { background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.4)" }
-                }>{f}</button>
+                }>{t(`marketplace.auctions.status.${f}`, f)}</button>
             ))}
           </div>
           {isLoggedInUser && (

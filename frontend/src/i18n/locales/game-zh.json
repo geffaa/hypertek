@@ -1119,6 +1119,31 @@
     "pairing": "配对中...",
     "unavailableNow": "暂时不可用",
     "pairDevice": "配对设备",
-    "vrInteractionMode": "VR互动模式·即将推出"
+    "vrInteractionMode": "VR互动模式·即将推出",
+    "eventStatus": {
+      "eventOngoing": "活动进行中",
+      "endsIn": "剩余时间",
+      "startsIn": "开始倒计时",
+      "resetsDaily": "每日重置",
+      "seasonEndsIn": "赛季结束倒计时"
+    },
+    "eventItems": {
+      "inviteFriends": "邀请好友",
+      "landBaseOversight": "基地监察",
+      "questsTrail": "任务追踪",
+      "contractKiller": "合同杀手",
+      "mazedMission": "迷宫任务",
+      "flamingAsteroid": "火焰小行星",
+      "refiningMaster": "精炼大师",
+      "starGaze": "观星",
+      "dailyLoginBonus": "每日登录奖励",
+      "battlePass": "战斗通行证",
+      "allianceWar": "联盟战争",
+      "weeklyChallenge": "每周挑战",
+      "galacticCup": "银河杯",
+      "speedRacingTournament": "极速赛车锦标赛",
+      "overlordChampionship": "霸主锦标赛"
+    },
+    "eventDetailPlaceholder": "完整的活动详情、奖励和参与选项将在活动开始后提供。"
   }
 }

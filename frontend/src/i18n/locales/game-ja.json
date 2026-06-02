@@ -1119,6 +1119,31 @@
     "pairing": "ペアリング中...",
     "unavailableNow": "現在利用不可",
     "pairDevice": "デバイスをペアリング",
-    "vrInteractionMode": "VRインタラクションモード・近日公開"
+    "vrInteractionMode": "VRインタラクションモード・近日公開",
+    "eventStatus": {
+      "eventOngoing": "イベント開催中",
+      "endsIn": "終了まで",
+      "startsIn": "開始まで",
+      "resetsDaily": "毎日リセット",
+      "seasonEndsIn": "シーズン終了まで"
+    },
+    "eventItems": {
+      "inviteFriends": "フレンド招待",
+      "landBaseOversight": "拠点監視",
+      "questsTrail": "クエスト探索",
+      "contractKiller": "契約キラー",
+      "mazedMission": "迷宮ミッション",
+      "flamingAsteroid": "燃える小惑星",
+      "refiningMaster": "精錬マスター",
+      "starGaze": "星観測",
+      "dailyLoginBonus": "デイリーログインボーナス",
+      "battlePass": "バトルパス",
+      "allianceWar": "同盟戦争",
+      "weeklyChallenge": "ウィークリーチャレンジ",
+      "galacticCup": "銀河カップ",
+      "speedRacingTournament": "スピードレース大会",
+      "overlordChampionship": "オーバーロード選手権"
+    },
+    "eventDetailPlaceholder": "イベントの詳細、報酬、参加オプションはイベント開始後にご利用いただけます。"
   }
 }

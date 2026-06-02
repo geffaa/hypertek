@@ -6,6 +6,23 @@ import LazyImage from "../Common/LazyImage";
 import overview1 from "../../assets/images/Overview/overview1.jpg";
 import { getImageUrl } from "../../Config";
 
+// ── Category i18n key lookup ──────────────────────────────────────────────────
+const CAT_I18N = {
+  "skins":          "skins",
+  "military badges":"militaryBadges",
+  "specialists":    "specialists",
+  "weapons":        "weapons",
+  "body armour":    "bodyArmour",
+  "spaceships":     "spaceships",
+  "racing vehicles":"racingVehicles",
+  "vehicles":       "racingVehicles",
+  "artwork":        "artwork",
+  "land and bases": "landAndBases",
+  "land & bases":   "landAndBases",
+  "general":        "general",
+  "badges":         "militaryBadges",
+};
+
 // ── Item card ─────────────────────────────────────────────────────────────────
 // Asset type badge config
 const ASSET_BADGE = {
@@ -92,7 +109,7 @@ function LineCard({ item }) {
         {item.parentCategory && (
           <div className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded text-[9px] font-semibold capitalize"
             style={{ background: "rgba(0,0,0,0.55)", border: "1px solid rgba(255,255,255,0.18)", color: "rgba(255,255,255,0.7)" }}>
-            {item.parentCategory}
+            {(() => { const k = CAT_I18N[item.parentCategory]; return k ? t(`marketplace.general.categories.${k}`, item.parentCategory) : item.parentCategory; })()}
           </div>
         )}
         {isDummy && (

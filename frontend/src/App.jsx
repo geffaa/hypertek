@@ -90,6 +90,8 @@ import Nft101Article from "./pages/Nft101Article";
 import GameModePage from "./pages/GameModePage";
 import Preview from "./pages/Preview";
 import PreviewGameMode from "./pages/PreviewGameMode";
+import PreviewAbout from "./pages/PreviewAbout";
+import PreviewUI from "./pages/PreviewUI";
 
 import DashboardLayout from "./Layout/DashboardLayout";
 import ChatbotWidget from "./Components/Chatbot/ChatbotWidget";
@@ -236,6 +238,8 @@ function AppWrapper() {
 
             {/* Public Preview — shareable links for social media */}
             <Route path="/preview" element={<Preview />} />
+            <Route path="/preview/about" element={<PreviewAbout />} />
+            <Route path="/preview/ui" element={<PreviewUI />} />
             <Route path="/preview/:mode" element={<PreviewGameMode />} />
             <Route path="/game/:mode" element={<GameModePage />} />
 

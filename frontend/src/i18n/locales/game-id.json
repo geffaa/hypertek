@@ -1119,6 +1119,31 @@
     "pairing": "MEMASANGKAN...",
     "unavailableNow": "TIDAK TERSEDIA SAAT INI",
     "pairDevice": "PASANGKAN PERANGKAT",
-    "vrInteractionMode": "MODE Interaksi VR · Segera Hadir"
+    "vrInteractionMode": "MODE Interaksi VR · Segera Hadir",
+    "eventStatus": {
+      "eventOngoing": "Acara Berlangsung",
+      "endsIn": "Berakhir dalam",
+      "startsIn": "Dimulai dalam",
+      "resetsDaily": "Setel ulang harian",
+      "seasonEndsIn": "Musim berakhir dalam"
+    },
+    "eventItems": {
+      "inviteFriends": "Undang Teman",
+      "landBaseOversight": "Pengawasan Pangkalan",
+      "questsTrail": "Jejak Misi",
+      "contractKiller": "Pembunuh Bayaran",
+      "mazedMission": "Misi Labirin",
+      "flamingAsteroid": "Asteroid Berapi",
+      "refiningMaster": "Ahli Pemurnian",
+      "starGaze": "Melihat Bintang",
+      "dailyLoginBonus": "Bonus Login Harian",
+      "battlePass": "Battle Pass",
+      "allianceWar": "Perang Aliansi",
+      "weeklyChallenge": "Tantangan Mingguan",
+      "galacticCup": "Piala Galaksi",
+      "speedRacingTournament": "Turnamen Balap Kecepatan",
+      "overlordChampionship": "Kejuaraan Overlord"
+    },
+    "eventDetailPlaceholder": "Detail acara lengkap, hadiah, dan opsi partisipasi akan tersedia saat acara ini diluncurkan."
   }
 }

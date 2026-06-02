@@ -1119,6 +1119,31 @@
     "pairing": "PARNING...",
     "unavailableNow": "INTE TILLGÄNGLIG JUST NU",
     "pairDevice": "PARA ENHET",
-    "vrInteractionMode": "VR-interaktionsläge · Kommer snart"
+    "vrInteractionMode": "VR-interaktionsläge · Kommer snart",
+    "eventStatus": {
+      "eventOngoing": "Evenemang pågår",
+      "endsIn": "Slutar om",
+      "startsIn": "Börjar om",
+      "resetsDaily": "Daglig återställning",
+      "seasonEndsIn": "Säsongen slutar om"
+    },
+    "eventItems": {
+      "inviteFriends": "Bjud in vänner",
+      "landBaseOversight": "Basövervakning",
+      "questsTrail": "Uppdragsled",
+      "contractKiller": "Lejd mördare",
+      "mazedMission": "Labyrintuppdrag",
+      "flamingAsteroid": "Flammande asteroid",
+      "refiningMaster": "Raffineringsmästare",
+      "starGaze": "Stjärnskådning",
+      "dailyLoginBonus": "Daglig inloggningsbonus",
+      "battlePass": "Stridspass",
+      "allianceWar": "Allianseskrig",
+      "weeklyChallenge": "Veckoutmaning",
+      "galacticCup": "Galaktisk pokal",
+      "speedRacingTournament": "Hastighetsturnering",
+      "overlordChampionship": "Overlord-mästerskap"
+    },
+    "eventDetailPlaceholder": "Fullständiga händelsedetaljer, belöningar och deltagandealternativ kommer att vara tillgängliga när detta evenemang lanseras."
   }
 }

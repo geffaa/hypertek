@@ -1119,6 +1119,31 @@
     "pairing": "מקווי...",
     "unavailableNow": "לא זמין כרגע",
     "pairDevice": "קווי מכשיר",
-    "vrInteractionMode": "מצב אינטראקציה VR · בקרוב"
+    "vrInteractionMode": "מצב אינטראקציה VR · בקרוב",
+    "eventStatus": {
+      "eventOngoing": "אירוע בתהליך",
+      "endsIn": "מסתיים בעוד",
+      "startsIn": "מתחיל בעוד",
+      "resetsDaily": "איפוס יומי",
+      "seasonEndsIn": "עונה מסתיימת בעוד"
+    },
+    "eventItems": {
+      "inviteFriends": "הזמן חברים",
+      "landBaseOversight": "פיקוח על הבסיס",
+      "questsTrail": "מסלול משימות",
+      "contractKiller": "קוטל שכיר",
+      "mazedMission": "משימת מבוך",
+      "flamingAsteroid": "אסטרואיד בוער",
+      "refiningMaster": "מאסטר זיקוק",
+      "starGaze": "הבטה בכוכבים",
+      "dailyLoginBonus": "בונוס כניסה יומי",
+      "battlePass": "כרטיס קרב",
+      "allianceWar": "מלחמת ברית",
+      "weeklyChallenge": "אתגר שבועי",
+      "galacticCup": "גביע גלקטי",
+      "speedRacingTournament": "טורניר מירוצי מהירות",
+      "overlordChampionship": "אליפות אוברלורד"
+    },
+    "eventDetailPlaceholder": "פרטי האירוע המלאים, הפרסים ואפשרויות ההשתתפות יהיו זמינים עם השקת האירוע."
   }
 }

@@ -171,7 +171,8 @@
       "dummyContent": "더미 콘텐츠",
       "preview": "미리보기",
       "buyNow": "지금 구매",
-      "viewDetails": "세부정보 보기"
+      "viewDetails": "세부정보 보기",
+      "dummyNotForSale": "미리보기 전용"
     },
     "nfa101": {
       "sectionLabel": "교육",
@@ -280,6 +281,12 @@
         "prev": "이전",
         "next": "다음",
         "page": "{{page}} / {{pages}} 페이지"
+      },
+      "status": {
+        "active": "진행 중",
+        "ended": "종료됨",
+        "sold": "판매됨",
+        "cancelled": "취소됨"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "이전",
         "next": "다음",
         "page": "{{page}} / {{pages}} 페이지"
-      }
+      },
+      "status": {
+        "open": "공개",
+        "accepted": "수락됨",
+        "completed": "완료됨",
+        "cancelled": "취소됨",
+        "expired": "만료됨"
+      },
+      "openOfferText": "제안해 주세요"
     },
     "quests": {
       "heading": "퀘스트 보드",
@@ -378,16 +393,16 @@
         "page": "{{page}} / {{pages}} 페이지"
       },
       "buyer": "구매자",
-      "player": "Player",
-      "platform": "Platform",
+      "player": "플레이어",
+      "platform": "플랫폼",
       "status": {
-        "open": "Open",
-        "accepted": "Accepted",
-        "completed": "Completed",
-        "cancelled": "Cancelled"
+        "open": "공개",
+        "accepted": "수락됨",
+        "completed": "완료됨",
+        "cancelled": "취소됨"
       },
       "type": {
-        "money": "Money",
+        "money": "머니",
         "resources": "리소스"
       }
     },
@@ -499,6 +514,13 @@
         "prev": "이전",
         "next": "다음",
         "page": "{{page}} / {{pages}} 페이지"
+      },
+      "status": {
+        "open": "공개",
+        "claimed": "수락됨",
+        "completed": "완료됨",
+        "cancelled": "취소됨",
+        "expired": "만료됨"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "지금 구매",
       "listNow": "지금 목록",
       "yourListed": "귀하의 {{type}}(등록됨)",
-      "notAvailable": "사용할 수 없음"
+      "notAvailable": "사용할 수 없음",
+      "dummyNotForSale": "샘플 미리보기 — 구매 불가"
     },
     "fundModal": {
       "title": "USDC가 충분하지 않음",

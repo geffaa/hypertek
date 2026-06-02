@@ -171,7 +171,8 @@
       "dummyContent": "Dummy innhold",
       "preview": "Forhåndsvisning",
       "buyNow": "Kjøp nå",
-      "viewDetails": "Se detaljer"
+      "viewDetails": "Se detaljer",
+      "dummyNotForSale": "Kun Forhåndsvisning"
     },
     "nfa101": {
       "sectionLabel": "Opplaring",
@@ -280,6 +281,12 @@
         "prev": "Forrige",
         "next": "Neste",
         "page": "Side {{page}} av {{pages}}"
+      },
+      "status": {
+        "active": "Aktiv",
+        "ended": "Avsluttet",
+        "sold": "Solgt",
+        "cancelled": "Avlyst"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "Forrige",
         "next": "Neste",
         "page": "Side {{page}} av {{pages}}"
-      }
+      },
+      "status": {
+        "open": "Åpen",
+        "accepted": "Akseptert",
+        "completed": "Fullført",
+        "cancelled": "Avlyst",
+        "expired": "Utløpt"
+      },
+      "openOfferText": "Gi meg et tilbud"
     },
     "quests": {
       "heading": "Oppdragstavle",
@@ -499,6 +514,13 @@
         "prev": "Forrige",
         "next": "Neste",
         "page": "Side {{page}} av {{pages}}"
+      },
+      "status": {
+        "open": "Åpen",
+        "claimed": "Krevd",
+        "completed": "Fullført",
+        "cancelled": "Avlyst",
+        "expired": "Utløpt"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "Kjøp nå",
       "listNow": "Liste nå",
       "yourListed": "Din {{type}} (oppført)",
-      "notAvailable": "Ikke tilgjengelig"
+      "notAvailable": "Ikke tilgjengelig",
+      "dummyNotForSale": "Forhåndsvisning — Ikke Tilgjengelig for Kjøp"
     },
     "fundModal": {
       "title": "Utilstrekkelig USDC",

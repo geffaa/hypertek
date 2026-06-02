@@ -171,7 +171,8 @@
       "dummyContent": "Kandungan Dummy",
       "preview": "Pratonton",
       "buyNow": "Beli Sekarang",
-      "viewDetails": "Lihat Butiran"
+      "viewDetails": "Lihat Butiran",
+      "dummyNotForSale": "Pratonton Sahaja"
     },
     "nfa101": {
       "sectionLabel": "Pendidikan",
@@ -280,6 +281,12 @@
         "prev": "Sebelum",
         "next": "Seterusnya",
         "page": "Halaman {{page}} daripada {{pages}}"
+      },
+      "status": {
+        "active": "Aktif",
+        "ended": "Berakhir",
+        "sold": "Terjual",
+        "cancelled": "Dibatalkan"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "Sebelum",
         "next": "Seterusnya",
         "page": "Halaman {{page}} daripada {{pages}}"
-      }
+      },
+      "status": {
+        "open": "Buka",
+        "accepted": "Diterima",
+        "completed": "Selesai",
+        "cancelled": "Dibatalkan",
+        "expired": "Tamat"
+      },
+      "openOfferText": "Buat tawaran kepada saya"
     },
     "quests": {
       "heading": "Papan Kuest",
@@ -499,6 +514,13 @@
         "prev": "Sebelum",
         "next": "Seterusnya",
         "page": "Halaman {{page}} daripada {{pages}}"
+      },
+      "status": {
+        "open": "Buka",
+        "claimed": "Dituntut",
+        "completed": "Selesai",
+        "cancelled": "Dibatalkan",
+        "expired": "Tamat"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "Beli Sekarang",
       "listNow": "Senarai Sekarang",
       "yourListed": "PH0__ Anda (Tersenarai)",
-      "notAvailable": "Tidak Tersedia"
+      "notAvailable": "Tidak Tersedia",
+      "dummyNotForSale": "Pratonton — Tidak Tersedia untuk Dibeli"
     },
     "fundModal": {
       "title": "USDC tidak mencukupi",

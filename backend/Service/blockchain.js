@@ -69,7 +69,7 @@ function getBlockchain(chainId) {
     return instances[id];
   }
 
-  console.log(`🔌 Initializing connection for ${config.name} (${id})...`);
+  console.log(`Initializing connection for ${config.name} (${id})...`);
 
   if (!config.rpc || !config.privateKey) {
     throw new Error(` Missing RPC or Private Key for ${config.name}`);

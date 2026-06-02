@@ -1119,6 +1119,31 @@
     "pairing": "पेयरिंग...",
     "unavailableNow": "अभी उपलब्ध नहीं",
     "pairDevice": "डिवाइस पेयर करें",
-    "vrInteractionMode": "VR इंटरेक्शन मोड · जल्द आ रहा है"
+    "vrInteractionMode": "VR इंटरेक्शन मोड · जल्द आ रहा है",
+    "eventStatus": {
+      "eventOngoing": "इवेंट जारी है",
+      "endsIn": "समाप्त होता है",
+      "startsIn": "शुरू होता है",
+      "resetsDaily": "दैनिक रीसेट",
+      "seasonEndsIn": "सीज़न समाप्त होता है"
+    },
+    "eventItems": {
+      "inviteFriends": "दोस्तों को आमंत्रित करें",
+      "landBaseOversight": "भूमि आधार निगरानी",
+      "questsTrail": "मिशन ट्रेल",
+      "contractKiller": "अनुबंध हत्यारा",
+      "mazedMission": "भूलभुलैया मिशन",
+      "flamingAsteroid": "ज्वलंत क्षुद्रग्रह",
+      "refiningMaster": "शोधन मास्टर",
+      "starGaze": "तारों को देखना",
+      "dailyLoginBonus": "दैनिक लॉगिन बोनस",
+      "battlePass": "बैटल पास",
+      "allianceWar": "गठबंधन युद्ध",
+      "weeklyChallenge": "साप्ताहिक चुनौती",
+      "galacticCup": "गैलेक्टिक कप",
+      "speedRacingTournament": "स्पीड रेसिंग टूर्नामेंट",
+      "overlordChampionship": "ओवरलॉर्ड चैम्पियनशिप"
+    },
+    "eventDetailPlaceholder": "पूर्ण इवेंट विवरण, पुरस्कार और भागीदारी विकल्प इस इवेंट के लॉन्च होने पर उपलब्ध होंगे।"
   }
 }

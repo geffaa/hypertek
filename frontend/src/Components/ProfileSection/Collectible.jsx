@@ -234,7 +234,7 @@ function MarketPlace() {
   /* ================= HANDLE SELL NOW CLICK ================= */
   const handleSellNowClick = (itemId) => {
     console.log("🔘 Sell Now clicked for item:", itemId);
-    console.log("🔌 Is connected:", isConnected);
+    console.log("Is connected:", isConnected);
 
     if (!isConnected) {
       // Not connected - open RainbowKit modal

@@ -791,9 +791,9 @@ function NfaLand() {
 
     if (!connectedWallet) {
       return {
-        text: "🔌 Connect Wallet",
+        text: "Connect Wallet",
         action: async () => {
-          const toastId = toast.loading("🔌 Connecting wallet...");
+          const toastId = toast.loading("Connecting wallet...");
           try {
             await window.ethereum.request({ method: "eth_requestAccounts" });
             await checkWalletAndOwnership();

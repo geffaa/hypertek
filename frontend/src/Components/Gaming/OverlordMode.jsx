@@ -9,6 +9,7 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import LazyImage from "./LazyImage";
 import useMobileLandscape from "../../hooks/useMobileLandscape";
@@ -21,12 +22,6 @@ const CSS = `
     to   { opacity: 1; transform: scale(1); }
   }
   .overlord-overlay { animation: overlordEnter 0.55s cubic-bezier(0.16,1,0.3,1) both; }
-
-  @keyframes ringRotate {
-    from { transform: translate(-50%, -50%) rotateX(75deg) rotateZ(0deg); }
-    to   { transform: translate(-50%, -50%) rotateX(75deg) rotateZ(360deg); }
-  }
-  .space-ring { animation: ringRotate 24s linear infinite; }
 
   @keyframes overlordPlanetPulse {
     0%,100% { box-shadow: 0 0 40px rgba(248,113,113,0.25), 0 0 80px rgba(248,113,113,0.08); }
@@ -224,43 +219,6 @@ function SpaceView() {
         filter: "blur(40px)",
       }} />
 
-      {/* ── Space ring — rotating torus-like oval ── */}
-      <div style={{
-        position: "absolute", top: "42%", left: "50%",
-        width: 700, height: 700,
-        pointerEvents: "none",
-      }} className="space-ring">
-        <svg viewBox="0 0 700 700" width="700" height="700" style={{ overflow:"visible" }}>
-          {/* Outer ring */}
-          <ellipse cx="350" cy="350" rx="320" ry="120"
-            fill="none" stroke="rgba(248,113,113,0.18)" strokeWidth="28"
-            strokeDasharray="60 20"/>
-          {/* Mid ring */}
-          <ellipse cx="350" cy="350" rx="280" ry="100"
-            fill="none" stroke="rgba(248,113,113,0.10)" strokeWidth="12"/>
-          {/* Inner ring glow */}
-          <ellipse cx="350" cy="350" rx="200" ry="70"
-            fill="none" stroke="rgba(248,113,113,0.25)" strokeWidth="4"/>
-
-          {/* Player dots on ring */}
-          {[0, 60, 120, 180, 240, 300].map((deg, i) => {
-            const rad = (deg * Math.PI) / 180;
-            const x = 350 + Math.cos(rad) * 300;
-            const y = 350 + Math.sin(rad) * 110;
-            return (
-              <g key={i}>
-                <circle cx={x} cy={y} r={i === 0 ? 8 : 5}
-                  fill={i === 0 ? "#f87171" : "rgba(248,113,113,0.5)"}
-                  stroke={i === 0 ? "#fff" : "rgba(248,113,113,0.3)"} strokeWidth="1"/>
-                {i !== 0 && (
-                  <circle cx={x} cy={y} r="12" fill="none"
-                    stroke="rgba(248,113,113,0.2)" strokeWidth="0.8"/>
-                )}
-              </g>
-            );
-          })}
-        </svg>
-      </div>
 
       {/* HUD label */}
       <div style={{
@@ -398,11 +356,86 @@ function WorldView() {
 }
 
 /* ══════════════════════════════════════════════════════════════════
+   VIDEO OVERLAY
+   ══════════════════════════════════════════════════════════════════ */
+function VideoOverlay({ onClose }) {
+  const { t } = useTranslation();
+  return createPortal(
+    <div
+      onClick={onClose}
+      style={{
+        position: "fixed", inset: 0, zIndex: 9000,
+        background: "rgba(0,3,15,0.92)", backdropFilter: "blur(6px)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+      }}
+    >
+      <style>{`
+        @keyframes ovlVideoPopIn {
+          from { opacity:0; transform:scale(0.93); }
+          to   { opacity:1; transform:scale(1); }
+        }
+      `}</style>
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{
+          display: "flex", flexDirection: "column",
+          width: "min(72vw, calc(58vh * 1.778))",
+          animation: "ovlVideoPopIn 0.25s cubic-bezier(0.16,1,0.3,1) both",
+          gap: 8,
+        }}
+      >
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div style={{
+            fontFamily: "Orbitron,sans-serif",
+            fontSize: "clamp(9px,1vw,13px)", fontWeight: "bold",
+            letterSpacing: "0.18em", color: "#fca5a5",
+            textShadow: "0 0 12px rgba(248,113,113,0.7)", whiteSpace: "nowrap",
+          }}>▶ {t("overlord.video.title", "OVERLORD GAMEPLAY VIDEO")}</div>
+          <button
+            onClick={onClose}
+            style={{
+              padding: "5px 14px",
+              background: "rgba(15,0,0,0.9)",
+              border: "1px solid rgba(248,113,113,0.7)",
+              borderRadius: 3,
+              clipPath: "polygon(0% 0%,calc(100% - 5px) 0%,100% 100%,5px 100%)",
+              fontFamily: "Orbitron,sans-serif",
+              fontSize: "clamp(8px,0.8vw,11px)", fontWeight: "bold",
+              letterSpacing: "0.14em", color: "#fca5a5",
+              textShadow: "0 0 8px rgba(248,113,113,0.6)",
+              cursor: "pointer", whiteSpace: "nowrap",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background = "rgba(248,113,113,0.25)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "rgba(15,0,0,0.9)"; }}
+          >✕ {t("overlord.video.close", "CLOSE")}</button>
+        </div>
+        <div style={{
+          position: "relative", aspectRatio: "16/9",
+          background: "#000",
+          border: "1.5px solid rgba(248,113,113,0.45)",
+          borderRadius: 10,
+          boxShadow: "0 0 80px rgba(0,0,0,0.95), 0 0 40px rgba(248,113,113,0.12)",
+          overflow: "hidden",
+        }}>
+          <video
+            src="/video/overlord_content.mp4"
+            autoPlay loop muted playsInline
+            style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
+          />
+        </div>
+      </div>
+    </div>,
+    document.body
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════
    OverlordMode — main export
    ══════════════════════════════════════════════════════════════════ */
 export default function OverlordMode({ view = "SPACE", onExit }) {
   const { t } = useTranslation();
   const isSpace = view === "SPACE";
+  const [videoOpen, setVideoOpen] = useState(false);
 
   return (
     <>
@@ -417,6 +450,36 @@ export default function OverlordMode({ view = "SPACE", onExit }) {
 
         {/* Action buttons — right (no joystick) */}
         <OverlordActionButtons />
+
+        {/* VIDEO button — top center */}
+        <div style={{
+          position: "absolute", top: "22%", left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 30,
+        }}>
+          <button
+            onClick={() => setVideoOpen(true)}
+            style={{
+              padding: "9px 24px",
+              background: "rgba(28,0,0,0.88)",
+              border: "1.5px solid rgba(248,113,113,0.6)",
+              borderRadius: 3,
+              clipPath: "polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)",
+              fontFamily: "Orbitron,sans-serif",
+              fontSize: "clamp(7px,0.85vw,10px)", fontWeight: "bold",
+              letterSpacing: "0.18em", color: "#fca5a5",
+              textShadow: "0 0 10px rgba(248,113,113,0.6)",
+              boxShadow: "0 0 20px rgba(248,113,113,0.2)",
+              cursor: "pointer", whiteSpace: "nowrap",
+              transition: "background 0.2s, box-shadow 0.2s",
+              display: "flex", alignItems: "center", gap: 8,
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background = "rgba(248,113,113,0.18)"; e.currentTarget.style.boxShadow = "0 0 28px rgba(248,113,113,0.4)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "rgba(28,0,0,0.88)"; e.currentTarget.style.boxShadow = "0 0 20px rgba(248,113,113,0.2)"; }}
+          >
+            ▶ {t("overlord.video.watchBtn", "WATCH VIDEO")}
+          </button>
+        </div>
 
         {/* EXIT button — bottom-left */}
         <button
@@ -446,6 +509,8 @@ export default function OverlordMode({ view = "SPACE", onExit }) {
         </button>
 
       </div>
+
+      {videoOpen && <VideoOverlay onClose={() => setVideoOpen(false)} />}
     </>
   );
 }

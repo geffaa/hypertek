@@ -30,7 +30,7 @@ function ItemDetailPopup({ imgSrc, title, category, description, offering, reque
           {category && (
             <span className="self-start px-2 py-0.5 rounded text-[9px] font-semibold capitalize"
               style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.5)" }}>
-              {category}
+              {tCat(category, t)}
             </span>
           )}
           {description && <p className="text-white/50 text-xs leading-relaxed">{description}</p>}
@@ -234,7 +234,7 @@ function TradeCard({ trade, onAccept, onCancel, currentWallet }) {
         {trade.category && (
           <span className="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded text-[9px] font-semibold capitalize"
             style={{ background: "rgba(0,0,0,0.55)", border: "1px solid rgba(255,255,255,0.18)", color: "rgba(255,255,255,0.7)" }}>
-            {trade.category}
+            {tCat(trade.category, t)}
           </span>
         )}
         <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none"
@@ -248,7 +248,7 @@ function TradeCard({ trade, onAccept, onCancel, currentWallet }) {
             style={{ background: "rgba(0,80,255,0.18)", color: "rgba(100,160,255,0.9)" }}>
             {t("marketplace.trades.trade")}
           </span>
-          <span className={`text-[10px] font-bold uppercase ml-auto ${statusColor}`}>{trade.status}</span>
+          <span className={`text-[10px] font-bold uppercase ml-auto ${statusColor}`}>{t(`marketplace.trades.status.${trade.status}`, trade.status)}</span>
           {isPoster && (
             <span className="text-[9px] px-1.5 py-0.5 rounded font-semibold"
               style={{ background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.35)" }}>
@@ -269,7 +269,7 @@ function TradeCard({ trade, onAccept, onCancel, currentWallet }) {
           </div>
           <div className="flex justify-between items-center gap-2">
             <span className="text-white/30 text-[10px] shrink-0">{t("marketplace.trades.wanting")}</span>
-            <span className="text-blue-300/80 text-[11px] font-medium truncate text-right">{trade.requesting || t("marketplace.trades.makeOffer")}</span>
+            <span className="text-blue-300/80 text-[11px] font-medium truncate text-right">{trade.requesting === "Make me an offer" ? t("marketplace.trades.openOfferText") : (trade.requesting || t("marketplace.trades.makeOffer"))}</span>
           </div>
         </div>
 
@@ -309,6 +309,28 @@ function TradeCard({ trade, onAccept, onCancel, currentWallet }) {
     )}
     </>
   );
+}
+
+// ── Category i18n helper ──────────────────────────────────────────────────────
+const CAT_KEY = {
+  "skins":          "skins",
+  "military badges":"militaryBadges",
+  "specialists":    "specialists",
+  "weapons":        "weapons",
+  "body armour":    "bodyArmour",
+  "spaceships":     "spaceships",
+  "racing vehicles":"racingVehicles",
+  "vehicles":       "racingVehicles",
+  "artwork":        "artwork",
+  "land & bases":   "landAndBases",
+  "land and bases": "landAndBases",
+  "general":        "general",
+  "badges":         "militaryBadges",
+};
+function tCat(cat, t) {
+  if (!cat) return "";
+  const key = CAT_KEY[cat.toLowerCase()];
+  return key ? t(`marketplace.general.categories.${key}`, cat) : cat;
 }
 
 // ── Fixed categories ──────────────────────────────────────────────────────────
@@ -739,7 +761,7 @@ export default function TradesTab() {
                 style={statusFilter === f
                   ? { background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.25)", color: "#fff" }
                   : { background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.35)" }}>
-                {f}
+                {t(`marketplace.trades.status.${f}`, f)}
               </button>
             ))}
           </div>

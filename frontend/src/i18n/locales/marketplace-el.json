@@ -171,7 +171,8 @@
       "dummyContent": "Ψευδές περιεχόμενο",
       "preview": "Πρεμιέρα",
       "buyNow": "Αγοράστε τώρα",
-      "viewDetails": "Προβολή λεπτομερειών"
+      "viewDetails": "Προβολή λεπτομερειών",
+      "dummyNotForSale": "Μόνο Προεπισκόπηση"
     },
     "nfa101": {
       "sectionLabel": "Εκπαίδευση",
@@ -280,6 +281,12 @@
         "prev": "Προηγ.",
         "next": "Επόμ.",
         "page": "Σελίδα {{page}} από {{pages}}"
+      },
+      "status": {
+        "active": "Ενεργό",
+        "ended": "Έληξε",
+        "sold": "Πουλήθηκε",
+        "cancelled": "Ακυρώθηκε"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "Προηγ.",
         "next": "Επόμ.",
         "page": "Σελίδα {{page}} από {{pages}}"
-      }
+      },
+      "status": {
+        "open": "Ανοιχτό",
+        "accepted": "Αποδεκτό",
+        "completed": "Ολοκληρώθηκε",
+        "cancelled": "Ακυρώθηκε",
+        "expired": "Έληξε"
+      },
+      "openOfferText": "Κάντε μου μια προσφορά"
     },
     "quests": {
       "heading": "Πίνακας Αποστολών",
@@ -381,14 +396,14 @@
       "player": "Παίκτης",
       "platform": "Πλατφόρμα",
       "status": {
-        "open": "Open",
-        "accepted": "Accepted",
-        "completed": "Completed",
-        "cancelled": "Cancelled"
+        "open": "Ανοιχτό",
+        "accepted": "Αποδεκτό",
+        "completed": "Ολοκληρωμένο",
+        "cancelled": "Ακυρωμένο"
       },
       "type": {
-        "money": "Money",
-        "resources": "Πηγές"
+        "money": "Χρήματα",
+        "resources": "Πόροι"
       }
     },
     "hire": {
@@ -499,6 +514,13 @@
         "prev": "Προηγ.",
         "next": "Επόμ.",
         "page": "Σελίδα {{page}} από {{pages}}"
+      },
+      "status": {
+        "open": "Ανοιχτό",
+        "claimed": "Διεκδικήθηκε",
+        "completed": "Ολοκληρώθηκε",
+        "cancelled": "Ακυρώθηκε",
+        "expired": "Έληξε"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "Αγοράστε τώρα",
       "listNow": "Λίστα τώρα",
       "yourListed": "{{type}} σας (Παρατίθεται)",
-      "notAvailable": "Μη Διαθέσιμο"
+      "notAvailable": "Μη Διαθέσιμο",
+      "dummyNotForSale": "Δείγμα — Μη Διαθέσιμο για Αγορά"
     },
     "fundModal": {
       "title": "Ανεπαρκές USDC",

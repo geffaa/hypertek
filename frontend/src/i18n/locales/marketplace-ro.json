@@ -171,7 +171,8 @@
       "dummyContent": "Conținut fals",
       "preview": "Previzualizare",
       "buyNow": "Cumpărați acum",
-      "viewDetails": "Vezi detalii"
+      "viewDetails": "Vezi detalii",
+      "dummyNotForSale": "Doar Previzualizare"
     },
     "nfa101": {
       "sectionLabel": "Educație",
@@ -280,6 +281,12 @@
         "prev": "Prev",
         "next": "Următor",
         "page": "Pagina {{page}} din {{pages}}"
+      },
+      "status": {
+        "active": "Activ",
+        "ended": "Încheiat",
+        "sold": "Vândut",
+        "cancelled": "Anulat"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "Prev",
         "next": "Următor",
         "page": "Pagina {{page}} din {{pages}}"
-      }
+      },
+      "status": {
+        "open": "Deschis",
+        "accepted": "Acceptat",
+        "completed": "Finalizat",
+        "cancelled": "Anulat",
+        "expired": "Expirat"
+      },
+      "openOfferText": "Fă-mi o ofertă"
     },
     "quests": {
       "heading": "Tabloul de Misiuni",
@@ -378,8 +393,8 @@
         "page": "Pagina {{page}} din {{pages}}"
       },
       "buyer": "Cumpărător",
-      "player": "Player",
-      "platform": "Platform",
+      "player": "Jucător",
+      "platform": "Platformă",
       "status": {
         "open": "Deschis",
         "accepted": "Acceptat",
@@ -499,6 +514,13 @@
         "prev": "Prev",
         "next": "Următor",
         "page": "Pagina {{page}} din {{pages}}"
+      },
+      "status": {
+        "open": "Deschis",
+        "claimed": "Revendicat",
+        "completed": "Finalizat",
+        "cancelled": "Anulat",
+        "expired": "Expirat"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "Cumpără acum",
       "listNow": "Listați acum",
       "yourListed": "{{type}} dvs. (Listat)",
-      "notAvailable": "Nu este disponibil"
+      "notAvailable": "Nu este disponibil",
+      "dummyNotForSale": "Previzualizare — Nu este Disponibil pentru Cumpărare"
     },
     "fundModal": {
       "title": "USDC insuficient",

@@ -171,7 +171,8 @@
       "dummyContent": "Dummy-Inhalt",
       "preview": "Vorschau",
       "buyNow": "Jetzt kaufen",
-      "viewDetails": "Details anzeigen"
+      "viewDetails": "Details anzeigen",
+      "dummyNotForSale": "Nur Vorschau"
     },
     "nfa101": {
       "sectionLabel": "Bildung",
@@ -280,6 +281,12 @@
         "prev": "Zurück",
         "next": "Weiter",
         "page": "Seite {{page}} von {{pages}}"
+      },
+      "status": {
+        "active": "Aktiv",
+        "ended": "Beendet",
+        "sold": "Verkauft",
+        "cancelled": "Abgebrochen"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "Zurück",
         "next": "Weiter",
         "page": "Seite {{page}} von {{pages}}"
-      }
+      },
+      "status": {
+        "open": "Offen",
+        "accepted": "Akzeptiert",
+        "completed": "Abgeschlossen",
+        "cancelled": "Abgebrochen",
+        "expired": "Abgelaufen"
+      },
+      "openOfferText": "Mach mir ein Angebot"
     },
     "quests": {
       "heading": "Quest-Pinnwand",
@@ -499,6 +514,13 @@
         "prev": "Zurück",
         "next": "Weiter",
         "page": "Seite {{page}} von {{pages}}"
+      },
+      "status": {
+        "open": "Offen",
+        "claimed": "Beansprucht",
+        "completed": "Abgeschlossen",
+        "cancelled": "Abgebrochen",
+        "expired": "Abgelaufen"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "Jetzt kaufen",
       "listNow": "Jetzt auflisten",
       "yourListed": "Ihr {{type}} (gelistet)",
-      "notAvailable": "Nicht verfügbar"
+      "notAvailable": "Nicht verfügbar",
+      "dummyNotForSale": "Vorschau — Nicht Käuflich"
     },
     "fundModal": {
       "title": "Unzureichende USDC",

@@ -171,7 +171,8 @@
       "dummyContent": "Sahte İçerik",
       "preview": "Önizleme",
       "buyNow": "Hemen Satın Al",
-      "viewDetails": "Detayları Görüntüle"
+      "viewDetails": "Detayları Görüntüle",
+      "dummyNotForSale": "Yalnızca Önizleme"
     },
     "nfa101": {
       "sectionLabel": "Eğitim",
@@ -280,6 +281,12 @@
         "prev": "Önceki",
         "next": "Sonraki",
         "page": "Sayfa {{page}} / {{pages}}"
+      },
+      "status": {
+        "active": "Aktif",
+        "ended": "Sona Erdi",
+        "sold": "Satıldı",
+        "cancelled": "İptal Edildi"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "Önceki",
         "next": "Sonraki",
         "page": "Sayfa {{page}} / {{pages}}"
-      }
+      },
+      "status": {
+        "open": "Açık",
+        "accepted": "Kabul Edildi",
+        "completed": "Tamamlandı",
+        "cancelled": "İptal Edildi",
+        "expired": "Süresi Doldu"
+      },
+      "openOfferText": "Bana teklif yap"
     },
     "quests": {
       "heading": "Görev Panosu",
@@ -499,6 +514,13 @@
         "prev": "Önceki",
         "next": "Sonraki",
         "page": "Sayfa {{page}} / {{pages}}"
+      },
+      "status": {
+        "open": "Açık",
+        "claimed": "Talep Edildi",
+        "completed": "Tamamlandı",
+        "cancelled": "İptal Edildi",
+        "expired": "Süresi Doldu"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "Hemen Satın Al",
       "listNow": "Şimdi Listele",
       "yourListed": "{{type}}'niz (Listelendi)",
-      "notAvailable": "Mevcut Değil"
+      "notAvailable": "Mevcut Değil",
+      "dummyNotForSale": "Örnek Önizleme — Satın Alınamaz"
     },
     "fundModal": {
       "title": "Yetersiz USDC",

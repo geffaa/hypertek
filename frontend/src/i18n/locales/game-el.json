@@ -1119,6 +1119,31 @@
     "pairing": "ΣΎΖΕΥΞΗ...",
     "unavailableNow": "ΔΕΝ ΕΊΝΑΙ ΔΙΑΘΈΣΙΜΟ ΤΏΡΑ",
     "pairDevice": "ΣΎΖΕΥΞΗ ΣΥΣΚΕΥΉΣ",
-    "vrInteractionMode": "Λειτουργία VR · Σύντομα"
+    "vrInteractionMode": "Λειτουργία VR · Σύντομα",
+    "eventStatus": {
+      "eventOngoing": "Εκδήλωση σε εξέλιξη",
+      "endsIn": "Τελειώνει σε",
+      "startsIn": "Ξεκινά σε",
+      "resetsDaily": "Ημερήσια επαναφορά",
+      "seasonEndsIn": "Η σεζόν τελειώνει σε"
+    },
+    "eventItems": {
+      "inviteFriends": "Πρόσκληση φίλων",
+      "landBaseOversight": "Εποπτεία βάσης",
+      "questsTrail": "Διαδρομή αποστολών",
+      "contractKiller": "Μισθοφόρος δολοφόνος",
+      "mazedMission": "Αποστολή στο λαβύρινθο",
+      "flamingAsteroid": "Φλεγόμενος αστεροειδής",
+      "refiningMaster": "Δάσκαλος εξευγενισμού",
+      "starGaze": "Παρατήρηση άστρων",
+      "dailyLoginBonus": "Ημερήσιο μπόνους σύνδεσης",
+      "battlePass": "Πάσο μάχης",
+      "allianceWar": "Πόλεμος συμμαχίας",
+      "weeklyChallenge": "Εβδομαδιαία πρόκληση",
+      "galacticCup": "Γαλαξιακό Κύπελλο",
+      "speedRacingTournament": "Τουρνουά ταχύτητας",
+      "overlordChampionship": "Πρωτάθλημα Overlord"
+    },
+    "eventDetailPlaceholder": "Πλήρεις λεπτομέρειες εκδήλωσης, ανταμοιβές και επιλογές συμμετοχής θα είναι διαθέσιμες όταν ξεκινήσει αυτή η εκδήλωση."
   }
 }

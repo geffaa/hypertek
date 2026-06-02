@@ -1119,6 +1119,31 @@
     "pairing": "جارٍ الإقران...",
     "unavailableNow": "غير متاح الآن",
     "pairDevice": "إقران الجهاز",
-    "vrInteractionMode": "وضع تفاعل الواقع الافتراضي · قريباً"
+    "vrInteractionMode": "وضع تفاعل الواقع الافتراضي · قريباً",
+    "eventStatus": {
+      "eventOngoing": "الحدث جارٍ",
+      "endsIn": "ينتهي خلال",
+      "startsIn": "يبدأ خلال",
+      "resetsDaily": "إعادة تعيين يومية",
+      "seasonEndsIn": "الموسم ينتهي خلال"
+    },
+    "eventItems": {
+      "inviteFriends": "دعوة الأصدقاء",
+      "landBaseOversight": "الإشراف على القاعدة",
+      "questsTrail": "مسار المهام",
+      "contractKiller": "القاتل المأجور",
+      "mazedMission": "مهمة المتاهة",
+      "flamingAsteroid": "الكويكب المشتعل",
+      "refiningMaster": "سيد التكرير",
+      "starGaze": "مراقبة النجوم",
+      "dailyLoginBonus": "مكافأة تسجيل الدخول اليومية",
+      "battlePass": "تصريح المعركة",
+      "allianceWar": "حرب التحالف",
+      "weeklyChallenge": "التحدي الأسبوعي",
+      "galacticCup": "كأس المجرة",
+      "speedRacingTournament": "بطولة سباقات السرعة",
+      "overlordChampionship": "بطولة أوفرلورد"
+    },
+    "eventDetailPlaceholder": "ستتوفر تفاصيل الحدث الكاملة والمكافآت وخيارات المشاركة عند إطلاق هذا الحدث."
   }
 }

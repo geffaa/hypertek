@@ -171,7 +171,8 @@
       "dummyContent": "Dummy innehåll",
       "preview": "Förhandsvisning",
       "buyNow": "Köp nu",
-      "viewDetails": "Visa detaljer"
+      "viewDetails": "Visa detaljer",
+      "dummyNotForSale": "Endast Förhandsvisning"
     },
     "nfa101": {
       "sectionLabel": "Utbildning",
@@ -280,6 +281,12 @@
         "prev": "Föregående",
         "next": "Nästa",
         "page": "Sida {{page}} av {{pages}}"
+      },
+      "status": {
+        "active": "Aktiv",
+        "ended": "Avslutad",
+        "sold": "Såld",
+        "cancelled": "Avbruten"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "Föregående",
         "next": "Nästa",
         "page": "Sida {{page}} av {{pages}}"
-      }
+      },
+      "status": {
+        "open": "Öppen",
+        "accepted": "Accepterad",
+        "completed": "Slutförd",
+        "cancelled": "Avbruten",
+        "expired": "Utgången"
+      },
+      "openOfferText": "Ge mig ett erbjudande"
     },
     "quests": {
       "heading": "Uppdragstavla",
@@ -499,6 +514,13 @@
         "prev": "Föregående",
         "next": "Nästa",
         "page": "Sida {{page}} av {{pages}}"
+      },
+      "status": {
+        "open": "Öppen",
+        "claimed": "Begärd",
+        "completed": "Slutförd",
+        "cancelled": "Avbruten",
+        "expired": "Utgången"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "Köp nu",
       "listNow": "Lista nu",
       "yourListed": "Din {{type}} (listad)",
-      "notAvailable": "Inte tillgänglig"
+      "notAvailable": "Inte tillgänglig",
+      "dummyNotForSale": "Förhandsvisning — Inte Tillgänglig för Köp"
     },
     "fundModal": {
       "title": "Otillräckligt USDC",

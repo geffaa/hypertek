@@ -1119,6 +1119,31 @@
     "pairing": "KOPPELEN...",
     "unavailableNow": "MOMENTEEL NIET BESCHIKBAAR",
     "pairDevice": "APPARAAT KOPPELEN",
-    "vrInteractionMode": "VR-interactiemodus · Binnenkort"
+    "vrInteractionMode": "VR-interactiemodus · Binnenkort",
+    "eventStatus": {
+      "eventOngoing": "Evenement gaande",
+      "endsIn": "Eindigt over",
+      "startsIn": "Begint over",
+      "resetsDaily": "Dagelijkse reset",
+      "seasonEndsIn": "Seizoen eindigt over"
+    },
+    "eventItems": {
+      "inviteFriends": "Vrienden uitnodigen",
+      "landBaseOversight": "Basisbewaking",
+      "questsTrail": "Missiespoor",
+      "contractKiller": "Huurmoordenaar",
+      "mazedMission": "Labyrintmissie",
+      "flamingAsteroid": "Brandende asteroïde",
+      "refiningMaster": "Raffineermeester",
+      "starGaze": "Sterren kijken",
+      "dailyLoginBonus": "Dagelijkse inlogbonus",
+      "battlePass": "Gevechtspass",
+      "allianceWar": "Alliantieoorlog",
+      "weeklyChallenge": "Wekelijkse uitdaging",
+      "galacticCup": "Galactische beker",
+      "speedRacingTournament": "Snelheidsracetoernooi",
+      "overlordChampionship": "Overlord-kampioenschap"
+    },
+    "eventDetailPlaceholder": "Volledige eventdetails, beloningen en deelnameopties zijn beschikbaar wanneer dit evenement wordt gelanceerd."
   }
 }

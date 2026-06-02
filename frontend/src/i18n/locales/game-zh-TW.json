@@ -1119,6 +1119,31 @@
     "pairing": "配對中...",
     "unavailableNow": "暫時無法使用",
     "pairDevice": "配對裝置",
-    "vrInteractionMode": "VR互動模式·即將推出"
+    "vrInteractionMode": "VR互動模式·即將推出",
+    "eventStatus": {
+      "eventOngoing": "活動進行中",
+      "endsIn": "剩餘時間",
+      "startsIn": "開始倒數",
+      "resetsDaily": "每日重置",
+      "seasonEndsIn": "賽季結束倒數"
+    },
+    "eventItems": {
+      "inviteFriends": "邀請好友",
+      "landBaseOversight": "基地監察",
+      "questsTrail": "任務追蹤",
+      "contractKiller": "合約殺手",
+      "mazedMission": "迷宮任務",
+      "flamingAsteroid": "烈焰小行星",
+      "refiningMaster": "精煉大師",
+      "starGaze": "觀星",
+      "dailyLoginBonus": "每日登入獎勵",
+      "battlePass": "戰鬥通行證",
+      "allianceWar": "聯盟戰爭",
+      "weeklyChallenge": "每週挑戰",
+      "galacticCup": "銀河盃",
+      "speedRacingTournament": "極速賽車錦標賽",
+      "overlordChampionship": "霸主錦標賽"
+    },
+    "eventDetailPlaceholder": "完整的活動詳情、獎勵和參與選項將在活動開始後提供。"
   }
 }

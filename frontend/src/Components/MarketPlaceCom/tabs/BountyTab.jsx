@@ -150,7 +150,7 @@ export default function BountyTab() {
                 : { background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.4)" }
               }
             >
-              {f}
+              {t(`marketplace.bounty.status.${f}`, f)}
             </button>
           ))}
         </div>
@@ -274,7 +274,7 @@ export default function BountyTab() {
                     padding: "2px 7px",
                   }}
                 >
-                  {b.status}
+                  {t(`marketplace.bounty.status.${b.status}`, b.status)}
                 </span>
               </div>
             );

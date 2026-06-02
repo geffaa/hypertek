@@ -171,7 +171,8 @@
       "dummyContent": "Dummy-inhoud",
       "preview": "Voorbeeld",
       "buyNow": "Nu kopen",
-      "viewDetails": "Details bekijken"
+      "viewDetails": "Details bekijken",
+      "dummyNotForSale": "Alleen Voorbeeld"
     },
     "nfa101": {
       "sectionLabel": "Onderwijs",
@@ -280,6 +281,12 @@
         "prev": "Vorig",
         "next": "Volgende",
         "page": "Pagina {{page}} van {{pages}}"
+      },
+      "status": {
+        "active": "Actief",
+        "ended": "Beëindigd",
+        "sold": "Verkocht",
+        "cancelled": "Geannuleerd"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "Vorig",
         "next": "Volgende",
         "page": "Pagina {{page}} van {{pages}}"
-      }
+      },
+      "status": {
+        "open": "Open",
+        "accepted": "Geaccepteerd",
+        "completed": "Voltooid",
+        "cancelled": "Geannuleerd",
+        "expired": "Verlopen"
+      },
+      "openOfferText": "Doe me een bod"
     },
     "quests": {
       "heading": "Questbord",
@@ -388,7 +403,7 @@
       },
       "type": {
         "money": "Geld",
-        "resources": "Bronnen"
+        "resources": "Middelen"
       }
     },
     "hire": {
@@ -499,6 +514,13 @@
         "prev": "Vorig",
         "next": "Volgende",
         "page": "Pagina {{page}} van {{pages}}"
+      },
+      "status": {
+        "open": "Open",
+        "claimed": "Geclaimd",
+        "completed": "Voltooid",
+        "cancelled": "Geannuleerd",
+        "expired": "Verlopen"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "Koop nu",
       "listNow": "Maak nu een lijst",
       "yourListed": "Uw {{type}} (vermeld)",
-      "notAvailable": "Niet beschikbaar"
+      "notAvailable": "Niet beschikbaar",
+      "dummyNotForSale": "Voorbeeldweergave — Niet Beschikbaar voor Aankoop"
     },
     "fundModal": {
       "title": "Onvoldoende USDC",

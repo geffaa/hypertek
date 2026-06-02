@@ -1277,7 +1277,7 @@ function Buy1() {
 
     if (!isAnyConnected) {
       return {
-        text: `🔌 ${t("buyNfa.marketplace.connectWallet", "Connect Wallet")}`,
+        text: `${t("buyNfa.marketplace.connectWallet", "Connect Wallet")}`,
         action: () => { if (openConnectModal) openConnectModal(); },
       };
     }

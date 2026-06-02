@@ -171,7 +171,8 @@
       "dummyContent": "डमी सामग्री",
       "preview": "पूर्वावलोकन",
       "buyNow": "अभी खरीदें",
-      "viewDetails": "विवरण देखें"
+      "viewDetails": "विवरण देखें",
+      "dummyNotForSale": "केवल पूर्वावलोकन"
     },
     "nfa101": {
       "sectionLabel": "शिक्षा",
@@ -280,6 +281,12 @@
         "prev": "पिछला",
         "next": "अगला",
         "page": "पृष्ठ {{page}} / {{pages}}"
+      },
+      "status": {
+        "active": "सक्रिय",
+        "ended": "समाप्त",
+        "sold": "बेचा गया",
+        "cancelled": "रद्द"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "पिछला",
         "next": "अगला",
         "page": "पृष्ठ {{page}} / {{pages}}"
-      }
+      },
+      "status": {
+        "open": "खुला",
+        "accepted": "स्वीकृत",
+        "completed": "पूर्ण",
+        "cancelled": "रद्द",
+        "expired": "समाप्त"
+      },
+      "openOfferText": "मुझे एक प्रस्ताव दें"
     },
     "quests": {
       "heading": "क्वेस्ट बोर्ड",
@@ -499,6 +514,13 @@
         "prev": "पिछला",
         "next": "अगला",
         "page": "पृष्ठ {{page}} / {{pages}}"
+      },
+      "status": {
+        "open": "खुला",
+        "claimed": "दावा किया",
+        "completed": "पूर्ण",
+        "cancelled": "रद्द",
+        "expired": "समाप्त"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "अभी खरीदें",
       "listNow": "अभी सूचीबद्ध करें",
       "yourListed": "आपका {{type}} (सूचीबद्ध)",
-      "notAvailable": "उपलब्ध नहीं है"
+      "notAvailable": "उपलब्ध नहीं है",
+      "dummyNotForSale": "नमूना पूर्वावलोकन — खरीद के लिए उपलब्ध नहीं"
     },
     "fundModal": {
       "title": "अपर्याप्त USDC",

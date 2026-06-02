@@ -171,7 +171,8 @@
       "dummyContent": "Dummy Content",
       "preview": "Podgląd",
       "buyNow": "Kup Teraz",
-      "viewDetails": "Wyświetl szczegóły"
+      "viewDetails": "Wyświetl szczegóły",
+      "dummyNotForSale": "Tylko Podgląd"
     },
     "nfa101": {
       "sectionLabel": "Edukacja",
@@ -280,6 +281,12 @@
         "prev": "Poprzednia",
         "next": "Następna",
         "page": "Strona {{page}} z {{pages}}"
+      },
+      "status": {
+        "active": "Aktywny",
+        "ended": "Zakończony",
+        "sold": "Sprzedany",
+        "cancelled": "Anulowany"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "Poprzednia",
         "next": "Następna",
         "page": "Strona {{page}} z {{pages}}"
-      }
+      },
+      "status": {
+        "open": "Otwarty",
+        "accepted": "Zaakceptowany",
+        "completed": "Ukończony",
+        "cancelled": "Anulowany",
+        "expired": "Wygasły"
+      },
+      "openOfferText": "Złóż mi ofertę"
     },
     "quests": {
       "heading": "Tablica misji",
@@ -499,6 +514,13 @@
         "prev": "Poprzednia",
         "next": "Następna",
         "page": "Strona {{page}} z {{pages}}"
+      },
+      "status": {
+        "open": "Otwarty",
+        "claimed": "Przejęty",
+        "completed": "Ukończony",
+        "cancelled": "Anulowany",
+        "expired": "Wygasły"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "Kup teraz",
       "listNow": "Wystaw teraz",
       "yourListed": "Twój {{type}} (na liście)",
-      "notAvailable": "Niedostępne"
+      "notAvailable": "Niedostępne",
+      "dummyNotForSale": "Podgląd — Niedostępny do Zakupu"
     },
     "fundModal": {
       "title": "Niewystarczająca ilość USDC",

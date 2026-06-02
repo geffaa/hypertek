@@ -1119,6 +1119,31 @@
     "pairing": "PAIRING...",
     "unavailableNow": "UNAVAILABLE RIGHT NOW",
     "pairDevice": "PAIR DEVICE",
-    "vrInteractionMode": "VR Interaction MODE · Coming Soon"
+    "vrInteractionMode": "VR Interaction MODE · Coming Soon",
+    "eventStatus": {
+      "eventOngoing": "Event Ongoing",
+      "endsIn": "Ends in",
+      "startsIn": "Starts in",
+      "resetsDaily": "Resets daily",
+      "seasonEndsIn": "Season ends in"
+    },
+    "eventItems": {
+      "inviteFriends": "Invite Friends",
+      "landBaseOversight": "Land Base Oversight",
+      "questsTrail": "Quests Trail",
+      "contractKiller": "Contract Killer",
+      "mazedMission": "Mazed Mission",
+      "flamingAsteroid": "Flaming Asteroid",
+      "refiningMaster": "Refining Master",
+      "starGaze": "Star Gaze",
+      "dailyLoginBonus": "Daily Login Bonus",
+      "battlePass": "Battle Pass",
+      "allianceWar": "Alliance War",
+      "weeklyChallenge": "Weekly Challenge",
+      "galacticCup": "Galactic Cup",
+      "speedRacingTournament": "Speed Racing Tournament",
+      "overlordChampionship": "Overlord Championship"
+    },
+    "eventDetailPlaceholder": "Full event details, rewards, and participation options will be available when this event launches."
   }
 }

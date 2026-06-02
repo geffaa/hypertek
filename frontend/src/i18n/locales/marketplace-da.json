@@ -171,7 +171,8 @@
       "dummyContent": "Dummy indhold",
       "preview": "Forhåndsvisning",
       "buyNow": "Køb nu",
-      "viewDetails": "Se detaljer"
+      "viewDetails": "Se detaljer",
+      "dummyNotForSale": "Kun Forhåndsvisning"
     },
     "nfa101": {
       "sectionLabel": "Uddannelse",
@@ -280,6 +281,12 @@
         "prev": "Forrige",
         "next": "Naeste",
         "page": "Side {{page}} af {{pages}}"
+      },
+      "status": {
+        "active": "Aktiv",
+        "ended": "Afsluttet",
+        "sold": "Solgt",
+        "cancelled": "Annulleret"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "Forrige",
         "next": "Naeste",
         "page": "Side {{page}} af {{pages}}"
-      }
+      },
+      "status": {
+        "open": "Åben",
+        "accepted": "Accepteret",
+        "completed": "Fuldført",
+        "cancelled": "Annulleret",
+        "expired": "Udløbet"
+      },
+      "openOfferText": "Giv mig et tilbud"
     },
     "quests": {
       "heading": "Quest-opslagstavle",
@@ -383,7 +398,7 @@
       "status": {
         "open": "Åben",
         "accepted": "Accepteret",
-        "completed": "Fuldført",
+        "completed": "Afsluttet",
         "cancelled": "Annulleret"
       },
       "type": {
@@ -499,6 +514,13 @@
         "prev": "Forrige",
         "next": "Naeste",
         "page": "Side {{page}} af {{pages}}"
+      },
+      "status": {
+        "open": "Åben",
+        "claimed": "Krævet",
+        "completed": "Fuldført",
+        "cancelled": "Annulleret",
+        "expired": "Udløbet"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "Køb nu",
       "listNow": "Skriv nu",
       "yourListed": "Din {{type}} (opført)",
-      "notAvailable": "Ikke tilgængelig"
+      "notAvailable": "Ikke tilgængelig",
+      "dummyNotForSale": "Forhåndsvisning — Ikke Tilgængelig til Køb"
     },
     "fundModal": {
       "title": "Utilstrækkelig USDC",

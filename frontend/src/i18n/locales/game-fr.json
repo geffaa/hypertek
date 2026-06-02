@@ -1119,6 +1119,31 @@
     "pairing": "COUPLAGE...",
     "unavailableNow": "INDISPONIBLE POUR L'INSTANT",
     "pairDevice": "COUPLER L'APPAREIL",
-    "vrInteractionMode": "MODE Interaction VR · Bientôt"
+    "vrInteractionMode": "MODE Interaction VR · Bientôt",
+    "eventStatus": {
+      "eventOngoing": "Événement en cours",
+      "endsIn": "Se termine dans",
+      "startsIn": "Commence dans",
+      "resetsDaily": "Réinitialisation quotidienne",
+      "seasonEndsIn": "Saison se termine dans"
+    },
+    "eventItems": {
+      "inviteFriends": "Inviter des amis",
+      "landBaseOversight": "Surveillance de base",
+      "questsTrail": "Piste de quêtes",
+      "contractKiller": "Tueur à gages",
+      "mazedMission": "Mission labyrinthique",
+      "flamingAsteroid": "Astéroïde enflammé",
+      "refiningMaster": "Maître du raffinage",
+      "starGaze": "Observation des étoiles",
+      "dailyLoginBonus": "Bonus de connexion quotidien",
+      "battlePass": "Passe de combat",
+      "allianceWar": "Guerre d'alliance",
+      "weeklyChallenge": "Défi hebdomadaire",
+      "galacticCup": "Coupe galactique",
+      "speedRacingTournament": "Tournoi de course de vitesse",
+      "overlordChampionship": "Championnat Overlord"
+    },
+    "eventDetailPlaceholder": "Les détails complets de l'événement, les récompenses et les options de participation seront disponibles au lancement de cet événement."
   }
 }

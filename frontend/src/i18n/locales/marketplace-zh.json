@@ -171,7 +171,8 @@
       "dummyContent": "虚拟内容",
       "preview": "预览",
       "buyNow": "立即购买",
-      "viewDetails": "查看详情"
+      "viewDetails": "查看详情",
+      "dummyNotForSale": "仅供预览"
     },
     "nfa101": {
       "sectionLabel": "教育",
@@ -280,6 +281,12 @@
         "prev": "上一页",
         "next": "下一页",
         "page": "第 {{page}} 页，共 {{pages}} 页"
+      },
+      "status": {
+        "active": "进行中",
+        "ended": "已结束",
+        "sold": "已售出",
+        "cancelled": "已取消"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "上一页",
         "next": "下一页",
         "page": "第 {{page}} 页，共 {{pages}} 页"
-      }
+      },
+      "status": {
+        "open": "开放",
+        "accepted": "已接受",
+        "completed": "已完成",
+        "cancelled": "已取消",
+        "expired": "已过期"
+      },
+      "openOfferText": "给我出价"
     },
     "quests": {
       "heading": "任务板",
@@ -499,6 +514,13 @@
         "prev": "上一页",
         "next": "下一页",
         "page": "第 {{page}} 页，共 {{pages}} 页"
+      },
+      "status": {
+        "open": "开放",
+        "claimed": "已认领",
+        "completed": "已完成",
+        "cancelled": "已取消",
+        "expired": "已过期"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "立即购买",
       "listNow": "立即列出",
       "yourListed": "您的 {{type}}（已列出）",
-      "notAvailable": "不可用"
+      "notAvailable": "不可用",
+      "dummyNotForSale": "样品预览 — 暂不可购买"
     },
     "fundModal": {
       "title": "USDC不足",

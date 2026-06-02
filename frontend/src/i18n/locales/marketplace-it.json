@@ -171,7 +171,8 @@
       "dummyContent": "Contenuto fittizio",
       "preview": "Anteprima",
       "buyNow": "Acquista ora",
-      "viewDetails": "Visualizza dettagli"
+      "viewDetails": "Visualizza dettagli",
+      "dummyNotForSale": "Solo Anteprima"
     },
     "nfa101": {
       "sectionLabel": "Educazione",
@@ -280,6 +281,12 @@
         "prev": "Prec.",
         "next": "Succ.",
         "page": "Pagina {{page}} di {{pages}}"
+      },
+      "status": {
+        "active": "Attivo",
+        "ended": "Terminato",
+        "sold": "Venduto",
+        "cancelled": "Annullato"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "Prec.",
         "next": "Succ.",
         "page": "Pagina {{page}} di {{pages}}"
-      }
+      },
+      "status": {
+        "open": "Aperto",
+        "accepted": "Accettato",
+        "completed": "Completato",
+        "cancelled": "Annullato",
+        "expired": "Scaduto"
+      },
+      "openOfferText": "Fammi un'offerta"
     },
     "quests": {
       "heading": "Bacheca missioni",
@@ -499,6 +514,13 @@
         "prev": "Prec.",
         "next": "Succ.",
         "page": "Pagina {{page}} di {{pages}}"
+      },
+      "status": {
+        "open": "Aperto",
+        "claimed": "Reclamato",
+        "completed": "Completato",
+        "cancelled": "Annullato",
+        "expired": "Scaduto"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "Acquista ora",
       "listNow": "Elenca ora",
       "yourListed": "Il tuo {{type}} (elencato)",
-      "notAvailable": "Non disponibile"
+      "notAvailable": "Non disponibile",
+      "dummyNotForSale": "Anteprima — Non Disponibile per l'Acquisto"
     },
     "fundModal": {
       "title": "USDC insufficienti",

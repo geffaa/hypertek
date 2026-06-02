@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Layers3, Gem, Network, Rocket, CheckCircle2, Zap, Lock } from "lucide-react";
 import { useSiteContentPage } from "../hooks/useSiteContent";
 import { getImageUrl } from "../Config";
 import LazyImage from "../Components/Common/LazyImage";
@@ -14,19 +14,19 @@ import gamePng   from "../assets/images/aboutpage/game.png";
 
 // ── Static visual data (no text) ─────────────────────────────────────────────
 const NFA_CARDS_STATIC = [
-  { icon: "🎨", accent: "#38bdf8",  glow: "rgba(56,189,248,0.12)",   border: "rgba(56,189,248,0.35)",  type: "tiers"    },
-  { icon: "💰", accent: "#fbbf24",  glow: "rgba(251,191,36,0.10)",   border: "rgba(251,191,36,0.4)",   type: "value"    },
-  { icon: "🤝", accent: "#818cf8",  glow: "rgba(129,140,248,0.10)",  border: "rgba(129,140,248,0.35)", type: "fair"     },
-  { icon: "🚀", accent: "#4ade80",  glow: "rgba(74,222,128,0.10)",   border: "rgba(74,222,128,0.35)",  type: "involved" },
+  { Icon: Layers3,      accent: "#38bdf8",  glow: "rgba(56,189,248,0.12)",   border: "rgba(56,189,248,0.35)",  type: "tiers"    },
+  { Icon: Gem,          accent: "#fbbf24",  glow: "rgba(251,191,36,0.10)",   border: "rgba(251,191,36,0.4)",   type: "value"    },
+  { Icon: Network,      accent: "#818cf8",  glow: "rgba(129,140,248,0.10)",  border: "rgba(129,140,248,0.35)", type: "fair"     },
+  { Icon: Rocket,       accent: "#4ade80",  glow: "rgba(74,222,128,0.10)",   border: "rgba(74,222,128,0.35)",  type: "involved" },
 ];
 
 const PHASES_STATIC = [
-  { num: 1, status: "done",   icon: "✅", accent: "#38bdf8",             bg: "rgba(56,189,248,0.06)",  border: "rgba(56,189,248,0.3)"   },
-  { num: 2, status: "active", icon: "🔥", accent: "#fbbf24",             bg: "rgba(251,191,36,0.08)", border: "rgba(251,191,36,0.5)"   },
-  { num: 3, status: "locked", icon: "🔒", accent: "rgba(255,255,255,0.22)", bg: "rgba(255,255,255,0.02)", border: "rgba(255,255,255,0.1)" },
-  { num: 4, status: "locked", icon: "🔒", accent: "rgba(255,255,255,0.22)", bg: "rgba(255,255,255,0.02)", border: "rgba(255,255,255,0.1)" },
-  { num: 5, status: "locked", icon: "🔒", accent: "rgba(255,255,255,0.22)", bg: "rgba(255,255,255,0.02)", border: "rgba(255,255,255,0.1)" },
-  { num: 6, status: "locked", icon: "🔒", accent: "rgba(255,255,255,0.22)", bg: "rgba(255,255,255,0.02)", border: "rgba(255,255,255,0.1)" },
+  { num: 1, status: "done",   Icon: CheckCircle2, accent: "#38bdf8",              bg: "rgba(56,189,248,0.06)",   border: "rgba(56,189,248,0.3)"   },
+  { num: 2, status: "active", Icon: Zap,          accent: "#fbbf24",              bg: "rgba(251,191,36,0.08)",  border: "rgba(251,191,36,0.5)"   },
+  { num: 3, status: "locked", Icon: Lock,         accent: "rgba(255,255,255,0.22)", bg: "rgba(255,255,255,0.02)", border: "rgba(255,255,255,0.1)" },
+  { num: 4, status: "locked", Icon: Lock,         accent: "rgba(255,255,255,0.22)", bg: "rgba(255,255,255,0.02)", border: "rgba(255,255,255,0.1)" },
+  { num: 5, status: "locked", Icon: Lock,         accent: "rgba(255,255,255,0.22)", bg: "rgba(255,255,255,0.02)", border: "rgba(255,255,255,0.1)" },
+  { num: 6, status: "locked", Icon: Lock,         accent: "rgba(255,255,255,0.22)", bg: "rgba(255,255,255,0.02)", border: "rgba(255,255,255,0.1)" },
 ];
 
 const GAMES_STATIC = [
@@ -438,7 +438,10 @@ function About() {
                   viewport={{ once: true }}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="text-xl">{cs.icon}</span>
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                      style={{ background: `${cs.accent}18`, border: `1px solid ${cs.accent}45`, boxShadow: `0 0 10px ${cs.accent}20` }}>
+                      <cs.Icon size={15} color={cs.accent} strokeWidth={1.5} />
+                    </div>
                     <span className="text-[12px] font-bold uppercase tracking-[0.18em]"
                       style={{ fontFamily: "Orbitron, sans-serif", color: cs.accent }}>
                       {card.title}
@@ -537,7 +540,10 @@ function About() {
                     >
                       {sec05.phaseLabel || "Phase"} {ps.num} — {phase.name}
                     </span>
-                    <span className="text-lg">{ps.icon}</span>
+                    <div className="w-7 h-7 rounded-md flex items-center justify-center flex-shrink-0"
+                      style={{ background: ps.status === "locked" ? "rgba(255,255,255,0.04)" : `${ps.accent}20`, border: `1px solid ${ps.status === "locked" ? "rgba(255,255,255,0.1)" : ps.accent + "50"}` }}>
+                      <ps.Icon size={13} color={ps.status === "locked" ? "rgba(255,255,255,0.28)" : ps.accent} strokeWidth={1.5} />
+                    </div>
                   </div>
 
                   {ps.status === "active" && (

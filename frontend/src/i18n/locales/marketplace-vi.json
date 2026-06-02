@@ -171,7 +171,8 @@
       "dummyContent": "Nội dung giả",
       "preview": "Xem trước",
       "buyNow": "Mua ngay",
-      "viewDetails": "Xem chi tiết"
+      "viewDetails": "Xem chi tiết",
+      "dummyNotForSale": "Chỉ Xem Trước"
     },
     "nfa101": {
       "sectionLabel": "Giáo Dục",
@@ -280,6 +281,12 @@
         "prev": "Trước",
         "next": "Tiếp",
         "page": "Trang {{page}} / {{pages}}"
+      },
+      "status": {
+        "active": "Đang diễn ra",
+        "ended": "Đã kết thúc",
+        "sold": "Đã bán",
+        "cancelled": "Đã hủy"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "Trước",
         "next": "Tiếp",
         "page": "Trang {{page}} / {{pages}}"
-      }
+      },
+      "status": {
+        "open": "Mở",
+        "accepted": "Đã chấp nhận",
+        "completed": "Hoàn thành",
+        "cancelled": "Đã hủy",
+        "expired": "Hết hạn"
+      },
+      "openOfferText": "Hãy đề nghị với tôi"
     },
     "quests": {
       "heading": "Bảng Nhiệm Vụ",
@@ -499,6 +514,13 @@
         "prev": "Trước",
         "next": "Tiếp",
         "page": "Trang {{page}} / {{pages}}"
+      },
+      "status": {
+        "open": "Mở",
+        "claimed": "Đã nhận",
+        "completed": "Hoàn thành",
+        "cancelled": "Đã hủy",
+        "expired": "Hết hạn"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "Mua ngay",
       "listNow": "Danh sách ngay",
       "yourListed": "{{type}} của bạn (Đã liệt kê)",
-      "notAvailable": "Không có sẵn"
+      "notAvailable": "Không có sẵn",
+      "dummyNotForSale": "Xem Trước — Không Có Sẵn để Mua"
     },
     "fundModal": {
       "title": "Không đủ USDC",

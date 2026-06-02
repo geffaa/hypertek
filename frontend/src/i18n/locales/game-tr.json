@@ -1119,6 +1119,31 @@
     "pairing": "EŞLEŞTİRİLİYOR...",
     "unavailableNow": "ŞU AN KULLANILAMIYOR",
     "pairDevice": "CİHAZI EŞLEŞTİR",
-    "vrInteractionMode": "VR Etkileşim MODU · Yakında"
+    "vrInteractionMode": "VR Etkileşim MODU · Yakında",
+    "eventStatus": {
+      "eventOngoing": "Etkinlik Devam Ediyor",
+      "endsIn": "Bitiş",
+      "startsIn": "Başlangıç",
+      "resetsDaily": "Günlük sıfırlama",
+      "seasonEndsIn": "Sezon bitiş"
+    },
+    "eventItems": {
+      "inviteFriends": "Arkadaşları Davet Et",
+      "landBaseOversight": "Üs Denetimi",
+      "questsTrail": "Görev İzi",
+      "contractKiller": "Kiralık Katil",
+      "mazedMission": "Labirent Görevi",
+      "flamingAsteroid": "Alev Asteroidi",
+      "refiningMaster": "Rafineri Ustası",
+      "starGaze": "Yıldız Seyri",
+      "dailyLoginBonus": "Günlük Giriş Bonusu",
+      "battlePass": "Savaş Geçişi",
+      "allianceWar": "İttifak Savaşı",
+      "weeklyChallenge": "Haftalık Görev",
+      "galacticCup": "Galaktik Kupa",
+      "speedRacingTournament": "Hız Yarışı Turnuvası",
+      "overlordChampionship": "Overlord Şampiyonası"
+    },
+    "eventDetailPlaceholder": "Etkinliğin tam detayları, ödüller ve katılım seçenekleri bu etkinlik başlatıldığında mevcut olacak."
   }
 }

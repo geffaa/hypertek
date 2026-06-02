@@ -171,7 +171,8 @@
       "dummyContent": "เนื้อหาจำลอง",
       "preview": "ดูตัวอย่าง",
       "buyNow": "ซื้อเลย",
-      "viewDetails": "ดูรายละเอียด"
+      "viewDetails": "ดูรายละเอียด",
+      "dummyNotForSale": "ดูตัวอย่างเท่านั้น"
     },
     "nfa101": {
       "sectionLabel": "การศึกษา",
@@ -280,6 +281,12 @@
         "prev": "ก่อนหน้า",
         "next": "ถัดไป",
         "page": "หน้า {{page}} จาก {{pages}}"
+      },
+      "status": {
+        "active": "ใช้งานอยู่",
+        "ended": "สิ้นสุด",
+        "sold": "ขายแล้ว",
+        "cancelled": "ยกเลิก"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "ก่อนหน้า",
         "next": "ถัดไป",
         "page": "หน้า {{page}} จาก {{pages}}"
-      }
+      },
+      "status": {
+        "open": "เปิด",
+        "accepted": "ยอมรับ",
+        "completed": "เสร็จสิ้น",
+        "cancelled": "ยกเลิก",
+        "expired": "หมดอายุ"
+      },
+      "openOfferText": "เสนอราคามาให้ฉัน"
     },
     "quests": {
       "heading": "กระดานภารกิจ",
@@ -499,6 +514,13 @@
         "prev": "ก่อนหน้า",
         "next": "ถัดไป",
         "page": "หน้า {{page}} จาก {{pages}}"
+      },
+      "status": {
+        "open": "เปิด",
+        "claimed": "ถูกรับ",
+        "completed": "เสร็จสิ้น",
+        "cancelled": "ยกเลิก",
+        "expired": "หมดอายุ"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "ซื้อเลย",
       "listNow": "แสดงรายการทันที",
       "yourListed": "ของคุณ {{type}} (จดทะเบียน)",
-      "notAvailable": "ไม่มีจำหน่าย"
+      "notAvailable": "ไม่มีจำหน่าย",
+      "dummyNotForSale": "ตัวอย่าง — ไม่พร้อมจำหน่าย"
     },
     "fundModal": {
       "title": "USDC ไม่เพียงพอ",

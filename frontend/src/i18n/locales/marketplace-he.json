@@ -171,7 +171,8 @@
       "dummyContent": "תוכן דמה",
       "preview": "תצוגה מקדימה",
       "buyNow": "קנה עכשיו",
-      "viewDetails": "הצג פרטים"
+      "viewDetails": "הצג פרטים",
+      "dummyNotForSale": "תצוגה מקדימה בלבד"
     },
     "nfa101": {
       "sectionLabel": "חינוך",
@@ -280,6 +281,12 @@
         "prev": "הקודם",
         "next": "הבא",
         "page": "עמוד {{page}} מתוך {{pages}}"
+      },
+      "status": {
+        "active": "פעיל",
+        "ended": "הסתיים",
+        "sold": "נמכר",
+        "cancelled": "בוטל"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "הקודם",
         "next": "הבא",
         "page": "עמוד {{page}} מתוך {{pages}}"
-      }
+      },
+      "status": {
+        "open": "פתוח",
+        "accepted": "התקבל",
+        "completed": "הושלם",
+        "cancelled": "בוטל",
+        "expired": "פג תוקף"
+      },
+      "openOfferText": "הצע לי הצעה"
     },
     "quests": {
       "heading": "לוח משימות",
@@ -499,6 +514,13 @@
         "prev": "הקודם",
         "next": "הבא",
         "page": "עמוד {{page}} מתוך {{pages}}"
+      },
+      "status": {
+        "open": "פתוח",
+        "claimed": "נתבע",
+        "completed": "הושלם",
+        "cancelled": "בוטל",
+        "expired": "פג תוקף"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "קנה עכשיו",
       "listNow": "רשום עכשיו",
       "yourListed": "{{type}} שלך (רשום)",
-      "notAvailable": "לא זמין"
+      "notAvailable": "לא זמין",
+      "dummyNotForSale": "דוגמה — לא זמין לרכישה"
     },
     "fundModal": {
       "title": "לא מספיק USDC",

@@ -171,7 +171,8 @@
       "dummyContent": "Contenu factice",
       "preview": "Aperçu",
       "buyNow": "Acheter maintenant",
-      "viewDetails": "Afficher les détails"
+      "viewDetails": "Afficher les détails",
+      "dummyNotForSale": "Aperçu Seulement"
     },
     "nfa101": {
       "sectionLabel": "Éducation",
@@ -280,6 +281,12 @@
         "prev": "Préc.",
         "next": "Suiv.",
         "page": "Page {{page}} sur {{pages}}"
+      },
+      "status": {
+        "active": "Actif",
+        "ended": "Terminé",
+        "sold": "Vendu",
+        "cancelled": "Annulé"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "Préc.",
         "next": "Suiv.",
         "page": "Page {{page}} sur {{pages}}"
-      }
+      },
+      "status": {
+        "open": "Ouvert",
+        "accepted": "Accepté",
+        "completed": "Terminé",
+        "cancelled": "Annulé",
+        "expired": "Expiré"
+      },
+      "openOfferText": "Faites-moi une offre"
     },
     "quests": {
       "heading": "Tableau des quêtes",
@@ -499,6 +514,13 @@
         "prev": "Préc.",
         "next": "Suiv.",
         "page": "Page {{page}} sur {{pages}}"
+      },
+      "status": {
+        "open": "Ouvert",
+        "claimed": "Réclamé",
+        "completed": "Terminé",
+        "cancelled": "Annulé",
+        "expired": "Expiré"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "Acheter maintenant",
       "listNow": "Inscrire maintenant",
       "yourListed": "Votre {{type}} (listé)",
-      "notAvailable": "Non disponible"
+      "notAvailable": "Non disponible",
+      "dummyNotForSale": "Aperçu — Non Disponible à l'Achat"
     },
     "fundModal": {
       "title": "USDC insuffisant",

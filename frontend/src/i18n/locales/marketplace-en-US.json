@@ -144,22 +144,22 @@
       "filterSort": "Filter & Sort",
       "sortBy": "Sort By",
       "sort": {
-        "default":   "Default",
-        "priceAsc":  "Price: Low → High",
+        "default": "Default",
+        "priceAsc": "Price: Low → High",
         "priceDesc": "Price: High → Low",
-        "nameAsc":   "Name: A → Z",
-        "nameDesc":  "Name: Z → A"
+        "nameAsc": "Name: A → Z",
+        "nameDesc": "Name: Z → A"
       },
-      "priceRange":   "Price Range (USDC)",
-      "min":          "Min",
-      "max":          "Max",
-      "apply":        "Apply",
-      "clearAll":     "Clear All Filters",
-      "noResults":    "No results found",
+      "priceRange": "Price Range (USDC)",
+      "min": "Min",
+      "max": "Max",
+      "apply": "Apply",
+      "clearAll": "Clear All Filters",
+      "noResults": "No results found",
       "dummyContent": "Dummy Content",
-      "preview":      "Preview",
-      "buyNow":       "Buy Now",
-      "viewDetails":  "View Details",
+      "preview": "Preview",
+      "buyNow": "Buy Now",
+      "viewDetails": "View Details",
       "categories": {
         "skins": "Skins",
         "militaryBadges": "Military Badges",
@@ -171,7 +171,8 @@
         "artwork": "Artwork",
         "landAndBases": "Land & Bases",
         "general": "General"
-      }
+      },
+      "dummyNotForSale": "Preview Only"
     },
     "nfa101": {
       "sectionLabel": "Education",
@@ -280,6 +281,12 @@
         "prev": "Prev",
         "next": "Next",
         "page": "Page {{page}} of {{pages}}"
+      },
+      "status": {
+        "active": "Active",
+        "ended": "Ended",
+        "sold": "Sold",
+        "cancelled": "Cancelled"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "Prev",
         "next": "Next",
         "page": "Page {{page}} of {{pages}}"
-      }
+      },
+      "status": {
+        "open": "Open",
+        "accepted": "Accepted",
+        "completed": "Completed",
+        "cancelled": "Cancelled",
+        "expired": "Expired"
+      },
+      "openOfferText": "Make me an offer"
     },
     "quests": {
       "heading": "Quest Board",
@@ -356,19 +371,19 @@
       "resourceQuests": "Resource Quests (20% pool)",
       "footerNote1": "# Quests with combined payloads will be paid out using the separate table amounts.",
       "footerNote2": "# Planet data will sync when the games go live.",
-      "inGame":   "In-game",
-      "open":     "Open",
-      "buyer":    "Buyer",
-      "player":   "Player",
+      "inGame": "In-game",
+      "open": "Open",
+      "buyer": "Buyer",
+      "player": "Player",
       "platform": "Platform",
       "status": {
-        "open":      "Open",
-        "accepted":  "Accepted",
+        "open": "Open",
+        "accepted": "Accepted",
         "completed": "Completed",
         "cancelled": "Cancelled"
       },
       "type": {
-        "money":     "Money",
+        "money": "Money",
         "resources": "Resources"
       },
       "table": {
@@ -499,6 +514,13 @@
         "prev": "Prev",
         "next": "Next",
         "page": "Page {{page}} of {{pages}}"
+      },
+      "status": {
+        "open": "Open",
+        "claimed": "Claimed",
+        "completed": "Completed",
+        "cancelled": "Cancelled",
+        "expired": "Expired"
       }
     },
     "common": {
@@ -513,195 +535,192 @@
       "loginFirst": "Log in first"
     }
   },
-
   "musicPlayer": {
-    "title":          "Music Player",
-    "playing":        "Playing",
-    "sound":          "Sound",
-    "ambientDesc":    "Built-in ambient soundtrack for the marketplace. Plays on loop.",
-    "playAmbient":    "Play Ambient",
-    "pauseAmbient":   "Pause Ambient",
-    "spotifyDesc":    "Paste any Spotify track, playlist, or album link.",
-    "loadSpotify":    "Load Spotify",
+    "title": "Music Player",
+    "playing": "Playing",
+    "sound": "Sound",
+    "ambientDesc": "Built-in ambient soundtrack for the marketplace. Plays on loop.",
+    "playAmbient": "Play Ambient",
+    "pauseAmbient": "Pause Ambient",
+    "spotifyDesc": "Paste any Spotify track, playlist, or album link.",
+    "loadSpotify": "Load Spotify",
     "soundcloudDesc": "Paste any SoundCloud track or playlist link.",
     "loadSoundCloud": "Load SoundCloud",
-    "changeLink":     "Change link"
+    "changeLink": "Change link"
   },
-
   "makeOffer": {
-    "back":       "Back",
-    "floor":      "Floor",
-    "title":      "Make an Offer",
-    "yourOffer":  "Your Offer (USDC)",
-    "expiresIn":  "Offer Expires In",
-    "youPay":     "You Pay",
+    "back": "Back",
+    "floor": "Floor",
+    "title": "Make an Offer",
+    "yourOffer": "Your Offer (USDC)",
+    "expiresIn": "Offer Expires In",
+    "youPay": "You Pay",
     "submitting": "Submitting...",
-    "submit":     "Submit Offer",
-    "terms":      "By submitting this offer, you agree to Hyper Tek's Terms of Service.",
+    "submit": "Submit Offer",
+    "terms": "By submitting this offer, you agree to Hyper Tek's Terms of Service.",
     "expiry": {
-      "6h":  "6 Hours",
+      "6h": "6 Hours",
       "12h": "12 Hours",
-      "1d":  "1 Day",
-      "3d":  "3 Days",
-      "7d":  "7 Days",
+      "1d": "1 Day",
+      "3d": "3 Days",
+      "7d": "7 Days",
       "1mo": "1 Month"
     },
     "success": {
-      "title":           "Offer Submitted!",
-      "desc":            "Your offer of {{price}} USDC for {{name}} has been sent to the owner.",
-      "expires":         "Expires in {{duration}}",
-      "backToNft":       "Back to NFT",
+      "title": "Offer Submitted!",
+      "desc": "Your offer of {{price}} USDC for {{name}} has been sent to the owner.",
+      "expires": "Expires in {{duration}}",
+      "backToNft": "Back to NFT",
       "goToMarketplace": "Go to Marketplace"
     },
     "error": {
       "loginRequired": "Please log in to make an offer",
-      "submitFailed":  "Failed to submit offer. Please try again."
+      "submitFailed": "Failed to submit offer. Please try again."
     }
   },
-
   "paymentError": {
     "message": "Your request was not successful",
-    "goHome":  "Go Home"
+    "goHome": "Go Home"
   },
-
   "buyNfa": {
     "stripe": {
-      "title":      "Pay with Card",
-      "amount":     "Amount:",
-      "cancel":     "Cancel",
+      "title": "Pay with Card",
+      "amount": "Amount:",
+      "cancel": "Cancel",
       "processing": "Processing...",
-      "pay":        "Pay"
+      "pay": "Pay"
     },
     "nav": {
-      "backToMarketplace":  "Back to Marketplace",
-      "backToCollections":  "Back to Collections",
-      "offers":             "Offers",
-      "marketplace":        "Marketplace",
-      "auction":            "Auction",
-      "trade":              "Trade",
-      "detail":             "{{type}} Detail",
-      "buy":                "Buy {{type}}"
+      "backToMarketplace": "Back to Marketplace",
+      "backToCollections": "Back to Collections",
+      "offers": "Offers",
+      "marketplace": "Marketplace",
+      "auction": "Auction",
+      "trade": "Trade",
+      "detail": "{{type}} Detail",
+      "buy": "Buy {{type}}"
     },
     "marketplace": {
-      "listed":        "Listed",
-      "youOwn":        "You Own This",
-      "notMinted":     "Not minted yet",
-      "ownedBy":       "Owned by",
-      "platform":      "Platform",
-      "noDesc":        "No description provided for this item.",
-      "price":         "Price",
-      "minBuyback":    "Min Buyback Guarantee",
-      "reservePrice":  "Reserve Price",
-      "buybackNote":   "This asset cannot be sold below its minimum buyback value.",
-      "networkNote":   "USDC on Base · Base ETH required for gas (wallet payments only)",
-      "buyWithCard":   "Buy With Card",
-      "makeOffer":     "Make Offer",
-      "processing":    "Processing...",
+      "listed": "Listed",
+      "youOwn": "You Own This",
+      "notMinted": "Not minted yet",
+      "ownedBy": "Owned by",
+      "platform": "Platform",
+      "noDesc": "No description provided for this item.",
+      "price": "Price",
+      "minBuyback": "Min Buyback Guarantee",
+      "reservePrice": "Reserve Price",
+      "buybackNote": "This asset cannot be sold below its minimum buyback value.",
+      "networkNote": "USDC on Base · Base ETH required for gas (wallet payments only)",
+      "buyWithCard": "Buy With Card",
+      "makeOffer": "Make Offer",
+      "processing": "Processing...",
       "connectWallet": "Connect Wallet",
-      "buyNow":        "Buy Now",
-      "listNow":       "List Now",
-      "yourListed":    "Your {{type}} (Listed)",
-      "notAvailable":  "Not Available"
+      "buyNow": "Buy Now",
+      "listNow": "List Now",
+      "yourListed": "Your {{type}} (Listed)",
+      "notAvailable": "Not Available",
+      "dummyNotForSale": "Sample Preview — Not Available for Purchase"
     },
     "priceHistory": {
-      "title":       "Price History",
-      "subtitle":    "Historical sale prices for this NFT",
-      "loading":     "Loading...",
-      "noSales":     "No sales recorded yet",
+      "title": "Price History",
+      "subtitle": "Historical sale prices for this NFT",
+      "loading": "Loading...",
+      "noSales": "No sales recorded yet",
       "noSalesNote": "Price history appears after the first sale"
     },
     "fundModal": {
-      "title":    "Insufficient USDC",
-      "youNeed":  "You need",
-      "butHave":  "but your wallet only has",
-      "desc2":    "Fund your wallet instantly with a credit or debit card via Transak, then come back to complete the purchase.",
-      "fundBtn":  "Fund Wallet with Card (Transak)",
-      "cancel":   "Cancel"
+      "title": "Insufficient USDC",
+      "youNeed": "You need",
+      "butHave": "but your wallet only has",
+      "desc2": "Fund your wallet instantly with a credit or debit card via Transak, then come back to complete the purchase.",
+      "fundBtn": "Fund Wallet with Card (Transak)",
+      "cancel": "Cancel"
     },
     "gasModal": {
-      "title":       "ETH Required for Gas",
+      "title": "ETH Required for Gas",
       "mainnetNote": "You're on Base Mainnet. Buy a small amount of ETH (≈ $1–2) on Coinbase or bridge from Ethereum via bridge.base.org.",
       "testnetNote": "You're on Base Sepolia Testnet. Get free test ETH from a faucet.",
-      "faucetBtn":   "Get Testnet ETH (Faucet)",
-      "bridgeBtn":   "Bridge ETH to Base",
-      "close":       "Close"
+      "faucetBtn": "Get Testnet ETH (Faucet)",
+      "bridgeBtn": "Bridge ETH to Base",
+      "close": "Close"
     },
     "confirmModal1": {
-      "title":       "Confirm Action",
-      "listPrice":   "List Price",
+      "title": "Confirm Action",
+      "listPrice": "List Price",
       "platformFee": "Platform Fee (10%)",
-      "total":       "Total",
-      "cancel":      "Cancel",
-      "continue":    "Continue"
+      "total": "Total",
+      "cancel": "Cancel",
+      "continue": "Continue"
     },
     "confirmModal2": {
-      "setPrice":   "Set Your Listing Price (USDC)",
-      "willList":   "✓ Will list at {{price}} USDC",
-      "price":      "Price",
-      "cancel":     "Cancel",
+      "setPrice": "Set Your Listing Price (USDC)",
+      "willList": "✓ Will list at {{price}} USDC",
+      "price": "Price",
+      "cancel": "Cancel",
       "processing": "Processing...",
-      "confirm":    "Confirm"
+      "confirm": "Confirm"
     },
     "offers": {
-      "noOffers":      "No offers yet",
-      "offer":         "offer",
-      "offers":        "offers",
+      "noOffers": "No offers yet",
+      "offer": "offer",
+      "offers": "offers",
       "noOffersTitle": "No offers right now",
-      "noOffersDesc":  "Be the first to make an offer",
-      "colPrice":      "Price",
-      "colStatus":     "Status",
-      "colFrom":       "From",
-      "colExpires":    "Expires",
-      "colAction":     "Action",
-      "accept":        "Accept",
-      "reject":        "Reject",
-      "cancel":        "Cancel",
-      "expired":       "Expired",
+      "noOffersDesc": "Be the first to make an offer",
+      "colPrice": "Price",
+      "colStatus": "Status",
+      "colFrom": "From",
+      "colExpires": "Expires",
+      "colAction": "Action",
+      "accept": "Accept",
+      "reject": "Reject",
+      "cancel": "Cancel",
+      "expired": "Expired",
       "completePurchase": "Complete Purchase"
     },
     "auction": {
-      "loading":       "Loading auction data…",
-      "active":        "Active Auction",
-      "startPrice":    "Start Price",
-      "currentBid":    "Current Bid",
-      "noBids":        "No bids yet",
-      "instantBuy":    "Instant Buy",
-      "reservePrice":  "Reserve Price",
-      "bidHistory":    "Bid History",
-      "minBid":        "Min bid:",
-      "bidding":       "Bidding…",
-      "placeBid":      "Place Bid",
+      "loading": "Loading auction data…",
+      "active": "Active Auction",
+      "startPrice": "Start Price",
+      "currentBid": "Current Bid",
+      "noBids": "No bids yet",
+      "instantBuy": "Instant Buy",
+      "reservePrice": "Reserve Price",
+      "bidHistory": "Bid History",
+      "minBid": "Min bid:",
+      "bidding": "Bidding…",
+      "placeBid": "Place Bid",
       "connectWallet": "Connect your wallet to place a bid",
-      "ownerNote":     "Your item is listed on auction. Bids will appear here as they come in.",
-      "noAuction":     "No active auction for this item",
-      "ownerSetup":    "Go to your Collections and click List to set up an auction.",
-      "notAvailable":  "This item has no open auction at the moment."
+      "ownerNote": "Your item is listed on auction. Bids will appear here as they come in.",
+      "noAuction": "No active auction for this item",
+      "ownerSetup": "Go to your Collections and click List to set up an auction.",
+      "notAvailable": "This item has no open auction at the moment."
     },
     "trade": {
-      "loading":      "Loading trade listings…",
-      "active":       "active trade listing",
-      "actives":      "active trade listings",
-      "offering":     "Offering",
-      "wants":        "Wants",
-      "openOffer":    "Open offer",
-      "by":           "By",
+      "loading": "Loading trade listings…",
+      "active": "active trade listing",
+      "actives": "active trade listings",
+      "offering": "Offering",
+      "wants": "Wants",
+      "openOffer": "Open offer",
+      "by": "By",
       "proposeTrade": "Propose Trade →",
-      "noTrades":     "No active trade listings",
-      "ownerSetup":   "Go to your Collections and click List to set up a trade.",
+      "noTrades": "No active trade listings",
+      "ownerSetup": "Go to your Collections and click List to set up a trade.",
       "notAvailable": "The owner has no open trade listings for this item."
     },
     "successModal": {
-      "title":            "Purchase Successful!",
-      "desc":             "{{name}} has been purchased. Your NFT will be transferred to your wallet shortly.",
-      "note":             "Transfer is processed automatically via our system.",
-      "viewProfile":      "View in My Profile",
+      "title": "Purchase Successful!",
+      "desc": "{{name}} has been purchased. Your NFT will be transferred to your wallet shortly.",
+      "note": "Transfer is processed automatically via our system.",
+      "viewProfile": "View in My Profile",
       "continueShopping": "Continue Shopping"
     },
     "transferFailed": {
-      "title":       "Payment Received — Transfer Pending",
-      "desc":        "Your payment was successful, but the NFT transfer encountered an issue. Your funds are safe — our team will complete the transfer manually.",
+      "title": "Payment Received — Transfer Pending",
+      "desc": "Your payment was successful, but the NFT transfer encountered an issue. Your funds are safe — our team will complete the transfer manually.",
       "viewProfile": "View My Profile",
-      "dismiss":     "Dismiss"
+      "dismiss": "Dismiss"
     }
   }
 }

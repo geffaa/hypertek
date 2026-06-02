@@ -171,7 +171,8 @@
       "dummyContent": "محتوى وهمي",
       "preview": "معاينة",
       "buyNow": "اشتري الآن",
-      "viewDetails": "عرض التفاصيل"
+      "viewDetails": "عرض التفاصيل",
+      "dummyNotForSale": "معاينة فقط"
     },
     "nfa101": {
       "sectionLabel": "التعليم",
@@ -280,6 +281,12 @@
         "prev": "السابق",
         "next": "التالي",
         "page": "الصفحة {{page}} من {{pages}}"
+      },
+      "status": {
+        "active": "نشط",
+        "ended": "منتهٍ",
+        "sold": "مباع",
+        "cancelled": "ملغى"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "السابق",
         "next": "التالي",
         "page": "الصفحة {{page}} من {{pages}}"
-      }
+      },
+      "status": {
+        "open": "مفتوح",
+        "accepted": "مقبول",
+        "completed": "مكتمل",
+        "cancelled": "ملغى",
+        "expired": "منتهي"
+      },
+      "openOfferText": "قدم لي عرضاً"
     },
     "quests": {
       "heading": "لوحة المهمات",
@@ -499,6 +514,13 @@
         "prev": "السابق",
         "next": "التالي",
         "page": "الصفحة {{page}} من {{pages}}"
+      },
+      "status": {
+        "open": "مفتوح",
+        "claimed": "مطالب به",
+        "completed": "مكتمل",
+        "cancelled": "ملغى",
+        "expired": "منتهي"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "اشتر الآن",
       "listNow": "أدرج الآن",
       "yourListed": "الخاص بك {{type}} (مدرج)",
-      "notAvailable": "غير متوفر"
+      "notAvailable": "غير متوفر",
+      "dummyNotForSale": "معاينة — غير متاح للشراء"
     },
     "fundModal": {
       "title": "USDC غير كافية",

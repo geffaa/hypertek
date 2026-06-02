@@ -1119,6 +1119,31 @@
     "pairing": "NAGPAPARES...",
     "unavailableNow": "HINDI AVAILABLE NGAYON",
     "pairDevice": "I-PAIR ANG DEVICE",
-    "vrInteractionMode": "VR Interaction MODE · Malapit Na"
+    "vrInteractionMode": "VR Interaction MODE · Malapit Na",
+    "eventStatus": {
+      "eventOngoing": "Nagpapatuloy ang Kaganapan",
+      "endsIn": "Magtatapos sa",
+      "startsIn": "Magsisimula sa",
+      "resetsDaily": "Araw-araw na pag-reset",
+      "seasonEndsIn": "Magtatapos ang season sa"
+    },
+    "eventItems": {
+      "inviteFriends": "Mag-imbita ng mga Kaibigan",
+      "landBaseOversight": "Pangangasiwa ng Base",
+      "questsTrail": "Landas ng Misyon",
+      "contractKiller": "Kontratang Mamamatay-tao",
+      "mazedMission": "Misyon sa Labirinto",
+      "flamingAsteroid": "Nagniningas na Asteroid",
+      "refiningMaster": "Dalubhasa sa Pagpipino",
+      "starGaze": "Pagtitingin sa Bituin",
+      "dailyLoginBonus": "Araw-araw na Bonus sa Pag-login",
+      "battlePass": "Battle Pass",
+      "allianceWar": "Digmaan ng Alyansa",
+      "weeklyChallenge": "Lingguhang Hamon",
+      "galacticCup": "Galactic Cup",
+      "speedRacingTournament": "Torneo ng Speed Racing",
+      "overlordChampionship": "Overlord Championship"
+    },
+    "eventDetailPlaceholder": "Ang kumpletong mga detalye ng kaganapan, mga gantimpala, at mga opsyon sa pakikilahok ay magiging available kapag inilunsad ang kaganapang ito."
   }
 }

@@ -1119,6 +1119,31 @@
     "pairing": "СОПРЯЖЕНИЕ...",
     "unavailableNow": "СЕЙЧАС НЕДОСТУПНО",
     "pairDevice": "СОПРЯЧЬ УСТРОЙСТВО",
-    "vrInteractionMode": "Режим VR-взаимодействия · Скоро"
+    "vrInteractionMode": "Режим VR-взаимодействия · Скоро",
+    "eventStatus": {
+      "eventOngoing": "Событие продолжается",
+      "endsIn": "Заканчивается через",
+      "startsIn": "Начинается через",
+      "resetsDaily": "Ежедневный сброс",
+      "seasonEndsIn": "Сезон заканчивается через"
+    },
+    "eventItems": {
+      "inviteFriends": "Пригласить друзей",
+      "landBaseOversight": "Надзор за базой",
+      "questsTrail": "Путь заданий",
+      "contractKiller": "Наёмный убийца",
+      "mazedMission": "Миссия в лабиринте",
+      "flamingAsteroid": "Пылающий астероид",
+      "refiningMaster": "Мастер очистки",
+      "starGaze": "Звёздное наблюдение",
+      "dailyLoginBonus": "Ежедневный бонус за вход",
+      "battlePass": "Боевой пропуск",
+      "allianceWar": "Война альянсов",
+      "weeklyChallenge": "Еженедельное задание",
+      "galacticCup": "Галактический кубок",
+      "speedRacingTournament": "Турнир скоростных гонок",
+      "overlordChampionship": "Чемпионат Оверлорда"
+    },
+    "eventDetailPlaceholder": "Полные сведения о событии, награды и варианты участия будут доступны при запуске этого события."
   }
 }

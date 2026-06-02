@@ -171,7 +171,8 @@
       "dummyContent": "Contenido ficticio",
       "preview": "Vista previa",
       "buyNow": "Comprar ahora",
-      "viewDetails": "Ver detalles"
+      "viewDetails": "Ver detalles",
+      "dummyNotForSale": "Solo Vista Previa"
     },
     "nfa101": {
       "sectionLabel": "Educación",
@@ -280,6 +281,12 @@
         "prev": "Ant.",
         "next": "Sig.",
         "page": "Página {{page}} de {{pages}}"
+      },
+      "status": {
+        "active": "Activo",
+        "ended": "Finalizado",
+        "sold": "Vendido",
+        "cancelled": "Cancelado"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "Ant.",
         "next": "Sig.",
         "page": "Página {{page}} de {{pages}}"
-      }
+      },
+      "status": {
+        "open": "Abierto",
+        "accepted": "Aceptado",
+        "completed": "Completado",
+        "cancelled": "Cancelado",
+        "expired": "Expirado"
+      },
+      "openOfferText": "Hazme una oferta"
     },
     "quests": {
       "heading": "Tablero de Misiones",
@@ -499,6 +514,13 @@
         "prev": "Ant.",
         "next": "Sig.",
         "page": "Página {{page}} de {{pages}}"
+      },
+      "status": {
+        "open": "Abierto",
+        "claimed": "Reclamado",
+        "completed": "Completado",
+        "cancelled": "Cancelado",
+        "expired": "Expirado"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "Comprar ahora",
       "listNow": "Listar ahora",
       "yourListed": "Su {{type}} (listado)",
-      "notAvailable": "No disponible"
+      "notAvailable": "No disponible",
+      "dummyNotForSale": "Vista Previa — No Disponible para Compra"
     },
     "fundModal": {
       "title": "USDC insuficiente",

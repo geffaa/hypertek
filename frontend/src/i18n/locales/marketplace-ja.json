@@ -171,7 +171,8 @@
       "dummyContent": "ダミーコンテンツ",
       "preview": "プレビュー",
       "buyNow": "今すぐ購入",
-      "viewDetails": "詳細を見る"
+      "viewDetails": "詳細を見る",
+      "dummyNotForSale": "プレビューのみ"
     },
     "nfa101": {
       "sectionLabel": "教育",
@@ -280,6 +281,12 @@
         "prev": "前へ",
         "next": "次へ",
         "page": "{{page}} / {{pages}} ページ"
+      },
+      "status": {
+        "active": "進行中",
+        "ended": "終了",
+        "sold": "売却済み",
+        "cancelled": "キャンセル"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "前へ",
         "next": "次へ",
         "page": "{{page}} / {{pages}} ページ"
-      }
+      },
+      "status": {
+        "open": "オープン",
+        "accepted": "承諾済み",
+        "completed": "完了",
+        "cancelled": "キャンセル",
+        "expired": "期限切れ"
+      },
+      "openOfferText": "オファーしてください"
     },
     "quests": {
       "heading": "クエストボード",
@@ -499,6 +514,13 @@
         "prev": "前へ",
         "next": "次へ",
         "page": "{{page}} / {{pages}} ページ"
+      },
+      "status": {
+        "open": "オープン",
+        "claimed": "受領済み",
+        "completed": "完了",
+        "cancelled": "キャンセル",
+        "expired": "期限切れ"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "今すぐ購入",
       "listNow": "今すぐ出品",
       "yourListed": "あなたの {{type}} (出品中)",
-      "notAvailable": "利用不可"
+      "notAvailable": "利用不可",
+      "dummyNotForSale": "サンプルプレビュー — 購入不可"
     },
     "fundModal": {
       "title": "USDCが不十分",

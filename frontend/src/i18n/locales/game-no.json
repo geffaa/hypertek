@@ -1119,6 +1119,31 @@
     "pairing": "PARRING...",
     "unavailableNow": "IKKE TILGJENGELIG AKKURAT NÅ",
     "pairDevice": "PAR ENHET",
-    "vrInteractionMode": "VR-interaksjonsmodus · Snart"
+    "vrInteractionMode": "VR-interaksjonsmodus · Snart",
+    "eventStatus": {
+      "eventOngoing": "Arrangement pågår",
+      "endsIn": "Avsluttes om",
+      "startsIn": "Starter om",
+      "resetsDaily": "Daglig tilbakestilling",
+      "seasonEndsIn": "Sesongen slutter om"
+    },
+    "eventItems": {
+      "inviteFriends": "Inviter venner",
+      "landBaseOversight": "Baseovervåking",
+      "questsTrail": "Oppdragsspor",
+      "contractKiller": "Leid morder",
+      "mazedMission": "Labyrintoppdrag",
+      "flamingAsteroid": "Brennende asteroide",
+      "refiningMaster": "Raffineringsmester",
+      "starGaze": "Stjernekikking",
+      "dailyLoginBonus": "Daglig påloggingsbonus",
+      "battlePass": "Kamppass",
+      "allianceWar": "Alliansekrig",
+      "weeklyChallenge": "Ukentlig utfordring",
+      "galacticCup": "Galaktisk pokal",
+      "speedRacingTournament": "Hastighetskappkjøringsturneringen",
+      "overlordChampionship": "Overlord-mesterskap"
+    },
+    "eventDetailPlaceholder": "Fullstendige arrangementdetaljer, belønninger og deltakeralternativer vil være tilgjengelige når dette arrangementet lanseres."
   }
 }

@@ -171,7 +171,8 @@
       "dummyContent": "Dummy Content",
       "preview": "Silipin",
       "buyNow": "Bumili na",
-      "viewDetails": "Tingnan ang mga Detalye"
+      "viewDetails": "Tingnan ang mga Detalye",
+      "dummyNotForSale": "Preview Lamang"
     },
     "nfa101": {
       "sectionLabel": "Edukasyon",
@@ -280,6 +281,12 @@
         "prev": "Nakaraan",
         "next": "Susunod",
         "page": "Pahina {{page}} ng {{pages}}"
+      },
+      "status": {
+        "active": "Aktibo",
+        "ended": "Natapos",
+        "sold": "Nabenta",
+        "cancelled": "Kinansela"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "Nakaraan",
         "next": "Susunod",
         "page": "Pahina {{page}} ng {{pages}}"
-      }
+      },
+      "status": {
+        "open": "Bukas",
+        "accepted": "Tinanggap",
+        "completed": "Nakumpleto",
+        "cancelled": "Kinansela",
+        "expired": "Nag-expire"
+      },
+      "openOfferText": "Mag-alok sa akin"
     },
     "quests": {
       "heading": "Quest Board",
@@ -384,11 +399,11 @@
         "open": "Bukas",
         "accepted": "Tinanggap",
         "completed": "Nakumpleto",
-        "cancelled": "Kanselado"
+        "cancelled": "Kinansela"
       },
       "type": {
         "money": "Pera",
-        "resources": "Mga Mapagkukunan"
+        "resources": "Mga Likas-yaman"
       }
     },
     "hire": {
@@ -499,6 +514,13 @@
         "prev": "Nakaraan",
         "next": "Susunod",
         "page": "Pahina {{page}} ng {{pages}}"
+      },
+      "status": {
+        "open": "Bukas",
+        "claimed": "Na-claim",
+        "completed": "Nakumpleto",
+        "cancelled": "Kinansela",
+        "expired": "Nag-expire"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "Bumili Ngayon",
       "listNow": "Maglista Ngayon",
       "yourListed": "Iyong {{type}} (Nakalista)",
-      "notAvailable": "Hindi Magagamit"
+      "notAvailable": "Hindi Magagamit",
+      "dummyNotForSale": "Sample Preview — Hindi Available para Bilhin"
     },
     "fundModal": {
       "title": "Hindi sapat ang USDC",

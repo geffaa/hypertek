@@ -9,6 +9,7 @@
  */
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import RacingControls  from "./RacingControls";
 import LazyImage       from "./LazyImage";
@@ -1021,10 +1022,85 @@ function GarageView() {
 /* ══════════════════════════════════════════════════════════════════
    RacingMode — main export
    ══════════════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════════════
+   VIDEO OVERLAY
+   ══════════════════════════════════════════════════════════════════ */
+function VideoOverlay({ onClose }) {
+  const { t } = useTranslation();
+  return createPortal(
+    <div
+      onClick={onClose}
+      style={{
+        position: "fixed", inset: 0, zIndex: 9000,
+        background: "rgba(0,3,15,0.92)", backdropFilter: "blur(6px)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+      }}
+    >
+      <style>{`
+        @keyframes raceVideoPopIn {
+          from { opacity:0; transform:scale(0.93); }
+          to   { opacity:1; transform:scale(1); }
+        }
+      `}</style>
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{
+          display: "flex", flexDirection: "column",
+          width: "min(72vw, calc(58vh * 1.778))",
+          animation: "raceVideoPopIn 0.25s cubic-bezier(0.16,1,0.3,1) both",
+          gap: 8,
+        }}
+      >
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div style={{
+            fontFamily: "Orbitron,sans-serif",
+            fontSize: "clamp(9px,1vw,13px)", fontWeight: "bold",
+            letterSpacing: "0.18em", color: "#86efac",
+            textShadow: "0 0 12px rgba(34,197,94,0.7)", whiteSpace: "nowrap",
+          }}>▶ {t("racing.video.title", "RACING GAMEPLAY VIDEO")}</div>
+          <button
+            onClick={onClose}
+            style={{
+              padding: "5px 14px",
+              background: "rgba(0,20,8,0.9)",
+              border: "1px solid rgba(34,197,94,0.7)",
+              borderRadius: 3,
+              clipPath: "polygon(0% 0%,calc(100% - 5px) 0%,100% 100%,5px 100%)",
+              fontFamily: "Orbitron,sans-serif",
+              fontSize: "clamp(8px,0.8vw,11px)", fontWeight: "bold",
+              letterSpacing: "0.14em", color: "#86efac",
+              textShadow: "0 0 8px rgba(34,197,94,0.6)",
+              cursor: "pointer", whiteSpace: "nowrap",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background = "rgba(34,197,94,0.25)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,20,8,0.9)"; }}
+          >✕ {t("racing.video.close", "CLOSE")}</button>
+        </div>
+        <div style={{
+          position: "relative", aspectRatio: "16/9",
+          background: "#000",
+          border: "1.5px solid rgba(34,197,94,0.45)",
+          borderRadius: 10,
+          boxShadow: "0 0 80px rgba(0,0,0,0.95), 0 0 40px rgba(34,197,94,0.12)",
+          overflow: "hidden",
+        }}>
+          <video
+            src="/video/racing_content.mp4"
+            autoPlay loop muted playsInline
+            style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
+          />
+        </div>
+      </div>
+    </div>,
+    document.body
+  );
+}
+
 export default function RacingMode({ view = "TRACK", onExit }) {
   const { t } = useTranslation();
   const isTrack = view === "TRACK";
   const [speed, setSpeed] = useState(0.4);
+  const [videoOpen, setVideoOpen] = useState(false);
 
   return (
     <>
@@ -1043,6 +1119,38 @@ export default function RacingMode({ view = "TRACK", onExit }) {
 
         {/* ── Racing controls (track only) ── */}
         {isTrack && <RacingControls speed={speed} onSpeedChange={setSpeed} />}
+
+        {/* ── VIDEO button — top center (track only) ── */}
+        {isTrack && (
+          <div style={{
+            position: "absolute", top: "22%", left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 30,
+          }}>
+            <button
+              onClick={() => setVideoOpen(true)}
+              style={{
+                padding: "9px 24px",
+                background: "rgba(0,20,8,0.88)",
+                border: "1.5px solid rgba(34,197,94,0.6)",
+                borderRadius: 3,
+                clipPath: "polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)",
+                fontFamily: "Orbitron,sans-serif",
+                fontSize: "clamp(7px,0.85vw,10px)", fontWeight: "bold",
+                letterSpacing: "0.18em", color: "#86efac",
+                textShadow: "0 0 10px rgba(34,197,94,0.6)",
+                boxShadow: "0 0 20px rgba(34,197,94,0.2)",
+                cursor: "pointer", whiteSpace: "nowrap",
+                transition: "background 0.2s, box-shadow 0.2s",
+                display: "flex", alignItems: "center", gap: 8,
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = "rgba(34,197,94,0.18)"; e.currentTarget.style.boxShadow = "0 0 28px rgba(34,197,94,0.4)"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,20,8,0.88)"; e.currentTarget.style.boxShadow = "0 0 20px rgba(34,197,94,0.2)"; }}
+            >
+              ▶ {t("racing.video.watchBtn", "WATCH VIDEO")}
+            </button>
+          </div>
+        )}
 
         {/* ── EXIT button — bottom-left ── */}
         <button
@@ -1073,6 +1181,8 @@ export default function RacingMode({ view = "TRACK", onExit }) {
         </button>
 
       </div>
+
+      {videoOpen && <VideoOverlay onClose={() => setVideoOpen(false)} />}
     </>
   );
 }

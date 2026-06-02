@@ -1119,6 +1119,31 @@
     "pairing": "ASOCIERE...",
     "unavailableNow": "INDISPONIBIL ACUM",
     "pairDevice": "ASOCIAZĂ DISPOZITIV",
-    "vrInteractionMode": "Modul Interacțiune VR · În Curând"
+    "vrInteractionMode": "Modul Interacțiune VR · În Curând",
+    "eventStatus": {
+      "eventOngoing": "Eveniment în desfășurare",
+      "endsIn": "Se termină în",
+      "startsIn": "Începe în",
+      "resetsDaily": "Resetare zilnică",
+      "seasonEndsIn": "Sezonul se termină în"
+    },
+    "eventItems": {
+      "inviteFriends": "Invită prieteni",
+      "landBaseOversight": "Supraveghere bază",
+      "questsTrail": "Traseu misiuni",
+      "contractKiller": "Ucigaș de contract",
+      "mazedMission": "Misiune în labirint",
+      "flamingAsteroid": "Asteroid în flăcări",
+      "refiningMaster": "Maestru al rafinării",
+      "starGaze": "Privit la stele",
+      "dailyLoginBonus": "Bonus zilnic de conectare",
+      "battlePass": "Permis de luptă",
+      "allianceWar": "Război de alianță",
+      "weeklyChallenge": "Provocare săptămânală",
+      "galacticCup": "Cupa Galactică",
+      "speedRacingTournament": "Turneu de curse de viteză",
+      "overlordChampionship": "Campionatul Overlord"
+    },
+    "eventDetailPlaceholder": "Detaliile complete ale evenimentului, recompensele și opțiunile de participare vor fi disponibile când acest eveniment va fi lansat."
   }
 }

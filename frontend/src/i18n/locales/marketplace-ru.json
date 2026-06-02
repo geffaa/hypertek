@@ -171,7 +171,8 @@
       "dummyContent": "Фиктивный контент",
       "preview": "Предварительный просмотр",
       "buyNow": "Купить сейчас",
-      "viewDetails": "Посмотреть подробности"
+      "viewDetails": "Посмотреть подробности",
+      "dummyNotForSale": "Только предпросмотр"
     },
     "nfa101": {
       "sectionLabel": "Образование",
@@ -280,6 +281,12 @@
         "prev": "Назад",
         "next": "Вперёд",
         "page": "Страница {{page}} из {{pages}}"
+      },
+      "status": {
+        "active": "Активный",
+        "ended": "Завершён",
+        "sold": "Продан",
+        "cancelled": "Отменён"
       }
     },
     "trades": {
@@ -343,7 +350,15 @@
         "prev": "Назад",
         "next": "Вперёд",
         "page": "Страница {{page}} из {{pages}}"
-      }
+      },
+      "status": {
+        "open": "Открыт",
+        "accepted": "Принят",
+        "completed": "Завершён",
+        "cancelled": "Отменён",
+        "expired": "Истёк"
+      },
+      "openOfferText": "Сделайте мне предложение"
     },
     "quests": {
       "heading": "Доска заданий",
@@ -499,6 +514,13 @@
         "prev": "Назад",
         "next": "Вперёд",
         "page": "Страница {{page}} из {{pages}}"
+      },
+      "status": {
+        "open": "Открыт",
+        "claimed": "Занят",
+        "completed": "Завершён",
+        "cancelled": "Отменён",
+        "expired": "Истёк"
       }
     },
     "common": {
@@ -563,7 +585,8 @@
       "buyNow": "Buy Now",
       "listNow": "List Now",
       "yourListed": "Your {{type}} (Listed)",
-      "notAvailable": "Not Available"
+      "notAvailable": "Not Available",
+      "dummyNotForSale": "Образец — Недоступен для покупки"
     },
     "fundModal": {
       "title": "Недостаточно долларов США",

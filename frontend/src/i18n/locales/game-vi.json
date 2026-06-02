@@ -1119,6 +1119,31 @@
     "pairing": "ĐANG GHÉP NỐI...",
     "unavailableNow": "HIỆN KHÔNG KHẢ DỤNG",
     "pairDevice": "GHÉP NỐI THIẾT BỊ",
-    "vrInteractionMode": "Chế độ Tương tác VR · Sắp ra mắt"
+    "vrInteractionMode": "Chế độ Tương tác VR · Sắp ra mắt",
+    "eventStatus": {
+      "eventOngoing": "Sự kiện đang diễn ra",
+      "endsIn": "Kết thúc sau",
+      "startsIn": "Bắt đầu sau",
+      "resetsDaily": "Đặt lại hàng ngày",
+      "seasonEndsIn": "Mùa kết thúc sau"
+    },
+    "eventItems": {
+      "inviteFriends": "Mời bạn bè",
+      "landBaseOversight": "Giám sát căn cứ",
+      "questsTrail": "Hành trình nhiệm vụ",
+      "contractKiller": "Sát thủ hợp đồng",
+      "mazedMission": "Nhiệm vụ mê cung",
+      "flamingAsteroid": "Tiểu hành tinh bốc lửa",
+      "refiningMaster": "Bậc thầy tinh chế",
+      "starGaze": "Ngắm sao",
+      "dailyLoginBonus": "Thưởng đăng nhập hàng ngày",
+      "battlePass": "Thẻ chiến đấu",
+      "allianceWar": "Chiến tranh liên minh",
+      "weeklyChallenge": "Thử thách hàng tuần",
+      "galacticCup": "Cúp Thiên Hà",
+      "speedRacingTournament": "Giải đua tốc độ",
+      "overlordChampionship": "Giải vô địch Overlord"
+    },
+    "eventDetailPlaceholder": "Chi tiết đầy đủ về sự kiện, phần thưởng và tùy chọn tham gia sẽ có sẵn khi sự kiện này ra mắt."
   }
 }

@@ -48,25 +48,25 @@ import {
 // locked: true = coming soon (game not yet created)
 const EVENT_DATA = {
   Limited: [
-    { title: "Invite Friends",      status: "Event Ongoing", time: null,       locked: true  },
-    { title: "Land Base Oversight", status: "Event Ongoing", time: null,       locked: true  },
-    { title: "Quests Trail",        status: "Event Ongoing", time: null,       locked: true  },
-    { title: "Contract Killer",     status: "Event Ongoing", time: null,       locked: true  },
-    { title: "Mazed Mission",       status: "Ends in",       time: "1d 18:17", locked: true  },
-    { title: "Flaming Asteroid",    status: "Ends in",       time: "2d 06:17", locked: true  },
-    { title: "Refining Master",     status: "Ends in",       time: "2d 06:17", locked: true  },
-    { title: "Star Gaze",           status: "Ends in",       time: "6d 18:17", locked: true  },
+    { title: "Invite Friends",      titleKey: "hud.eventItems.inviteFriends",        statusKey: "hud.eventStatus.eventOngoing", status: "Event Ongoing", time: null,       locked: true  },
+    { title: "Land Base Oversight", titleKey: "hud.eventItems.landBaseOversight",    statusKey: "hud.eventStatus.eventOngoing", status: "Event Ongoing", time: null,       locked: true  },
+    { title: "Quests Trail",        titleKey: "hud.eventItems.questsTrail",          statusKey: "hud.eventStatus.eventOngoing", status: "Event Ongoing", time: null,       locked: true  },
+    { title: "Contract Killer",     titleKey: "hud.eventItems.contractKiller",       statusKey: "hud.eventStatus.eventOngoing", status: "Event Ongoing", time: null,       locked: true  },
+    { title: "Mazed Mission",       titleKey: "hud.eventItems.mazedMission",         statusKey: "hud.eventStatus.endsIn",       status: "Ends in",       time: "1d 18:17", locked: true  },
+    { title: "Flaming Asteroid",    titleKey: "hud.eventItems.flamingAsteroid",      statusKey: "hud.eventStatus.endsIn",       status: "Ends in",       time: "2d 06:17", locked: true  },
+    { title: "Refining Master",     titleKey: "hud.eventItems.refiningMaster",       statusKey: "hud.eventStatus.endsIn",       status: "Ends in",       time: "2d 06:17", locked: true  },
+    { title: "Star Gaze",           titleKey: "hud.eventItems.starGaze",             statusKey: "hud.eventStatus.endsIn",       status: "Ends in",       time: "6d 18:17", locked: true  },
   ],
   Activities: [
-    { title: "Daily Login Bonus",       status: "Resets daily",   time: null,        locked: true  },
-    { title: "Battle Pass",             status: "Season ends in", time: "12d 04:00", locked: true  },
-    { title: "Alliance War",            status: "Event Ongoing",  time: null,        locked: true  },
-    { title: "Weekly Challenge",        status: "Ends in",        time: "4d 10:30",  locked: true  },
+    { title: "Daily Login Bonus",       titleKey: "hud.eventItems.dailyLoginBonus",       statusKey: "hud.eventStatus.resetsDaily",    status: "Resets daily",   time: null,        locked: true  },
+    { title: "Battle Pass",             titleKey: "hud.eventItems.battlePass",             statusKey: "hud.eventStatus.seasonEndsIn",   status: "Season ends in", time: "12d 04:00", locked: true  },
+    { title: "Alliance War",            titleKey: "hud.eventItems.allianceWar",            statusKey: "hud.eventStatus.eventOngoing",   status: "Event Ongoing",  time: null,        locked: true  },
+    { title: "Weekly Challenge",        titleKey: "hud.eventItems.weeklyChallenge",        statusKey: "hud.eventStatus.endsIn",         status: "Ends in",        time: "4d 10:30",  locked: true  },
   ],
   Competition: [
-    { title: "Galactic Cup",            status: "Starts in",      time: "3d 00:00",  locked: true  },
-    { title: "Speed Racing Tournament", status: "Ends in",        time: "5d 12:00",  locked: true  },
-    { title: "Overlord Championship",   status: "Event Ongoing",  time: null,        locked: true  },
+    { title: "Galactic Cup",            titleKey: "hud.eventItems.galacticCup",            statusKey: "hud.eventStatus.startsIn",       status: "Starts in",      time: "3d 00:00",  locked: true  },
+    { title: "Speed Racing Tournament", titleKey: "hud.eventItems.speedRacingTournament",  statusKey: "hud.eventStatus.endsIn",         status: "Ends in",        time: "5d 12:00",  locked: true  },
+    { title: "Overlord Championship",   titleKey: "hud.eventItems.overlordChampionship",   statusKey: "hud.eventStatus.eventOngoing",   status: "Event Ongoing",  time: null,        locked: true  },
   ],
 };
 
@@ -314,11 +314,11 @@ function EventsPanel({ onClose, isMobile, panelRight }) {
                     letterSpacing:"0.08em",
                     color: ev.locked ? "#aad4ee" : isSelected ? "#00E5FF" : "#ffffff",
                     marginBottom:3,
-                  }}>{ev.title}</div>
+                  }}>{t(ev.titleKey, ev.title)}</div>
                   <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
                     color: ev.time ? "#fde047" : "#00E5FF", letterSpacing:"0.06em",
                   }}>
-                    {ev.time ? `⏱ ${ev.status} ${ev.time}` : `● ${ev.status}`}
+                    {ev.time ? `⏱ ${t(ev.statusKey, ev.status)} ${ev.time}` : `● ${t(ev.statusKey, ev.status)}`}
                   </div>
                 </div>
                 {ev.locked
@@ -326,7 +326,7 @@ function EventsPanel({ onClose, isMobile, panelRight }) {
                   : tab === "Limited"
                     ? <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8,
                         color:"#00E5FF", letterSpacing:"0.06em",
-                      }}>VIEW →</span>
+                      }}>{t("hud.viewArrow", "VIEW →")}</span>
                     : null
                 }
               </div>
@@ -342,17 +342,17 @@ function EventsPanel({ onClose, isMobile, panelRight }) {
             background:"none", border:"none", cursor:"pointer", padding:"0 0 10px 0",
             fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8, color:"#00E5FF",
             letterSpacing:"0.1em",
-          }}>← BACK</button>
+          }}>{t("hud.back", "← BACK")}</button>
 
           <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 9 : 11, fontWeight:"bold",
             color:"#ffffff", letterSpacing:"0.1em", marginBottom:6,
-          }}>{detail.title}</div>
+          }}>{t(detail.titleKey, detail.title)}</div>
 
           <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8,
             color: detail.time ? "#fde047" : "#00E5FF",
             letterSpacing:"0.06em", marginBottom:14,
           }}>
-            {detail.time ? `⏱ ${detail.status} ${detail.time}` : `● ${detail.status}`}
+            {detail.time ? `⏱ ${t(detail.statusKey, detail.status)} ${detail.time}` : `● ${t(detail.statusKey, detail.status)}`}
           </div>
 
           <div style={{ height:1, background:"rgba(0,229,255,0.3)", marginBottom:12 }}/>
@@ -360,7 +360,7 @@ function EventsPanel({ onClose, isMobile, panelRight }) {
           <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8,
             color:"#cce8f8", lineHeight:1.7,
           }}>
-            Full event details, rewards, and participation options will be available when this event launches.
+            {t("hud.eventDetailPlaceholder", "Full event details, rewards, and participation options will be available when this event launches.")}
           </div>
         </div>
       )}

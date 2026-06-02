@@ -2,51 +2,65 @@
   "marketplace": {
     "sectionLabel": "Marketplace",
     "searchPlaceholder": "Search...",
-
     "tabs": {
-      "overview":  "Overview",
-      "nfa101":    "NFAs / NFCs / NFTs",
-      "general":   "The Marketplace",
-      "auctions":  "Auctions",
-      "trades":    "Trades",
-      "quests":    "Quests",
-      "hire":      "For Hire",
-      "bounty":    "Bounty"
+      "overview": "Overview",
+      "nfa101": "NFAs / NFCs / NFTs",
+      "general": "The Marketplace",
+      "auctions": "Auctions",
+      "trades": "Trades",
+      "quests": "Quests",
+      "hire": "For Hire",
+      "bounty": "Bounty"
     },
-
     "banner": {
       "defaultHeading": "A New Era Dawns in Hyper Tek",
       "defaultDesc": "It's the start of a living, breathing universe where every decision shapes the journey. Whether you're racing at light speed, forging alliances in the Overlord Realm, or uncovering secrets in HyperQuest, this is your chance to leave your mark on the story.",
       "stats": {
-        "totalItems":  "Total Items",
-        "totalBuys":   "Total Buys",
-        "listed":      "Listed",
+        "totalItems": "Total Items",
+        "totalBuys": "Total Buys",
+        "listed": "Listed",
         "collections": "Collections"
       },
-      "soundOn":  "Sound On",
+      "soundOn": "Sound On",
       "soundOff": "Sound Off"
     },
-
     "bottomBar": {
-      "learnLabel":     "Learn about NFAs / NFCs",
+      "learnLabel": "Learn about NFAs / NFCs",
       "educationPanel": "HyperTek Education Panel",
-      "footerNote":     "This panel is for quick reference. Visit the NFAs / NFCs 101 tab for full educational content.",
+      "footerNote": "This panel is for quick reference. Visit the NFAs / NFCs 101 tab for full educational content.",
       "facts": [
-        { "label": "NFA",        "desc": "Hypertek-only asset. Highest in-game bonuses. Guaranteed minimum buyback value that grows with every sale." },
-        { "label": "NFC",        "desc": "Created by Hypertek or licensed players. In-game bonuses included. Minimum buyback guaranteed." },
-        { "label": "NFT",        "desc": "Player-created collectible. No in-game bonuses. No buyback guarantee. Tradeable on the marketplace." },
-        { "label": "Commission", "desc": "20% platform fee on all sales. Seller receives 80%. Artist royalty 4% on resales." },
-        { "label": "Buyback Growth", "desc": "+5% of each resale price is added to the asset's minimum buyback value. It only ever grows." },
-        { "label": "Custodial Wallet", "desc": "HyperTek auto-creates a crypto wallet for you on signup." }
+        {
+          "label": "NFA",
+          "desc": "Hypertek-only asset. Highest in-game bonuses. Guaranteed minimum buyback value that grows with every sale."
+        },
+        {
+          "label": "NFC",
+          "desc": "Created by Hypertek or licensed players. In-game bonuses included. Minimum buyback guaranteed."
+        },
+        {
+          "label": "NFT",
+          "desc": "Player-created collectible. No in-game bonuses. No buyback guarantee. Tradeable on the marketplace."
+        },
+        {
+          "label": "Commission",
+          "desc": "20% platform fee on all sales. Seller receives 80%. Artist royalty 4% on resales."
+        },
+        {
+          "label": "Buyback Growth",
+          "desc": "+5% of each resale price is added to the asset's minimum buyback value. It only ever grows."
+        },
+        {
+          "label": "Custodial Wallet",
+          "desc": "HyperTek auto-creates a crypto wallet for you on signup."
+        }
       ]
     },
-
     "overview": {
-      "heading":  "Overview",
+      "heading": "Overview",
       "subtitle": "Welcome to the HyperTek Marketplace. Select a feature to learn more — then jump straight in.",
       "features": [
         {
-          "label":   "NFAs / NFCs / NFTs",
+          "label": "NFAs / NFCs / NFTs",
           "tagline": "New to Web3 assets? Start here",
           "details": [
             "NFAs (Non-Fungible Assets) are Hypertek-issued items with a platform-guaranteed buyback price.",
@@ -56,7 +70,7 @@
           "cta": "Learn the Basics"
         },
         {
-          "label":   "The Marketplace",
+          "label": "The Marketplace",
           "tagline": "Buy & sell in-game assets instantly",
           "details": [
             "Browse a wide catalog of NFAs, NFCs, and NFTs — skins, weapons, specialists, spaceships, and more.",
@@ -66,7 +80,7 @@
           "cta": "Browse The Marketplace"
         },
         {
-          "label":   "Auctions",
+          "label": "Auctions",
           "tagline": "Compete for exclusive limited-edition items",
           "details": [
             "Bid on rare assets that are only available through time-limited auctions.",
@@ -76,7 +90,7 @@
           "cta": "View Auctions"
         },
         {
-          "label":   "Trades",
+          "label": "Trades",
           "tagline": "Swap assets peer-to-peer, no middleman",
           "details": [
             "Propose or accept direct asset trades with other players — fully on-chain.",
@@ -86,7 +100,7 @@
           "cta": "Browse Trades"
         },
         {
-          "label":   "Quests",
+          "label": "Quests",
           "tagline": "Complete missions, earn exclusive rewards",
           "details": [
             "Take on quests to earn exclusive rewards and rare in-game assets.",
@@ -96,7 +110,7 @@
           "cta": "Explore Quests"
         },
         {
-          "label":   "For Hire",
+          "label": "For Hire",
           "tagline": "Borrow assets or earn from yours",
           "details": [
             "Rent powerful specialists or gear for a single mission without buying outright.",
@@ -106,7 +120,7 @@
           "cta": "Browse For Hire"
         },
         {
-          "label":   "Bounty",
+          "label": "Bounty",
           "tagline": "Hunt targets, claim rewards, top the leaderboard",
           "details": [
             "Accept bounties posted by other players or the system to earn crypto rewards.",
@@ -117,9 +131,8 @@
         }
       ]
     },
-
     "general": {
-      "heading":  "General",
+      "heading": "General",
       "subtitle": "Browse NFAs, NFCs, and NFTs available for immediate purchase — skins, weapons, specialists, spaceships, and more.",
       "filterAll": "All",
       "samplePreviewTitle": "Sample Marketplace Preview",
@@ -131,571 +144,583 @@
       "filterSort": "Filter & Sort",
       "sortBy": "Sort By",
       "sort": {
-        "default":   "Default",
-        "priceAsc":  "Price: Low → High",
+        "default": "Default",
+        "priceAsc": "Price: Low → High",
         "priceDesc": "Price: High → Low",
-        "nameAsc":   "Name: A → Z",
-        "nameDesc":  "Name: Z → A"
+        "nameAsc": "Name: A → Z",
+        "nameDesc": "Name: Z → A"
       },
-      "priceRange":   "Price Range (USDC)",
-      "min":          "Min",
-      "max":          "Max",
-      "apply":        "Apply",
-      "clearAll":     "Clear All Filters",
-      "noResults":    "No results found",
+      "priceRange": "Price Range (USDC)",
+      "min": "Min",
+      "max": "Max",
+      "apply": "Apply",
+      "clearAll": "Clear All Filters",
+      "noResults": "No results found",
       "dummyContent": "Dummy Content",
-      "preview":      "Preview",
-      "buyNow":       "Buy Now",
-      "viewDetails":  "View Details",
+      "preview": "Preview",
+      "buyNow": "Buy Now",
+      "viewDetails": "View Details",
       "categories": {
-        "skins":           "Skins",
-        "militaryBadges":  "Military Badges",
-        "specialists":     "Specialists",
-        "weapons":         "Weapons",
-        "bodyArmour":      "Body Armour",
-        "spaceships":      "Spaceships",
-        "racingVehicles":  "Vehicles",
-        "artwork":         "Artwork",
-        "landAndBases":    "Land & Bases",
-        "general":         "General"
-      }
+        "skins": "Skins",
+        "militaryBadges": "Military Badges",
+        "specialists": "Specialists",
+        "weapons": "Weapons",
+        "bodyArmour": "Body Armour",
+        "spaceships": "Spaceships",
+        "racingVehicles": "Vehicles",
+        "artwork": "Artwork",
+        "landAndBases": "Land & Bases",
+        "general": "General"
+      },
+      "dummyNotForSale": "Preview Only"
     },
-
     "nfa101": {
       "sectionLabel": "Education",
-      "heading":      "NFAs / NFCs / NFTs 101",
-      "subtitle":     "New to NFTs and Web3? Explore our articles to understand blockchain assets, wallets, security, and the HyperTek ecosystem.",
-      "minRead":      "min read",
-      "filterAll":    "All"
+      "heading": "NFAs / NFCs / NFTs 101",
+      "subtitle": "New to NFTs and Web3? Explore our articles to understand blockchain assets, wallets, security, and the HyperTek ecosystem.",
+      "minRead": "min read",
+      "filterAll": "All"
     },
-
     "auctions": {
-      "heading":        "Auctions",
-      "listings":       "listings",
-      "newAuction":     "New Auction",
-      "noAuctions":     "No {{filter}} auctions",
-      "createFirst":    "Create the first auction",
-      "endingSoon":     "ENDING SOON",
-      "viewDetails":    "View Details",
+      "heading": "Auctions",
+      "listings": "listings",
+      "newAuction": "New Auction",
+      "noAuctions": "No {{filter}} auctions",
+      "createFirst": "Create the first auction",
+      "endingSoon": "ENDING SOON",
+      "viewDetails": "View Details",
       "rules": {
-        "durations":    "Durations: 1d · 3d · 7d",
+        "durations": "Durations: 1d · 3d · 7d",
         "minIncrement": "Min increment: 5%",
-        "freeToList":   "Free to list",
-        "commission":   "Commission: 20% on sale"
+        "freeToList": "Free to list",
+        "commission": "Commission: 20% on sale"
       },
       "preview": {
-        "title":   "In-Game Feature Preview",
-        "desc":    "The Auction system will be fully live in-game at launch. Items shown here are seeded samples for investor/user showcase."
+        "title": "In-Game Feature Preview",
+        "desc": "The Auction system will be fully live in-game at launch. Items shown here are seeded samples for investor/user showcase."
       },
       "card": {
         "currentBid": "Current bid",
-        "endsIn":     "Ends in",
-        "placeBid":   "Place Bid",
-        "buyNow":     "Buy Now",
-        "bids":       "bid(s)",
-        "ended":      "ENDED"
+        "endsIn": "Ends in",
+        "placeBid": "Place Bid",
+        "buyNow": "Buy Now",
+        "bids": "bid(s)",
+        "ended": "ENDED"
       },
       "detail": {
-        "currentBid":  "Current bid",
-        "start":       "Start",
-        "endsIn":      "Ends in",
+        "currentBid": "Current bid",
+        "start": "Start",
+        "endsIn": "Ends in",
         "description": "Description",
-        "recentBids":  "Recent Bids",
-        "anonymous":   "Anonymous",
-        "placeBid":    "Place Bid",
-        "buyNow":      "Buy Now",
+        "recentBids": "Recent Bids",
+        "anonymous": "Anonymous",
+        "placeBid": "Place Bid",
+        "buyNow": "Buy Now",
         "buyNowLabel": "Buy Now",
-        "bids":        "bid(s)"
+        "bids": "bid(s)"
       },
       "bidModal": {
-        "title":          "Place a Bid",
-        "currentBid":     "Current bid",
-        "minimumBid":     "Minimum bid",
-        "yourBid":        "Your bid (USDC)",
-        "minIncrement":   "Min increment 5% · Next minimum after your bid: {{next}} USDC",
-        "reviewBid":      "Review Bid",
-        "disclaimer":     "Winning bid is binding · 20% platform commission",
-        "confirmTitle":   "Confirm Bid",
-        "item":           "Item",
-        "yourBidLabel":   "Your bid",
-        "youPay":         "If you win, you pay",
-        "outbidNotice":   "You'll be notified immediately if someone outbids you. The auction auto-closes when the timer expires.",
-        "back":           "Back",
-        "confirm":        "Confirm — {{amount}} USDC",
-        "placing":        "Placing…",
-        "successTitle":   "Bid Placed!",
-        "highestBidder":  "You're the highest bidder",
-        "outbidWarning":  "You'll receive a notification if you're outbid.",
-        "done":           "Done",
-        "endsIn":         "Ends in"
+        "title": "Place a Bid",
+        "currentBid": "Current bid",
+        "minimumBid": "Minimum bid",
+        "yourBid": "Your bid (USDC)",
+        "minIncrement": "Min increment 5% · Next minimum after your bid: {{next}} USDC",
+        "reviewBid": "Review Bid",
+        "disclaimer": "Winning bid is binding · 20% platform commission",
+        "confirmTitle": "Confirm Bid",
+        "item": "Item",
+        "yourBidLabel": "Your bid",
+        "youPay": "If you win, you pay",
+        "outbidNotice": "You'll be notified immediately if someone outbids you. The auction auto-closes when the timer expires.",
+        "back": "Back",
+        "confirm": "Confirm — {{amount}} USDC",
+        "placing": "Placing…",
+        "successTitle": "Bid Placed!",
+        "highestBidder": "You're the highest bidder",
+        "outbidWarning": "You'll receive a notification if you're outbid.",
+        "done": "Done",
+        "endsIn": "Ends in"
       },
       "instantBuyModal": {
-        "title":         "Buy Now — Instant",
-        "buyNowPrice":   "Buy now price",
-        "currentBids":   "Current bids",
-        "notice":        "Buying now ends the auction immediately. The item transfers to your wallet and all other bidders are refunded.",
-        "cancel":        "Cancel",
-        "processing":    "Processing…",
-        "successTitle":  "Item Secured!",
+        "title": "Buy Now — Instant",
+        "buyNowPrice": "Buy now price",
+        "currentBids": "Current bids",
+        "notice": "Buying now ends the auction immediately. The item transfers to your wallet and all other bidders are refunded.",
+        "cancel": "Cancel",
+        "processing": "Processing…",
+        "successTitle": "Item Secured!",
         "auctionClosed": "Auction closed · Transfer initiated",
-        "item":          "Item",
-        "paid":          "Paid",
-        "status":        "Status",
-        "transferred":   "Transferred to wallet",
-        "walletNote":    "Item will appear in your My Collections tab.",
-        "viewCollect":   "View My Collections"
+        "item": "Item",
+        "paid": "Paid",
+        "status": "Status",
+        "transferred": "Transferred to wallet",
+        "walletNote": "Item will appear in your My Collections tab.",
+        "viewCollect": "View My Collections"
       },
       "createModal": {
-        "title":          "Create Auction",
-        "selectItem":     "Select Item",
-        "connectWallet":  "Connect wallet to browse your items",
-        "loadingItems":   "Loading…",
-        "noItems":        "No owned items found",
-        "pricingDuration":"Pricing & Duration",
-        "startPrice":     "Start Price (USDC) *",
-        "reservePrice":   "Reserve Price (USDC)",
-        "instantBuyPrice":"Instant Buy Price (USDC)",
-        "optional":       "Optional",
-        "leaveBlank":     "Leave blank to disable",
-        "duration":       "Duration",
-        "dur1Day":        "1 Day",
-        "dur3Days":       "3 Days",
-        "dur7Days":       "7 Days",
-        "freeToList":     "Free to list · 20% commission on sale",
-        "creating":       "Creating…",
-        "submit":         "Create Auction"
+        "title": "Create Auction",
+        "selectItem": "Select Item",
+        "connectWallet": "Connect wallet to browse your items",
+        "loadingItems": "Loading…",
+        "noItems": "No owned items found",
+        "pricingDuration": "Pricing & Duration",
+        "startPrice": "Start Price (USDC) *",
+        "reservePrice": "Reserve Price (USDC)",
+        "instantBuyPrice": "Instant Buy Price (USDC)",
+        "optional": "Optional",
+        "leaveBlank": "Leave blank to disable",
+        "duration": "Duration",
+        "dur1Day": "1 Day",
+        "dur3Days": "3 Days",
+        "dur7Days": "7 Days",
+        "freeToList": "Free to list · 20% commission on sale",
+        "creating": "Creating…",
+        "submit": "Create Auction"
       },
       "pagination": {
-        "prev":  "Prev",
-        "next":  "Next",
-        "page":  "Page {{page}} of {{pages}}"
+        "prev": "Prev",
+        "next": "Next",
+        "page": "Page {{page}} of {{pages}}"
+      },
+      "status": {
+        "active": "Active",
+        "ended": "Ended",
+        "sold": "Sold",
+        "cancelled": "Cancelled"
       }
     },
-
     "trades": {
-      "heading":    "Trades",
-      "listings":   "listings",
-      "postTrade":  "Post Trade",
-      "noTrades":   "No {{filter}} trades",
-      "viewDetails":"View Details",
-      "trade":      "trade",
-      "yours":      "yours",
-      "offering":   "Offering",
-      "wanting":    "Wanting",
-      "makeOffer":  "Make an offer",
-      "by":         "by",
-      "acceptTrade":"Accept Trade",
-      "cancelTrade":"Cancel Trade",
+      "heading": "Trades",
+      "listings": "listings",
+      "postTrade": "Post Trade",
+      "noTrades": "No {{filter}} trades",
+      "viewDetails": "View Details",
+      "trade": "trade",
+      "yours": "yours",
+      "offering": "Offering",
+      "wanting": "Wanting",
+      "makeOffer": "Make an offer",
+      "by": "by",
+      "acceptTrade": "Accept Trade",
+      "cancelTrade": "Cancel Trade",
       "rules": {
-        "expiry":    "Listings expire in 30 days",
-        "fee":       "Platform fee applies to both parties",
-        "noNFA":     "NFAs cannot be traded — sell only"
+        "expiry": "Listings expire in 30 days",
+        "fee": "Platform fee applies to both parties",
+        "noNFA": "NFAs cannot be traded — sell only"
       },
       "acceptModal": {
-        "title":          "Trade Proposal",
-        "postedBy":       "Posted by",
-        "exchangeDetails":"Exchange Details",
-        "theyOffer":      "They offer",
-        "theyWant":       "They want",
-        "feeNotice":      "Platform fee applies to both parties",
-        "acceptBtn":      "Accept This Trade",
-        "confirmTitle":   "Confirm Trade",
-        "trade":          "Trade",
-        "postedByLabel":  "Posted by",
-        "terms":          "By accepting, you agree to the exchange terms. The poster will be notified and must confirm before items are transferred.",
-        "back":           "Back",
-        "sending":        "Sending…",
-        "confirm":        "Confirm",
-        "successTitle":   "Proposal Sent!",
-        "notified":       "has been notified",
-        "successNote":    "The trade poster will review your proposal and arrange the exchange. Check your notifications for their response.",
-        "expiry":         "⏱ Proposals expire in 30 days if not confirmed.",
-        "close":          "Close"
+        "title": "Trade Proposal",
+        "postedBy": "Posted by",
+        "exchangeDetails": "Exchange Details",
+        "theyOffer": "They offer",
+        "theyWant": "They want",
+        "feeNotice": "Platform fee applies to both parties",
+        "acceptBtn": "Accept This Trade",
+        "confirmTitle": "Confirm Trade",
+        "trade": "Trade",
+        "postedByLabel": "Posted by",
+        "terms": "By accepting, you agree to the exchange terms. The poster will be notified and must confirm before items are transferred.",
+        "back": "Back",
+        "sending": "Sending…",
+        "confirm": "Confirm",
+        "successTitle": "Proposal Sent!",
+        "notified": "has been notified",
+        "successNote": "The trade poster will review your proposal and arrange the exchange. Check your notifications for their response.",
+        "expiry": "⏱ Proposals expire in 30 days if not confirmed.",
+        "close": "Close"
       },
       "createModal": {
-        "title":          "Post a Trade",
-        "yourItem":       "Your Item",
+        "title": "Post a Trade",
+        "yourItem": "Your Item",
         "itemNamePlaceholder": "Item name *",
-        "loadingItems":   "Loading your items…",
-        "connectWallet":  "Connect wallet to select from your items",
-        "pickFromItems":  "Or pick from your items (auto-fills name):",
-        "imageOptional":  "Image (optional)",
-        "whatYouWant":    "What You Want",
-        "openOffer":      "Open offer — let others propose",
-        "anyCategory":    "Any category",
-        "notesLabel":     "Notes (optional)",
-        "notesPlaceholder":"Trade terms, condition, etc.",
-        "disclaimer":     "Both parties pay a platform fee · Expires in 30 days · NFAs cannot be traded",
-        "posting":        "Posting…",
-        "submit":         "Post Trade"
+        "loadingItems": "Loading your items…",
+        "connectWallet": "Connect wallet to select from your items",
+        "pickFromItems": "Or pick from your items (auto-fills name):",
+        "imageOptional": "Image (optional)",
+        "whatYouWant": "What You Want",
+        "openOffer": "Open offer — let others propose",
+        "anyCategory": "Any category",
+        "notesLabel": "Notes (optional)",
+        "notesPlaceholder": "Trade terms, condition, etc.",
+        "disclaimer": "Both parties pay a platform fee · Expires in 30 days · NFAs cannot be traded",
+        "posting": "Posting…",
+        "submit": "Post Trade"
       },
       "pagination": {
-        "prev":  "Prev",
-        "next":  "Next",
-        "page":  "Page {{page}} of {{pages}}"
-      }
-    },
-
-    "quests": {
-      "heading":       "Quest Board",
-      "quests":        "quests",
-      "noQuests":      "No {{filter}} quests",
-      "inGameFeature": "In-Game Feature",
-      "inGameDesc":    "Quests are auto-generated when sellers choose a reduced commission. Players can complete up to 5 quests per day. The commission pool is split between the buyer discount, the player reward, and the platform.",
-      "earnFromQuests":"Want to earn from quests? Play the game →",
-      "moneyQuests":   "Money Quests (11% pool)",
-      "resourceQuests":"Resource Quests (20% pool)",
-      "footerNote1":   "# Quests with combined payloads will be paid out using the separate table amounts.",
-      "footerNote2":   "# Planet data will sync when the games go live.",
-      "inGame":    "In-game",
-      "open":      "Open",
-      "buyer":     "Buyer",
-      "player":    "Player",
-      "platform":  "Platform",
+        "prev": "Prev",
+        "next": "Next",
+        "page": "Page {{page}} of {{pages}}"
+      },
       "status": {
-        "open":      "Open",
-        "accepted":  "Accepted",
+        "open": "Open",
+        "accepted": "Accepted",
+        "completed": "Completed",
+        "cancelled": "Cancelled",
+        "expired": "Expired"
+      },
+      "openOfferText": "Make me an offer"
+    },
+    "quests": {
+      "heading": "Quest Board",
+      "quests": "quests",
+      "noQuests": "No {{filter}} quests",
+      "inGameFeature": "In-Game Feature",
+      "inGameDesc": "Quests are auto-generated when sellers choose a reduced commission. Players can complete up to 5 quests per day. The commission pool is split between the buyer discount, the player reward, and the platform.",
+      "earnFromQuests": "Want to earn from quests? Play the game →",
+      "moneyQuests": "Money Quests (11% pool)",
+      "resourceQuests": "Resource Quests (20% pool)",
+      "footerNote1": "# Quests with combined payloads will be paid out using the separate table amounts.",
+      "footerNote2": "# Planet data will sync when the games go live.",
+      "inGame": "In-game",
+      "open": "Open",
+      "buyer": "Buyer",
+      "player": "Player",
+      "platform": "Platform",
+      "status": {
+        "open": "Open",
+        "accepted": "Accepted",
         "completed": "Completed",
         "cancelled": "Cancelled"
       },
       "type": {
-        "money":     "Money",
+        "money": "Money",
         "resources": "Resources"
       },
       "table": {
-        "questingNo":    "Questing No",
-        "pickupPlanet":  "Pickup Planet",
+        "questingNo": "Questing No",
+        "pickupPlanet": "Pickup Planet",
         "dropOffPlanet": "Drop Off Planet",
-        "itemGoods":     "Item / Goods",
-        "commSplit":     "Commission Split",
-        "questingTime":  "Questing Time",
-        "assignedTo":    "Assigned To"
+        "itemGoods": "Item / Goods",
+        "commSplit": "Commission Split",
+        "questingTime": "Questing Time",
+        "assignedTo": "Assigned To"
       },
       "comingSoon": {
-        "title":   "Coming Soon",
-        "desc":    "The in-game quest feature is currently under development. Stay tuned — you'll be able to earn rewards directly from the game.",
-        "gotIt":   "Got it"
+        "title": "Coming Soon",
+        "desc": "The in-game quest feature is currently under development. Stay tuned — you'll be able to earn rewards directly from the game.",
+        "gotIt": "Got it"
       },
       "pagination": {
-        "prev":  "Prev",
-        "next":  "Next",
-        "page":  "Page {{page}} of {{pages}}"
+        "prev": "Prev",
+        "next": "Next",
+        "page": "Page {{page}} of {{pages}}"
       }
     },
-
     "hire": {
-      "heading":          "For Hire",
-      "listings":         "listings",
-      "listBtn":          "List",
-      "forHireLabel":     "For Hire",
-      "wantingToHire":    "Wanting to Hire",
-      "noListings":       "No {{filter}} listings",
-      "lockedTitle":      "HyperTek Gaming content for display purposes only.",
-      "lockedDesc":       "This section is locked until games have been finalised.",
-      "forHireBadge":     "FOR HIRE",
-      "wantedBadge":      "WANTING TO HIRE",
-      "price":            "Price",
-      "maxDuration":      "Max Duration",
-      "hireBtn":          "Hire",
-      "fulfillBtn":       "Fulfill Request",
+      "heading": "For Hire",
+      "listings": "listings",
+      "listBtn": "List",
+      "forHireLabel": "For Hire",
+      "wantingToHire": "Wanting to Hire",
+      "noListings": "No {{filter}} listings",
+      "lockedTitle": "HyperTek Gaming content for display purposes only.",
+      "lockedDesc": "This section is locked until games have been finalised.",
+      "forHireBadge": "FOR HIRE",
+      "wantedBadge": "WANTING TO HIRE",
+      "price": "Price",
+      "maxDuration": "Max Duration",
+      "hireBtn": "Hire",
+      "fulfillBtn": "Fulfill Request",
       "rules": {
-        "durations":   "8h · 1d · 3d · 1w · 1mo",
-        "cooldown":    "Cooldown: 2× rental duration",
-        "commission":  "Commission: 20%",
-        "payment":     "Pay in Hyper Bucks or Materials"
+        "durations": "8h · 1d · 3d · 1w · 1mo",
+        "cooldown": "Cooldown: 2× rental duration",
+        "commission": "Commission: 20%",
+        "payment": "Pay in Hyper Bucks or Materials"
       },
       "preview": {
         "title": "In-Game Feature Preview",
-        "desc":  "The For Hire system will be fully live in-game at launch. Items shown here are seeded samples for investor/user showcase."
+        "desc": "The For Hire system will be fully live in-game at launch. Items shown here are seeded samples for investor/user showcase."
       },
       "hireModal": {
-        "hireTitle":     "Hire Specialist",
-        "fulfillTitle":  "Fulfill Hire Request",
-        "forHireBadge":  "FOR HIRE",
-        "wantedBadge":   "WANTED",
-        "price":         "Price",
-        "duration":      "Duration",
-        "howHire":       "How hiring works",
-        "howFulfill":    "How fulfilling a request works",
-        "proceedHire":   "Proceed to Hire",
-        "offerFulfill":  "Offer to Fulfill",
-        "commission":    "20% platform commission · Cooldown applies after return",
-        "confirmHire":   "Confirm Hire",
-        "confirmOffer":  "Confirm Offer",
-        "specialist":    "Specialist",
-        "payment":       "Payment",
-        "yourOffer":     "Your offer",
+        "hireTitle": "Hire Specialist",
+        "fulfillTitle": "Fulfill Hire Request",
+        "forHireBadge": "FOR HIRE",
+        "wantedBadge": "WANTED",
+        "price": "Price",
+        "duration": "Duration",
+        "howHire": "How hiring works",
+        "howFulfill": "How fulfilling a request works",
+        "proceedHire": "Proceed to Hire",
+        "offerFulfill": "Offer to Fulfill",
+        "commission": "20% platform commission · Cooldown applies after return",
+        "confirmHire": "Confirm Hire",
+        "confirmOffer": "Confirm Offer",
+        "specialist": "Specialist",
+        "payment": "Payment",
+        "yourOffer": "Your offer",
         "durationLabel": "Duration",
-        "commLabel":     "Commission",
-        "back":          "Back",
-        "processing":    "Processing…",
-        "sendOffer":     "Send Offer",
+        "commLabel": "Commission",
+        "back": "Back",
+        "processing": "Processing…",
+        "sendOffer": "Send Offer",
         "deployedTitle": "Deployed!",
-        "offerSentTitle":"Offer Sent!",
-        "availableFor":  "Available for",
-        "paid":          "Paid",
-        "returnNote":    "Return before the period ends to avoid automatic penalty. Cooldown of {{hours}}h applies after return.",
-        "close":         "Close"
+        "offerSentTitle": "Offer Sent!",
+        "availableFor": "Available for",
+        "paid": "Paid",
+        "returnNote": "Return before the period ends to avoid automatic penalty. Cooldown of {{hours}}h applies after return.",
+        "close": "Close"
       },
       "createModal": {
-        "listTitle":         "List For Hire",
-        "postTitle":         "Post Wanting to Hire",
-        "forHireBtn":        "For Hire",
-        "wantingBtn":        "Wanting to Hire",
-        "itemNameHire":      "Specialist / item name *",
-        "itemNameWant":      "What you want to hire *",
-        "descPlaceholder":   "Description",
-        "categoryPlaceholder":"Category (optional)",
-        "paymentType":       "Payment Type",
-        "hyperBucks":        "Hyper Bucks",
-        "materials":         "Materials",
-        "amountLabel":       "Amount (Hyper Bucks)",
-        "afterCommission":   "You receive {{amount}} HB after 20% commission",
-        "maxDuration":       "Max Duration",
-        "disclaimer":        "20% commission · Cooldown = 2× rental duration after return",
-        "listing":           "Listing…",
-        "submit":            "Create Listing"
+        "listTitle": "List For Hire",
+        "postTitle": "Post Wanting to Hire",
+        "forHireBtn": "For Hire",
+        "wantingBtn": "Wanting to Hire",
+        "itemNameHire": "Specialist / item name *",
+        "itemNameWant": "What you want to hire *",
+        "descPlaceholder": "Description",
+        "categoryPlaceholder": "Category (optional)",
+        "paymentType": "Payment Type",
+        "hyperBucks": "Hyper Bucks",
+        "materials": "Materials",
+        "amountLabel": "Amount (Hyper Bucks)",
+        "afterCommission": "You receive {{amount}} HB after 20% commission",
+        "maxDuration": "Max Duration",
+        "disclaimer": "20% commission · Cooldown = 2× rental duration after return",
+        "listing": "Listing…",
+        "submit": "Create Listing"
       },
       "pagination": {
-        "prev":  "Prev",
-        "next":  "Next",
-        "page":  "Page {{page}} of {{pages}}"
+        "prev": "Prev",
+        "next": "Next",
+        "page": "Page {{page}} of {{pages}}"
       }
     },
-
     "bounty": {
-      "heading":       "Bounty Board",
-      "contracts":     "contract",
-      "contractsPlural":"contracts",
-      "noContracts":   "No {{filter}} contracts",
-      "noContractsNote":"Bounties are posted by game players and the game system",
-      "expiresIn":     "Expires in {{days}}d",
+      "heading": "Bounty Board",
+      "contracts": "contract",
+      "contractsPlural": "contracts",
+      "noContracts": "No {{filter}} contracts",
+      "noContractsNote": "Bounties are posted by game players and the game system",
+      "expiresIn": "Expires in {{days}}d",
       "inGameNotice": {
         "title": "In-Game Feature — View Only",
-        "desc":  "Bounties are created by game players and the game system. Accepting and completing bounties happens in-game only. This board is shown for transparency and to encourage new players to join."
+        "desc": "Bounties are created by game players and the game system. Accepting and completing bounties happens in-game only. This board is shown for transparency and to encourage new players to join."
       },
       "rules": {
-        "battle":     "Battle resolved in-game automatically",
+        "battle": "Battle resolved in-game automatically",
         "commission": "20% platform commission on reward",
-        "expiry":     "Contracts expire in 30 days"
+        "expiry": "Contracts expire in 30 days"
       },
       "table": {
-        "bountyNo":   "Bounty No",
-        "target":     "Target (Hit On)",
-        "reward":     "Reward",
-        "postedBy":   "Posted By",
-        "claimedBy":  "Claimed By",
-        "status":     "Status",
-        "netHB":      "{{amount}} HB net"
+        "bountyNo": "Bounty No",
+        "target": "Target (Hit On)",
+        "reward": "Reward",
+        "postedBy": "Posted By",
+        "claimedBy": "Claimed By",
+        "status": "Status",
+        "netHB": "{{amount}} HB net"
       },
       "pagination": {
-        "prev":  "Prev",
-        "next":  "Next",
-        "page":  "Page {{page}} of {{pages}}"
+        "prev": "Prev",
+        "next": "Next",
+        "page": "Page {{page}} of {{pages}}"
+      },
+      "status": {
+        "open": "Open",
+        "claimed": "Claimed",
+        "completed": "Completed",
+        "cancelled": "Cancelled",
+        "expired": "Expired"
       }
     },
-
     "common": {
-      "prev":           "Prev",
-      "next":           "Next",
-      "pageOf":         "Page {{page}} of {{pages}}",
-      "back":           "Back",
-      "close":          "Close",
-      "cancel":         "Cancel",
-      "loading":        "Loading…",
-      "connectWallet":  "Connect your wallet first",
-      "loginFirst":     "Log in first"
+      "prev": "Prev",
+      "next": "Next",
+      "pageOf": "Page {{page}} of {{pages}}",
+      "back": "Back",
+      "close": "Close",
+      "cancel": "Cancel",
+      "loading": "Loading…",
+      "connectWallet": "Connect your wallet first",
+      "loginFirst": "Log in first"
     }
   },
-
   "musicPlayer": {
-    "title":          "Music Player",
-    "playing":        "Playing",
-    "sound":          "Sound",
-    "ambientDesc":    "Built-in ambient soundtrack for the marketplace. Plays on loop.",
-    "playAmbient":    "Play Ambient",
-    "pauseAmbient":   "Pause Ambient",
-    "spotifyDesc":    "Paste any Spotify track, playlist, or album link.",
-    "loadSpotify":    "Load Spotify",
+    "title": "Music Player",
+    "playing": "Playing",
+    "sound": "Sound",
+    "ambientDesc": "Built-in ambient soundtrack for the marketplace. Plays on loop.",
+    "playAmbient": "Play Ambient",
+    "pauseAmbient": "Pause Ambient",
+    "spotifyDesc": "Paste any Spotify track, playlist, or album link.",
+    "loadSpotify": "Load Spotify",
     "soundcloudDesc": "Paste any SoundCloud track or playlist link.",
     "loadSoundCloud": "Load SoundCloud",
-    "changeLink":     "Change link"
+    "changeLink": "Change link"
   },
-
   "makeOffer": {
-    "back":       "Back",
-    "floor":      "Floor",
-    "title":      "Make an Offer",
-    "yourOffer":  "Your Offer (USDC)",
-    "expiresIn":  "Offer Expires In",
-    "youPay":     "You Pay",
+    "back": "Back",
+    "floor": "Floor",
+    "title": "Make an Offer",
+    "yourOffer": "Your Offer (USDC)",
+    "expiresIn": "Offer Expires In",
+    "youPay": "You Pay",
     "submitting": "Submitting...",
-    "submit":     "Submit Offer",
-    "terms":      "By submitting this offer, you agree to Hyper Tek's Terms of Service.",
+    "submit": "Submit Offer",
+    "terms": "By submitting this offer, you agree to Hyper Tek's Terms of Service.",
     "expiry": {
-      "6h":  "6 Hours",
+      "6h": "6 Hours",
       "12h": "12 Hours",
-      "1d":  "1 Day",
-      "3d":  "3 Days",
-      "7d":  "7 Days",
+      "1d": "1 Day",
+      "3d": "3 Days",
+      "7d": "7 Days",
       "1mo": "1 Month"
     },
     "success": {
-      "title":           "Offer Submitted!",
-      "desc":            "Your offer of {{price}} USDC for {{name}} has been sent to the owner.",
-      "expires":         "Expires in {{duration}}",
-      "backToNft":       "Back to NFT",
+      "title": "Offer Submitted!",
+      "desc": "Your offer of {{price}} USDC for {{name}} has been sent to the owner.",
+      "expires": "Expires in {{duration}}",
+      "backToNft": "Back to NFT",
       "goToMarketplace": "Go to Marketplace"
     },
     "error": {
       "loginRequired": "Please log in to make an offer",
-      "submitFailed":  "Failed to submit offer. Please try again."
+      "submitFailed": "Failed to submit offer. Please try again."
     }
   },
-
   "paymentError": {
     "message": "Your request was not successful",
-    "goHome":  "Go Home"
+    "goHome": "Go Home"
   },
-
   "buyNfa": {
     "stripe": {
-      "title":      "Pay with Card",
-      "amount":     "Amount:",
-      "cancel":     "Cancel",
+      "title": "Pay with Card",
+      "amount": "Amount:",
+      "cancel": "Cancel",
       "processing": "Processing...",
-      "pay":        "Pay"
+      "pay": "Pay"
     },
     "nav": {
-      "backToMarketplace":  "Back to Marketplace",
-      "backToCollections":  "Back to Collections",
-      "offers":             "Offers",
-      "marketplace":        "Marketplace",
-      "auction":            "Auction",
-      "trade":              "Trade",
-      "detail":             "{{type}} Detail",
-      "buy":                "Buy {{type}}"
+      "backToMarketplace": "Back to Marketplace",
+      "backToCollections": "Back to Collections",
+      "offers": "Offers",
+      "marketplace": "Marketplace",
+      "auction": "Auction",
+      "trade": "Trade",
+      "detail": "{{type}} Detail",
+      "buy": "Buy {{type}}"
     },
     "marketplace": {
-      "listed":        "Listed",
-      "youOwn":        "You Own This",
-      "notMinted":     "Not minted yet",
-      "ownedBy":       "Owned by",
-      "platform":      "Platform",
-      "noDesc":        "No description provided for this item.",
-      "price":         "Price",
-      "minBuyback":    "Min Buyback Guarantee",
-      "reservePrice":  "Reserve Price",
-      "buybackNote":   "This asset cannot be sold below its minimum buyback value.",
-      "networkNote":   "USDC on Base · Base ETH required for gas (wallet payments only)",
-      "buyWithCard":   "Buy With Card",
-      "makeOffer":     "Make Offer",
-      "processing":    "Processing...",
+      "listed": "Listed",
+      "youOwn": "You Own This",
+      "notMinted": "Not minted yet",
+      "ownedBy": "Owned by",
+      "platform": "Platform",
+      "noDesc": "No description provided for this item.",
+      "price": "Price",
+      "minBuyback": "Min Buyback Guarantee",
+      "reservePrice": "Reserve Price",
+      "buybackNote": "This asset cannot be sold below its minimum buyback value.",
+      "networkNote": "USDC on Base · Base ETH required for gas (wallet payments only)",
+      "buyWithCard": "Buy With Card",
+      "makeOffer": "Make Offer",
+      "processing": "Processing...",
       "connectWallet": "Connect Wallet",
-      "buyNow":        "Buy Now",
-      "listNow":       "List Now",
-      "yourListed":    "Your {{type}} (Listed)",
-      "notAvailable":  "Not Available"
+      "buyNow": "Buy Now",
+      "listNow": "List Now",
+      "yourListed": "Your {{type}} (Listed)",
+      "notAvailable": "Not Available",
+      "dummyNotForSale": "Sample Preview — Not Available for Purchase"
     },
     "priceHistory": {
-      "title":       "Price History",
-      "subtitle":    "Historical sale prices for this NFT",
-      "loading":     "Loading...",
-      "noSales":     "No sales recorded yet",
+      "title": "Price History",
+      "subtitle": "Historical sale prices for this NFT",
+      "loading": "Loading...",
+      "noSales": "No sales recorded yet",
       "noSalesNote": "Price history appears after the first sale"
     },
     "fundModal": {
-      "title":    "Insufficient USDC",
-      "youNeed":  "You need",
-      "butHave":  "but your wallet only has",
-      "desc2":    "Fund your wallet instantly with a credit or debit card via Transak, then come back to complete the purchase.",
-      "fundBtn":  "Fund Wallet with Card (Transak)",
-      "cancel":   "Cancel"
+      "title": "Insufficient USDC",
+      "youNeed": "You need",
+      "butHave": "but your wallet only has",
+      "desc2": "Fund your wallet instantly with a credit or debit card via Transak, then come back to complete the purchase.",
+      "fundBtn": "Fund Wallet with Card (Transak)",
+      "cancel": "Cancel"
     },
     "gasModal": {
-      "title":       "ETH Required for Gas",
+      "title": "ETH Required for Gas",
       "mainnetNote": "You're on Base Mainnet. Buy a small amount of ETH (≈ $1–2) on Coinbase or bridge from Ethereum via bridge.base.org.",
       "testnetNote": "You're on Base Sepolia Testnet. Get free test ETH from a faucet.",
-      "faucetBtn":   "Get Testnet ETH (Faucet)",
-      "bridgeBtn":   "Bridge ETH to Base",
-      "close":       "Close"
+      "faucetBtn": "Get Testnet ETH (Faucet)",
+      "bridgeBtn": "Bridge ETH to Base",
+      "close": "Close"
     },
     "confirmModal1": {
-      "title":       "Confirm Action",
-      "listPrice":   "List Price",
+      "title": "Confirm Action",
+      "listPrice": "List Price",
       "platformFee": "Platform Fee (10%)",
-      "total":       "Total",
-      "cancel":      "Cancel",
-      "continue":    "Continue"
+      "total": "Total",
+      "cancel": "Cancel",
+      "continue": "Continue"
     },
     "confirmModal2": {
-      "setPrice":   "Set Your Listing Price (USDC)",
-      "willList":   "✓ Will list at {{price}} USDC",
-      "price":      "Price",
-      "cancel":     "Cancel",
+      "setPrice": "Set Your Listing Price (USDC)",
+      "willList": "✓ Will list at {{price}} USDC",
+      "price": "Price",
+      "cancel": "Cancel",
       "processing": "Processing...",
-      "confirm":    "Confirm"
+      "confirm": "Confirm"
     },
     "offers": {
-      "noOffers":      "No offers yet",
-      "offer":         "offer",
-      "offers":        "offers",
+      "noOffers": "No offers yet",
+      "offer": "offer",
+      "offers": "offers",
       "noOffersTitle": "No offers right now",
-      "noOffersDesc":  "Be the first to make an offer",
-      "colPrice":      "Price",
-      "colStatus":     "Status",
-      "colFrom":       "From",
-      "colExpires":    "Expires",
-      "colAction":     "Action",
-      "accept":        "Accept",
-      "reject":        "Reject",
-      "cancel":        "Cancel",
-      "expired":       "Expired",
+      "noOffersDesc": "Be the first to make an offer",
+      "colPrice": "Price",
+      "colStatus": "Status",
+      "colFrom": "From",
+      "colExpires": "Expires",
+      "colAction": "Action",
+      "accept": "Accept",
+      "reject": "Reject",
+      "cancel": "Cancel",
+      "expired": "Expired",
       "completePurchase": "Complete Purchase"
     },
     "auction": {
-      "loading":      "Loading auction data…",
-      "active":       "Active Auction",
-      "startPrice":   "Start Price",
-      "currentBid":   "Current Bid",
-      "noBids":       "No bids yet",
-      "instantBuy":   "Instant Buy",
+      "loading": "Loading auction data…",
+      "active": "Active Auction",
+      "startPrice": "Start Price",
+      "currentBid": "Current Bid",
+      "noBids": "No bids yet",
+      "instantBuy": "Instant Buy",
       "reservePrice": "Reserve Price",
-      "bidHistory":   "Bid History",
-      "minBid":       "Min bid:",
-      "bidding":      "Bidding…",
-      "placeBid":     "Place Bid",
-      "connectWallet":"Connect your wallet to place a bid",
-      "ownerNote":    "Your item is listed on auction. Bids will appear here as they come in.",
-      "noAuction":    "No active auction for this item",
-      "ownerSetup":   "Go to your Collections and click List to set up an auction.",
+      "bidHistory": "Bid History",
+      "minBid": "Min bid:",
+      "bidding": "Bidding…",
+      "placeBid": "Place Bid",
+      "connectWallet": "Connect your wallet to place a bid",
+      "ownerNote": "Your item is listed on auction. Bids will appear here as they come in.",
+      "noAuction": "No active auction for this item",
+      "ownerSetup": "Go to your Collections and click List to set up an auction.",
       "notAvailable": "This item has no open auction at the moment."
     },
     "trade": {
-      "loading":      "Loading trade listings…",
-      "active":       "active trade listing",
-      "actives":      "active trade listings",
-      "offering":     "Offering",
-      "wants":        "Wants",
-      "openOffer":    "Open offer",
-      "by":           "By",
+      "loading": "Loading trade listings…",
+      "active": "active trade listing",
+      "actives": "active trade listings",
+      "offering": "Offering",
+      "wants": "Wants",
+      "openOffer": "Open offer",
+      "by": "By",
       "proposeTrade": "Propose Trade →",
-      "noTrades":     "No active trade listings",
-      "ownerSetup":   "Go to your Collections and click List to set up a trade.",
+      "noTrades": "No active trade listings",
+      "ownerSetup": "Go to your Collections and click List to set up a trade.",
       "notAvailable": "The owner has no open trade listings for this item."
     },
     "successModal": {
-      "title":             "Purchase Successful!",
-      "desc":              "{{name}} has been purchased. Your NFT will be transferred to your wallet shortly.",
-      "note":              "Transfer is processed automatically via our system.",
-      "viewProfile":       "View in My Profile",
-      "continueShopping":  "Continue Shopping"
+      "title": "Purchase Successful!",
+      "desc": "{{name}} has been purchased. Your NFT will be transferred to your wallet shortly.",
+      "note": "Transfer is processed automatically via our system.",
+      "viewProfile": "View in My Profile",
+      "continueShopping": "Continue Shopping"
     },
     "transferFailed": {
-      "title":       "Payment Received — Transfer Pending",
-      "desc":        "Your payment was successful, but the NFT transfer encountered an issue. Your funds are safe — our team will complete the transfer manually.",
+      "title": "Payment Received — Transfer Pending",
+      "desc": "Your payment was successful, but the NFT transfer encountered an issue. Your funds are safe — our team will complete the transfer manually.",
       "viewProfile": "View My Profile",
-      "dismiss":     "Dismiss"
+      "dismiss": "Dismiss"
     }
   }
 }
