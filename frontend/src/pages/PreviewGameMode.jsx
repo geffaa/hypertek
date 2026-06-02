@@ -1,8 +1,43 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import logo from "../assets/logo1.png";
+
+/* ─── Skeleton shimmer keyframes ──────────────────────── */
+const shimmerCSS = `
+@keyframes htShimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+`;
+
+/* ─── Hook: preload a single image ────────────────────── */
+function useImageLoaded(src) {
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    setLoaded(false);
+    const img = new Image();
+    img.onload = () => setLoaded(true);
+    img.src = src;
+    if (img.complete) setLoaded(true);
+  }, [src]);
+  return loaded;
+}
+
+/* ─── Skeleton overlay component ──────────────────────── */
+function SkeletonOverlay() {
+  return (
+    <div
+      className="absolute inset-0"
+      style={{
+        background: "linear-gradient(90deg, rgba(20,20,40,1) 0%, rgba(40,40,70,0.6) 50%, rgba(20,20,40,1) 100%)",
+        backgroundSize: "800px 100%",
+        animation: "htShimmer 1.8s ease-in-out infinite",
+      }}
+    />
+  );
+}
 
 /* ─── Static visual data ────────────────────────────────── */
 const MODES_STATIC = {
@@ -41,8 +76,9 @@ const fadeUp = {
   }),
 };
 
-/* ─── Video section ────────────────────────────────── */
+/* ─── Video section with skeleton ─────────────────── */
 function VideoSection({ src, accent }) {
+  const [videoReady, setVideoReady] = useState(false);
   return (
     <section className="w-full max-w-[1080px] mx-auto px-6 md:px-12 pb-24">
       <motion.div
@@ -52,12 +88,46 @@ function VideoSection({ src, accent }) {
         style={{ border: `1px solid ${accent}44`, boxShadow: `0 0 32px ${accent}18` }}
       >
         <div className="absolute top-0 inset-x-0 h-[2px] z-10" style={{ background: accent }} />
+        {/* Skeleton while video loads */}
+        {!videoReady && (
+          <div className="relative w-full" style={{ height: "540px", maxHeight: "56vw" }}>
+            <SkeletonOverlay />
+          </div>
+        )}
         <video
           src={src} controls playsInline preload="metadata"
-          style={{ width: "100%", display: "block", background: "#000", maxHeight: "540px" }}
+          onLoadedData={() => setVideoReady(true)}
+          style={{
+            width: "100%", display: videoReady ? "block" : "none",
+            background: "#000", maxHeight: "540px",
+          }}
         />
       </motion.div>
     </section>
+  );
+}
+
+/* ─── Background image with skeleton ──────────────────── */
+function BackgroundImage({ panelImg, glow }) {
+  const loaded = useImageLoaded(panelImg);
+  return (
+    <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 0 }}>
+      {/* Skeleton shimmer while loading */}
+      {!loaded && <SkeletonOverlay />}
+      {/* Actual background — fades in */}
+      <div
+        className="absolute inset-0 transition-opacity duration-1000"
+        style={{
+          backgroundImage: `url(${panelImg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          opacity: loaded ? 1 : 0,
+        }}
+      />
+      <div className="absolute inset-0" style={{ background: "rgba(6,6,20,0.78)" }} />
+      <div className="absolute inset-0" style={{ background: glow, mixBlendMode: "screen" }} />
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 0%, transparent 40%, rgba(6,6,20,0.7) 100%)" }} />
+    </div>
   );
 }
 
@@ -236,13 +306,11 @@ export default function PreviewGameMode() {
 
   return (
     <div className="relative text-white min-h-screen" style={{ background: "#060614" }}>
-      {/* Fixed background image */}
-      <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 0 }}>
-        <div className="absolute inset-0" style={{ backgroundImage: `url(${data.panelImg})`, backgroundSize: "cover", backgroundPosition: "center" }} />
-        <div className="absolute inset-0" style={{ background: "rgba(6,6,20,0.78)" }} />
-        <div className="absolute inset-0" style={{ background: data.glow, mixBlendMode: "screen" }} />
-        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 0%, transparent 40%, rgba(6,6,20,0.7) 100%)" }} />
-      </div>
+      {/* Inject shimmer keyframes */}
+      <style>{shimmerCSS}</style>
+
+      {/* Fixed background image with skeleton */}
+      <BackgroundImage panelImg={data.panelImg} glow={data.glow} />
 
       {/* Top accent line */}
       <div className="fixed top-0 left-0 right-0 h-[3px] pointer-events-none" style={{ background: `linear-gradient(to right, transparent, ${data.accent}, transparent)`, boxShadow: `0 0 24px ${data.accent}`, zIndex: 100 }} />
