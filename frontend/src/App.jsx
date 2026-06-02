@@ -17,6 +17,10 @@ import SplashScreen from "./Components/Common/SplashScreen";
 const MAINTENANCE_MODE = true;
 const MAINTENANCE_BYPASS_PATH = "/testing";
 
+// Public preview paths — bypass maintenance WITHOUT setting the bypass cookie.
+// Visitors can ONLY view these pages; navigating elsewhere shows "Coming Soon".
+const PUBLIC_PREVIEW_PATHS = ["/preview"];
+
 const SPLASH_COOLDOWN_MS = 60 * 60 * 1000; // 1 hour
 
 // Returns true if splash should show (inactive for >= 1 hour or never visited).
@@ -84,6 +88,8 @@ import Funnel from "./pages/Funnel";
 import Gaming from "./pages/Gaming";
 import Nft101Article from "./pages/Nft101Article";
 import GameModePage from "./pages/GameModePage";
+import Preview from "./pages/Preview";
+import PreviewGameMode from "./pages/PreviewGameMode";
 
 import DashboardLayout from "./Layout/DashboardLayout";
 import ChatbotWidget from "./Components/Chatbot/ChatbotWidget";
@@ -148,12 +154,14 @@ function AppWrapper() {
     "/dashboard/topup",
     "/dashboard/upload-nfc",
     "/gaming",
+    "/preview",
   ];
 
   const shouldHideLayout =
     hideLayoutRoutes.includes(location.pathname) ||
     ["/signin", "/signup", "/forgot-password"].includes(location.pathname) ||
-    location.pathname.startsWith("/reset-password");
+    location.pathname.startsWith("/reset-password") ||
+    location.pathname.startsWith("/preview");
 
   return (
     <>
@@ -225,6 +233,10 @@ function AppWrapper() {
 
             {/* Gaming Interface */}
             <Route path="/gaming" element={<Gaming />} />
+
+            {/* Public Preview — shareable links for social media */}
+            <Route path="/preview" element={<Preview />} />
+            <Route path="/preview/:mode" element={<PreviewGameMode />} />
             <Route path="/game/:mode" element={<GameModePage />} />
 
             {/* Testing Routes  */}
@@ -314,8 +326,9 @@ function App() {
 
   const isBypassPath = window.location.pathname.startsWith(MAINTENANCE_BYPASS_PATH);
   if (isBypassPath) localStorage.setItem("maintenance_bypass", "1");
+  const isPublicPreview = PUBLIC_PREVIEW_PATHS.some(p => window.location.pathname.startsWith(p));
   const isLoggedIn = !!localStorage.getItem("token");
-  const isBypassed = isBypassPath || localStorage.getItem("maintenance_bypass") === "1" || isLoggedIn;
+  const isBypassed = isBypassPath || isPublicPreview || localStorage.getItem("maintenance_bypass") === "1" || isLoggedIn;
 
   if (MAINTENANCE_MODE && !isBypassed) {
     return (
