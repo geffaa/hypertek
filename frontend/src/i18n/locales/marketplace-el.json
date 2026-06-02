@@ -532,7 +532,8 @@
       "cancel": "Ακύρωση",
       "loading": "Φόρτωση…",
       "connectWallet": "Συνδέσου πρώτα στο πορτοφόλι",
-      "loginFirst": "Συνδέσου πρώτα"
+      "loginFirst": "Συνδέσου πρώτα",
+      "cancelFailed": "Could not cancel trade. Please try again."
     }
   },
   "musicPlayer": {

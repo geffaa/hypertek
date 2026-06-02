@@ -532,7 +532,8 @@
       "cancel": "İptal",
       "loading": "Yükleniyor…",
       "connectWallet": "Önce cüzdanınızı bağlayın",
-      "loginFirst": "Önce giriş yapın"
+      "loginFirst": "Önce giriş yapın",
+      "cancelFailed": "Could not cancel trade. Please try again."
     }
   },
   "musicPlayer": {

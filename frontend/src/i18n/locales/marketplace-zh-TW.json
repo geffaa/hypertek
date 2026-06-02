@@ -532,7 +532,8 @@
       "cancel": "取消",
       "loading": "載入中…",
       "connectWallet": "請先連接您的錢包",
-      "loginFirst": "請先登入"
+      "loginFirst": "請先登入",
+      "cancelFailed": "Could not cancel trade. Please try again."
     }
   },
   "musicPlayer": {

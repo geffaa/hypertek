@@ -532,7 +532,8 @@
       "cancel": "ביטול",
       "loading": "טוען…",
       "connectWallet": "חבר קודם את הארנק שלך",
-      "loginFirst": "התחבר קודם"
+      "loginFirst": "התחבר קודם",
+      "cancelFailed": "Could not cancel trade. Please try again."
     }
   },
   "musicPlayer": {

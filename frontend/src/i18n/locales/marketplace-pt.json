@@ -532,7 +532,8 @@
       "cancel": "Cancelar",
       "loading": "Carregando…",
       "connectWallet": "Conecte sua carteira primeiro",
-      "loginFirst": "Faça login primeiro"
+      "loginFirst": "Faça login primeiro",
+      "cancelFailed": "Could not cancel trade. Please try again."
     }
   },
   "musicPlayer": {

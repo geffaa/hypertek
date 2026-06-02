@@ -532,7 +532,8 @@
       "cancel": "Annuleren",
       "loading": "Laden…",
       "connectWallet": "Verbind eerst je wallet",
-      "loginFirst": "Log eerst in"
+      "loginFirst": "Log eerst in",
+      "cancelFailed": "Could not cancel trade. Please try again."
     }
   },
   "musicPlayer": {

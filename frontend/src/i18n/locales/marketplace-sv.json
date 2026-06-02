@@ -532,7 +532,8 @@
       "cancel": "Avbryt",
       "loading": "Laddar…",
       "connectWallet": "Anslut din plånbok först",
-      "loginFirst": "Logga in först"
+      "loginFirst": "Logga in först",
+      "cancelFailed": "Could not cancel trade. Please try again."
     }
   },
   "musicPlayer": {

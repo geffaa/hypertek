@@ -532,7 +532,8 @@
       "cancel": "Batal",
       "loading": "Memuatkan…",
       "connectWallet": "Sambungkan dompet anda dahulu",
-      "loginFirst": "Log masuk dahulu"
+      "loginFirst": "Log masuk dahulu",
+      "cancelFailed": "Could not cancel trade. Please try again."
     }
   },
   "musicPlayer": {

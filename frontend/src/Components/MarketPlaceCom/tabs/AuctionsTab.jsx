@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
 import LazyImage from "../../Common/LazyImage";
 import popularFallback from "../../../assets/images/popular/popolar.png";
+import toast from "react-hot-toast";
 
 // ── Auction Detail Popup ──────────────────────────────────────────────────────
 function AuctionDetailPopup({ auction, imgSrc, onClose, onBid, onInstantBuy }) {
@@ -999,8 +1000,8 @@ export default function AuctionsTab() {
             return aEnd - bEnd;
           }).map(a => (
             <AuctionCard key={a._id} auction={a}
-              onBid={a => isLoggedInUser ? setBidAuction(a) : alert(t("marketplace.common.loginFirst"))}
-              onInstantBuy={a => isLoggedInUser ? setInstantBuyAuction(a) : alert(t("marketplace.common.loginFirst"))}
+              onBid={a => isLoggedInUser ? setBidAuction(a) : toast.error(t("marketplace.common.loginFirst"))}
+              onInstantBuy={a => isLoggedInUser ? setInstantBuyAuction(a) : toast.error(t("marketplace.common.loginFirst"))}
             />
           ))}
         </div>

@@ -532,7 +532,8 @@
       "cancel": "취소",
       "loading": "로딩 중…",
       "connectWallet": "먼저 지갑을 연결하세요",
-      "loginFirst": "먼저 로그인하세요"
+      "loginFirst": "먼저 로그인하세요",
+      "cancelFailed": "Could not cancel trade. Please try again."
     }
   },
   "musicPlayer": {

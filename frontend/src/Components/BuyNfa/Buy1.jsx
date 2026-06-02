@@ -1764,6 +1764,7 @@ function Buy1() {
               <button
                 onClick={() => {
                   if (buttonConfig.disabled) return;
+                  if (!user?.id) return toast.error(t("marketplace.common.loginFirst", "Log in first"));
                   if (!isOwner && !buttonConfig.disabled) {
                     setShowPayModal(true);
                   } else {
@@ -1779,13 +1780,15 @@ function Buy1() {
 
               {/* Make Offer — only for non-owners */}
               {!isOwner && (
-                <Link
-                  to="/make-offer"
-                  state={{ item: collection }}
-                  className="flex items-center justify-center gap-1.5 text-white/40 hover:text-blue-400 text-sm transition-colors"
+                <button
+                  onClick={() => {
+                    if (!user?.id) return toast.error(t("marketplace.common.loginFirst", "Log in first"));
+                    navigate("/make-offer", { state: { item: collection } });
+                  }}
+                  className="flex items-center justify-center gap-1.5 text-white/40 hover:text-blue-400 text-sm transition-colors bg-transparent border-none cursor-pointer"
                 >
                   {t("buyNfa.marketplace.makeOffer", "Make Offer")} <FiEdit2 size={12} />
-                </Link>
+                </button>
               )}
             </div>
 
@@ -2079,13 +2082,15 @@ function Buy1() {
                           {trade.posterName ? `${t("buyNfa.trade.by", "By")} ${trade.posterName}` : trade.posterWallet ? `${trade.posterWallet.substring(0, 6)}...${trade.posterWallet.substring(38)}` : ""}
                         </span>
                         {!isOwner && (
-                          <Link
-                            to="/market-place?tab=trades"
-                            state={{ tradeId: trade._id }}
-                            className="text-xs text-blue-400 hover:text-blue-300 transition-colors font-medium"
+                          <button
+                            onClick={() => {
+                              if (!user?.id) return toast.error(t("marketplace.common.loginFirst", "Log in first"));
+                              navigate("/market-place?tab=trades", { state: { tradeId: trade._id } });
+                            }}
+                            className="text-xs text-blue-400 hover:text-blue-300 transition-colors font-medium bg-transparent border-none cursor-pointer"
                           >
                             {t("buyNfa.trade.proposeTrade", "Propose Trade →")}
-                          </Link>
+                          </button>
                         )}
                       </div>
                     </div>

@@ -532,7 +532,8 @@
       "cancel": "Avbryt",
       "loading": "Laster...",
       "connectWallet": "Koble til lommeboken din forst",
-      "loginFirst": "Logg inn forst"
+      "loginFirst": "Logg inn forst",
+      "cancelFailed": "Could not cancel trade. Please try again."
     }
   },
   "musicPlayer": {

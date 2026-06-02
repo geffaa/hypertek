@@ -532,7 +532,8 @@
       "cancel": "Отмена",
       "loading": "Загрузка…",
       "connectWallet": "Сначала подключите кошелёк",
-      "loginFirst": "Сначала войдите в аккаунт"
+      "loginFirst": "Сначала войдите в аккаунт",
+      "cancelFailed": "Could not cancel trade. Please try again."
     }
   },
   "musicPlayer": {

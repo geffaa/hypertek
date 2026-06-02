@@ -532,7 +532,8 @@
       "cancel": "रद्द करें",
       "loading": "लोड हो रहा है…",
       "connectWallet": "पहले अपना वॉलेट कनेक्ट करें",
-      "loginFirst": "पहले लॉग इन करें"
+      "loginFirst": "पहले लॉग इन करें",
+      "cancelFailed": "Could not cancel trade. Please try again."
     }
   },
   "musicPlayer": {

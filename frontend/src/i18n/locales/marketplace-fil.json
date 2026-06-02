@@ -532,7 +532,8 @@
       "cancel": "Kanselahin",
       "loading": "Naglo-load…",
       "connectWallet": "I-connect muna ang iyong wallet",
-      "loginFirst": "Mag-login muna"
+      "loginFirst": "Mag-login muna",
+      "cancelFailed": "Could not cancel trade. Please try again."
     }
   },
   "musicPlayer": {

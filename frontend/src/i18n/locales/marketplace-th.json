@@ -532,7 +532,8 @@
       "cancel": "ยกเลิก",
       "loading": "กำลังโหลด…",
       "connectWallet": "เชื่อมต่อกระเป๋าเงินของคุณก่อน",
-      "loginFirst": "เข้าสู่ระบบก่อน"
+      "loginFirst": "เข้าสู่ระบบก่อน",
+      "cancelFailed": "Could not cancel trade. Please try again."
     }
   },
   "musicPlayer": {

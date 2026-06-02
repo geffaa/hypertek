@@ -532,7 +532,8 @@
       "cancel": "الغاء",
       "loading": "جارٍ التحميل...",
       "connectWallet": "اربط محفظتك اولا",
-      "loginFirst": "سجل الدخول اولا"
+      "loginFirst": "سجل الدخول اولا",
+      "cancelFailed": "Could not cancel trade. Please try again."
     }
   },
   "musicPlayer": {

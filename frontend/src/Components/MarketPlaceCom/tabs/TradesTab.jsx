@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
 import LazyImage from "../../Common/LazyImage";
 import popularFallback from "../../../assets/images/popular/popolar.png";
+import toast from "react-hot-toast";
 
 // ── Item Detail Popup ─────────────────────────────────────────────────────────
 function ItemDetailPopup({ imgSrc, title, category, description, offering, requesting, onClose }) {
@@ -735,7 +736,7 @@ export default function TradesTab() {
       if (!r.ok) throw new Error("Failed to cancel");
       setTrades((prev) => prev.filter((t) => t._id !== tradeId));
     } catch {
-      alert("Could not cancel trade. Please try again.");
+      toast.error(t("marketplace.common.cancelFailed"));
     } finally {
       setCancelling(null);
     }
@@ -803,7 +804,7 @@ export default function TradesTab() {
               key={tr._id}
               trade={tr}
               currentWallet={wallet}
-              onAccept={(tr) => setAcceptTrade(tr)}
+              onAccept={(tr) => isLoggedInUser ? setAcceptTrade(tr) : toast.error(t("marketplace.common.loginFirst"))}
               onCancel={handleCancel}
             />
           ))}

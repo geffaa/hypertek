@@ -532,7 +532,8 @@
       "cancel": "Annuller",
       "loading": "Indlaeser...",
       "connectWallet": "Tilslut din pung først",
-      "loginFirst": "Log ind først"
+      "loginFirst": "Log ind først",
+      "cancelFailed": "Could not cancel trade. Please try again."
     }
   },
   "musicPlayer": {

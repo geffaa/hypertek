@@ -532,7 +532,8 @@
       "cancel": "Hủy",
       "loading": "Đang Tải…",
       "connectWallet": "Kết nối ví của bạn trước",
-      "loginFirst": "Đăng nhập trước"
+      "loginFirst": "Đăng nhập trước",
+      "cancelFailed": "Could not cancel trade. Please try again."
     }
   },
   "musicPlayer": {

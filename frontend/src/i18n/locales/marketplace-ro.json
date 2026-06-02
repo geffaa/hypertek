@@ -532,7 +532,8 @@
       "cancel": "Anulați",
       "loading": "Se încarcă…",
       "connectWallet": "Conectați mai întâi portofelul",
-      "loginFirst": "Autentificați-vă mai întâi"
+      "loginFirst": "Autentificați-vă mai întâi",
+      "cancelFailed": "Could not cancel trade. Please try again."
     }
   },
   "musicPlayer": {
