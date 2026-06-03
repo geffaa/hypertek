@@ -95,9 +95,35 @@ export const createListing = async (req, res) => {
   try {
     const {
       category, activityType, itemName, itemDescription, itemImage,
-      nftSystemId, subCollectionId,
       price, reservePrice, commissionTier,
     } = req.body;
+
+    let { nftSystemId, subCollectionId } = req.body;
+
+    // Auto-detect NFT subCollection if not provided — needed when listing is
+    // created from the manual form (no NFT picker), so the marketplace slider
+    // can find the item via NFTSystem.subCollections[].listed === true.
+    if (activityType === "selling_general" && (!nftSystemId || !subCollectionId) && itemName) {
+      const userWallet = req.user.WalletAddress || req.user.MetaMaskAddress || "";
+      if (userWallet) {
+        const escapedName = itemName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const parent = await NFTSystem.findOne({
+          "subCollections.owner": new RegExp(`^${userWallet}$`, "i"),
+          "subCollections.name":  new RegExp(`^${escapedName}$`, "i"),
+        });
+        if (parent) {
+          const sub = parent.subCollections.find(
+            (s) =>
+              s.name?.toLowerCase() === itemName.toLowerCase() &&
+              s.owner?.toLowerCase() === userWallet.toLowerCase()
+          );
+          if (sub) {
+            nftSystemId     = parent._id;
+            subCollectionId = sub._id;
+          }
+        }
+      }
+    }
 
     const listing = await MarketListing.create({
       userId:     req.user._id || req.user.id,
@@ -109,13 +135,13 @@ export const createListing = async (req, res) => {
       itemDescription,
       itemImage,
       nftSystemId:     nftSystemId || null,
-      subCollectionId: subCollectionId || null,
+      subCollectionId: subCollectionId ? String(subCollectionId) : null,
       price:           price ?? null,
       reservePrice:    reservePrice ?? null,
       commissionTier:  commissionTier ?? 20,
     });
 
-    // Sync priceETH to the NFTSystem subCollection so marketplace filter works
+    // Sync priceETH + listed flag on the NFTSystem subCollection
     if (activityType === "selling_general" && nftSystemId && subCollectionId && price > 0) {
       await syncSubCollectionPrice(nftSystemId, subCollectionId, price, true);
     }

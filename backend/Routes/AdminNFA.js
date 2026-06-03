@@ -697,4 +697,81 @@ AdminNFARouter.post("/trades/cancel-stale", authMiddleware("admin"), async (req,
   }
 });
 
+// POST /api/v1/admin/nfa/sync-listed-flags-by-name
+// For listings WITHOUT nftSystemId: find the subCollection by itemName+userWallet and sync.
+AdminNFARouter.post("/sync-listed-flags-by-name", authMiddleware("admin"), async (req, res) => {
+  try {
+    const listings = await MarketListing.find({
+      activityType: "selling_general",
+      status:       "active",
+      $or: [{ nftSystemId: null }, { subCollectionId: null }],
+      userWallet:   { $nin: [null, ""] },
+    }).lean();
+
+    let synced = 0;
+    for (const l of listings) {
+      const escapedName = (l.itemName || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const parent = await NFTSystem.findOne({
+        "subCollections.owner": new RegExp(`^${l.userWallet}$`, "i"),
+        "subCollections.name":  new RegExp(`^${escapedName}$`, "i"),
+      });
+      if (!parent) continue;
+      const sub = parent.subCollections.find(
+        (s) =>
+          s.name?.toLowerCase() === l.itemName?.toLowerCase() &&
+          s.owner?.toLowerCase() === l.userWallet?.toLowerCase()
+      );
+      if (!sub) continue;
+
+      // Patch the listing with proper NFT refs
+      await MarketListing.findByIdAndUpdate(l._id, {
+        nftSystemId:     parent._id,
+        subCollectionId: String(sub._id),
+      });
+
+      // Sync listed flag
+      if (!sub.listed || sub.priceETH !== l.price) {
+        sub.listed   = true;
+        sub.priceETH = l.price || sub.priceETH;
+        await parent.save();
+        synced++;
+      }
+    }
+    res.json({ success: true, synced, checked: listings.length });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// POST /api/v1/admin/nfa/sync-listed-flags
+// Scans all active selling_general MarketListings that have nftSystemId+subCollectionId
+// and ensures the matching NFTSystem subCollection has listed=true and priceETH synced.
+AdminNFARouter.post("/sync-listed-flags", authMiddleware("admin"), async (req, res) => {
+  try {
+    const listings = await MarketListing.find({
+      activityType: "selling_general",
+      status:       "active",
+      nftSystemId:  { $ne: null },
+      subCollectionId: { $ne: null },
+    }).lean();
+
+    let synced = 0;
+    for (const l of listings) {
+      const parent = await NFTSystem.findById(l.nftSystemId);
+      if (!parent) continue;
+      const sub = parent.subCollections.id(l.subCollectionId);
+      if (!sub) continue;
+      if (!sub.listed || sub.priceETH !== l.price) {
+        sub.listed   = true;
+        sub.priceETH = l.price || sub.priceETH;
+        await parent.save();
+        synced++;
+      }
+    }
+    res.json({ success: true, synced, checked: listings.length });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
 export default AdminNFARouter;
