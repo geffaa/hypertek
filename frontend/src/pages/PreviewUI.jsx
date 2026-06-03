@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import logo from "../assets/logo1.png";
 import Gaming from "./Gaming";
 import LanguageSwitcher from "../Components/Common/LanguageSwitcher";
@@ -13,6 +14,7 @@ const GAME_THUMBS = [
 
 export default function PreviewUI() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [showFullUI, setShowFullUI] = useState(false);
 
   return (
@@ -50,11 +52,11 @@ export default function PreviewUI() {
 
             <div className="flex flex-col gap-1">
               <span className="text-[9px] md:text-[10px] tracking-[0.45em] uppercase font-bold" style={{ fontFamily: "Orbitron, sans-serif", color: "#a78bfa" }}>
-                Game Interface
+                {t("gaming.preview.uiLabel", "Game Interface")}
               </span>
               <p className="text-white/80 text-[13px] md:text-[14px] leading-snug">
-                The full-spectrum gaming dashboard.{" "}
-                <span className="text-white/55">Three modes. One immersive experience.</span>
+                {t("gaming.preview.uiPageSubtitle", "The full-spectrum gaming dashboard.")}{" "}
+                <span className="text-white/55">{t("gaming.preview.uiPageSubtitleSpan", "Three modes. One immersive experience.")}</span>
               </p>
             </div>
           </div>
@@ -78,7 +80,7 @@ export default function PreviewUI() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25 }}
         >
-          {/* Corner accent — top left */}
+          {/* Corner accent */}
           <div className="absolute top-0 left-0 w-16 h-[2px]" style={{ background: "#a78bfa" }} />
           <div className="absolute top-0 left-0 w-[2px] h-16" style={{ background: "#a78bfa" }} />
 
@@ -94,7 +96,7 @@ export default function PreviewUI() {
           {/* Ambient glow */}
           <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(167,139,250,0.09) 0%, transparent 70%)" }} />
 
-          {/* Content: split on desktop, stacked on mobile */}
+          {/* Content */}
           <div className="relative z-10 flex flex-col md:flex-row h-full min-h-[520px]">
 
             {/* Left: text + CTA */}
@@ -108,7 +110,7 @@ export default function PreviewUI() {
                 <div className="flex items-center gap-3 mb-5">
                   <div className="w-6 h-[2px]" style={{ background: "#a78bfa" }} />
                   <span className="text-[10px] font-bold uppercase tracking-[0.45em]" style={{ fontFamily: "Orbitron, sans-serif", color: "#a78bfa" }}>
-                    Interactive Preview
+                    {t("gaming.preview.uiHeroLabel", "Interactive Preview")}
                   </span>
                 </div>
 
@@ -128,12 +130,17 @@ export default function PreviewUI() {
 
                 {/* Description */}
                 <p className="text-white/60 leading-relaxed mb-8" style={{ fontSize: "clamp(0.82rem, 1.1vw, 0.95rem)", maxWidth: 400 }}>
-                  Step inside the full Hyper Tek 100 dashboard. Switch between Racing, Quest, and Overlord modes — each with its own live marketplace, NFT inventory, and real-time earnings view.
+                  {t("gaming.preview.uiHeroDesc", "Step inside the full Hyper Tek 100 dashboard. Switch between Racing, Quest, and Overlord modes. Each with its own marketplace, asset inventory, and real-time earnings.")}
                 </p>
 
                 {/* Stats row */}
                 <div className="flex flex-wrap gap-3 mb-10">
-                  {["3 Game Modes", "Web3 Native", "Live Trading", "NFT Inventory"].map((stat) => (
+                  {[
+                    t("gaming.preview.uiStat1", "3 Game Modes"),
+                    t("gaming.preview.uiStat2", "Full Dashboard"),
+                    t("gaming.preview.uiStat3", "Asset Inventory"),
+                    t("gaming.preview.uiStat4", "Live Marketplace"),
+                  ].map((stat) => (
                     <span
                       key={stat}
                       className="px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em]"
@@ -166,8 +173,8 @@ export default function PreviewUI() {
                   whileHover={{ boxShadow: "0 0 48px rgba(167,139,250,0.35)" }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <span>Launch Interface</span>
-                  <span style={{ fontSize: 16 }}>→</span>
+                  <span>{t("gaming.preview.uiLaunchBtn", "Launch Interface")}</span>
+                  <span style={{ fontSize: 16 }}>&#x2192;</span>
                 </motion.button>
               </motion.div>
             </div>
@@ -227,7 +234,7 @@ export default function PreviewUI() {
           <div className="flex items-center gap-4 mb-6">
             <div className="h-px flex-1" style={{ background: "linear-gradient(to right, transparent, rgba(0,80,220,0.4))" }} />
             <span className="text-[9px] tracking-[0.5em] uppercase font-bold" style={{ fontFamily: "Orbitron, sans-serif", color: "rgba(147,197,253,0.6)" }}>
-              Explore More
+              {t("gaming.preview.exploreMore", "Explore More")}
             </span>
             <div className="h-px flex-1" style={{ background: "linear-gradient(to left, transparent, rgba(0,80,220,0.4))" }} />
           </div>
@@ -255,18 +262,18 @@ export default function PreviewUI() {
                   <div className="flex items-center gap-2.5 mb-2">
                     <div className="w-5 h-[2px] rounded" style={{ background: "#22c55e" }} />
                     <span className="text-[10px] font-bold uppercase tracking-[0.35em]" style={{ fontFamily: "Orbitron, sans-serif", color: "#22c55e" }}>
-                      Gaming Info
+                      {t("gaming.preview.gamingInfoLabel", "Gaming Info")}
                     </span>
                   </div>
                   <h3 className="text-white font-bold text-lg md:text-xl leading-tight" style={{ fontFamily: "Goldman, sans-serif" }}>
-                    Explore The Games
+                    {t("gaming.preview.gamingInfoHeading", "Explore The Games")}
                   </h3>
                   <p className="text-white/50 text-xs mt-1.5 leading-relaxed">
-                    Racing, Quest, and Overlord — discover each game world in detail.
+                    {t("gaming.preview.gamingInfoDesc", "Racing, Quest, and Overlord. Discover each game world in detail.")}
                   </p>
                 </div>
                 <div className="ml-6 shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110" style={{ background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.3)" }}>
-                  <span style={{ color: "#22c55e", fontSize: 18 }}>→</span>
+                  <span style={{ color: "#22c55e", fontSize: 18 }}>&#x2192;</span>
                 </div>
               </div>
             </motion.button>
@@ -293,18 +300,18 @@ export default function PreviewUI() {
                   <div className="flex items-center gap-2.5 mb-2">
                     <div className="w-5 h-[2px] rounded" style={{ background: "#38bdf8" }} />
                     <span className="text-[10px] font-bold uppercase tracking-[0.35em]" style={{ fontFamily: "Orbitron, sans-serif", color: "#38bdf8" }}>
-                      About Us
+                      {t("gaming.preview.aboutLabel", "About Us")}
                     </span>
                   </div>
                   <h3 className="text-white font-bold text-lg md:text-xl leading-tight" style={{ fontFamily: "Goldman, sans-serif" }}>
-                    Our Story & Vision
+                    {t("gaming.preview.aboutHeading", "Our Story & Vision")}
                   </h3>
                   <p className="text-white/50 text-xs mt-1.5 leading-relaxed">
-                    Discover the team, mission, and roadmap behind Hyper Tek 100.
+                    {t("gaming.preview.aboutDesc", "Discover the team, mission, and roadmap behind Hyper Tek 100.")}
                   </p>
                 </div>
                 <div className="ml-6 shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110" style={{ background: "rgba(56,189,248,0.1)", border: "1px solid rgba(56,189,248,0.3)" }}>
-                  <span style={{ color: "#38bdf8", fontSize: 18 }}>→</span>
+                  <span style={{ color: "#38bdf8", fontSize: 18 }}>&#x2192;</span>
                 </div>
               </div>
             </motion.button>
@@ -355,7 +362,7 @@ export default function PreviewUI() {
                 }}
               >
                 <img src={logo} alt="" className="h-4 w-4" />
-                ← Back
+                &#x2190; Back
               </button>
             </motion.div>
           </motion.div>
