@@ -21,25 +21,24 @@ import Trade from "../Models/TradeModel.js";
  * @param {string} [opts.ownerWallet]     Wallet of the item owner to scope Trade cancellation
  */
 export async function cancelSiblingListings(subCollectionId, { skipAuctionId, itemName, ownerWallet } = {}) {
-  if (!subCollectionId) return;
+  // Need at least one anchor to do anything useful
+  if (!subCollectionId && !itemName) return;
 
   try {
-    const promises = [
-      // Cancel active MarketListing documents
-      MarketListing.updateMany(
-        { subCollectionId: String(subCollectionId), status: "active" },
-        { status: "cancelled" }
-      ),
-      // Cancel active Auction documents (skip the one that triggered this if provided)
-      (() => {
-        const filter = {
-          subCollectionId: String(subCollectionId),
-          status: "active",
-        };
-        if (skipAuctionId) filter._id = { $ne: skipAuctionId };
-        return Auction.updateMany(filter, { status: "cancelled" });
-      })(),
-    ];
+    const promises = [];
+
+    // Cancel active MarketListing and Auction documents — only possible when subCollectionId is known
+    if (subCollectionId) {
+      promises.push(
+        MarketListing.updateMany(
+          { subCollectionId: String(subCollectionId), status: "active" },
+          { status: "cancelled" }
+        )
+      );
+      const auctionFilter = { subCollectionId: String(subCollectionId), status: "active" };
+      if (skipAuctionId) auctionFilter._id = { $ne: skipAuctionId };
+      promises.push(Auction.updateMany(auctionFilter, { status: "cancelled" }));
+    }
 
     // Cancel matching Trade documents — Trade has no subCollectionId, so we
     // match by offering name + poster wallet (best-effort).
@@ -59,7 +58,7 @@ export async function cancelSiblingListings(subCollectionId, { skipAuctionId, it
     const results = await Promise.all(promises);
     const cancelled = results.reduce((sum, r) => sum + (r.modifiedCount || 0), 0);
     if (cancelled > 0) {
-      console.log(`🚫 [cancelSiblingListings] Cancelled ${cancelled} sibling listing(s) for subCollection ${subCollectionId}`);
+      console.log(`🚫 [cancelSiblingListings] Cancelled ${cancelled} sibling listing(s) for subCollection ${subCollectionId ?? itemName}`);
     }
   } catch (err) {
     // Non-blocking — log but do not re-throw
