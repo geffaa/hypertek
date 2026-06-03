@@ -743,6 +743,32 @@ AdminNFARouter.post("/sync-listed-flags-by-name", authMiddleware("admin"), async
   }
 });
 
+// POST /api/v1/admin/nfa/force-set-listed
+// Body: [{ nftSystemId, subCollectionId, listed, priceETH }]
+// Directly sets listed flag on specific subCollections — for data-repair use.
+AdminNFARouter.post("/force-set-listed", authMiddleware("admin"), async (req, res) => {
+  try {
+    const items = req.body;
+    if (!Array.isArray(items) || !items.length)
+      return res.status(400).json({ success: false, message: "body must be a non-empty array" });
+
+    let updated = 0;
+    for (const { nftSystemId, subCollectionId, listed = true, priceETH } of items) {
+      const parent = await NFTSystem.findById(nftSystemId);
+      if (!parent) continue;
+      const sub = parent.subCollections.id(subCollectionId);
+      if (!sub) continue;
+      sub.listed = listed;
+      if (priceETH != null) sub.priceETH = priceETH;
+      await parent.save();
+      updated++;
+    }
+    res.json({ success: true, updated });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
 // POST /api/v1/admin/nfa/sync-listed-flags
 // Scans all active selling_general MarketListings that have nftSystemId+subCollectionId
 // and ensures the matching NFTSystem subCollection has listed=true and priceETH synced.
