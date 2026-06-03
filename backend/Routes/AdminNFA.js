@@ -14,6 +14,7 @@ import Artist from "../Models/Artist.js";
 import BuybackRequest from "../Models/BuybackRequest.js";
 import User from "../Models/User.js";
 import HBLedger from "../Models/HBLedger.js";
+import Trade from "../Models/TradeModel.js";
 
 const AdminNFARouter = express.Router();
 
@@ -673,6 +674,24 @@ AdminNFARouter.put("/hb/cashouts/:ledgerId/fail", async (req, res) => {
 
     console.log(`[Admin HB] cashout ${entry._id} marked failed + ${hbAmount} HB refunded by admin ${req.user._id}`);
     res.json({ success: true, message: `Cashout marked failed. ${user ? `${hbAmount} HB refunded to user.` : "User not found — no refund."}`, entry });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// POST /api/v1/admin/nfa/trades/cancel-stale
+// Body: { ids: ["id1", "id2", ...] }  — admin bulk-cancel specific trade IDs
+AdminNFARouter.post("/trades/cancel-stale", authMiddleware("admin"), async (req, res) => {
+  try {
+    const { ids } = req.body;
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return res.status(400).json({ success: false, message: "ids array required" });
+    }
+    const result = await Trade.updateMany(
+      { _id: { $in: ids }, status: { $in: ["open", "accepted"] } },
+      { status: "cancelled" }
+    );
+    res.json({ success: true, cancelled: result.modifiedCount, requested: ids.length });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }

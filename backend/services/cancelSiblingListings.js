@@ -42,19 +42,18 @@ export async function cancelSiblingListings(subCollectionId, { skipAuctionId, it
     ];
 
     // Cancel matching Trade documents — Trade has no subCollectionId, so we
-    // match by offering name + poster wallet (best-effort)
-    if (itemName && ownerWallet) {
-      promises.push(
-        Trade.updateMany(
-          {
-            type: "trade",
-            offering: new RegExp(itemName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i"),
-            posterWallet: new RegExp(`^${ownerWallet}$`, "i"),
-            status: "open",
-          },
-          { status: "cancelled" }
-        )
-      );
+    // match by offering name + poster wallet (best-effort).
+    // If ownerWallet is missing, fall back to itemName-only match to avoid leaving ghost records.
+    if (itemName) {
+      const tradeFilter = {
+        type: "trade",
+        offering: new RegExp(itemName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i"),
+        status: "open",
+      };
+      if (ownerWallet) {
+        tradeFilter.posterWallet = new RegExp(`^${ownerWallet}$`, "i");
+      }
+      promises.push(Trade.updateMany(tradeFilter, { status: "cancelled" }));
     }
 
     const results = await Promise.all(promises);

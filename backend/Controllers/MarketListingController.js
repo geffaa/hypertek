@@ -2,6 +2,7 @@ import MarketListing from "../Models/MarketListingModel.js";
 import HireRent from "../Models/HireRentModel.js";
 import NFTSystem from "../Models/NFTSystem.js";
 import { createNotification } from "../services/notificationService.js";
+import { cancelSiblingListings } from "../services/cancelSiblingListings.js";
 
 // Sync priceETH + listed flag on the NFTSystem subCollection
 async function syncSubCollectionPrice(nftSystemId, subCollectionId, priceETH, listed) {
@@ -192,6 +193,13 @@ export const deleteListing = async (req, res) => {
     }
 
     await listing.deleteOne();
+
+    // Cancel any sibling trades/auctions for the same item
+    cancelSiblingListings(listing.subCollectionId, {
+      itemName:    listing.itemName,
+      ownerWallet: listing.userWallet,
+    }).catch(() => {});
+
     return res.json({ success: true, message: "Listing removed" });
   } catch (err) {
     console.error("deleteListing:", err);
