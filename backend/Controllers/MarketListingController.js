@@ -195,10 +195,10 @@ export const deleteListing = async (req, res) => {
     await listing.deleteOne();
 
     // Cancel any sibling trades/auctions for the same item
-    cancelSiblingListings(listing.subCollectionId, {
+    await cancelSiblingListings(listing.subCollectionId, {
       itemName:    listing.itemName,
       ownerWallet: listing.userWallet,
-    }).catch(() => {});
+    });
 
     return res.json({ success: true, message: "Listing removed" });
   } catch (err) {
