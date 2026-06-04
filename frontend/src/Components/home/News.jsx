@@ -66,14 +66,10 @@ export default function News() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.12 }}
               >
-                {/* Dark overlay */}
+                {/* Subtle bottom gradient for text readability */}
                 <div
-                  className="absolute inset-0 transition-all duration-500"
-                  style={{
-                    background: isActive
-                      ? "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.25) 55%, rgba(0,0,0,0.08) 100%)"
-                      : "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.65) 100%)",
-                  }}
+                  className="absolute bottom-0 inset-x-0 h-40 pointer-events-none"
+                  style={{ background: "linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%)" }}
                 />
 
                 {/* Accent bar bottom */}
