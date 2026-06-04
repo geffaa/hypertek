@@ -72,7 +72,6 @@ import Waitlist from "./pages/Waitlist";
 import WaitlistForm from "./pages/WaitlistForm";
 import WhitepaperPage from "./pages/WhitepaperPage";
 import TermsPage from "./pages/TermsPage";
-import Testing from "./pages/Testing";
 import DashboardHome from "./pages/DashboardHome";
 import OfferedReceived from "./pages/OfferedReceived";
 import NoOffered from "./pages/NoOffered";
@@ -242,9 +241,6 @@ function AppWrapper() {
             <Route path="/preview/ui" element={<PreviewUI />} />
             <Route path="/preview/:mode" element={<PreviewGameMode />} />
             <Route path="/game/:mode" element={<GameModePage />} />
-
-            {/* Testing Routes  */}
-            <Route path="/testing" element={<Testing />} />
 
             {/* for payment options  */}
 
