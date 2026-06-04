@@ -13,8 +13,8 @@ import OverlordMode   from "../Components/Gaming/OverlordMode";
 import RotatePrompt   from "../Components/Gaming/RotatePrompt";
 
 export default function Gaming({ isPreview = false }) {
-  const [loading,     setLoading]     = useState(true);
-  const [visible,     setVisible]     = useState(false);
+  const [loading,     setLoading]     = useState(!isPreview);
+  const [visible,     setVisible]     = useState(isPreview);
   const [activeGame,  setActiveGame]  = useState(null);
   const [raceView,     setRaceView]     = useState("TRACK");  // "TRACK" | "GARAGE"
   const [questView,    setQuestView]    = useState("SPACE");  // "SPACE" | "GROUND"

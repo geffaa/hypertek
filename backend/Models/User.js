@@ -117,6 +117,10 @@ const UserSchema = new mongoose.Schema(
       verified: { type: Boolean, default: false },
     },
 
+    // Stripe Connect — created when user saves bank details
+    stripeConnectAccountId: { type: String, default: null },
+    stripeExternalAccountId: { type: String, default: null },
+
     // KYC — required before cashout
     kyc: {
       status: { type: String, enum: ["not_started", "pending", "verified", "failed"], default: "not_started" },

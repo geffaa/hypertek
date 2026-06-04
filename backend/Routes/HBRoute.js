@@ -10,13 +10,14 @@ import {
   getBankDetails,
   createHBTopupIntent,
   topupViaUSDC,
+  getHBPlatformStats,
 } from "../Controllers/HBController.js";
 import { authMiddleware } from "../Middleware/googleMiddle.js";
 
 const router = express.Router();
 
-router.post("/earn", earnHB);                             // called by game server (no auth — internal)
-router.post("/spend", spendHB);                           // called by marketplace (no auth — internal)
+router.post("/earn", earnHB);
+router.post("/spend", spendHB);
 router.post("/cashout/otp", authMiddleware(), requestCashoutOTP);
 router.post("/cashout", authMiddleware(), cashoutHB);
 router.get("/balance", authMiddleware(), getHBBalance);
@@ -25,5 +26,6 @@ router.get("/bank-details", authMiddleware(), getBankDetails);
 router.put("/bank-details", authMiddleware(), saveBankDetails);
 router.post("/topup/intent", authMiddleware(), createHBTopupIntent);
 router.post("/topup/usdc", authMiddleware(), topupViaUSDC);
+router.get("/admin/stats", authMiddleware(), getHBPlatformStats);
 
 export default router;

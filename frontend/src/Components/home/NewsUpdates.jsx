@@ -4,6 +4,26 @@ import { motion } from "framer-motion";
 import { Play, X, Calendar, Tag } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
+// ── Add new articles here (text-only news cards) ────────────────────────────
+const ARTICLE_ITEMS = [
+  {
+    id: "article-001",
+    tag: "PLATFORM UPDATE",
+    tagColor: "#22c55e",
+    title: "HyperBucks — Top-Up & Cashout Now Live",
+    date: "June 2025",
+    points: [
+      "Top up with credit/debit card or USDC crypto",
+      "Cash out via bank transfer (1–3 business days) or USDC",
+      "Minimum $1 USD (250 HB) for top-up and cashout",
+      "OTP email verification protects every cashout",
+      "KYC identity check required before first withdrawal",
+    ],
+    note: "250 HB = $1 USD · All transactions secured by Stripe",
+  },
+];
+// ────────────────────────────────────────────────────────────────────────────
+
 // ── Add new videos here ──────────────────────────────────────────────────────
 const VIDEO_ITEMS = [
   {
@@ -260,10 +280,61 @@ function VideoCard({ item, index }) {
   );
 }
 
+function ArticleCard({ item, index }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.45, delay: index * 0.08 }}
+      className="rounded-2xl overflow-hidden flex flex-col"
+      style={{
+        background: "linear-gradient(135deg, rgba(0,42,168,0.18) 0%, rgba(255,255,255,0.03) 100%)",
+        border: "1px solid rgba(0,42,168,0.35)",
+      }}
+    >
+      {/* Tag bar */}
+      <div className="flex items-center justify-between px-4 pt-4 pb-2">
+        <span
+          className="text-[10px] font-bold tracking-[0.18em] px-2.5 py-1 rounded-full"
+          style={{ color: item.tagColor, background: `${item.tagColor}18`, border: `1px solid ${item.tagColor}35` }}
+        >
+          {item.tag}
+        </span>
+        <div className="flex items-center gap-1.5">
+          <Calendar size={11} style={{ color: "rgba(255,255,255,0.3)" }} />
+          <span className="text-white/30 text-[11px]">{item.date}</span>
+        </div>
+      </div>
+
+      {/* Body */}
+      <div className="flex flex-col gap-3 px-4 pb-4 flex-1">
+        <h3
+          className="text-white font-bold leading-snug"
+          style={{ fontSize: "clamp(0.9rem, 1.1vw, 1.05rem)", fontFamily: "Goldman, sans-serif" }}
+        >
+          {item.title}
+        </h3>
+        <ul className="space-y-1.5">
+          {item.points.map((pt) => (
+            <li key={pt} className="flex items-start gap-2 text-xs text-white/55">
+              <span className="w-1 h-1 rounded-full bg-green-400 mt-1.5 shrink-0" />
+              {pt}
+            </li>
+          ))}
+        </ul>
+        {item.note && (
+          <p className="text-[10px] text-white/30 mt-auto pt-2 border-t border-white/5">{item.note}</p>
+        )}
+      </div>
+    </motion.div>
+  );
+}
+
 export default function NewsUpdates() {
   const { t } = useTranslation();
 
-  if (!VIDEO_ITEMS.length) return null;
+  if (!VIDEO_ITEMS.length && !ARTICLE_ITEMS.length) return null;
 
   return (
     <section className="w-full pt-4 pb-16 md:pb-24 relative">
@@ -290,8 +361,11 @@ export default function NewsUpdates() {
             gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))",
           }}
         >
+          {ARTICLE_ITEMS.map((item, i) => (
+            <ArticleCard key={item.id} item={item} index={i} />
+          ))}
           {VIDEO_ITEMS.map((item, i) => (
-            <VideoCard key={item.id} item={item} index={i} />
+            <VideoCard key={item.id} item={item} index={ARTICLE_ITEMS.length + i} />
           ))}
         </div>
 

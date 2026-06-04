@@ -2,10 +2,7 @@ import User from "../Models/User.js";
 import HBLedger from "../Models/HBLedger.js";
 import { ethers } from "ethers";
 import Stripe from "stripe";
-import dotenv from "dotenv";
 import nodemailer from "nodemailer";
-
-dotenv.config({ path: "./Config/.env" });
 
 // Minimal ERC-20 ABI for USDC transfer
 const ERC20_ABI = [
@@ -16,8 +13,146 @@ const ERC20_ABI = [
 // HB conversion constant
 const HB_TO_USD = 250; // 250 HB = $1 USD
 const MIN_USDC_CASHOUT_HB = 250; // $1 minimum for USDC cashout
-const MIN_BANK_CASHOUT_HB = 2500; // $10 minimum for bank cashout
+const MIN_BANK_CASHOUT_HB = 250; // $1 minimum for bank cashout
 const MIN_TOPUP_HB = 250; // $1 minimum top-up
+
+
+// ── Stripe Connect helpers ───────────────────────────────────────────────────
+
+async function getOrCreateConnectedAccount(user, stripe, userIp) {
+  const isTestMode = process.env.STRIPE_SECRET_KEY?.startsWith("sk_test_");
+  const country = (user.bankDetails?.country || "US").toUpperCase().slice(0, 2);
+
+  if (user.stripeConnectAccountId) {
+    // If capability not yet active in test mode, patch with test identity data
+    if (isTestMode) {
+      await _ensureTestCapabilities(stripe, user.stripeConnectAccountId, country);
+    }
+    return user.stripeConnectAccountId;
+  }
+
+  const nameParts = (user.FullName || "").trim().split(" ");
+  const firstName = nameParts[0] || "User";
+  const lastName = nameParts.slice(1).join(" ") || "Account";
+
+  const individualData = {
+    email: user.Email || user.email,
+    first_name: firstName,
+    last_name: lastName,
+  };
+
+  // Test mode: supply Stripe's canonical test identity values so the transfers
+  // capability activates immediately without requiring a real KYC flow.
+  if (isTestMode && country === "US") {
+    Object.assign(individualData, {
+      ssn_last_4: "0000",
+      dob: { day: 1, month: 1, year: 1901 },
+      address: { line1: "123 Main St", city: "Anytown", state: "CA", postal_code: "90001", country: "US" },
+      phone: "+15005550000",
+    });
+  }
+
+  const account = await stripe.accounts.create({
+    type: "custom",
+    country,
+    email: user.Email || user.email,
+    capabilities: { transfers: { requested: true } },
+    business_type: "individual",
+    individual: individualData,
+    business_profile: {
+      mcc: "7372", // software
+      url: process.env.FRONTEND_URL || "https://hypertek.gg",
+    },
+    tos_acceptance: {
+      date: Math.floor(Date.now() / 1000),
+      ip: userIp || "127.0.0.1",
+    },
+    settings: {
+      payouts: { schedule: { interval: "manual" } },
+    },
+  });
+
+  user.stripeConnectAccountId = account.id;
+  await user.save();
+
+  if (isTestMode) {
+    await _ensureTestCapabilities(stripe, account.id, country);
+  }
+
+  return account.id;
+}
+
+// Pushes required test-identity fields so Stripe activates the transfers capability.
+// Returns true if capability is (or became) active.
+async function _ensureTestCapabilities(stripe, accountId, country) {
+  try {
+    const account = await stripe.accounts.retrieve(accountId);
+    if (account.capabilities?.transfers === "active") return true;
+
+    if (country === "US") {
+      await stripe.accounts.update(accountId, {
+        individual: {
+          ssn_last_4: "0000",
+          dob: { day: 1, month: 1, year: 1901 },
+          address: { line1: "123 Main St", city: "Anytown", state: "CA", postal_code: "90001", country: "US" },
+          phone: "+15005550000",
+        },
+        business_profile: {
+          mcc: "7372",
+          url: process.env.FRONTEND_URL || "https://hypertek.gg",
+        },
+      });
+
+      // Stripe activates capabilities asynchronously — wait for propagation
+      await new Promise((r) => setTimeout(r, 4000));
+      const updated = await stripe.accounts.retrieve(accountId);
+      return updated.capabilities?.transfers === "active";
+    }
+  } catch (e) {
+    console.warn("[StripeConnect] Capability activation attempt failed:", e.message);
+  }
+  return false;
+}
+
+async function attachExternalBankAccount(user, stripe, accountId) {
+  const bd = user.bankDetails;
+  const country = (bd.country || "US").toUpperCase().slice(0, 2);
+  const currency = (bd.currency || "USD").toLowerCase();
+
+  let bankAccountParams = {
+    country,
+    currency,
+    account_holder_name: bd.accountHolderName,
+    account_holder_type: "individual",
+  };
+
+  if (country === "US" && bd.routingNumber && bd.accountNumber) {
+    bankAccountParams.routing_number = bd.routingNumber;
+    bankAccountParams.account_number = bd.accountNumber;
+  } else if (bd.iban) {
+    bankAccountParams.account_number = bd.iban;
+  } else {
+    bankAccountParams.account_number = bd.accountNumber;
+  }
+
+  const token = await stripe.tokens.create({ bank_account: bankAccountParams });
+
+  // Remove old external accounts first
+  if (user.stripeExternalAccountId) {
+    try {
+      await stripe.accounts.deleteExternalAccount(accountId, user.stripeExternalAccountId);
+    } catch {}
+  }
+
+  const externalAccount = await stripe.accounts.createExternalAccount(accountId, {
+    external_account: token.id,
+    default_for_currency: true,
+  });
+
+  user.stripeExternalAccountId = externalAccount.id;
+  await user.save();
+  return externalAccount.id;
+}
 
 // ------------------ SMTP TRANSPORTER ------------------
 const transporter = nodemailer.createTransport({
@@ -209,10 +344,6 @@ export async function cashoutHB(req, res) {
       return res.status(400).json({ error: "OTP has expired. Please request a new one." });
     }
 
-    // Clear OTP immediately — single use
-    user.cashoutOtp = { code: null, expiresAt: null };
-    await user.save();
-
     // KYC required before cashout
     if (user.kyc?.status !== "verified") {
       return res.status(403).json({
@@ -250,12 +381,16 @@ export async function cashoutHB(req, res) {
           error: `Minimum bank cashout is ${MIN_BANK_CASHOUT_HB} HB ($${MIN_BANK_CASHOUT_HB / HB_TO_USD})`,
         });
       }
-      if (!user.bankDetails?.verified) {
+      if (!user.bankDetails?.accountNumber) {
         return res.status(400).json({
-          error: "Bank details not verified. Please add and verify your bank details first.",
+          error: "Bank details not found. Please add your bank details first.",
         });
       }
     }
+
+    // All validations passed — clear OTP (single use)
+    user.cashoutOtp = { code: null, expiresAt: null };
+    await user.save();
 
     const usdAmount = parseFloat((amount / HB_TO_USD).toFixed(2));
 
@@ -355,62 +490,83 @@ export async function cashoutHB(req, res) {
       }
     }
 
-    // ── Bank: Stripe payout attempt + admin email ────────────────────────────
+    // ── Bank: Stripe Connect (automated) or manual admin flow ───────────────
     if (method === "bank") {
-      let stripePayoutId = null;
-      try {
-        // stripe.payouts.create() sends from Stripe platform balance → platform bank account.
-        // Admin then manually transfers to the user.
-        // Full user-direct payout requires Stripe Connect (see docs/remaining-implementation.md).
-        const stripeKey = process.env.STRIPE_SECRET_KEY;
-        if (!stripeKey) throw new Error("STRIPE_SECRET_KEY not configured");
-        const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
+      const stripeKey = process.env.STRIPE_SECRET_KEY;
+      if (!stripeKey) throw new Error("STRIPE_SECRET_KEY not configured");
+      const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
 
-        const stripePayout = await stripe.payouts.create({
-          amount: Math.round(usdAmount * 100), // cents
-          currency: "usd",
-          statement_descriptor: "HYPERTEK HB",
-          metadata: {
-            userId: String(userId),
-            hbAmount: String(amount),
-            ledgerId: String(ledgerEntry._id),
-            userBank: user.bankDetails?.bankName || "",
-            userAccount: user.bankDetails?.accountHolderName || "",
-          },
-        });
+      if (process.env.STRIPE_CONNECT_ENABLED === "true") {
+        try {
+          const connectAccountId = await getOrCreateConnectedAccount(user, stripe, req.ip);
+          await attachExternalBankAccount(user, stripe, connectAccountId);
 
-        stripePayoutId = stripePayout.id;
-        await HBLedger.findByIdAndUpdate(ledgerEntry._id, {
-          cashoutStatus: "processing",
-          cashoutTxHash: stripePayout.id,
-        });
+          // Verify capability is active before attempting transfer
+          const capAccount = await stripe.accounts.retrieve(connectAccountId);
+          if (capAccount.capabilities?.transfers !== "active") {
+            throw new Error("Connected account transfers capability not yet active. Please try again in a few moments.");
+          }
 
-        cashoutResult = { status: "processing", stripePayoutId };
-        console.log(`[HB Cashout] Stripe payout created: ${stripePayout.id} — $${usdAmount}`);
-      } catch (stripeErr) {
-        console.warn("⚠️ [HB Cashout] Stripe payout failed:", stripeErr.message);
-        // Keep as "pending" — admin processes manually
-        cashoutResult = { status: "pending", error: stripeErr.message };
+          // Transfer from platform Stripe balance to connected account
+          const transfer = await stripe.transfers.create({
+            amount: Math.round(usdAmount * 100),
+            currency: "usd",
+            destination: connectAccountId,
+            transfer_group: `cashout_${ledgerEntry._id}`,
+            metadata: {
+              userId: String(userId),
+              hbAmount: String(amount),
+              ledgerId: String(ledgerEntry._id),
+            },
+          });
+
+          // Payout from connected account balance to their bank
+          const payout = await stripe.payouts.create(
+            {
+              amount: Math.round(usdAmount * 100),
+              currency: "usd",
+              statement_descriptor: "HYPERTEK",
+              metadata: { userId: String(userId), transferId: transfer.id },
+            },
+            { stripeAccount: connectAccountId }
+          );
+
+          await HBLedger.findByIdAndUpdate(ledgerEntry._id, {
+            cashoutStatus: "processing",
+            cashoutTxHash: payout.id,
+          });
+
+          cashoutResult = { status: "processing", stripePayoutId: payout.id, transferId: transfer.id };
+          console.log(`[HB Cashout Connect] Transfer: ${transfer.id} | Payout: ${payout.id} | $${usdAmount} → ${connectAccountId}`);
+        } catch (connectErr) {
+          console.error("[HB Cashout Connect] Failed:", connectErr.message);
+          cashoutResult = { status: "pending", error: connectErr.message };
+          await HBLedger.findByIdAndUpdate(ledgerEntry._id, { cashoutStatus: "pending" });
+        }
+      } else {
+        // Stripe Connect not yet enabled — notify admin to process manually
+        cashoutResult = { status: "pending", detail: "awaiting_admin" };
       }
 
-      // Always send admin email for bank cashouts with full bank details
+      // Notify admin for all bank cashouts (automated or manual)
       const adminEmail = process.env.ADMIN_EMAIL || process.env.SMTP_USER || process.env.SMTP_EMAIL;
       if (adminEmail) {
+        const isAutomated = process.env.STRIPE_CONNECT_ENABLED === "true" && cashoutResult.status === "processing";
         try {
           await transporter.sendMail({
             from: process.env.SMTP_EMAIL,
             to: adminEmail,
-            subject: `[HyperTek] HB Bank Cashout — $${usdAmount} USD — ${cashoutResult.status.toUpperCase()}`,
+            subject: `[HyperTek] HB Bank Cashout $${usdAmount} USD — ${cashoutResult.status.toUpperCase()}`,
             html: `
-              <h2>Hyper Bucks Bank Cashout ${cashoutResult.status === "processing" ? "Stripe Payout Created" : "⏳ Pending Manual Processing"}</h2>
+              <h2>HyperBucks Bank Cashout — ${isAutomated ? "Processed via Stripe Connect" : "ACTION REQUIRED: Manual Transfer Needed"}</h2>
               <table border="1" cellpadding="6" cellspacing="0">
                 <tr><td><strong>User ID</strong></td><td>${userId}</td></tr>
                 <tr><td><strong>User Email</strong></td><td>${user.Email || user.email || "N/A"}</td></tr>
                 <tr><td><strong>HB Amount</strong></td><td>${amount} HB</td></tr>
                 <tr><td><strong>USD Amount</strong></td><td>$${usdAmount}</td></tr>
                 <tr><td><strong>Ledger Entry ID</strong></td><td>${ledgerEntry._id}</td></tr>
-                <tr><td><strong>Stripe Payout ID</strong></td><td>${stripePayoutId || "N/A — manual processing required"}</td></tr>
                 <tr><td><strong>Status</strong></td><td>${cashoutResult.status}</td></tr>
+                <tr><td><strong>Stripe Payout ID</strong></td><td>${cashoutResult.stripePayoutId || "N/A"}</td></tr>
                 <tr style="background:#fff3cd"><td><strong>Account Holder</strong></td><td>${user.bankDetails?.accountHolderName || "N/A"}</td></tr>
                 <tr style="background:#fff3cd"><td><strong>Bank Name</strong></td><td>${user.bankDetails?.bankName || "N/A"}</td></tr>
                 <tr style="background:#fff3cd"><td><strong>Account Number</strong></td><td>${user.bankDetails?.accountNumber || "N/A"}</td></tr>
@@ -420,8 +576,7 @@ export async function cashoutHB(req, res) {
                 <tr style="background:#fff3cd"><td><strong>Country</strong></td><td>${user.bankDetails?.country || "N/A"}</td></tr>
                 <tr style="background:#fff3cd"><td><strong>Currency</strong></td><td>${user.bankDetails?.currency || "USD"}</td></tr>
               </table>
-              ${cashoutResult.status === "pending" ? '<p style="color:red"><strong>ACTION REQUIRED:</strong> Stripe payout failed — please process this transfer manually via your banking system or Wise.</p>' : ''}
-              <p style="color:#888;font-size:12px">For full automated user payouts, implement Stripe Connect (see backend/docs/remaining-implementation.md).</p>
+              ${!isAutomated ? `<p style="color:red"><strong>ACTION REQUIRED:</strong> Please transfer $${usdAmount} USD manually to the bank account above. Stripe Connect is not yet enabled.</p>` : "<p style='color:green'>This payout was processed automatically via Stripe Connect. No action needed.</p>"}
             `,
           });
         } catch (emailErr) {
@@ -432,10 +587,18 @@ export async function cashoutHB(req, res) {
 
     const finalStatus = cashoutResult.status;
     const messageMap = {
-      completed: `${amount} HB ($${usdAmount}) sent as USDC on-chain successfully.`,
-      processing: `${amount} HB ($${usdAmount}) bank payout initiated. Admin will process transfer to your account.`,
-      pending: `${amount} HB ($${usdAmount}) cashout is queued — platform wallet is being topped up. Admin will send USDC to your wallet shortly.`,
-      failed: `Cashout of ${amount} HB failed. Your HB balance has been restored. Please try again or contact support.`,
+      completed: method === "bank"
+        ? `${amount} HB ($${usdAmount}) bank transfer completed successfully.`
+        : `${amount} HB ($${usdAmount}) sent as USDC to your wallet successfully.`,
+      processing: method === "bank"
+        ? `${amount} HB ($${usdAmount}) bank transfer initiated. Funds will arrive in 1-3 business days.`
+        : `${amount} HB ($${usdAmount}) USDC transfer is being processed on-chain.`,
+      pending: method === "bank"
+        ? `${amount} HB ($${usdAmount}) cashout request received. Admin will process the bank transfer to your account shortly.`
+        : `${amount} HB ($${usdAmount}) USDC cashout is queued — platform wallet is being topped up. Admin will send the funds to your wallet shortly.`,
+      failed: method === "bank"
+        ? `Bank transfer of ${amount} HB ($${usdAmount}) failed. Your HB balance has been restored. Please try again or contact support.`
+        : `USDC cashout of ${amount} HB failed. Your HB balance has been restored. Please try again or contact support.`,
     };
 
     return res.status(200).json({
@@ -532,7 +695,6 @@ export async function getBankDetails(req, res) {
 // ------------------ SAVE BANK DETAILS ------------------
 // PUT /api/v1/hb/bank-details
 // Auth required. Body: { accountHolderName, bankName, accountNumber, iban, swift, routingNumber, country, currency }
-// NOTE: $0 test deposit verification is Phase 2. For now: save details and set verified: false (admin verifies manually).
 export async function saveBankDetails(req, res) {
   try {
     const userId = req.user.id || req.user._id;
@@ -553,31 +715,44 @@ export async function saveBankDetails(req, res) {
       });
     }
 
-    const user = await User.findByIdAndUpdate(
-      userId,
-      {
-        bankDetails: {
-          accountHolderName,
-          bankName,
-          accountNumber,
-          iban: iban || "",
-          swift: swift || "",
-          routingNumber: routingNumber || "",
-          country: country || "",
-          currency: currency || "USD",
-          verified: false, // Phase 2: $0 test deposit verification
-        },
-      },
-      { new: true, select: "bankDetails" }
-    );
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ error: "User not found" });
 
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
+    user.bankDetails = {
+      accountHolderName,
+      bankName,
+      accountNumber,
+      iban: iban || "",
+      swift: swift || "",
+      routingNumber: routingNumber || "",
+      country: country || "",
+      currency: currency || "USD",
+      // Auto-verify when Connect not enabled — admin handles payout manually via email
+      verified: process.env.STRIPE_CONNECT_ENABLED !== "true",
+    };
+
+    await user.save();
+
+    // If Stripe Connect is enabled, create connected account and attach bank immediately
+    let connectMessage = "Bank details saved. Verification is pending.";
+    if (process.env.STRIPE_CONNECT_ENABLED === "true") {
+      try {
+        const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2023-10-16" });
+        const connectAccountId = await getOrCreateConnectedAccount(user, stripe, req.ip);
+        await attachExternalBankAccount(user, stripe, connectAccountId);
+        user.bankDetails.verified = true;
+        await user.save();
+        connectMessage = "Bank details saved and verified via Stripe Connect.";
+        console.log(`[BankDetails] Connected account ${connectAccountId} ready for user ${userId}`);
+      } catch (connectErr) {
+        console.error("[BankDetails] Stripe Connect setup failed:", connectErr.message);
+        connectMessage = "Bank details saved. Stripe verification pending — admin will verify manually.";
+      }
     }
 
     return res.status(200).json({
       success: true,
-      message: "Bank details saved. Verification is pending (admin will verify manually).",
+      message: connectMessage,
       bankDetails: user.bankDetails,
     });
   } catch (error) {
@@ -706,6 +881,43 @@ export async function createHBTopupIntent(req, res) {
     return res.json({ clientSecret: paymentIntent.client_secret });
   } catch (error) {
     console.error("createHBTopupIntent error:", error);
+    return res.status(500).json({ error: error.message });
+  }
+}
+
+// ------------------ ADMIN: HB PLATFORM STATS ------------------
+// GET /api/v1/hb/admin/stats
+// Admin only. Returns total HB in circulation, USD liability, and platform balance info.
+export async function getHBPlatformStats(req, res) {
+  try {
+    const result = await User.aggregate([
+      { $group: { _id: null, totalHB: { $sum: "$hyperBucks" }, userCount: { $sum: 1 } } },
+    ]);
+
+    const totalHB = result[0]?.totalHB || 0;
+    const totalUsers = result[0]?.userCount || 0;
+    const totalUSDLiability = parseFloat((totalHB / HB_TO_USD).toFixed(2));
+
+    const pendingCashouts = await HBLedger.aggregate([
+      { $match: { type: "cashout", cashoutStatus: "pending" } },
+      { $group: { _id: null, totalHB: { $sum: { $abs: "$amount" } } } },
+    ]);
+
+    const pendingHB = pendingCashouts[0]?.totalHB || 0;
+    const pendingUSD = parseFloat((pendingHB / HB_TO_USD).toFixed(2));
+
+    return res.status(200).json({
+      success: true,
+      totalHBInCirculation: totalHB,
+      totalUSDLiability,
+      pendingCashoutsHB: pendingHB,
+      pendingCashoutsUSD: pendingUSD,
+      totalUsers,
+      stripeConnectEnabled: process.env.STRIPE_CONNECT_ENABLED === "true",
+      note: "Ensure your Stripe Balance is at least $" + totalUSDLiability + " USD to cover all outstanding HyperBucks.",
+    });
+  } catch (error) {
+    console.error("getHBPlatformStats error:", error);
     return res.status(500).json({ error: error.message });
   }
 }

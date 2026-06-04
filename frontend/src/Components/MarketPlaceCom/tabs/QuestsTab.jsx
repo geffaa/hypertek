@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Swords, Gamepad2, Clock, Zap, Package } from "lucide-react";
+import { Swords, Gamepad2, Clock, Zap, Package, Lock } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { BACKEND_BASE_URL } from "../../../Config";
 
@@ -328,104 +328,88 @@ export default function QuestsTab() {
 
       </div>
 
-      {/* ── Table ── */}
-      {loading ? (
-        <div className="space-y-2">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <div key={i} className="h-14 rounded-xl animate-pulse"
-              style={{ background: "rgba(255,255,255,0.04)" }} />
-          ))}
-        </div>
-      ) : quests.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-20 text-white/25">
-          <Swords className="w-10 h-10 mb-3 opacity-30" />
-          <p className="text-sm">{t("marketplace.quests.noQuests", { filter: statusFilter })}</p>
-        </div>
-      ) : (
-        <div className="rounded-2xl overflow-x-auto"
-          style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
-          {/* Table header */}
-          <div
-            className="grid min-w-[820px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
-            style={{
-              background: "rgba(10,20,60,0.6)",
-              gridTemplateColumns: "1fr 1.1fr 1.1fr 1.8fr 1.6fr 1fr 1.2fr",
-            }}
-          >
-            <span>{t("marketplace.quests.table.questingNo")}</span>
-            <span>{t("marketplace.quests.table.pickupPlanet")}</span>
-            <span>{t("marketplace.quests.table.dropOffPlanet")}</span>
-            <span>{t("marketplace.quests.table.itemGoods")}</span>
-            <span>{t("marketplace.quests.table.commSplit")}</span>
-            <span>{t("marketplace.quests.table.questingTime")}</span>
-            <span>{t("marketplace.quests.table.assignedTo")}</span>
-          </div>
-
-          {/* Table rows */}
-          {quests.map((q, i) => {
-            const colors = STATUS_COLORS[q.status] || STATUS_COLORS.open;
-            return (
+      {/* ── Table + lock overlay using CSS Grid overlap ── */}
+      <div style={{ display: "grid" }}>
+        {/* Table — dimmed while locked */}
+        <div className="opacity-50 pointer-events-none select-none" style={{ gridRow: "1/1", gridColumn: "1/1" }}>
+          {loading ? (
+            <div className="space-y-2">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <div key={i} className="h-14 rounded-xl animate-pulse"
+                  style={{ background: "rgba(255,255,255,0.04)" }} />
+              ))}
+            </div>
+          ) : quests.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-20 text-white/25">
+              <Swords className="w-10 h-10 mb-3 opacity-30" />
+              <p className="text-sm">{t("marketplace.quests.noQuests", { filter: statusFilter })}</p>
+            </div>
+          ) : (
+            <div className="rounded-2xl overflow-x-auto"
+              style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
               <div
-                key={q._id}
-                className="grid min-w-[820px] px-4 py-3 items-center"
-                style={{
-                  background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent",
-                  borderTop: "1px solid rgba(255,255,255,0.04)",
-                  gridTemplateColumns: "1fr 1.1fr 1.1fr 1.8fr 1.6fr 1fr 1.2fr",
-                }}
+                className="grid min-w-[820px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
+                style={{ background: "rgba(10,20,60,0.6)", gridTemplateColumns: "1fr 1.1fr 1.1fr 1.8fr 1.6fr 1fr 1.2fr" }}
               >
-                {/* Questing No */}
-                <div className="flex flex-col gap-1">
-                  <span className="text-white/70 text-xs font-mono">{shortId(q._id)}</span>
-                  <div className="flex items-center gap-1 flex-wrap">
-                    <span
-                      className={`text-[9px] font-semibold capitalize ${colors.text}`}
-                      style={{ background: colors.bg, border: `1px solid ${colors.border}`, borderRadius: 3, padding: "1px 4px", display: "inline-block" }}
-                    >
-                      {t(`marketplace.quests.status.${q.status}`, q.status)}
-                    </span>
-                    <WaitTierBadge waitHours={q.waitHours} buyerSavePercent={q.buyerSavePercent} />
-                  </div>
-                </div>
-
-                {/* Pickup Planet */}
-                <span className="text-white/50 text-xs">
-                  {q.pickupPlanet || <span className="text-white/20 italic">{t("marketplace.quests.inGame")}</span>}
-                </span>
-
-                {/* Drop Off Planet */}
-                <span className="text-white/50 text-xs">
-                  {q.dropOffPlanet || <span className="text-white/20 italic">{t("marketplace.quests.inGame")}</span>}
-                </span>
-
-                {/* Item / Goods */}
-                <div className="flex flex-col gap-0.5 min-w-0">
-                  <span className="text-white/80 text-xs font-medium truncate">{q.title || "—"}</span>
-                  {q.offering && (
-                    <span className="text-white/35 text-[10px] truncate">{q.offering}</span>
-                  )}
-                </div>
-
-                {/* Commission Split */}
-                <SplitInfo q={q} />
-
-                {/* Questing Time */}
-                <span className="text-white/40 text-xs font-mono flex items-center gap-1">
-                  <Clock className="w-2.5 h-2.5 opacity-50" />
-                  {formatElapsed(q.createdAt)}
-                </span>
-
-                {/* Assigned To */}
-                <span className="text-white/50 text-xs font-mono">
-                  {q.status === "open"
-                    ? <span className="text-green-400/60 text-[11px]">{t("marketplace.quests.open")}</span>
-                    : shortAddr(q.acceptedByWallet)}
-                </span>
+                <span>{t("marketplace.quests.table.questingNo")}</span>
+                <span>{t("marketplace.quests.table.pickupPlanet")}</span>
+                <span>{t("marketplace.quests.table.dropOffPlanet")}</span>
+                <span>{t("marketplace.quests.table.itemGoods")}</span>
+                <span>{t("marketplace.quests.table.commSplit")}</span>
+                <span>{t("marketplace.quests.table.questingTime")}</span>
+                <span>{t("marketplace.quests.table.assignedTo")}</span>
               </div>
-            );
-          })}
+              {quests.map((q, i) => {
+                const colors = STATUS_COLORS[q.status] || STATUS_COLORS.open;
+                return (
+                  <div key={q._id} className="grid min-w-[820px] px-4 py-3 items-center"
+                    style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)", gridTemplateColumns: "1fr 1.1fr 1.1fr 1.8fr 1.6fr 1fr 1.2fr" }}
+                  >
+                    <div className="flex flex-col gap-1">
+                      <span className="text-white/70 text-xs font-mono">{shortId(q._id)}</span>
+                      <div className="flex items-center gap-1 flex-wrap">
+                        <span className={`text-[9px] font-semibold capitalize ${colors.text}`}
+                          style={{ background: colors.bg, border: `1px solid ${colors.border}`, borderRadius: 3, padding: "1px 4px", display: "inline-block" }}>
+                          {t(`marketplace.quests.status.${q.status}`, q.status)}
+                        </span>
+                        <WaitTierBadge waitHours={q.waitHours} buyerSavePercent={q.buyerSavePercent} />
+                      </div>
+                    </div>
+                    <span className="text-white/50 text-xs">{q.pickupPlanet || <span className="text-white/20 italic">{t("marketplace.quests.inGame")}</span>}</span>
+                    <span className="text-white/50 text-xs">{q.dropOffPlanet || <span className="text-white/20 italic">{t("marketplace.quests.inGame")}</span>}</span>
+                    <div className="flex flex-col gap-0.5 min-w-0">
+                      <span className="text-white/80 text-xs font-medium truncate">{q.title || "—"}</span>
+                      {q.offering && <span className="text-white/35 text-[10px] truncate">{q.offering}</span>}
+                    </div>
+                    <SplitInfo q={q} />
+                    <span className="text-white/40 text-xs font-mono flex items-center gap-1">
+                      <Clock className="w-2.5 h-2.5 opacity-50" />{formatElapsed(q.createdAt)}
+                    </span>
+                    <span className="text-white/50 text-xs font-mono">
+                      {q.status === "open"
+                        ? <span className="text-green-400/60 text-[11px]">{t("marketplace.quests.open")}</span>
+                        : shortAddr(q.acceptedByWallet)}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
-      )}
+
+        {/* Sticky lock message — overlaps table, stays centered in viewport */}
+        <div className="pointer-events-none" style={{ gridRow: "1/1", gridColumn: "1/1", position: "sticky", top: "calc(50vh - 70px)", zIndex: 10, display: "flex", justifyContent: "center", alignSelf: "start" }}>
+          <div className="flex flex-col items-center gap-3 px-8 py-6 rounded-2xl text-center"
+            style={{ background: "rgba(6,8,22,0.82)", border: "1px solid rgba(255,255,255,0.12)", backdropFilter: "blur(10px)", maxWidth: 400 }}>
+            <div className="w-10 h-10 rounded-full flex items-center justify-center"
+              style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.15)" }}>
+              <Lock className="w-5 h-5 text-white/60" />
+            </div>
+            <p className="text-white font-bold text-base leading-snug">{t("marketplace.hire.lockedTitle")}</p>
+            <p className="text-white/55 text-sm leading-relaxed">{t("marketplace.hire.lockedDesc")}</p>
+          </div>
+        </div>
+      </div>
 
       {/* ── Coming Soon modal ── */}
       {showComingSoon && (

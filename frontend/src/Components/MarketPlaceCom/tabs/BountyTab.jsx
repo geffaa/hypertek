@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Target, Gamepad2, Swords, Clock, Zap } from "lucide-react";
+import { Target, Gamepad2, Swords, Clock, Zap, Lock } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { BACKEND_BASE_URL } from "../../../Config";
 
@@ -176,111 +176,82 @@ export default function BountyTab() {
         <span><Clock className="w-3 h-3 inline mr-1" />{t("marketplace.bounty.rules.expiry")}</span>
       </div>
 
-      {/* ── Table ── */}
-      {loading ? (
-        <div className="space-y-2">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="h-12 rounded-xl animate-pulse"
-              style={{ background: "rgba(255,255,255,0.04)" }} />
-          ))}
-        </div>
-      ) : bounties.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-20 text-white/25 gap-3">
-          <Target className="w-10 h-10 opacity-20" />
-          <p className="text-sm">{t("marketplace.bounty.noContracts", { filter: statusFilter })}</p>
-          <p className="text-xs text-white/15">{t("marketplace.bounty.noContractsNote")}</p>
-        </div>
-      ) : (
-        <div className="rounded-2xl overflow-x-auto"
-          style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
-
-          {/* Table header */}
-          <div
-            className="grid min-w-[640px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
-            style={{
-              background: "rgba(30,10,10,0.6)",
-              gridTemplateColumns: "1fr 1.6fr 1.4fr 1.2fr 1.2fr 0.8fr",
-            }}
-          >
-            <span>{t("marketplace.bounty.table.bountyNo")}</span>
-            <span>{t("marketplace.bounty.table.target")}</span>
-            <span>{t("marketplace.bounty.table.reward")}</span>
-            <span>{t("marketplace.bounty.table.postedBy")}</span>
-            <span>{t("marketplace.bounty.table.claimedBy")}</span>
-            <span>{t("marketplace.bounty.table.status")}</span>
-          </div>
-
-          {/* Rows */}
-          {bounties.map((b, i) => {
-            const colors    = STATUS_COLORS[b.status] || STATUS_COLORS.open;
-            const expiresIn = b.expiresAt
-              ? Math.max(0, Math.round((new Date(b.expiresAt) - Date.now()) / 86400000))
-              : null;
-
-            return (
-              <div
-                key={b._id}
-                className="grid min-w-[640px] px-4 py-3 items-center"
-                style={{
-                  background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent",
-                  borderTop: "1px solid rgba(255,255,255,0.04)",
-                  gridTemplateColumns: "1fr 1.6fr 1.4fr 1.2fr 1.2fr 0.8fr",
-                }}
-              >
-                {/* Bounty No */}
-                <span className="text-white/60 text-xs font-mono">{shortId(b._id)}</span>
-
-                {/* Target */}
-                <div className="flex flex-col gap-0.5 min-w-0">
-                  <span className="text-red-300/80 text-xs font-semibold truncate">
-                    {b.targetName || b.title || "—"}
-                  </span>
-                  {expiresIn !== null && b.status === "open" && (
-                    <span className="text-white/25 text-[9px]">
-                      {t("marketplace.bounty.expiresIn", { days: expiresIn })}
-                    </span>
-                  )}
-                </div>
-
-                {/* Reward */}
-                <div className="flex flex-col gap-0.5">
-                  <span className="text-amber-300/80 text-xs font-semibold">
-                    {rewardLabel(b)}
-                  </span>
-                  {b.rewardType === "hyperBucks" && b.reward > 0 && (
-                    <span className="text-white/25 text-[9px]">
-                      {t("marketplace.bounty.table.netHB", { amount: Math.round(b.reward * 0.8) })}
-                    </span>
-                  )}
-                </div>
-
-                {/* Posted By */}
-                <span className="text-white/50 text-xs truncate">
-                  {b.posterName || shortAddr(b.posterWallet)}
-                </span>
-
-                {/* Claimed By */}
-                <span className="text-white/40 text-xs font-mono">
-                  {b.claimedBy ? shortAddr(b.claimedBy) : "—"}
-                </span>
-
-                {/* Status badge */}
-                <span
-                  className={`text-[10px] font-semibold capitalize inline-block w-fit ${colors.text}`}
-                  style={{
-                    background: colors.bg,
-                    border: `1px solid ${colors.border}`,
-                    borderRadius: 4,
-                    padding: "2px 7px",
-                  }}
-                >
-                  {t(`marketplace.bounty.status.${b.status}`, b.status)}
-                </span>
+      {/* ── Table + lock overlay using CSS Grid overlap ── */}
+      <div style={{ display: "grid" }}>
+        {/* Table — dimmed while locked */}
+        <div className="opacity-50 pointer-events-none select-none" style={{ gridRow: "1/1", gridColumn: "1/1" }}>
+          {loading ? (
+            <div className="space-y-2">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="h-12 rounded-xl animate-pulse"
+                  style={{ background: "rgba(255,255,255,0.04)" }} />
+              ))}
+            </div>
+          ) : bounties.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-20 text-white/25 gap-3">
+              <Target className="w-10 h-10 opacity-20" />
+              <p className="text-sm">{t("marketplace.bounty.noContracts", { filter: statusFilter })}</p>
+              <p className="text-xs text-white/15">{t("marketplace.bounty.noContractsNote")}</p>
+            </div>
+          ) : (
+            <div className="rounded-2xl overflow-x-auto"
+              style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
+              <div className="grid min-w-[640px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
+                style={{ background: "rgba(30,10,10,0.6)", gridTemplateColumns: "1fr 1.6fr 1.4fr 1.2fr 1.2fr 0.8fr" }}>
+                <span>{t("marketplace.bounty.table.bountyNo")}</span>
+                <span>{t("marketplace.bounty.table.target")}</span>
+                <span>{t("marketplace.bounty.table.reward")}</span>
+                <span>{t("marketplace.bounty.table.postedBy")}</span>
+                <span>{t("marketplace.bounty.table.claimedBy")}</span>
+                <span>{t("marketplace.bounty.table.status")}</span>
               </div>
-            );
-          })}
+              {bounties.map((b, i) => {
+                const colors = STATUS_COLORS[b.status] || STATUS_COLORS.open;
+                const expiresIn = b.expiresAt
+                  ? Math.max(0, Math.round((new Date(b.expiresAt) - Date.now()) / 86400000))
+                  : null;
+                return (
+                  <div key={b._id} className="grid min-w-[640px] px-4 py-3 items-center"
+                    style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)", gridTemplateColumns: "1fr 1.6fr 1.4fr 1.2fr 1.2fr 0.8fr" }}>
+                    <span className="text-white/60 text-xs font-mono">{shortId(b._id)}</span>
+                    <div className="flex flex-col gap-0.5 min-w-0">
+                      <span className="text-red-300/80 text-xs font-semibold truncate">{b.targetName || b.title || "—"}</span>
+                      {expiresIn !== null && b.status === "open" && (
+                        <span className="text-white/25 text-[9px]">{t("marketplace.bounty.expiresIn", { days: expiresIn })}</span>
+                      )}
+                    </div>
+                    <div className="flex flex-col gap-0.5">
+                      <span className="text-amber-300/80 text-xs font-semibold">{rewardLabel(b)}</span>
+                      {b.rewardType === "hyperBucks" && b.reward > 0 && (
+                        <span className="text-white/25 text-[9px]">{t("marketplace.bounty.table.netHB", { amount: Math.round(b.reward * 0.8) })}</span>
+                      )}
+                    </div>
+                    <span className="text-white/50 text-xs truncate">{b.posterName || shortAddr(b.posterWallet)}</span>
+                    <span className="text-white/40 text-xs font-mono">{b.claimedBy ? shortAddr(b.claimedBy) : "—"}</span>
+                    <span className={`text-[10px] font-semibold capitalize inline-block w-fit ${colors.text}`}
+                      style={{ background: colors.bg, border: `1px solid ${colors.border}`, borderRadius: 4, padding: "2px 7px" }}>
+                      {t(`marketplace.bounty.status.${b.status}`, b.status)}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
-      )}
+
+        {/* Sticky lock message — overlaps table, stays centered in viewport */}
+        <div className="pointer-events-none" style={{ gridRow: "1/1", gridColumn: "1/1", position: "sticky", top: "calc(50vh - 70px)", zIndex: 10, display: "flex", justifyContent: "center", alignSelf: "start" }}>
+          <div className="flex flex-col items-center gap-3 px-8 py-6 rounded-2xl text-center"
+            style={{ background: "rgba(6,8,22,0.82)", border: "1px solid rgba(255,255,255,0.12)", backdropFilter: "blur(10px)", maxWidth: 400 }}>
+            <div className="w-10 h-10 rounded-full flex items-center justify-center"
+              style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.15)" }}>
+              <Lock className="w-5 h-5 text-white/60" />
+            </div>
+            <p className="text-white font-bold text-base leading-snug">{t("marketplace.hire.lockedTitle")}</p>
+            <p className="text-white/55 text-sm leading-relaxed">{t("marketplace.hire.lockedDesc")}</p>
+          </div>
+        </div>
+      </div>
 
       {/* ── Pagination ── */}
       {pages > 1 && (

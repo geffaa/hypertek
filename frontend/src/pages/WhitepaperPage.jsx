@@ -547,7 +547,7 @@ export default function WhitepaperPage() {
             <Card className="mb-6">
               <h3 className="font-semibold text-white mb-3">What Are HyperBucks (HB)?</h3>
               <p className="text-white/60 text-sm leading-relaxed mb-4">
-                HyperBucks are the primary in-game currency. The exchange rate is <strong className="text-white">250,000 HB = $1,000 USD</strong>. Virtual currency separates entertainment from direct monetary transactions while providing granular pricing control.
+                HyperBucks (HB) are the primary in-game currency of Hyper Tek. The fixed exchange rate is <strong className="text-white">250 HB = $1 USD</strong>. Virtual currency separates entertainment from direct monetary transactions while providing granular pricing control across all three game worlds.
               </p>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
@@ -584,11 +584,55 @@ export default function WhitepaperPage() {
               </div>
             </Card>
 
+            {/* Top-up & Cashout */}
+            <div className="grid md:grid-cols-2 gap-5 mb-6">
+              <Card>
+                <h3 className="font-semibold text-white mb-4">Topping Up HyperBucks</h3>
+                <p className="text-white/50 text-xs mb-4">Minimum top-up: <strong className="text-white">250 HB ($1)</strong>. All payments processed securely via Stripe.</p>
+                <div className="space-y-3">
+                  {[
+                    { method: "Credit / Debit Card", detail: "Visa, Mastercard, Amex — instant credit via Stripe", color: "#3b82f6" },
+                    { method: "USDC (Crypto)", detail: "Send USDC on Base network to platform wallet — credited after on-chain confirmation", color: "#10b981" },
+                  ].map(({ method, detail, color }) => (
+                    <div key={method} className="rounded-xl p-3 flex items-start gap-3" style={{ background: "rgba(0,0,0,0.3)", border: `1px solid ${color}25` }}>
+                      <span className="w-2 h-2 rounded-full mt-1.5 shrink-0" style={{ background: color }} />
+                      <div>
+                        <p className="text-sm font-semibold" style={{ color }}>{method}</p>
+                        <p className="text-white/40 text-xs mt-0.5">{detail}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+
+              <Card>
+                <h3 className="font-semibold text-white mb-4">Cashing Out HyperBucks</h3>
+                <p className="text-white/50 text-xs mb-4">Minimum cashout: <strong className="text-white">250 HB ($1)</strong>. Identity verification (KYC) required before first cashout.</p>
+                <div className="space-y-3">
+                  {[
+                    { method: "Bank Transfer", detail: "Direct to your bank account. Processing time: 1–3 business days.", color: "#f59e0b" },
+                    { method: "USDC (Crypto)", detail: "Sent to your wallet on Base network. Near-instant on-chain transfer.", color: "#10b981" },
+                  ].map(({ method, detail, color }) => (
+                    <div key={method} className="rounded-xl p-3 flex items-start gap-3" style={{ background: "rgba(0,0,0,0.3)", border: `1px solid ${color}25` }}>
+                      <span className="w-2 h-2 rounded-full mt-1.5 shrink-0" style={{ background: color }} />
+                      <div>
+                        <p className="text-sm font-semibold" style={{ color }}>{method}</p>
+                        <p className="text-white/40 text-xs mt-0.5">{detail}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-3 rounded-xl p-3" style={{ background: "rgba(0,42,168,0.12)", border: "1px solid rgba(0,42,168,0.25)" }}>
+                  <p className="text-white/50 text-xs">OTP email verification is required for every cashout to protect your funds.</p>
+                </div>
+              </Card>
+            </div>
+
             <Card>
               <h3 className="font-semibold text-white mb-4">Currency Types</h3>
               <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
                 {[
-                  { name: "HyperBucks (HB)", color: "#3b82f6", desc: "Primary currency. Earned through gameplay, purchased with credit card / PayPal / Apple Pay." },
+                  { name: "HyperBucks (HB)", color: "#3b82f6", desc: "Primary currency. Earned through gameplay or purchased with credit/debit card and USDC crypto." },
                   { name: "Gold", color: "#f59e0b", desc: "Specialty currency produced exclusively in Land Bases or won in special events." },
                   { name: "Diamonds", color: "#a855f7", desc: "Prestige currency for exclusive cosmetics, premium services, and rare auction access." },
                   { name: "Crystals", color: "#10b981", desc: "Furuseth (wormhole jumps), Energy (weapons/engines), Time (speed up research & travel)." },
@@ -601,7 +645,7 @@ export default function WhitepaperPage() {
               </div>
               <div className="mt-4 rounded-xl p-4" style={{ background: "rgba(0,42,168,0.12)", border: "1px solid rgba(0,42,168,0.25)" }}>
                 <p className="text-white/50 text-xs">
-                  <strong className="text-white">Withdrawal limits:</strong> Minimum $100 USD · Maximum $10,000/month · Higher limits for verified accounts · Platform complies with KYC/AML regulations and provides annual earning statements.
+                  <strong className="text-white">Cashout policy:</strong> Minimum $1 USD (250 HB) · KYC identity verification required · OTP email confirmation per cashout · Bank transfers arrive in 1–3 business days · USDC transfers are near-instant · Platform complies with KYC/AML regulations.
                 </p>
               </div>
             </Card>

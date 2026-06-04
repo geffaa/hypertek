@@ -56,30 +56,40 @@ How to Check Your HB Balance
 - Your balance shows in HB and also in USD equivalent (balance / 250)
 - Full transaction history is available under HB History
 
-How to Top Up / Receive HyperBucks
-HyperBucks are earned, not purchased directly with cash. You receive them by:
-1. Playing the Racing, Quest, or Overlord game and earning rewards
-2. Completing quest listings posted by other users in the marketplace
-3. Receiving admin-awarded prizes
+How to Top Up HyperBucks
+You can add HyperBucks to your account in two ways:
+1. Credit or debit card via Stripe — minimum top-up is 250 HB (= $1 USD). Payment is instant and HB is credited automatically.
+2. USDC on the Base network — send USDC to the platform wallet, submit your transaction hash, and HB is credited automatically after on-chain verification.
+
+You can also earn HyperBucks by:
+- Playing the Racing, Quest, or Overlord game and earning rewards
+- Completing quest listings posted by other users in the marketplace
+- Winning prizes or special events
 
 How to Cash Out HyperBucks (Convert to Real Money)
 
 Important: When you create a HyperTek account (sign up with email), the platform automatically creates a secure embedded crypto wallet for you — you do NOT need MetaMask or any external wallet to get started.
 
-Option 1: Cash out as USDC (cryptocurrency)
-- Minimum: 250 HB (= 1 USD)
+Both cashout methods are equally supported. Choose based on your preference.
+
+Option 1: Bank Transfer (real money to your bank account)
+- Minimum: 250 HB (= $1 USD)
+- You must first save your bank details in your profile: account holder name, bank name, account number, IBAN, SWIFT/BIC, routing number, country, and currency
+- An OTP code will be sent to your email to confirm the cashout
+- Once confirmed, the platform processes a bank transfer directly to your bank account
+- Standard transfers arrive within 1 to 3 business days — this is how the traditional banking system works globally, not a platform limitation
+- You can use this money for anything: fuel, food, bills, or any other expenses
+- There is no fee for standard bank transfers
+
+Option 2: USDC to Crypto Wallet
+- Minimum: 250 HB (= $1 USD)
 - Your HyperTek account already includes a built-in embedded wallet on the Base network — no MetaMask needed
 - You can also use your own external wallet address if you prefer
 - Go to Dashboard > Withdraw or the HB cashout section
 - Enter your wallet address (or use your embedded HyperTek wallet address)
-- The platform transfers USDC directly to your wallet on-chain
+- The platform transfers USDC directly to your wallet on-chain — near-instant with very low fees
 - You receive a transaction hash as proof
-
-Option 2: Cash out as Bank Transfer (fiat money)
-- Minimum: 2,500 HB (= 10 USD)
-- You must first save your bank details in your profile: account holder name, bank name, account number, IBAN, SWIFT/BIC, routing number, country, and currency
-- Once submitted, a payout request is created and admin processes the transfer manually
-- You will receive the funds to your bank account after admin approval
+- You can convert USDC to your local currency through platforms like Coinbase or Binance
 
 Important HB rules:
 - HB cannot be transferred directly between users

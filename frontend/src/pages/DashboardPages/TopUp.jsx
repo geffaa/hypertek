@@ -113,11 +113,16 @@ export default function HyperBucks() {
 
   // Cashout states
   const [hbCashoutAmount, setHbCashoutAmount] = useState('');
-  const [hbCashoutMethod, setHbCashoutMethod] = useState('usdc');
+  const [hbCashoutMethod, setHbCashoutMethod] = useState('usdc'); // 'usdc' | 'bank'
   const [hbProcessing, setHbProcessing] = useState(false);
   const [cashoutStep, setCashoutStep] = useState('form'); // 'form' | 'confirm' | 'otp'
   const [otpCode, setOtpCode] = useState('');
   const [sendingOtp, setSendingOtp] = useState(false);
+  const [savedBankDetails, setSavedBankDetails] = useState(undefined); // undefined = not fetched yet, null = fetched but none
+  const [bankDetailsLoading, setBankDetailsLoading] = useState(false);
+  const [showBankForm, setShowBankForm] = useState(false);
+  const [bankForm, setBankForm] = useState({ accountHolderName: '', bankName: '', accountNumber: '', iban: '', swift: '', routingNumber: '', country: '', currency: 'USD' });
+  const [savingBank, setSavingBank] = useState(false);
 
   // USDC top-up states
   const [usdcTopupStep, setUsdcTopupStep] = useState('idle'); // 'idle' | 'approving' | 'sending' | 'verifying' | 'done'
@@ -174,6 +179,19 @@ export default function HyperBucks() {
     }
   }, [authToken]);
 
+  const fetchBankDetails = useCallback(async () => {
+    if (!authToken) return;
+    setBankDetailsLoading(true);
+    try {
+      const res = await fetch(`${BACKEND_BASE_URL}/api/v1/hb/bank-details`, {
+        headers: { Authorization: `Bearer ${authToken}` },
+      });
+      const data = await res.json();
+      setSavedBankDetails(data.bankDetails || null); // null = fetched but no bank details
+    } catch {}
+    finally { setBankDetailsLoading(false); }
+  }, [authToken]);
+
   useEffect(() => {
     fetchBalance();
     fetchHistory();
@@ -185,6 +203,13 @@ export default function HyperBucks() {
       fetchKycStatus();
     }
   }, [activeTab, kycStatus, fetchKycStatus]);
+
+  // Fetch bank details when bank method is selected (only if not fetched yet)
+  useEffect(() => {
+    if (activeTab === 'cashout' && hbCashoutMethod === 'bank' && savedBankDetails === undefined) {
+      fetchBankDetails();
+    }
+  }, [activeTab, hbCashoutMethod, savedBankDetails, fetchBankDetails]);
 
   // ── Top Up ────────────────────────────────────────────────────────
   const parsedUsd = customUsd ? parseFloat(customUsd) : 0;
@@ -286,13 +311,38 @@ export default function HyperBucks() {
     }
   };
 
+  const handleSaveBankDetails = async () => {
+    if (!bankForm.accountHolderName || !bankForm.bankName || !bankForm.accountNumber) {
+      toast.error('Account holder name, bank name, and account number are required');
+      return;
+    }
+    setSavingBank(true);
+    try {
+      const res = await fetch(`${BACKEND_BASE_URL}/api/v1/hb/bank-details`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${authToken}` },
+        body: JSON.stringify(bankForm),
+      });
+      const data = await res.json();
+      if (!res.ok) { toast.error(data.error || 'Failed to save bank details'); return; }
+      setSavedBankDetails(data.bankDetails);
+      setShowBankForm(false);
+      toast.success('Bank details saved');
+    } catch (err) {
+      toast.error('Failed to save bank details: ' + err.message);
+    } finally {
+      setSavingBank(false);
+    }
+  };
+
   // Step 1 — validate inputs then show confirmation modal
   const handleRequestOTP = async () => {
     const hbAmount = parseInt(hbCashoutAmount, 10);
     if (!hbAmount || hbAmount <= 0) { toast.error('Please enter a valid HB amount'); return; }
     if (kycStatus !== 'verified') { setKycGateOpen(true); return; }
-    if (hbAmount < 250) { toast.error('Minimum USDC cashout is 250 HB ($1)'); return; }
-    if (!activeAddress) { toast.error('Connect a wallet to receive USDC'); return; }
+    if (hbAmount < 250) { toast.error('Minimum cashout is 250 HB ($1)'); return; }
+    if (hbCashoutMethod === 'usdc' && !activeAddress) { toast.error('Connect a wallet to receive USDC'); return; }
+    if (hbCashoutMethod === 'bank' && !savedBankDetails) { toast.error('Please add your bank details first'); return; }
     setCashoutStep('confirm');
   };
 
@@ -323,22 +373,25 @@ export default function HyperBucks() {
     setHbProcessing(true);
     const toastId = toast.loading('Verifying OTP & processing cashout...');
     try {
+      const payload = {
+        amount: parseInt(hbCashoutAmount, 10),
+        method: hbCashoutMethod,
+        otp: otpCode,
+      };
+      if (hbCashoutMethod === 'usdc') payload.walletAddress = activeAddress;
+
       const res = await fetch(`${BACKEND_BASE_URL}/api/v1/hb/cashout`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${authToken}` },
-        body: JSON.stringify({
-          amount: parseInt(hbCashoutAmount, 10),
-          method: 'usdc',
-          otp: otpCode,
-          walletAddress: activeAddress,
-        }),
+        body: JSON.stringify(payload),
       });
       const data = await res.json();
       if (!res.ok) { toast.error(data.error || 'Cashout failed', { id: toastId }); return; }
 
-      // Show status-specific toast
       if (data.cashoutStatus === 'completed') {
-        toast.success(data.message || 'USDC sent successfully!', { id: toastId, duration: 6000 });
+        toast.success(data.message || 'Cashout sent successfully!', { id: toastId, duration: 6000 });
+      } else if (data.cashoutStatus === 'processing') {
+        toast.success(data.message || 'Bank transfer initiated. Funds arrive in 1-3 business days.', { id: toastId, duration: 8000 });
       } else if (data.cashoutStatus === 'pending') {
         toast(data.message || 'Cashout queued — admin will process shortly.', {
           id: toastId, icon: '⏳', duration: 8000,
@@ -666,7 +719,7 @@ export default function HyperBucks() {
                   <div className="mb-2 text-white/50 text-xs">
                     {t("dashboard.hyperbucks.otp.cashingOut", "Cashing out")} <span className="text-white font-semibold">{parseInt(hbCashoutAmount, 10).toLocaleString()} HB</span>
                     {' '}≈ <span className="text-white font-semibold">${(parseInt(hbCashoutAmount, 10) / 250).toFixed(2)} USD</span>
-                    {' '}via <span className="text-white font-semibold">{t("dashboard.hyperbucks.otp.bankAccount", "Bank Transfer")}</span>
+                    {' '}via <span className="text-white font-semibold">{hbCashoutMethod === 'bank' ? 'Bank Transfer' : 'USDC on Base'}</span>
                   </div>
                 </div>
 
@@ -722,21 +775,49 @@ export default function HyperBucks() {
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-white/50 text-sm">{t("dashboard.hyperbucks.confirm.method", "Method")}</span>
-                    <span className="text-white font-semibold">USDC on Base</span>
+                    <span className="text-white font-semibold">{hbCashoutMethod === 'bank' ? 'Bank Transfer' : 'USDC on Base'}</span>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-white/50 text-sm">{t("dashboard.hyperbucks.confirm.wallet", "To Wallet")}</span>
-                    <span className="text-white font-mono text-sm">{activeAddress?.slice(0, 6)}...{activeAddress?.slice(-4)}</span>
-                  </div>
-                  <div className="border-t border-white/10 pt-4">
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/50 text-sm">{t("dashboard.hyperbucks.confirm.fee", "Gas Fee")}</span>
-                      <span className="text-white/70 font-semibold">~$0.01 (paid by platform)</span>
-                    </div>
-                  </div>
-                  <div className="bg-[#002AA8]/10 border border-[#002AA8]/30 rounded-xl p-3">
-                    <p className="text-white/50 text-xs">{t("dashboard.hyperbucks.confirm.processingNote", "USDC will be sent to your wallet on Base network. If platform wallet is low, admin will process within 24h.")}</p>
-                  </div>
+                  {hbCashoutMethod === 'usdc' ? (
+                    <>
+                      <div className="flex justify-between items-center">
+                        <span className="text-white/50 text-sm">{t("dashboard.hyperbucks.confirm.wallet", "To Wallet")}</span>
+                        <span className="text-white font-mono text-sm">{activeAddress?.slice(0, 6)}...{activeAddress?.slice(-4)}</span>
+                      </div>
+                      <div className="border-t border-white/10 pt-4">
+                        <div className="flex justify-between items-center">
+                          <span className="text-white/50 text-sm">{t("dashboard.hyperbucks.confirm.fee", "Gas Fee")}</span>
+                          <span className="text-white/70 font-semibold">~$0.01 (paid by platform)</span>
+                        </div>
+                      </div>
+                      <div className="bg-[#002AA8]/10 border border-[#002AA8]/30 rounded-xl p-3">
+                        <p className="text-white/50 text-xs">USDC will be sent to your wallet on Base network. Near-instant transfer.</p>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex justify-between items-center">
+                        <span className="text-white/50 text-sm">To Bank</span>
+                        <span className="text-white text-sm font-semibold">{savedBankDetails?.bankName}</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-white/50 text-sm">Account Holder</span>
+                        <span className="text-white text-sm">{savedBankDetails?.accountHolderName}</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-white/50 text-sm">Account</span>
+                        <span className="text-white font-mono text-sm">****{savedBankDetails?.accountNumber?.slice(-4)}</span>
+                      </div>
+                      <div className="border-t border-white/10 pt-4">
+                        <div className="flex justify-between items-center">
+                          <span className="text-white/50 text-sm">Transfer Fee</span>
+                          <span className="text-white/70 font-semibold">Free</span>
+                        </div>
+                      </div>
+                      <div className="bg-[#002AA8]/10 border border-[#002AA8]/30 rounded-xl p-3">
+                        <p className="text-white/50 text-xs">Funds will arrive in your bank account within 1 to 3 business days. This is standard banking processing time and not a platform limitation.</p>
+                      </div>
+                    </>
+                  )}
                 </div>
 
                 <button
@@ -752,29 +833,134 @@ export default function HyperBucks() {
             ) : (
             /* Form Step */
             <div className="flex flex-col lg:flex-row gap-6 items-start">
-              <div className="w-full lg:flex-1">
-                <label className="text-white/50 text-xs mb-2 block">{t("dashboard.hyperbucks.cashout.amountLabel", "Amount (HB)")}</label>
-                <div className="relative mb-3">
-                  <input
-                    type="number"
-                    value={hbCashoutAmount}
-                    onChange={(e) => setHbCashoutAmount(e.target.value)}
-                    placeholder={t("dashboard.hyperbucks.cashout.minUsdc", "Min 250 HB")}
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-4 text-white text-2xl font-semibold focus:outline-none focus:border-[#002AA8] transition-colors pr-28"
-                  />
-                  {hbCashoutAmount && Number(hbCashoutAmount) > 0 && (
-                    <span className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 text-sm">
-                      ≈ ${(Number(hbCashoutAmount) / 250).toFixed(2)}
-                    </span>
-                  )}
+              <div className="w-full lg:flex-1 space-y-4">
+
+                {/* Method selector */}
+                <div>
+                  <label className="text-white/50 text-xs mb-2 block">Cashout Method</label>
+                  <div className="flex gap-3">
+                    {[
+                      { key: 'usdc', label: 'USDC Wallet', sub: 'Instant · Base network', Icon: Wallet },
+                      { key: 'bank', label: 'Bank Transfer', sub: 'Free · 1-3 business days', Icon: CreditCard },
+                    ].map(({ key, label, sub, Icon }) => (
+                      <button
+                        key={key}
+                        onClick={() => { setHbCashoutMethod(key); setCashoutStep('form'); }}
+                        className={`flex-1 rounded-2xl p-3 text-left border transition-all ${
+                          hbCashoutMethod === key
+                            ? 'bg-[#002AA8]/30 border-[#002AA8] text-white'
+                            : 'bg-white/5 border-white/10 text-white/50 hover:border-white/30'
+                        }`}
+                      >
+                        <Icon size={18} strokeWidth={1.5} className={hbCashoutMethod === key ? 'text-blue-400' : 'text-white/40'} />
+                        <p className="text-sm font-semibold mt-1">{label}</p>
+                        <p className="text-[10px] text-white/30 mt-0.5">{sub}</p>
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
-                {activeAddress ? (
-                  <p className="text-white/30 text-xs mb-5">
-                    {t("dashboard.hyperbucks.cashout.toWallet", "To:")} <span className="font-mono text-white/50">{activeAddress.slice(0, 6)}...{activeAddress.slice(-4)}</span>
-                  </p>
-                ) : (
-                  <p className="text-yellow-400 text-xs mb-5">{t("dashboard.hyperbucks.cashout.noWallet", "Connect a wallet to receive USDC")}</p>
+                {/* Amount input */}
+                <div>
+                  <label className="text-white/50 text-xs mb-2 block">{t("dashboard.hyperbucks.cashout.amountLabel", "Amount (HB)")}</label>
+                  <div className="relative">
+                    <input
+                      type="number"
+                      value={hbCashoutAmount}
+                      onChange={(e) => setHbCashoutAmount(e.target.value)}
+                      placeholder="Min 250 HB"
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-4 text-white text-2xl font-semibold focus:outline-none focus:border-[#002AA8] transition-colors pr-28"
+                    />
+                    {hbCashoutAmount && Number(hbCashoutAmount) > 0 && (
+                      <span className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 text-sm">
+                        ≈ ${(Number(hbCashoutAmount) / 250).toFixed(2)}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* USDC: wallet address display */}
+                {hbCashoutMethod === 'usdc' && (
+                  activeAddress ? (
+                    <p className="text-white/30 text-xs">
+                      {t("dashboard.hyperbucks.cashout.toWallet", "To:")} <span className="font-mono text-white/50">{activeAddress.slice(0, 6)}...{activeAddress.slice(-4)}</span>
+                    </p>
+                  ) : (
+                    <p className="text-yellow-400 text-xs">{t("dashboard.hyperbucks.cashout.noWallet", "Connect a wallet to receive USDC")}</p>
+                  )
+                )}
+
+                {/* Bank: bank details section */}
+                {hbCashoutMethod === 'bank' && (
+                  <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
+                    {bankDetailsLoading || savedBankDetails === undefined ? (
+                      <p className="text-white/40 text-sm text-center py-2">Loading bank details...</p>
+                    ) : savedBankDetails && !showBankForm ? (
+                      <div className="space-y-1">
+                        <div className="flex justify-between items-center mb-2">
+                          <p className="text-white/50 text-xs font-semibold uppercase tracking-wide">Saved Bank Account</p>
+                          <button onClick={() => {
+                            setBankForm({
+                              accountHolderName: savedBankDetails.accountHolderName || '',
+                              bankName: savedBankDetails.bankName || '',
+                              accountNumber: savedBankDetails.accountNumber || '',
+                              iban: savedBankDetails.iban || '',
+                              swift: savedBankDetails.swift || '',
+                              routingNumber: savedBankDetails.routingNumber || '',
+                              country: savedBankDetails.country || '',
+                              currency: savedBankDetails.currency || 'USD',
+                            });
+                            setShowBankForm(true);
+                          }} className="text-blue-400 text-xs hover:text-blue-300">Edit</button>
+                        </div>
+                        <p className="text-white text-sm font-semibold">{savedBankDetails.accountHolderName}</p>
+                        <p className="text-white/50 text-xs">{savedBankDetails.bankName}</p>
+                        <p className="text-white/40 text-xs font-mono">****{savedBankDetails.accountNumber?.slice(-4)}</p>
+                        {savedBankDetails.iban && <p className="text-white/40 text-xs">IBAN: {savedBankDetails.iban}</p>}
+                        <div className={`mt-2 inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium ${savedBankDetails.verified ? 'bg-green-500/15 text-green-400' : 'bg-yellow-500/15 text-yellow-400'}`}>
+                          {savedBankDetails.verified ? '✓ Verified' : '⏳ Pending verification'}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="space-y-3">
+                        <p className="text-white/50 text-xs font-semibold uppercase tracking-wide mb-1">{savedBankDetails ? 'Update Bank Details' : 'Add Bank Details'}</p>
+                        {[
+                          { field: 'accountHolderName', label: 'Account Holder Name', required: true },
+                          { field: 'bankName', label: 'Bank Name', required: true },
+                          { field: 'accountNumber', label: 'Account Number', required: true },
+                          { field: 'iban', label: 'IBAN (international)', required: false },
+                          { field: 'swift', label: 'SWIFT / BIC', required: false },
+                          { field: 'routingNumber', label: 'Routing / Sort / BSB Code', required: false },
+                          { field: 'country', label: 'Country', required: false },
+                          { field: 'currency', label: 'Currency (e.g. USD, EUR, AUD)', required: false },
+                        ].map(({ field, label, required }) => (
+                          <div key={field}>
+                            <label className="text-white/40 text-xs mb-1 block">{label}{required && ' *'}</label>
+                            <input
+                              type="text"
+                              value={bankForm[field]}
+                              onChange={(e) => setBankForm(prev => ({ ...prev, [field]: e.target.value }))}
+                              className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-white text-sm focus:outline-none focus:border-[#002AA8] transition-colors"
+                            />
+                          </div>
+                        ))}
+                        <div className="flex gap-2 pt-1">
+                          {savedBankDetails && (
+                            <button onClick={() => setShowBankForm(false)} className="flex-1 py-2 rounded-xl border border-white/20 text-white/50 text-sm hover:text-white transition-colors">
+                              Cancel
+                            </button>
+                          )}
+                          <button
+                            onClick={handleSaveBankDetails}
+                            disabled={savingBank}
+                            className={`flex-1 py-2 rounded-xl font-semibold text-sm transition-all ${savingBank ? 'bg-white/10 text-white/40 cursor-not-allowed' : 'bg-[#002AA8] hover:bg-blue-700 text-white'}`}
+                          >
+                            {savingBank ? 'Saving...' : 'Save Bank Details'}
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 )}
 
                 <button
@@ -784,17 +970,30 @@ export default function HyperBucks() {
                     sendingOtp ? 'bg-white/10 text-white/40 cursor-not-allowed' : 'bg-[#002AA8] hover:bg-blue-700 text-white'
                   }`}
                 >
-                  {t("dashboard.hyperbucks.cashout.toUsdc", "Cashout to USDC Wallet")}
+                  {sendingOtp ? 'Sending OTP...' : hbCashoutMethod === 'bank' ? 'Cashout to Bank Account' : 'Cashout to USDC Wallet'}
                 </button>
               </div>
 
-              <div className="w-full lg:w-[280px] flex-shrink-0 bg-white/5 border border-white/10 rounded-2xl p-4">
-                <p className="text-white font-semibold text-sm mb-2">{t("dashboard.hyperbucks.cashout.usdcWallet", "USDC Wallet")}</p>
-                <p className="text-white/40 text-xs mb-1">{t("dashboard.hyperbucks.cashout.usdcMin", "Min 250 HB ($1)")}</p>
-                <p className="text-white/40 text-xs mb-1">~$0.01 gas fee (Base network)</p>
-                <p className="text-white/40 text-xs">Instant transfer on-chain</p>
-                <div className="mt-3 pt-3 border-t border-white/10">
-                  <p className="text-white/30 text-xs">If platform wallet is low, admin will process manually within 24h.</p>
+              <div className="w-full lg:w-[260px] flex-shrink-0 bg-white/5 border border-white/10 rounded-2xl p-4 space-y-3">
+                <p className="text-white font-semibold text-sm">{hbCashoutMethod === 'bank' ? 'Bank Transfer' : 'USDC Wallet'}</p>
+                <div className="space-y-1.5 text-xs text-white/40">
+                  <p>Min 250 HB ($1)</p>
+                  {hbCashoutMethod === 'bank' ? (
+                    <>
+                      <p>Free — no transfer fee</p>
+                      <p>Arrives in 1-3 business days</p>
+                      <p>Real money to your bank account</p>
+                    </>
+                  ) : (
+                    <>
+                      <p>~$0.01 gas fee (paid by platform)</p>
+                      <p>Near-instant on Base network</p>
+                      <p>Convert to local currency via Coinbase or Binance</p>
+                    </>
+                  )}
+                </div>
+                <div className="pt-2 border-t border-white/10">
+                  <p className="text-white/25 text-xs">KYC verification required before cashout.</p>
                 </div>
               </div>
             </div>

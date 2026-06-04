@@ -191,7 +191,43 @@ export const termsOfServiceData = {
       ],
     },
     {
-      id: "s20", title: "20. Contact",
+      id: "s20", title: "20. HyperBucks Virtual Currency",
+      content: [
+        { type: "p", text: `HyperBucks (HB) is a virtual in-game currency issued by HT for use within the Hyper Tek Platform. The fixed exchange rate is 250 HB = $1 USD. HyperBucks have no value outside the platform and do not constitute legal tender, a financial product, or a security.` },
+        {
+          type: "subsection", title: "Purchasing HyperBucks (Top-Up)",
+          content: [
+            { type: "p", text: `Players may purchase HyperBucks using the following methods:` },
+            { type: "list", items: [
+              "Credit or debit card (Visa, Mastercard, Amex) — processed securely via Stripe. HB credited instantly.",
+              "USDC cryptocurrency on the Base network — player sends USDC to the platform wallet and submits the transaction hash. HB credited after on-chain confirmation.",
+            ]},
+            { type: "p", text: `Minimum top-up is 250 HB ($1 USD). All purchases are final and non-refundable unless required by applicable consumer protection law.` },
+          ],
+        },
+        {
+          type: "subsection", title: "Cashing Out HyperBucks",
+          content: [
+            { type: "p", text: `Players who have earned or purchased HyperBucks may cash out to real currency subject to the following conditions:` },
+            { type: "list", items: [
+              "Minimum cashout: 250 HB ($1 USD).",
+              "Identity verification (KYC) must be completed before the first cashout.",
+              "A one-time 6-digit OTP sent to your registered email address is required to authorise each cashout.",
+              "Cashout via Bank Transfer: funds are sent directly to the bank account you register in your dashboard. Processing time is 1–3 business days.",
+              "Cashout via USDC: USDC is sent to your wallet on the Base network. Transfer is near-instant after confirmation.",
+            ]},
+          ],
+        },
+        {
+          type: "important",
+          label: "No Guarantee of Value",
+          text: `HT does not guarantee that HyperBucks will retain any particular value. HyperBucks are not an investment. HT reserves the right to adjust the HB–USD exchange rate with 30 days' notice. Cashout availability is subject to platform liquidity and compliance requirements.`,
+        },
+        { type: "p", text: `HT complies with applicable KYC and AML regulations. HT may suspend or cancel cashout requests where fraud, money laundering, or abuse is suspected, and may report such activity to relevant authorities.` },
+      ],
+    },
+    {
+      id: "s21", title: "21. Contact",
       content: [{ type: "p", text: `For questions about these Terms, contact us at info@hypertek100.com` }],
     },
   ],

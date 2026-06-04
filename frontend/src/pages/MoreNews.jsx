@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaCalendarAlt, FaArrowLeft, FaShareAlt, FaCheck } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
-import { getImageUrl } from "../Config";
+import { getImageUrl, BACKEND_BASE_URL } from "../Config";
 import GlowingOrb from "../Components/Common/BgColoring";
 
 export default function NewsDetail() {
@@ -12,14 +12,30 @@ export default function NewsDetail() {
   const { t, i18n } = useTranslation();
   const [newsItem, setNewsItem] = useState(null);
   const [copied, setCopied] = useState(false);
+  const articleIdRef = useRef(null);
 
+  // Initial load from navigation state
   useEffect(() => {
     if (location.state?.newsItem) {
       setNewsItem(location.state.newsItem);
+      articleIdRef.current = location.state.newsItem._id;
     } else {
       navigate("/news");
     }
   }, [location.state, navigate]);
+
+  // Re-fetch when language changes
+  useEffect(() => {
+    const id = articleIdRef.current;
+    if (!id) return;
+    fetch(`${BACKEND_BASE_URL}/api/v1/news/getNews?lang=${i18n.language}`)
+      .then((r) => r.json())
+      .then((data) => {
+        const found = (data.data || []).find((n) => String(n._id) === String(id));
+        if (found) setNewsItem(found);
+      })
+      .catch(() => {});
+  }, [i18n.language]);
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString(i18n.language || "en", {
@@ -49,14 +65,47 @@ export default function NewsDetail() {
     );
   }
 
-  const blocks = newsItem.description
-    .split("\n")
-    .map(p => p.trim())
-    .filter(p => p.length > 0)
-    .map(p => p.startsWith("## ")
-      ? { type: "subtitle", text: p.slice(3) }
-      : { type: "para",     text: p }
+  // Parse inline bold: split text on **...** markers into React nodes
+  const parseBold = (text) => {
+    const parts = text.split(/\*\*(.*?)\*\*/g);
+    return parts.map((part, i) =>
+      i % 2 === 1 ? <strong key={i} className="text-white font-semibold">{part}</strong> : part
     );
+  };
+
+  // Group lines into typed blocks: subtitle | table | para
+  const blocks = (() => {
+    const lines = newsItem.description.split("\n").map(l => l.trim());
+    const result = [];
+    let i = 0;
+    while (i < lines.length) {
+      const line = lines[i];
+      if (!line) { i++; continue; }
+      if (line.startsWith("## ")) {
+        result.push({ type: "subtitle", text: line.slice(3) });
+        i++;
+      } else if (line.startsWith("|")) {
+        // Collect all consecutive table lines
+        const tableLines = [];
+        while (i < lines.length && lines[i].startsWith("|")) {
+          tableLines.push(lines[i]);
+          i++;
+        }
+        // Parse header (first line), skip separator (---), then rows
+        const parseRow = (l) => l.split("|").slice(1, -1).map(c => c.trim());
+        const [headerLine, ...rest] = tableLines;
+        const headers = parseRow(headerLine);
+        const rows = rest
+          .filter(l => !/^\|[-| ]+\|$/.test(l))
+          .map(parseRow);
+        result.push({ type: "table", headers, rows });
+      } else {
+        result.push({ type: "para", text: line });
+        i++;
+      }
+    }
+    return result;
+  })();
 
   return (
     <div className="text-white relative" style={{ background: "#060610" }}>
@@ -144,8 +193,8 @@ export default function NewsDetail() {
           transition={{ duration: 0.6, delay: 0.15 }}
           className="space-y-5"
         >
-          {blocks.map((block, i) =>
-            block.type === "subtitle" ? (
+          {blocks.map((block, i) => {
+            if (block.type === "subtitle") return (
               <div key={i} className="pt-4 pb-1">
                 <div className="flex items-center gap-3 mb-1">
                   <div className="w-1 h-5 rounded-full flex-shrink-0" style={{ background: "#38bdf8" }} />
@@ -155,19 +204,42 @@ export default function NewsDetail() {
                 </div>
                 <div className="ml-4 h-px" style={{ background: "linear-gradient(to right, rgba(56,189,248,0.3), transparent)" }} />
               </div>
-            ) : (
-              <p
-                key={i}
-                className={
-                  i === 0
-                    ? "text-white/90 text-[16px] md:text-[17px] leading-[1.85] font-medium"
-                    : "text-white/65 text-[14px] md:text-[15px] leading-[1.9]"
-                }
-              >
-                {block.text}
+            );
+            if (block.type === "table") return (
+              <div key={i} className="overflow-x-auto rounded-xl my-2" style={{ border: "1px solid rgba(56,189,248,0.2)" }}>
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr style={{ background: "rgba(56,189,248,0.08)" }}>
+                      {block.headers.map((h, ci) => (
+                        <th key={ci} className="px-4 py-2.5 text-left text-[11px] font-bold uppercase tracking-widest text-cyan-400/80">
+                          {h}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {block.rows.map((row, ri) => (
+                      <tr key={ri} style={{ borderTop: "1px solid rgba(255,255,255,0.06)", background: ri % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent" }}>
+                        {row.map((cell, ci) => (
+                          <td key={ci} className={`px-4 py-2.5 text-[13px] ${ci === 0 ? "text-white/80 font-medium" : "text-white/50"}`}>
+                            {parseBold(cell)}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            );
+            return (
+              <p key={i} className={i === 0
+                ? "text-white/90 text-[16px] md:text-[17px] leading-[1.85] font-medium"
+                : "text-white/65 text-[14px] md:text-[15px] leading-[1.9]"
+              }>
+                {parseBold(block.text)}
               </p>
-            )
-          )}
+            );
+          })}
         </motion.div>
 
         {/* Bottom divider + share */}
