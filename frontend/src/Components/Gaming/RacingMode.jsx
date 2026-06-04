@@ -8,7 +8,7 @@
  * HUD (TopBar, MiniMap, Profile, Sidebar) remains visible on top.
  */
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import RacingControls  from "./RacingControls";
@@ -1027,19 +1027,6 @@ function GarageView() {
    ══════════════════════════════════════════════════════════════════ */
 function VideoOverlay({ onClose }) {
   const { t } = useTranslation();
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isBuffering, setIsBuffering] = useState(false);
-  const videoRef = useRef(null);
-
-  const togglePlay = () => {
-    if (!videoRef.current) return;
-    if (videoRef.current.paused) {
-      videoRef.current.play();
-    } else {
-      videoRef.current.pause();
-    }
-  };
 
   return createPortal(
     <div
@@ -1055,9 +1042,6 @@ function VideoOverlay({ onClose }) {
           from { opacity:0; transform:scale(0.93); }
           to   { opacity:1; transform:scale(1); }
         }
-        @keyframes raceVideoShimmer { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
-        @keyframes raceVideoSpin { to { transform: rotate(360deg) } }
-        @keyframes raceCtrlFadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
       `}</style>
       <div
         onClick={e => e.stopPropagation()}
@@ -1094,103 +1078,18 @@ function VideoOverlay({ onClose }) {
           >✕ {t("racing.video.close", "CLOSE")}</button>
         </div>
         <div style={{
-          position: "relative", aspectRatio: "16/9",
+          aspectRatio: "16/9",
           background: "#000",
           border: "1.5px solid rgba(34,197,94,0.45)",
           borderRadius: 10,
           boxShadow: "0 0 80px rgba(0,0,0,0.95), 0 0 40px rgba(34,197,94,0.12)",
           overflow: "hidden",
-          cursor: "pointer",
-        }}
-          onClick={videoLoaded ? togglePlay : undefined}
-        >
-          {/* Initial loading skeleton */}
-          {!videoLoaded && (
-            <div style={{
-              position: "absolute", inset: 0, zIndex: 2,
-              background: "linear-gradient(135deg, rgba(5,15,10,0.95) 0%, rgba(10,30,20,0.9) 50%, rgba(5,15,10,0.95) 100%)",
-              backgroundSize: "200% 100%",
-              animation: "raceVideoShimmer 1.6s ease-in-out infinite",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              flexDirection: "column", gap: 12,
-            }}>
-              <div style={{ width: 40, height: 40, borderRadius: "50%",
-                border: "3px solid rgba(34,197,94,0.2)", borderTopColor: "rgba(34,197,94,0.8)",
-                animation: "raceVideoSpin 0.9s linear infinite",
-              }} />
-              <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: "clamp(8px,0.8vw,11px)",
-                color: "rgba(34,197,94,0.7)", letterSpacing: "0.18em",
-              }}>LOADING VIDEO...</div>
-            </div>
-          )}
-          {/* Buffering indicator — shown when video stalls after load */}
-          {videoLoaded && isBuffering && (
-            <div style={{
-              position: "absolute", inset: 0, zIndex: 3,
-              background: "rgba(0,0,0,0.55)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              flexDirection: "column", gap: 10,
-            }}>
-              <div style={{ width: 36, height: 36, borderRadius: "50%",
-                border: "3px solid rgba(34,197,94,0.2)", borderTopColor: "rgba(34,197,94,0.9)",
-                animation: "raceVideoSpin 0.8s linear infinite",
-              }} />
-              <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: "clamp(7px,0.75vw,10px)",
-                color: "rgba(34,197,94,0.85)", letterSpacing: "0.16em",
-              }}>BUFFERING...</div>
-            </div>
-          )}
+        }}>
           <video
-            ref={videoRef}
             src="https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/racing_content.mp4"
-            autoPlay loop muted playsInline
-            onCanPlay={() => setVideoLoaded(true)}
-            onPlay={() => { setIsPlaying(true); setIsBuffering(false); }}
-            onPause={() => setIsPlaying(false)}
-            onWaiting={() => setIsBuffering(true)}
-            onPlaying={() => { setIsPlaying(true); setIsBuffering(false); }}
-            onStalled={() => setIsBuffering(true)}
-            style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", opacity: videoLoaded ? 1 : 0 }}
+            autoPlay loop playsInline controls
+            style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
           />
-          {/* Play/pause control bar */}
-          {videoLoaded && (
-            <div
-              onClick={e => { e.stopPropagation(); togglePlay(); }}
-              style={{
-                position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 4,
-                padding: "10px 14px 8px",
-                background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%)",
-                display: "flex", alignItems: "center", gap: 10,
-                animation: "raceCtrlFadeIn 0.3s ease both",
-              }}
-            >
-              <button
-                style={{
-                  width: 32, height: 32, borderRadius: "50%",
-                  background: "rgba(34,197,94,0.15)",
-                  border: "1.5px solid rgba(34,197,94,0.7)",
-                  color: "#86efac",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  cursor: "pointer", fontSize: 13,
-                  boxShadow: "0 0 10px rgba(34,197,94,0.3)",
-                  flexShrink: 0,
-                }}
-                onMouseEnter={e => { e.currentTarget.style.background = "rgba(34,197,94,0.35)"; }}
-                onMouseLeave={e => { e.currentTarget.style.background = "rgba(34,197,94,0.15)"; }}
-                title={isPlaying ? "Pause" : "Play"}
-              >
-                {isPlaying ? "⏸" : "▶"}
-              </button>
-              <div style={{
-                fontFamily: "Orbitron,sans-serif",
-                fontSize: "clamp(7px,0.7vw,9px)",
-                color: isBuffering ? "rgba(248,197,94,0.8)" : isPlaying ? "rgba(34,197,94,0.7)" : "rgba(34,197,94,0.5)",
-                letterSpacing: "0.14em",
-              }}>
-                {isBuffering ? "BUFFERING..." : isPlaying ? "PLAYING" : "PAUSED — CLICK TO RESUME"}
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </div>,
