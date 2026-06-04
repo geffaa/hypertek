@@ -475,7 +475,7 @@ function VideoOverlay({ onClose }) {
           )}
           <video
             ref={videoRef}
-            src="/video/overlord_content.mp4"
+            src="https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/overlord_content.mp4"
             autoPlay loop muted playsInline
             onCanPlay={() => setVideoLoaded(true)}
             onPlay={() => { setIsPlaying(true); setIsBuffering(false); }}

@@ -1,10 +1,7 @@
 import { motion } from "framer-motion";
 import popularFallback from "../../assets/images/popular/popolar.png";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
 import LazyImage from "../Common/LazyImage";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const fadeUp = {
@@ -16,47 +13,20 @@ const fadeUp = {
   }),
 };
 
+// TODO: Replace with admin-curated API endpoint (e.g. GET /api/v1/admin/featured-nfa)
+const DUMMY_FEATURED_NFA = [
+  { id: 1, name: "Shadow Blade NFA",     category: "Weapons",       price: 2500, image: null, hasBuyback: true,  minBuyback: 875 },
+  { id: 2, name: "Storm Sentinel NFA",   category: "Skins",         price: 1800, image: null, hasBuyback: true,  minBuyback: 630 },
+  { id: 3, name: "Void Crystal NFA",     category: "General",       price: 950,  image: null, hasBuyback: false, minBuyback: 0   },
+  { id: 4, name: "Iron Titan NFA",       category: "Skins",         price: 3200, image: null, hasBuyback: true,  minBuyback: 1120 },
+  { id: 5, name: "Aurora Station NFA",   category: "Land And Bases", price: 4500, image: null, hasBuyback: true,  minBuyback: 1575 },
+  { id: 6, name: "Cyber District NFA",   category: "Land And Bases", price: 2100, image: null, hasBuyback: false, minBuyback: 0   },
+];
+
 function FeaturedMarketplace() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchItems = async () => {
-    try {
-      // Fetch listed NFA/NFC/NFT subCollections from parent collections
-      const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/nft/parent-collections`);
-      if (!res.data?.success) return;
-
-      const listed = [];
-      (res.data.collections || []).forEach((col) => {
-        (col.subCollections || []).forEach((sub) => {
-          if (sub.listed === true && sub.priceETH > 0) {
-            listed.push({
-              ...sub,
-              _parentId: col._id,
-              _category: (col.category || col.collection?.name || "general").toLowerCase().trim(),
-              _hasBuyback: !!(sub.minimumBuybackUSD > 0),
-              _assetType: sub.assetType || (sub.isNFA ? "NFA" : "NFC"),
-            });
-          }
-        });
-      });
-
-      listed.sort((a, b) => new Date(b.updatedAt || b.createdAt || 0) - new Date(a.updatedAt || a.createdAt || 0));
-      setItems(listed.slice(0, 6));
-    } catch (err) {
-      console.error("FeaturedMarketplace fetch error:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchItems();
-    window.addEventListener("categoriesUpdated", fetchItems);
-    return () => window.removeEventListener("categoriesUpdated", fetchItems);
-  }, []);
+  const items = DUMMY_FEATURED_NFA;
 
   return (
     <section className="relative z-10 w-full px-6 pb-20">
@@ -89,17 +59,10 @@ function FeaturedMarketplace() {
           </p>
         </motion.div>
 
-        {loading && <p className="text-white/60 text-sm">{t("homeMarket.loading")}</p>}
-
-        {!loading && items.length === 0 && (
-          <p className="text-white/30 text-sm">{t("homeMarket.empty")}</p>
-        )}
-
-        {!loading && items.length > 0 && (
-          <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide sm:grid sm:grid-cols-3 sm:overflow-visible lg:grid-cols-6">
+        <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide sm:grid sm:grid-cols-3 sm:overflow-visible lg:grid-cols-6">
             {items.map((item, index) => (
               <motion.div
-                key={item._id}
+                key={item.id}
                 className="snap-start flex-shrink-0 w-[45vw] sm:w-auto rounded-xl overflow-hidden flex flex-col text-white cursor-pointer"
                 style={{
                   background: "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)",
@@ -111,28 +74,25 @@ function FeaturedMarketplace() {
                 initial="hidden" whileInView="visible"
                 viewport={{ once: true, amount: 0.1 }}
                 whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                onClick={() => navigate("/buy-nfa", { state: { item, parentId: item._parentId } })}
+                onClick={() => navigate("/buy-nfa")}
               >
                 <div className="relative">
                   <LazyImage
-                    src={getImageUrl(item.image)}
+                    src={item.image || popularFallback}
                     alt={item.name || "Item"}
                     fallback={popularFallback}
                     className="h-[110px] sm:h-[130px] lg:h-[150px] bg-black"
                     imgClassName="object-contain"
                   />
-                  {/* Asset type badge */}
+                  {/* Asset type badge — always NFA for this section */}
                   <span
                     className="absolute top-2 left-2 text-[9px] font-bold px-1.5 py-0.5 rounded"
-                    style={{
-                      background: item._assetType === "NFA" ? "#FF6B3580" : item._assetType === "NFC" ? "#002AA880" : "#ffffff30",
-                      border: `1px solid ${item._assetType === "NFA" ? "#FF6B35" : item._assetType === "NFC" ? "#4A90D9" : "#ffffff50"}`,
-                    }}
+                    style={{ background: "#FF6B3580", border: "1px solid #FF6B35" }}
                   >
-                    {item._assetType}
+                    NFA
                   </span>
                   {/* Buy-back badge */}
-                  {item._hasBuyback && (
+                  {item.hasBuyback && (
                     <span className="absolute top-2 right-2 text-[9px] font-bold px-1.5 py-0.5 rounded bg-[#50C87880] border border-[#50C878]">
                       BB ✦
                     </span>
@@ -144,24 +104,24 @@ function FeaturedMarketplace() {
                     {item.name || "Unnamed Item"}
                   </h3>
 
-                  {item._category && (
+                  {item.category && (
                     <span className="text-white/40 text-[10px] capitalize truncate">
-                      {item._category}
+                      {item.category}
                     </span>
                   )}
 
                   <div className="flex items-center justify-between">
                     <span className="text-white/50 text-[10px]">{t("homeMarket.price")}</span>
                     <span className="text-white font-semibold text-[10px] sm:text-xs">
-                      {item.priceETH} USDC
+                      {item.price} USDC
                     </span>
                   </div>
 
-                  {item._hasBuyback && item.minimumBuybackUSD > 0 && (
+                  {item.hasBuyback && item.minBuyback > 0 && (
                     <div className="flex items-center justify-between">
                       <span className="text-[#50C878]/70 text-[9px]">{t("homeMarket.minBuyback")}</span>
                       <span className="text-[#50C878] font-semibold text-[9px]">
-                        ${item.minimumBuybackUSD} USD
+                        ${item.minBuyback} USD
                       </span>
                     </div>
                   )}
@@ -170,7 +130,7 @@ function FeaturedMarketplace() {
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        navigate("/buy-nfa", { state: { item, parentId: item._parentId } });
+                        navigate("/buy-nfa");
                       }}
                       className="w-full py-1.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-[10px] sm:text-xs rounded-md transition-all duration-300 border border-white/20"
                     >
@@ -181,7 +141,6 @@ function FeaturedMarketplace() {
               </motion.div>
             ))}
           </div>
-        )}
 
       </div>
     </section>

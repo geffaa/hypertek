@@ -660,7 +660,7 @@ function VideoOverlay({ onClose }) {
           overflow: "hidden",
         }}>
           <video
-            src="/video/quest_video2.webm"
+            src="https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/quest_video2.webm"
             autoPlay
             loop
             muted

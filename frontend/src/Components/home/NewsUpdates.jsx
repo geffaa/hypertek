@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 const VIDEO_ITEMS = [
   {
     id: "news-001",
-    src: "/video/racing_content.mp4",
+    src: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/racing_content.mp4",
     tag: "GAME FOOTAGE",
     tagColor: "#38bdf8",
     title: "Hyper Tek — Game Content Preview",
@@ -17,7 +17,7 @@ const VIDEO_ITEMS = [
   },
   {
     id: "news-002",
-    src: "/video/overlord_content.mp4",
+    src: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/overlord_content.mp4",
     tag: "GAME FOOTAGE",
     tagColor: "#38bdf8",
     title: "Hyper Tek — Overlord Content Preview",

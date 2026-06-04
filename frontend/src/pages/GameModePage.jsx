@@ -11,7 +11,7 @@ const MODES_STATIC = {
     accentDim: "rgba(34,197,94,0.12)",
     glow: "rgba(34,197,94,0.3)",
     panelImg: "/racing3.png",
-    videoSrc: "/video/racing_content.mp4",
+    videoSrc: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/racing_content.mp4",
   },
   quest: {
     rich: true,
@@ -27,7 +27,7 @@ const MODES_STATIC = {
     accentDim: "rgba(248,113,113,0.12)",
     glow: "rgba(248,113,113,0.25)",
     panelImg: "/overlord4.png",
-    videoSrc: "/video/overlord_content.mp4",
+    videoSrc: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/overlord_content.mp4",
   },
 };
 
