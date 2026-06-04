@@ -32,8 +32,11 @@ function PriceCell({ listing }) {
   if (!listing) return <span className="text-white/15 text-[11px]">—</span>;
 
   const { activityType, price, currentOffer, reservePrice, currentBid, durationHours, status } = listing;
-  const isExpired = status === "expired" || status === "cancelled";
-  const dot = isExpired ? <span className="ml-1 text-[9px] text-red-400/60">(expired)</span> : null;
+  const dot = status === "expired"
+    ? <span className="ml-1 text-[9px] text-red-400/60">(expired)</span>
+    : status === "cancelled"
+    ? <span className="ml-1 text-[9px] text-orange-400/60">(cancelled)</span>
+    : null;
 
   if (activityType === "selling_general") {
     return (
@@ -218,9 +221,10 @@ export default function ProfileListingsTab({ token }) {
     return map;
   };
 
-  const totalItems = allCategories.reduce(
-    (sum, cat) => sum + (grouped[cat]?.length || 0), 0
-  );
+  const totalItems = allCategories.reduce((sum, cat) => {
+    const itemMap = buildItemMap(grouped[cat] || []);
+    return sum + Object.keys(itemMap).length;
+  }, 0);
 
   // Build translated column definitions
   const ACTIVITY_COLS = ACTIVITY_KEYS.map((c) => ({

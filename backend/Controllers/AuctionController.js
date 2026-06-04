@@ -268,6 +268,13 @@ export async function cancelAuction(req, res) {
     await auction.save();
     // Item has no winner — return it to unlisted state so it shows back in My Collectibles
     await resetListedFlagForAuction(auction);
+    // Remove the synced MarketListing that was created when this auction was posted
+    await MarketListing.deleteMany({
+      userId: auction.seller,
+      activityType: "selling_auction",
+      itemName: auction.title,
+      status: { $in: ["active", "pending"] },
+    });
     res.json({ message: "Auction cancelled", auction });
   } catch (err) {
     res.status(500).json({ error: err.message });

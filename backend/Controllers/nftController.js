@@ -2498,12 +2498,18 @@ export async function cancelSubCollectionListing(req, res) {
     parent.markModified('subCollections');
     await parent.save();
 
-    // Remove corresponding MarketListing
-    await MarketListing.deleteOne({ subCollectionId: subCollection._id.toString(), status: "active" });
+    // Remove all MarketListing records for this sub-collection (selling, auction-sync, trade-sync)
+    const subIdStr = subCollection._id.toString();
+    await MarketListing.deleteMany({
+      $or: [
+        { subCollectionId: subIdStr },
+        { userId: req.user._id || req.user.id, activityType: "trading", itemName: subCollection.name },
+      ],
+    });
 
     // Cancel any active Auction for this sub-collection
     const auctionResult = await Auction.updateMany(
-      { subCollectionId: subCollection._id.toString(), status: "active" },
+      { subCollectionId: subIdStr, status: "active" },
       { status: "cancelled" }
     );
 

@@ -458,6 +458,15 @@ export async function cancelTrade(req, res) {
     }
     trade.status = "cancelled";
     await trade.save();
+    // Remove the synced MarketListing that was created when this trade was posted
+    if (trade.type === "trade") {
+      await MarketListing.deleteMany({
+        userId: trade.poster,
+        activityType: "trading",
+        itemName: trade.offering || trade.title,
+        status: { $in: ["active", "pending"] },
+      });
+    }
     res.json({ message: "Listing cancelled", trade });
   } catch (err) {
     res.status(500).json({ error: err.message });

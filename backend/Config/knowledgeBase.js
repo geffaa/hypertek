@@ -64,11 +64,14 @@ HyperBucks are earned, not purchased directly with cash. You receive them by:
 
 How to Cash Out HyperBucks (Convert to Real Money)
 
+Important: When you create a HyperTek account (sign up with email), the platform automatically creates a secure embedded crypto wallet for you — you do NOT need MetaMask or any external wallet to get started.
+
 Option 1: Cash out as USDC (cryptocurrency)
 - Minimum: 250 HB (= 1 USD)
-- You need a cryptocurrency wallet address on the Base network (e.g., MetaMask)
+- Your HyperTek account already includes a built-in embedded wallet on the Base network — no MetaMask needed
+- You can also use your own external wallet address if you prefer
 - Go to Dashboard > Withdraw or the HB cashout section
-- Enter your wallet address
+- Enter your wallet address (or use your embedded HyperTek wallet address)
 - The platform transfers USDC directly to your wallet on-chain
 - You receive a transaction hash as proof
 
@@ -416,7 +419,7 @@ Q: How do I cash out my HyperBucks?
 A: Go to Dashboard > Withdraw. Choose USDC cashout (minimum 250 HB, needs wallet address) or bank transfer (minimum 2,500 HB, needs saved bank details).
 
 Q: Do I need a crypto wallet?
-A: Yes for blockchain transactions. But you can also sign up with email and use a credit card for purchases.
+A: No! When you sign up with email, HyperTek automatically creates a secure embedded crypto wallet for you. You don't need MetaMask or any external wallet. Your embedded wallet is ready to use for all on-chain transactions on the Base network.
 
 Q: Can I sell my assets?
 A: Yes. List them for sale in General, create an auction, propose a trade, or request a buyback from the platform.
@@ -447,6 +450,9 @@ A: Yes. The platform supports English, Japanese, Korean, Portuguese, and Chinese
 
 Q: What is the platform commission for hire/rent?
 A: 20% of the rental fee.
+
+Q: Can I bring NFTs from other sites or blockchains and list them on the marketplace?
+A: No. HyperTek100's marketplace only supports NFAs, NFCs, and NFTs that are created within the HyperTek ecosystem on the Base network. There is no feature to import, bridge, or link NFTs from external sites like OpenSea, or from other blockchains like Ethereum or Polygon. If you want to list an item, you must create it on the platform using the Dashboard > Create NFT/NFC feature, where you upload your own image and it gets minted on the Base network when listed.
 
 Q: What categories are available in the marketplace?
 A: Skins, Military Badges, Specialists, Weapons, Body Armour, Spaceships, Racing Vehicles, Artwork, Land and Bases, and General.

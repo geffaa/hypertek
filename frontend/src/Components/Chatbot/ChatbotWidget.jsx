@@ -5,6 +5,58 @@ import { BACKEND_BASE_URL } from "../../Config";
 import hyperbotAvatar from "../../assets/images/hyperbot-avatar.png";
 import { useTranslation } from "react-i18next";
 
+/* ── Inline markdown renderer (bold + bullets) ── */
+function renderInline(text) {
+  const parts = [];
+  const re = /\*\*(.+?)\*\*/g;
+  let last = 0, m;
+  while ((m = re.exec(text)) !== null) {
+    if (m.index > last) parts.push(text.slice(last, m.index));
+    parts.push(<strong key={m.index} className="text-white font-semibold">{m[1]}</strong>);
+    last = re.lastIndex;
+  }
+  if (last < text.length) parts.push(text.slice(last));
+  return parts;
+}
+
+function BotMessage({ text }) {
+  const lines = text.split("\n");
+  const elements = [];
+  let listItems = [];
+
+  const flushList = () => {
+    if (listItems.length > 0) {
+      elements.push(
+        <ul key={`ul-${elements.length}`} className="list-disc list-inside space-y-0.5 my-1">
+          {listItems}
+        </ul>
+      );
+      listItems = [];
+    }
+  };
+
+  lines.forEach((line, i) => {
+    const bullet = line.match(/^[\*\-]\s+(.*)$/);
+    const numbered = line.match(/^(\d+)\.\s+(.*)$/);
+    if (bullet) {
+      listItems.push(<li key={i}>{renderInline(bullet[1])}</li>);
+    } else if (numbered) {
+      flushList();
+      elements.push(<p key={i}><strong className="text-white">{numbered[1]}.</strong> {renderInline(numbered[2])}</p>);
+    } else {
+      flushList();
+      if (line.trim() === "") {
+        elements.push(<br key={i} />);
+      } else {
+        elements.push(<p key={i}>{renderInline(line)}</p>);
+      }
+    }
+  });
+  flushList();
+
+  return <div className="space-y-0.5">{elements}</div>;
+}
+
 /* ── Typing dots ── */
 function TypingIndicator() {
   return (
@@ -302,14 +354,14 @@ export default function ChatbotWidget() {
                   <div key={i} className="flex items-end gap-2">
                     <BotAvatar />
                     <div
-                      className="max-w-[82%] px-4 py-2.5 rounded-2xl rounded-bl-none text-[13px] leading-relaxed whitespace-pre-wrap break-words"
+                      className="max-w-[82%] px-4 py-2.5 rounded-2xl rounded-bl-none text-[13px] leading-relaxed break-words"
                       style={{
                         background: "rgba(255,255,255,0.04)",
                         border: "1px solid rgba(255,255,255,0.09)",
                         color: "rgba(255,255,255,0.85)",
                       }}
                     >
-                      {msg.text}
+                      <BotMessage text={msg.text} />
                     </div>
                   </div>
                 )

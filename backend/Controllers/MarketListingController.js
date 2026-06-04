@@ -30,7 +30,7 @@ export const getMyListings = async (req, res) => {
     const userId = req.user._id || req.user.id;
 
     const [listings, ownedHire, rentedHire] = await Promise.all([
-      MarketListing.find({ userId }).sort({ createdAt: -1 }).lean(),
+      MarketListing.find({ userId, status: { $in: ["active", "pending"] } }).sort({ createdAt: -1 }).lean(),
       // Items the user has listed for hire (they are the owner)
       HireRent.find({ owner: userId, status: { $in: ["available", "rented", "cooldown"] } })
         .sort({ createdAt: -1 }).lean(),
