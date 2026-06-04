@@ -443,7 +443,7 @@ export default function Preview() {
                     {t("gaming.preview.uiHeading", "Interactive UI Preview")}
                   </h3>
                   <p className="text-white/50 text-xs mt-1.5 leading-relaxed">
-                    {t("gaming.preview.uiDesc", "Experience the full game dashboard — Racing, Quest, and Overlord modes.")}
+                    {t("gaming.preview.uiDesc", "Experience the full game dashboard. Racing, Quest, and Overlord modes.")}
                   </p>
                 </div>
                 <div
