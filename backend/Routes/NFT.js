@@ -49,6 +49,7 @@ import {
   getSubCollectionPriceHistory,
   getSubCollectionById,
   finalizeByPaymentIntent,
+  fixUnlistedPricedItems,
 } from "../Controllers/nftController.js";
 
 import uploadTemp from "../Middleware/UploadMulter.js";
@@ -163,6 +164,7 @@ NFTRouter.get("/user/owned-subs-only/:walletAddress", getOwnedSubCollectionsOnly
 NFTRouter.get("/dashboard/total-counts", getTotalCounts);
 
 NFTRouter.put("/admin/status/:id", updateNFTStatus);
+NFTRouter.post("/admin/fix-unlisted-priced-items", authMiddleware("admin"), fixUnlistedPricedItems);
 
 /* =====================================================
    USER COLLECTION ROUTES (OPTIONAL AUTH – kept same)

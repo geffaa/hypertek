@@ -203,16 +203,17 @@ export async function createItemDirect(req, res) {
       }
     }
 
+    const parsedPrice = priceETH ? parseFloat(priceETH) : 0;
     const newItem = {
       name: name.trim(),
       description: description?.trim() || "",
       owner: owner.toLowerCase(),
       image,
-      priceETH: priceETH ? parseFloat(priceETH) : 0,
+      priceETH: parsedPrice,
       assetType: resolvedType,
       isNFA: resolvedType === "NFA",
       isFirstSale: true,
-      listed: false,
+      listed: parsedPrice > 0,
       createdAt: new Date(),
     };
 
@@ -280,6 +281,7 @@ export async function addSubCollection(req, res) {
       ? await saveImagePermanently(req.file.path, req.file.filename)
       : req.body.image || parent.collection.image;
 
+    const subCollectionPrice = priceETH || 0;
     const subCollection = {
       name: name || "", // optional now
       symbol: symbol || "", // optional now
@@ -287,8 +289,8 @@ export async function addSubCollection(req, res) {
       description: description || "",
       owner: owner || parent.collection.owner || "admin",
       creator: creator || "admin",
-      listed: false,
-      priceETH: priceETH || 0,
+      listed: subCollectionPrice > 0,
+      priceETH: subCollectionPrice,
       Type: Type || "characters",
       isFirstSale: true,
       salesHistory: [],
@@ -3147,6 +3149,37 @@ export async function finalizeByPaymentIntent(req, res) {
     return res.json({ success: true, result });
   } catch (err) {
     console.error(" [finalizeByPaymentIntent] Error:", err.message);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+}
+
+/**
+ * Admin: fix existing subCollection items that have priceETH > 0 but listed = false.
+ * Run once after deploying the auto-list fix.
+ */
+export async function fixUnlistedPricedItems(req, res) {
+  try {
+    const parents = await NFTSystem.find({ isParentCollection: true, status: "active" });
+    let fixed = 0;
+
+    for (const parent of parents) {
+      let changed = false;
+      for (const sub of parent.subCollections) {
+        if (!sub.listed && sub.priceETH > 0) {
+          sub.listed = true;
+          changed = true;
+          fixed++;
+        }
+      }
+      if (changed) {
+        parent.markModified("subCollections");
+        await parent.save();
+      }
+    }
+
+    return res.json({ success: true, message: `Fixed ${fixed} unlisted items with price > 0.`, fixed });
+  } catch (err) {
+    console.error("[fixUnlistedPricedItems] Error:", err.message);
     return res.status(500).json({ success: false, error: err.message });
   }
 }
