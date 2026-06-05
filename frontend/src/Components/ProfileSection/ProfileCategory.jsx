@@ -270,12 +270,7 @@ function ProfileCategory() {
       return;
     }
 
-    const categoryLower = (category || "").toLowerCase();
-    if (categoryLower === "land") {
-      navigate("/buy-land", { state: { item } });
-    } else {
-      navigate("/buy-nfa", { state: { item } });
-    }
+    navigate("/buy-nfa", { state: { item } });
   };
 
   /* ================= MINT NFT ================= */

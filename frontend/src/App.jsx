@@ -19,7 +19,7 @@ const MAINTENANCE_BYPASS_PATH = "/testing";
 
 // Public preview paths — bypass maintenance WITHOUT setting the bypass cookie.
 // Visitors can ONLY view these pages; navigating elsewhere shows "Coming Soon".
-const PUBLIC_PREVIEW_PATHS = ["/preview"];
+const PUBLIC_PREVIEW_PATHS = ["/preview", "/waitlist", "/join-waitlist"];
 
 const SPLASH_COOLDOWN_MS = 60 * 60 * 1000; // 1 hour
 
@@ -54,15 +54,12 @@ import NoPersonalActivity from "./pages/NoPersonalActivity";
 
 // NFA Pages
 import BuyNfa from "./pages/BuyNfa";
-import NfaLand from "./pages/NfaLand";
 import Payment from "./pages/Payment";
-import OfferPage from "./pages/OfferPage";
 import ErrorPage from "./pages/ErrorPage";
 import Success from "./pages/Success";
 
 // Profile Section
 import Collect from "./Components/ProfileSection/Collectible";
-import Profile from "./Components/ProfileSection/Land";
 import ProfileCategory from "./Components/ProfileSection/ProfileCategory";
 import Activity from "./Components/ProfileSection/Activity";
 import List from "./Components/ProfileSection/Listing";
@@ -79,9 +76,6 @@ import WalletConnect from "./pages/WalletConnect";
 import Wellcome from "./pages/Wellcome";
 import SigninWallet from "./pages/SigninWallet";
 import NoItem from "./pages/NoItem";
-import { loadStripe } from "@stripe/stripe-js";
-import { STRIPE_PUBLISHABLE_KEY } from "./Config";
-import { Elements } from "@stripe/react-stripe-js";
 import Stripe from "./pages/Stripe";
 import Funnel from "./pages/Funnel";
 import Gaming from "./pages/Gaming";
@@ -108,8 +102,6 @@ import AddUserCollection from "./pages/DashboardPages/AddUserCollection";
 import Withdraw from "./pages/DashboardPages/Withdraw";
 import UploadNFC from "./pages/DashboardPages/UploadNFC";
 import TopUp from "./pages/DashboardPages/TopUp";
-
-const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
 // Wrapper component to handle route changes
 function AppWrapper() {
@@ -166,8 +158,7 @@ function AppWrapper() {
 
   return (
     <>
-      <Elements stripe={stripePromise}>
-        {!shouldHideLayout && <Navbar />}
+      {!shouldHideLayout && <Navbar />}
 
         <div style={{ flex: 1, position: "relative", zIndex: 20 }}>
           <Routes key={location.pathname}>
@@ -198,10 +189,8 @@ function AppWrapper() {
 
             {/* NFA Pages */}
             <Route path="/buy-nfa" element={<BuyNfa />} />
-            <Route path="/buy-land" element={<NfaLand />} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/make-offer" element={<Payment />} />
-            <Route path="/offer" element={<OfferPage />} />
             <Route path="/offer-recieved" element={<OfferedReceived />} />
 
             {/* added this new page  */}
@@ -225,7 +214,6 @@ function AppWrapper() {
             {/* Profile Section */}
             <Route path="/Profile" element={<Collect />} />
             <Route path="/profile/:category" element={<ProfileCategory />} />
-            <Route path="/Lands" element={<Profile />} />
             <Route path="/Activity" element={<Activity />} />
             <Route path="/List" element={<List />} />
             <Route path="/edit" element={<Edit />} />
@@ -292,8 +280,7 @@ function AppWrapper() {
         </div>
         <Toaster position="top-right" reverseOrder={false} />
         {!shouldHideLayout && <Footer />}
-      </Elements>
-      {location.pathname !== "/gaming" && <ChatbotWidget />}
+        {location.pathname !== "/gaming" && <ChatbotWidget />}
     </>
   );
 }

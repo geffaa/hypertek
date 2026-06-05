@@ -1088,7 +1088,7 @@ export default function TopBar({ activeGame, isPreview = false }) {
         {/* 4. WALLET — inline modal */}
         <button
           className="res-slot"
-          onClick={() => setWalletOpen(true)}
+          onClick={() => { if (!isPreview) setWalletOpen(true); }}
           style={{
             ...NAV_BTN,
             flexShrink: 0,

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { ChevronRight, Layers3, Gem, Network, Rocket, CheckCircle2, Zap, Lock } from "lucide-react";
@@ -97,6 +98,7 @@ function CornerAccent({ color = "rgba(56,189,248,0.45)" }) {
 function About({ isPreview = false }) {
   const navigate = useNavigate();
   const [showComingSoon, setShowComingSoon] = useState(false);
+  const [showGamesComingSoon, setShowGamesComingSoon] = useState(false);
   const { t } = useTranslation();
   const { sections: cms } = useSiteContentPage("about");
   const top = cms.about_top || {};
@@ -150,7 +152,7 @@ function About({ isPreview = false }) {
         <div className="absolute bottom-0 left-0 right-0 h-32" style={{ background: "linear-gradient(to bottom,transparent,#060610)" }} />
         <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg,transparent,rgba(56,189,248,0.4) 40%,rgba(56,189,248,0.4) 60%,transparent)" }} />
 
-        <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-20 pt-36 pb-10 flex flex-col md:flex-row items-start gap-8">
+        <div className={`relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-20 ${isPreview ? "pt-[72px]" : "pt-36"} pb-10 flex flex-col md:flex-row items-start gap-8`}>
 
           {/* Left */}
           <motion.div
@@ -694,7 +696,7 @@ function About({ isPreview = false }) {
             )}
             {isPreview ? (
               <button
-                onClick={() => navigate("/preview/ui")}
+                onClick={() => setShowGamesComingSoon(true)}
                 className="px-8 py-3 text-[11px] font-bold uppercase transition-all hover:brightness-110"
                 style={BTN_SECONDARY}
               >
@@ -707,96 +709,6 @@ function About({ isPreview = false }) {
             )}
           </div>
 
-          {/* Coming Soon popup */}
-          <AnimatePresence>
-            {showComingSoon && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.25 }}
-                onClick={() => setShowComingSoon(false)}
-                style={{
-                  position: "fixed", inset: 0, zIndex: 9999,
-                  background: "rgba(0,3,15,0.75)", backdropFilter: "blur(6px)",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                }}
-              >
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.88, y: 16 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.92, y: 8 }}
-                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                  onClick={e => e.stopPropagation()}
-                  style={{
-                    background: "rgba(5,10,28,0.97)",
-                    border: "1px solid rgba(56,189,248,0.3)",
-                    borderTop: "2px solid rgba(56,189,248,0.7)",
-                    borderRadius: 8,
-                    padding: "40px 56px",
-                    display: "flex", flexDirection: "column", alignItems: "center", gap: 16,
-                    boxShadow: "0 0 80px rgba(0,0,0,0.9), 0 0 40px rgba(56,189,248,0.08)",
-                    minWidth: 280,
-                  }}
-                >
-                  <div style={{
-                    fontFamily: "Orbitron, sans-serif",
-                    fontSize: "clamp(9px,1vw,11px)",
-                    letterSpacing: "0.5em",
-                    color: "rgba(56,189,248,0.6)",
-                    textTransform: "uppercase",
-                  }}>
-                    MARKETPLACE
-                  </div>
-                  <div style={{
-                    fontFamily: "Goldman, sans-serif",
-                    fontSize: "clamp(22px,3vw,32px)",
-                    fontWeight: "bold",
-                    color: "#fff",
-                    letterSpacing: "0.08em",
-                    textAlign: "center",
-                  }}>
-                    Coming Soon
-                  </div>
-                  <div style={{
-                    fontFamily: "Orbitron, sans-serif",
-                    fontSize: "clamp(9px,0.75vw,11px)",
-                    color: "rgba(255,255,255,0.35)",
-                    letterSpacing: "0.15em",
-                    textAlign: "center",
-                    maxWidth: 220,
-                    lineHeight: 1.7,
-                  }}>
-                    The marketplace is currently under maintenance and will be available at official launch.
-                  </div>
-                  <button
-                    onClick={() => setShowComingSoon(false)}
-                    style={{
-                      marginTop: 8,
-                      padding: "8px 28px",
-                      fontFamily: "Orbitron, sans-serif",
-                      fontSize: "clamp(9px,0.8vw,11px)",
-                      fontWeight: "bold",
-                      letterSpacing: "0.18em",
-                      textTransform: "uppercase",
-                      background: "rgba(56,189,248,0.1)",
-                      border: "1px solid rgba(56,189,248,0.4)",
-                      borderTop: "2px solid rgba(56,189,248,0.65)",
-                      color: "rgba(56,189,248,0.9)",
-                      clipPath: "polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%)",
-                      cursor: "pointer",
-                      transition: "background 0.2s",
-                    }}
-                    onMouseEnter={e => { e.currentTarget.style.background = "rgba(56,189,248,0.2)"; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = "rgba(56,189,248,0.1)"; }}
-                  >
-                    CLOSE
-                  </button>
-                </motion.div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
           <div className="flex items-center gap-4 mt-10 justify-center">
             <div className="flex-1 h-px bg-white/8" />
             <span className="text-white/12 text-[10px] tracking-[0.5em] font-bold uppercase">Hyper Tek</span>
@@ -804,6 +716,92 @@ function About({ isPreview = false }) {
           </div>
         </motion.div>
       </section>
+
+      {/* ── Marketplace Coming Soon popup ── */}
+      {createPortal(
+        <AnimatePresence>
+          {showComingSoon && (
+            <motion.div
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={() => setShowComingSoon(false)}
+              style={{ position: "fixed", inset: 0, zIndex: 9999, background: "rgba(0,3,15,0.75)", backdropFilter: "blur(6px)", display: "flex", alignItems: "center", justifyContent: "center" }}
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.88, y: 16 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.92, y: 8 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                onClick={e => e.stopPropagation()}
+                style={{ position: "relative", background: "rgba(5,10,28,0.97)", border: "1px solid rgba(56,189,248,0.3)", borderTop: "2px solid rgba(56,189,248,0.7)", borderRadius: 8, padding: "40px 56px", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, boxShadow: "0 0 80px rgba(0,0,0,0.9), 0 0 40px rgba(56,189,248,0.08)", minWidth: 280, maxWidth: 360 }}
+              >
+                <button
+                  onClick={() => setShowComingSoon(false)}
+                  style={{ position: "absolute", top: 12, right: 12, width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 4, color: "rgba(255,255,255,0.45)", fontSize: 14, cursor: "pointer", transition: "all 0.2s", lineHeight: 1 }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.14)"; e.currentTarget.style.color = "rgba(255,255,255,0.9)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.06)"; e.currentTarget.style.color = "rgba(255,255,255,0.45)"; }}
+                >✕</button>
+                <div style={{ fontFamily: "Orbitron, sans-serif", fontSize: "clamp(9px,1vw,11px)", letterSpacing: "0.5em", color: "rgba(56,189,248,0.6)", textTransform: "uppercase" }}>MARKETPLACE</div>
+                <div style={{ fontFamily: "Goldman, sans-serif", fontSize: "clamp(22px,3vw,32px)", fontWeight: "bold", color: "#fff", letterSpacing: "0.08em", textAlign: "center" }}>Coming Soon</div>
+                <div style={{ fontFamily: "Orbitron, sans-serif", fontSize: "clamp(9px,0.75vw,11px)", color: "rgba(255,255,255,0.35)", letterSpacing: "0.15em", textAlign: "center", maxWidth: 260, lineHeight: 1.7 }}>
+                  The Marketplace is ready and will be available after the official launch. Sign up for the Waitlist page and receive official updates.
+                </div>
+                <a
+                  href="/waitlist"
+                  onClick={() => setShowComingSoon(false)}
+                  style={{ marginTop: 8, padding: "8px 28px", fontFamily: "Orbitron, sans-serif", fontSize: "clamp(9px,0.8vw,11px)", fontWeight: "bold", letterSpacing: "0.18em", textTransform: "uppercase", textDecoration: "none", background: "rgba(56,189,248,0.1)", border: "1px solid rgba(56,189,248,0.4)", borderTop: "2px solid rgba(56,189,248,0.65)", color: "rgba(56,189,248,0.9)", clipPath: "polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%)", cursor: "pointer", transition: "background 0.2s", display: "inline-block" }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "rgba(56,189,248,0.2)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "rgba(56,189,248,0.1)"; }}
+                >
+                  WAITLIST PAGE
+                </a>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
+
+      {/* ── Games Coming Soon popup ── */}
+      {createPortal(
+        <AnimatePresence>
+          {showGamesComingSoon && (
+            <motion.div
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={() => setShowGamesComingSoon(false)}
+              style={{ position: "fixed", inset: 0, zIndex: 9999, background: "rgba(0,3,15,0.75)", backdropFilter: "blur(6px)", display: "flex", alignItems: "center", justifyContent: "center" }}
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.88, y: 16 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.92, y: 8 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                onClick={e => e.stopPropagation()}
+                style={{ position: "relative", background: "rgba(5,10,28,0.97)", border: "1px solid rgba(255,255,255,0.15)", borderTop: "2px solid rgba(255,255,255,0.35)", borderRadius: 8, padding: "40px 56px", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, boxShadow: "0 0 80px rgba(0,0,0,0.9), 0 0 40px rgba(255,255,255,0.04)", minWidth: 280, maxWidth: 360 }}
+              >
+                <button
+                  onClick={() => setShowGamesComingSoon(false)}
+                  style={{ position: "absolute", top: 12, right: 12, width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 4, color: "rgba(255,255,255,0.45)", fontSize: 14, cursor: "pointer", transition: "all 0.2s", lineHeight: 1 }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.14)"; e.currentTarget.style.color = "rgba(255,255,255,0.9)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.06)"; e.currentTarget.style.color = "rgba(255,255,255,0.45)"; }}
+                >✕</button>
+                <div style={{ fontFamily: "Orbitron, sans-serif", fontSize: "clamp(9px,1vw,11px)", letterSpacing: "0.5em", color: "rgba(255,255,255,0.4)", textTransform: "uppercase" }}>GAMES</div>
+                <div style={{ fontFamily: "Goldman, sans-serif", fontSize: "clamp(22px,3vw,32px)", fontWeight: "bold", color: "#fff", letterSpacing: "0.08em", textAlign: "center" }}>Not Ready Yet</div>
+                <div style={{ fontFamily: "Orbitron, sans-serif", fontSize: "clamp(9px,0.75vw,11px)", color: "rgba(255,255,255,0.35)", letterSpacing: "0.15em", textAlign: "center", maxWidth: 260, lineHeight: 1.7 }}>
+                  The games are currently in development and will be available at official launch.
+                </div>
+                <a
+                  href="/waitlist"
+                  onClick={() => setShowGamesComingSoon(false)}
+                  style={{ marginTop: 8, padding: "8px 28px", fontFamily: "Orbitron, sans-serif", fontSize: "clamp(9px,0.8vw,11px)", fontWeight: "bold", letterSpacing: "0.18em", textTransform: "uppercase", textDecoration: "none", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.2)", borderTop: "2px solid rgba(255,255,255,0.35)", color: "rgba(255,255,255,0.7)", clipPath: "polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%)", cursor: "pointer", transition: "background 0.2s", display: "inline-block" }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.12)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.06)"; }}
+                >
+                  WAITLIST PAGE
+                </a>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
 
     </div>
   );

@@ -47,8 +47,8 @@ const DashboardLayout = () => {
         </div>
 
         {/* Scrollable main content */}
-        <main className="flex-1 min-h-0 flex flex-col mt-[1px] overflow-hidden p-4 md:p-6 relative z-10">
-          <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar flex flex-col">
+        <main className="flex-1 min-h-0 flex flex-col mt-[1px] overflow-hidden pt-4 pb-4 pl-4 md:pt-6 md:pb-6 md:pl-6 relative z-10">
+          <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar flex flex-col pr-4 md:pr-6">
             <Outlet />
           </div>
         </main>

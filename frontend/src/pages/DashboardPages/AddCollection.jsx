@@ -63,7 +63,7 @@ function AddCollection() {
   const handleFile = (file) => {
     if (!file) return;
     if (!file.type.startsWith("image/")) return toast.error("Please upload an image file");
-    if (file.size > 10 * 1024 * 1024) return toast.error("Image must be under 10MB");
+    if (file.size > 25 * 1024 * 1024) return toast.error("Image must be under 25MB");
     setCropFileName(file.name);
     const reader = new FileReader();
     reader.onload = () => setCropSrc(reader.result);

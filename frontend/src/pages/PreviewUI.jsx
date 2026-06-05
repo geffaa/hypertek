@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import logo from "../assets/logo1.png";
 import Gaming from "./Gaming";
+import LanguageSwitcher from "../Components/Common/LanguageSwitcher";
 
 export default function PreviewUI() {
   const navigate = useNavigate();
@@ -57,6 +58,16 @@ export default function PreviewUI() {
                   <span className="text-white/55">{t("gaming.preview.uiPageSubtitleSpan", "Three modes. One immersive experience.")}</span>
                 </p>
               </div>
+            </div>
+            <div className="ml-auto flex items-center gap-3">
+              <a
+                href="/waitlist"
+                className="px-4 py-2 text-sm font-semibold text-white/80 hover:text-white hover:bg-white/10 border border-white/25 hover:border-white/40 rounded-lg transition-all duration-200"
+                style={{ textDecoration: "none", whiteSpace: "nowrap" }}
+              >
+                Waitlist
+              </a>
+              <LanguageSwitcher />
             </div>
           </motion.div>
         </div>

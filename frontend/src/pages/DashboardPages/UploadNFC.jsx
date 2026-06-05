@@ -143,7 +143,7 @@ function UploadNFC() {
                 <p className="text-gray-400 text-sm">
                   Drag & drop or <span className="text-blue-400 underline">browse</span>
                 </p>
-                <p className="text-gray-500 text-xs">PNG, JPG, GIF up to 10MB</p>
+                <p className="text-gray-500 text-xs">PNG, JPG, GIF up to 25MB</p>
               </div>
             )}
           </div>

@@ -19,6 +19,7 @@ const MODES_STATIC = {
     accentDim: "rgba(56,189,248,0.12)",
     glow: "rgba(56,189,248,0.25)",
     panelImg: "/quest1.png",
+    videoSrc: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/quest_video2.webm",
   },
   overlord: {
     rich: true,

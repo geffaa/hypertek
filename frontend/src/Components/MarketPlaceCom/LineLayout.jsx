@@ -59,10 +59,7 @@ function LineCard({ item }) {
   const { t }     = useTranslation();
   const name      = item.name || "Unnamed";
   const price     = item.priceETH ?? item.price ?? null;
-  // Public-folder paths (start with "/") are served directly; backend paths go through getImageUrl
-  const imgSrc    = item.image
-    ? (item.image.startsWith("/") ? item.image : getImageUrl(item.image))
-    : null;
+  const imgSrc    = item.image ? getImageUrl(item.image) : null;
 
   // Resolve assetType — use new field, fall back to legacy isNFA boolean
   const assetType = item.assetType || (item.isNFA ? "NFA" : "NFT"); // NFC always has assetType set

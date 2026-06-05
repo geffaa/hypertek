@@ -19,7 +19,7 @@ const HB_PACKAGES = [
   { hb: 250,   usd: 1,   label: 'Starter' },
   { hb: 1000,  usd: 4,   label: 'Basic' },
   { hb: 2500,  usd: 10,  label: 'Standard', popular: true },
-  { hb: 5000,  usd: 20,  label: 'Plus' },
+  { hb: 5000,  usd: 20,  label: 'Plus', mostPopular: true },
   { hb: 10000, usd: 40,  label: 'Pro' },
   { hb: 25000, usd: 100, label: 'Elite' },
 ];
@@ -640,6 +640,11 @@ export default function HyperBucks() {
                           {pkg.popular && (
                             <span className="absolute -top-2 left-1/2 -translate-x-1/2 bg-[#002AA8] text-white text-[9px] font-bold px-2 py-0.5 rounded-full">
                               POPULAR
+                            </span>
+                          )}
+                          {pkg.mostPopular && (
+                            <span className="absolute -top-2 left-1/2 -translate-x-1/2 bg-green-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap">
+                              MOST POPULAR
                             </span>
                           )}
                           <p className="text-white/40 text-[10px] mb-0.5">{pkg.label}</p>

@@ -56,6 +56,7 @@ const MODES_STATIC = {
     accentDim: "rgba(56,189,248,0.12)",
     glow: "rgba(56,189,248,0.25)",
     panelImg: "/quest1.png",
+    videoSrc: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/quest_video2.webm",
   },
   overlord: {
     rich: true,
@@ -344,7 +345,14 @@ export default function PreviewGameMode() {
               {data.label} MODE
             </div>
 
-            <div className="ml-auto">
+            <div className="ml-auto flex items-center gap-3">
+              <a
+                href="/waitlist"
+                className="px-4 py-2 text-sm font-semibold text-white/80 hover:text-white hover:bg-white/10 border border-white/25 hover:border-white/40 rounded-lg transition-all duration-200"
+                style={{ textDecoration: "none", whiteSpace: "nowrap" }}
+              >
+                Waitlist
+              </a>
               <LanguageSwitcher />
             </div>
           </div>
