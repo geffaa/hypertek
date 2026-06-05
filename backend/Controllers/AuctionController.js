@@ -165,7 +165,8 @@ export async function createAuction(req, res) {
       itemImage: image || "",
       nftSystemId: nftSystemId || null,
       subCollectionId: subCollectionId ? String(subCollectionId) : null,
-      reservePrice: reservePrice != null ? Number(reservePrice) : null,
+      // Use explicit reservePrice if given, otherwise fall back to startPrice (minimum bid)
+      reservePrice: reservePrice != null ? Number(reservePrice) : Number(startPrice),
       currentBid: 0,
       status: "active",
     }).catch((e) => console.error("MarketListing auction sync:", e.message));
@@ -217,6 +218,13 @@ export async function placeBid(req, res) {
     auction.currentBidderWallet = bidderWallet;
 
     await auction.save();
+
+    // Sync currentBid to the corresponding MarketListing so Listings tab stays accurate
+    MarketListing.findOneAndUpdate(
+      { subCollectionId: auction.subCollectionId, activityType: "selling_auction", status: "active" },
+      { currentBid: Number(amount) }
+    ).catch((e) => console.error("MarketListing bid sync:", e.message));
+
     res.json(auction);
   } catch (err) {
     res.status(500).json({ error: err.message });

@@ -59,6 +59,8 @@ const marketListingSchema = new mongoose.Schema(
     itemName:        { type: String, required: true },
     itemDescription: { type: String, default: "" },
     itemImage:       { type: String, default: "" },
+    assetType:       { type: String, enum: ["NFA", "NFC", "NFT"], default: "NFT" },
+    isNFA:           { type: Boolean, default: false },
 
     // Optional NFT reference
     nftSystemId:     { type: mongoose.Schema.Types.ObjectId, ref: "NFTSystem", default: null },

@@ -57,37 +57,49 @@ export default function GeneralTab() {
     const load = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/nft/parent-collections`);
-        const parents = res.data.nfts || res.data.collections || [];
+        // Primary: fetch real active marketplace listings from MarketListing model
+        const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/listings/marketplace`);
+        const grouped = res.data.grouped || {};
 
-        const map = {};
-        parents.forEach((parent) => {
-          const subCollections = parent.subCollections || [];
-          if (!subCollections.length) return;
-          const rawKey = (parent.category || parent.collection?.name || "other").toLowerCase().trim();
-          const catKey = CAT_ALIAS[rawKey] || rawKey;
-          if (!map[catKey]) map[catKey] = [];
-          const listedSubs = subCollections.filter(
-            (s) => s.listed === true && s.priceETH > 0
-          );
-          map[catKey].push(
-            ...listedSubs.map((s) => ({
-              ...s,
-              parentId:       parent._id,
-              parentCategory: catKey,
-              parentName:     parent.collection?.name || "",
-              isDummy:        parent.isDummy === true,
-            }))
-          );
-        });
-
-        const hasItems = Object.values(map).some(arr => arr.length > 0);
+        const hasItems = Object.values(grouped).some(arr => arr.length > 0);
         if (hasItems) {
-          setCatMap(map);
+          setCatMap(grouped);
           setUsingFallback(false);
         } else {
-          setCatMap(FALLBACK_ITEMS);
-          setUsingFallback(true);
+          // Fallback: try parent-collections API
+          try {
+            const res2 = await axios.get(`${BACKEND_BASE_URL}/api/v1/nft/parent-collections`);
+            const parents = res2.data.nfts || res2.data.collections || [];
+            const map = {};
+            parents.forEach((parent) => {
+              const subCollections = parent.subCollections || [];
+              if (!subCollections.length) return;
+              const rawKey = (parent.category || parent.collection?.name || "other").toLowerCase().trim();
+              const catKey = CAT_ALIAS[rawKey] || rawKey;
+              if (!map[catKey]) map[catKey] = [];
+              const listedSubs = subCollections.filter((s) => s.listed === true && s.priceETH > 0);
+              map[catKey].push(
+                ...listedSubs.map((s) => ({
+                  ...s,
+                  parentId:       parent._id,
+                  parentCategory: catKey,
+                  parentName:     parent.collection?.name || "",
+                  isDummy:        false,
+                }))
+              );
+            });
+            const hasItems2 = Object.values(map).some(arr => arr.length > 0);
+            if (hasItems2) {
+              setCatMap(map);
+              setUsingFallback(false);
+            } else {
+              setCatMap(FALLBACK_ITEMS);
+              setUsingFallback(true);
+            }
+          } catch {
+            setCatMap(FALLBACK_ITEMS);
+            setUsingFallback(true);
+          }
         }
       } catch (err) {
         console.error("GeneralTab fetch error:", err);

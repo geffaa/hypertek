@@ -2097,6 +2097,8 @@ export async function createSubCollectionListing(req, res) {
       itemName: subCollection.name || "Unnamed",
       itemDescription: subCollection.description || "",
       itemImage: subCollection.image || "",
+      assetType: subCollection.assetType || (subCollection.isNFA ? "NFA" : "NFT"),
+      isNFA: subCollection.isNFA || false,
       nftSystemId: parent._id,
       subCollectionId: subCollection._id.toString(),
       price: Number(priceETH),

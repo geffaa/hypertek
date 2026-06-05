@@ -1,6 +1,7 @@
 import MarketListing from "../Models/MarketListingModel.js";
 import HireRent from "../Models/HireRentModel.js";
 import NFTSystem from "../Models/NFTSystem.js";
+import Auction from "../Models/AuctionModel.js";
 import { createNotification } from "../services/notificationService.js";
 import { cancelSiblingListings } from "../services/cancelSiblingListings.js";
 
@@ -31,15 +32,36 @@ export const getMyListings = async (req, res) => {
 
     const [listings, ownedHire, rentedHire] = await Promise.all([
       MarketListing.find({ userId, status: { $in: ["active", "pending"] } }).sort({ createdAt: -1 }).lean(),
-      // Items the user has listed for hire (they are the owner)
       HireRent.find({ owner: userId, status: { $in: ["available", "rented", "cooldown"] } })
         .sort({ createdAt: -1 }).lean(),
-      // Items the user is currently renting from others
       HireRent.find({ renter: userId, status: "rented" })
         .sort({ createdAt: -1 }).lean(),
     ]);
 
-    // Convert HireRent doc → listing-like shape for the frontend
+    // Live-sync selling_auction listings with the Auction model so reservePrice
+    // (startPrice) and currentBid are always up to date, even for existing records
+    // created before the sync fix.
+    const auctionListings = listings.filter((l) => l.activityType === "selling_auction" && l.subCollectionId);
+    if (auctionListings.length > 0) {
+      const subIds = auctionListings.map((l) => l.subCollectionId);
+      const liveAuctions = await Auction.find({
+        subCollectionId: { $in: subIds },
+        status: { $in: ["active", "ended"] },
+      }).select("subCollectionId startPrice currentBid status").lean();
+
+      const auctionMap = {};
+      liveAuctions.forEach((a) => { auctionMap[String(a.subCollectionId)] = a; });
+
+      auctionListings.forEach((l) => {
+        const live = auctionMap[String(l.subCollectionId)];
+        if (!live) return;
+        // reservePrice: use explicit reserve from MarketListing if set, else startPrice
+        if (l.reservePrice == null || l.reservePrice === 0) l.reservePrice = live.startPrice;
+        // currentBid: always take the live value from Auction model
+        l.currentBid = live.currentBid ?? 0;
+      });
+    }
+
     const toHireListing = (h, activityType) => ({
       _id:          h._id,
       activityType,
@@ -59,7 +81,6 @@ export const getMyListings = async (req, res) => {
       ...rentedHire.map((h) => toHireListing(h, "hiring")),
     ];
 
-    // Group by category
     const grouped = {};
     allListings.forEach((l) => {
       const cat = (l.category || "general").toLowerCase().trim();
@@ -317,6 +338,44 @@ export const submitBid = async (req, res) => {
     return res.json({ success: true, listing });
   } catch (err) {
     console.error("submitBid:", err);
+    return res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+// ── GET /api/v1/listings/marketplace (public) ────────────────────────────────
+// Returns active selling_general listings grouped by category for the marketplace slider.
+export const getPublicMarketplaceListings = async (req, res) => {
+  try {
+    const listings = await MarketListing.find({
+      activityType: "selling_general",
+      status:       "active",
+    })
+      .select("category itemName itemImage itemDescription price assetType isNFA nftSystemId subCollectionId")
+      .sort({ createdAt: -1 })
+      .limit(200)
+      .lean();
+
+    const grouped = {};
+    listings.forEach((l) => {
+      const cat = l.category || "general";
+      if (!grouped[cat]) grouped[cat] = [];
+      grouped[cat].push({
+        _id:            l.subCollectionId || String(l._id),
+        name:           l.itemName,
+        image:          l.itemImage,
+        description:    l.itemDescription,
+        priceETH:       l.price,
+        assetType:      l.assetType || "NFT",
+        isNFA:          l.isNFA || false,
+        parentCategory: cat,
+        parentId:       l.nftSystemId ? String(l.nftSystemId) : null,
+        isDummy:        false,
+      });
+    });
+
+    return res.json({ success: true, grouped });
+  } catch (err) {
+    console.error("getPublicMarketplaceListings:", err);
     return res.status(500).json({ success: false, message: "Server error" });
   }
 };

@@ -111,6 +111,9 @@ function MarketPlace() {
   const [auctionsLoading, setAuctionsLoading] = useState(false);
   const [auctionStatusFilter, setAuctionStatusFilter] = useState("active");
 
+  // ---- Active marketplace listings (for Market badge cross-reference) ----
+  const [myMarketListings, setMyMarketListings] = useState([]);
+
   // ---- Pagination ----
   const PAGE_SIZE = 10;
   const ACT_PAGE_SIZE = 10;
@@ -286,6 +289,22 @@ function MarketPlace() {
       .catch((err) => { console.error("Activities fetch error:", err.response?.status, err.message); setTransactions([]); })
       .finally(() => setTxLoading(false));
   }, [activeTab, connectedWallet, token]);
+
+  // ---- Fetch active marketplace listings (eager — for Market badge cross-reference) ----
+  useEffect(() => {
+    if (!token) return;
+    axios
+      .get(`${BACKEND_BASE_URL}/api/v1/listings/my`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        const allListings = Object.values(res.data?.grouped || {}).flat();
+        setMyMarketListings(
+          allListings.filter((l) => l.activityType === "selling_general" && l.status === "active")
+        );
+      })
+      .catch(() => setMyMarketListings([]));
+  }, [token]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ---- Fetch trade posts (eager — needed for venue badges in My Collectibles) ----
   const fetchOffers = () => {
@@ -515,11 +534,13 @@ function MarketPlace() {
                   ) : (
                     <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full">
                       {gridItems.map((item) => {
-                        const onAuction = myAuctions.some((a) => String(a.subCollectionId) === String(item._id) && a.status === "active")
+                        const onMarket = item.listed
+                          || myMarketListings.some((l) => l.subCollectionId === String(item._id));
+                        const onAuction = myAuctions.some((a) => String(a.subCollectionId) === String(item._id) && a.status === "active" && new Date(a.endTime) > new Date())
                           || sessionAuctionIds.has(item._id);
                         const onTrade = offers.some((t) => t.offering === item.name && t.status === "open")
                           || sessionTradeNames.has(item.name);
-                        const anyVenue = item.listed || onAuction || onTrade;
+                        const anyVenue = onMarket || onAuction || onTrade;
                         return (
                           <div
                             key={item._id}
@@ -542,7 +563,7 @@ function MarketPlace() {
                               )}
                               {/* Venue badges stacked top-right */}
                               <div className="absolute top-2 right-2 flex flex-col gap-0.5 items-end">
-                                {item.listed && (
+                                {onMarket && (
                                   <span className="px-1.5 py-0.5 rounded text-[10px] font-bold text-green-300"
                                     style={{ background: "rgba(0,0,0,0.60)", backdropFilter: "blur(4px)", border: "1px solid rgba(74,222,128,0.35)" }}>
                                     {t("profile.badgeMarket", "Market")}
@@ -584,7 +605,7 @@ function MarketPlace() {
 
                             {/* CTA */}
                             <div className="px-3 pb-3 flex flex-col gap-1.5">
-                              {item.listed ? (
+                              {onMarket ? (
                                 <button
                                   onClick={() => navigate("/buy-nfa", { state: { item, parentId: item.parentId } })}
                                   className="w-full h-8 rounded-lg text-white text-xs font-semibold transition-all hover:brightness-110"

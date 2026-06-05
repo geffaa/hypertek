@@ -132,7 +132,7 @@ function NFTs() {
               ...item,
               parentId:  col._id,
               category:  col.category || "general",
-              onAuction: auctions.some((a) => String(a.subCollectionId) === String(item._id) && a.status === "active"),
+              onAuction: auctions.some((a) => String(a.subCollectionId) === String(item._id) && a.status === "active" && new Date(a.endTime) > new Date()),
               onTrade:   trades.some((t) => t.offering === item.name && t.status === "open"),
             }))
         );
