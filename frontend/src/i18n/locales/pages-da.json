@@ -509,7 +509,7 @@
       "changeImage": "Skift billede",
       "dropImage": "Drop billedet her",
       "clickBrowse": "eller klik for at gennemse",
-      "maxSize": "PNG, JPG, WebP · max 10 MB",
+      "maxSize": "PNG, JPG, WebP · max 25 MB",
       "itemName": "Varens navn",
       "namePlaceholder": "f.eks. Dragesværd #001",
       "itemDescription": "Varebeskrivelse",

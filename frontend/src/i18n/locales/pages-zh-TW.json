@@ -509,7 +509,7 @@
       "changeImage": "更改圖像",
       "dropImage": "Drop image here",
       "clickBrowse": "或點選瀏覽",
-      "maxSize": "PNG、JPG、WebP · 最大 10MB",
+      "maxSize": "PNG、JPG、WebP · 最大 25MB",
       "itemName": "商品名稱",
       "namePlaceholder": "例如龍劍 #001",
       "itemDescription": "項目描述",

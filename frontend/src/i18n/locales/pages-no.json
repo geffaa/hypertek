@@ -509,7 +509,7 @@
       "changeImage": "Endre bilde",
       "dropImage": "Slipp bildet her",
       "clickBrowse": "eller klikk for å bla",
-      "maxSize": "PNG, JPG, WebP · maks 10 MB",
+      "maxSize": "PNG, JPG, WebP · maks 25 MB",
       "itemName": "Varenavn",
       "namePlaceholder": "f.eks. Dragesverd #001",
       "itemDescription": "Varebeskrivelse",

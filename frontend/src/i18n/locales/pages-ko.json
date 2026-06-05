@@ -509,7 +509,7 @@
       "changeImage": " 이미지 변경 ",
       "dropImage": " 여기에 이미지를 놓거나 ",
       "clickBrowse": " 찾아보거나 클릭하여 찾아보기 ",
-      "maxSize": " PNG, JPG, WebP · 최대 10MB ",
+      "maxSize": " PNG, JPG, WebP · 최대 25MB ",
       "itemName": " 항목 이름 ",
       "namePlaceholder": " 예: Dragon Sword #001 ",
       "itemDescription": " 품목 설명 ",

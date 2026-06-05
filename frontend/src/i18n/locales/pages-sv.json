@@ -509,7 +509,7 @@
       "changeImage": "Ändra bild",
       "dropImage": "Släpp bilden här",
       "clickBrowse": "eller klicka för att bläddra",
-      "maxSize": "PNG, JPG, WebP · max 10MB",
+      "maxSize": "PNG, JPG, WebP · max 25MB",
       "itemName": "Objektets namn",
       "namePlaceholder": "till exempel Draksvärd #001",
       "itemDescription": "Objektbeskrivning",

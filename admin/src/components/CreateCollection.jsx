@@ -66,7 +66,7 @@ function CreateCollection() {
   const handleFile = (file) => {
     if (!file) return;
     if (!file.type.startsWith("image/")) return toast.error("Please upload an image file");
-    if (file.size > 10 * 1024 * 1024) return toast.error("Image must be under 10MB");
+    if (file.size > 25 * 1024 * 1024) return toast.error("Image must be under 25MB");
     setCropFileName(file.name);
     const reader = new FileReader();
     reader.onload = () => setCropSrc(reader.result);
@@ -195,7 +195,7 @@ function CreateCollection() {
                   <p className="text-white/60 text-sm font-medium">Drop image here</p>
                   <p className="text-white/30 text-xs mt-1">or click to browse</p>
                 </div>
-                <p className="text-white/20 text-[11px]">PNG, JPG, WebP · max 10MB</p>
+                <p className="text-white/20 text-[11px]">PNG, JPG, WebP · max 25MB</p>
               </div>
             )}
             <input

@@ -509,7 +509,7 @@
       "changeImage": "Change Image",
       "dropImage": "Drop image here",
       "clickBrowse": "or click to browse",
-      "maxSize": "PNG, JPG, WebP · max 10MB",
+      "maxSize": "PNG, JPG, WebP · max 25MB",
       "itemName": "Item Name",
       "namePlaceholder": "e.g. Dragon Sword #001",
       "itemDescription": "Item Description",

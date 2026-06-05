@@ -1087,7 +1087,7 @@ function VideoOverlay({ onClose }) {
         }}>
           <video
             src="https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/racing_content.mp4"
-            autoPlay loop playsInline controls
+            autoPlay loop playsInline controls preload="metadata"
             style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
           />
         </div>

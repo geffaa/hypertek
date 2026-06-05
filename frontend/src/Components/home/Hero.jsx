@@ -80,6 +80,7 @@ function VideoModal({ onClose }) {
           src="https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/download_page.mp4"
           autoPlay
           playsInline
+          preload="metadata"
           style={{
             width: "100%", borderRadius: 12,
             maxHeight: "80vh", background: "#000",
