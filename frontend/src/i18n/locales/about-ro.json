@@ -3,13 +3,22 @@
     "badge": "UNIVERSUL HYPER TEK",
     "heroHeading": "DESPRE NOI",
     "stats": [
-      { "v": "3", "l": "Lumi de joc" },
-      { "v": "NFA", "l": "Răscumpărare minimă garantată" },
-      { "v": "P2E", "l": "Joacă-și-Câștigă" }
+      {
+        "v": "3",
+        "l": "Lumi de joc"
+      },
+      {
+        "v": "NFA",
+        "l": "Răscumpărare minimă garantată"
+      },
+      {
+        "v": "P2E",
+        "l": "Joacă-și-Câștigă"
+      }
     ],
     "subtitle": [
       "Misiunea Hyper Tek a fost să abordeze mai multe probleme din industria jocurilor și să redefinească modul în care funcționează ecosistemele de jocuri, creând un univers interconectat unde jucătorii nu sunt limitați la un singur stil de joc. Combinând mai multe genuri într-un singur sistem de progresie, proiectul Hyper Tek oferă un mediu dinamic unde jucătorii pot explora, concura și crește într-o lume unificată.",
-      "Își propune să ofere adevărata proprietate asupra activelor digitale cu valoare reală, care crește în timp, cu o răscumpărare minimă garantată pentru toate Non-Fungible Artworks, și sisteme adevărate de play-to-earn în cadrul ecosistemului, la care contribuie jucătorii.",
+      "Își propune să ofere adevărata proprietate asupra activelor digitale cu valoare reală, care crește în timp, cu o răscumpărare minimă garantată pentru toate Non-Fungible Artworks, și infrastructuri adevărate de play-to-earn în cadrul ecosistemului, la care contribuie jucătorii.",
       "Proiectul urmărește să împuternicească jucătorii oferindu-le proprietate semnificativă asupra progresului și recompenselor lor, încurajând în același timp creativitatea, colaborarea și competiția.",
       "Viziunea pe termen lung a Hyper Tek este de a construi un univers digital viu unde mai multe jocuri, economii și comunități coexistă pe o singură platformă interconectată."
     ],
@@ -48,9 +57,21 @@
       "discover": "Descoperă",
       "tryUI": "Încearcă interfața",
       "games": [
-        { "name": "Hyper Racing", "tag": "Viteză · Dominanță", "desc": "Curse de mare viteză pe teren ostil. Îmbunătățește-ți vehiculul, construiește-ți echipajul și cucerește teritorii în toată galaxia." },
-        { "name": "Hyper Quest", "tag": "Explorare · Comerț", "desc": "Navighează planete, finalizează misiuni și tranzacționează resurse pe o hartă stelară mereu în expansiune. Fiecare livrare modelează economia." },
-        { "name": "Overlord of the Seven Realms", "tag": "Strategie · Putere", "desc": "Comandă armate, forjează alianțe și cucerește regate. Cel mai puternic Overlord controlează destinul întregului univers." }
+        {
+          "name": "Hyper Racing",
+          "tag": "Viteză · Dominanță",
+          "desc": "Curse de mare viteză pe teren ostil. Îmbunătățește-ți vehiculul, construiește-ți echipajul și cucerește teritorii în toată galaxia."
+        },
+        {
+          "name": "Hyper Quest",
+          "tag": "Explorare · Comerț",
+          "desc": "Navighează planete, finalizează misiuni și tranzacționează resurse pe o hartă stelară mereu în expansiune. Fiecare livrare modelează economia."
+        },
+        {
+          "name": "Overlord of the Seven Realms",
+          "tag": "Strategie · Putere",
+          "desc": "Comandă armate, forjează alianțe și cucerește regate. Cel mai puternic Overlord controlează destinul întregului univers."
+        }
       ]
     },
     "section04": {
@@ -63,9 +84,18 @@
           "title": "Ce sunt?",
           "intro": "Opere de artă digitală legate de blockchain în trei niveluri:",
           "items": [
-            { "label": "NFA...", "desc": "Create de arhitecți, cele mai mari bonusuri în joc, ultra-rare" },
-            { "label": "NFC...", "desc": "Colecționabile cu bonusuri în joc, pot fi create de jucători" },
-            { "label": "NFT...", "desc": "Complet create de jucători, decorează-ți baza pentru bonusuri de putere" }
+            {
+              "label": "NFA...",
+              "desc": "Create de arhitecți, cele mai mari bonusuri în joc, de la semi la ultra-rare"
+            },
+            {
+              "label": "NFC...",
+              "desc": "Colecționabile cu bonusuri în joc, pot fi create de jucători"
+            },
+            {
+              "label": "NFT...",
+              "desc": "Complet create de jucători, decorează-ți baza pentru bonusuri de putere"
+            }
           ]
         },
         {
@@ -79,11 +109,11 @@
         },
         {
           "title": "Echitabil prin design",
-          "body": "Până la 85% din comisionul pieței merge spre creșterea valorilor de răscumpărare, plata drepturilor de autor ale artiștilor și finanțarea misiunilor. Jucătorii pot reduce taxele creând misiuni care îi plătesc pe alții să participe, generând interacțiuni sociale la fiecare nivel. Acesta este specific Hyper Tek."
+          "body": "Până la 85% din comisionul pieței merge spre creșterea valorilor de răscumpărare, plata drepturilor de autor ale artiștilor și finanțarea activităților play-to-earn autentice. Jucătorii pot reduce taxele creând misiuni care îi plătesc pe alții să participe, generând interacțiuni sociale la fiecare nivel. Acesta este specific Hyper Tek."
         },
         {
           "title": "Implică-te acum",
-          "body": "Strângem fonduri pentru a construi Hyper Racing, Hyper Quest și Overlord of the 7 Realms. Fiecare operă de artă pe care o cumperi sau o creezi finanțează direct dezvoltarea. Deține artă garantată să-și mențină și să-și crească valoarea, ajutând în același timp să construiești viitorul jocurilor.",
+          "body": "Suntem pe cale să lansăm campania noastră de crowdfunding pentru a finaliza dezvoltarea Proiectului Hyper Tek. Cum poți ajuta? Fiecare operă de artă pe care o cumperi sau o creezi finanțează direct dezvoltarea. Deține artă garantată să-și mențină și să-și crească valoarea, ajutând în același timp să construiești viitorul jocurilor.",
           "link": "[www.hypertek.com] — Explorează. Cumpără. Creează. Deține viitorul."
         }
       ]
@@ -95,18 +125,45 @@
       "phaseLabel": "Faza",
       "crowdfundingNow": "Crowdfunding în desfășurare",
       "phases": [
-        { "name": "Fundație", "desc": "Site web activ • Interfață utilizator construită • Piață operațională • Sistem NFA/NFC/NFT proiectat • Cadrul de răscumpărare garantată implementat" },
-        { "name": "Crowdfunding în desfășurare", "desc": "Vânzări de opere de artă NFA/NFC/NFT active • NFT-uri create de jucători activate • Partajare comision activă • Construirea comunității • Fonduri direcționate în dezvoltarea jocurilor" },
-        { "name": "Lansare Alpha", "desc": "Alpha Hyper Racing • Primul mediu de joc jucabil • Integrare NFA în joc • Recompense exclusive pentru susținătorii timpurii • Tranzacționare live pe piață" },
-        { "name": "Expansiunea ecosistemului", "desc": "Alpha Hyper Quest • Progresie între jocuri activă • Integrarea monedei Hyper Bucks • Colecții NFA extinse • Evenimente cu premii în numerar" },
-        { "name": "Lansare Overlord", "desc": "Alpha Overlord of the 7 Realms • Sistem de bătălie pe trei niveluri • Acces Battle Ring • Integrare VR • Economie unificată completă pentru trei jocuri" },
-        { "name": "Lansare completă", "desc": "Toate cele trei jocuri complet active • Ecosistem NFA complet • VR complet în toate titlurile • Turnee globale • Universul interconectat realizat" }
+        {
+          "name": "Fundație",
+          "desc": "Site web activ • Interfață utilizator construită • Piață operațională • Sistem NFA/NFC/NFT proiectat • Cadrul de răscumpărare garantată implementat"
+        },
+        {
+          "name": "Crowdfunding în desfășurare",
+          "desc": "Vânzări de opere de artă NFA/NFC/NFT active • NFT-uri create de jucători activate • Partajare comision activă • Construirea comunității • Fonduri direcționate în dezvoltarea jocurilor"
+        },
+        {
+          "name": "Lansare Alpha",
+          "desc": "Alpha Hyper Racing • Primul mediu de joc jucabil • Integrare NFA în joc • Recompense exclusive pentru susținătorii timpurii • Tranzacționare live pe piață"
+        },
+        {
+          "name": "Expansiunea ecosistemului",
+          "desc": "Alpha Hyper Quest • Progresie între jocuri activă • Integrarea monedei Hyper Bucks • Colecții NFA extinse • Evenimente cu premii în numerar"
+        },
+        {
+          "name": "Lansare Overlord",
+          "desc": "Alpha Overlord of the 7 Realms • Sistem de bătălie pe trei niveluri • Acces Battle Ring • Integrare VR • Economie unificată completă pentru trei jocuri"
+        },
+        {
+          "name": "Lansare completă",
+          "desc": "Toate cele trei jocuri complet active • Ecosistem NFA complet • VR complet în toate titlurile • Turnee globale • Universul interconectat realizat"
+        }
       ],
       "helpHeading": "Cum POȚI ajuta chiar acum",
       "helpItems": [
-        { "bold": "Cumpără un NFA, NFC sau NFT", "text": "— deține artă digitală cu valoare garantată care finanțează dezvoltarea jocurilor" },
-        { "bold": "Creează-ți propriul NFT", "text": "— devino creator pe piață și câștigă din fiecare revânzare" },
-        { "bold": "Distribuie și răspândește vestea", "text": "— fiecare nou susținător accelerează drumul spre lansare" }
+        {
+          "bold": "Cumpără un NFA, NFC sau NFT",
+          "text": "— deține artă digitală cu valoare garantată care finanțează dezvoltarea jocurilor"
+        },
+        {
+          "bold": "Creează-ți propriul NFT",
+          "text": "— devino creator pe piață și câștigă din fiecare revânzare"
+        },
+        {
+          "bold": "Distribuie și răspândește vestea",
+          "text": "— fiecare nou susținător accelerează drumul spre lansare"
+        }
       ],
       "link": "[www.hypertek.com] — Susține proiectul. Deține viitorul."
     },

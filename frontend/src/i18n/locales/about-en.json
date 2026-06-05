@@ -3,13 +3,22 @@
     "badge": "The HYPER TEK UNIVERSE",
     "heroHeading": "ABOUT US",
     "stats": [
-      { "v": "3", "l": "Gaming Worlds" },
-      { "v": "NFA", "l": "Guaranteed Min Buy-back" },
-      { "v": "P2E", "l": "Play-to-Earn" }
+      {
+        "v": "3",
+        "l": "Gaming Worlds"
+      },
+      {
+        "v": "NFA",
+        "l": "Guaranteed Min Buy-back"
+      },
+      {
+        "v": "P2E",
+        "l": "Play-to-Earn"
+      }
     ],
     "subtitle": [
       "The Hyper Tek mission was to address multiple issues within the gaming industry and to redefine how gaming ecosystems operate by creating an interconnected universe where players are not limited to a single gameplay style. By combining multiple genres into one progression system, the Hyper Tek project provides a dynamic environment where players can explore, compete, and grow within a unified world.",
-      "It sets out to give true ownership to digital assets that have real value, which increases over time with a guaranteed minimum buy-back on all Non-Fungible Artworks, and true play-to-earn designed systems within the ecosystem, which players contribute to.",
+      "It sets out to give true ownership to digital assets that have real value, which increases over time with a guaranteed minimum buy-back on all Non-Fungible Artworks, and true play-to-earn designed infrastructure within the ecosystem, which players contribute to.",
       "The project aims to empower players by giving them meaningful ownership over their progress and rewards while encouraging creativity, collaboration, and competition.",
       "Hyper Tek's long-term vision is to build a living digital universe where multiple games, economies, and communities coexist on a single interconnected platform."
     ],
@@ -48,9 +57,21 @@
       "discover": "Discover",
       "tryUI": "Try the UI",
       "games": [
-        { "name": "Hyper Racing", "tag": "Speed · Dominance", "desc": "High-speed racing across hostile terrain. Upgrade your vehicle, build your crew, and claim territory across the galaxy." },
-        { "name": "Hyper Quest", "tag": "Explore · Trade", "desc": "Navigate planets, complete quests, and trade resources across an ever-expanding star map. Every delivery shapes the economy." },
-        { "name": "Overlord of the Seven Realms", "tag": "Strategy · Power", "desc": "Command armies, forge alliances, and conquer realms. The most powerful Overlord controls the fate of the entire universe." }
+        {
+          "name": "Hyper Racing",
+          "tag": "Speed · Dominance",
+          "desc": "High-speed racing across hostile terrain. Upgrade your vehicle, build your crew, and claim territory across the galaxy."
+        },
+        {
+          "name": "Hyper Quest",
+          "tag": "Explore · Trade",
+          "desc": "Navigate planets, complete quests, and trade resources across an ever-expanding star map. Every delivery shapes the economy."
+        },
+        {
+          "name": "Overlord of the Seven Realms",
+          "tag": "Strategy · Power",
+          "desc": "Command armies, forge alliances, and conquer realms. The most powerful Overlord controls the fate of the entire universe."
+        }
       ]
     },
     "section04": {
@@ -63,27 +84,36 @@
           "title": "What Are They?",
           "intro": "Blockchain-linked digital artworks in three tiers:",
           "items": [
-            { "label": "NFAs...", "desc": "Architect-created, highest in-game bonuses, ultra-rare" },
-            { "label": "NFCs...", "desc": "Collectibles with in-game bonuses, player-creatable" },
-            { "label": "NFTs...", "desc": "Fully player-made, decorate your base for power bonuses" }
+            {
+              "label": "NFAs...",
+              "desc": "Architect-created, highest in-game bonuses, semi to ultra rare"
+            },
+            {
+              "label": "NFCs...",
+              "desc": "Collectibles with in-game bonuses, player-creatable"
+            },
+            {
+              "label": "NFTs...",
+              "desc": "Fully player-made, decorate your base for power bonuses"
+            }
           ]
         },
         {
           "title": "Why They Hold Value",
           "bullets": [
             "Guaranteed minimum buy-back on every artwork",
-            "Buy-back increases every resale",
+            "Buy-back increases with every resale",
             "Inflation-indexed twice per year",
             "Your value is always growing, never shrinking"
           ]
         },
         {
           "title": "Fair by Design",
-          "body": "Up to 85% of marketplace commission goes to increasing buy-back values, paying artist royalties, and funding quests. Players can reduce fees by creating quests that pay others to participate, driving social interaction at every level. This is unique to Hyper Tek."
+          "body": "Up to 85% of marketplace commission goes to increasing buy-back values, paying artist royalties, and funding genuine play to earn activates. Players can reduce fees by creating quests that pay others to participate, driving social interaction at every level. This is unique to Hyper Tek."
         },
         {
           "title": "Get Involved Now",
-          "body": "We are crowdfunding to build Hyper Racing, Hyper Quest, and Overlord of the 7 Realms. Every artwork you buy or create directly funds development. Own art that is guaranteed to hold and grow in value while helping build the future of gaming.",
+          "body": "We are about to launch our crowdfunding campaign to finish the development of the Hyper Tek Project. How can you help? Every artwork you buy or create directly funds development. Own art that is guaranteed to hold and grow in value while helping build the future of gaming.",
           "link": "[www.hypertek.com] — Browse. Buy. Create. Own the Future."
         }
       ]
@@ -95,18 +125,45 @@
       "phaseLabel": "Phase",
       "crowdfundingNow": "Crowdfunding Now",
       "phases": [
-        { "name": "Foundation", "desc": "Website live • User Interface built • Marketplace operational • NFA/NFC/NFT system designed • Guaranteed buy-back framework in place" },
-        { "name": "Crowdfunding Now", "desc": "NFA/NFC/NFT artwork sales live • Player-created NFTs enabled • Commission-sharing active • Community building • Funds flowing into game development" },
-        { "name": "Alpha Launch", "desc": "Hyper Racing alpha • First playable game environment • In-game NFA integration • Early backer exclusive rewards • Live marketplace trading" },
-        { "name": "Ecosystem Expansion", "desc": "Hyper Quest alpha • Cross-game progression live • Hyper Bucks currency integration • Expanded NFA collections • Real cash prize events" },
-        { "name": "Overlord Launch", "desc": "Overlord of the 7 Realms alpha • Tri-level battle system • Battle Ring access • VR integration • Full three-game unified economy" },
-        { "name": "Full Release", "desc": "All three games fully live • Complete NFA ecosystem • Full VR across all titles • Global tournaments • The interconnected universe realised" }
+        {
+          "name": "Foundation",
+          "desc": "Website live • User Interface built • Marketplace operational • NFA/NFC/NFT system designed • Guaranteed buy-back framework in place"
+        },
+        {
+          "name": "Crowdfunding Now",
+          "desc": "NFA/NFC/NFT artwork sales live • Player-created NFTs enabled • Commission-sharing active • Community building • Funds flowing into game development"
+        },
+        {
+          "name": "Alpha Launch",
+          "desc": "Hyper Racing alpha • First playable game environment • In-game NFA integration • Early backer exclusive rewards • Live marketplace trading"
+        },
+        {
+          "name": "Ecosystem Expansion",
+          "desc": "Hyper Quest alpha • Cross-game progression live • Hyper Bucks currency integration • Expanded NFA collections • Real cash prize events"
+        },
+        {
+          "name": "Overlord Launch",
+          "desc": "Overlord of the 7 Realms alpha • Tri-level battle system • Battle Ring access • VR integration • Full three-game unified economy"
+        },
+        {
+          "name": "Full Release",
+          "desc": "All three games fully live • Complete NFA ecosystem • Full VR across all titles • Global tournaments • The interconnected universe realised"
+        }
       ],
       "helpHeading": "How YOU Can Help Right Now",
       "helpItems": [
-        { "bold": "Buy an NFA, NFC, or NFT", "text": "— own digital art with guaranteed value that funds game development" },
-        { "bold": "Create your own NFT", "text": "— become a creator in the marketplace and earn from every resale" },
-        { "bold": "Share and spread the word", "text": "— every new supporter accelerates the journey to launch" }
+        {
+          "bold": "Buy an NFA, NFC, or NFT",
+          "text": "— own digital art with guaranteed value that funds game development"
+        },
+        {
+          "bold": "Create your own NFT",
+          "text": "— become a creator in the marketplace and earn from every resale"
+        },
+        {
+          "bold": "Share and spread the word",
+          "text": "— every new supporter accelerates the journey to launch"
+        }
       ],
       "link": "[www.hypertek.com] — Back the Project. Own the Future."
     },

@@ -3,13 +3,22 @@
     "badge": "ANG HYPER TEK UNIVERSE",
     "heroHeading": "TUNGKOL SA AMIN",
     "stats": [
-      { "v": "3", "l": "Mga Mundo ng Laro" },
-      { "v": "NFA", "l": "Garantisadong Min Buyback" },
-      { "v": "P2E", "l": "Play-to-Earn" }
+      {
+        "v": "3",
+        "l": "Mga Mundo ng Laro"
+      },
+      {
+        "v": "NFA",
+        "l": "Garantisadong Min Buyback"
+      },
+      {
+        "v": "P2E",
+        "l": "Play-to-Earn"
+      }
     ],
     "subtitle": [
       "Ang misyon ng Hyper Tek ay tugunan ang maraming isyu sa loob ng industriya ng gaming at muling tukuyin kung paano gumagana ang mga gaming ecosystem sa pamamagitan ng paglikha ng isang magkakaugnay na universe kung saan ang mga manlalaro ay hindi limitado sa isang estilo ng gameplay. Sa pamamagitan ng pagsasama ng maraming genre sa isang sistema ng pag-unlad, ang proyekto ng Hyper Tek ay nagbibigay ng dinamikong kapaligiran kung saan ang mga manlalaro ay maaaring magsaliksik, makipagkumpitensya, at lumago sa loob ng isang pinag-isang mundo.",
-      "Layunin nitong bigyan ng tunay na pagmamay-ari ang mga digital na asset na may tunay na halaga, na tumataas sa paglipas ng panahon na may garantisadong minimum na buyback sa lahat ng Non-Fungible Artworks, at tunay na mga sistema ng play-to-earn na dinisenyo sa loob ng ecosystem na pinag-ambagan ng mga manlalaro.",
+      "Layunin nitong bigyan ng tunay na pagmamay-ari ang mga digital na asset na may tunay na halaga, na tumataas sa paglipas ng panahon na may garantisadong minimum na buyback sa lahat ng Non-Fungible Artworks, at tunay na imprastraktura ng play-to-earn na dinisenyo sa loob ng ecosystem na pinag-ambagan ng mga manlalaro.",
       "Layunin ng proyekto na bigyan ng kapangyarihan ang mga manlalaro sa pamamagitan ng pagbibigay sa kanila ng makabuluhang pagmamay-ari sa kanilang pag-unlad at mga gantimpala habang hinihikayat ang pagkamalikhain, pakikipagtulungan, at kumpetisyon.",
       "Ang pangmatagalang pananaw ng Hyper Tek ay bumuo ng isang buhay na digital na universe kung saan ang maraming laro, ekonomiya, at komunidad ay magkasamang nabubuhay sa isang magkakaugnay na platform."
     ],
@@ -48,9 +57,21 @@
       "discover": "Tuklasin",
       "tryUI": "Subukan ang UI",
       "games": [
-        { "name": "Hyper Racing", "tag": "Bilis · Dominasyon", "desc": "Mataas na bilis na karera sa kabayanan na kapaligiran. I-upgrade ang iyong sasakyan, buuin ang iyong crew, at angkinin ang teritoryo sa buong galaksya." },
-        { "name": "Hyper Quest", "tag": "Mag-explore · Mag-trade", "desc": "Mag-navigate ng mga planeta, kumpletuhin ang mga misyon, at mag-trade ng mga mapagkukunan sa isang patuloy na lumalawak na star map. Bawat paghahatid ay humuhubog sa ekonomiya." },
-        { "name": "Overlord of the Seven Realms", "tag": "Estratehiya · Kapangyarihan", "desc": "Mamuno ng mga hukbo, bumuo ng mga alyansa, at sakupin ang mga kaharian. Ang pinaka-makapangyarihang Overlord ay kumokontrol sa kapalaran ng buong universe." }
+        {
+          "name": "Hyper Racing",
+          "tag": "Bilis · Dominasyon",
+          "desc": "Mataas na bilis na karera sa kabayanan na kapaligiran. I-upgrade ang iyong sasakyan, buuin ang iyong crew, at angkinin ang teritoryo sa buong galaksya."
+        },
+        {
+          "name": "Hyper Quest",
+          "tag": "Mag-explore · Mag-trade",
+          "desc": "Mag-navigate ng mga planeta, kumpletuhin ang mga misyon, at mag-trade ng mga mapagkukunan sa isang patuloy na lumalawak na star map. Bawat paghahatid ay humuhubog sa ekonomiya."
+        },
+        {
+          "name": "Overlord of the Seven Realms",
+          "tag": "Estratehiya · Kapangyarihan",
+          "desc": "Mamuno ng mga hukbo, bumuo ng mga alyansa, at sakupin ang mga kaharian. Ang pinaka-makapangyarihang Overlord ay kumokontrol sa kapalaran ng buong universe."
+        }
       ]
     },
     "section04": {
@@ -63,9 +84,18 @@
           "title": "Ano Ang Mga Ito?",
           "intro": "Mga digital na artwork na nakakonekta sa blockchain sa tatlong antas:",
           "items": [
-            { "label": "NFA...", "desc": "Nilikha ng arkitekto, pinakamataas na bonus sa laro, ultra-bihira" },
-            { "label": "NFC...", "desc": "Mga collectible na may bonus sa laro, maaaring likhain ng manlalaro" },
-            { "label": "NFT...", "desc": "Ganap na ginawa ng manlalaro, palamutian ang iyong base para sa mga bonus sa kapangyarihan" }
+            {
+              "label": "NFA...",
+              "desc": "Nilikha ng arkitekto, pinakamataas na bonus sa laro, semi hanggang ultra-bihira"
+            },
+            {
+              "label": "NFC...",
+              "desc": "Mga collectible na may bonus sa laro, maaaring likhain ng manlalaro"
+            },
+            {
+              "label": "NFT...",
+              "desc": "Ganap na ginawa ng manlalaro, palamutian ang iyong base para sa mga bonus sa kapangyarihan"
+            }
           ]
         },
         {
@@ -79,11 +109,11 @@
         },
         {
           "title": "Patas sa Pamamagitan ng Disenyo",
-          "body": "Hanggang 85% ng komisyon sa marketplace ay napupunta sa pagpapataas ng mga halaga ng buyback, pagbabayad ng royalties sa mga artista, at pagpopondo ng mga misyon. Ang mga manlalaro ay maaaring bawasan ang mga bayad sa pamamagitan ng paglikha ng mga misyon na nagbabayad sa iba para lumahok, na nagpapalakas ng social interaction sa bawat antas. Ito ay natatangi sa Hyper Tek."
+          "body": "Hanggang 85% ng komisyon sa marketplace ay napupunta sa pagpapataas ng mga halaga ng buyback, pagbabayad ng royalties sa mga artista, at pagpopondo ng tunay na mga aktibidad ng play-to-earn. Ang mga manlalaro ay maaaring bawasan ang mga bayad sa pamamagitan ng paglikha ng mga misyon na nagbabayad sa iba para lumahok, na nagpapalakas ng social interaction sa bawat antas. Ito ay natatangi sa Hyper Tek."
         },
         {
           "title": "Makisali Ngayon",
-          "body": "Kami ay nag-crowdfund upang itayo ang Hyper Racing, Hyper Quest, at Overlord of the 7 Realms. Bawat artwork na iyong binibili o nililikha ay direktang nagpopondo ng pag-unlad. Magmay-ari ng sining na garantisadong mapanatili at lalago ang halaga habang tinutulungan ang pagtatayo ng hinaharap ng gaming.",
+          "body": "Malapit na naming ilunsad ang aming crowdfunding campaign upang tapusin ang pagbuo ng Hyper Tek Project. Paano ka makakatulong? Bawat artwork na iyong binibili o nililikha ay direktang nagpopondo ng pag-unlad. Magmay-ari ng sining na garantisadong mapanatili at lalago ang halaga habang tinutulungan ang pagtatayo ng hinaharap ng gaming.",
           "link": "[www.hypertek.com] — Mag-browse. Bumili. Lumikha. Angkinin ang Hinaharap."
         }
       ]
@@ -95,18 +125,45 @@
       "phaseLabel": "Phase",
       "crowdfundingNow": "Crowdfunding Ngayon",
       "phases": [
-        { "name": "Pundasyon", "desc": "Website live • Nabuong User Interface • Marketplace gumagana • Sistema ng NFA/NFC/NFT dinisenyo • Garantisadong buyback framework nakalagay" },
-        { "name": "Crowdfunding Ngayon", "desc": "Benta ng NFA/NFC/NFT artwork live • Pinagana ang player-created NFTs • Aktibo ang pagbabahagi ng komisyon • Pagtatayo ng komunidad • Pondo umaagos sa pag-unlad ng laro" },
-        { "name": "Alpha Launch", "desc": "Alpha ng Hyper Racing • Unang maaaring laruin na kapaligiran ng laro • Integrasyong NFA sa laro • Eksklusibong gantimpala para sa maagang backer • Live na kalakalan sa marketplace" },
-        { "name": "Pagpapalawak ng Ecosystem", "desc": "Alpha ng Hyper Quest • Aktibo ang cross-game progression • Integrasyong Hyper Bucks currency • Pinalawak na mga koleksyon ng NFA • Mga real cash prize events" },
-        { "name": "Overlord Launch", "desc": "Alpha ng Overlord of the 7 Realms • Tri-level na sistema ng labanan • Akses sa Battle Ring • Integrasyong VR • Ganap na tatlong-larong pinag-isang ekonomiya" },
-        { "name": "Ganap na Paglabas", "desc": "Tatlong laro ganap na live • Kumpletong NFA ecosystem • Buong VR sa lahat ng titulo • Mga global na tournament • Ang magkakaugnay na universe ay natupad" }
+        {
+          "name": "Pundasyon",
+          "desc": "Website live • Nabuong User Interface • Marketplace gumagana • Sistema ng NFA/NFC/NFT dinisenyo • Garantisadong buyback framework nakalagay"
+        },
+        {
+          "name": "Crowdfunding Ngayon",
+          "desc": "Benta ng NFA/NFC/NFT artwork live • Pinagana ang player-created NFTs • Aktibo ang pagbabahagi ng komisyon • Pagtatayo ng komunidad • Pondo umaagos sa pag-unlad ng laro"
+        },
+        {
+          "name": "Alpha Launch",
+          "desc": "Alpha ng Hyper Racing • Unang maaaring laruin na kapaligiran ng laro • Integrasyong NFA sa laro • Eksklusibong gantimpala para sa maagang backer • Live na kalakalan sa marketplace"
+        },
+        {
+          "name": "Pagpapalawak ng Ecosystem",
+          "desc": "Alpha ng Hyper Quest • Aktibo ang cross-game progression • Integrasyong Hyper Bucks currency • Pinalawak na mga koleksyon ng NFA • Mga real cash prize events"
+        },
+        {
+          "name": "Overlord Launch",
+          "desc": "Alpha ng Overlord of the 7 Realms • Tri-level na sistema ng labanan • Akses sa Battle Ring • Integrasyong VR • Ganap na tatlong-larong pinag-isang ekonomiya"
+        },
+        {
+          "name": "Ganap na Paglabas",
+          "desc": "Tatlong laro ganap na live • Kumpletong NFA ecosystem • Buong VR sa lahat ng titulo • Mga global na tournament • Ang magkakaugnay na universe ay natupad"
+        }
       ],
       "helpHeading": "Paano KAYO Makatutulong Ngayon",
       "helpItems": [
-        { "bold": "Bumili ng NFA, NFC, o NFT", "text": "— magmay-ari ng digital art na may garantisadong halaga na nagpopondo ng pag-unlad ng laro" },
-        { "bold": "Lumikha ng iyong sariling NFT", "text": "— maging tagalikha sa marketplace at kumita mula sa bawat muling pagbebenta" },
-        { "bold": "Ibahagi at ikalat ang balita", "text": "— bawat bagong tagasuporta ay nagpapabilis sa paglalakbay patungo sa paglulunsad" }
+        {
+          "bold": "Bumili ng NFA, NFC, o NFT",
+          "text": "— magmay-ari ng digital art na may garantisadong halaga na nagpopondo ng pag-unlad ng laro"
+        },
+        {
+          "bold": "Lumikha ng iyong sariling NFT",
+          "text": "— maging tagalikha sa marketplace at kumita mula sa bawat muling pagbebenta"
+        },
+        {
+          "bold": "Ibahagi at ikalat ang balita",
+          "text": "— bawat bagong tagasuporta ay nagpapabilis sa paglalakbay patungo sa paglulunsad"
+        }
       ],
       "link": "[www.hypertek.com] — Suportahan ang Proyekto. Angkinin ang Hinaharap."
     },

@@ -3,13 +3,22 @@
     "badge": "SEMESTA HYPER TEK",
     "heroHeading": "TENTANG KAMI",
     "stats": [
-      { "v": "3", "l": "Dunia Gaming" },
-      { "v": "NFA", "l": "Jaminan Buyback Minimum" },
-      { "v": "P2E", "l": "Play-to-Earn" }
+      {
+        "v": "3",
+        "l": "Dunia Gaming"
+      },
+      {
+        "v": "NFA",
+        "l": "Jaminan Buyback Minimum"
+      },
+      {
+        "v": "P2E",
+        "l": "Play-to-Earn"
+      }
     ],
     "subtitle": [
       "Misi Hyper Tek adalah untuk mengatasi berbagai masalah dalam industri gaming dan mendefinisikan ulang bagaimana ekosistem gaming beroperasi dengan menciptakan semesta yang saling terhubung di mana para pemain tidak terbatas pada satu gaya bermain. Dengan menggabungkan berbagai genre ke dalam satu sistem perkembangan, proyek Hyper Tek menyediakan lingkungan dinamis di mana para pemain dapat menjelajah, bersaing, dan berkembang dalam dunia yang terpadu.",
-      "Ini bertujuan untuk memberikan kepemilikan sejati atas aset digital yang memiliki nilai nyata, yang meningkat seiring waktu dengan jaminan buyback minimum pada semua Karya Seni Tidak Dapat Diganti, dan sistem play-to-earn sejati yang dirancang dalam ekosistem yang pemain berkontribusi padanya.",
+      "Ini bertujuan untuk memberikan kepemilikan sejati atas aset digital yang memiliki nilai nyata, yang meningkat seiring waktu dengan jaminan buyback minimum pada semua Karya Seni Tidak Dapat Diganti, dan infrastruktur play-to-earn sejati yang dirancang dalam ekosistem yang pemain berkontribusi padanya.",
       "Proyek ini bertujuan untuk memberdayakan pemain dengan memberikan kepemilikan yang bermakna atas kemajuan dan hadiah mereka sambil mendorong kreativitas, kolaborasi, dan kompetisi.",
       "Visi jangka panjang Hyper Tek adalah membangun semesta digital yang hidup di mana banyak game, ekonomi, dan komunitas hidup berdampingan pada satu platform yang saling terhubung."
     ],
@@ -48,9 +57,21 @@
       "discover": "Jelajahi",
       "tryUI": "Coba UI",
       "games": [
-        { "name": "Hyper Racing", "tag": "Kecepatan · Dominasi", "desc": "Balap kecepatan tinggi melintasi medan yang berbahaya. Tingkatkan kendaraan Anda, bangun kru Anda, dan klaim wilayah di seluruh galaksi." },
-        { "name": "Hyper Quest", "tag": "Jelajahi · Dagang", "desc": "Jelajahi planet-planet, selesaikan misi, dan perdagangkan sumber daya di peta bintang yang terus berkembang. Setiap pengiriman membentuk ekonomi." },
-        { "name": "Overlord of the Seven Realms", "tag": "Strategi · Kekuasaan", "desc": "Komando pasukan, bentuk aliansi, dan taklukkan wilayah. Overlord paling kuat mengendalikan nasib seluruh semesta." }
+        {
+          "name": "Hyper Racing",
+          "tag": "Kecepatan · Dominasi",
+          "desc": "Balap kecepatan tinggi melintasi medan yang berbahaya. Tingkatkan kendaraan Anda, bangun kru Anda, dan klaim wilayah di seluruh galaksi."
+        },
+        {
+          "name": "Hyper Quest",
+          "tag": "Jelajahi · Dagang",
+          "desc": "Jelajahi planet-planet, selesaikan misi, dan perdagangkan sumber daya di peta bintang yang terus berkembang. Setiap pengiriman membentuk ekonomi."
+        },
+        {
+          "name": "Overlord of the Seven Realms",
+          "tag": "Strategi · Kekuasaan",
+          "desc": "Komando pasukan, bentuk aliansi, dan taklukkan wilayah. Overlord paling kuat mengendalikan nasib seluruh semesta."
+        }
       ]
     },
     "section04": {
@@ -63,27 +84,36 @@
           "title": "Apa Itu?",
           "intro": "Karya seni digital yang terhubung blockchain dalam tiga tingkatan:",
           "items": [
-            { "label": "NFA...", "desc": "Dibuat oleh arsitek, bonus dalam game tertinggi, sangat langka" },
-            { "label": "NFC...", "desc": "Kolektibel dengan bonus dalam game, dapat dibuat oleh pemain" },
-            { "label": "NFT...", "desc": "Sepenuhnya dibuat pemain, hiasi basis Anda untuk bonus kekuatan" }
+            {
+              "label": "NFA...",
+              "desc": "Dibuat oleh arsitek, bonus dalam game tertinggi, semi hingga sangat langka"
+            },
+            {
+              "label": "NFC...",
+              "desc": "Kolektibel dengan bonus dalam game, dapat dibuat oleh pemain"
+            },
+            {
+              "label": "NFT...",
+              "desc": "Sepenuhnya dibuat pemain, hiasi basis Anda untuk bonus kekuatan"
+            }
           ]
         },
         {
           "title": "Mengapa Nilainya Bertahan",
           "bullets": [
             "Jaminan buyback minimum pada setiap karya seni",
-            "Buyback meningkat setiap penjualan kembali",
+            "Buyback meningkat dengan setiap penjualan kembali",
             "Diindeks inflasi dua kali per tahun",
             "Nilai Anda selalu tumbuh, tidak pernah menyusut"
           ]
         },
         {
           "title": "Adil Berdasarkan Desain",
-          "body": "Hingga 85% komisi marketplace digunakan untuk meningkatkan nilai buyback, membayar royalti artis, dan mendanai misi. Pemain dapat mengurangi biaya dengan membuat misi yang membayar orang lain untuk berpartisipasi, mendorong interaksi sosial di setiap level. Ini unik untuk Hyper Tek."
+          "body": "Hingga 85% komisi marketplace digunakan untuk meningkatkan nilai buyback, membayar royalti artis, dan mendanai aktivitas play-to-earn yang sesungguhnya. Pemain dapat mengurangi biaya dengan membuat misi yang membayar orang lain untuk berpartisipasi, mendorong interaksi sosial di setiap level. Ini unik untuk Hyper Tek."
         },
         {
           "title": "Terlibat Sekarang",
-          "body": "Kami melakukan crowdfunding untuk membangun Hyper Racing, Hyper Quest, dan Overlord of the 7 Realms. Setiap karya seni yang Anda beli atau buat secara langsung mendanai pengembangan. Miliki seni yang dijamin untuk mempertahankan dan meningkatkan nilai sambil membantu membangun masa depan gaming.",
+          "body": "Kami akan segera meluncurkan kampanye crowdfunding untuk menyelesaikan pengembangan Hyper Tek Project. Bagaimana Anda bisa membantu? Setiap karya seni yang Anda beli atau buat secara langsung mendanai pengembangan. Miliki seni yang dijamin untuk mempertahankan dan meningkatkan nilai sambil membantu membangun masa depan gaming.",
           "link": "[www.hypertek.com] — Jelajahi. Beli. Buat. Miliki Masa Depan."
         }
       ]
@@ -95,18 +125,45 @@
       "phaseLabel": "Fase",
       "crowdfundingNow": "Crowdfunding Sekarang",
       "phases": [
-        { "name": "Fondasi", "desc": "Website aktif • Antarmuka pengguna dibangun • Marketplace beroperasi • Sistem NFA/NFC/NFT dirancang • Kerangka buyback terjamin" },
-        { "name": "Crowdfunding Sekarang", "desc": "Penjualan karya NFA/NFC/NFT aktif • NFT buatan pemain diaktifkan • Berbagi komisi aktif • Membangun komunitas • Dana mengalir ke pengembangan game" },
-        { "name": "Peluncuran Alpha", "desc": "Alpha Hyper Racing • Lingkungan game yang dapat dimainkan pertama • Integrasi NFA dalam game • Hadiah eksklusif backer awal • Perdagangan marketplace langsung" },
-        { "name": "Ekspansi Ekosistem", "desc": "Alpha Hyper Quest • Perkembangan lintas game aktif • Integrasi mata uang Hyper Bucks • Koleksi NFA yang diperluas • Acara hadiah uang tunai nyata" },
-        { "name": "Peluncuran Overlord", "desc": "Alpha Overlord of the 7 Realms • Sistem pertempuran tiga level • Akses Battle Ring • Integrasi VR • Ekonomi terpadu tiga game penuh" },
-        { "name": "Rilis Penuh", "desc": "Ketiga game sepenuhnya aktif • Ekosistem NFA lengkap • VR penuh di semua judul • Turnamen global • Semesta yang saling terhubung terwujud" }
+        {
+          "name": "Fondasi",
+          "desc": "Website aktif • Antarmuka pengguna dibangun • Marketplace beroperasi • Sistem NFA/NFC/NFT dirancang • Kerangka buyback terjamin"
+        },
+        {
+          "name": "Crowdfunding Sekarang",
+          "desc": "Penjualan karya NFA/NFC/NFT aktif • NFT buatan pemain diaktifkan • Berbagi komisi aktif • Membangun komunitas • Dana mengalir ke pengembangan game"
+        },
+        {
+          "name": "Peluncuran Alpha",
+          "desc": "Alpha Hyper Racing • Lingkungan game yang dapat dimainkan pertama • Integrasi NFA dalam game • Hadiah eksklusif backer awal • Perdagangan marketplace langsung"
+        },
+        {
+          "name": "Ekspansi Ekosistem",
+          "desc": "Alpha Hyper Quest • Perkembangan lintas game aktif • Integrasi mata uang Hyper Bucks • Koleksi NFA yang diperluas • Acara hadiah uang tunai nyata"
+        },
+        {
+          "name": "Peluncuran Overlord",
+          "desc": "Alpha Overlord of the 7 Realms • Sistem pertempuran tiga level • Akses Battle Ring • Integrasi VR • Ekonomi terpadu tiga game penuh"
+        },
+        {
+          "name": "Rilis Penuh",
+          "desc": "Ketiga game sepenuhnya aktif • Ekosistem NFA lengkap • VR penuh di semua judul • Turnamen global • Semesta yang saling terhubung terwujud"
+        }
       ],
       "helpHeading": "Bagaimana ANDA Bisa Membantu Sekarang",
       "helpItems": [
-        { "bold": "Beli NFA, NFC, atau NFT", "text": "— miliki seni digital dengan nilai terjamin yang mendanai pengembangan game" },
-        { "bold": "Buat NFT Anda sendiri", "text": "— jadilah kreator di marketplace dan dapatkan penghasilan dari setiap penjualan kembali" },
-        { "bold": "Bagikan dan sebarkan beritanya", "text": "— setiap pendukung baru mempercepat perjalanan menuju peluncuran" }
+        {
+          "bold": "Beli NFA, NFC, atau NFT",
+          "text": "— miliki seni digital dengan nilai terjamin yang mendanai pengembangan game"
+        },
+        {
+          "bold": "Buat NFT Anda sendiri",
+          "text": "— jadilah kreator di marketplace dan dapatkan penghasilan dari setiap penjualan kembali"
+        },
+        {
+          "bold": "Bagikan dan sebarkan beritanya",
+          "text": "— setiap pendukung baru mempercepat perjalanan menuju peluncuran"
+        }
       ],
       "link": "[www.hypertek.com] — Dukung Proyek. Miliki Masa Depan."
     },

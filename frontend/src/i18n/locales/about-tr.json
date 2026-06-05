@@ -3,13 +3,22 @@
     "badge": "HYPER TEK EVRENI",
     "heroHeading": "HAKKIMIZDA",
     "stats": [
-      { "v": "3", "l": "Oyun Dunyasi" },
-      { "v": "NFA", "l": "Garantili Min Geri Alim" },
-      { "v": "P2E", "l": "Oynayarak Kazan" }
+      {
+        "v": "3",
+        "l": "Oyun Dunyasi"
+      },
+      {
+        "v": "NFA",
+        "l": "Garantili Min Geri Alim"
+      },
+      {
+        "v": "P2E",
+        "l": "Oynayarak Kazan"
+      }
     ],
     "subtitle": [
       "Hyper Tek misyonu, oyun sektoru icindeki birden fazla sorunu ele almak ve oyun ekosistemlerinin nasil isletildigini yeniden tanimlamakti; oyuncularin tek bir oyun stiliyle sinirli olmadigi birbirine bagli bir evren yaratmak. Birden fazla turu tek bir ilerleme sisteminde birlestirerek Hyper Tek projesi, oyuncularin birlesik bir dunya icinde kesfedebilecegi, rekabet edebilecegi ve buyuyebilecegi dinamik bir ortam sunmaktadir.",
-      "Oyuncularin katki sagladdigi ekosistem icerisinde garantili minimum geri alim ile zaman icinde gercek degeri artan dijital varliklara gercek sahiplik tanima ve gercek oynayarak-kazan olarak tasarlanmis sistemler sunmayi hedeflemektedir.",
+      "Oyuncularin katki sagladdigi ekosistem icerisinde garantili minimum geri alim ile zaman icinde gercek degeri artan dijital varliklara gercek sahiplik tanima ve gercek oynayarak-kazan olarak tasarlanmis altyapi sunmayi hedeflemektedir.",
       "Proje, oyunculari ilerleme ve odulleri uzerinde anlamli sahiplik vererek guclendirmeyi, yaraticilik, isbirligi ve rekabeti tesvik etmeyi amaclamaktadir.",
       "Hyper Tek'in uzun vadeli vizyonu, birden fazla oyunun, ekonominin ve toplulugugun tek bir birbirine bagli platformda bir arada var oldugu yasayan bir dijital evren insa etmektir."
     ],
@@ -48,9 +57,21 @@
       "discover": "Kesfedin",
       "tryUI": "Arayuzu Dene",
       "games": [
-        { "name": "Hyper Racing", "tag": "Hiz · Ustunluk", "desc": "Dusmanca arazide yuksek hizli yaris. Aracini yukselt, ekibini kur ve galaksi genelinde bolgeler kazan." },
-        { "name": "Hyper Quest", "tag": "Kesif · Ticaret", "desc": "Gezegenlerde yol alin, gorevleri tamamlayin ve suresiz genisleyen bir yildiz haritasi uzerinde kaynaklar takas edin. Her teslimat ekonomiyi sekillendiriyor." },
-        { "name": "Overlord of the Seven Realms", "tag": "Strateji · Guc", "desc": "Orduları komuta edin, ittifaklar kurun ve alemleri fethedin. En guclu Overlord tum evrenin kaderini kontrol eder." }
+        {
+          "name": "Hyper Racing",
+          "tag": "Hiz · Ustunluk",
+          "desc": "Dusmanca arazide yuksek hizli yaris. Aracini yukselt, ekibini kur ve galaksi genelinde bolgeler kazan."
+        },
+        {
+          "name": "Hyper Quest",
+          "tag": "Kesif · Ticaret",
+          "desc": "Gezegenlerde yol alin, gorevleri tamamlayin ve suresiz genisleyen bir yildiz haritasi uzerinde kaynaklar takas edin. Her teslimat ekonomiyi sekillendiriyor."
+        },
+        {
+          "name": "Overlord of the Seven Realms",
+          "tag": "Strateji · Guc",
+          "desc": "Orduları komuta edin, ittifaklar kurun ve alemleri fethedin. En guclu Overlord tum evrenin kaderini kontrol eder."
+        }
       ]
     },
     "section04": {
@@ -63,27 +84,36 @@
           "title": "Nelerdir?",
           "intro": "Uc katmanda blokzincir baglantili dijital sanat eserleri:",
           "items": [
-            { "label": "NFA'lar...", "desc": "Mimar tarafindan olusturulmus, en yuksek oyun ici bonuslar, ultra nadir" },
-            { "label": "NFC'ler...", "desc": "Oyun ici bonuslu koleksiyonlar, oyuncu tarafindan olusturulabilir" },
-            { "label": "NFT'ler...", "desc": "Tamamen oyuncu yapimi, ussu guc bonuslari icin dekorasyon yapimi" }
+            {
+              "label": "NFA'lar...",
+              "desc": "Mimar tarafindan olusturulmus, en yuksek oyun ici bonuslar, yarı ila ultra nadir"
+            },
+            {
+              "label": "NFC'ler...",
+              "desc": "Oyun ici bonuslu koleksiyonlar, oyuncu tarafindan olusturulabilir"
+            },
+            {
+              "label": "NFT'ler...",
+              "desc": "Tamamen oyuncu yapimi, ussu guc bonuslari icin dekorasyon yapimi"
+            }
           ]
         },
         {
           "title": "Neden Degerlerini Korurlar",
           "bullets": [
             "Her sanat eserinde garantili minimum geri alim",
-            "Geri alim her yeniden satista artar",
+            "Geri alim her yeniden satisla artar",
             "Yilda iki kez enflasyona endeksli",
             "Degeriniz her zaman buyur, hicbir zaman kuculmez"
           ]
         },
         {
           "title": "Tasarim Gereği Adil",
-          "body": "Pazar yeri komisyonunun %85'e kadar olan kismi geri alim degerlerini artirmak, sanatci telif ucretlerini odemek ve gorevleri finanse etmek icin kullanilir. Oyuncular, basskalarini katilim icin odeyerek gorevler olusturarak ucreti azaltabilir; bu da her seviyede sosyal etkilesimi tesvike eder. Bu Hyper Tek'e ozgudur."
+          "body": "Pazar yeri komisyonunun %85'e kadar olan kismi geri alim degerlerini artirmak, sanatci telif ucretlerini odemek ve gercek play-to-earn faaliyetlerini finanse etmek icin kullanilir. Oyuncular, basskalarini katilim icin odeyerek gorevler olusturarak ucreti azaltabilir; bu da her seviyede sosyal etkilesimi tesvike eder. Bu Hyper Tek'e ozgudur."
         },
         {
           "title": "Simdi Dahil Olun",
-          "body": "Hyper Racing, Hyper Quest ve Overlord of the 7 Realms'i insa etmek icin kitle fonlamasi yapiyoruz. Satin aldiginiz veya olusturdugunuz her sanat eseri dogrudan gelistirmeyi finanse eder. Oyunun gelecegini insa etmeye yardim ederken garantili olarak degerini koruyan ve buyuyen sanata sahip olun.",
+          "body": "Hyper Tek Projesinin gelistirilmesini tamamlamak icin yakinda kitle fonlamasi kampanyamizi baslatiyor olacagiz. Nasil yardimci olabilirsiniz? Satin aldiginiz veya olusturdugunuz her sanat eseri dogrudan gelistirmeyi finanse eder. Oyunun gelecegini insa etmeye yardim ederken garantili olarak degerini koruyan ve buyuyen sanata sahip olun.",
           "link": "[www.hypertek.com] — Goz At. Satin Al. Olustur. Gelecege Sahip Ol."
         }
       ]
@@ -95,18 +125,45 @@
       "phaseLabel": "Aşama",
       "crowdfundingNow": "Simdi Kitle Fonlamasi",
       "phases": [
-        { "name": "Temel", "desc": "Web sitesi canli • Kullanici Arayuzu insa edildi • Pazar yeri faaliyette • NFA/NFC/NFT sistemi tasarlandi • Garantili geri alim cercevesi yerinde" },
-        { "name": "Simdi Kitle Fonlamasi", "desc": "NFA/NFC/NFT sanat eseri satislari canli • Oyuncu tarafindan olusturulan NFT'ler etkin • Komisyon paylasimi aktif • Topluluk insa etme • Fonlar oyun gelistirmeye akiyor" },
-        { "name": "Alfa Lansmani", "desc": "Hyper Racing alfa • Ilk oynanabilir oyun ortami • Oyun ici NFA entegrasyonu • Erken destekci ozel odulleri • Canli pazar yeri ticareti" },
-        { "name": "Ekosistem Genislemes", "desc": "Hyper Quest alfa • Oyunlar arasi ilerleme canli • Hyper Bucks para birimi entegrasyonu • Genisletilmis NFA koleksiyonlari • Gercek nakit odul etkinlikleri" },
-        { "name": "Overlord Lansmani", "desc": "Overlord of the 7 Realms alfa • Uc seviyeli savas sistemi • Savas Halkas erisimi • VR entegrasyonu • Tam uc oyun birlesik ekonomi" },
-        { "name": "Tam Surum", "desc": "Her uc oyun tam olarak canli • Tam NFA ekosistemi • Tum basliкlar genelinde tam VR • Kuresel turnuvalar • Birbirine bagli evren gerceklesti" }
+        {
+          "name": "Temel",
+          "desc": "Web sitesi canli • Kullanici Arayuzu insa edildi • Pazar yeri faaliyette • NFA/NFC/NFT sistemi tasarlandi • Garantili geri alim cercevesi yerinde"
+        },
+        {
+          "name": "Simdi Kitle Fonlamasi",
+          "desc": "NFA/NFC/NFT sanat eseri satislari canli • Oyuncu tarafindan olusturulan NFT'ler etkin • Komisyon paylasimi aktif • Topluluk insa etme • Fonlar oyun gelistirmeye akiyor"
+        },
+        {
+          "name": "Alfa Lansmani",
+          "desc": "Hyper Racing alfa • Ilk oynanabilir oyun ortami • Oyun ici NFA entegrasyonu • Erken destekci ozel odulleri • Canli pazar yeri ticareti"
+        },
+        {
+          "name": "Ekosistem Genislemes",
+          "desc": "Hyper Quest alfa • Oyunlar arasi ilerleme canli • Hyper Bucks para birimi entegrasyonu • Genisletilmis NFA koleksiyonlari • Gercek nakit odul etkinlikleri"
+        },
+        {
+          "name": "Overlord Lansmani",
+          "desc": "Overlord of the 7 Realms alfa • Uc seviyeli savas sistemi • Savas Halkas erisimi • VR entegrasyonu • Tam uc oyun birlesik ekonomi"
+        },
+        {
+          "name": "Tam Surum",
+          "desc": "Her uc oyun tam olarak canli • Tam NFA ekosistemi • Tum basliкlar genelinde tam VR • Kuresel turnuvalar • Birbirine bagli evren gerceklesti"
+        }
       ],
       "helpHeading": "SIMDI Nasil Yardim Edebilirsiniz",
       "helpItems": [
-        { "bold": "Bir NFA, NFC veya NFT Satin Alin", "text": "— oyun gelistirmeyi finanse eden garantili degerli dijital sanata sahip olun" },
-        { "bold": "Kendi NFT'nizi Olusturun", "text": "— pazar yerinde bir yaratici olun ve her yeniden satisten kazanin" },
-        { "bold": "Paylasin ve Haberi Yayın", "text": "— her yeni destekci lansmana gidis yolculugunu hizlandiriyor" }
+        {
+          "bold": "Bir NFA, NFC veya NFT Satin Alin",
+          "text": "— oyun gelistirmeyi finanse eden garantili degerli dijital sanata sahip olun"
+        },
+        {
+          "bold": "Kendi NFT'nizi Olusturun",
+          "text": "— pazar yerinde bir yaratici olun ve her yeniden satisten kazanin"
+        },
+        {
+          "bold": "Paylasin ve Haberi Yayın",
+          "text": "— her yeni destekci lansmana gidis yolculugunu hizlandiriyor"
+        }
       ],
       "link": "[www.hypertek.com] — Projeyi Destekle. Gelecege Sahip Ol."
     },

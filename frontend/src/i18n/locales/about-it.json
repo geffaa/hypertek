@@ -3,13 +3,22 @@
     "badge": "L'UNIVERSO HYPER TEK",
     "heroHeading": "CHI SIAMO",
     "stats": [
-      { "v": "3", "l": "Mondi di gioco" },
-      { "v": "NFA", "l": "Riacquisto minimo garantito" },
-      { "v": "P2E", "l": "Play-to-Earn" }
+      {
+        "v": "3",
+        "l": "Mondi di gioco"
+      },
+      {
+        "v": "NFA",
+        "l": "Riacquisto minimo garantito"
+      },
+      {
+        "v": "P2E",
+        "l": "Play-to-Earn"
+      }
     ],
     "subtitle": [
       "La missione di Hyper Tek era affrontare molteplici problemi all'interno dell'industria del gaming e ridefinire il funzionamento degli ecosistemi di gioco creando un universo interconnesso dove i giocatori non sono limitati a un singolo stile di gioco. Combinando più generi in un unico sistema di progressione, il progetto Hyper Tek fornisce un ambiente dinamico dove i giocatori possono esplorare, competere e crescere in un mondo unificato.",
-      "Si propone di dare vera proprietà ad asset digitali che hanno un valore reale, che aumenta nel tempo con un riacquisto minimo garantito su tutte le opere d'arte non fungibili, e veri sistemi play-to-earn all'interno dell'ecosistema a cui i giocatori contribuiscono.",
+      "Si propone di dare vera proprietà ad asset digitali che hanno un valore reale, che aumenta nel tempo con un riacquisto minimo garantito su tutte le opere d'arte non fungibili, e vera infrastruttura play-to-earn all'interno dell'ecosistema a cui i giocatori contribuiscono.",
       "Il progetto mira a responsabilizzare i giocatori dando loro una proprietà significativa sui loro progressi e ricompense, incoraggiando al contempo creatività, collaborazione e competizione.",
       "La visione a lungo termine di Hyper Tek è costruire un universo digitale vivente in cui più giochi, economie e comunità coesistano su un'unica piattaforma interconnessa."
     ],
@@ -48,9 +57,21 @@
       "discover": "Scopri",
       "tryUI": "Prova l'interfaccia",
       "games": [
-        { "name": "Hyper Racing", "tag": "Velocità · Dominio", "desc": "Corse ad alta velocità su terreni ostili. Migliora il tuo veicolo, costruisci la tua squadra e rivendica territori in tutta la galassia." },
-        { "name": "Hyper Quest", "tag": "Esplora · Commercia", "desc": "Naviga tra i pianeti, completa missioni e scambia risorse su una mappa stellare in continua espansione. Ogni consegna plasma l'economia." },
-        { "name": "Overlord of the Seven Realms", "tag": "Strategia · Potere", "desc": "Comanda eserciti, forgia alleanze e conquista regni. L'Overlord più potente controlla il destino dell'intero universo." }
+        {
+          "name": "Hyper Racing",
+          "tag": "Velocità · Dominio",
+          "desc": "Corse ad alta velocità su terreni ostili. Migliora il tuo veicolo, costruisci la tua squadra e rivendica territori in tutta la galassia."
+        },
+        {
+          "name": "Hyper Quest",
+          "tag": "Esplora · Commercia",
+          "desc": "Naviga tra i pianeti, completa missioni e scambia risorse su una mappa stellare in continua espansione. Ogni consegna plasma l'economia."
+        },
+        {
+          "name": "Overlord of the Seven Realms",
+          "tag": "Strategia · Potere",
+          "desc": "Comanda eserciti, forgia alleanze e conquista regni. L'Overlord più potente controlla il destino dell'intero universo."
+        }
       ]
     },
     "section04": {
@@ -63,27 +84,36 @@
           "title": "Cosa sono?",
           "intro": "Opere d'arte digitali collegate alla blockchain in tre livelli:",
           "items": [
-            { "label": "NFAs...", "desc": "Creati da architetti, bonus in gioco più elevati, ultra-rari" },
-            { "label": "NFCs...", "desc": "Oggetti da collezione con bonus in gioco, creabili dai giocatori" },
-            { "label": "NFTs...", "desc": "Creati interamente dai giocatori, decora la tua base per bonus di potere" }
+            {
+              "label": "NFAs...",
+              "desc": "Creati da architetti, bonus in gioco più elevati, da semi a ultra rari"
+            },
+            {
+              "label": "NFCs...",
+              "desc": "Oggetti da collezione con bonus in gioco, creabili dai giocatori"
+            },
+            {
+              "label": "NFTs...",
+              "desc": "Creati interamente dai giocatori, decora la tua base per bonus di potere"
+            }
           ]
         },
         {
           "title": "Perché mantengono il loro valore",
           "bullets": [
             "Riacquisto minimo garantito su ogni opera d'arte",
-            "Il riacquisto aumenta ad ogni rivendita",
+            "Il riacquisto aumenta con ogni rivendita",
             "Indicizzato all'inflazione due volte l'anno",
             "Il tuo valore cresce sempre, non diminuisce mai"
           ]
         },
         {
           "title": "Equo per design",
-          "body": "Fino all'85% della commissione del marketplace va ad aumentare i valori di riacquisto, a pagare i diritti agli artisti e a finanziare le missioni. I giocatori possono ridurre le commissioni creando missioni che pagano altri per partecipare, favorendo l'interazione sociale a ogni livello. Questo è unico di Hyper Tek."
+          "body": "Fino all'85% della commissione del marketplace va ad aumentare i valori di riacquisto, a pagare i diritti agli artisti e a finanziare vere attività play-to-earn. I giocatori possono ridurre le commissioni creando missioni che pagano altri per partecipare, favorendo l'interazione sociale a ogni livello. Questo è unico di Hyper Tek."
         },
         {
           "title": "Partecipa ora",
-          "body": "Stiamo raccogliendo fondi tramite crowdfunding per costruire Hyper Racing, Hyper Quest e Overlord of the 7 Realms. Ogni opera d'arte che acquisti o crei finanzia direttamente lo sviluppo. Possiedi arte con valore garantito che cresce mentre aiuti a costruire il futuro del gaming.",
+          "body": "Stiamo per lanciare la nostra campagna di crowdfunding per completare lo sviluppo del Progetto Hyper Tek. Come puoi aiutare? Ogni opera d'arte che acquisti o crei finanzia direttamente lo sviluppo. Possiedi arte con valore garantito che cresce mentre aiuti a costruire il futuro del gaming.",
           "link": "[www.hypertek.com] — Sfoglia. Acquista. Crea. Possiedi il futuro."
         }
       ]
@@ -95,18 +125,45 @@
       "phaseLabel": "Fase",
       "crowdfundingNow": "Crowdfunding in corso",
       "phases": [
-        { "name": "Fondamenta", "desc": "Sito web live • Interfaccia utente costruita • Marketplace operativo • Sistema NFA/NFC/NFT progettato • Framework di riacquisto garantito in atto" },
-        { "name": "Crowdfunding in corso", "desc": "Vendite di opere NFA/NFC/NFT live • NFT creati dai giocatori abilitati • Condivisione commissioni attiva • Costruzione della comunità • Fondi che affluiscono nello sviluppo del gioco" },
-        { "name": "Lancio Alpha", "desc": "Alpha di Hyper Racing • Primo ambiente di gioco giocabile • Integrazione NFA in-game • Ricompense esclusive per i primi finanziatori • Trading live sul marketplace" },
-        { "name": "Espansione dell'ecosistema", "desc": "Alpha di Hyper Quest • Progressione cross-game live • Integrazione valuta Hyper Bucks • Collezioni NFA ampliate • Eventi con premi in denaro reale" },
-        { "name": "Lancio di Overlord", "desc": "Alpha di Overlord of the 7 Realms • Sistema di battaglia a tre livelli • Accesso alla Battle Ring • Integrazione VR • Economia unificata dei tre giochi" },
-        { "name": "Rilascio completo", "desc": "Tutti e tre i giochi completamente live • Ecosistema NFA completo • VR completo su tutti i titoli • Tornei globali • L'universo interconnesso realizzato" }
+        {
+          "name": "Fondamenta",
+          "desc": "Sito web live • Interfaccia utente costruita • Marketplace operativo • Sistema NFA/NFC/NFT progettato • Framework di riacquisto garantito in atto"
+        },
+        {
+          "name": "Crowdfunding in corso",
+          "desc": "Vendite di opere NFA/NFC/NFT live • NFT creati dai giocatori abilitati • Condivisione commissioni attiva • Costruzione della comunità • Fondi che affluiscono nello sviluppo del gioco"
+        },
+        {
+          "name": "Lancio Alpha",
+          "desc": "Alpha di Hyper Racing • Primo ambiente di gioco giocabile • Integrazione NFA in-game • Ricompense esclusive per i primi finanziatori • Trading live sul marketplace"
+        },
+        {
+          "name": "Espansione dell'ecosistema",
+          "desc": "Alpha di Hyper Quest • Progressione cross-game live • Integrazione valuta Hyper Bucks • Collezioni NFA ampliate • Eventi con premi in denaro reale"
+        },
+        {
+          "name": "Lancio di Overlord",
+          "desc": "Alpha di Overlord of the 7 Realms • Sistema di battaglia a tre livelli • Accesso alla Battle Ring • Integrazione VR • Economia unificata dei tre giochi"
+        },
+        {
+          "name": "Rilascio completo",
+          "desc": "Tutti e tre i giochi completamente live • Ecosistema NFA completo • VR completo su tutti i titoli • Tornei globali • L'universo interconnesso realizzato"
+        }
       ],
       "helpHeading": "Come TU puoi aiutare adesso",
       "helpItems": [
-        { "bold": "Acquista un NFA, NFC o NFT", "text": "— possiedi arte digitale con valore garantito che finanzia lo sviluppo del gioco" },
-        { "bold": "Crea il tuo NFT", "text": "— diventa un creatore nel marketplace e guadagna da ogni rivendita" },
-        { "bold": "Condividi e diffondi la voce", "text": "— ogni nuovo sostenitore accelera il cammino verso il lancio" }
+        {
+          "bold": "Acquista un NFA, NFC o NFT",
+          "text": "— possiedi arte digitale con valore garantito che finanzia lo sviluppo del gioco"
+        },
+        {
+          "bold": "Crea il tuo NFT",
+          "text": "— diventa un creatore nel marketplace e guadagna da ogni rivendita"
+        },
+        {
+          "bold": "Condividi e diffondi la voce",
+          "text": "— ogni nuovo sostenitore accelera il cammino verso il lancio"
+        }
       ],
       "link": "[www.hypertek.com] — Sostieni il progetto. Possiedi il futuro."
     },

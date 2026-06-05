@@ -152,7 +152,7 @@ function About({ isPreview = false }) {
         <div className="absolute bottom-0 left-0 right-0 h-32" style={{ background: "linear-gradient(to bottom,transparent,#060610)" }} />
         <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg,transparent,rgba(56,189,248,0.4) 40%,rgba(56,189,248,0.4) 60%,transparent)" }} />
 
-        <div className={`relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-20 ${isPreview ? "pt-[72px]" : "pt-36"} pb-10 flex flex-col md:flex-row items-start gap-8`}>
+        <div className={`relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-20 ${isPreview ? "pt-[72px]" : "pt-24"} pb-10 flex flex-col md:flex-row items-start gap-8`}>
 
           {/* Left */}
           <motion.div

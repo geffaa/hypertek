@@ -3,13 +3,22 @@
     "badge": "HYPER TEK-UNIVERSUM",
     "heroHeading": "OM OSS",
     "stats": [
-      { "v": "3", "l": "Spelvärldar" },
-      { "v": "NFA", "l": "Garanterat min. återköp" },
-      { "v": "P2E", "l": "Play-to-Earn" }
+      {
+        "v": "3",
+        "l": "Spelvärldar"
+      },
+      {
+        "v": "NFA",
+        "l": "Garanterat min. återköp"
+      },
+      {
+        "v": "P2E",
+        "l": "Play-to-Earn"
+      }
     ],
     "subtitle": [
       "Hyper Teks uppdrag var att åtgärda flera problem inom spelindustrin och att omdefiniera hur spelekosystem fungerar genom att skapa ett sammankopplat universum där spelare inte är begränsade till en enda spelstil. Genom att kombinera flera genrer i ett progressionssystem skapar Hyper Tek-projektet en dynamisk miljö där spelare kan utforska, tävla och växa inom en enad värld.",
-      "Det strävar efter att ge äkta ägande av digitala tillgångar med verkligt värde, som ökar med tiden med ett garanterat minsta återköp på alla Non-Fungible Artworks, och äkta play-to-earn-designade system inom ekosystemet som spelare bidrar till.",
+      "Det strävar efter att ge äkta ägande av digitala tillgångar med verkligt värde, som ökar med tiden med ett garanterat minsta återköp på alla Non-Fungible Artworks, och äkta play-to-earn-designad infrastruktur inom ekosystemet som spelare bidrar till.",
       "Projektet syftar till att stärka spelare genom att ge dem meningsfull kontroll över sin framsteg och belöningar, samtidigt som det uppmuntrar kreativitet, samarbete och konkurrens.",
       "Hyper Teks långsiktiga vision är att bygga ett levande digitalt universum där flera spel, ekonomier och gemenskaper samexisterar på en enda sammankopplad plattform."
     ],
@@ -48,9 +57,21 @@
       "discover": "Utforska",
       "tryUI": "Prova gränssnittet",
       "games": [
-        { "name": "Hyper Racing", "tag": "Hastighet · Dominans", "desc": "Höghastighetsracing över fientlig terräng. Uppgradera ditt fordon, bygg ditt team och erövra territorium i galaxen." },
-        { "name": "Hyper Quest", "tag": "Utforska · Handla", "desc": "Navigera planeter, slutför uppdrag och handla resurser över en ständigt expanderande stjärnkarta. Varje leverans formar ekonomin." },
-        { "name": "Overlord of the Seven Realms", "tag": "Strategi · Makt", "desc": "Befäl arméer, smid allianser och erövra riken. Den mäktigaste Overlord kontrollerar hela universums öde." }
+        {
+          "name": "Hyper Racing",
+          "tag": "Hastighet · Dominans",
+          "desc": "Höghastighetsracing över fientlig terräng. Uppgradera ditt fordon, bygg ditt team och erövra territorium i galaxen."
+        },
+        {
+          "name": "Hyper Quest",
+          "tag": "Utforska · Handla",
+          "desc": "Navigera planeter, slutför uppdrag och handla resurser över en ständigt expanderande stjärnkarta. Varje leverans formar ekonomin."
+        },
+        {
+          "name": "Overlord of the Seven Realms",
+          "tag": "Strategi · Makt",
+          "desc": "Befäl arméer, smid allianser och erövra riken. Den mäktigaste Overlord kontrollerar hela universums öde."
+        }
       ]
     },
     "section04": {
@@ -63,27 +84,36 @@
           "title": "Vad är de?",
           "intro": "Blockkedjelänkad digital konst i tre nivåer:",
           "items": [
-            { "label": "NFA...", "desc": "Arkitektskapat, högsta spelbonus, ultrasällsynt" },
-            { "label": "NFC...", "desc": "Samlarföremål med spelbonus, spelarskapsbart" },
-            { "label": "NFT...", "desc": "Helt spelarskapad, dekorera din bas för kraftbonus" }
+            {
+              "label": "NFA...",
+              "desc": "Arkitektskapat, högsta spelbonus, semi till ultrasällsynt"
+            },
+            {
+              "label": "NFC...",
+              "desc": "Samlarföremål med spelbonus, spelarskapsbart"
+            },
+            {
+              "label": "NFT...",
+              "desc": "Helt spelarskapad, dekorera din bas för kraftbonus"
+            }
           ]
         },
         {
           "title": "Varför de behåller värde",
           "bullets": [
             "Garanterat minsta återköp på varje konstverk",
-            "Återköp ökar vid varje vidareförsäljning",
+            "Återköp ökar med varje vidareförsäljning",
             "Inflationsindexerat två gånger per år",
             "Ditt värde växer alltid, krymper aldrig"
           ]
         },
         {
           "title": "Rättvist av design",
-          "body": "Upp till 85 % av marknadsplatsens provision går till att öka återköpsvärden, betala konstnärsroyalties och finansiera uppdrag. Spelare kan minska avgifter genom att skapa uppdrag som betalar andra att delta, vilket driver social interaktion på varje nivå. Detta är unikt för Hyper Tek."
+          "body": "Upp till 85 % av marknadsplatsens provision går till att öka återköpsvärden, betala konstnärsroyalties och finansiera genuina play-to-earn-aktiviteter. Spelare kan minska avgifter genom att skapa uppdrag som betalar andra att delta, vilket driver social interaktion på varje nivå. Detta är unikt för Hyper Tek."
         },
         {
           "title": "Engagera dig nu",
-          "body": "Vi crowdfundar för att bygga Hyper Racing, Hyper Quest och Overlord of the 7 Realms. Varje konstverk du köper eller skapar finansierar direkt utvecklingen. Äg konst som garanteras hålla och öka i värde medan du hjälper till att bygga framtidens gaming.",
+          "body": "Vi håller på att lansera vår crowdfunding-kampanj för att slutföra utvecklingen av Hyper Tek-projektet. Hur kan du hjälpa? Varje konstverk du köper eller skapar finansierar direkt utvecklingen. Äg konst som garanteras hålla och öka i värde medan du hjälper till att bygga framtidens gaming.",
           "link": "[www.hypertek.com] — Bläddra. Köp. Skapa. Äg framtiden."
         }
       ]
@@ -95,18 +125,45 @@
       "phaseLabel": "Fas",
       "crowdfundingNow": "Crowdfunding pågår",
       "phases": [
-        { "name": "Grund", "desc": "Webbplats live • Användargränssnitt byggt • Marknadsplats operativ • NFA/NFC/NFT-system designat • Garanterat återköpsramverk på plats" },
-        { "name": "Crowdfunding pågår", "desc": "NFA/NFC/NFT-konstverksförsäljning live • Spelarskapade NFT aktiverade • Provisionsdelning aktiv • Gemenskapsbyggande • Medel flödar in i spelutveckling" },
-        { "name": "Alpha-lansering", "desc": "Hyper Racing alpha • Första spelbar spelmiljö • NFA-integration i spelet • Exklusiva belöningar för tidiga stödjare • Live-marknadshandel" },
-        { "name": "Ekosystemexpansion", "desc": "Hyper Quest alpha • Korsande spelprogression live • HyperBucks-valutaintegration • Utökade NFA-samlingar • Riktiga kontantprisevents" },
-        { "name": "Overlord-lansering", "desc": "Overlord of the 7 Realms alpha • Tri-nivå kampsystem • Battle Ring-åtkomst • VR-integration • Full trespels enad ekonomi" },
-        { "name": "Fullständig lansering", "desc": "Alla tre spelen fullt live • Komplett NFA-ekosystem • Full VR i alla titlar • Globala turneringar • Det sammankopplade universum förverkligat" }
+        {
+          "name": "Grund",
+          "desc": "Webbplats live • Användargränssnitt byggt • Marknadsplats operativ • NFA/NFC/NFT-system designat • Garanterat återköpsramverk på plats"
+        },
+        {
+          "name": "Crowdfunding pågår",
+          "desc": "NFA/NFC/NFT-konstverksförsäljning live • Spelarskapade NFT aktiverade • Provisionsdelning aktiv • Gemenskapsbyggande • Medel flödar in i spelutveckling"
+        },
+        {
+          "name": "Alpha-lansering",
+          "desc": "Hyper Racing alpha • Första spelbar spelmiljö • NFA-integration i spelet • Exklusiva belöningar för tidiga stödjare • Live-marknadshandel"
+        },
+        {
+          "name": "Ekosystemexpansion",
+          "desc": "Hyper Quest alpha • Korsande spelprogression live • HyperBucks-valutaintegration • Utökade NFA-samlingar • Riktiga kontantprisevents"
+        },
+        {
+          "name": "Overlord-lansering",
+          "desc": "Overlord of the 7 Realms alpha • Tri-nivå kampsystem • Battle Ring-åtkomst • VR-integration • Full trespels enad ekonomi"
+        },
+        {
+          "name": "Fullständig lansering",
+          "desc": "Alla tre spelen fullt live • Komplett NFA-ekosystem • Full VR i alla titlar • Globala turneringar • Det sammankopplade universum förverkligat"
+        }
       ],
       "helpHeading": "Hur DU kan hjälpa just nu",
       "helpItems": [
-        { "bold": "Köp en NFA, NFC eller NFT", "text": "— äg digital konst med garanterat värde som finansierar spelutveckling" },
-        { "bold": "Skapa din egen NFT", "text": "— bli skapare på marknadsplatsen och tjäna på varje vidareförsäljning" },
-        { "bold": "Dela och sprid budskapet", "text": "— varje ny supporter påskyndar resan mot lansering" }
+        {
+          "bold": "Köp en NFA, NFC eller NFT",
+          "text": "— äg digital konst med garanterat värde som finansierar spelutveckling"
+        },
+        {
+          "bold": "Skapa din egen NFT",
+          "text": "— bli skapare på marknadsplatsen och tjäna på varje vidareförsäljning"
+        },
+        {
+          "bold": "Dela och sprid budskapet",
+          "text": "— varje ny supporter påskyndar resan mot lansering"
+        }
       ],
       "link": "[www.hypertek.com] — Stöd projektet. Äg framtiden."
     },
