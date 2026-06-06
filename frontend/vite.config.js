@@ -25,11 +25,8 @@ export default defineConfig({
             if (id.includes('i18next') || id.includes('react-i18next')) {
               return 'vendor-i18n';
             }
-            // React core
-            if (id.includes('react-dom') || id.includes('react-router')) {
-              return 'vendor-react';
-            }
-            // Everything else in node_modules
+            // Everything else in node_modules (includes react, react-dom, react-router)
+            // Keep them together to avoid multiple React instance errors
             return 'vendor';
           }
         },
