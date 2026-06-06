@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# Video files (stored in R2, too large for git)
+public/video/

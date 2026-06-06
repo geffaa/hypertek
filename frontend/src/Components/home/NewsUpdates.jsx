@@ -114,6 +114,7 @@ function VideoModal({ item, onClose }) {
           autoPlay
           controls
           playsInline
+          preload="metadata"
           style={{
             width: "100%", borderRadius: 12,
             maxHeight: "80vh", background: "#000",

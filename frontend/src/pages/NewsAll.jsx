@@ -87,7 +87,7 @@ function VideoModal({ item, onClose }) {
           <X style={{ width: 14, height: 14 }} /> {t("newsPage.close", "Close")}
         </button>
         <video
-          src={item.src} autoPlay controls playsInline
+          src={item.src} autoPlay controls playsInline preload="metadata"
           style={{ width: "100%", borderRadius: 12, maxHeight: "80vh", background: "#000", display: "block" }}
         />
         <div style={{ marginTop: 14, paddingLeft: 4 }}>

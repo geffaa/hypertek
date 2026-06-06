@@ -663,8 +663,8 @@ function VideoOverlay({ onClose }) {
             src="https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/quest_video2.webm"
             autoPlay
             loop
-            muted
             playsInline
+            controls
             preload="metadata"
             style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
           />
