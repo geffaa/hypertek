@@ -5,7 +5,7 @@ import useSiteContent from "../../hooks/useSiteContent";
 import { getImageUrl } from "../../Config";
 import LanguageSwitcher from "./LanguageSwitcher";
 
-import bgAuth from "../../assets/images/auth/bg-auth.png";
+import bgAuth from "../../assets/images/auth/bg-auth.webp";
 
 const Logo = "/logo-white.png";
 

@@ -7,10 +7,10 @@ import { FiArrowRight, FiMail, FiCheck } from "react-icons/fi";
 import { Gauge, Compass, Crown } from "lucide-react";
 import Navbar from "../Components/Common/Navbar";
 import Footer from "../Components/Common/Footer";
-import bgHero from "../assets/images/waitlist/bg-hero.png";
-import alphabetImg from "../assets/images/waitlist/alphabet.png";
-import character1 from "../assets/images/waitlist/character1.png";
-import character2 from "../assets/images/waitlist/character2.png";
+import bgHero from "../assets/images/waitlist/bg-hero.webp";
+import alphabetImg from "../assets/images/waitlist/alphabet.webp";
+import character1 from "../assets/images/waitlist/character1.webp";
+import character2 from "../assets/images/waitlist/character2.webp";
 import logoWhite from "../assets/logo-t-white.png";
 
 const WORLDS = [

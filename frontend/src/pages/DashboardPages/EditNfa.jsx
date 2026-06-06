@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import uploadIcon from "../../assets/images/CreateCollection/uploadIcon.png";
+import uploadIcon from "../../assets/images/CreateCollection/uploadIcon.webp";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../../Config";

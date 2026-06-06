@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import logo from "../assets/logo1.png";
+import logo from "../assets/logo1.webp";
 import LanguageSwitcher from "../Components/Common/LanguageSwitcher";
 
 /* ─── Skeleton shimmer keyframes (injected once) ──────── */
@@ -14,9 +14,9 @@ const shimmerCSS = `
 `;
 
 const GAME_STATIC = [
-  { id: "racing",   path: "/preview/racing",   image: "/racing3.png",   accent: "#22c55e", glow: "rgba(34,197,94,0.45)" },
-  { id: "quest",    path: "/preview/quest",    image: "/quest1.png",    accent: "#38bdf8", glow: "rgba(56,189,248,0.45)" },
-  { id: "overlord", path: "/preview/overlord", image: "/overlord4.png", accent: "#f87171", glow: "rgba(248,113,113,0.45)" },
+  { id: "racing",   path: "/preview/racing",   image: "/racing3.webp",   accent: "#22c55e", glow: "rgba(34,197,94,0.45)" },
+  { id: "quest",    path: "/preview/quest",    image: "/quest1.webp",    accent: "#38bdf8", glow: "rgba(56,189,248,0.45)" },
+  { id: "overlord", path: "/preview/overlord", image: "/overlord4.webp", accent: "#f87171", glow: "rgba(248,113,113,0.45)" },
 ];
 
 /* ─── Hook: preload a single image ────────────────────── */

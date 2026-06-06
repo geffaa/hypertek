@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import land1Image from "../../assets/images/Overview/land1.jpg";
-import ManImage from "../../assets/images/Overview/man.png";
+import land1Image from "../../assets/images/Overview/land1.webp";
+import ManImage from "../../assets/images/Overview/man.webp";
 import ProfileBanner from "./ProfileBanner";
 import { Link } from "react-router-dom";
 import NavLinks from "../ProfileSection/Navlinks";
-import Profile from "../../assets/images/Profile/Profile.png";
+import Profile from "../../assets/images/Profile/Profile.webp";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
@@ -13,7 +13,7 @@ import { FaUserCircle } from "react-icons/fa";
 import FullScreenLoader from "../Common/Spinner"
 import { useAccount, useReadContract } from 'wagmi';
 import { BASE_MARKETPLACE_ADDRESS, MARKETPLACE_ABI } from "../../Web3/Config";
-import TVector from "../../assets/images/popular/vector.png";
+import TVector from "../../assets/images/popular/vector.webp";
 import { ethers } from "ethers";
 import { useEmailWallet } from "../../hooks/useEmailWallet";
 

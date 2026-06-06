@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import CustomButton from "../Components/Buttons/Button1";
 import { Link } from "react-router-dom";
-import BackHome from "../assets/images/backhome.png";
+import BackHome from "../assets/images/backhome.webp";
 
 function Success() {
   return (

@@ -9,10 +9,10 @@ import LazyImage from "../Components/Common/LazyImage";
 import GlowingOrb from "../Components/Common/BgColoring";
 import { useTranslation } from "react-i18next";
 
-import aboutBg   from "../assets/images/aboutpage/about_bg.jpg";
-import charImg   from "../assets/images/aboutpage/char.png";
-import ourstory1 from "../assets/images/aboutpage/ourstory1.png";
-import gamePng   from "../assets/images/aboutpage/game.png";
+import aboutBg   from "../assets/images/aboutpage/about_bg.webp";
+import charImg   from "../assets/images/aboutpage/char.webp";
+import ourstory1 from "../assets/images/aboutpage/ourstory1.webp";
+import gamePng   from "../assets/images/aboutpage/game.webp";
 
 // ── Static visual data (no text) ─────────────────────────────────────────────
 const NFA_CARDS_STATIC = [
@@ -32,9 +32,9 @@ const PHASES_STATIC = [
 ];
 
 const GAMES_STATIC = [
-  { img: "/racing3.png",       accent: "#f59e0b", glow: "rgba(245,158,11,0.35)",  mode: "racing"   },
-  { img: "/quest1.png",        accent: "#22c55e", glow: "rgba(34,197,94,0.35)",   mode: "quest"    },
-  { img: "/overlord_panel.png",accent: "#a78bfa", glow: "rgba(167,139,250,0.35)", mode: "overlord" },
+  { img: "/racing3.webp",       accent: "#f59e0b", glow: "rgba(245,158,11,0.35)",  mode: "racing"   },
+  { img: "/quest1.webp",        accent: "#22c55e", glow: "rgba(34,197,94,0.35)",   mode: "quest"    },
+  { img: "/overlord_panel.webp",accent: "#a78bfa", glow: "rgba(167,139,250,0.35)", mode: "overlord" },
 ];
 
 const WEB3_CARD_ACCENTS = [
@@ -221,7 +221,7 @@ function About({ isPreview = false }) {
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-stretch">
           <motion.div className="w-full lg:w-[45%] flex-shrink-0 flex" variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
             <div className="relative rounded-2xl overflow-hidden w-full">
-              <LazyImage src="/about2.png" alt="Our Mission" fallback={ourstory1}
+              <LazyImage src="/about2.webp" alt="Our Mission" fallback={ourstory1}
                 className="w-full h-full min-h-[280px]" imgClassName="object-cover" />
               <CornerAccent />
               <div className="absolute inset-0 pointer-events-none rounded-2xl" style={{ border: "1px solid rgba(56,189,248,0.18)" }} />

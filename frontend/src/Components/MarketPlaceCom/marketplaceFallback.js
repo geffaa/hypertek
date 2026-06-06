@@ -1,5 +1,5 @@
 // Shared fallback items shown on both /market-place and /collections/:category
-// when the backend returns no listed items. No image field — both pages use overview1.jpg as fallback.
+// when the backend returns no listed items. No image field — both pages use overview1.webp as fallback.
 export const FALLBACK_ITEMS = {
   skins: [
     { _id: "fs-1", name: "Desert Storm Skin",    priceETH: 45,  description: "Camouflage desert warfare skin for elite soldiers.",        parentCategory: "skins", isDummy: true },

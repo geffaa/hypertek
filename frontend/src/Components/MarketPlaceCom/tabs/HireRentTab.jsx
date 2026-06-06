@@ -5,7 +5,7 @@ import { Users, Package, Plus, X, Clock, RotateCcw, ShieldAlert, Gamepad2, Info,
 import { useTranslation } from "react-i18next";
 import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
 import LazyImage from "../../Common/LazyImage";
-import popularFallback from "../../../assets/images/popular/popolar.png";
+import popularFallback from "../../../assets/images/popular/popolar.webp";
 
 const DURATION_LABELS = { 8: "8 hours", 24: "1 day", 72: "3 days", 168: "1 week", 720: "1 month" };
 

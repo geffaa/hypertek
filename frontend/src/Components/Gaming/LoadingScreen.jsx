@@ -31,7 +31,7 @@ export default function LoadingScreen({ onDone }) {
       transition: "opacity 0.6s ease",
     }}>
       <img
-        src="/loading_game.png"
+        src="/loading_game.webp"
         alt="loading"
         style={{ position:"absolute", inset:0, width:"100%", height:"100%",
           objectFit:"cover", objectPosition:"center" }}

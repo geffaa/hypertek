@@ -38,7 +38,7 @@ const SPECIES = [
     clothing: "Trial style, made of natural and fabricated fibres",
     palette: ["#E5E7EB", "#374151", "#9CA3AF", "#D1D5DB"],
     notes: "The Lithionites are a complex species, classified as mutagenic, metamorphic hybrids. They are distinguished by their hard, rough exoskeletons and unique crystallised fluidic inner structure.\n\nIn terms of behaviour, Lithionites are known for their aggressive nature and can be easily provoked into combat when threatened or challenged. Despite their fierce disposition, they are quite sociable among members of their own species, where they often engage in social bonding rituals, although they are typically wary of outsiders and may perceive them as threats and, or prey.\n\nWithin their groups, Lithionites have a tendency to test their strength against one another, leading to competitive displays that can sometimes disrupt group cohesion and unity. This frequent rivalry, while integral to their culture, can result in internal conflicts.\n\nTheir diet is diverse, encompassing both plant life and meat sources. Lithionites are skilled hunters and ruthless in capturing prey. Their lack of mercy during hunts showcases their survival instincts and emphasises their dominance in their ecosystem.\n\nLithionites reside in caves or constructed rock shelters at the bases of mountainous regions and rocky plains. These environments not only provide them with ample resources but also serve as strategic vantage points for observing rival species or potential threats.\n\nLoyalty is a cornerstone of Lithionite culture; they are fiercely devoted to their kin and will mobilise to engage in warfare against other species to secure territory and valuable resources. This warrior spirit reflects their deep-rooted beliefs and values.\n\nSpiritually, Lithionites hold a profound connection to crystallised structures, considering them sacred. They engage in rituals that involve worshipping the light emitted from fire and the energies radiated by the crystals that surround them.",
-    imgs: ["/avatar/lithionites-female.png", "/avatar/lithionites-male.png"],
+    imgs: ["/avatar/lithionites-female.webp", "/avatar/lithionites-male.webp"],
     genders: ["female", "male"],
   },
   {
@@ -53,7 +53,7 @@ const SPECIES = [
     clothing: "Egyptian/Modern style, made of natural and fabricated fibres",
     palette: ["#FFFFFF", "#FCD34D", "#92400E", "#111827"],
     notes: "The Marmulus species are classified as mutagenic, metamorphic hybrids. These extraordinary beings are characterised by their hard, smooth exoskeletons and feature a unique, energised fluidic inner core.\n\nMarmulus are not just biologically advanced; they are also socially vibrant and incredibly outgoing. They express their sexuality openly, celebrating their identities through elaborate displays.\n\nTheir diet is diverse, comprising both plant life and meat, reflecting their adaptability as a species. Marmulus have a keen appreciation for valuable items and wealth, often seeking out rare treasures.\n\nOver the centuries, they have developed impressive cities that stand as testaments to their intelligence and creativity, favouring locations in mountainous regions or areas characterised by hard stone, which provide their inspiration.\n\nThe social structure of the Marmulus is deeply rooted in democratic values, fostering loyalty and camaraderie among its communities. They maintain a well-defined authority that ensures harmony within their society. Central to their culture is a belief in spiritual beings and the importance of structural alignment, guiding their interactions with both the physical and metaphysical worlds.",
-    imgs: ["/avatar/marmulus-female.png", "/avatar/marmulus-male.png"],
+    imgs: ["/avatar/marmulus-female.webp", "/avatar/marmulus-male.webp"],
     genders: ["female", "male"],
   },
   {
@@ -67,7 +67,7 @@ const SPECIES = [
     clothing: "Roman, Natural and Fabricated Fibres, Silk, Cotton, and Leather",
     palette: ["#111827", "#7C2D12", "#B45309", "#BAE6FD"],
     notes: "The Ophidians species are characterised by their unique snake-alien hybrid appearance. With smooth, scaly skin that glistens in vibrant dark arrays of colors.\n\nThese creatures thrive in social settings, exhibiting a strong tendency to interact and bond with one another, although their demeanour towards outsiders is notably hostile.\n\nTheir diet is diverse, encompassing both meat and plant-based foods, which supports their dynamic lifestyle.\n\nOphidians are renowned for their deep social connections and affection, forming tight-knit communities where loyalty is paramount. When their territory is threatened, they display fierce protectiveness, and their readiness to engage in conflict can be easily provoked.\n\nWorshipping the sun is an integral part of their culture, as they flourish in warm to hot plains and arid regions. Their architectural prowess is evident in the advanced cities they construct in these sun-drenched environments, showcasing their engineering skills and adaptation to their preferred habitats.",
-    imgs: ["/avatar/ophidians-female.png", "/avatar/ophidians-male.png"],
+    imgs: ["/avatar/ophidians-female.webp", "/avatar/ophidians-male.webp"],
     genders: ["female", "male"],
   },
   {
@@ -81,7 +81,7 @@ const SPECIES = [
     clothing: "Long, flowing, Semi-Transparent, made of natural and fabricated fibres",
     palette: ["#FFFFFF", "#111827", "#78350F", "#9CA3AF"],
     notes: "The Geodian species are classified as mutagenic, metamorphic hybrids. These remarkable beings possess a striking crystalised lattice exoskeleton that shimmers and refracts light with mesmerising beauty, while their inner core flows with a thermos fluidic substance that fluctuates with thermal energy.\n\nIntelligent and highly evolved, Geodians have established intricate cities, showcasing advanced engineering and architectural marvels that often flourish near thermal hot springs or regions of intense heat, where their unique biology thrives.\n\nSocial in nature, Geodians embrace their communal existence, openly expressing their emotions and sexuality, fostering connections that bind them together.\n\nTheir diet is versatile, comprising both lush plant life and various forms of meat, reflecting their adaptive nature.\n\nThe Geodian society is marked by its democratic principles and well-structured systems, ensuring every voice is heard.\n\nThey hold a deep reverence for light, which dances through their crystal lattice, creating a captivating spectacle that symbolises their spiritual beliefs and unity within the community.",
-    imgs: ["/avatar/geodians-female.png", "/avatar/geodians-male.png"],
+    imgs: ["/avatar/geodians-female.webp", "/avatar/geodians-male.webp"],
     genders: ["female", "male"],
   },
   {
@@ -95,7 +95,7 @@ const SPECIES = [
     clothing: "Steampunk Style of clothing made from Natural and Fabricated Fibres, Silk, Cotton, and Leather",
     palette: ["#3B1F0A", "#1D3557", "#8B3A3A", "#B8860B"],
     notes: "The Fawnus species resembles a captivating blend of goat and alien features. Their bodies are covered in coarse, short fur that varies in colour, giving them an intriguing appearance that reflects their playful personalities.\n\nInherently mischievous and spirited, Fawnus are known for their love of play, often engaging in activities that showcase their vibrant energy.\n\nTheir diet is impressively diverse, as they thrive on both meat and plant-based foods, allowing them to adapt in varying environments that support their dynamic lifestyles.\n\nSocially, Fawnus are deeply connected, forming tight-knit communities where loyalty holds significant value. Their bonds are fierce, and they display a protective instinct towards both their kin and their territory, making them guardians of the places they inhabit.\n\nCulturally, the Fawnus are devout, worshipping an array of gods and religious symbols that are integral to their way of life. They take cues from Spanish culture, revelling in the joy of music and the allure of wealth, particularly gold, which they cherish as a symbol of prosperity.\n\nArchitecturally, their creations are nothing short of magnificent, showcasing a steampunk style that reflects both their artistic flair and engineering prowess. Grand structures adorned with intricate designs and mechanisms stand as a testament to their creativity and innovation.",
-    imgs: ["/avatar/fawnus-female.png", "/avatar/fawnus-male.png"],
+    imgs: ["/avatar/fawnus-female.webp", "/avatar/fawnus-male.webp"],
     genders: ["female", "male"],
   },
   {
@@ -109,7 +109,7 @@ const SPECIES = [
     environment: "Caves in Mountains or Hillsides",
     clothing: "Cloaked or Hooded Style of clothing made from Natural and Fabricated Fibres, Silk, Cotton, and Leather",
     palette: ["#0A0A0A", "#2C1A0E", "#6B2737", "#4B0082"],
-    imgs: ["/avatar/mantasquads-female.png", "/avatar/mantasquads-male.png"],
+    imgs: ["/avatar/mantasquads-female.webp", "/avatar/mantasquads-male.webp"],
     genders: ["female", "male"],
     notes: "The Mantaquads are unique beings, characterised by their four dexterous arms and four observant eyes, embodying the essence of an alien hybrid. These creatures possess a hive mind, allowing them to operate in perfect unison, which makes them a formidable force.\n\nSocial creatures by nature, Mantaquads engage in vibrant interactions and are known for their open and adventurous approach to sexuality.\n\nTheir pursuit of perfection drives them to master a wide array of martial arts, honing their skills with relentless dedication.\n\nThey consume both meat and plant-based foods, with a particular desire for hunting. Their hunting methods are both thrilling and ruthless, as they prefer to consume their prey while it is still alive, revelling in the primal act of pursuit.\n\nAs mercenaries, the Mantaquads are often sought after for their unparalleled efficiency and merciless prowess in battle. Their hive minds enhance this capability, enabling them to function seamlessly as a single unit, whether in combat or construction.\n\nThese beings exhibit remarkable architectural skills, erecting intricate and massive structures at a pace unmatched by any other species. Deeply religious, Mantaquads are devoted worshippers who follow an intriguing blend of medieval traditions and the use of satanic symbols. They demonstrate their faith by contributing at least 10% of their wealth to churches, reflecting their commitment to their beliefs and community.",
   },
@@ -125,7 +125,7 @@ const SPECIES = [
     clothing: "Natural Plant and Tree-Based Fibres, Silk, Cotton, and Leather",
     palette: ["#2D5016", "#5C3A1E", "#8B2500", "#4A7C59"],
     notes: "The Dryads are a fascinating and unique species, characterised by their hybrid nature that combines traits of trees and alien beings. This distinctive physiology allows them to thrive in diverse environments, often resembling the flora around them.\n\nThey have a hive-like mind, which enables them to communicate seamlessly with one another. This collective consciousness fosters a deep sense of unity and cooperation, allowing them to operate as a cohesive group while maintaining an intricate connection to the natural world, and they can sense the health of their surroundings, making them exceptional guardians of nature.\n\nTheir diet is primarily plant-based, consisting of leaves, fruits, and other botanical materials. However, they occasionally supplement their diet with small quantities of meat, which they acquire with great care and respect for the life they take.\n\nIn addition to their physical attributes, the Dryads are known for their playful and mischievous behaviour. They often engage in light-hearted pranks or games, reflecting their joyful spirit.\n\nTheir loyalty to one another and their homeland is unwavering, and they will fiercely protect their community and territory when threatened.\n\nSpiritually, the Dryads hold a profound belief in an afterlife that is intertwined with the cycles of nature. They revere the natural elements (Earth, Air, Fire, and Water) as divine forces, and they also worship celestial bodies such as the sun and stars, which they perceive as guiding lights in their existence. This deep connection to both nature and the cosmos shapes their culture, rituals, and overall way of life.",
-    imgs: ["/avatar/dryads-female.png", "/avatar/dryads-male.png"],
+    imgs: ["/avatar/dryads-female.webp", "/avatar/dryads-male.webp"],
     genders: ["female", "male"],
   },
 ];
@@ -316,7 +316,7 @@ export default function ProfileButton() {
     return () => document.removeEventListener("mousedown", handler);
   }, [open, charSelectOpen]);
 
-  const backendAvatarSrc = profile?.Avatar ? `${BACKEND_BASE_URL}${profile.Avatar}` : "/avatar/geodians-male.png";
+  const backendAvatarSrc = profile?.Avatar ? `${BACKEND_BASE_URL}${profile.Avatar}` : "/avatar/geodians-male.webp";
   const displayAvatarSrc = selectedChar
     ? (SPECIES.find(s => s.id === selectedChar.speciesId)?.imgs[selectedChar.variantIdx] ?? backendAvatarSrc)
     : backendAvatarSrc;
@@ -427,14 +427,14 @@ export default function ProfileButton() {
                   src={portraitAvatarSrc}
                   alt="Profile"
                   loading="lazy"
-                  onError={(e) => { e.currentTarget.src = "/avatar-potrait/geodians-male.png"; }}
+                  onError={(e) => { e.currentTarget.src = "/avatar-potrait/geodians-male.webp"; }}
                   style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", display: "block" }}
                 />
               </div>
 
               {/* PNG frame overlay — sits on top of avatar, transparent center shows avatar */}
               <img
-                src="/profile-frame.png"
+                src="/profile-frame.webp"
                 alt=""
                 draggable={false}
                 style={{
@@ -562,7 +562,7 @@ export default function ProfileButton() {
                           <img
                             src={displayAvatarSrc}
                             alt="avatar"
-                            onError={(e) => { e.currentTarget.src = "/avatar/geodians-male.png"; }}
+                            onError={(e) => { e.currentTarget.src = "/avatar/geodians-male.webp"; }}
                             style={{ width: "100%", height: "170%", objectFit: "cover", objectPosition: "center 10%", display: "block", transform: "scale(1.2)", transformOrigin: "top center" }}
                           />
                         </div>
@@ -576,7 +576,7 @@ export default function ProfileButton() {
                           pointerEvents: "none", userSelect: "none",
                         }}>
                           <img
-                            src="/avatar-frame.png"
+                            src="/avatar-frame.webp"
                             alt=""
                             draggable={false}
                             style={{ width: "100%", height: "100%", objectFit: "fill", display: "block" }}

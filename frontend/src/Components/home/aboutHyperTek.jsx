@@ -1,8 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
-import LeftImageDefault from "../../assets/images/about/about.jpg";
-import RightImage1Default from "../../assets/images/about/left.jpg";
-import RightImage2Default from "../../assets/images/about/right.jpg";
+import LeftImageDefault from "../../assets/images/about/about.webp";
+import RightImage1Default from "../../assets/images/about/left.webp";
+import RightImage2Default from "../../assets/images/about/right.webp";
 import useSiteContent from "../../hooks/useSiteContent";
 import { useTranslation } from "react-i18next";
 

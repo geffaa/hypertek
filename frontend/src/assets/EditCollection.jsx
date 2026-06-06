@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import uploadIcon from "../assets/images/CreateCollection/uploadIcon.png";
-import ChainIcon from "../assets/images/CreateCollection/ChainIcon.png"
+import uploadIcon from "../assets/images/CreateCollection/uploadIcon.webp";
+import ChainIcon from "../assets/images/CreateCollection/ChainIcon.webp"
 
 
 function EditColelctions() {

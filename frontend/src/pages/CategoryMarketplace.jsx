@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { ArrowLeft } from "lucide-react";
 import FullScreenLoader from "../Components/Common/Spinner";
 import { BACKEND_BASE_URL, getImageUrl } from "../Config";
-import overview1 from "../assets/images/Overview/overview1.jpg";
+import overview1 from "../assets/images/Overview/overview1.webp";
 import NavLinks from "../Components/MarketPlaceCom/NavLinks";
 import MarketplaceBanner from "../Components/MarketPlaceCom/MarketplaceBanner";
 import BottomInfoBar from "../Components/MarketPlaceCom/BottomInfoBar";

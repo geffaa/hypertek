@@ -1,11 +1,11 @@
 import React from "react";
-import Hero1 from "../../assets/images/Profile/Hero1.jpeg";
+import Hero1 from "../../assets/images/Profile/Hero1.webp";
 import useSiteContent from "../../hooks/useSiteContent";
 import { BACKEND_BASE_URL } from "../../Config";
 
 /**
  * Full-width profile hero banner — driven by CMS (profile_banner section).
- * Falls back to Hero1.jpeg if no CMS image is set.
+ * Falls back to Hero1.webp if no CMS image is set.
  */
 function ProfileBanner() {
   const { data: cms } = useSiteContent("profile_banner");

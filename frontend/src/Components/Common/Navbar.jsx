@@ -13,11 +13,11 @@ import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
 /// logout icions
-import logoutImage from "../../assets/images/login/logout.png";
+import logoutImage from "../../assets/images/login/logout.webp";
 // Social dropdown images
-import DiscordImg from "../../assets/images/discard.png";
-import xImg from "../../assets/images/skipe.png";
-import telegramImg from "../../assets/images/telegram.png";
+import DiscordImg from "../../assets/images/discard.webp";
+import xImg from "../../assets/images/skipe.webp";
+import telegramImg from "../../assets/images/telegram.webp";
 import { logout } from "../../Redux/AuthSlice";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";

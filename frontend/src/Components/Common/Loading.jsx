@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../../assets/logo1.png";
+import Logo from "../../assets/logo1.webp";
 import GlowinBg from "../Common/BgColoring"
 
 export default function Loading() {

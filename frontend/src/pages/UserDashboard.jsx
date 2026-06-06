@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import uploadIcon from "../assets/images/CreateCollection/uploadIcon.png";
-import ChainIcon from "../assets/images/CreateCollection/ChainIcon.png";
+import uploadIcon from "../assets/images/CreateCollection/uploadIcon.webp";
+import ChainIcon from "../assets/images/CreateCollection/ChainIcon.webp";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";

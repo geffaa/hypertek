@@ -23,7 +23,7 @@ const UNLOCKED_VEHICLES = [
     name: "Wraith SR-9",
     class: "Stealth Interceptor",
     bay: "BAY 03",
-    img: "/vehicle2-1.png",
+    img: "/vehicle2-1.webp",
     color: "#38bdf8",
     stats: {
       "Top Speed":     "1645 kt",
@@ -40,7 +40,7 @@ const UNLOCKED_VEHICLES = [
     name: "Voidhawk ZX-1",
     class: "Long Range Striker",
     bay: "BAY 01",
-    img: "/vehicle3-1.png",
+    img: "/vehicle3-1.webp",
     color: "#f97316",
     stats: {
       "Top Speed":     "1798 kt",
@@ -57,7 +57,7 @@ const UNLOCKED_VEHICLES = [
     name: "Phantom SP-3",
     class: "Shadow Striker",
     bay: "BAY 07",
-    img: "/Spaceship_3.png",
+    img: "/Spaceship_3.webp",
     color: "#a78bfa",
     stats: {
       "Top Speed":     "1854 kt",
@@ -74,7 +74,7 @@ const UNLOCKED_VEHICLES = [
     name: "Solar Fury SP-5",
     class: "Speed Chaser",
     bay: "BAY 11",
-    img: "/Spaceship_5.png",
+    img: "/Spaceship_5.webp",
     color: "#eab308",
     stats: {
       "Top Speed":     "1987 kt",
@@ -91,7 +91,7 @@ const UNLOCKED_VEHICLES = [
     name: "Aether SP-6",
     class: "Hyper Runner",
     bay: "BAY 13",
-    img: "/Spaceship_6.png",
+    img: "/Spaceship_6.webp",
     color: "#06b6d4",
     stats: {
       "Top Speed":     "2058 kt",
@@ -193,7 +193,7 @@ function TrackView({ speed }) {
       overflow: "hidden",
     }}>
       {/* ── Background image ── */}
-      <LazyImage src="/racing1.png" spinnerColor="#22c55e"
+      <LazyImage src="/racing1.webp" spinnerColor="#22c55e"
         style={{ objectPosition: "center" }} />
 
       {/* ── Dark vignette overlay ── */}
@@ -732,7 +732,7 @@ function GarageView() {
       `}</style>
 
       {/* ── Background ── */}
-      <LazyImage src="/racing-overlay.png" spinnerColor="#22c55e"
+      <LazyImage src="/racing-overlay.webp" spinnerColor="#22c55e"
         style={{ objectPosition: "center" }} />
 
       {/* ── Vehicle — 3D: large centered canvas, static: fixed container ── */}

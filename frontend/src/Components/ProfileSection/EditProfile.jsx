@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import overview1 from "../../assets/images/Profile/Hero1.jpeg";
-import Profile from "../../assets/images/Profile/Profile.png";
+import overview1 from "../../assets/images/Profile/Hero1.webp";
+import Profile from "../../assets/images/Profile/Profile.webp";
 import { FaUserCircle } from "react-icons/fa";
 import { FiCamera, FiCopy, FiEye, FiEyeOff } from "react-icons/fi";
 import ImageCropModal from "../ImageCropModal";

@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/maintenance.css";
-import logo from "../assets/logo1.png";
+import logo from "../assets/logo1.webp";
 
 export default function Maintenance() {
     return (

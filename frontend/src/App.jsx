@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -13,6 +13,10 @@ import ProtectedRoute from "./Components/ProtectRoutes";
 import { EmailWalletProvider } from "./context/EmailWalletContext";
 import Maintenance from "./pages/Maintenance";
 import SplashScreen from "./Components/Common/SplashScreen";
+import Navbar from "./Components/Common/Navbar";
+import Footer from "./Components/Common/Footer";
+import Loading from "./Components/Common/Loading";
+import ChatbotWidget from "./Components/Chatbot/ChatbotWidget";
 
 const MAINTENANCE_MODE = true;
 const MAINTENANCE_BYPASS_PATH = "/testing";
@@ -32,76 +36,65 @@ function shouldShowSplash() {
   return inactive;
 }
 
-import Home from "./pages/home";
-import About from "./pages/about";
-import Navbar from "./Components/Common/Navbar";
-import Footer from "./Components/Common/Footer";
-import Signup from "./pages/Signup";
-import Login from "./pages/Signin";
-import ForgotPasswor from "./pages/ForgotPasswor";
-import ResetPassword from "./pages/ResetPassword";
-import Loading from "./Components/Common/Loading";
-import HypeGamePage from "./pages/MoreNews";
-import NewsAll from "./pages/NewsAll";
-
-
-import MarketPlace from "./pages/MarketPlace";
-import NFA from "./pages/NFA";
-import Land from "./pages/Land";
-import CategoryMarketplace from "./pages/CategoryMarketplace";
-import PersonalActivity from "./pages/PersonalActivity";
-import NoPersonalActivity from "./pages/NoPersonalActivity";
-
-// NFA Pages
-import BuyNfa from "./pages/BuyNfa";
-import Payment from "./pages/Payment";
-import ErrorPage from "./pages/ErrorPage";
-import Success from "./pages/Success";
-
-// Profile Section
-import Collect from "./Components/ProfileSection/Collectible";
-import ProfileCategory from "./Components/ProfileSection/ProfileCategory";
-import Activity from "./Components/ProfileSection/Activity";
-import List from "./Components/ProfileSection/Listing";
-import Edit from "./Components/ProfileSection/EditProfile";
-import NotFound from "./pages/NotFound";
-import Waitlist from "./pages/Waitlist";
-import WaitlistForm from "./pages/WaitlistForm";
-import WhitepaperPage from "./pages/WhitepaperPage";
-import TermsPage from "./pages/TermsPage";
-import DashboardHome from "./pages/DashboardHome";
-import OfferedReceived from "./pages/OfferedReceived";
-import NoOffered from "./pages/NoOffered";
-import WalletConnect from "./pages/WalletConnect";
-import Wellcome from "./pages/Wellcome";
-import SigninWallet from "./pages/SigninWallet";
-import NoItem from "./pages/NoItem";
-import Stripe from "./pages/Stripe";
-import Funnel from "./pages/Funnel";
-import Gaming from "./pages/Gaming";
-import Nft101Article from "./pages/Nft101Article";
-import GameModePage from "./pages/GameModePage";
-import Preview from "./pages/Preview";
-import PreviewGameMode from "./pages/PreviewGameMode";
-import PreviewAbout from "./pages/PreviewAbout";
-import PreviewUI from "./pages/PreviewUI";
-
-import DashboardLayout from "./Layout/DashboardLayout";
-import ChatbotWidget from "./Components/Chatbot/ChatbotWidget";
-
-import NFTs from "./pages/DashboardPages/Nfts";
-import EditColelctions from "./assets/EditCollection";
-import EditProfile from "./pages/DashboardPages/EditUser";
-import Transactions from "./pages/DashboardPages/Transaction";
-import Support from "./pages/DashboardPages/Support";
-import AddCollection from "./pages/DashboardPages/AddCollection";
-import CollectionOnSale from "./pages/DashboardPages/CollectionOnSale";
-import MyOffers from "./pages/DashboardPages/MyOffers";
-import EditNfa from "./pages/DashboardPages/EditNfa";
-import AddUserCollection from "./pages/DashboardPages/AddUserCollection";
-import Withdraw from "./pages/DashboardPages/Withdraw";
-import UploadNFC from "./pages/DashboardPages/UploadNFC";
-import TopUp from "./pages/DashboardPages/TopUp";
+// Route-level lazy loading — each page is only loaded when first visited
+const Home = lazy(() => import("./pages/home"));
+const About = lazy(() => import("./pages/about"));
+const Signup = lazy(() => import("./pages/Signup"));
+const Login = lazy(() => import("./pages/Signin"));
+const ForgotPasswor = lazy(() => import("./pages/ForgotPasswor"));
+const ResetPassword = lazy(() => import("./pages/ResetPassword"));
+const HypeGamePage = lazy(() => import("./pages/MoreNews"));
+const NewsAll = lazy(() => import("./pages/NewsAll"));
+const MarketPlace = lazy(() => import("./pages/MarketPlace"));
+const NFA = lazy(() => import("./pages/NFA"));
+const Land = lazy(() => import("./pages/Land"));
+const CategoryMarketplace = lazy(() => import("./pages/CategoryMarketplace"));
+const PersonalActivity = lazy(() => import("./pages/PersonalActivity"));
+const NoPersonalActivity = lazy(() => import("./pages/NoPersonalActivity"));
+const BuyNfa = lazy(() => import("./pages/BuyNfa"));
+const Payment = lazy(() => import("./pages/Payment"));
+const ErrorPage = lazy(() => import("./pages/ErrorPage"));
+const Success = lazy(() => import("./pages/Success"));
+const Collect = lazy(() => import("./Components/ProfileSection/Collectible"));
+const ProfileCategory = lazy(() => import("./Components/ProfileSection/ProfileCategory"));
+const Activity = lazy(() => import("./Components/ProfileSection/Activity"));
+const List = lazy(() => import("./Components/ProfileSection/Listing"));
+const Edit = lazy(() => import("./Components/ProfileSection/EditProfile"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const Waitlist = lazy(() => import("./pages/Waitlist"));
+const WaitlistForm = lazy(() => import("./pages/WaitlistForm"));
+const WhitepaperPage = lazy(() => import("./pages/WhitepaperPage"));
+const TermsPage = lazy(() => import("./pages/TermsPage"));
+const DashboardHome = lazy(() => import("./pages/DashboardHome"));
+const OfferedReceived = lazy(() => import("./pages/OfferedReceived"));
+const NoOffered = lazy(() => import("./pages/NoOffered"));
+const WalletConnect = lazy(() => import("./pages/WalletConnect"));
+const Wellcome = lazy(() => import("./pages/Wellcome"));
+const SigninWallet = lazy(() => import("./pages/SigninWallet"));
+const NoItem = lazy(() => import("./pages/NoItem"));
+const Stripe = lazy(() => import("./pages/Stripe"));
+const Funnel = lazy(() => import("./pages/Funnel"));
+const Gaming = lazy(() => import("./pages/Gaming"));
+const Nft101Article = lazy(() => import("./pages/Nft101Article"));
+const GameModePage = lazy(() => import("./pages/GameModePage"));
+const Preview = lazy(() => import("./pages/Preview"));
+const PreviewGameMode = lazy(() => import("./pages/PreviewGameMode"));
+const PreviewAbout = lazy(() => import("./pages/PreviewAbout"));
+const PreviewUI = lazy(() => import("./pages/PreviewUI"));
+const DashboardLayout = lazy(() => import("./Layout/DashboardLayout"));
+const NFTs = lazy(() => import("./pages/DashboardPages/Nfts"));
+const EditColelctions = lazy(() => import("./assets/EditCollection"));
+const EditProfile = lazy(() => import("./pages/DashboardPages/EditUser"));
+const Transactions = lazy(() => import("./pages/DashboardPages/Transaction"));
+const Support = lazy(() => import("./pages/DashboardPages/Support"));
+const AddCollection = lazy(() => import("./pages/DashboardPages/AddCollection"));
+const CollectionOnSale = lazy(() => import("./pages/DashboardPages/CollectionOnSale"));
+const MyOffers = lazy(() => import("./pages/DashboardPages/MyOffers"));
+const EditNfa = lazy(() => import("./pages/DashboardPages/EditNfa"));
+const AddUserCollection = lazy(() => import("./pages/DashboardPages/AddUserCollection"));
+const Withdraw = lazy(() => import("./pages/DashboardPages/Withdraw"));
+const UploadNFC = lazy(() => import("./pages/DashboardPages/UploadNFC"));
+const TopUp = lazy(() => import("./pages/DashboardPages/TopUp"));
 
 // Wrapper component to handle route changes
 function AppWrapper() {
@@ -161,6 +154,7 @@ function AppWrapper() {
       {!shouldHideLayout && <Navbar />}
 
         <div style={{ flex: 1, position: "relative", zIndex: 20 }}>
+          <Suspense fallback={<Loading />}>
           <Routes key={location.pathname}>
             {/* Main Pages */}
             <Route path="/" element={<Home />} />
@@ -277,6 +271,7 @@ function AppWrapper() {
             {/* not found page  */}
             <Route path="*" element={<NotFound />} />
           </Routes>
+          </Suspense>
         </div>
         <Toaster position="top-right" reverseOrder={false} />
         {!shouldHideLayout && <Footer />}

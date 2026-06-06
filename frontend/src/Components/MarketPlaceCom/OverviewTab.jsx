@@ -15,13 +15,13 @@ const fadeUp = {
 };
 
 const AVATARS = {
-  nfa101:  "/avatar/dryads-male.png",
-  general: "/avatar/fawnus-female.png",
-  auctions:"/avatar/geodians-male.png",
-  trades:  "/avatar/geodians-female.png",
-  quests:  "/avatar/lithionites-female.png",
-  hire:    "/avatar/mantasquads-male.png",
-  bounty:  "/avatar/ophidians-female.png",
+  nfa101:  "/avatar/dryads-male.webp",
+  general: "/avatar/fawnus-female.webp",
+  auctions:"/avatar/geodians-male.webp",
+  trades:  "/avatar/geodians-female.webp",
+  quests:  "/avatar/lithionites-female.webp",
+  hire:    "/avatar/mantasquads-male.webp",
+  bounty:  "/avatar/ophidians-female.webp",
 };
 
 const FEATURE_ICONS = [GiCrystalBall, MdStorefront, GiGavel, GiTrade, GiCrossedSwords, GiShakingHands, GiTargetArrows];

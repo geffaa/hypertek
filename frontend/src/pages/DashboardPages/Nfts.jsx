@@ -6,7 +6,7 @@ import { useAccount } from "wagmi";
 import { useEmailWallet } from "../../hooks/useEmailWallet";
 import axios from "axios";
 import toast from "react-hot-toast";
-import Collectionimage from "../../assets/images/CreateCollection/collection.png";
+import Collectionimage from "../../assets/images/CreateCollection/collection.webp";
 import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
 import { FiSearch, FiEdit2, FiTrash2, FiTag, FiPackage, FiX, FiUploadCloud, FiAlertTriangle } from "react-icons/fi";
 import { Gavel, ArrowRightLeft, CheckCircle2, ChevronDown } from "lucide-react";

@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const GAME_STATIC = [
-  { id: "racing",   path: "/game/racing",   image: "/racing3.png",   accent: "#22c55e", glow: "rgba(34,197,94,0.45)" },
-  { id: "quest",    path: "/game/quest",    image: "/quest1.png",    accent: "#38bdf8", glow: "rgba(56,189,248,0.45)" },
-  { id: "overlord", path: "/game/overlord", image: "/overlord4.png", accent: "#f87171", glow: "rgba(248,113,113,0.45)" },
+  { id: "racing",   path: "/game/racing",   image: "/racing3.webp",   accent: "#22c55e", glow: "rgba(34,197,94,0.45)" },
+  { id: "quest",    path: "/game/quest",    image: "/quest1.webp",    accent: "#38bdf8", glow: "rgba(56,189,248,0.45)" },
+  { id: "overlord", path: "/game/overlord", image: "/overlord4.webp", accent: "#f87171", glow: "rgba(248,113,113,0.45)" },
 ];
 
 

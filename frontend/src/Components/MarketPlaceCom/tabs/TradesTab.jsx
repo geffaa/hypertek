@@ -7,7 +7,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
 import LazyImage from "../../Common/LazyImage";
-import popularFallback from "../../../assets/images/popular/popolar.png";
+import popularFallback from "../../../assets/images/popular/popolar.webp";
 import toast from "react-hot-toast";
 
 // ── Item Detail Popup ─────────────────────────────────────────────────────────

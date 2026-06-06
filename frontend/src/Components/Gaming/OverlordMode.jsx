@@ -194,7 +194,7 @@ function SpaceView() {
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", background: "#04010a" }}>
 
       {/* Background image */}
-      <LazyImage src="/overlord4.png" spinnerColor="#f87171" />
+      <LazyImage src="/overlord4.webp" spinnerColor="#f87171" />
 
       {/* Stars */}
       {Array.from({ length: 150 }, (_, i) => (
@@ -335,7 +335,7 @@ function WorldView() {
         willChange: "transform",
       }}>
         <img
-          src="/overlord_world3.png"
+          src="/overlord_world3.webp"
           alt="World Map"
           draggable={false}
           style={{

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import heroImage from "../../assets/images/hero.jpg";
+import heroImage from "../../assets/images/hero.webp";
 import CustomButton from "../Buttons/Button1";
 
 const HeroSection = () => {

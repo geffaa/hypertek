@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ChevronRight, SlidersHorizontal, X, Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import LazyImage from "../Common/LazyImage";
-import overview1 from "../../assets/images/Overview/overview1.jpg";
+import overview1 from "../../assets/images/Overview/overview1.webp";
 import { getImageUrl } from "../../Config";
 
 // ── Category i18n key lookup ──────────────────────────────────────────────────

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
-import heroImage from "../../assets/images/hero.jpg";
+import heroImage from "../../assets/images/hero.webp";
 import Logo from "/logo-white.png";
 import "../../App.css";
 import { Link, useNavigate } from "react-router-dom";

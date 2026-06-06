@@ -4,11 +4,11 @@ import { useTranslation } from "react-i18next";
 import { FiX, FiFileText, FiZap, FiPlusSquare, FiMessageSquare, FiPlusCircle } from "react-icons/fi";
 
 import Logo from "../../assets/logo-t-white.png";
-import CreateCollection1 from "../../assets/images/Sidebar/create1.png";
-import CreateCollection2 from "../../assets/images/Sidebar/create2.png";
-import CollectionImage from "../../assets/images/Sidebar/collections.png";
-import SupportImage from "../../assets/images/Sidebar/support.png";
-import LogoutImage from "../../assets/images/Sidebar/logout.png";
+import CreateCollection1 from "../../assets/images/Sidebar/create1.webp";
+import CreateCollection2 from "../../assets/images/Sidebar/create2.webp";
+import CollectionImage from "../../assets/images/Sidebar/collections.webp";
+import SupportImage from "../../assets/images/Sidebar/support.webp";
+import LogoutImage from "../../assets/images/Sidebar/logout.webp";
 
 const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
   const { t } = useTranslation();

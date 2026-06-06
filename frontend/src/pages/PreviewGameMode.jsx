@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import logo from "../assets/logo1.png";
+import logo from "../assets/logo1.webp";
 import LanguageSwitcher from "../Components/Common/LanguageSwitcher";
 
 /* ─── Skeleton shimmer keyframes ──────────────────────── */
@@ -47,7 +47,7 @@ const MODES_STATIC = {
     accent: "#22c55e",
     accentDim: "rgba(34,197,94,0.12)",
     glow: "rgba(34,197,94,0.3)",
-    panelImg: "/racing3.png",
+    panelImg: "/racing3.webp",
     videoSrc: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/racing_content.mp4",
   },
   quest: {
@@ -55,7 +55,7 @@ const MODES_STATIC = {
     accent: "#38bdf8",
     accentDim: "rgba(56,189,248,0.12)",
     glow: "rgba(56,189,248,0.25)",
-    panelImg: "/quest1.png",
+    panelImg: "/quest1.webp",
     videoSrc: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/quest_video2.webm",
   },
   overlord: {
@@ -64,7 +64,7 @@ const MODES_STATIC = {
     accent: "#f87171",
     accentDim: "rgba(248,113,113,0.12)",
     glow: "rgba(248,113,113,0.25)",
-    panelImg: "/overlord4.png",
+    panelImg: "/overlord4.webp",
     videoSrc: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/overlord_content.mp4",
   },
 };

@@ -6,7 +6,7 @@ import { useAccount } from "wagmi";
 import axios from "axios";
 import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
 import LazyImage from "../../Common/LazyImage";
-import popularFallback from "../../../assets/images/popular/popolar.png";
+import popularFallback from "../../../assets/images/popular/popolar.webp";
 
 const fadeUp = {
   hidden:  { opacity: 0, y: 24 },

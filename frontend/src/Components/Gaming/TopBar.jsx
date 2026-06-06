@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../Redux/AuthSlice";
-import symbol from "../../assets/images/login/Symbol.svg.png";
+import symbol from "../../assets/images/login/Symbol.svg.webp";
 import useMobileLandscape from "../../hooks/useMobileLandscape";
 import { Rocket } from "lucide-react";
 import i18n from "../../i18n/index.js";
@@ -28,11 +28,11 @@ function fmtVal(n) {
 
 // 5 resources per Don's brief — each has open/stored for dropdown
 const RESOURCE_META = [
-  { id: "FOOD", label: "Food", color: "#6ee7b7", img: "/icon_food.png", openSuffix: "5.3B" },
-  { id: "OIL", label: "Oil", color: "#94a3b8", img: "/icon_oil.png", openSuffix: "1.4B" },
-  { id: "CRYSTALS", label: "Energy Crystals", color: "#c4b5fd", img: "/icon_energy.png", openSuffix: "39M" },
-  { id: "FUEL", label: "Fuel", color: "#fb923c", img: "/icon_fuel.png", openSuffix: "766M" },
-  { id: "ORE", label: "Ore", color: "#cbd5e1", img: "/icon_ore.png", openSuffix: "821M" },
+  { id: "FOOD", label: "Food", color: "#6ee7b7", img: "/icon_food.webp", openSuffix: "5.3B" },
+  { id: "OIL", label: "Oil", color: "#94a3b8", img: "/icon_oil.webp", openSuffix: "1.4B" },
+  { id: "CRYSTALS", label: "Energy Crystals", color: "#c4b5fd", img: "/icon_energy.webp", openSuffix: "39M" },
+  { id: "FUEL", label: "Fuel", color: "#fb923c", img: "/icon_fuel.webp", openSuffix: "766M" },
+  { id: "ORE", label: "Ore", color: "#cbd5e1", img: "/icon_ore.webp", openSuffix: "821M" },
 ];
 
 // Resources panel categories per Don's brief
@@ -341,7 +341,7 @@ const SHIP_ROOMS = {
   ],
 };
 
-// ── Skin 1 weapon hotspot data — positions as % of level1-cover.jpeg ──
+// ── Skin 1 weapon hotspot data — positions as % of level1-cover.webp ──
 // circle:true = elliptical hotspot; rotate = degrees for rect hotspots
 // Total: 26 hotspots
 //   Left section (18): 1 far-left bar + 2 diagonal bays
@@ -679,7 +679,7 @@ export default function TopBar({ activeGame, isPreview = false }) {
                       }}>
                         {skin.unlocked ? (
                           <img
-                            src="/ships/level1-cover.jpeg"
+                            src="/ships/level1-cover.webp"
                             alt={skin.label}
                             style={{ width: "100%", height: "100%", objectFit: "cover" }}
                           />
@@ -1643,8 +1643,9 @@ export default function TopBar({ activeGame, isPreview = false }) {
                   <img
                     ref={shipImgRef}
                     key={shipLevel}
-                    src={`/ships/level${shipLevel}-plain.png`}
+                    src={`/ships/level${shipLevel}-plain.webp`}
                     alt={`Ship Level ${shipLevel}`}
+                    loading="lazy"
                     style={{ width: "100%", height: "auto", display: "block" }}
                   />
                   {/* Room highlight boxes — only visible on hover or select */}
@@ -2111,7 +2112,7 @@ export default function TopBar({ activeGame, isPreview = false }) {
               <div style={{ flex: 1, background: "#000", padding: isMobile ? "6px" : "10px", overflowY: "auto", overflowX: "hidden" }}>
                 <div style={{ position: "relative", display: "inline-block", width: "100%" }}>
                   <img
-                    src="/ships/level1-cover.jpeg"
+                    src="/ships/level1-cover.webp"
                     alt="Skin 1 Weapons Layout"
                     style={{ width: "100%", height: "auto", display: "block" }}
                   />

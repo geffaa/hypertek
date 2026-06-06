@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
-import SearchImage from "../../assets/search.png";
+import SearchImage from "../../assets/search.webp";
 import { BACKEND_BASE_URL } from "../../Config";
 
 function Transactions() {

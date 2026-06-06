@@ -1,22 +1,22 @@
 import { useMemo } from "react";
 
 const AVATARS = [
-  "/avatar/dryads-female.png",
-  "/avatar/dryads-male.png",
-  "/avatar/fawnus-female.png",
-  "/avatar/fawnus-male.png",
-  "/avatar/geodians-female.png",
-  "/avatar/geodians-male.png",
-  "/avatar/lithionites-female.png",
-  "/avatar/lithionites-male.png",
-  "/avatar/mantasquads-female.png",
-  "/avatar/mantasquads-male.png",
-  "/avatar/marmulus-female.png",
-  "/avatar/marmulus-male.png",
-  "/avatar/ophidians-female.png",
-  "/avatar/ophidians-male.png",
-  "/avatar/overlord.png",
-  "/avatar/commander-elite.png",
+  "/avatar/dryads-female.webp",
+  "/avatar/dryads-male.webp",
+  "/avatar/fawnus-female.webp",
+  "/avatar/fawnus-male.webp",
+  "/avatar/geodians-female.webp",
+  "/avatar/geodians-male.webp",
+  "/avatar/lithionites-female.webp",
+  "/avatar/lithionites-male.webp",
+  "/avatar/mantasquads-female.webp",
+  "/avatar/mantasquads-male.webp",
+  "/avatar/marmulus-female.webp",
+  "/avatar/marmulus-male.webp",
+  "/avatar/ophidians-female.webp",
+  "/avatar/ophidians-male.webp",
+  "/avatar/overlord.webp",
+  "/avatar/commander-elite.webp",
 ];
 
 export default function StickyAvatarSidebar() {

@@ -12,7 +12,7 @@ function MarketplaceBanner({ stats = [], titleOverride, descOverride, playing = 
   const heading  = titleOverride || (tHeading || cms.heading)     || "A New Era Dawns in Hyper Tek";
   const desc     = descOverride  || (tDesc    || cms.description) || "";
 
-  let bgImage = "/marketplace_banner.png";
+  let bgImage = "/marketplace_banner.webp";
   if (cms.background_image) {
     bgImage = cms.background_image.startsWith("http")
       ? cms.background_image

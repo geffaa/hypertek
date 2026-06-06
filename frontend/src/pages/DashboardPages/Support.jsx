@@ -3,7 +3,7 @@ import axios from "axios";
 import { io } from "socket.io-client";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import ChatImage from "../../assets/images/hyperbot-avatar.png";
+import ChatImage from "../../assets/images/hyperbot-avatar.webp";
 import { BACKEND_BASE_URL } from "../../Config";
 import { FiSend, FiMessageCircle, FiZap, FiShield, FiHelpCircle, FiClock } from "react-icons/fi";
 

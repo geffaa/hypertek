@@ -388,33 +388,33 @@ const LOCATIONS = [
 
 /* ── Planet image mapping — add entries here as assets arrive ── */
 const PLANET_IMG = {
-  agri:  "/planet/1.png",   // ZETA-37-6LP
-  sd:    "/planet/1.png",   // ZETA-51-M2
-  mil:   "/planet/1.png",   // ZV-23N-19U
-  orb:   "/planet/2.png",   // TXC-44P-GM09
-  ship:  "/planet/2.png",   // ICx3-9-GM09
-  echo:  "/planet/2.png",   // ZIR-12-56
-  logi:  "/planet/2.png",   // ZORAX-4SH
-  trade: "/planet/2.png",   // ZETA-73-QN
-  sci:   "/planet/3.png",   // ZETA-31-196
-  pion:  "/planet/3.png",   // TNS-554
-  sup:   "/planet/3.png",   // TLM-675
-  fuel:  "/planet/3.png",   // ZETA-91-9XV
-  cmd:   "/planet/4.png",   // ZORAX-19U
-  ind:   "/planet/4.png",   // ZETA-33-8V2
-  sig:   "/planet/4.png",   // TMA-488
-  asm:   "/planet/4.png",   // ZX-89-QW
-  ice:   "/planet/4.png",   // TZR-092
-  bio:   "/planet/4.png",   // TY-67-3P
-  col:   "/planet/5.png",   // FZC-423
-  res:   "/planet/5.png",   // ZETA-55-9R
-  relay: "/planet/6.png",   // ZEN-83-OX
-  trd:   "/planet/6.png",   // TKY-981
-  gas:   "/planet/6.png",   // TNG-921
-  tech:  "/planet/6.png",   // ZX-88-QW
-  comm:  "/planet/7.png",   // ZIR-31-6NV
-  expl:  "/planet/7.png",   // ZRSE-40P
-  nav:   "/planet/7.png",   // TQ-173-HN
+  agri:  "/planet/1.webp",   // ZETA-37-6LP
+  sd:    "/planet/1.webp",   // ZETA-51-M2
+  mil:   "/planet/1.webp",   // ZV-23N-19U
+  orb:   "/planet/2.webp",   // TXC-44P-GM09
+  ship:  "/planet/2.webp",   // ICx3-9-GM09
+  echo:  "/planet/2.webp",   // ZIR-12-56
+  logi:  "/planet/2.webp",   // ZORAX-4SH
+  trade: "/planet/2.webp",   // ZETA-73-QN
+  sci:   "/planet/3.webp",   // ZETA-31-196
+  pion:  "/planet/3.webp",   // TNS-554
+  sup:   "/planet/3.webp",   // TLM-675
+  fuel:  "/planet/3.webp",   // ZETA-91-9XV
+  cmd:   "/planet/4.webp",   // ZORAX-19U
+  ind:   "/planet/4.webp",   // ZETA-33-8V2
+  sig:   "/planet/4.webp",   // TMA-488
+  asm:   "/planet/4.webp",   // ZX-89-QW
+  ice:   "/planet/4.webp",   // TZR-092
+  bio:   "/planet/4.webp",   // TY-67-3P
+  col:   "/planet/5.webp",   // FZC-423
+  res:   "/planet/5.webp",   // ZETA-55-9R
+  relay: "/planet/6.webp",   // ZEN-83-OX
+  trd:   "/planet/6.webp",   // TKY-981
+  gas:   "/planet/6.webp",   // TNG-921
+  tech:  "/planet/6.webp",   // ZX-88-QW
+  comm:  "/planet/7.webp",   // ZIR-31-6NV
+  expl:  "/planet/7.webp",   // ZRSE-40P
+  nav:   "/planet/7.webp",   // TQ-173-HN
 };
 
 /* ── Location type → i18n key map ────────────────────────────── */
@@ -813,7 +813,7 @@ function StarMapOverlay({ onClose }) {
       >
         {/* Map image — fills popup exactly (same 16:9 ratio) */}
         <img
-          src="/UI Globe Map_Fixed3.png"
+          src="/UI Globe Map_Fixed3.webp"
           alt="star map"
           style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"fill", pointerEvents:"none" }}
         />
@@ -952,7 +952,7 @@ function SpaceView() {
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", background: "#020612" }}>
 
       {/* Background image */}
-      <LazyImage src="/quest_space.png" spinnerColor="#38bdf8" />
+      <LazyImage src="/quest_space.webp" spinnerColor="#38bdf8" />
 
       {/* Overlay / stars fallback */}
       <div style={{ position:"absolute", inset:0, background:"radial-gradient(ellipse 70% 50% at 50% 40%, rgba(30,15,60,0.6), transparent)" }} />
@@ -1115,7 +1115,7 @@ function GroundView() {
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", background: "#080c06" }}>
 
       {/* Background image */}
-      <LazyImage src="/quest3.png" spinnerColor="#38bdf8" />
+      <LazyImage src="/quest3.webp" spinnerColor="#38bdf8" />
 
       {/* Vignette */}
       <div style={{

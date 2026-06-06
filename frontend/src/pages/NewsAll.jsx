@@ -331,12 +331,12 @@ function VideoCarousel() {
 }
 
 const AVATAR_FILES = [
-  "commander-elite.png","dryads-female.png","dryads-male.png",
-  "fawnus-female.png","fawnus-male.png","geodians-female.png",
-  "geodians-male.png","lithionites-female.png","lithionites-male.png",
-  "mantasquads-female.png","mantasquads-male.png","marmulus-female.png",
-  "marmulus-male.png","ophidians-female.png","ophidians-male.png",
-  "overlord.png","team-specialist-major.png",
+  "commander-elite.webp","dryads-female.webp","dryads-male.webp",
+  "fawnus-female.webp","fawnus-male.webp","geodians-female.webp",
+  "geodians-male.webp","lithionites-female.webp","lithionites-male.webp",
+  "mantasquads-female.webp","mantasquads-male.webp","marmulus-female.webp",
+  "marmulus-male.webp","ophidians-female.webp","ophidians-male.webp",
+  "overlord.webp","team-specialist-major.webp",
 ];
 
 const fadeUp = {

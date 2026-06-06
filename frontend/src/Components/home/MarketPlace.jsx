@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import popularFallback from "../../assets/images/popular/popolar.png";
+import popularFallback from "../../assets/images/popular/popolar.webp";
 import LazyImage from "../Common/LazyImage";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";

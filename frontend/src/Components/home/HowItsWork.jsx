@@ -1,9 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
-import connectIcon from "../../assets/images/howItsWork/connect.png";
-import walletIcon from "../../assets/images/howItsWork/wallet.png";
-import cardIcon from "../../assets/images/howItsWork/card.png";
-import earnIcon from "../../assets/images/howItsWork/earn.png";
+import connectIcon from "../../assets/images/howItsWork/connect.webp";
+import walletIcon from "../../assets/images/howItsWork/wallet.webp";
+import cardIcon from "../../assets/images/howItsWork/card.webp";
+import earnIcon from "../../assets/images/howItsWork/earn.webp";
 import "../../index.css";
 import useSiteContent from "../../hooks/useSiteContent";
 import { useTranslation } from "react-i18next";

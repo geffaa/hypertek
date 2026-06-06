@@ -66,17 +66,17 @@ export default function ViewButton({ activeGame, raceView, onRaceViewToggle, que
 
   // Racing icons
   const isTrack    = raceView === "TRACK";
-  const raceImgSrc = isTrack ? "/garage_icon.png" : "/flag.png";
+  const raceImgSrc = isTrack ? "/garage_icon.webp" : "/flag.webp";
   const raceSub    = isTrack ? "GARAGE" : "TRACK";
 
   // Quest icons
   const isQuestSpace = questView === "SPACE";
-  const questImgSrc  = isQuestSpace ? "/quest_planet.png" : "/quest_space_icon.png";
+  const questImgSrc  = isQuestSpace ? "/quest_planet.webp" : "/quest_space_icon.webp";
   const questSub     = isQuestSpace ? "GROUND" : "SPACE";
 
   // Overlord icons
   const isOvSpace      = overlordView === "SPACE";
-  const overlordImgSrc = isOvSpace ? "/overlord_solar.png" : "/overlord_planet.png";
+  const overlordImgSrc = isOvSpace ? "/overlord_solar.webp" : "/overlord_planet.webp";
   const overlordSub    = isOvSpace ? "WORLD" : "SPACE";
 
   const handleClick = isRacing   ? onRaceViewToggle
@@ -131,7 +131,7 @@ export default function ViewButton({ activeGame, raceView, onRaceViewToggle, que
 
           {/* Icon only — no text inside */}
           <img
-            src={inGame ? gameImgSrc : "/eagle-eye-icon.png"}
+            src={inGame ? gameImgSrc : "/eagle-eye-icon.webp"}
             alt={inGame ? gameSub : "VIEW"}
             loading="lazy"
             style={{
@@ -188,7 +188,7 @@ export default function ViewButton({ activeGame, raceView, onRaceViewToggle, que
             }}
           >
             <img
-              src="/vr-icon.png"
+              src="/vr-icon.webp"
               alt="VR MODE"
               style={{
                 width: "clamp(36px, 5vmin, 62px)",

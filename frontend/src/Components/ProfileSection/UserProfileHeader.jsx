@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
-import TVector from "../../assets/images/popular/vector.png";
+import TVector from "../../assets/images/popular/vector.webp";
 import { BACKEND_BASE_URL } from "../../Config";
 
 function UserProfileHeader({ userData, connectedWallet, sellerBalance }) {

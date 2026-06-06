@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import SaifImage from "../../assets/images/saifullah.png"
+import SaifImage from "../../assets/images/saifullah.webp"
 
 // --- Team Data ---
 const teamData = [

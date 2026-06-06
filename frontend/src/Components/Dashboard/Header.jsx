@@ -3,7 +3,7 @@ import { ChevronDown, LayoutGrid, Gamepad2, Store, Bell } from "lucide-react";
 import HBCoinIcon from "../Common/HBCoinIcon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import logoutImage from "../../assets/images/login/logout.png";
+import logoutImage from "../../assets/images/login/logout.webp";
 import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, Link } from "react-router-dom";

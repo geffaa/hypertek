@@ -21,7 +21,7 @@ const PACKAGES = [
     id: 1,
     title: "Recruit",
     tier: "$20 USD",
-    image: "/avatar/dryads-female.png",
+    image: "/avatar/dryads-female.webp",
     rewards: [
       'Your name will appear in the end credits of the game under the title "Recruit"',
       "You will receive $35 USD credits to be used for in-game purchases (can not be turned into cash-out payments)",
@@ -34,7 +34,7 @@ const PACKAGES = [
     id: 2,
     title: "Cadet Rookie Class",
     tier: "$50 USD",
-    image: "/avatar/dryads-male.png",
+    image: "/avatar/dryads-male.webp",
     rewards: [
       'Your name will appear in the end credits of the game under the title "Cadet Rookie Class"',
       "You will receive $90 USD credits to be used for in-game purchases (can not be turned into cash-out payments)",
@@ -50,7 +50,7 @@ const PACKAGES = [
     id: 3,
     title: "Cadet 1st Class",
     tier: "$75 USD",
-    image: "/avatar/ophidians-male.png",
+    image: "/avatar/ophidians-male.webp",
     rewards: [
       'Your name will appear in the end credits of the game under the title "Cadet 1st Class"',
       "You will receive $125 USD credits to be used for in-game purchases (can not be turned into cash-out payments)",
@@ -67,7 +67,7 @@ const PACKAGES = [
     id: 4,
     title: "Leading Cadet",
     tier: "$100 USD",
-    image: "/avatar/ophidians-female.png",
+    image: "/avatar/ophidians-female.webp",
     rewards: [
       'Your name will appear in the end credits of the game under the title "Leading Cadet"',
       "You will receive $170 USD credits to be used for in-game purchases (can not be turned into cash-out payments)",
@@ -84,7 +84,7 @@ const PACKAGES = [
     id: 5,
     title: "Leading Cadet Special Class",
     tier: "$150 USD",
-    image: "/avatar/lithionites-female.png",
+    image: "/avatar/lithionites-female.webp",
     rewards: [
       'Your name will appear in the end credits of the game under the title "Leading Cadet Special Class"',
       "You will receive $240 USD credits to be used for in-game purchases (can not be turned into cash-out payments)",
@@ -101,7 +101,7 @@ const PACKAGES = [
     id: 6,
     title: "Senior Cadet",
     tier: "$250 USD",
-    image: "/avatar/lithionites-male.png",
+    image: "/avatar/lithionites-male.webp",
     rewards: [
       'Your name will appear in the end credits of the game under the title "Leading Cadet Special Class"',
       "You will receive $390 USD credits to be used for in-game purchases (can not be turned into cash-out payments)",
@@ -121,7 +121,7 @@ const PACKAGES = [
     id: 7,
     title: "Senior Cadet Special Class",
     tier: "$300 USD",
-    image: "/avatar/geodians-female.png",
+    image: "/avatar/geodians-female.webp",
     rewards: [
       'Your name will appear in the end credits of the game under the title "Senior Cadet Special Class"',
       "You will receive $440 USD credits to be used for in-game purchases (can not be turned into cash-out payments)",
@@ -142,7 +142,7 @@ const PACKAGES = [
     id: 8,
     title: "Flight Cadet",
     tier: "$400 USD",
-    image: "/avatar/geodians-male.png",
+    image: "/avatar/geodians-male.webp",
     rewards: [
       'Your name will appear in the end credits of the game under the title "Flight Cadet"',
       "You will receive $550 USD credits to be used for in-game purchases (can not be turned into cash-out payments)",
@@ -165,7 +165,7 @@ const PACKAGES = [
     id: 9,
     title: "Flight Lieutenant",
     tier: "$500 USD",
-    image: "/avatar/marmulus-female.png",
+    image: "/avatar/marmulus-female.webp",
     rewards: [
       'Your name will appear in the end credits of the game under the title "Flight Lieutenant"',
       "You will receive $6800 USD credits to be used for in-game purchases (can not be turned into cash-out payments)",
@@ -191,7 +191,7 @@ const PACKAGES = [
     id: 10,
     title: "Flight Lieutenant Special Class",
     tier: "$750 USD",
-    image: "/avatar/marmulus-male.png",
+    image: "/avatar/marmulus-male.webp",
     rewards: [
       'Your name will appear in the end credits of the game under the title "Flight Lieutenant Special Class"',
       "You will receive $1,050 USD credits to be used for in-game purchases (can not be turned into cash-out payments)",
@@ -218,7 +218,7 @@ const PACKAGES = [
     id: 11,
     title: "Wingman",
     tier: "$1,000 USD",
-    image: "/avatar/fawnus-female.png",
+    image: "/avatar/fawnus-female.webp",
     rewards: [
       'Your name will appear in the end credits of the game under the title "Wingman"',
       "You will receive $1,480 USD credits to be used for in-game purchases (can not be turned into cash-out payments)",
@@ -247,7 +247,7 @@ const PACKAGES = [
     id: 12,
     title: "Wingman Senior Class",
     tier: "$1,500 USD",
-    image: "/avatar/fawnus-male.png",
+    image: "/avatar/fawnus-male.webp",
     rewards: [
       'Your name will appear in the end credits of the game under the title "Wingman Senior Class"',
       "You will receive $2,200 USD credits to be used for in-game purchases (can not be turned into cash-out payments)",
@@ -276,7 +276,7 @@ const PACKAGES = [
     id: 13,
     title: "Technical Officer",
     tier: "$2,000 USD",
-    image: "/avatar/mantasquads-female.png",
+    image: "/avatar/mantasquads-female.webp",
     rewards: [
       'Your name will appear in the end credits of the game under the title "Technical Officer"',
       "You will receive $2,900 USD credits to be used for in-game purchases (can not be turned into cash-out payments)",
@@ -310,7 +310,7 @@ const PACKAGES = [
     id: 14,
     title: "Team Specialist",
     tier: "$2,500 USD",
-    image: "/avatar/mantasquads-male.png",
+    image: "/avatar/mantasquads-male.webp",
     rewards: [
       'Your name will appear in the end credits of the game under the title "Team Specialist"',
       "You will receive $3,300 USD credits to be used for in-game purchases (can not be turned into cash-out payments)",
@@ -346,7 +346,7 @@ const PACKAGES = [
     id: 15,
     title: "Team Specialist Major",
     tier: "$5,000 USD",
-    image: "/avatar/team-specialist-major.png",
+    image: "/avatar/team-specialist-major.webp",
     rewards: [
       'Your name will appear in the end credits of the game under the title "Team Specialist Major"',
       "You will receive $6,500 USD credits to be used for in-game purchases (can not be turned into cash-out payments)",
@@ -381,7 +381,7 @@ const PACKAGES = [
     id: 16,
     title: "Commandar Elite",
     tier: "$7,500 USD",
-    image: "/avatar/commander-elite.png",
+    image: "/avatar/commander-elite.webp",
     rewards: [
       'Your name will appear in the end credits of the game under the title "Commandar Elite"',
       "You will receive $9,000 USD credits to be used for in-game purchases",
@@ -417,7 +417,7 @@ const PACKAGES = [
     id: 17,
     title: "Over Lord",
     tier: "$10,000 USD",
-    image: "/avatar/overlord.png",
+    image: "/avatar/overlord.webp",
     rewards: [
       'Your name will appear in the end credits of the game under the title "Over Lord"',
       "You will receive $15,000 USD credits to be used for in-game purchases (can not be turned into cash-out payments)",
@@ -493,6 +493,7 @@ function PackageModal({ pkg, onClose }) {
               <img
                 src={pkg.image}
                 alt={pkg.title}
+                loading="lazy"
                 className="w-20 h-20 object-cover object-top rounded-lg flex-shrink-0"
                 style={{ border: "1px solid rgba(255,255,255,0.2)" }}
               />

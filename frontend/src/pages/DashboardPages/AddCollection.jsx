@@ -7,7 +7,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { FiArrowLeft, FiImage, FiUploadCloud, FiPackage } from "react-icons/fi";
 import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
-import Collectionimage from "../../assets/images/CreateCollection/collection.png";
+import Collectionimage from "../../assets/images/CreateCollection/collection.webp";
 import ImageCropModal from "../../Components/ImageCropModal";
 
 const inputClass =

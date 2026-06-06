@@ -5,7 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useAccount } from "wagmi";
 import { useEmailWallet } from "../../hooks/useEmailWallet";
-import Collectionimage from "../../assets/images/CreateCollection/collection.png";
+import Collectionimage from "../../assets/images/CreateCollection/collection.webp";
 import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
 
 function CollectionOnSale() {

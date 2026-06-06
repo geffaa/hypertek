@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import logo from "../assets/logo1.png";
+import logo from "../assets/logo1.webp";
 import About from "./about";
 import LanguageSwitcher from "../Components/Common/LanguageSwitcher";
 

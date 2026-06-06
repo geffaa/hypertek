@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import InfoIcon from "../assets/images/info.png";
-import symbol from "../assets/images/login/Symbol.svg.png";
+import InfoIcon from "../assets/images/info.webp";
+import symbol from "../assets/images/login/Symbol.svg.webp";
 
 function WalletConnect() {
   const [isVisible, setIsVisible] = useState(true);

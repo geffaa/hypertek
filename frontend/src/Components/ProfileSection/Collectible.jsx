@@ -8,8 +8,8 @@ import ProfileQuestingTab from "./ProfileQuestingTab";
 import ProfileBountyTab from "./ProfileBountyTab";
 import StickyAvatarSidebar from "./StickyAvatarSidebar";
 
-import FaceOne from "../../assets/images/noActivity1.png";
-import FaceTwo from "../../assets/images/noActivity2.png";
+import FaceOne from "../../assets/images/noActivity1.webp";
+import FaceTwo from "../../assets/images/noActivity2.webp";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import axios from "axios";

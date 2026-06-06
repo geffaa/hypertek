@@ -121,7 +121,7 @@ export default function BountyTab() {
     <div className="py-6 relative overflow-hidden">
       {/* ── Background figure ── */}
       <img
-        src="/avatar/lithionites-female.png"
+        src="/avatar/lithionites-female.webp"
         alt=""
         aria-hidden="true"
         className="pointer-events-none select-none absolute -right-12 top-0 h-[700px] w-auto object-contain object-top"

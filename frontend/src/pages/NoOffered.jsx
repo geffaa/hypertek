@@ -1,6 +1,6 @@
 import React from "react";
-import FaceOne from "../assets/images/noActivity1.png";
-import FaceTwo from "../assets/images/noActivity2.png";
+import FaceOne from "../assets/images/noActivity1.webp";
+import FaceTwo from "../assets/images/noActivity2.webp";
 
 function NoOffered() {
   return (

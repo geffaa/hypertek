@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { Zap, Gavel, Gamepad2, Wallet } from "lucide-react";
 import { BACKEND_BASE_URL } from "../../Config";
-import hyperbotAvatar from "../../assets/images/hyperbot-avatar.png";
+import hyperbotAvatar from "../../assets/images/hyperbot-avatar.webp";
 import { useTranslation } from "react-i18next";
 
 /* ── Inline markdown renderer (bold + bullets) ── */

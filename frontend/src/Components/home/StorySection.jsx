@@ -6,17 +6,17 @@ import useSiteContent from "../../hooks/useSiteContent";
 import { useTranslation } from "react-i18next";
 
 const AVATAR_FILES = [
-  "commander-elite.png","dryads-female.png","dryads-male.png",
-  "fawnus-female.png","fawnus-male.png","geodians-female.png",
-  "geodians-male.png","lithionites-female.png","lithionites-male.png",
-  "mantasquads-female.png","mantasquads-male.png","marmulus-female.png",
-  "marmulus-male.png","ophidians-female.png","ophidians-male.png",
-  "overlord.png","team-specialist-major.png",
+  "commander-elite.webp","dryads-female.webp","dryads-male.webp",
+  "fawnus-female.webp","fawnus-male.webp","geodians-female.webp",
+  "geodians-male.webp","lithionites-female.webp","lithionites-male.webp",
+  "mantasquads-female.webp","mantasquads-male.webp","marmulus-female.webp",
+  "marmulus-male.webp","ophidians-female.webp","ophidians-male.webp",
+  "overlord.webp","team-specialist-major.webp",
 ];
 
-import storyBg   from "../../assets/images/herostory/story_bg.jpg";
-import lineRight from "../../assets/images/herostory/line_right.png";
-import lineLeft  from "../../assets/images/herostory/line_left.png";
+import storyBg   from "../../assets/images/herostory/story_bg.webp";
+import lineRight from "../../assets/images/herostory/line_right.webp";
+import lineLeft  from "../../assets/images/herostory/line_left.webp";
 
 const KEY_HIGHLIGHTS = [
   { Icon: Network,        label: "Interconnected Universe",  desc: "3 games — 1 shared economy and progression system",          color: "#38bdf8" },
@@ -69,8 +69,8 @@ export default function StorySection() {
         style={{ background: "linear-gradient(to top, rgba(4,8,21,0.9), transparent)" }} />
 
       {/* Decorative lines */}
-      <img src={lineRight} alt="" className="absolute top-6 right-0 w-[220px] opacity-30 z-[2] pointer-events-none" />
-      <img src={lineLeft}  alt="" className="absolute bottom-6 left-0 w-[220px] opacity-30 z-[2] pointer-events-none" />
+      <img src={lineRight} alt="" loading="lazy" className="absolute top-6 right-0 w-[220px] opacity-30 z-[2] pointer-events-none" />
+      <img src={lineLeft}  alt="" loading="lazy" className="absolute bottom-6 left-0 w-[220px] opacity-30 z-[2] pointer-events-none" />
 
       {/* ── 3-column grid ── */}
       <motion.div

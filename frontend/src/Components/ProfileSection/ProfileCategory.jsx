@@ -9,11 +9,11 @@ import { useAccount, useReadContract, useWriteContract, usePublicClient, useBala
 import { BASE_MARKETPLACE_ADDRESS } from "../../Web3/Config";
 import { useEmailWallet } from "../../hooks/useEmailWallet";
 
-import overview1 from "../../assets/images/Profile/Hero1.jpeg";
-import FaceOne from "../../assets/images/noActivity1.png";
-import FaceTwo from "../../assets/images/noActivity2.png";
+import overview1 from "../../assets/images/Profile/Hero1.webp";
+import FaceOne from "../../assets/images/noActivity1.webp";
+import FaceTwo from "../../assets/images/noActivity2.webp";
 import CustomButton4 from "../Buttons/Button4";
-import land1Image from "../../assets/images/Overview/land1.jpg";
+import land1Image from "../../assets/images/Overview/land1.webp";
 
 import NavLinks from "../ProfileSection/Navlinks";
 import FullScreenLoader from "../Common/Spinner";

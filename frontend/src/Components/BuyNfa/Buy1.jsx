@@ -11,8 +11,8 @@ import { useAccount, useWalletClient, usePublicClient, useSwitchChain } from "wa
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useEmailWallet } from "../../hooks/useEmailWallet";
 
-import FaceOne from "../../assets/images/noActivity1.png";
-import overview1 from "../../assets/images/Overview/overview1.jpg";
+import FaceOne from "../../assets/images/noActivity1.webp";
+import overview1 from "../../assets/images/Overview/overview1.webp";
 import {
   BASE_NFT_ADDRESS,
   BASE_MARKETPLACE_ADDRESS,

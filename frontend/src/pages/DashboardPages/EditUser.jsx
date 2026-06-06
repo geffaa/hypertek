@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
-import Hero1 from "../../assets/images/Profile/Hero1.jpeg";
+import Hero1 from "../../assets/images/Profile/Hero1.webp";
 import useSiteContent from "../../hooks/useSiteContent";
 import { FiCopy } from "react-icons/fi";
 import CustomButton from "../../Components/Buttons/Button1";
-import Profile from "../../assets/images/Profile/Profile.png";
+import Profile from "../../assets/images/Profile/Profile.webp";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";

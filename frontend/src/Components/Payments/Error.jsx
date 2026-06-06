@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import BackHome from "../../assets/images/backhome.png";
+import BackHome from "../../assets/images/backhome.webp";
 
 function Error() {
   const { t } = useTranslation();

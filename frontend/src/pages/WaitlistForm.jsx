@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaXTwitter } from "react-icons/fa6";
 import { FiUser, FiMail, FiZap, FiGrid, FiEdit3, FiDollarSign, FiArrowRight, FiCheck, FiX, FiArrowLeft } from "react-icons/fi";
-import bgHero from "../assets/images/waitlist/bg-hero.png";
+import bgHero from "../assets/images/waitlist/bg-hero.webp";
 import { BACKEND_BASE_URL } from "../Config";
 import LanguageSwitcher from "../Components/Common/LanguageSwitcher";
 

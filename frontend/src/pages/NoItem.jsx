@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import overview1 from "../assets/images/Profile/Hero1.jpeg";
-import Profile from "../assets/images/Profile/Profile.png"
+import overview1 from "../assets/images/Profile/Hero1.webp";
+import Profile from "../assets/images/Profile/Profile.webp"
 import { Link } from 'react-router-dom'
 import NavLinks from '../Components/ProfileSection/Navlinks'
-import noActivity1 from "../assets/images/NoPersonalActivity/noActivity1.png";
-import noActivity2 from "../assets/images/NoPersonalActivity/noActivity2.png";
+import noActivity1 from "../assets/images/NoPersonalActivity/noActivity1.webp";
+import noActivity2 from "../assets/images/NoPersonalActivity/noActivity2.webp";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import FullScreenLoader from "../Components/Common/Spinner"

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight, ArrowDownLeft, RefreshCw, Clock } from "lucide-react";
 import MarketplaceBanner from "../Components/MarketPlaceCom/MarketplaceBanner";
 import LazyImage from "../Components/Common/LazyImage";
-import popularFallback from "../assets/images/popular/popolar.png";
+import popularFallback from "../assets/images/popular/popolar.webp";
 import axios from "axios";
 import { BACKEND_BASE_URL, getImageUrl } from "../Config";
 import FullScreenLoader from "../Components/Common/Spinner";

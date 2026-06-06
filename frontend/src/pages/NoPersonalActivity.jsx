@@ -1,9 +1,9 @@
 import React from "react";
-import overview1 from "../assets/images/Overview/overview1.jpg";
+import overview1 from "../assets/images/Overview/overview1.webp";
 import { Link } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
-import noActivity1 from "../assets/images/NoPersonalActivity/noActivity1.png";
-import noActivity2 from "../assets/images/NoPersonalActivity/noActivity2.png";
+import noActivity1 from "../assets/images/NoPersonalActivity/noActivity1.webp";
+import noActivity2 from "../assets/images/NoPersonalActivity/noActivity2.webp";
 import GlowingOrb from "../Components/Common/BgColoring";
 import { useTranslation } from "react-i18next";
 
