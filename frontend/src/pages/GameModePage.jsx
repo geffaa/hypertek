@@ -56,7 +56,7 @@ function VideoSection({ src, accent }) {
           src={src}
           controls
           playsInline
-          preload="metadata"
+          preload="auto"
           style={{ width: "100%", display: "block", background: "#000", maxHeight: "540px" }}
         />
       </motion.div>

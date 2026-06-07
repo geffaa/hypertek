@@ -76,10 +76,6 @@ export default function Gaming({ isPreview = false }) {
         />
       )}
 
-      {/* Preload all game videos as soon as gaming page opens */}
-      <video src="https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/racing_content.mp4" preload="auto" style={{ display: "none" }} />
-      <video src="https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/quest_video2.webm" preload="auto" style={{ display: "none" }} />
-      <video src="https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/overlord_content.mp4" preload="auto" style={{ display: "none" }} />
     </div>
     </>
   );

@@ -5,6 +5,23 @@
 import { useTranslation } from "react-i18next";
 import useMobileLandscape from "../../hooks/useMobileLandscape";
 
+const VIDEO_SRCS = {
+  RACING:   "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/racing_content.mp4",
+  QUEST:    "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/quest_video2.webm",
+  OVERLORD: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/overlord_content.mp4",
+};
+const preloaded = new Set();
+function preloadVideo(label) {
+  const src = VIDEO_SRCS[label];
+  if (!src || preloaded.has(src)) return;
+  preloaded.add(src);
+  const link = document.createElement("link");
+  link.rel = "preload";
+  link.as = "video";
+  link.href = src;
+  document.head.appendChild(link);
+}
+
 const GAMES = [
   {
     label: "RACING",
@@ -59,6 +76,7 @@ export default function GameButtons({ activeGame, onSelect }) {
           <button
             key={g.label}
             className="hud-game-btn"
+            onMouseEnter={() => preloadVideo(g.label)}
             onClick={() => onSelect?.(isActive ? null : g.label)}
             style={{
               position:"absolute",

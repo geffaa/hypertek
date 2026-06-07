@@ -97,7 +97,7 @@ function VideoSection({ src, accent }) {
           </div>
         )}
         <video
-          src={src} controls playsInline preload="metadata"
+          src={src} controls playsInline preload="auto"
           onLoadedData={() => setVideoReady(true)}
           style={{
             width: "100%", display: videoReady ? "block" : "none",

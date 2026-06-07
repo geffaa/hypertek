@@ -3,6 +3,39 @@ import { Canvas } from "@react-three/fiber";
 import { useGLTF, OrbitControls, Environment } from "@react-three/drei";
 import * as THREE from "three";
 
+const SKELETON_CSS = `
+  @keyframes skeletonPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+  }
+  @keyframes skeletonSpin {
+    to { transform: rotate(360deg); }
+  }
+  .viewer-skeleton { animation: skeletonPulse 1.6s ease-in-out infinite; }
+  .viewer-spinner { animation: skeletonSpin 0.9s linear infinite; }
+`;
+let skeletonCssInjected = false;
+function SkeletonFallback() {
+  if (!skeletonCssInjected && typeof document !== "undefined") {
+    const el = document.createElement("style");
+    el.textContent = SKELETON_CSS;
+    document.head.appendChild(el);
+    skeletonCssInjected = true;
+  }
+  return (
+    <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "transparent" }}>
+      <div className="viewer-skeleton" style={{
+        width: "40%", height: "60%", borderRadius: 12,
+        background: "linear-gradient(135deg, rgba(0,212,255,0.08), rgba(99,102,241,0.08))",
+        border: "1px solid rgba(0,212,255,0.12)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+      }}>
+        <div className="viewer-spinner" style={{ width: 40, height: 40, borderRadius: "50%", border: "2px solid rgba(0,212,255,0.25)", borderTopColor: "rgba(0,212,255,0.7)" }} />
+      </div>
+    </div>
+  );
+}
+
 const MODELS = {
   wraith:      "/vehicles/Spaceship_2.glb",
   voidhawk:    "/vehicles/Spaceship_1.glb",
@@ -47,7 +80,7 @@ export default function Wraith3DViewer({ vehicleId = "wraith" }) {
       camera={{ position: [0, 0.8, 4.5], fov: 42 }}
       style={{ width: "100%", height: "100%", cursor: "grab", background: "transparent" }}
     >
-      <Suspense fallback={null}>
+      <Suspense fallback={<SkeletonFallback />}>
         <ambientLight intensity={0.5} />
         <directionalLight position={[4, 6, 4]}  intensity={1.4} />
         <directionalLight position={[-4, -2, -4]} intensity={0.35} color="#8ab4f8" />
@@ -68,4 +101,5 @@ export default function Wraith3DViewer({ vehicleId = "wraith" }) {
   );
 }
 
-Object.values(MODELS).forEach((url) => useGLTF.preload(url));
+// Only preload the default model — others load on demand when selected
+useGLTF.preload(MODELS.wraith);

@@ -554,7 +554,7 @@ function PlanetDetail({ loc, onClose }) {
             background: imgSrc ? "#000" : `radial-gradient(circle at 40% 35%, ${fallbackColor}33, rgba(2,6,22,0.9))`,
           }}>
             {imgSrc
-              ? <img src={imgSrc} alt={loc.type} style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+              ? <LazyImage src={imgSrc} alt={loc.type} wrapStyle={{ position:"relative", width:"100%", height:"100%" }} spinnerColor="#38bdf8" />
               : <div style={{ width:"100%", height:"100%", display:"flex", alignItems:"center", justifyContent:"center" }}>
                   <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(255,255,255,0.18)", letterSpacing:"0.12em" }}>{t("quest.planet.noImage")}</div>
                 </div>
