@@ -1183,7 +1183,7 @@ export default function RacingMode({ view = "TRACK", onExit }) {
 
       </div>
 
-      {videoOpen && <VideoOverlay onClose={() => setVideoOpen(false)} />
+      {videoOpen && <VideoOverlay onClose={() => setVideoOpen(false)} />}
     </>
   );
 }
