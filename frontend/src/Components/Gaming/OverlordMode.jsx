@@ -511,7 +511,7 @@ export default function OverlordMode({ view = "SPACE", onExit }) {
 
       </div>
 
-      {videoOpen && <VideoOverlay onClose={() => setVideoOpen(false)} />
+      {videoOpen && <VideoOverlay onClose={() => setVideoOpen(false)} />}
     </>
   );
 }

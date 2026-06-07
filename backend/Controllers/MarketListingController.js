@@ -115,11 +115,11 @@ export const getListing = async (req, res) => {
 export const createListing = async (req, res) => {
   try {
     const {
-      category, activityType, itemName, itemDescription, itemImage,
+      category, activityType, itemName, itemDescription,
       price, reservePrice, commissionTier,
     } = req.body;
 
-    let { nftSystemId, subCollectionId } = req.body;
+    let { nftSystemId, subCollectionId, itemImage } = req.body;
 
     // Auto-detect NFT subCollection if not provided — needed when listing is
     // created from the manual form (no NFT picker), so the marketplace slider
@@ -141,6 +141,8 @@ export const createListing = async (req, res) => {
           if (sub) {
             nftSystemId     = parent._id;
             subCollectionId = sub._id;
+            // Copy image from NFTSystem subCollection if the form didn't provide one
+            if (!itemImage && sub.image) itemImage = sub.image;
           }
         }
       }

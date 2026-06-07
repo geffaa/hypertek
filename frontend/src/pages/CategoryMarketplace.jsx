@@ -138,15 +138,33 @@ function CategoryMarketplace() {
     const fetchByCategory = async () => {
       setLoading(true);
       try {
+        const normalizedCat = category
+          ? (CAT_ALIAS_REDIRECT[category.toLowerCase().trim()] || category.toLowerCase().trim())
+          : null;
+
+        // Source 1: active marketplace listings (same source as GeneralTab slider)
+        let marketItems = [];
+        try {
+          const mRes = await axios.get(`${BACKEND_BASE_URL}/api/v1/listings/marketplace`);
+          const grouped = mRes.data.grouped || {};
+          if (normalizedCat) {
+            marketItems = grouped[normalizedCat] || [];
+          } else {
+            // No category filter — flatten all
+            Object.values(grouped).forEach(arr => marketItems.push(...arr));
+          }
+        } catch {
+          // Non-fatal — will still show NFTSystem items
+        }
+
+        // Source 2: NFTSystem parent-collections (items synced via syncSubCollectionPrice)
         const url = category
           ? `${BACKEND_BASE_URL}/api/v1/nft/parent-collections?category=${category}`
           : `${BACKEND_BASE_URL}/api/v1/nft/parent-collections`;
         const res = await axios.get(url);
-
         const parents = res.data.collections || res.data.nfts || [];
 
-        let allSubs = [];
-
+        let nftSystemItems = [];
         for (const parent of parents) {
           try {
             const mapSub = (sub) => ({
@@ -158,13 +176,13 @@ function CategoryMarketplace() {
             });
 
             if (parent.subCollections && parent.subCollections.length) {
-              allSubs.push(...parent.subCollections.map(mapSub));
+              nftSystemItems.push(...parent.subCollections.map(mapSub));
             } else {
               const subRes = await axios.get(
                 `${BACKEND_BASE_URL}/api/v1/nft/parent-collection/${parent._id}/sub-collections`
               );
               if (subRes.data.success && subRes.data.subCollections) {
-                allSubs.push(...subRes.data.subCollections.map(mapSub));
+                nftSystemItems.push(...subRes.data.subCollections.map(mapSub));
               }
             }
           } catch (err) {
@@ -172,7 +190,11 @@ function CategoryMarketplace() {
           }
         }
 
-        setItems(allSubs);
+        // Deduplicate: prefer marketItems entry if same subCollectionId exists in both sources
+        const marketIds = new Set(marketItems.map(i => String(i._id)));
+        const uniqueNftSystemItems = nftSystemItems.filter(i => !marketIds.has(String(i._id)));
+
+        setItems([...marketItems, ...uniqueNftSystemItems]);
       } catch (err) {
         console.error("Error fetching category data:", err);
         toast.error("Failed to load category data");
@@ -196,10 +218,13 @@ function CategoryMarketplace() {
 
   if (loading) return <FullScreenLoader />;
 
-  // Real listed items from parent-collections API
-  const listedItems = items.filter((item) =>
-    item.listed === true && item.priceETH > 0
-  );
+  // Real listed items — marketplace API items have no `listed` field (always active),
+  // NFTSystem items require listed === true. Both require a price.
+  const listedItems = items.filter((item) => {
+    const price = item.priceETH ?? item.price ?? 0;
+    const isListed = item.listed === undefined ? true : item.listed === true;
+    return isListed && price > 0;
+  });
 
   // Always show dummy content as base; real listings are prepended in front
   const normalizedCategory = category
@@ -333,22 +358,6 @@ function CategoryMarketplace() {
             </div>
           )}
 
-          {/* Fallback notice — always shown since dummy content is always present */}
-          <div
-            className="mb-2 px-5 py-4 rounded-xl flex items-start gap-3"
-            style={{
-              background: "linear-gradient(135deg, rgba(180,120,0,0.1) 0%, rgba(0,42,168,0.06) 100%)",
-              border: "1px solid rgba(180,120,0,0.2)",
-            }}
-          >
-            <span className="text-2xl flex-shrink-0">🎮</span>
-            <div>
-              <p className="text-amber-300/90 text-sm font-semibold mb-1">{t("collections.samplePreviewTitle")}</p>
-              <p className="text-white/50 text-xs leading-relaxed">
-                {t("collections.samplePreviewDesc")}
-              </p>
-            </div>
-          </div>
 
           {/* GRID — responsive: 2 cols mobile → 3 sm → 5 lg → 6 xl */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 lg:gap-4">

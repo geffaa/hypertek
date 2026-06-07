@@ -50,7 +50,6 @@ export default function GeneralTab() {
   const { t } = useTranslation();
   const [catMap, setCatMap]       = useState({});
   const [loading, setLoading]     = useState(true);
-  const [usingFallback, setUsingFallback] = useState(false);
   const [typeFilter, setTypeFilter] = useState("ALL");
 
   useEffect(() => {
@@ -152,27 +151,6 @@ export default function GeneralTab() {
         })}
       </motion.div>
 
-      {/* Fallback notice */}
-      {usingFallback && !loading && (
-        <motion.div
-          initial="hidden" animate="visible" variants={fadeUp} custom={1}
-          className="mb-8 px-5 py-4 rounded-xl flex items-start gap-3"
-          style={{
-            background: "linear-gradient(135deg, rgba(180,120,0,0.1) 0%, rgba(0,42,168,0.06) 100%)",
-            border: "1px solid rgba(180,120,0,0.2)",
-          }}
-        >
-          <span className="text-2xl flex-shrink-0">🎮</span>
-          <div>
-            <p className="text-amber-300/90 text-sm font-semibold mb-1">
-              {t("marketplace.general.samplePreviewTitle")}
-            </p>
-            <p className="text-white/50 text-xs leading-relaxed">
-              {t("marketplace.general.samplePreviewDesc")}
-            </p>
-          </div>
-        </motion.div>
-      )}
 
       {/* Lines */}
       {loading ? (

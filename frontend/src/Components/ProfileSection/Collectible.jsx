@@ -535,7 +535,10 @@ function MarketPlace() {
                     <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full">
                       {gridItems.map((item) => {
                         const onMarket = item.listed
-                          || myMarketListings.some((l) => l.subCollectionId === String(item._id));
+                          || myMarketListings.some((l) =>
+                            (l.subCollectionId && l.subCollectionId === String(item._id))
+                            || (!l.subCollectionId && l.itemName?.toLowerCase() === item.name?.toLowerCase())
+                          );
                         const onAuction = myAuctions.some((a) => String(a.subCollectionId) === String(item._id) && a.status === "active" && new Date(a.endTime) > new Date())
                           || sessionAuctionIds.has(item._id);
                         const onTrade = offers.some((t) => t.offering === item.name && t.status === "open")
