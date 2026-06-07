@@ -196,29 +196,24 @@ function CategoryMarketplace() {
 
   if (loading) return <FullScreenLoader />;
 
-  // Only show items that are listed for sale with a valid price
+  // Real listed items from parent-collections API
   const listedItems = items.filter((item) =>
     item.listed === true && item.priceETH > 0
   );
 
-  // When backend has no items, show consistent fallback dummy data
+  // Always show dummy content as base; real listings are prepended in front
   const normalizedCategory = category
     ? (CAT_ALIAS_REDIRECT[category.toLowerCase().trim()] || category.toLowerCase().trim())
     : null;
-  const fallbackForCat = !listedItems.length
-    ? (normalizedCategory ? (FALLBACK_ITEMS[normalizedCategory] || ALL_FALLBACK_ITEMS) : ALL_FALLBACK_ITEMS)
-    : [];
-  const usingFallback = fallbackForCat.length > 0;
+  const fallbackBase = normalizedCategory
+    ? (FALLBACK_ITEMS[normalizedCategory] || ALL_FALLBACK_ITEMS)
+    : ALL_FALLBACK_ITEMS;
 
-  const displayItems = usingFallback
-    ? fallbackForCat.filter((item) =>
-        (item.name || "").toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    : listedItems.filter((item) =>
-        (item.name || "").toLowerCase().includes(searchTerm.toLowerCase())
-      );
+  const allDisplayItems = [...listedItems, ...fallbackBase];
 
-  const filteredItems = displayItems;
+  const filteredItems = allDisplayItems.filter((item) =>
+    (item.name || "").toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const navStyle = {
     background:           "rgba(4,5,18,0.97)",
@@ -338,24 +333,22 @@ function CategoryMarketplace() {
             </div>
           )}
 
-          {/* Fallback notice */}
-          {usingFallback && (
-            <div
-              className="mb-2 px-5 py-4 rounded-xl flex items-start gap-3"
-              style={{
-                background: "linear-gradient(135deg, rgba(180,120,0,0.1) 0%, rgba(0,42,168,0.06) 100%)",
-                border: "1px solid rgba(180,120,0,0.2)",
-              }}
-            >
-              <span className="text-2xl flex-shrink-0">🎮</span>
-              <div>
-                <p className="text-amber-300/90 text-sm font-semibold mb-1">{t("collections.samplePreviewTitle")}</p>
-                <p className="text-white/50 text-xs leading-relaxed">
-                  {t("collections.samplePreviewDesc")}
-                </p>
-              </div>
+          {/* Fallback notice — always shown since dummy content is always present */}
+          <div
+            className="mb-2 px-5 py-4 rounded-xl flex items-start gap-3"
+            style={{
+              background: "linear-gradient(135deg, rgba(180,120,0,0.1) 0%, rgba(0,42,168,0.06) 100%)",
+              border: "1px solid rgba(180,120,0,0.2)",
+            }}
+          >
+            <span className="text-2xl flex-shrink-0">🎮</span>
+            <div>
+              <p className="text-amber-300/90 text-sm font-semibold mb-1">{t("collections.samplePreviewTitle")}</p>
+              <p className="text-white/50 text-xs leading-relaxed">
+                {t("collections.samplePreviewDesc")}
+              </p>
             </div>
-          )}
+          </div>
 
           {/* GRID — responsive: 2 cols mobile → 3 sm → 5 lg → 6 xl */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 lg:gap-4">

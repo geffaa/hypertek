@@ -57,50 +57,28 @@ export default function GeneralTab() {
     const load = async () => {
       setLoading(true);
       try {
-        // Primary: fetch real active marketplace listings from MarketListing model
-        const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/listings/marketplace`);
-        const grouped = res.data.grouped || {};
+        // Always start with dummy content as the base for all categories
+        const merged = {};
+        Object.keys(FALLBACK_ITEMS).forEach((cat) => {
+          merged[cat] = [...FALLBACK_ITEMS[cat]];
+        });
 
-        const hasItems = Object.values(grouped).some(arr => arr.length > 0);
-        if (hasItems) {
-          setCatMap(grouped);
-          setUsingFallback(false);
-        } else {
-          // Fallback: try parent-collections API
-          try {
-            const res2 = await axios.get(`${BACKEND_BASE_URL}/api/v1/nft/parent-collections`);
-            const parents = res2.data.nfts || res2.data.collections || [];
-            const map = {};
-            parents.forEach((parent) => {
-              const subCollections = parent.subCollections || [];
-              if (!subCollections.length) return;
-              const rawKey = (parent.category || parent.collection?.name || "other").toLowerCase().trim();
-              const catKey = CAT_ALIAS[rawKey] || rawKey;
-              if (!map[catKey]) map[catKey] = [];
-              const listedSubs = subCollections.filter((s) => s.listed === true && s.priceETH > 0);
-              map[catKey].push(
-                ...listedSubs.map((s) => ({
-                  ...s,
-                  parentId:       parent._id,
-                  parentCategory: catKey,
-                  parentName:     parent.collection?.name || "",
-                  isDummy:        false,
-                }))
-              );
-            });
-            const hasItems2 = Object.values(map).some(arr => arr.length > 0);
-            if (hasItems2) {
-              setCatMap(map);
-              setUsingFallback(false);
-            } else {
-              setCatMap(FALLBACK_ITEMS);
-              setUsingFallback(true);
-            }
-          } catch {
-            setCatMap(FALLBACK_ITEMS);
-            setUsingFallback(true);
-          }
+        // Fetch real active marketplace listings and prepend them to the correct category
+        try {
+          const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/listings/marketplace`);
+          const grouped = res.data.grouped || {};
+          Object.entries(grouped).forEach(([cat, items]) => {
+            if (!items.length) return;
+            if (!merged[cat]) merged[cat] = [];
+            // Real listings go first, dummy content follows
+            merged[cat] = [...items, ...merged[cat]];
+          });
+        } catch {
+          // If listings API fails, we still show dummy content — no action needed
         }
+
+        setCatMap(merged);
+        setUsingFallback(false);
       } catch (err) {
         console.error("GeneralTab fetch error:", err);
         setCatMap(FALLBACK_ITEMS);
