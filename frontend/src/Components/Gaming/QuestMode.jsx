@@ -1101,7 +1101,7 @@ function SpaceView() {
       </div>
 
       {mapOpen   && <StarMapOverlay  onClose={() => setMapOpen(false)} />}
-      {videoOpen && <VideoOverlay    onClose={() => setVideoOpen(false)} />
+      {videoOpen && <VideoOverlay    onClose={() => setVideoOpen(false)} />}
     </div>
   );
 }
