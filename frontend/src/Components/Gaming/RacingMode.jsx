@@ -1087,7 +1087,7 @@ function VideoOverlay({ onClose }) {
         }}>
           <video
             src="https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/racing_content.mp4"
-            autoPlay loop playsInline controls preload="metadata"
+            loop playsInline controls preload="auto"
             style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
           />
         </div>
@@ -1184,6 +1184,9 @@ export default function RacingMode({ view = "TRACK", onExit }) {
       </div>
 
       {videoOpen && <VideoOverlay onClose={() => setVideoOpen(false)} />}
+
+      {/* Preload video in background when mode mounts */}
+      <video src="https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/racing_content.mp4" preload="auto" style={{ display: "none" }} />
     </>
   );
 }
