@@ -661,6 +661,7 @@ function VideoOverlay({ onClose }) {
         }}>
           <video
             src="https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/quest_video2.webm"
+            autoPlay
             loop
             playsInline
             controls
@@ -1100,10 +1101,7 @@ function SpaceView() {
       </div>
 
       {mapOpen   && <StarMapOverlay  onClose={() => setMapOpen(false)} />}
-      {videoOpen && <VideoOverlay    onClose={() => setVideoOpen(false)} />}
-
-      {/* Preload video in background when mode mounts */}
-      <video src="https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/quest_video2.webm" preload="auto" style={{ display: "none" }} />
+      {videoOpen && <VideoOverlay    onClose={() => setVideoOpen(false)} />
     </div>
   );
 }

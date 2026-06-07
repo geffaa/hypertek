@@ -1,4 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+const VIDEO_SRCS = {
+  RACING:   "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/racing_content.mp4",
+  QUEST:    "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/quest_video2.webm",
+  OVERLORD: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/overlord_content.mp4",
+};
+const preloaded = new Set();
+function preloadVideo(src) {
+  if (!src || preloaded.has(src) || typeof document === "undefined") return;
+  preloaded.add(src);
+  const link = document.createElement("link");
+  link.rel = "preload";
+  link.as = "video";
+  link.href = src;
+  document.head.appendChild(link);
+}
 import LoadingScreen  from "../Components/Gaming/LoadingScreen";
 import GameFrame      from "../Components/Gaming/GameFrame";
 import SidebarPanel   from "../Components/Gaming/SidebarPanel";
@@ -19,6 +35,11 @@ export default function Gaming({ isPreview = false }) {
   const [raceView,     setRaceView]     = useState("TRACK");  // "TRACK" | "GARAGE"
   const [questView,    setQuestView]    = useState("SPACE");  // "SPACE" | "GROUND"
   const [overlordView, setOverlordView] = useState("SPACE");  // "SPACE" | "WORLD"
+
+  // Preload video as soon as user selects a mode
+  useEffect(() => {
+    if (activeGame) preloadVideo(VIDEO_SRCS[activeGame]);
+  }, [activeGame]);
 
   const handleSelectGame = (game) => {
     setActiveGame(game);
