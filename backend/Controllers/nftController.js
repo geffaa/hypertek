@@ -2517,16 +2517,15 @@ export async function cancelSubCollectionListing(req, res) {
       { status: "cancelled" }
     );
 
-    // Cancel any open Trade listings for this item (matched by seller wallet + offering name)
+    // Cancel any open/accepted Trade listings for this item (case-insensitive name match; wallet optional)
     const sellerWallet = req.body.seller || subCollection.owner || "";
-    const tradeResult = await Trade.updateMany(
-      {
-        posterWallet: new RegExp(`^${sellerWallet}$`, "i"),
-        offering: subCollection.name,
-        status: "open",
-      },
-      { status: "cancelled" }
-    );
+    const escapedName = subCollection.name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const tradeFilter = {
+      offering: new RegExp(`^${escapedName}$`, "i"),
+      status: { $in: ["open", "accepted"] },
+    };
+    if (sellerWallet) tradeFilter.posterWallet = new RegExp(`^${sellerWallet}$`, "i");
+    const tradeResult = await Trade.updateMany(tradeFilter, { status: "cancelled" });
 
     const cancelledVenues = [];
     if (auctionResult.modifiedCount > 0) cancelledVenues.push(`${auctionResult.modifiedCount} auction(s)`);

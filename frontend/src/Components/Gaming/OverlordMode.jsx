@@ -9,7 +9,7 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { createPortal } from "react-dom";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import LazyImage from "./LazyImage";
 import useMobileLandscape from "../../hooks/useMobileLandscape";
@@ -356,87 +356,12 @@ function WorldView() {
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   VIDEO OVERLAY
-   ══════════════════════════════════════════════════════════════════ */
-function VideoOverlay({ onClose }) {
-  const { t } = useTranslation();
-
-  return createPortal(
-    <div
-      onClick={onClose}
-      style={{
-        position: "fixed", inset: 0, zIndex: 9000,
-        background: "rgba(0,3,15,0.92)", backdropFilter: "blur(6px)",
-        display: "flex", alignItems: "center", justifyContent: "center",
-      }}
-    >
-      <style>{`
-        @keyframes ovlVideoPopIn {
-          from { opacity:0; transform:scale(0.93); }
-          to   { opacity:1; transform:scale(1); }
-        }
-      `}</style>
-      <div
-        onClick={e => e.stopPropagation()}
-        style={{
-          display: "flex", flexDirection: "column",
-          width: "min(72vw, calc(58vh * 1.778))",
-          animation: "ovlVideoPopIn 0.25s cubic-bezier(0.16,1,0.3,1) both",
-          gap: 8,
-        }}
-      >
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <div style={{
-            fontFamily: "Orbitron,sans-serif",
-            fontSize: "clamp(9px,1vw,13px)", fontWeight: "bold",
-            letterSpacing: "0.18em", color: "#fca5a5",
-            textShadow: "0 0 12px rgba(248,113,113,0.7)", whiteSpace: "nowrap",
-          }}>▶ {t("overlord.video.title", "OVERLORD GAMEPLAY VIDEO")}</div>
-          <button
-            onClick={onClose}
-            style={{
-              padding: "5px 14px",
-              background: "rgba(15,0,0,0.9)",
-              border: "1px solid rgba(248,113,113,0.7)",
-              borderRadius: 3,
-              clipPath: "polygon(0% 0%,calc(100% - 5px) 0%,100% 100%,5px 100%)",
-              fontFamily: "Orbitron,sans-serif",
-              fontSize: "clamp(8px,0.8vw,11px)", fontWeight: "bold",
-              letterSpacing: "0.14em", color: "#fca5a5",
-              textShadow: "0 0 8px rgba(248,113,113,0.6)",
-              cursor: "pointer", whiteSpace: "nowrap",
-            }}
-            onMouseEnter={e => { e.currentTarget.style.background = "rgba(248,113,113,0.25)"; }}
-            onMouseLeave={e => { e.currentTarget.style.background = "rgba(15,0,0,0.9)"; }}
-          >✕ {t("overlord.video.close", "CLOSE")}</button>
-        </div>
-        <div style={{
-          aspectRatio: "16/9",
-          background: "#000",
-          border: "1.5px solid rgba(248,113,113,0.45)",
-          borderRadius: 10,
-          boxShadow: "0 0 80px rgba(0,0,0,0.95), 0 0 40px rgba(248,113,113,0.12)",
-          overflow: "hidden",
-        }}>
-          <video
-            src="https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/overlord_content.mp4"
-            autoPlay loop playsInline controls preload="auto"
-            style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
-          />
-        </div>
-      </div>
-    </div>,
-    document.body
-  );
-}
-
-/* ══════════════════════════════════════════════════════════════════
    OverlordMode — main export
    ══════════════════════════════════════════════════════════════════ */
-export default function OverlordMode({ view = "SPACE", onExit }) {
+export default function OverlordMode({ view = "SPACE", onExit, isPreview = false }) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const isSpace = view === "SPACE";
-  const [videoOpen, setVideoOpen] = useState(false);
 
   return (
     <>
@@ -459,7 +384,7 @@ export default function OverlordMode({ view = "SPACE", onExit }) {
           zIndex: 30,
         }}>
           <button
-            onClick={() => setVideoOpen(true)}
+            onClick={() => navigate(isPreview ? "/preview/overlord" : "/game/overlord")}
             style={{
               padding: "9px 24px",
               background: "rgba(28,0,0,0.88)",
@@ -478,7 +403,7 @@ export default function OverlordMode({ view = "SPACE", onExit }) {
             onMouseEnter={e => { e.currentTarget.style.background = "rgba(248,113,113,0.18)"; e.currentTarget.style.boxShadow = "0 0 28px rgba(248,113,113,0.4)"; }}
             onMouseLeave={e => { e.currentTarget.style.background = "rgba(28,0,0,0.88)"; e.currentTarget.style.boxShadow = "0 0 20px rgba(248,113,113,0.2)"; }}
           >
-            ▶ {t("overlord.video.watchBtn", "WATCH VIDEO")}
+            ▶ {t("overlord.video.gamingInfoBtn", "GAMING INFO / IN-GAMING VIDEO...")}
           </button>
         </div>
 
@@ -511,7 +436,6 @@ export default function OverlordMode({ view = "SPACE", onExit }) {
 
       </div>
 
-      {videoOpen && <VideoOverlay onClose={() => setVideoOpen(false)} />}
     </>
   );
 }

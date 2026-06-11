@@ -81,6 +81,7 @@ const fadeUp = {
 /* ─── Video section with skeleton ─────────────────── */
 function VideoSection({ src, accent }) {
   const [videoReady, setVideoReady] = useState(false);
+  const mimeType = src?.endsWith(".webm") ? "video/webm" : "video/mp4";
   return (
     <section className="w-full max-w-[1080px] mx-auto px-6 md:px-12 pb-24">
       <motion.div
@@ -90,20 +91,24 @@ function VideoSection({ src, accent }) {
         style={{ border: `1px solid ${accent}44`, boxShadow: `0 0 32px ${accent}18` }}
       >
         <div className="absolute top-0 inset-x-0 h-[2px] z-10" style={{ background: accent }} />
-        {/* Skeleton while video loads */}
         {!videoReady && (
           <div className="relative w-full" style={{ height: "540px", maxHeight: "56vw" }}>
             <SkeletonOverlay />
           </div>
         )}
         <video
-          src={src} controls playsInline preload="auto"
-          onLoadedData={() => setVideoReady(true)}
+          controls
+          playsInline
+          preload="metadata"
+          x-webkit-airplay="allow"
+          onLoadedMetadata={() => setVideoReady(true)}
           style={{
             width: "100%", display: videoReady ? "block" : "none",
             background: "#000", maxHeight: "540px",
           }}
-        />
+        >
+          <source src={src} type={mimeType} />
+        </video>
       </motion.div>
     </section>
   );
@@ -319,42 +324,71 @@ export default function PreviewGameMode() {
       {/* Top accent line */}
       <div className="fixed top-0 left-0 right-0 h-[3px] pointer-events-none" style={{ background: `linear-gradient(to right, transparent, ${data.accent}, transparent)`, boxShadow: `0 0 24px ${data.accent}`, zIndex: 100 }} />
 
-      {/* Fixed bar with back + mode tag */}
+      {/* Fixed bar with back + mode tag + actions */}
       <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="fixed left-0 right-0 z-40" style={{ top: 0 }}>
-        <div style={{ background: `linear-gradient(to right, rgba(6,6,20,0.55), ${data.accentDim} 50%, rgba(6,6,20,0.55))`, backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)", borderBottom: `1px solid ${data.accent}22`, boxShadow: "0 4px 24px rgba(0,0,0,0.35)" }}>
-          <div className="w-full max-w-[1080px] mx-auto px-6 md:px-12 py-[14px] flex items-center gap-4 justify-between">
+        <div style={{ background: `linear-gradient(to right, rgba(6,6,20,0.65), ${data.accentDim} 50%, rgba(6,6,20,0.65))`, backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)", borderBottom: `1px solid ${data.accent}33`, boxShadow: "0 4px 24px rgba(0,0,0,0.45)" }}>
+          <div className="absolute bottom-0 left-0 right-0 h-[1px]" style={{ background: `linear-gradient(to right, transparent, ${data.accent}55, transparent)` }} />
+          <div className="w-full max-w-[1200px] mx-auto px-6 md:px-12 py-[12px] flex items-center gap-3 flex-wrap">
+
             {/* Logo */}
-            <img src={logo} alt="Hyper Tek" className="h-8 w-8 mr-2" />
+            <img src={logo} alt="Hyper Tek" className="h-7 w-7 shrink-0" />
 
-            {/* Back button → smart back based on entry point */}
-            <button
-              onClick={() => navigate(backTo)}
-              className="flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase transition-all duration-200 group"
-              style={{ fontFamily: "Orbitron, sans-serif", color: "rgba(255,255,255,0.9)", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.18)", padding: "6px 14px 6px 10px", clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)" }}
-              onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.14)"; }}
-              onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.08)"; }}
-            >
-              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              {t("gamePage.back")}
-            </button>
-
-            <div className="w-px h-4 bg-white/15" />
+            <div className="w-px h-4 bg-white/15 shrink-0" />
 
             {/* Mode tag */}
-            <div className="text-[11px] font-bold tracking-[0.3em] uppercase px-4 py-[5px]" style={{ fontFamily: "Orbitron, sans-serif", border: `1px solid ${data.accent}55`, borderTop: `2px solid ${data.accent}`, color: data.accent, background: data.accentDim, clipPath: "polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)", textShadow: `0 0 12px ${data.accent}88` }}>
+            <div className="text-[10px] font-bold tracking-[0.3em] uppercase px-3 py-[5px] shrink-0" style={{ fontFamily: "Orbitron, sans-serif", border: `1px solid ${data.accent}55`, borderTop: `2px solid ${data.accent}`, color: data.accent, background: data.accentDim, clipPath: "polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)", textShadow: `0 0 12px ${data.accent}88` }}>
               {data.label} MODE
             </div>
 
-            <div className="ml-auto flex items-center gap-3">
-              <a
-                href="/waitlist"
-                className="px-4 py-2 text-sm font-semibold text-white/80 hover:text-white hover:bg-white/10 border border-white/25 hover:border-white/40 rounded-lg transition-all duration-200"
-                style={{ textDecoration: "none", whiteSpace: "nowrap" }}
-              >
-                Waitlist
-              </a>
-              <LanguageSwitcher />
-            </div>
+            <div className="flex-1" />
+
+            {/* ── Primary: Back to UI Interface ── */}
+            <button
+              onClick={() => navigate("/preview/ui", { state: { startMode: modeKey.toUpperCase() } })}
+              className="flex items-center gap-2 text-[10px] tracking-[0.15em] uppercase shrink-0 transition-all duration-200"
+              style={{
+                fontFamily: "Orbitron, sans-serif",
+                color: "#000",
+                background: data.accent,
+                border: `1px solid ${data.accent}`,
+                padding: "7px 16px 7px 12px",
+                clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
+                fontWeight: "bold",
+                whiteSpace: "nowrap",
+                boxShadow: `0 0 18px ${data.accent}55`,
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = `${data.accent}cc`; e.currentTarget.style.boxShadow = `0 0 28px ${data.accent}88`; }}
+              onMouseLeave={e => { e.currentTarget.style.background = data.accent; e.currentTarget.style.boxShadow = `0 0 18px ${data.accent}55`; }}
+            >
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+                <rect x="1" y="1" width="14" height="14" rx="2" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+                <path d="M5 8h6M8 5l-3 3 3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              {t("gamePage.backToUIInterface", "BACK TO UI INTERFACE")}
+            </button>
+
+            {/* ── Secondary: Back (browser back) ── */}
+            <button
+              onClick={() => navigate("/preview")}
+              className="flex items-center gap-2 text-[10px] tracking-[0.15em] uppercase shrink-0 transition-all duration-200"
+              style={{
+                fontFamily: "Orbitron, sans-serif",
+                color: "rgba(255,255,255,0.55)",
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.12)",
+                padding: "7px 14px 7px 10px",
+                clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
+                whiteSpace: "nowrap",
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.09)"; e.currentTarget.style.color = "rgba(255,255,255,0.8)"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.color = "rgba(255,255,255,0.55)"; }}
+            >
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              {t("gamePage.back")}
+            </button>
+
+            <div className="w-px h-4 bg-white/10 shrink-0" />
+            <LanguageSwitcher />
           </div>
         </div>
       </motion.div>

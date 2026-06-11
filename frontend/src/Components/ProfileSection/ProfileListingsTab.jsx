@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ChevronDown, LayoutList } from "lucide-react";
+import { ChevronDown, LayoutList, X } from "lucide-react";
 import { BACKEND_BASE_URL } from "../../Config";
 
 const ACTIVITY_KEYS = [
@@ -27,6 +27,11 @@ const MIN_WIDTH  = "860px";
 const capWords = (str) =>
   str ? str.replace(/\b\w/g, (c) => c.toUpperCase()) : "";
 
+
+const truncateWallet = (w) =>
+  w && w.length > 12 ? `${w.slice(0, 6)}...${w.slice(-4)}` : (w || "");
+
+const CANCELLABLE_TYPES = ["selling_general", "selling_auction", "trading"];
 
 function PriceCell({ listing }) {
   if (!listing) return <span className="text-white/15 text-[11px]">—</span>;
@@ -57,16 +62,26 @@ function PriceCell({ listing }) {
   if (activityType === "buying_general") {
     return (
       <div className="flex flex-col gap-0.5">
-        {price != null && <span className="text-blue-300/80 text-[11px] font-semibold">${price} Price{dot}</span>}
-        {currentOffer != null && <span className="text-green-300/70 text-[10px]">${currentOffer} Offer</span>}
+        {listing.topBidderName && (
+          <span className="text-white/70 text-[10px] font-medium truncate">{listing.topBidderName}</span>
+        )}
+        {listing.topBidderWallet && (
+          <span className="text-white/30 text-[9px] font-mono">{truncateWallet(listing.topBidderWallet)}</span>
+        )}
+        {price != null && <span className="text-blue-300/80 text-[11px] font-semibold">${price} Offer{dot}</span>}
       </div>
     );
   }
   if (activityType === "buying_auction") {
     return (
       <div className="flex flex-col gap-0.5">
-        {reservePrice != null && <span className="text-blue-300/70 text-[11px] font-semibold">${reservePrice} Reserve{dot}</span>}
-        {currentBid != null && <span className="text-amber-300/70 text-[10px]">${currentBid} C.Bid</span>}
+        {listing.topBidderName && (
+          <span className="text-white/70 text-[10px] font-medium truncate">{listing.topBidderName}</span>
+        )}
+        {listing.topBidderWallet && (
+          <span className="text-white/30 text-[9px] font-mono">{truncateWallet(listing.topBidderWallet)}</span>
+        )}
+        {currentBid != null && currentBid > 0 && <span className="text-amber-300/70 text-[10px]">${currentBid} C.Bid</span>}
       </div>
     );
   }
@@ -146,46 +161,67 @@ export default function ProfileListingsTab({ token }) {
   const [loading, setLoading]               = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [dropdownOpen, setDropdownOpen]     = useState(false);
+  const [cancellingId, setCancellingId]     = useState(null);
 
-  useEffect(() => {
-    const fetchListings = async () => {
-      if (!token) {
-        setGrouped({});
-        setLoading(false);
-        return;
-      }
-      setLoading(true);
-      try {
-        const res = await fetch(`${BACKEND_BASE_URL}/api/v1/listings/my`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        const data = await res.json();
-        if (data.success) {
-          const CAT_ALIAS = {
-            "military badges and collectables": "military badges",
-            "vehicles":                         "racing vehicles",
-            "land/bases":                       "land and bases",
-          };
-          const normalized = {};
-          for (const [key, val] of Object.entries(data.grouped || {})) {
-            const canonical = CAT_ALIAS[key.toLowerCase().trim()] || key;
-            normalized[canonical] = normalized[canonical]
-              ? [...normalized[canonical], ...val]
-              : val;
-          }
-          setGrouped(normalized);
-        } else {
-          setGrouped({});
+  const CAT_ALIAS = {
+    "military badges and collectables": "military badges",
+    "vehicles":                         "racing vehicles",
+    "land/bases":                       "land and bases",
+  };
+
+  const fetchListings = useCallback(async () => {
+    if (!token) {
+      setGrouped({});
+      setLoading(false);
+      return;
+    }
+    setLoading(true);
+    try {
+      const res = await fetch(`${BACKEND_BASE_URL}/api/v1/listings/my`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      if (data.success) {
+        const normalized = {};
+        for (const [key, val] of Object.entries(data.grouped || {})) {
+          const canonical = CAT_ALIAS[key.toLowerCase().trim()] || key;
+          normalized[canonical] = normalized[canonical]
+            ? [...normalized[canonical], ...val]
+            : val;
         }
-      } catch (err) {
-        console.error("ProfileListingsTab fetch error:", err);
+        setGrouped(normalized);
+      } else {
         setGrouped({});
-      } finally {
-        setLoading(false);
       }
-    };
-    fetchListings();
+    } catch (err) {
+      console.error("ProfileListingsTab fetch error:", err);
+      setGrouped({});
+    } finally {
+      setLoading(false);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
+
+  useEffect(() => { fetchListings(); }, [fetchListings]);
+
+  const handleCancelListing = async (listing) => {
+    if (!window.confirm(`Cancel listing for "${listing.itemName}"?`)) return;
+    setCancellingId(String(listing._id));
+    try {
+      const res = await fetch(`${BACKEND_BASE_URL}/api/v1/listings/${listing._id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      if (data.success) {
+        await fetchListings();
+      }
+    } catch (err) {
+      console.error("Cancel listing error:", err);
+    } finally {
+      setCancellingId(null);
+    }
+  };
 
   const ALL_KNOWN = [
     "skins", "military badges", "specialists", "weapons",
@@ -388,11 +424,34 @@ export default function ProfileListingsTab({ token }) {
                         }}
                       >
                         <span className="text-white/80 text-xs font-medium truncate pr-2">{itemName}</span>
-                        {ACTIVITY_COLS.map((col) => (
-                          <div key={col.key} className="flex justify-center">
-                            <PriceCell listing={typesMap[col.key] || null} />
-                          </div>
-                        ))}
+                        {ACTIVITY_COLS.map((col) => {
+                          const listing = typesMap[col.key] || null;
+                          const isCancellable =
+                            listing &&
+                            CANCELLABLE_TYPES.includes(listing.activityType) &&
+                            ["active", "pending"].includes(listing.status) &&
+                            !String(listing._id).endsWith("_buying");
+                          const isBeingCancelled = listing && cancellingId === String(listing._id);
+                          return (
+                            <div key={col.key} className="flex justify-center relative group/cell">
+                              <PriceCell listing={listing} />
+                              {isCancellable && (
+                                <button
+                                  onClick={() => handleCancelListing(listing)}
+                                  disabled={isBeingCancelled}
+                                  title="Cancel listing"
+                                  className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full items-center justify-center hidden group-hover/cell:flex transition-all"
+                                  style={{
+                                    background: isBeingCancelled ? "rgba(156,163,175,0.7)" : "rgba(239,68,68,0.8)",
+                                    color: "#fff",
+                                  }}
+                                >
+                                  <X className="w-2.5 h-2.5" />
+                                </button>
+                              )}
+                            </div>
+                          );
+                        })}
                       </div>
                     );
                   })}

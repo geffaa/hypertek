@@ -44,15 +44,29 @@ export async function cancelSiblingListings(subCollectionId, { skipAuctionId, it
     // match by offering name + poster wallet (best-effort).
     // If ownerWallet is missing, fall back to itemName-only match to avoid leaving ghost records.
     if (itemName) {
+      const escapedName = itemName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
       const tradeFilter = {
         type: "trade",
-        offering: new RegExp(itemName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i"),
-        status: "open",
+        offering: new RegExp(escapedName, "i"),
+        status: { $in: ["open", "accepted"] },
       };
       if (ownerWallet) {
         tradeFilter.posterWallet = new RegExp(`^${ownerWallet}$`, "i");
       }
       promises.push(Trade.updateMany(tradeFilter, { status: "cancelled" }));
+
+      // "trading" MarketListing records created by TradeController have no subCollectionId,
+      // so they are not caught by the subCollectionId query above. Cancel them by itemName.
+      const tradingListingFilter = {
+        activityType: "trading",
+        itemName: new RegExp(`^${escapedName}$`, "i"),
+        status: { $in: ["active", "pending"] },
+      };
+      if (ownerWallet) {
+        tradingListingFilter.userWallet = new RegExp(`^${ownerWallet}$`, "i");
+      }
+      promises.push(MarketListing.updateMany(tradingListingFilter, { status: "cancelled" }));
     }
 
     const results = await Promise.all(promises);

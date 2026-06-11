@@ -9,6 +9,7 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import LazyImage from "./LazyImage";
 import useMobileLandscape from "../../hooks/useMobileLandscape";
@@ -590,90 +591,6 @@ function PlanetDetail({ loc, onClose }) {
   );
 }
 
-/* ── Video overlay ────────────────────────────────────────── */
-function VideoOverlay({ onClose }) {
-  const { t } = useTranslation();
-  return createPortal(
-    <div
-      onClick={onClose}
-      style={{
-        position: "fixed", inset: 0, zIndex: 9000,
-        background: "rgba(0,3,15,0.92)", backdropFilter: "blur(6px)",
-        display: "flex", alignItems: "center", justifyContent: "center",
-      }}
-    >
-      <style>{`
-        @keyframes videoPopIn {
-          from { opacity:0; transform:scale(0.93); }
-          to   { opacity:1; transform:scale(1); }
-        }
-      `}</style>
-
-      <div
-        onClick={e => e.stopPropagation()}
-        style={{
-          display: "flex", flexDirection: "column",
-          width: "min(72vw, calc(58vh * 1.778))",
-          animation: "videoPopIn 0.25s cubic-bezier(0.16,1,0.3,1) both",
-          gap: 8,
-        }}
-      >
-        {/* Title + close — above video */}
-        <div style={{
-          display: "flex", justifyContent: "space-between", alignItems: "center",
-        }}>
-          <div style={{
-            fontFamily: "Orbitron,sans-serif",
-            fontSize: "clamp(9px,1vw,13px)", fontWeight: "bold",
-            letterSpacing: "0.18em", color: "#c4b5fd",
-            textShadow: "0 0 12px rgba(167,139,250,0.7)",
-            whiteSpace: "nowrap",
-          }}>▶ {t("quest.video.title")}</div>
-
-          <button
-            onClick={onClose}
-            style={{
-              padding: "5px 14px",
-              background: "rgba(0,15,35,0.9)",
-              border: "1px solid rgba(167,139,250,0.7)",
-              borderRadius: 3,
-              clipPath: "polygon(0% 0%,calc(100% - 5px) 0%,100% 100%,5px 100%)",
-              fontFamily: "Orbitron,sans-serif",
-              fontSize: "clamp(8px,0.8vw,11px)", fontWeight: "bold",
-              letterSpacing: "0.14em", color: "#c4b5fd",
-              textShadow: "0 0 8px rgba(167,139,250,0.6)",
-              cursor: "pointer", whiteSpace: "nowrap",
-            }}
-            onMouseEnter={e => { e.currentTarget.style.background = "rgba(99,102,241,0.3)"; }}
-            onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,15,35,0.9)"; }}
-          >✕ {t("quest.video.close")}</button>
-        </div>
-
-        {/* Video container */}
-        <div style={{
-          position: "relative",
-          aspectRatio: "16/9",
-          background: "#000",
-          border: "1.5px solid rgba(99,102,241,0.55)",
-          borderRadius: 10,
-          boxShadow: "0 0 80px rgba(0,0,0,0.95), 0 0 40px rgba(99,102,241,0.15)",
-          overflow: "hidden",
-        }}>
-          <video
-            src="https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/quest_video2.webm"
-            autoPlay
-            loop
-            playsInline
-            controls
-            preload="auto"
-            style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
-          />
-        </div>
-      </div>
-    </div>,
-    document.body
-  );
-}
 
 /* ── Unknown planet dropdown ──────────────────────────────── */
 function UnknownDropdown({ loc, onClose }) {
@@ -943,10 +860,10 @@ function StarMapOverlay({ onClose }) {
 /* ══════════════════════════════════════════════════════════════════
    SPACE VIEW
    ══════════════════════════════════════════════════════════════════ */
-function SpaceView() {
+function SpaceView({ isPreview = false }) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [mapOpen,      setMapOpen]      = useState(false);
-  const [videoOpen,    setVideoOpen]    = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   return (
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", background: "#020612" }}>
@@ -1072,7 +989,7 @@ function SpaceView() {
             overflow: "hidden", minWidth: 220,
           }}>
             {[
-              { label: t("quest.space.galaxyVideo"), icon: "▶", action: () => { setVideoOpen(true); setDropdownOpen(false); } },
+              { label: t("quest.space.galaxyVideo"), icon: "▶", action: () => { navigate(isPreview ? "/preview/quest" : "/game/quest"); setDropdownOpen(false); } },
               { label: t("quest.space.interactiveMap"), icon: "◈", action: () => { setMapOpen(true);   setDropdownOpen(false); } },
             ].map(item => (
               <button
@@ -1100,8 +1017,7 @@ function SpaceView() {
         )}
       </div>
 
-      {mapOpen   && <StarMapOverlay  onClose={() => setMapOpen(false)} />}
-      {videoOpen && <VideoOverlay    onClose={() => setVideoOpen(false)} />}
+      {mapOpen && <StarMapOverlay onClose={() => setMapOpen(false)} />}
     </div>
   );
 }
@@ -1150,7 +1066,7 @@ function GroundView() {
 /* ══════════════════════════════════════════════════════════════════
    QuestMode — main export
    ══════════════════════════════════════════════════════════════════ */
-export default function QuestMode({ view = "SPACE", onExit }) {
+export default function QuestMode({ view = "SPACE", onExit, isPreview = false }) {
   const { t } = useTranslation();
   const isSpace = view === "SPACE";
 
@@ -1163,7 +1079,7 @@ export default function QuestMode({ view = "SPACE", onExit }) {
         zIndex: 15, overflow: "hidden",
       }}>
 
-        {isSpace ? <SpaceView /> : <GroundView />}
+        {isSpace ? <SpaceView isPreview={isPreview} /> : <GroundView />}
 
         {/* EXIT button — bottom-left */}
         <button

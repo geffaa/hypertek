@@ -2,6 +2,7 @@ import MarketListing from "../Models/MarketListingModel.js";
 import HireRent from "../Models/HireRentModel.js";
 import NFTSystem from "../Models/NFTSystem.js";
 import Auction from "../Models/AuctionModel.js";
+import Trade from "../Models/TradeModel.js";
 import { createNotification } from "../services/notificationService.js";
 import { cancelSiblingListings } from "../services/cancelSiblingListings.js";
 
@@ -42,14 +43,14 @@ export const getMyListings = async (req, res) => {
     // (startPrice) and currentBid are always up to date, even for existing records
     // created before the sync fix.
     const auctionListings = listings.filter((l) => l.activityType === "selling_auction" && l.subCollectionId);
+    const auctionMap = {};
     if (auctionListings.length > 0) {
       const subIds = auctionListings.map((l) => l.subCollectionId);
       const liveAuctions = await Auction.find({
         subCollectionId: { $in: subIds },
         status: { $in: ["active", "ended"] },
-      }).select("subCollectionId startPrice currentBid status").lean();
+      }).select("subCollectionId startPrice currentBid currentBidderWallet bidHistory status").lean();
 
-      const auctionMap = {};
       liveAuctions.forEach((a) => { auctionMap[String(a.subCollectionId)] = a; });
 
       auctionListings.forEach((l) => {
@@ -59,6 +60,52 @@ export const getMyListings = async (req, res) => {
         if (l.reservePrice == null || l.reservePrice === 0) l.reservePrice = live.startPrice;
         // currentBid: always take the live value from Auction model
         l.currentBid = live.currentBid ?? 0;
+      });
+    }
+
+    // Build synthetic buying listings to populate the Buying columns in the Listings tab.
+    // These are not stored in the DB — they are computed from existing offer/bid data
+    // so the seller can see who is currently offering/bidding on their items.
+    const syntheticBuying = [];
+
+    // buying_general: derive from selling_general listings that have received at least one offer
+    for (const l of listings.filter((l) => l.activityType === "selling_general" && l.currentOffer > 0)) {
+      const topOffer = (l.offerHistory || [])
+        .filter((o) => o.status !== "rejected")
+        .sort((a, b) => b.amount - a.amount)[0];
+      if (!topOffer) continue;
+      syntheticBuying.push({
+        _id:             String(l._id) + "_buying",
+        activityType:    "buying_general",
+        itemName:        l.itemName,
+        category:        l.category,
+        itemImage:       l.itemImage,
+        price:           topOffer.amount,
+        currentOffer:    topOffer.amount,
+        topBidderName:   topOffer.offererName || "Anonymous",
+        topBidderWallet: topOffer.offererWallet || "",
+        status:          l.status,
+        createdAt:       topOffer.offeredAt || l.createdAt,
+      });
+    }
+
+    // buying_auction: derive from selling_auction listings that have at least one bid
+    for (const l of auctionListings) {
+      const live = auctionMap[String(l.subCollectionId)];
+      if (!live || !(live.currentBid > 0)) continue;
+      const topBid = (live.bidHistory || []).sort((a, b) => b.amount - a.amount)[0];
+      syntheticBuying.push({
+        _id:             String(l._id) + "_buying",
+        activityType:    "buying_auction",
+        itemName:        l.itemName,
+        category:        l.category,
+        itemImage:       l.itemImage,
+        reservePrice:    live.startPrice,
+        currentBid:      live.currentBid,
+        topBidderName:   topBid?.bidderName || "Anonymous",
+        topBidderWallet: live.currentBidderWallet || topBid?.bidderWallet || "",
+        status:          l.status,
+        createdAt:       topBid?.placedAt || l.createdAt,
       });
     }
 
@@ -77,6 +124,7 @@ export const getMyListings = async (req, res) => {
 
     const allListings = [
       ...listings,
+      ...syntheticBuying,
       ...ownedHire.map((h) => toHireListing(h, "on_hire")),
       ...rentedHire.map((h) => toHireListing(h, "hiring")),
     ];
@@ -226,8 +274,7 @@ export const deleteListing = async (req, res) => {
     if (listing.userId.toString() !== (req.user._id || req.user.id).toString())
       return res.status(403).json({ success: false, message: "Not your listing" });
 
-    // If this was a selling_general listing, reset priceETH on the subCollection
-    // only if no other active selling_general listing exists for the same item
+    // For selling_general: reset priceETH on the subCollection if no other active listing
     if (listing.activityType === "selling_general" && listing.nftSystemId && listing.subCollectionId) {
       const sibling = await MarketListing.findOne({
         _id:             { $ne: listing._id },
@@ -241,9 +288,41 @@ export const deleteListing = async (req, res) => {
       }
     }
 
+    // For selling_auction: cancel the Auction doc + reset NFTSystem listed flag
+    if (listing.activityType === "selling_auction" && listing.subCollectionId) {
+      await Auction.updateMany(
+        { subCollectionId: String(listing.subCollectionId), status: { $in: ["active", "pending"] } },
+        { status: "cancelled" }
+      );
+      if (listing.nftSystemId) {
+        const sibling = await MarketListing.findOne({
+          _id:             { $ne: listing._id },
+          subCollectionId: String(listing.subCollectionId),
+          status:          "active",
+        });
+        if (!sibling) {
+          await syncSubCollectionPrice(listing.nftSystemId, listing.subCollectionId, 0, false);
+        }
+      }
+    }
+
+    // For trading: cancel the associated Trade doc
+    if (listing.activityType === "trading" && listing.userId && listing.itemName) {
+      const escapedName = listing.itemName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      await Trade.updateMany(
+        {
+          type:     "trade",
+          poster:   listing.userId,
+          offering: new RegExp(`^${escapedName}$`, "i"),
+          status:   { $in: ["open", "accepted"] },
+        },
+        { status: "cancelled" }
+      );
+    }
+
     await listing.deleteOne();
 
-    // Cancel any sibling trades/auctions for the same item
+    // Cancel any sibling listings across all channels for the same item
     await cancelSiblingListings(listing.subCollectionId, {
       itemName:    listing.itemName,
       ownerWallet: listing.userWallet,

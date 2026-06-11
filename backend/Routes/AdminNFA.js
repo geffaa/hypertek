@@ -15,6 +15,7 @@ import BuybackRequest from "../Models/BuybackRequest.js";
 import User from "../Models/User.js";
 import HBLedger from "../Models/HBLedger.js";
 import Trade from "../Models/TradeModel.js";
+import { cancelSiblingListings } from "../services/cancelSiblingListings.js";
 
 const AdminNFARouter = express.Router();
 
@@ -178,6 +179,12 @@ AdminNFARouter.get("/items", async (req, res) => {
     // Flatten all sub-collections, attaching parent info
     let items = [];
     for (const parent of parents) {
+      // Determine creator: "admin" string or the creator's wallet address
+      const parentCreatorType = parent.collection?.creator || "admin";
+      const creatorValue = parentCreatorType === "admin"
+        ? "admin"
+        : (parent.collection?.owner || parent.collection?.royaltyWallet || "");
+
       for (const sub of parent.subCollections || []) {
         items.push({
           _id:          sub._id,
@@ -192,6 +199,7 @@ AdminNFARouter.get("/items", async (req, res) => {
           listed:       sub.listed || false,
           status:       sub.status || "active",
           owner:        sub.owner || "",
+          creator:      creatorValue,
           isFirstSale:  sub.isFirstSale !== false,
           minimumBuybackUSD: sub.minimumBuybackUSD || 0,
           reservePriceUSD:   sub.reservePriceUSD || 0,
@@ -256,12 +264,20 @@ AdminNFARouter.delete("/items/:parentId/:subId", async (req, res) => {
     const parent = await NFTSystem.findById(parentId);
     if (!parent) return res.status(404).json({ success: false, message: "Parent collection not found" });
 
-    const before = parent.subCollections.length;
-    parent.subCollections = parent.subCollections.filter(s => s._id.toString() !== subId);
-    if (parent.subCollections.length === before) {
-      return res.status(404).json({ success: false, message: "Item not found" });
-    }
+    const sub = parent.subCollections.id(subId);
+    if (!sub) return res.status(404).json({ success: false, message: "Item not found" });
+
+    const itemName   = sub.name    || null;
+    const ownerWallet = sub.owner  || null;
+
+    parent.subCollections.pull(subId);
     await parent.save();
+
+    // Cascade: cancel all active MarketListing, Auction, and Trade records for this item
+    cancelSiblingListings(subId, { itemName, ownerWallet }).catch((err) =>
+      console.error("⚠️ [admin delete] cascade cleanup error:", err.message)
+    );
+
     res.json({ success: true, message: "Item deleted successfully" });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });

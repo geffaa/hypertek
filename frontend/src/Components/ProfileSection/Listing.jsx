@@ -209,7 +209,8 @@ function UserListings() {
           const cancelResponse = await axios.post(
             `${BACKEND_BASE_URL}/api/v1/nft/sub-collection/listing/cancel`,
             {
-              nftId: listing.parentId,
+              nftId:   listing.parentId,
+              subId:   listing._id,
               tokenId: listing.tokenId,
             },
             {

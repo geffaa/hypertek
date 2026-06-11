@@ -79,6 +79,15 @@ async function expireAuctions() {
     { status: "ended", cleanupAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) }
   );
 
+  // Sync MarketListing records so the Listings tab reflects expired auctions
+  const expiredSubIds = aboutToExpire.map((a) => String(a.subCollectionId)).filter(Boolean);
+  if (expiredSubIds.length > 0) {
+    await MarketListing.updateMany(
+      { subCollectionId: { $in: expiredSubIds }, activityType: "selling_auction", status: "active" },
+      { status: "expired" }
+    );
+  }
+
   // Reset listed=false for auctions that ended with no winner
   const noWinner = aboutToExpire.filter((a) => !a.currentBidderWallet);
   for (const auction of noWinner) {
@@ -283,6 +292,11 @@ export async function cancelAuction(req, res) {
       itemName: auction.title,
       status: { $in: ["active", "pending"] },
     });
+    // Cancel any sibling marketplace/trade listings for the same item
+    cancelSiblingListings(auction.subCollectionId, {
+      itemName:    auction.title,
+      ownerWallet: auction.sellerWallet,
+    }).catch(() => {});
     res.json({ message: "Auction cancelled", auction });
   } catch (err) {
     res.status(500).json({ error: err.message });

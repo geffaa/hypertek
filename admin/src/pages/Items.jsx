@@ -61,6 +61,19 @@ function WalletCell({ addr, label }) {
 }
 
 function CreatorBadge({ item }) {
+  // 1. Artist — if item is assigned to an artist, they are the creator
+  if (item.artistName) {
+    return (
+      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[11px] font-semibold bg-amber-500/15 border border-amber-500/30 text-amber-300">
+        <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 10c4.42 0 8 1.79 8 4v1H4v-1c0-2.21 3.58-4 8-4z"/>
+        </svg>
+        {item.artistName}
+      </span>
+    );
+  }
+
+  // 2. Admin — collection was created by admin (no user wallet)
   const raw = item.createdBy || item.creator || "";
   const isAdmin = raw === "admin" || raw === "Admin" || !raw;
 
@@ -74,6 +87,8 @@ function CreatorBadge({ item }) {
       </span>
     );
   }
+
+  // 3. User — show their wallet address
   return <WalletCell addr={isWallet(raw) ? raw : null} />;
 }
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const VIDEO_SRCS = {
   RACING:   "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/racing_content.mp4",
@@ -29,9 +30,10 @@ import OverlordMode   from "../Components/Gaming/OverlordMode";
 import RotatePrompt   from "../Components/Gaming/RotatePrompt";
 
 export default function Gaming({ isPreview = false }) {
+  const location = useLocation();
   const [loading,     setLoading]     = useState(!isPreview);
   const [visible,     setVisible]     = useState(isPreview);
-  const [activeGame,  setActiveGame]  = useState(null);
+  const [activeGame,  setActiveGame]  = useState(location.state?.startMode || null);
   const [raceView,     setRaceView]     = useState("TRACK");  // "TRACK" | "GARAGE"
   const [questView,    setQuestView]    = useState("SPACE");  // "SPACE" | "GROUND"
   const [overlordView, setOverlordView] = useState("SPACE");  // "SPACE" | "WORLD"
@@ -81,18 +83,21 @@ export default function Gaming({ isPreview = false }) {
       {activeGame === "RACING" && (
         <RacingMode
           view={raceView}
+          isPreview={isPreview}
           onExit={() => { setActiveGame(null); setRaceView("TRACK"); }}
         />
       )}
       {activeGame === "QUEST" && (
         <QuestMode
           view={questView}
+          isPreview={isPreview}
           onExit={() => { setActiveGame(null); setQuestView("SPACE"); }}
         />
       )}
       {activeGame === "OVERLORD" && (
         <OverlordMode
           view={overlordView}
+          isPreview={isPreview}
           onExit={() => { setActiveGame(null); setOverlordView("SPACE"); }}
         />
       )}

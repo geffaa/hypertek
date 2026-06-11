@@ -43,6 +43,7 @@ const fadeUp = {
 
 /* ─── Inline video section ────────────────────────────────── */
 function VideoSection({ src, accent }) {
+  const mimeType = src?.endsWith(".webm") ? "video/webm" : "video/mp4";
   return (
     <section className="w-full max-w-[1080px] mx-auto px-6 md:px-12 pb-24">
       <motion.div
@@ -53,12 +54,14 @@ function VideoSection({ src, accent }) {
       >
         <div className="absolute top-0 inset-x-0 h-[2px] z-10" style={{ background: accent }} />
         <video
-          src={src}
           controls
           playsInline
-          preload="auto"
+          preload="metadata"
+          x-webkit-airplay="allow"
           style={{ width: "100%", display: "block", background: "#000", maxHeight: "540px" }}
-        />
+        >
+          <source src={src} type={mimeType} />
+        </video>
       </motion.div>
     </section>
   );
@@ -498,33 +501,10 @@ export default function GameModePage() {
           <div className="absolute bottom-0 left-0 right-0 h-[1px]"
             style={{ background: `linear-gradient(to right, transparent, ${data.accent}55, transparent)` }} />
 
-          <div className="w-full max-w-[1080px] mx-auto px-6 md:px-12 py-[14px] flex items-center gap-4">
-            {/* Back button — clearly visible */}
-            <button
-              onClick={() => navigate(-1)}
-              className="flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase transition-all duration-200 group"
-              style={{
-                fontFamily: "Orbitron, sans-serif",
-                color: "rgba(255,255,255,0.9)",
-                background: "rgba(255,255,255,0.08)",
-                border: "1px solid rgba(255,255,255,0.18)",
-                padding: "6px 14px 6px 10px",
-                clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
-              }}
-              onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.14)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.35)"; }}
-              onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.08)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.18)"; }}
-            >
-              <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
-                <path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              {t("gamePage.back")}
-            </button>
-
-            <div className="w-px h-4 bg-white/15" />
-
+          <div className="w-full max-w-[1080px] mx-auto px-6 md:px-12 py-[12px] flex items-center gap-3 flex-wrap">
             {/* Mode tag */}
             <div
-              className="text-[11px] font-bold tracking-[0.3em] uppercase px-4 py-[5px]"
+              className="text-[10px] font-bold tracking-[0.3em] uppercase px-3 py-[5px] shrink-0"
               style={{
                 fontFamily: "Orbitron, sans-serif",
                 border: `1px solid ${data.accent}55`,
@@ -537,6 +517,55 @@ export default function GameModePage() {
             >
               {data.label} MODE
             </div>
+
+            <div className="flex-1" />
+
+            {/* ── Primary: Back to Gaming Interface ── */}
+            <button
+              onClick={() => navigate("/gaming", { state: { startMode: modeKey.toUpperCase() } })}
+              className="flex items-center gap-2 text-[10px] tracking-[0.15em] uppercase shrink-0 transition-all duration-200"
+              style={{
+                fontFamily: "Orbitron, sans-serif",
+                color: "#000",
+                background: data.accent,
+                border: `1px solid ${data.accent}`,
+                padding: "7px 16px 7px 12px",
+                clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
+                fontWeight: "bold",
+                whiteSpace: "nowrap",
+                boxShadow: `0 0 18px ${data.accent}55`,
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = `${data.accent}cc`; e.currentTarget.style.boxShadow = `0 0 28px ${data.accent}88`; }}
+              onMouseLeave={e => { e.currentTarget.style.background = data.accent; e.currentTarget.style.boxShadow = `0 0 18px ${data.accent}55`; }}
+            >
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+                <rect x="1" y="1" width="14" height="14" rx="2" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+                <path d="M5 8h6M8 5l-3 3 3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              {t("gamePage.backToGaming", "BACK TO GAMING INTERFACE")}
+            </button>
+
+            {/* ── Secondary: Back to Website ── */}
+            <button
+              onClick={() => navigate("/")}
+              className="flex items-center gap-2 text-[10px] tracking-[0.15em] uppercase shrink-0 transition-all duration-200"
+              style={{
+                fontFamily: "Orbitron, sans-serif",
+                color: "rgba(255,255,255,0.5)",
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.12)",
+                padding: "7px 14px 7px 10px",
+                clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
+                whiteSpace: "nowrap",
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.09)"; e.currentTarget.style.color = "rgba(255,255,255,0.8)"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.color = "rgba(255,255,255,0.5)"; }}
+            >
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+                <path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              {t("gamePage.backToWebsite", "BACK TO WEBSITE")}
+            </button>
           </div>
         </div>
       </motion.div>

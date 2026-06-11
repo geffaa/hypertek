@@ -214,6 +214,7 @@ export async function createTrade(req, res) {
     if (type === "trade") {
       const rawCat = (category || "general").toLowerCase().trim();
       const normCat = CAT_ALIAS_TRADE[rawCat] || (VALID_CATS_TRADE.includes(rawCat) ? rawCat : "general");
+      const { nftSystemId, subCollectionId } = req.body;
       MarketListing.create({
         userId,
         userName: posterName || "Anonymous",
@@ -223,6 +224,8 @@ export async function createTrade(req, res) {
         itemName: offering || title,
         itemDescription: description || "",
         itemImage: resolvedImage || "",
+        nftSystemId:     nftSystemId     ? String(nftSystemId)     : null,
+        subCollectionId: subCollectionId ? String(subCollectionId) : null,
         status: "active",
       }).catch((e) => console.error("MarketListing trade sync:", e.message));
     }

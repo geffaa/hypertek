@@ -239,6 +239,8 @@ function NFTs() {
       fd.append("requesting", requesting || "Make me an offer");
       fd.append("category", listingItem.category || "general");
       if (listingItem.image) fd.append("imageUrl", listingItem.image);
+      if (listingItem.parentId) fd.append("nftSystemId", listingItem.parentId);
+      if (listingItem._id)     fd.append("subCollectionId", listingItem._id);
       const authToken = token || localStorage.getItem("token");
       const r = await fetch(`${BACKEND_BASE_URL}/api/v1/trade`, {
         method: "POST",
