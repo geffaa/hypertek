@@ -77,11 +77,9 @@ export default function GeneralTab() {
         }
 
         setCatMap(merged);
-        setUsingFallback(false);
       } catch (err) {
         console.error("GeneralTab fetch error:", err);
         setCatMap(FALLBACK_ITEMS);
-        setUsingFallback(true);
       } finally {
         setLoading(false);
       }

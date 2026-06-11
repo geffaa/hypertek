@@ -346,6 +346,7 @@ export const submitBid = async (req, res) => {
 
 // ── GET /api/v1/listings/marketplace (public) ────────────────────────────────
 // Returns active selling_general listings grouped by category for the marketplace slider.
+// Also includes NFTSystem subCollections with listed=true that have no active MarketListing.
 export const getPublicMarketplaceListings = async (req, res) => {
   try {
     const listings = await MarketListing.find({
@@ -356,6 +357,11 @@ export const getPublicMarketplaceListings = async (req, res) => {
       .sort({ createdAt: -1 })
       .limit(200)
       .lean();
+
+    // Track which subCollectionIds are already covered by a MarketListing
+    const coveredSubIds = new Set(
+      listings.filter((l) => l.subCollectionId).map((l) => String(l.subCollectionId))
+    );
 
     const grouped = {};
     listings.forEach((l) => {
@@ -374,6 +380,40 @@ export const getPublicMarketplaceListings = async (req, res) => {
         isDummy:        false,
       });
     });
+
+    // Also pull NFTSystem subCollections that are listed=true, status=active,
+    // and not already represented in the MarketListing results above.
+    const parents = await NFTSystem.find({
+      isParentCollection: true,
+      "subCollections.listed": true,
+    })
+      .select("category subCollections collection")
+      .lean();
+
+    for (const parent of parents) {
+      const cat = (parent.category || "general").toLowerCase().trim();
+      for (const sub of parent.subCollections || []) {
+        if (!sub.listed) continue;
+        if (sub.status === "inactive") continue;
+        if (coveredSubIds.has(String(sub._id))) continue;
+        // Only show items with a price set
+        if (!sub.priceETH || sub.priceETH <= 0) continue;
+
+        if (!grouped[cat]) grouped[cat] = [];
+        grouped[cat].push({
+          _id:            String(sub._id),
+          name:           sub.name,
+          image:          sub.image || parent.collection?.image || "",
+          description:    sub.description || "",
+          priceETH:       sub.priceETH,
+          assetType:      sub.assetType || "NFT",
+          isNFA:          sub.isNFA || false,
+          parentCategory: cat,
+          parentId:       String(parent._id),
+          isDummy:        false,
+        });
+      }
+    }
 
     return res.json({ success: true, grouped });
   } catch (err) {
