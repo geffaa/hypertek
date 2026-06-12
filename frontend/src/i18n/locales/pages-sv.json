@@ -260,10 +260,11 @@
       "myCollectibles": "Mina samlarföremål",
       "activities": "Aktiviteter",
       "listings": "Listor",
-      "trade": "Handel",
-      "auction": "Auktion",
-      "questing": "Questing",
-      "bounty": "Bounty"
+      "trade": "Handels",
+      "auction": "Auktions",
+      "questing": "Quests",
+      "bounty": "Bounty",
+      "forHire": "For Hire"
     },
     "categories": {
       "all": "Alla",

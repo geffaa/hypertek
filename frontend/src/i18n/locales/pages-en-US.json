@@ -260,10 +260,11 @@
       "myCollectibles": "My Collectibles",
       "activities": "Activities",
       "listings": "Listings",
-      "trade": "Trade",
-      "auction": "Auction",
-      "questing": "Questing",
-      "bounty": "Bounty"
+      "trade": "Trades",
+      "auction": "Auctions",
+      "questing": "Quests",
+      "bounty": "Bounty",
+      "forHire": "For Hire"
     },
     "categories": {
       "all": "All",

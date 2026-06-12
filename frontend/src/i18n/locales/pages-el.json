@@ -260,10 +260,11 @@
       "myCollectibles": "Τα Συλλεκτικά μου",
       "activities": "Δραστηριότητες",
       "listings": "Καταχωρίσεις",
-      "trade": "εμπόριο",
-      "auction": "Δημοπρασία",
-      "questing": "Questing",
-      "bounty": "Bounty"
+      "trade": "εμπόριοs",
+      "auction": "Δημοπρασίαs",
+      "questing": "Quests",
+      "bounty": "Bounty",
+      "forHire": "For Hire"
     },
     "categories": {
       "all": "Όλα",

@@ -260,10 +260,11 @@
       "myCollectibles": "Aking Mga Collectible",
       "activities": "Mga aktibidad",
       "listings": "Mga listahan",
-      "trade": "Trade",
-      "auction": "Auction",
-      "questing": "Nagtatanong",
-      "bounty": "Bounty"
+      "trade": "Trades",
+      "auction": "Auctions",
+      "questing": "Quests",
+      "bounty": "Bounty",
+      "forHire": "For Hire"
     },
     "categories": {
       "all": "Lahat",

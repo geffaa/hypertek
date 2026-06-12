@@ -79,9 +79,10 @@ function MarketPlace() {
     "My Collectibles": "collectibles",
     "Listings": "listings",
     "Activities": "activities",
-    "Trade": "trade",
-    "Auction": "auction",
-    "Questing": "questing",
+    "Trades": "trade",
+    "Auctions": "auction",
+    "For Hire": "for-hire",
+    "Quests": "questing",
     "Bounty": "bounty",
   };
   const SLUG_TAB = Object.fromEntries(Object.entries(TAB_SLUG).map(([k, v]) => [v, k]));
@@ -783,7 +784,7 @@ function MarketPlace() {
             })()}
 
             {/* ---- TRADE VIEW ---- */}
-            {activeTab === "Trade" && (() => {
+            {activeTab === "Trades" && (() => {
               const tradeData = offers;
               const isLoading = offersLoading;
               const statusColors = {
@@ -871,7 +872,7 @@ function MarketPlace() {
             })()}
 
             {/* ---- AUCTION VIEW ---- */}
-            {activeTab === "Auction" && (() => {
+            {activeTab === "Auctions" && (() => {
               const AUCTION_STATUS_FILTERS = [
                 { key: "active", label: t("profile.auction.filterActive", "Active") },
                 { key: "ended", label: t("profile.auction.filterEnded", "Ended") },
@@ -986,8 +987,69 @@ function MarketPlace() {
               );
             })()}
 
+            {/* ---- FOR HIRE VIEW ---- */}
+            {activeTab === "For Hire" && (() => {
+              const FOR_HIRE_COLS = ["Hire No", "Item", "Hired To", "Duration", "Payment", "Return Date", "Status"];
+              const colTemplate = "0.8fr 1.5fr 1.2fr 0.8fr 1fr 1fr 0.8fr";
+              return (
+                <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
+                  <div className="flex-1 min-w-0">
+                    {/* Lock overlay wrapper */}
+                    <div className="relative" style={{ minHeight: "calc(78vh - 30px)" }}>
+                      {/* Table skeleton */}
+                      <div style={{ border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, overflow: "clip" }}>
+                        {/* Header */}
+                        <div className="overflow-x-auto" style={{ background: "rgba(4,8,28,0.98)" }}>
+                          <div className="grid min-w-[720px] px-4 py-5 text-[10px] font-semibold uppercase tracking-widest text-white/30"
+                            style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: colTemplate }}>
+                            {FOR_HIRE_COLS.map((col) => <span key={col}>{col}</span>)}
+                          </div>
+                        </div>
+                        {/* Empty rows placeholder */}
+                        <div className="overflow-x-auto">
+                          {Array.from({ length: 5 }).map((_, i) => (
+                            <div key={i} className="grid min-w-[720px] px-4 py-4 items-center"
+                              style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)", gridTemplateColumns: colTemplate }}>
+                              {FOR_HIRE_COLS.map((col) => (
+                                <div key={col} className="h-3 rounded" style={{ background: "rgba(255,255,255,0.05)", width: "60%" }} />
+                              ))}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Coming Soon overlay */}
+                      <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-2xl"
+                        style={{ background: "rgba(4,8,28,0.82)", backdropFilter: "blur(6px)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16 }}>
+                        <div className="flex flex-col items-center gap-3">
+                          <div style={{
+                            width: 72, height: 72, borderRadius: "50%",
+                            background: "rgba(0,42,168,0.25)",
+                            border: "1px solid rgba(0,80,255,0.35)",
+                            display: "flex", alignItems: "center", justifyContent: "center",
+                          }}>
+                            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="rgba(99,150,255,0.9)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                            </svg>
+                          </div>
+                          <p className="text-white font-goldman uppercase" style={{ fontSize: "clamp(22px, 3vw, 36px)", letterSpacing: "0.25em" }}>
+                            Coming Soon
+                          </p>
+                          <p className="text-white/35 text-center max-w-[340px]" style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(12px, 1.1vw, 15px)" }}>
+                            For Hire is part of the Play to Earn system. List your items &amp; specialists to earn Hyper Bucks or materials.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="hidden xl:block"><StickyAvatarSidebar /></div>
+                </div>
+              );
+            })()}
+
             {/* ---- QUESTING VIEW ---- */}
-            {activeTab === "Questing" && (
+            {activeTab === "Quests" && (
               <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
                 <div className="flex-1 min-w-0">
                   <ProfileQuestingTab wallet={connectedWallet} token={token} />

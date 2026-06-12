@@ -23,17 +23,23 @@ const ALL_CATEGORIES = [
 ];
 
 // Step indicator dots for the multi-step listing modal
-function ListingSteps({ step }) {
+function ListingSteps({ step, selectedVenues }) {
   const { t } = useTranslation();
-  const steps = [
+  if (step === "venue_picker" || !selectedVenues || selectedVenues.length === 0) return null;
+
+  const ALL_STEPS = [
     { key: "marketplace", label: t("dashboard.collections.steps.marketplace", "Marketplace") },
     { key: "auction",     label: t("dashboard.collections.steps.auction", "Auction")         },
     { key: "trade",       label: t("dashboard.collections.steps.trade", "Trade")              },
   ];
-  const currentIndex =
-    step === "marketplace"                               ? 0 :
-    step === "auction_prompt" || step === "auction_form" ? 1 :
-    2;
+  const steps = ALL_STEPS.filter((s) => selectedVenues.includes(s.key));
+
+  const currentKey =
+    step === "marketplace" ? "marketplace" :
+    step === "auction_form" ? "auction" :
+    step === "trade_form" ? "trade" : null;
+
+  const currentIndex = steps.findIndex((s) => s.key === currentKey);
 
   return (
     <div className="flex items-center gap-1 justify-center mb-1">
@@ -43,7 +49,9 @@ function ListingSteps({ step }) {
           {i < steps.length - 1 && <div className="w-4 h-px bg-white/10" />}
         </div>
       ))}
-      <span className="text-white/30 text-[10px] ml-2">{steps[currentIndex]?.label}</span>
+      {currentIndex >= 0 && (
+        <span className="text-white/30 text-[10px] ml-2">{steps[currentIndex]?.label}</span>
+      )}
     </div>
   );
 }
@@ -76,8 +84,9 @@ function NFTs() {
 
   // — Multi-step marketplace listing modal
   const [listingItem, setListingItem]       = useState(null);
-  // step: null | 'marketplace' | 'auction_prompt' | 'auction_form' | 'trade_prompt' | 'trade_form'
+  // step: null | 'venue_picker' | 'marketplace' | 'auction_form' | 'trade_form'
   const [listStep, setListStep]             = useState(null);
+  const [selectedVenues, setSelectedVenues] = useState([]);
   const [listingPrice, setListingPrice]     = useState("");
   const [listingLoading, setListingLoading] = useState(false);
 
@@ -147,6 +156,7 @@ function NFTs() {
     setListingItem(null);
     setListStep(null);
     setListingPrice("");
+    setSelectedVenues([]);
     setAuctionForm({ startPrice: "", durationHours: "24", reservePrice: "", instantBuyPrice: "" });
     setTradeForm({ reqItem: "", description: "", openOffer: false });
   };
@@ -155,7 +165,33 @@ function NFTs() {
   const openListModal = (item) => {
     setListingItem(item);
     setListingPrice("");
-    setListStep("marketplace");
+    setSelectedVenues([]);
+    setListStep("venue_picker");
+  };
+
+  // ── Venue navigation helpers ───────────────────────────────────────────────
+  const getFirstStep = (venues) => {
+    if (venues.includes("marketplace")) return "marketplace";
+    if (venues.includes("auction"))     return "auction_form";
+    if (venues.includes("trade"))       return "trade_form";
+    return null;
+  };
+
+  const getNextStep = (currentVenue, venues) => {
+    const order = ["marketplace", "auction", "trade"];
+    const idx = order.indexOf(currentVenue);
+    for (let i = idx + 1; i < order.length; i++) {
+      if (venues.includes(order[i])) {
+        return order[i] === "auction" ? "auction_form" : "trade_form";
+      }
+    }
+    return null;
+  };
+
+  const toggleVenue = (venue) => {
+    setSelectedVenues((prev) =>
+      prev.includes(venue) ? prev.filter((v) => v !== venue) : [...prev, venue]
+    );
   };
 
   // ── Step 1: List on Marketplace ────────────────────────────────────────────
@@ -174,8 +210,9 @@ function NFTs() {
         prev.map((i) => i._id === listingItem._id ? { ...i, listed: true, priceETH: parseFloat(listingPrice) } : i)
       );
       toast.success(`"${listingItem.name}" listed on Marketplace!`);
-      // Proceed to offer auction listing
-      setListStep("auction_prompt");
+      const next = getNextStep("marketplace", selectedVenues);
+      if (next) setListStep(next);
+      else closeListing();
     } catch (err) {
       toast.error(err.response?.data?.error || "Failed to list item");
     } finally {
@@ -216,7 +253,9 @@ function NFTs() {
       toast.error(err.message || "Failed to create auction");
     } finally {
       setAuctionLoading(false);
-      setListStep("trade_prompt");
+      const next = getNextStep("auction", selectedVenues);
+      if (next) setListStep(next);
+      else closeListing();
     }
   };
 
@@ -527,13 +566,14 @@ function NFTs() {
                   </div>
 
                   <div className="px-3 pb-2 flex items-center gap-1.5 mt-1">
-                    {!item.listed ? (
+                    {!(item.listed && item.onAuction && item.onTrade) ? (
                       <button onClick={() => openListModal(item)}
                         className="flex items-center gap-1 flex-1 h-6 rounded-md text-[10px] font-semibold text-blue-300 hover:text-white transition-all justify-center"
                         style={{ background: "rgba(0,42,168,0.25)", border: "1px solid rgba(0,80,255,0.3)" }}>
-                        <FiTag size={10} /> {t("dashboard.collections.listBtn", "List")}
+                        <FiTag size={10} /> {isAnywhere ? t("dashboard.collections.addVenueBtn", "+ Add Venue") : t("dashboard.collections.listBtn", "List")}
                       </button>
-                    ) : (
+                    ) : null}
+                    {item.listed && (
                       <button onClick={() => setUnlistItem(item)}
                         className="flex items-center gap-1 flex-1 h-6 rounded-md text-[10px] font-semibold text-red-300/80 hover:text-red-200 transition-all justify-center"
                         style={{ background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.2)" }}>
@@ -562,7 +602,148 @@ function NFTs() {
           <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-[#0d0d1a] p-6 flex flex-col gap-4">
 
             {/* Step dots */}
-            <ListingSteps step={listStep} />
+            <ListingSteps step={listStep} selectedVenues={selectedVenues} />
+
+            {/* ── Step 0: Venue picker ── */}
+            {listStep === "venue_picker" && (
+              <>
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h2 className="text-white font-semibold text-base">{t("dashboard.collections.venuePicker.title", "Where do you want to list?")}</h2>
+                    <p className="text-white/40 text-xs mt-0.5">{t("dashboard.collections.venuePicker.subtitle", "Choose one or more venues")}</p>
+                  </div>
+                  <button onClick={closeListing} className="text-white/40 hover:text-white transition-colors mt-0.5"><FiX size={18} /></button>
+                </div>
+
+                {/* Item preview */}
+                <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/8">
+                  <img src={listingItem.image ? getImageUrl(listingItem.image) : Collectionimage} alt={listingItem.name}
+                    className="w-10 h-10 rounded-lg object-cover" onError={(e) => { e.target.src = Collectionimage; }} />
+                  <div>
+                    <p className="text-white text-sm font-medium">{listingItem.name}</p>
+                    <p className="text-white/40 text-xs capitalize">{listingItem.category}</p>
+                  </div>
+                </div>
+
+                {/* Venue cards */}
+                <div className="flex flex-col gap-2">
+                  {/* Marketplace */}
+                  {(() => {
+                    const active = selectedVenues.includes("marketplace");
+                    const done   = listingItem.listed;
+                    return (
+                      <button
+                        onClick={() => !done && toggleVenue("marketplace")}
+                        className="w-full text-left p-3 rounded-xl border transition-all"
+                        style={{
+                          background: done ? "rgba(74,222,128,0.05)" : active ? "rgba(0,42,168,0.25)" : "rgba(255,255,255,0.04)",
+                          border: done ? "1px solid rgba(74,222,128,0.25)" : active ? "1px solid rgba(0,80,255,0.45)" : "1px solid rgba(255,255,255,0.09)",
+                          opacity: done ? 0.6 : 1,
+                          cursor: done ? "default" : "pointer",
+                        }}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <FiTag size={14} className={active || done ? "text-blue-300" : "text-white/40"} />
+                            <span className={`text-sm font-semibold ${active || done ? "text-white" : "text-white/60"}`}>
+                              {t("dashboard.collections.steps.marketplace", "Marketplace")}
+                            </span>
+                            {done && <span className="text-[10px] text-green-400 font-medium">{t("dashboard.collections.venuePicker.alreadyListed", "Already listed")}</span>}
+                          </div>
+                          <div className={`w-4 h-4 rounded flex items-center justify-center border transition-all ${done ? "border-green-500/40 bg-green-500/20" : active ? "border-blue-500 bg-blue-600" : "border-white/20 bg-transparent"}`}>
+                            {(active || done) && <CheckCircle2 size={10} className={done ? "text-green-400" : "text-white"} />}
+                          </div>
+                        </div>
+                        <p className="text-white/30 text-[11px] mt-1 ml-5">{t("dashboard.collections.venuePicker.marketplaceDesc", "Fixed-price listing. Buyer purchases instantly.")}</p>
+                      </button>
+                    );
+                  })()}
+
+                  {/* Auction */}
+                  {(() => {
+                    const active = selectedVenues.includes("auction");
+                    const done   = listingItem.onAuction;
+                    return (
+                      <button
+                        onClick={() => !done && toggleVenue("auction")}
+                        className="w-full text-left p-3 rounded-xl border transition-all"
+                        style={{
+                          background: done ? "rgba(251,191,36,0.05)" : active ? "rgba(251,191,36,0.12)" : "rgba(255,255,255,0.04)",
+                          border: done ? "1px solid rgba(251,191,36,0.25)" : active ? "1px solid rgba(251,191,36,0.45)" : "1px solid rgba(255,255,255,0.09)",
+                          opacity: done ? 0.6 : 1,
+                          cursor: done ? "default" : "pointer",
+                        }}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <Gavel size={14} className={active || done ? "text-amber-300" : "text-white/40"} />
+                            <span className={`text-sm font-semibold ${active || done ? "text-white" : "text-white/60"}`}>
+                              {t("dashboard.collections.steps.auction", "Auction")}
+                            </span>
+                            {done && <span className="text-[10px] text-amber-400 font-medium">{t("dashboard.collections.venuePicker.alreadyListed", "Already listed")}</span>}
+                          </div>
+                          <div className={`w-4 h-4 rounded flex items-center justify-center border transition-all ${done ? "border-amber-500/40 bg-amber-500/20" : active ? "border-amber-400 bg-amber-500/40" : "border-white/20 bg-transparent"}`}>
+                            {(active || done) && <CheckCircle2 size={10} className={done ? "text-amber-400" : "text-white"} />}
+                          </div>
+                        </div>
+                        <p className="text-white/30 text-[11px] mt-1 ml-5">{t("dashboard.collections.venuePicker.auctionDesc", "Buyers place competitive bids. You set a start price and duration.")}</p>
+                      </button>
+                    );
+                  })()}
+
+                  {/* Trade */}
+                  {(() => {
+                    const active = selectedVenues.includes("trade");
+                    const done   = listingItem.onTrade;
+                    return (
+                      <button
+                        onClick={() => !done && toggleVenue("trade")}
+                        className="w-full text-left p-3 rounded-xl border transition-all"
+                        style={{
+                          background: done ? "rgba(59,130,246,0.05)" : active ? "rgba(59,130,246,0.12)" : "rgba(255,255,255,0.04)",
+                          border: done ? "1px solid rgba(59,130,246,0.25)" : active ? "1px solid rgba(59,130,246,0.45)" : "1px solid rgba(255,255,255,0.09)",
+                          opacity: done ? 0.6 : 1,
+                          cursor: done ? "default" : "pointer",
+                        }}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <ArrowRightLeft size={14} className={active || done ? "text-blue-300" : "text-white/40"} />
+                            <span className={`text-sm font-semibold ${active || done ? "text-white" : "text-white/60"}`}>
+                              {t("dashboard.collections.steps.trade", "Trade")}
+                            </span>
+                            {done && <span className="text-[10px] text-blue-400 font-medium">{t("dashboard.collections.venuePicker.alreadyListed", "Already listed")}</span>}
+                          </div>
+                          <div className={`w-4 h-4 rounded flex items-center justify-center border transition-all ${done ? "border-blue-500/40 bg-blue-500/20" : active ? "border-blue-400 bg-blue-500/40" : "border-white/20 bg-transparent"}`}>
+                            {(active || done) && <CheckCircle2 size={10} className={done ? "text-blue-400" : "text-white"} />}
+                          </div>
+                        </div>
+                        <p className="text-white/30 text-[11px] mt-1 ml-5">{t("dashboard.collections.venuePicker.tradeDesc", "Exchange item-for-item with other players.")}</p>
+                      </button>
+                    );
+                  })()}
+                </div>
+
+                <div className="flex gap-3">
+                  <button onClick={closeListing}
+                    className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white hover:border-white/20 transition-all text-sm">
+                    {t("dashboard.collections.listModal.cancel", "Cancel")}
+                  </button>
+                  <button
+                    onClick={() => {
+                      if (selectedVenues.length === 0) return toast.error("Select at least one venue");
+                      const first = getFirstStep(selectedVenues);
+                      if (first) setListStep(first);
+                    }}
+                    disabled={selectedVenues.length === 0}
+                    className="flex-1 h-10 rounded-lg text-white text-sm font-semibold disabled:opacity-40 transition-all"
+                    style={{ background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)", border: "1px solid rgba(0,80,255,0.3)" }}
+                  >
+                    {t("dashboard.collections.venuePicker.continue", "Continue →")}
+                  </button>
+                </div>
+              </>
+            )}
 
             {/* ── Step 1: Marketplace price ── */}
             {listStep === "marketplace" && (
@@ -610,40 +791,7 @@ function NFTs() {
               </>
             )}
 
-            {/* ── Step 2a: Auction prompt ── */}
-            {listStep === "auction_prompt" && (
-              <>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-green-400 flex-shrink-0" />
-                  <span className="text-green-300 text-sm font-medium">{t("dashboard.collections.auctionPrompt.listedSuccess", "Listed on Marketplace!")}</span>
-                </div>
-
-                <div className="rounded-xl p-4 flex flex-col gap-2"
-                  style={{ background: "rgba(251,191,36,0.06)", border: "1px solid rgba(251,191,36,0.2)" }}>
-                  <div className="flex items-center gap-2 mb-1">
-                    <Gavel className="w-4 h-4 text-amber-400" />
-                    <span className="text-amber-300 font-semibold text-sm">{t("dashboard.collections.auctionPrompt.title", "Also list on Auction?")}</span>
-                  </div>
-                  <p className="text-white/40 text-xs leading-relaxed">
-                    {t("dashboard.collections.auctionPrompt.desc", "Auction listings let buyers bid competitively. You set a start price and duration.")}
-                  </p>
-                </div>
-
-                <div className="flex gap-3">
-                  <button onClick={() => setListStep("trade_prompt")}
-                    className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white hover:border-white/20 transition-all text-sm">
-                    {t("dashboard.collections.auctionPrompt.skip", "No, skip")}
-                  </button>
-                  <button onClick={() => setListStep("auction_form")}
-                    className="flex-1 h-10 rounded-lg text-white text-sm font-semibold transition-all"
-                    style={{ background: "rgba(251,191,36,0.2)", border: "1px solid rgba(251,191,36,0.4)" }}>
-                    {t("dashboard.collections.auctionPrompt.setup", "Yes, set up →")}
-                  </button>
-                </div>
-              </>
-            )}
-
-            {/* ── Step 2b: Auction form ── */}
+            {/* ── Step 2: Auction form ── */}
             {listStep === "auction_form" && (
               <>
                 <div className="flex items-start justify-between">
@@ -651,7 +799,7 @@ function NFTs() {
                     <Gavel className="w-4 h-4 text-amber-400" />
                     <h2 className="text-white font-semibold text-base">{t("dashboard.collections.auctionForm.title", "Set Up Auction")}</h2>
                   </div>
-                  <button onClick={() => setListStep("trade_prompt")} className="text-white/40 hover:text-white transition-colors"><FiX size={16} /></button>
+                  <button onClick={() => { const next = getNextStep("auction", selectedVenues); if (next) setListStep(next); else closeListing(); }} className="text-white/40 hover:text-white transition-colors"><FiX size={16} /></button>
                 </div>
 
                 <div className="flex items-center gap-2 p-2.5 rounded-lg bg-white/4 border border-white/6">
@@ -722,7 +870,7 @@ function NFTs() {
                 </div>
 
                 <div className="flex gap-3">
-                  <button onClick={() => setListStep("trade_prompt")}
+                  <button onClick={() => { const next = getNextStep("auction", selectedVenues); if (next) setListStep(next); else closeListing(); }}
                     className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white transition-all text-sm">
                     {t("dashboard.collections.auctionForm.skip", "Skip")}
                   </button>
@@ -735,44 +883,7 @@ function NFTs() {
               </>
             )}
 
-            {/* ── Step 3a: Trade prompt ── */}
-            {listStep === "trade_prompt" && (
-              <>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-green-400 flex-shrink-0" />
-                  <span className="text-green-300 text-sm font-medium">
-                    {listingItem && allItems.find(i => i._id === listingItem._id)?.onAuction
-                      ? t("dashboard.collections.tradePrompt.listedBoth", "Listed on Marketplace & Auction!")
-                      : t("dashboard.collections.tradePrompt.listedMarket", "Listed on Marketplace!")}
-                  </span>
-                </div>
-
-                <div className="rounded-xl p-4 flex flex-col gap-2"
-                  style={{ background: "rgba(0,80,255,0.07)", border: "1px solid rgba(0,80,255,0.2)" }}>
-                  <div className="flex items-center gap-2 mb-1">
-                    <ArrowRightLeft className="w-4 h-4 text-blue-400" />
-                    <span className="text-blue-300 font-semibold text-sm">{t("dashboard.collections.tradePrompt.title", "Also list for Trading?")}</span>
-                  </div>
-                  <p className="text-white/40 text-xs leading-relaxed">
-                    {t("dashboard.collections.tradePrompt.desc", "Trade listings let other players propose item-for-item exchanges with you.")}
-                  </p>
-                </div>
-
-                <div className="flex gap-3">
-                  <button onClick={closeListing}
-                    className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white hover:border-white/20 transition-all text-sm">
-                    {t("dashboard.collections.tradePrompt.skip", "No, done")}
-                  </button>
-                  <button onClick={() => setListStep("trade_form")}
-                    className="flex-1 h-10 rounded-lg text-white text-sm font-semibold transition-all"
-                    style={{ background: "rgba(0,80,255,0.25)", border: "1px solid rgba(0,80,255,0.4)" }}>
-                    {t("dashboard.collections.tradePrompt.setup", "Yes, set up →")}
-                  </button>
-                </div>
-              </>
-            )}
-
-            {/* ── Step 3b: Trade form ── */}
+            {/* ── Step 3: Trade form ── */}
             {listStep === "trade_form" && (
               <>
                 <div className="flex items-start justify-between">

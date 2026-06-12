@@ -9,9 +9,10 @@ export const MAJOR_TABS = [
   "My Collectibles",
   "Activities",
   "Listings",
-  "Trade",
-  "Auction",
-  "Questing",
+  "Auctions",
+  "Trades",
+  "Quests",
+  "For Hire",
   "Bounty",
 ];
 
@@ -42,9 +43,10 @@ const TAB_I18N = {
   "My Collectibles": "profile.tabs.myCollectibles",
   "Activities":      "profile.tabs.activities",
   "Listings":        "profile.tabs.listings",
-  "Trade":           "profile.tabs.trade",
-  "Auction":         "profile.tabs.auction",
-  "Questing":        "profile.tabs.questing",
+  "Trades":          "profile.tabs.trade",
+  "Auctions":        "profile.tabs.auction",
+  "For Hire":        "profile.tabs.forHire",
+  "Quests":          "profile.tabs.questing",
   "Bounty":          "profile.tabs.bounty",
 };
 

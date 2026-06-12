@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import logo from "../assets/logo1.webp";
 import LanguageSwitcher from "../Components/Common/LanguageSwitcher";
+import StarMapOverlay from "../Components/Gaming/StarMap";
 
 /* ─── Skeleton shimmer keyframes ──────────────────────── */
 const shimmerCSS = `
@@ -52,6 +53,7 @@ const MODES_STATIC = {
   },
   quest: {
     rich: true,
+    isQuest: true,
     accent: "#38bdf8",
     accentDim: "rgba(56,189,248,0.12)",
     glow: "rgba(56,189,248,0.25)",
@@ -191,6 +193,7 @@ function StepsSection({ data, title, glow, accent, accentDim, items }) {
 function DetailContent({ data }) {
   const { accent, glow, accentDim } = data;
   const { t } = useTranslation();
+  const [mapOpen, setMapOpen] = useState(false);
 
   return (
     <div className="flex flex-col">
@@ -213,6 +216,85 @@ function DetailContent({ data }) {
 
       {/* Video */}
       {data.videoSrc && <VideoSection src={data.videoSrc} accent={accent} />}
+
+      {/* Interactive Map (Quest only) */}
+      {data.isQuest && (
+        <section className="w-full max-w-[1080px] mx-auto px-6 md:px-12 pb-24">
+          <style>{`
+            @keyframes mapPulseP {
+              0%,100% { box-shadow: 0 0 24px ${accent}55, 0 0 60px ${accent}22; }
+              50%      { box-shadow: 0 0 40px ${accent}99, 0 0 100px ${accent}44; }
+            }
+            @keyframes mapBtnPulseP {
+              0%,100% { box-shadow: 0 0 18px ${accent}66; }
+              50%      { box-shadow: 0 0 36px ${accent}cc, 0 0 60px ${accent}55; }
+            }
+            @keyframes scanLineP {
+              0%   { top: 0%; opacity: 0.5; }
+              100% { top: 100%; opacity: 0; }
+            }
+          `}</style>
+          <motion.div
+            variants={fadeUp} custom={0} initial="hidden"
+            whileInView="visible" viewport={{ once: true, amount: 0.15 }}
+            className="relative overflow-hidden"
+            style={{
+              borderRadius: 14,
+              border: `1.5px solid ${accent}55`,
+              animation: "mapPulseP 3s ease-in-out infinite",
+            }}
+          >
+            <div style={{ position:"absolute", inset:0, backgroundImage:"url('/UI Globe Map_Fixed3.webp')", backgroundSize:"cover", backgroundPosition:"center", opacity:0.22 }} />
+            <div style={{ position:"absolute", inset:0, background:`linear-gradient(135deg, rgba(2,6,22,0.92) 0%, rgba(0,20,45,0.75) 50%, rgba(2,6,22,0.92) 100%)` }} />
+            <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:`linear-gradient(to right, transparent, ${accent}, transparent)`, boxShadow:`0 0 16px ${accent}` }} />
+            <div style={{ position:"absolute", left:0, right:0, height:2, background:`linear-gradient(to right, transparent, ${accent}44, transparent)`, animation:"scanLineP 4s linear infinite" }} />
+
+            <div className="relative flex flex-col md:flex-row items-center gap-8 md:gap-12 p-10 md:p-14">
+              <div className="flex-1 flex flex-col gap-5">
+                <div style={{ fontFamily:"Orbitron, sans-serif", fontSize:"clamp(8px,0.75vw,10px)", fontWeight:"bold", letterSpacing:"0.35em", color:accent, opacity:0.7 }}>
+                  ◈ {t("gamePage.interactiveMapLabel", "QUEST FEATURE")}
+                </div>
+                <h2 className="font-goldman uppercase text-2xl md:text-3xl xl:text-4xl leading-tight" style={{ color:"#fff", textShadow:`0 0 40px ${accent}88` }}>
+                  {t("gamePage.interactiveMap", "INTERACTIVE STAR MAP")}
+                </h2>
+                <div className="flex flex-wrap gap-3 mt-1">
+                  {["30+ Locations", "Planet Details", "Hazard Levels", "Mission Briefings"].map(tag => (
+                    <span key={tag} style={{ fontFamily:"Orbitron, sans-serif", fontSize:"clamp(6px,0.6vw,8px)", padding:"3px 10px", letterSpacing:"0.12em", border:`1px solid ${accent}44`, color:`${accent}bb`, background:`${accent}10`, borderRadius:2 }}>{tag}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex flex-col items-center gap-4 shrink-0">
+                <button
+                  onClick={() => setMapOpen(true)}
+                  style={{
+                    padding:"14px 36px",
+                    background:`linear-gradient(135deg, ${accent}33, ${accent}18)`,
+                    border:`2px solid ${accent}`,
+                    borderRadius:4,
+                    clipPath:"polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%)",
+                    fontFamily:"Orbitron, sans-serif",
+                    fontSize:"clamp(9px,0.95vw,12px)", fontWeight:"bold",
+                    letterSpacing:"0.2em", color:"#fff",
+                    textShadow:`0 0 14px ${accent}`,
+                    animation:"mapBtnPulseP 2.5s ease-in-out infinite",
+                    cursor:"pointer", whiteSpace:"nowrap",
+                    transition:"background 0.2s, transform 0.15s",
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background=`${accent}55`; e.currentTarget.style.transform="scale(1.04)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background=`linear-gradient(135deg, ${accent}33, ${accent}18)`; e.currentTarget.style.transform="scale(1)"; }}
+                >
+                  ◈ {t("gamePage.openMap", "OPEN INTERACTIVE MAP")}
+                </button>
+                <div style={{ fontFamily:"Orbitron, sans-serif", fontSize:"clamp(6px,0.6vw,8px)", color:"rgba(255,255,255,0.3)", letterSpacing:"0.12em" }}>
+                  {t("gamePage.mapHint", "CLICK TO EXPLORE THE GALAXY")}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+          {mapOpen && <StarMapOverlay onClose={() => setMapOpen(false)} />}
+        </section>
+      )}
 
       {/* How It Works */}
       {data.howItWorks && (
