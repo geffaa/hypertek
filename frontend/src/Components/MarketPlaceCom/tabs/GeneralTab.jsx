@@ -69,8 +69,10 @@ export default function GeneralTab() {
           Object.entries(grouped).forEach(([cat, items]) => {
             if (!items.length) return;
             if (!merged[cat]) merged[cat] = [];
-            // Real listings go first, dummy content follows
-            merged[cat] = [...items, ...merged[cat]];
+            // If a real listing name matches an existing dummy, skip the real one — dummy takes priority
+            const dummyNames = new Set(merged[cat].map(d => (d.name || "").toLowerCase()));
+            const deduped = items.filter(r => !dummyNames.has((r.name || "").toLowerCase()));
+            merged[cat] = [...deduped, ...merged[cat]];
           });
         } catch {
           // If listings API fails, we still show dummy content — no action needed

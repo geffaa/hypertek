@@ -87,8 +87,8 @@ function LineCard({ item }) {
           src={imgSrc}
           alt={name}
           fallback={overview1}
-          className="w-full h-[150px] sm:h-[170px] bg-transparent"
-          imgClassName="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          className="w-full aspect-square bg-transparent"
+          imgClassName={`${isDummy ? "object-cover object-top" : "object-contain"} transition-transform duration-500 group-hover:scale-105`}
         />
         {badge && (
           <>

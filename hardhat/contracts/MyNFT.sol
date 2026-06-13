@@ -16,6 +16,7 @@ contract MyNFT is ERC721URIStorage, Ownable {
     mapping(uint256 => NFTRoyalty) public tokenRoyalties;
     mapping(uint256 => bool) public hasBeenSold; // Track first sale
     mapping(address => bool) public authorizedMarketplaces; // Allow marketplace to mark as sold
+    mapping(address => bool) public authorizedMinters;      // Allow backend server wallet to lazy-mint editions
     
     event Minted( 
         address indexed owner,
@@ -25,12 +26,46 @@ contract MyNFT is ERC721URIStorage, Ownable {
     );
     
     event MarketplaceAuthorized(address indexed marketplace, bool authorized);
+    event MinterAuthorized(address indexed minter, bool authorized);
     event FirstSaleCompleted(uint256 indexed tokenId);
     
     constructor() ERC721("MyNFT", "MNFT") Ownable(msg.sender) {
         nextTokenId = 1;
     }
     
+    // Authorize backend server wallet to lazy-mint edition tokens to buyers
+    function setMinterAuthorization(address minter, bool authorized) external onlyOwner {
+        require(minter != address(0), "Invalid minter address");
+        authorizedMinters[minter] = authorized;
+        emit MinterAuthorized(minter, authorized);
+    }
+
+    // Lazy-mint one edition token directly to a buyer — called by authorized backend minter only
+    function mintTo(
+        address to,
+        address creator,
+        string memory tokenURI,
+        uint16 royaltyBps
+    ) external returns (uint256) {
+        require(authorizedMinters[msg.sender], "Not authorized minter");
+        require(to != address(0), "Invalid recipient");
+        require(creator != address(0), "Invalid creator");
+        require(royaltyBps <= 10000, "Royalty too high");
+        require(bytes(tokenURI).length > 0, "Token URI cannot be empty");
+
+        uint256 tokenId = nextTokenId;
+        nextTokenId++;
+
+        _safeMint(to, tokenId);
+        _setTokenURI(tokenId, tokenURI);
+
+        tokenRoyalties[tokenId] = NFTRoyalty({ creator: creator, royaltyBps: royaltyBps });
+        hasBeenSold[tokenId] = false;
+
+        emit Minted(to, tokenId, tokenURI, royaltyBps);
+        return tokenId;
+    }
+
     // FIX: Authorize marketplace to call markAsSold
     function setMarketplaceAuthorization(address marketplace, bool authorized) external onlyOwner {
         require(marketplace != address(0), "Invalid marketplace address");

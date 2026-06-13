@@ -432,7 +432,7 @@ export const getPublicMarketplaceListings = async (req, res) => {
       activityType: "selling_general",
       status:       "active",
     })
-      .select("category itemName itemImage itemDescription price assetType isNFA nftSystemId subCollectionId")
+      .select("category itemName itemImage itemDescription price assetType isNFA nftSystemId subCollectionId userWallet")
       .sort({ createdAt: -1 })
       .limit(200)
       .lean();
@@ -446,6 +446,8 @@ export const getPublicMarketplaceListings = async (req, res) => {
     listings.forEach((l) => {
       const cat = l.category || "general";
       if (!grouped[cat]) grouped[cat] = [];
+      // Platform-owned: no real wallet (seed data uses "0x0000" or empty)
+      const isPlatformOwned = !l.userWallet || l.userWallet === "0x0000";
       grouped[cat].push({
         _id:            l.subCollectionId || String(l._id),
         name:           l.itemName,
@@ -456,7 +458,7 @@ export const getPublicMarketplaceListings = async (req, res) => {
         isNFA:          l.isNFA || false,
         parentCategory: cat,
         parentId:       l.nftSystemId ? String(l.nftSystemId) : null,
-        isDummy:        false,
+        isDummy:        isPlatformOwned,
       });
     });
 
@@ -466,17 +468,21 @@ export const getPublicMarketplaceListings = async (req, res) => {
       isParentCollection: true,
       "subCollections.listed": true,
     })
-      .select("category subCollections collection")
+      .select("category subCollections collection isSeed")
       .lean();
 
     for (const parent of parents) {
       const cat = (parent.category || "general").toLowerCase().trim();
+      const parentIsSeed = parent.isSeed === true;
       for (const sub of parent.subCollections || []) {
         if (!sub.listed) continue;
         if (sub.status === "inactive") continue;
         if (coveredSubIds.has(String(sub._id))) continue;
         // Only show items with a price set
         if (!sub.priceETH || sub.priceETH <= 0) continue;
+
+        // Platform-owned: parent is seed data OR sub has no real owner
+        const isPlatformOwned = parentIsSeed || !sub.owner;
 
         if (!grouped[cat]) grouped[cat] = [];
         grouped[cat].push({
@@ -489,7 +495,7 @@ export const getPublicMarketplaceListings = async (req, res) => {
           isNFA:          sub.isNFA || false,
           parentCategory: cat,
           parentId:       String(parent._id),
-          isDummy:        false,
+          isDummy:        isPlatformOwned,
         });
       }
     }

@@ -28,7 +28,7 @@ import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
 import { openTransakOnRamp } from "../../utils/transakUtils";
 import { FiEye, FiEdit2, FiCopy } from "react-icons/fi";
 import { useTokenBalance } from "../../hooks/useTokenBalance";
-import { Wallet, Copy, CreditCard } from "lucide-react";
+import { Wallet, Copy, CreditCard, ZoomIn, X as XIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import PriceHistory from "./BuyNfa2";
 
@@ -199,6 +199,7 @@ function Buy1() {
   const [stripeModal, setStripeModal] = useState(null); // { clientSecret, amount }
   const [showPayModal, setShowPayModal] = useState(false);
   const [gasModal, setGasModal] = useState(false); // true when no ETH for gas
+  const [showZoom, setShowZoom] = useState(false);
 
   // ── Auction tab data ──
   const [auctionInfo, setAuctionInfo] = useState(null);
@@ -1593,7 +1594,7 @@ function Buy1() {
       <div className="flex flex-col md:flex-row gap-8 lg:gap-10 items-stretch">
 
         {/* Left — Image (always visible) */}
-        <div className="w-full md:w-[420px] lg:w-[520px] xl:w-[580px] shrink-0">
+        <div className="w-full md:w-[420px] lg:w-[520px] xl:w-[580px] shrink-0 relative group">
           <img
             src={collection?.image ? getImageUrl(collection.image) : overview1}
             alt={collection?.name}
@@ -1601,7 +1602,40 @@ function Buy1() {
             style={{ background: "rgba(13,22,50,0.8)" }}
             onError={(e) => { e.target.src = overview1; }}
           />
+          {/* Zoom button */}
+          <button
+            onClick={() => setShowZoom(true)}
+            className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center w-9 h-9 rounded-full text-white/80 hover:text-white"
+            style={{ background: "rgba(0,0,0,0.6)", border: "1px solid rgba(255,255,255,0.2)", backdropFilter: "blur(6px)" }}
+            title="Zoom image"
+          >
+            <ZoomIn size={16} />
+          </button>
         </div>
+
+        {/* Image Lightbox */}
+        {showZoom && (
+          <div
+            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-sm px-4"
+            onClick={() => setShowZoom(false)}
+          >
+            <button
+              onClick={() => setShowZoom(false)}
+              className="absolute top-4 right-4 flex items-center justify-center w-10 h-10 rounded-full text-white/70 hover:text-white transition-colors"
+              style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)" }}
+            >
+              <XIcon size={18} />
+            </button>
+            <img
+              src={collection?.image ? getImageUrl(collection.image) : overview1}
+              alt={collection?.name}
+              className="max-w-full max-h-[90vh] rounded-2xl object-contain select-none"
+              style={{ boxShadow: "0 0 80px rgba(0,0,0,0.8)" }}
+              onClick={(e) => e.stopPropagation()}
+              onError={(e) => { e.target.src = overview1; }}
+            />
+          </div>
+        )}
 
         {/* Right — Tab panel */}
         <div className="flex-1 min-w-0 flex flex-col gap-4">

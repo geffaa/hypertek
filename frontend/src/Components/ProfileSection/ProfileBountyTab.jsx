@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Target, Gamepad2 } from "lucide-react";
+import { Target, Gamepad2, Lock } from "lucide-react";
 import { BACKEND_BASE_URL } from "../../Config";
 
 const STATUS_COLORS = {
@@ -74,6 +74,9 @@ export default function ProfileBountyTab({ wallet, token }) {
   }
 
   return (
+    <div style={{ display: "grid" }}>
+    {/* Existing content — dimmed */}
+    <div className="opacity-40 pointer-events-none select-none" style={{ gridRow: "1/1", gridColumn: "1/1" }}>
     <div className="py-4">
       {/* ── Header ── */}
       <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
@@ -207,6 +210,25 @@ export default function ProfileBountyTab({ wallet, token }) {
           </div>
         </div>
       )}
+    </div>
+    </div>
+
+    {/* Sticky lock card */}
+    <div className="pointer-events-none" style={{ gridRow: "1/1", gridColumn: "1/1", position: "sticky", top: "calc(50vh - 80px)", zIndex: 10, display: "flex", justifyContent: "center", alignSelf: "start" }}>
+      <div className="flex flex-col items-center gap-3 px-8 py-6 rounded-2xl text-center"
+        style={{ background: "rgba(6,8,22,0.82)", border: "1px solid rgba(255,255,255,0.12)", backdropFilter: "blur(10px)", maxWidth: 420 }}>
+        <div className="w-12 h-12 rounded-full flex items-center justify-center"
+          style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.15)" }}>
+          <Lock className="w-5 h-5 text-white/60" />
+        </div>
+        <p className="text-white font-bold text-base leading-snug">
+          HyperTek Gaming content for display purposes only.
+        </p>
+        <p className="text-white/55 text-sm leading-relaxed">
+          This is part of Hyper Tek's genuine 'Play to Earn' system, where players can earn real cash rewards, and or Materials/Resources.
+        </p>
+      </div>
+    </div>
     </div>
   );
 }

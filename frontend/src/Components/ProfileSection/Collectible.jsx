@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { Lock } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import ProfileBanner from "./ProfileBanner";
 import { Link, useNavigate, useLocation, useSearchParams } from "react-router-dom";
@@ -552,12 +553,12 @@ function MarketPlace() {
                             style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${anyVenue ? "rgba(74,222,128,0.22)" : "rgba(255,255,255,0.08)"}` }}
                           >
                             {/* Image */}
-                            <div className="relative w-full aspect-square overflow-hidden bg-[#0d1632]">
+                            <div className="relative w-full aspect-square overflow-hidden bg-[#0d1020]">
                               <LazyImage
                                 src={getImageUrl(item.image)}
                                 alt={item.name}
                                 className="w-full h-full transition-transform duration-300 group-hover:scale-105"
-                                imgClassName="object-cover"
+                                imgClassName="object-contain"
                               />
                               {item.category && (
                                 <div className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[10px] font-semibold text-white/80 capitalize"
@@ -994,10 +995,10 @@ function MarketPlace() {
               return (
                 <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
                   <div className="flex-1 min-w-0">
-                    {/* Lock overlay wrapper */}
-                    <div className="relative" style={{ minHeight: "calc(78vh - 30px)" }}>
-                      {/* Table skeleton */}
-                      <div style={{ border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, overflow: "clip" }}>
+                    {/* CSS Grid overlap — skeleton behind, lock card on top via sticky */}
+                    <div style={{ display: "grid" }}>
+                      {/* Table skeleton — dimmed */}
+                      <div className="opacity-40 pointer-events-none select-none" style={{ gridRow: "1/1", gridColumn: "1/1", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, overflow: "clip" }}>
                         {/* Header */}
                         <div className="overflow-x-auto" style={{ background: "rgba(4,8,28,0.98)" }}>
                           <div className="grid min-w-[720px] px-4 py-5 text-[10px] font-semibold uppercase tracking-widest text-white/30"
@@ -1007,7 +1008,7 @@ function MarketPlace() {
                         </div>
                         {/* Empty rows placeholder */}
                         <div className="overflow-x-auto">
-                          {Array.from({ length: 5 }).map((_, i) => (
+                          {Array.from({ length: 8 }).map((_, i) => (
                             <div key={i} className="grid min-w-[720px] px-4 py-4 items-center"
                               style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)", gridTemplateColumns: colTemplate }}>
                               {FOR_HIRE_COLS.map((col) => (
@@ -1018,26 +1019,19 @@ function MarketPlace() {
                         </div>
                       </div>
 
-                      {/* Coming Soon overlay */}
-                      <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-2xl"
-                        style={{ background: "rgba(4,8,28,0.82)", backdropFilter: "blur(6px)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16 }}>
-                        <div className="flex flex-col items-center gap-3">
-                          <div style={{
-                            width: 72, height: 72, borderRadius: "50%",
-                            background: "rgba(0,42,168,0.25)",
-                            border: "1px solid rgba(0,80,255,0.35)",
-                            display: "flex", alignItems: "center", justifyContent: "center",
-                          }}>
-                            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="rgba(99,150,255,0.9)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                            </svg>
+                      {/* Sticky lock card — overlaps skeleton, centres in viewport */}
+                      <div className="pointer-events-none" style={{ gridRow: "1/1", gridColumn: "1/1", position: "sticky", top: "calc(50vh - 80px)", zIndex: 10, display: "flex", justifyContent: "center", alignSelf: "start" }}>
+                        <div className="flex flex-col items-center gap-3 px-8 py-6 rounded-2xl text-center"
+                          style={{ background: "rgba(6,8,22,0.82)", border: "1px solid rgba(255,255,255,0.12)", backdropFilter: "blur(10px)", maxWidth: 420 }}>
+                          <div className="w-12 h-12 rounded-full flex items-center justify-center"
+                            style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.15)" }}>
+                            <Lock className="w-5 h-5 text-white/60" />
                           </div>
-                          <p className="text-white font-goldman uppercase" style={{ fontSize: "clamp(22px, 3vw, 36px)", letterSpacing: "0.25em" }}>
-                            Coming Soon
+                          <p className="text-white font-bold text-base leading-snug">
+                            HyperTek Gaming content for display purposes only.
                           </p>
-                          <p className="text-white/35 text-center max-w-[340px]" style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(12px, 1.1vw, 15px)" }}>
-                            For Hire is part of the Play to Earn system. List your items &amp; specialists to earn Hyper Bucks or materials.
+                          <p className="text-white/55 text-sm leading-relaxed">
+                            This is part of Hyper Tek's genuine 'Play to Earn' system, where players can earn real cash rewards, and or Materials/Resources.
                           </p>
                         </div>
                       </div>

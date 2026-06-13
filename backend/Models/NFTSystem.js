@@ -47,6 +47,9 @@ const subCollectionSchema = new mongoose.Schema({
       appliedAt:   { type: Date, default: Date.now },
     },
   ],
+  // Edition / limited supply fields
+  maxSupply:     { type: Number, default: 1, min: 1 }, // 1 = unique item, >1 = limited edition series
+  currentSupply: { type: Number, default: 0 },         // incremented each time a buyer's token is minted
   createdAt: { type: Date, default: Date.now },
 });
 

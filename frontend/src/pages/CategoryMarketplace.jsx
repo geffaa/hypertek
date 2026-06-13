@@ -234,7 +234,10 @@ function CategoryMarketplace() {
     ? (FALLBACK_ITEMS[normalizedCategory] || ALL_FALLBACK_ITEMS)
     : ALL_FALLBACK_ITEMS;
 
-  const allDisplayItems = [...listedItems, ...fallbackBase];
+  // Exclude real listings whose name matches a dummy — dummy takes priority for duplicates
+  const dummyNames = new Set(fallbackBase.map(d => (d.name || "").toLowerCase().trim()));
+  const dedupedReal = listedItems.filter(r => !dummyNames.has((r.name || "").toLowerCase().trim()));
+  const allDisplayItems = [...dedupedReal, ...fallbackBase];
 
   const filteredItems = allDisplayItems.filter((item) =>
     (item.name || "").toLowerCase().includes(searchTerm.toLowerCase())
@@ -381,8 +384,8 @@ function CategoryMarketplace() {
                         src={imgSrc}
                         alt={displayName}
                         fallback={overview1}
-                        className="w-full h-[200px] sm:h-[220px]"
-                        imgClassName="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                        className="w-full aspect-square"
+                        imgClassName={`${isDummy ? "object-cover object-top" : "object-contain"} transition-transform duration-500 group-hover:scale-105`}
                       />
                       {/* Asset type badge */}
                       {(() => {

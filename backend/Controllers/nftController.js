@@ -124,6 +124,8 @@ export async function createItemDirect(req, res) {
   try {
     const {
       name, description, priceETH, category, assetType, owner,
+      // Edition / supply
+      maxSupply,
       // Admin-only NFA fields
       minimumBuybackUSD, reservePriceUSD, nfaFrame, royaltyWallet,
     } = req.body;
@@ -204,6 +206,7 @@ export async function createItemDirect(req, res) {
     }
 
     const parsedPrice = priceETH ? parseFloat(priceETH) : 0;
+    const parsedMaxSupply = maxSupply ? Math.max(1, parseInt(maxSupply, 10)) : 1;
     const newItem = {
       name: name.trim(),
       description: description?.trim() || "",
@@ -214,6 +217,8 @@ export async function createItemDirect(req, res) {
       isNFA: resolvedType === "NFA",
       isFirstSale: true,
       listed: parsedPrice > 0,
+      maxSupply: parsedMaxSupply,
+      currentSupply: 0,
       createdAt: new Date(),
     };
 
@@ -2087,6 +2092,7 @@ export async function createSubCollectionListing(req, res) {
     const normCat = CAT_ALIAS[rawCat] || (VALID_CATS.includes(rawCat) ? rawCat : "general");
 
     // Remove any existing active listing for this sub-collection then create fresh
+    const itemMaxSupply = subCollection.maxSupply || 1;
     await MarketListing.deleteOne({ subCollectionId: subCollection._id.toString(), status: "active" });
     await MarketListing.create({
       userId: req.user._id || req.user.id,
@@ -2102,6 +2108,9 @@ export async function createSubCollectionListing(req, res) {
       nftSystemId: parent._id,
       subCollectionId: subCollection._id.toString(),
       price: Number(priceETH),
+      maxSupply: itemMaxSupply,
+      quantitySold: 0,
+      quantityRemaining: itemMaxSupply,
       status: "active",
     });
 
@@ -2292,12 +2301,41 @@ export async function recordSubCollectionSale(req, res) {
       subCollection.salesHistory = [];
     }
 
+    const isEdition = (subCollection.maxSupply || 1) > 1;
+
     subCollection.salesHistory.push(saleRecord);
-    subCollection.owner = buyer.toLowerCase();
-    subCollection.seller = null;
-    subCollection.buyer = null;
-    subCollection.listed = false;
-    subCollection.priceETH = null;
+
+    if (isEdition) {
+      // Edition mode — template stays listed; each purchase mints a fresh token to the buyer.
+      // currentSupply tracks how many have been minted so far.
+      subCollection.currentSupply = (subCollection.currentSupply || 0) + 1;
+
+      // Decrement the MarketListing quantity counter (non-blocking, fire-and-forget)
+      MarketListing.findOneAndUpdate(
+        { subCollectionId: subCollection._id.toString(), status: "active" },
+        { $inc: { quantitySold: 1, quantityRemaining: -1 } },
+        { new: true },
+      ).then((updatedListing) => {
+        if (updatedListing && updatedListing.quantityRemaining <= 0) {
+          // All editions sold — close the listing
+          subCollection.listed = false;
+          subCollection.priceETH = null;
+          parent.markModified("subCollections");
+          parent.save().catch((e) => console.warn("⚠️ [Edition] auto-close save error:", e.message));
+          MarketListing.findByIdAndUpdate(updatedListing._id, { status: "sold" }).catch((e) =>
+            console.warn("⚠️ [Edition] listing status update error:", e.message)
+          );
+          console.log(`✅ [Edition] All ${subCollection.maxSupply} editions sold — listing closed`);
+        }
+      }).catch((e) => console.warn("⚠️ [Edition] quantity update error:", e.message));
+    } else {
+      // Standard single-item mode — transfer ownership and delist
+      subCollection.owner = buyer.toLowerCase();
+      subCollection.seller = null;
+      subCollection.buyer = null;
+      subCollection.listed = false;
+      subCollection.priceETH = null;
+    }
 
     if (subCollection.isFirstSale) {
       subCollection.isFirstSale = false;

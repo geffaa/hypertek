@@ -42,18 +42,21 @@ function CreateNFT() {
   const [description, setDesc]    = useState("");
   const [category, setCategory]   = useState(CATEGORIES[0]);
   const [assetType, setAssetType] = useState("NFT");
+  const [maxSupply, setMaxSupply] = useState(1);
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setPreview] = useState(null);
   const [dragOver, setDragOver]   = useState(false);
   const [loading, setLoading]     = useState(false);
-  const [cropSrc,  setCropSrc]    = useState(null);
-  const [cropFileName, setCropFileName] = useState("");
+  const [cropSrc,       setCropSrc]       = useState(null);
+  const [cropFileName,  setCropFileName]  = useState("");
+  const [originalFile,  setOriginalFile]  = useState(null);
 
   const handleFile = (file) => {
     if (!file) return;
     if (!file.type.startsWith("image/")) return toast.error("Please upload an image file");
     if (file.size > 25 * 1024 * 1024) return toast.error("Image must be under 25MB");
     setCropFileName(file.name);
+    setOriginalFile(file);
     const reader = new FileReader();
     reader.onload = () => setCropSrc(reader.result);
     reader.readAsDataURL(file);
@@ -81,6 +84,7 @@ function CreateNFT() {
       form.append("category", category);
       form.append("owner", owner);
       form.append("assetType", assetType);
+      form.append("maxSupply", Math.max(1, parseInt(maxSupply, 10) || 1));
       form.append("image", imageFile);
 
       await axios.post(`${BACKEND_BASE_URL}/api/v1/nft/item/create`, form, {
@@ -108,6 +112,7 @@ function CreateNFT() {
         <ImageCropModal
           src={cropSrc}
           fileName={cropFileName}
+          originalFile={originalFile}
           onConfirm={handleCropConfirm}
           onCancel={() => setCropSrc(null)}
         />
@@ -251,6 +256,21 @@ function CreateNFT() {
             </p>
           </div>
 
+          {/* Max Supply */}
+          <div>
+            <label className={labelClass}>{t("dashboard.createNFT.maxSupply", "Max Supply")}</label>
+            <input
+              type="number"
+              min={1}
+              value={maxSupply}
+              onChange={(e) => setMaxSupply(Math.max(1, parseInt(e.target.value, 10) || 1))}
+              className={`${inputClass} w-32`}
+            />
+            <p className="text-white/25 text-[11px] mt-1">
+              {t("dashboard.createNFT.maxSupplyHint", "Set to 1 for a unique NFT. Set higher to sell multiple editions — each buyer gets their own minted token.")}
+            </p>
+          </div>
+
           {/* Blockchain info */}
           <div>
             <label className={labelClass}>{t("dashboard.createNFT.blockchain", "Blockchain")}</label>
@@ -274,9 +294,9 @@ function CreateNFT() {
             </p>
             <ul className="text-white/45 text-[11px] space-y-1 leading-relaxed">
               <li>• {t("dashboard.createNFT.howListing1", "Save your item to storage first — no gas / fees required.")}</li>
-              <li>• {t("dashboard.createNFT.howListing2", "Then list it on the Marketplace (fixed price).")}</li>
-              <li>• {t("dashboard.createNFT.howListing3", "Once listed on the Marketplace, open it for Auction (timed bidding with reserve), or offer it in Trade.")}</li>
-              <li>• {t("dashboard.createNFT.howListing4", "All three channels can be active at the same time — the first sale cancels the rest.")}</li>
+              <li>• {t("dashboard.createNFT.howListing2", "Choose your starting venue: list on the Marketplace (fixed price) or open an Auction straight away.")}</li>
+              <li>• {t("dashboard.createNFT.howListing3", "Once active in one venue, you can add the others simultaneously — the first sale cancels the rest.")}</li>
+              <li>• {t("dashboard.createNFT.howListing4", "For edition items (Max Supply > 1), one card appears in the Marketplace — each purchase mints a fresh token and reduces the available count.")}</li>
             </ul>
           </div>
 

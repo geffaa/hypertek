@@ -657,7 +657,7 @@ export default function GameModePage() {
 
             {/* ── Secondary: Back to Website ── */}
             <button
-              onClick={() => navigate("/")}
+              onClick={() => navigate(-1)}
               className="flex items-center gap-2 text-[10px] tracking-[0.15em] uppercase shrink-0 transition-all duration-200"
               style={{
                 fontFamily: "Orbitron, sans-serif",

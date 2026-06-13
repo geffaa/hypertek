@@ -508,11 +508,13 @@ function NFTs() {
               const badge = ASSET_BADGE[aType] || ASSET_BADGE.NFT;
               const isOnChain = !!item.tokenId;
               const isAnywhere = item.listed || item.onAuction || item.onTrade;
+              const isEdition = (item.maxSupply || 1) > 1;
+              const editionRemaining = (item.maxSupply || 1) - (item.currentSupply || 0);
               return (
                 <div key={item._id}
-                  className="rounded-xl border overflow-hidden flex flex-col transition-all hover:brightness-110"
+                  className="rounded-xl border flex flex-col transition-all hover:brightness-110"
                   style={{ background: "rgba(255,255,255,0.03)", borderColor: isAnywhere ? "rgba(74,222,128,0.25)" : "rgba(255,255,255,0.08)" }}>
-                  <div className="relative h-[200px] sm:h-[220px]" style={{ background: "#0d1020" }}>
+                  <div className="relative h-[200px] sm:h-[220px] overflow-hidden rounded-t-xl" style={{ background: "#0d1020" }}>
                     <img src={img} alt={item.name} className="w-full h-full object-contain"
                       onError={(e) => { e.target.src = Collectionimage; }} />
 
@@ -544,6 +546,12 @@ function NFTs() {
                       )}
                     </div>
 
+                    {isEdition && (
+                      <span className="absolute bottom-2 left-2 px-1.5 py-0.5 rounded text-[9px] font-bold text-cyan-300"
+                        style={{ background: "rgba(6,182,212,0.15)", border: "1px solid rgba(6,182,212,0.35)" }}>
+                        {editionRemaining}/{item.maxSupply}
+                      </span>
+                    )}
                     {isOnChain && (
                       <span className="absolute bottom-2 right-2 px-1.5 py-0.5 rounded text-[9px] font-bold text-purple-300"
                         style={{ background: "rgba(124,58,237,0.2)", border: "1px solid rgba(124,58,237,0.4)" }}>
@@ -565,29 +573,35 @@ function NFTs() {
                     )}
                   </div>
 
-                  <div className="px-3 pb-2 flex items-center gap-1.5 mt-1">
+                  <div className="px-3 pb-3 flex items-center gap-1.5 mt-1">
                     {!(item.listed && item.onAuction && item.onTrade) ? (
                       <button onClick={() => openListModal(item)}
-                        className="flex items-center gap-1 flex-1 h-6 rounded-md text-[10px] font-semibold text-blue-300 hover:text-white transition-all justify-center"
-                        style={{ background: "rgba(0,42,168,0.25)", border: "1px solid rgba(0,80,255,0.3)" }}>
-                        <FiTag size={10} /> {isAnywhere ? t("dashboard.collections.addVenueBtn", "+ Add Venue") : t("dashboard.collections.listBtn", "List")}
+                        className="flex items-center gap-1.5 flex-1 h-8 rounded-md text-[11px] font-semibold text-blue-300 hover:text-white transition-all justify-center whitespace-nowrap"
+                        style={{ background: "rgba(0,42,168,0.3)", border: "1px solid rgba(0,80,255,0.35)" }}>
+                        <FiTag size={11} /> {isAnywhere ? t("dashboard.collections.addVenueBtn", "+ Add Venue") : t("dashboard.collections.listBtn", "List")}
                       </button>
-                    ) : null}
-                    {item.listed && (
-                      <button onClick={() => setUnlistItem(item)}
-                        className="flex items-center gap-1 flex-1 h-6 rounded-md text-[10px] font-semibold text-red-300/80 hover:text-red-200 transition-all justify-center"
-                        style={{ background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.2)" }}>
-                        <FiX size={10} /> {t("dashboard.collections.unlistBtn", "Unlist")}
-                      </button>
+                    ) : (
+                      <div className="flex-1" />
                     )}
-                    <button onClick={() => openEditModal(item)} data-tooltip={item.listed ? t("dashboard.collections.cancelListingEdit", "Cancel listing to edit") : t("dashboard.collections.editTooltip", "Edit")}
-                      className={`w-6 h-6 flex items-center justify-center rounded-md transition-all ${item.listed ? "text-white/15 cursor-not-allowed" : "text-white/40 hover:text-white hover:bg-white/5"}`}>
-                      <FiEdit2 size={11} />
-                    </button>
-                    <button onClick={() => openDeleteModal(item)} data-tooltip={item.listed ? t("dashboard.collections.cancelListingDelete", "Cancel listing to delete") : isOnChain ? t("dashboard.collections.onChainDelete", "On-chain, cannot delete") : t("dashboard.collections.deleteTooltip", "Delete")}
-                      className={`w-6 h-6 flex items-center justify-center rounded-md transition-all ${(item.listed || isOnChain) ? "text-white/15 cursor-not-allowed" : "text-white/40 hover:text-red-400 hover:bg-red-400/5"}`}>
-                      <FiTrash2 size={11} />
-                    </button>
+                    <div className="flex items-center gap-1 shrink-0">
+                      {item.listed && (
+                        <button onClick={() => setUnlistItem(item)}
+                          className="w-8 h-8 flex items-center justify-center rounded-md text-red-400 hover:text-red-300 transition-all"
+                          style={{ background: "rgba(239,68,68,0.12)", border: "1px solid rgba(239,68,68,0.28)" }}>
+                          <FiX size={14} />
+                        </button>
+                      )}
+                      <button onClick={() => openEditModal(item)}
+                        data-tooltip={item.listed ? t("dashboard.collections.cancelListingEdit", "Cancel listing to edit") : t("dashboard.collections.editTooltip", "Edit")}
+                        className={`w-8 h-8 flex items-center justify-center rounded-md transition-all text-white ${item.listed ? "cursor-not-allowed opacity-30" : "hover:bg-white/10"}`}>
+                        <FiEdit2 size={13} />
+                      </button>
+                      <button onClick={() => openDeleteModal(item)}
+                        data-tooltip={item.listed ? t("dashboard.collections.cancelListingDelete", "Cancel listing to delete") : isOnChain ? t("dashboard.collections.onChainDelete", "On-chain, cannot delete") : t("dashboard.collections.deleteTooltip", "Delete")}
+                        className={`w-8 h-8 flex items-center justify-center rounded-md transition-all text-white ${(item.listed || isOnChain) ? "cursor-not-allowed opacity-30" : "hover:text-red-400 hover:bg-red-400/10"}`}>
+                        <FiTrash2 size={13} />
+                      </button>
+                    </div>
                   </div>
                 </div>
               );

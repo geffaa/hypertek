@@ -72,6 +72,11 @@ const marketListingSchema = new mongoose.Schema(
     reservePrice: { type: Number, default: null }, // auction reserve (selling/buying auction)
     currentBid:   { type: Number, default: null }, // current highest bid
 
+    // Edition / limited supply tracking
+    maxSupply:         { type: Number, default: 1 },  // mirrors subCollection.maxSupply at listing time
+    quantitySold:      { type: Number, default: 0 },  // incremented on each edition purchase
+    quantityRemaining: { type: Number, default: 1 },  // decremented on each purchase; listing auto-closes at 0
+
     // History & analytics
     offerHistory: [offerEntrySchema],
     bidHistory:   [bidEntrySchema],
