@@ -25,51 +25,76 @@ async function syncSubCollectionPrice(nftSystemId, subCollectionId, priceETH, li
 
 const WARN_BEFORE_MS = 24 * 60 * 60 * 1000; // notify 24h before expiry
 
+const CAT_ALIAS_ML = {
+  "military badges and collectables": "military badges",
+  "vehicles": "racing vehicles",
+  "land/bases": "land and bases",
+};
+const VALID_CATS_ML = ["skins", "military badges", "specialists", "weapons", "body armour", "spaceships", "racing vehicles", "artwork", "land and bases", "general"];
+
+function normalizeCat(cat) {
+  const raw = (cat || "general").toLowerCase().trim();
+  return CAT_ALIAS_ML[raw] || (VALID_CATS_ML.includes(raw) ? raw : "general");
+}
+
 // ── GET /api/v1/listings/my  (auth required) ─────────────────────────────────
-// Returns listings grouped by category, only non-empty categories
+// selling_auction → baca langsung dari Auction collection
+// trading         → baca langsung dari Trade collection
+// selling_general / buying_general / on_hire / hiring → dari MarketListing / HireRent
 export const getMyListings = async (req, res) => {
   try {
     const userId = req.user._id || req.user.id;
 
-    const [listings, ownedHire, rentedHire] = await Promise.all([
-      MarketListing.find({ userId, status: { $in: ["active", "pending"] } }).sort({ createdAt: -1 }).lean(),
+    const [mlListings, ownedHire, rentedHire, userAuctions, userTrades] = await Promise.all([
+      // Exclude selling_auction & trading — those come from their own collections
+      MarketListing.find({
+        userId,
+        status: { $in: ["active", "pending"] },
+        activityType: { $nin: ["selling_auction", "trading"] },
+      }).sort({ createdAt: -1 }).lean(),
       HireRent.find({ owner: userId, status: { $in: ["available", "rented", "cooldown"] } })
         .sort({ createdAt: -1 }).lean(),
       HireRent.find({ renter: userId, status: "rented" })
         .sort({ createdAt: -1 }).lean(),
+      // Auction: sumber utama untuk kolom Auction Selling
+      Auction.find({ seller: userId, status: "active" })
+        .select("_id nftSystemId subCollectionId title image category startPrice currentBid currentBidderWallet bidHistory status createdAt")
+        .lean(),
+      // Trade: sumber utama untuk kolom Trading
+      Trade.find({ poster: userId, type: "trade", status: "open" })
+        .select("_id title offering image category status createdAt")
+        .lean(),
     ]);
 
-    // Live-sync selling_auction listings with the Auction model so reservePrice
-    // (startPrice) and currentBid are always up to date, even for existing records
-    // created before the sync fix.
-    const auctionListings = listings.filter((l) => l.activityType === "selling_auction" && l.subCollectionId);
-    const auctionMap = {};
-    if (auctionListings.length > 0) {
-      const subIds = auctionListings.map((l) => l.subCollectionId);
-      const liveAuctions = await Auction.find({
-        subCollectionId: { $in: subIds },
-        status: { $in: ["active", "ended"] },
-      }).select("subCollectionId startPrice currentBid currentBidderWallet bidHistory status").lean();
+    // Map Auction docs → selling_auction entries
+    const auctionEntries = userAuctions.map((a) => ({
+      _id:             String(a._id),
+      activityType:    "selling_auction",
+      itemName:        a.title,
+      category:        normalizeCat(a.category),
+      itemImage:       a.image || "",
+      reservePrice:    a.startPrice,
+      currentBid:      a.currentBid || 0,
+      status:          a.status,
+      subCollectionId: a.subCollectionId ? String(a.subCollectionId) : null,
+      nftSystemId:     a.nftSystemId || null,
+      createdAt:       a.createdAt,
+    }));
 
-      liveAuctions.forEach((a) => { auctionMap[String(a.subCollectionId)] = a; });
+    // Map Trade docs → trading entries
+    const tradeEntries = userTrades.map((t) => ({
+      _id:          String(t._id),
+      activityType: "trading",
+      itemName:     t.offering || t.title,
+      category:     normalizeCat(t.category),
+      itemImage:    t.image || "",
+      status:       "active",
+      createdAt:    t.createdAt,
+    }));
 
-      auctionListings.forEach((l) => {
-        const live = auctionMap[String(l.subCollectionId)];
-        if (!live) return;
-        // reservePrice: use explicit reserve from MarketListing if set, else startPrice
-        if (l.reservePrice == null || l.reservePrice === 0) l.reservePrice = live.startPrice;
-        // currentBid: always take the live value from Auction model
-        l.currentBid = live.currentBid ?? 0;
-      });
-    }
-
-    // Build synthetic buying listings to populate the Buying columns in the Listings tab.
-    // These are not stored in the DB — they are computed from existing offer/bid data
-    // so the seller can see who is currently offering/bidding on their items.
+    // buying_general: derive from selling_general listings yang sudah ada offer
     const syntheticBuying = [];
-
-    // buying_general: derive from selling_general listings that have received at least one offer
-    for (const l of listings.filter((l) => l.activityType === "selling_general" && l.currentOffer > 0)) {
+    for (const l of mlListings.filter((l) => l.activityType === "selling_general" && l.currentOffer > 0)) {
       const topOffer = (l.offerHistory || [])
         .filter((o) => o.status !== "rejected")
         .sort((a, b) => b.amount - a.amount)[0];
@@ -89,23 +114,22 @@ export const getMyListings = async (req, res) => {
       });
     }
 
-    // buying_auction: derive from selling_auction listings that have at least one bid
-    for (const l of auctionListings) {
-      const live = auctionMap[String(l.subCollectionId)];
-      if (!live || !(live.currentBid > 0)) continue;
-      const topBid = (live.bidHistory || []).sort((a, b) => b.amount - a.amount)[0];
+    // buying_auction: derive dari auction yang sudah ada bid
+    for (const a of userAuctions) {
+      if (!(a.currentBid > 0)) continue;
+      const topBid = (a.bidHistory || []).sort((x, y) => y.amount - x.amount)[0];
       syntheticBuying.push({
-        _id:             String(l._id) + "_buying",
+        _id:             String(a._id) + "_buying",
         activityType:    "buying_auction",
-        itemName:        l.itemName,
-        category:        l.category,
-        itemImage:       l.itemImage,
-        reservePrice:    live.startPrice,
-        currentBid:      live.currentBid,
+        itemName:        a.title,
+        category:        normalizeCat(a.category),
+        itemImage:       a.image || "",
+        reservePrice:    a.startPrice,
+        currentBid:      a.currentBid,
         topBidderName:   topBid?.bidderName || "Anonymous",
-        topBidderWallet: live.currentBidderWallet || topBid?.bidderWallet || "",
-        status:          l.status,
-        createdAt:       topBid?.placedAt || l.createdAt,
+        topBidderWallet: a.currentBidderWallet || topBid?.bidderWallet || "",
+        status:          a.status,
+        createdAt:       topBid?.placedAt || a.createdAt,
       });
     }
 
@@ -123,7 +147,9 @@ export const getMyListings = async (req, res) => {
     });
 
     const allListings = [
-      ...listings,
+      ...mlListings,
+      ...auctionEntries,
+      ...tradeEntries,
       ...syntheticBuying,
       ...ownedHire.map((h) => toHireListing(h, "on_hire")),
       ...rentedHire.map((h) => toHireListing(h, "hiring")),
@@ -198,7 +224,7 @@ export const createListing = async (req, res) => {
 
     const listing = await MarketListing.create({
       userId:     req.user._id || req.user.id,
-      userName:   req.user.FullName || req.user.Email?.split("@")[0] || "Anonymous",
+      userName:   req.user.Nickname || req.user.UserName || req.user.FullName || req.user.Email?.split("@")[0] || "Anonymous",
       userWallet: req.user.WalletAddress || req.user.MetaMaskAddress || "",
       category,
       activityType,
@@ -345,7 +371,7 @@ export const submitOffer = async (req, res) => {
       return res.status(400).json({ success: false, message: "Listing is not active" });
 
     const entry = {
-      offererName:   req.user.FullName || "Anonymous",
+      offererName:   req.user.Nickname || req.user.UserName || req.user.FullName || "Anonymous",
       offererWallet: req.user.WalletAddress || "",
       amount,
       currency:  currency || "USDC",
@@ -365,7 +391,7 @@ export const submitOffer = async (req, res) => {
 
     // Notify the listing owner
     if (listing.userId) {
-      const offerer = req.user.FullName || req.user.Email?.split("@")[0] || "Someone";
+      const offerer = req.user.Nickname || req.user.UserName || req.user.FullName || req.user.Email?.split("@")[0] || "Someone";
       createNotification(
         listing.userId,
         "offer",
@@ -396,7 +422,7 @@ export const submitBid = async (req, res) => {
       return res.status(400).json({ success: false, message: "Bid must be higher than current bid" });
 
     listing.bidHistory.push({
-      bidderName:   req.user.FullName || "Anonymous",
+      bidderName:   req.user.Nickname || req.user.UserName || req.user.FullName || "Anonymous",
       bidderWallet: req.user.WalletAddress || "",
       amount,
     });
@@ -406,7 +432,7 @@ export const submitBid = async (req, res) => {
 
     // Notify the listing owner about the new bid
     if (listing.userId) {
-      const bidder = req.user.FullName || req.user.Email?.split("@")[0] || "Someone";
+      const bidder = req.user.Nickname || req.user.UserName || req.user.FullName || req.user.Email?.split("@")[0] || "Someone";
       createNotification(
         listing.userId,
         "bid",
@@ -442,12 +468,34 @@ export const getPublicMarketplaceListings = async (req, res) => {
       listings.filter((l) => l.subCollectionId).map((l) => String(l.subCollectionId))
     );
 
+    // Also pull NFTSystem subCollections that are listed=true, status=active,
+    // and not already represented in the MarketListing results above.
+    // Fetch parents first so we can enrich MarketListing items with supply counts.
+    const parents = await NFTSystem.find({
+      isParentCollection: true,
+      "subCollections.listed": true,
+    })
+      .select("category subCollections collection isSeed")
+      .lean();
+
+    // Build supply lookup: subCollectionId (string) → { maxSupply, currentSupply }
+    const supplyMap = {};
+    for (const parent of parents) {
+      for (const sub of parent.subCollections || []) {
+        supplyMap[String(sub._id)] = {
+          maxSupply:     sub.maxSupply     || 1,
+          currentSupply: sub.currentSupply || 0,
+        };
+      }
+    }
+
     const grouped = {};
     listings.forEach((l) => {
       const cat = l.category || "general";
       if (!grouped[cat]) grouped[cat] = [];
       // Platform-owned: no real wallet (seed data uses "0x0000" or empty)
       const isPlatformOwned = !l.userWallet || l.userWallet === "0x0000";
+      const supply = l.subCollectionId ? (supplyMap[String(l.subCollectionId)] || {}) : {};
       grouped[cat].push({
         _id:            l.subCollectionId || String(l._id),
         name:           l.itemName,
@@ -459,17 +507,11 @@ export const getPublicMarketplaceListings = async (req, res) => {
         parentCategory: cat,
         parentId:       l.nftSystemId ? String(l.nftSystemId) : null,
         isDummy:        isPlatformOwned,
+        owner:          isPlatformOwned ? null : (l.userWallet || null),
+        maxSupply:      supply.maxSupply     || 1,
+        currentSupply:  supply.currentSupply || 0,
       });
     });
-
-    // Also pull NFTSystem subCollections that are listed=true, status=active,
-    // and not already represented in the MarketListing results above.
-    const parents = await NFTSystem.find({
-      isParentCollection: true,
-      "subCollections.listed": true,
-    })
-      .select("category subCollections collection isSeed")
-      .lean();
 
     for (const parent of parents) {
       const cat = (parent.category || "general").toLowerCase().trim();
@@ -496,6 +538,9 @@ export const getPublicMarketplaceListings = async (req, res) => {
           parentCategory: cat,
           parentId:       String(parent._id),
           isDummy:        isPlatformOwned,
+          owner:          isPlatformOwned ? null : (sub.owner || null),
+          maxSupply:      sub.maxSupply     || 1,
+          currentSupply:  sub.currentSupply || 0,
         });
       }
     }

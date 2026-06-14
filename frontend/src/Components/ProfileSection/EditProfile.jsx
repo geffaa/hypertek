@@ -22,6 +22,8 @@ function EditProfile() {
   console.log("your recieved data are :", userData);
 
   const [name, setName] = useState(userData.FullName || "");
+  const storedNickname = userData.Nickname && !userData.Nickname.includes("@") ? userData.Nickname : "";
+  const [nickname, setNickname] = useState(storedNickname);
   const [email, setEmail] = useState(userData.Email || "");
   const [bio, setBio] = useState(userData.Bio || "");
   const [profileImage, setProfileImage] = useState(userData.Avatar ? `${BACKEND_BASE_URL}${userData.Avatar}` : null);
@@ -130,6 +132,7 @@ function EditProfile() {
 
     const formData = new FormData();
     formData.append("FullName", name);
+    formData.append("Nickname", nickname);
     formData.append("Email", email);
     formData.append("Bio", bio);
     if (newPass) formData.append("Password", currentPass); // current password
@@ -278,6 +281,43 @@ function EditProfile() {
                   )}
                 </div>
               </div>
+            </div>
+
+            {/* Nickname */}
+            <div className="w-full max-w-md mt-2">
+              <label
+                className="block text-[18px] md:text-[20.97px] text-white font-bold leading-[100%] mb-2"
+                style={{ fontFamily: "Inter, sans-serif" }}
+              >
+                Marketplace Nickname
+              </label>
+
+              {/* Info callout */}
+              <div
+                className="flex items-start gap-2 rounded-lg px-3 py-2.5 mb-3"
+                style={{ background: "rgba(0,42,168,0.18)", border: "1px solid rgba(99,179,237,0.25)" }}
+              >
+                <svg className="w-4 h-4 mt-0.5 flex-shrink-0 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z" />
+                </svg>
+                <p className="text-xs text-blue-200/80 leading-relaxed">
+                  This nickname will be shown publicly in the marketplace; for example, <span className="text-white/90 font-medium">by {nickname || name || "YourNickname"}</span> on trade and listing cards. Leave blank to use your full name instead.
+                </p>
+              </div>
+
+              <input
+                type="text"
+                value={nickname}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (value.length <= 30) setNickname(value);
+                }}
+                placeholder={name || "e.g. ShadowTrader99"}
+                className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200"
+              />
+              {nickname.length >= 30 && (
+                <p className="text-yellow-400 text-xs mt-1">Maximum 30 characters allowed</p>
+              )}
             </div>
 
             {/* Email */}

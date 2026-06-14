@@ -681,7 +681,7 @@ export default function TradesTab() {
   const { user, isLoggedInUser, token } = useSelector((s) => s.auth);
   const { address: wagmiAddress } = useAccount();
   const wallet = wagmiAddress || user?.WalletAddress || user?.MetaMaskAddress || "";
-  const posterName = user?.FullName || user?.Email?.split("@")[0] || "Anonymous";
+  const posterName = user?.Nickname || user?.FullName || user?.Email?.split("@")[0] || "Anonymous";
 
   const [trades, setTrades] = useState([]);
   const [loading, setLoading] = useState(true);

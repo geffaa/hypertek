@@ -293,10 +293,10 @@ function CreateNFT() {
               <span>ℹ</span> {t("dashboard.createNFT.howListingTitle", "How listing works")}
             </p>
             <ul className="text-white/45 text-[11px] space-y-1 leading-relaxed">
-              <li>• {t("dashboard.createNFT.howListing1", "Save your item to storage first — no gas / fees required.")}</li>
+              <li>• {t("dashboard.createNFT.howListing1", "Save your item to storage first; no gas / fees required.")}</li>
               <li>• {t("dashboard.createNFT.howListing2", "Choose your starting venue: list on the Marketplace (fixed price) or open an Auction straight away.")}</li>
-              <li>• {t("dashboard.createNFT.howListing3", "Once active in one venue, you can add the others simultaneously — the first sale cancels the rest.")}</li>
-              <li>• {t("dashboard.createNFT.howListing4", "For edition items (Max Supply > 1), one card appears in the Marketplace — each purchase mints a fresh token and reduces the available count.")}</li>
+              <li>• {t("dashboard.createNFT.howListing3", "Once active in one venue, you can add the others simultaneously; the first sale cancels the rest.")}</li>
+              <li>• {t("dashboard.createNFT.howListing4", "For additional items (Max Supply > 1), one card appears in the Marketplace; each purchase mints a fresh token and reduces the available count.")}</li>
             </ul>
           </div>
 

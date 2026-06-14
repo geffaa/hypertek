@@ -1669,6 +1669,12 @@ function Buy1() {
                   {t("buyNfa.marketplace.youOwn", "You Own This")}
                 </span>
               )}
+              {/* Edition count badge */}
+              {(collection?.maxSupply || 1) > 1 && (
+                <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                  {(collection.maxSupply || 1) - (collection.currentSupply || 0)}/{collection.maxSupply} {t("buyNfa.marketplace.remaining", "remaining")}
+                </span>
+              )}
             </div>
 
             {/* Name + meta */}
@@ -1679,15 +1685,18 @@ function Buy1() {
                   {collection?.symbol || assetType}
                   {collection?.tokenId ? ` · Token #${collection.tokenId}` : ` · ${t("buyNfa.marketplace.notMinted", "Not minted yet")}`}
                 </span>
-                {(onChainOwner || collection.owner) && (
+                {(onChainOwner || collection.owner || listingData?.seller) && (
                   <span className="text-white/20 text-sm">·</span>
                 )}
                 <span className="text-white/40 text-sm">
                   {t("buyNfa.marketplace.ownedBy", "Owned by")}{" "}
                   <span className="text-blue-400 font-medium">
-                    {onChainOwner || collection.owner
-                      ? `${(onChainOwner || collection.owner).substring(0, 6)}...${(onChainOwner || collection.owner).substring(38)}`
-                      : t("buyNfa.marketplace.platform", "Platform")}
+                    {(() => {
+                      const addr = onChainOwner || collection.owner || listingData?.seller;
+                      return addr
+                        ? `${addr.substring(0, 6)}...${addr.substring(38)}`
+                        : t("buyNfa.marketplace.platform", "Platform");
+                    })()}
                   </span>
                 </span>
               </div>

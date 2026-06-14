@@ -75,8 +75,8 @@ export default function ProfileBountyTab({ wallet, token }) {
 
   return (
     <div style={{ display: "grid" }}>
-    {/* Existing content — dimmed */}
-    <div className="opacity-40 pointer-events-none select-none" style={{ gridRow: "1/1", gridColumn: "1/1" }}>
+    {/* Existing content */}
+    <div className="pointer-events-none select-none" style={{ gridRow: "1/1", gridColumn: "1/1" }}>
     <div className="py-4">
       {/* ── Header ── */}
       <div className="flex items-center justify-between mb-5 flex-wrap gap-3">

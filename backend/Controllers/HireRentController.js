@@ -1,4 +1,5 @@
 import HireRent from "../Models/HireRentModel.js";
+import User from "../Models/User.js";
 
 const VALID_DURATIONS = [8, 24, 72, 168, 720];
 
@@ -27,10 +28,23 @@ export async function getListings(req, res) {
 
     const skip = (Number(page) - 1) * Number(limit);
     const [listings, total] = await Promise.all([
-      HireRent.find(filter).sort({ createdAt: -1 }).skip(skip).limit(Number(limit)),
+      HireRent.find(filter).sort({ createdAt: -1 }).skip(skip).limit(Number(limit))
+        .populate("owner", "Nickname FullName"),
       HireRent.countDocuments(filter),
     ]);
-    res.json({ listings, total, page: Number(page), pages: Math.ceil(total / limit) });
+
+    const listingsWithNickname = listings.map((l) => {
+      const obj = l.toObject();
+      const owner = obj.owner;
+      if (owner) {
+        const displayName = owner.Nickname || owner.FullName;
+        if (displayName) obj.ownerName = displayName;
+      }
+      obj.owner = owner?._id ?? owner;
+      return obj;
+    });
+
+    res.json({ listings: listingsWithNickname, total, page: Number(page), pages: Math.ceil(total / limit) });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

@@ -578,7 +578,7 @@ function NFTs() {
                       <button onClick={() => openListModal(item)}
                         className="flex items-center gap-1.5 flex-1 h-8 rounded-md text-[11px] font-semibold text-blue-300 hover:text-white transition-all justify-center whitespace-nowrap"
                         style={{ background: "rgba(0,42,168,0.3)", border: "1px solid rgba(0,80,255,0.35)" }}>
-                        <FiTag size={11} /> {isAnywhere ? t("dashboard.collections.addVenueBtn", "+ Add Venue") : t("dashboard.collections.listBtn", "List")}
+                        {isAnywhere ? t("dashboard.collections.addVenueBtn", "+ Add Venue") : t("dashboard.collections.listBtn", "List")}
                       </button>
                     ) : (
                       <div className="flex-1" />
@@ -593,12 +593,12 @@ function NFTs() {
                       )}
                       <button onClick={() => openEditModal(item)}
                         data-tooltip={item.listed ? t("dashboard.collections.cancelListingEdit", "Cancel listing to edit") : t("dashboard.collections.editTooltip", "Edit")}
-                        className={`w-8 h-8 flex items-center justify-center rounded-md transition-all text-white ${item.listed ? "cursor-not-allowed opacity-30" : "hover:bg-white/10"}`}>
+                        className={`w-8 h-8 flex items-center justify-center rounded-md transition-all text-white hover:bg-white/10 ${item.listed ? "cursor-not-allowed" : ""}`}>
                         <FiEdit2 size={13} />
                       </button>
                       <button onClick={() => openDeleteModal(item)}
                         data-tooltip={item.listed ? t("dashboard.collections.cancelListingDelete", "Cancel listing to delete") : isOnChain ? t("dashboard.collections.onChainDelete", "On-chain, cannot delete") : t("dashboard.collections.deleteTooltip", "Delete")}
-                        className={`w-8 h-8 flex items-center justify-center rounded-md transition-all text-white ${(item.listed || isOnChain) ? "cursor-not-allowed opacity-30" : "hover:text-red-400 hover:bg-red-400/10"}`}>
+                        className={`w-8 h-8 flex items-center justify-center rounded-md transition-all text-white hover:text-red-400 hover:bg-red-400/10 ${(item.listed || isOnChain) ? "cursor-not-allowed" : ""}`}>
                         <FiTrash2 size={13} />
                       </button>
                     </div>

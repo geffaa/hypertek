@@ -997,8 +997,8 @@ function MarketPlace() {
                   <div className="flex-1 min-w-0">
                     {/* CSS Grid overlap — skeleton behind, lock card on top via sticky */}
                     <div style={{ display: "grid" }}>
-                      {/* Table skeleton — dimmed */}
-                      <div className="opacity-40 pointer-events-none select-none" style={{ gridRow: "1/1", gridColumn: "1/1", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, overflow: "clip" }}>
+                      {/* Table skeleton */}
+                      <div className="pointer-events-none select-none" style={{ gridRow: "1/1", gridColumn: "1/1", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, overflow: "clip" }}>
                         {/* Header */}
                         <div className="overflow-x-auto" style={{ background: "rgba(4,8,28,0.98)" }}>
                           <div className="grid min-w-[720px] px-4 py-5 text-[10px] font-semibold uppercase tracking-widest text-white/30"

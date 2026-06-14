@@ -98,6 +98,7 @@ const SignupUser = async (req, res) => {
       user: {
         id: newUser._id,
         FullName: newUser.FullName,
+        Nickname: newUser.Nickname,
         Email: newUser.Email,
         Role: newUser.Role,
         isActive: newUser.isActive,
@@ -159,6 +160,7 @@ const LoginUser = async (req, res) => {
       user: {
         id: user._id,
         FullName: user.FullName,
+        Nickname: user.Nickname,
         Email: user.Email,
         Role: user.Role,
         isActive: user.isActive,
@@ -350,8 +352,9 @@ const GoogleAuth = async (req, res) => {
         id: user._id,
         Email: user.Email,
         FullName: user.FullName,
+        Nickname: user.Nickname,
         picture,
-        Role: user.Role, // ADD THIS
+        Role: user.Role,
         isActive: user.isActive,
         WalletAddress: user.WalletAddress
       },
@@ -490,8 +493,9 @@ const DiscordAuth = async (req, res) => {
         id: user._id,
         Email: user.Email,
         FullName: user.FullName,
+        Nickname: user.Nickname,
         DiscordId: user.DiscordId,
-        Role: user.Role, // MUST
+        Role: user.Role,
         isActive: user.isActive,
         WalletAddress: user.WalletAddress
       },
@@ -556,7 +560,7 @@ const GetProfile = async (req, res) => {
 const EditProfile = async (req, res) => {
   try {
     const userId = req.user._id;
-    const { FullName, Email, Password, NewPassword, Bio } = req.body;
+    const { FullName, Email, Password, NewPassword, Bio, Nickname } = req.body;
 
     const user = await UserModel.findById(userId);
     if (!user) return res.status(404).json({ message: "User not found" });
@@ -580,6 +584,7 @@ const EditProfile = async (req, res) => {
     if (FullName) user.FullName = FullName;
     if (Email) user.Email = Email;
     if (Bio) user.Bio = Bio;
+    if (Nickname !== undefined) user.Nickname = Nickname.trim();
 
     if (req.file) {
       const avatarUrl = `/uploads/temp/${req.file.filename}`;
@@ -594,6 +599,7 @@ const EditProfile = async (req, res) => {
         id: user._id,
         Email: user.Email,
         FullName: user.FullName,
+        Nickname: user.Nickname,
         Avatar: user.Avatar,
         Bio: user.Bio,
         isActive: user.isActive,
@@ -699,6 +705,7 @@ const MetaAuth = async (req, res) => {
         id: user._id,
         Email: user.Email,
         FullName: user.FullName,
+        Nickname: user.Nickname,
         Avatar: user.Avatar,
         Role: user.Role,
         isActive: user.isActive,
@@ -781,6 +788,7 @@ const MetaMaskAuth = async (req, res) => {
         id: user._id,
         Email: user.Email,
         FullName: user.FullName,
+        Nickname: user.Nickname,
         WalletAddress: user.WalletAddress,
         Avatar: user.Avatar,
         lastLogin: user.lastLogin,
@@ -906,6 +914,7 @@ const TwitterAuth = async (req, res) => {
         id: user._id,
         Email: user.Email,
         FullName: user.FullName,
+        Nickname: user.Nickname,
         isActive: user.isActive,
         Role: user.Role,
         WalletAddress: user.WalletAddress,

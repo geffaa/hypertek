@@ -118,6 +118,13 @@ function LineCard({ item }) {
             </span>
           </div>
         )}
+        {/* Edition count badge — bottom left */}
+        {(item.maxSupply || 1) > 1 && (
+          <div className="absolute bottom-1.5 left-1.5 px-1.5 py-0.5 rounded text-[9px] font-bold text-cyan-300"
+            style={{ background: "rgba(6,182,212,0.15)", border: "1px solid rgba(6,182,212,0.35)" }}>
+            {(item.maxSupply || 1) - (item.currentSupply || 0)}/{item.maxSupply}
+          </div>
+        )}
 
         {/* Hover overlay — slides up from bottom */}
         <div

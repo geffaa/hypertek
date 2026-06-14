@@ -413,6 +413,13 @@ function CategoryMarketplace() {
                           </span>
                         </div>
                       )}
+                      {/* Edition count badge — bottom left */}
+                      {(item.maxSupply || 1) > 1 && (
+                        <span className="absolute bottom-2 left-2 px-1.5 py-0.5 rounded text-[9px] font-bold text-cyan-300"
+                          style={{ background: "rgba(6,182,212,0.15)", border: "1px solid rgba(6,182,212,0.35)" }}>
+                          {(item.maxSupply || 1) - (item.currentSupply || 0)}/{item.maxSupply}
+                        </span>
+                      )}
                     </div>
 
                     <div className="flex flex-col gap-1 p-3 flex-1">

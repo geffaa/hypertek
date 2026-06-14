@@ -1,5 +1,5 @@
-import { Suspense, useMemo } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Suspense, useMemo, useState, useEffect, useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, OrbitControls, Environment } from "@react-three/drei";
 import * as THREE from "three";
 
@@ -45,59 +45,98 @@ const MODELS = {
   spaceship6:  "/vehicles/Spaceship_6.glb",
 };
 
-function VehicleModel({ url }) {
-  const { scene } = useGLTF(url);
-
-  // Clone so we don't mutate the cached scene
-  const normalized = useMemo(() => {
-    const clone = scene.clone(true);
-
-    // Compute world-space bounding box of the original scene
-    const box = new THREE.Box3().setFromObject(clone);
-    if (box.isEmpty()) return clone;
-
+function normalize(scene) {
+  const clone = scene.clone(true);
+  const box = new THREE.Box3().setFromObject(clone);
+  if (!box.isEmpty()) {
     const center = box.getCenter(new THREE.Vector3());
     const size   = box.getSize(new THREE.Vector3());
-    const maxDim = Math.max(size.x, size.y, size.z);
-
-    // Normalize to fit within 2 units, center at origin
-    const s = maxDim > 0 ? 2 / maxDim : 1;
+    const s = 2 / Math.max(size.x, size.y, size.z);
     clone.scale.setScalar(s);
     clone.position.set(-center.x * s, -center.y * s, -center.z * s);
+  }
+  return clone;
+}
 
-    return clone;
+/* Wireframe pulsing skeleton — shown right after GLB loads */
+function WireframeSkeleton({ scene }) {
+  const ref = useRef();
+
+  const clone = useMemo(() => {
+    const c = normalize(scene);
+    c.traverse(child => {
+      if (child.isMesh) {
+        child.material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: new THREE.Color("#22c55e"),
+          transparent: true,
+          opacity: 0.6,
+        });
+      }
+    });
+    return c;
   }, [scene]);
 
-  return <primitive object={normalized} />;
+  useFrame(({ clock }) => {
+    if (!ref.current) return;
+    const opacity = 0.3 + Math.sin(clock.elapsedTime * 2.8) * 0.25;
+    ref.current.traverse(child => {
+      if (child.isMesh) child.material.opacity = opacity;
+    });
+  });
+
+  return <primitive ref={ref} object={clone} />;
+}
+
+/* Full PBR model */
+function FullModel({ scene }) {
+  const clone = useMemo(() => normalize(scene), [scene]);
+  return <primitive object={clone} />;
+}
+
+/* Orchestrates skeleton → full transition */
+function VehicleModel({ url }) {
+  const { scene } = useGLTF(url);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    setReady(false);
+    const t = setTimeout(() => setReady(true), 1400);
+    return () => clearTimeout(t);
+  }, [url]);
+
+  return ready
+    ? <FullModel scene={scene} />
+    : <WireframeSkeleton scene={scene} />;
 }
 
 export default function Wraith3DViewer({ vehicleId = "wraith" }) {
   const url = MODELS[vehicleId] ?? MODELS.wraith;
 
   return (
-    <Canvas
-      gl={{ alpha: true, antialias: true }}
-      camera={{ position: [0, 0.8, 4.5], fov: 42 }}
-      style={{ width: "100%", height: "100%", cursor: "grab", background: "transparent" }}
-    >
-      <Suspense fallback={<SkeletonFallback />}>
+    <Suspense fallback={<SkeletonFallback />}>
+      <Canvas
+        gl={{ alpha: true, antialias: true }}
+        camera={{ position: [0, 0.8, 4.5], fov: 42 }}
+        style={{ width: "100%", height: "100%", cursor: "grab", background: "transparent" }}
+      >
         <ambientLight intensity={0.5} />
         <directionalLight position={[4, 6, 4]}  intensity={1.4} />
         <directionalLight position={[-4, -2, -4]} intensity={0.35} color="#8ab4f8" />
         <Environment preset="city" />
         <VehicleModel url={url} />
-      </Suspense>
-      <OrbitControls
-        enableZoom={false}
-        enablePan={false}
-        enableDamping
-        dampingFactor={0.08}
-        minPolarAngle={0}
-        maxPolarAngle={Math.PI}
-        autoRotate
-        autoRotateSpeed={6}
-      />
-    </Canvas>
+        <OrbitControls
+          enableZoom={false}
+          enablePan={false}
+          enableDamping
+          dampingFactor={0.08}
+          minPolarAngle={0}
+          maxPolarAngle={Math.PI}
+          autoRotate
+          autoRotateSpeed={6}
+        />
+      </Canvas>
+    </Suspense>
   );
 }
 

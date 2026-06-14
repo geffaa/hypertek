@@ -64,10 +64,23 @@ export async function getTrades(req, res) {
 
     const skip = (Number(page) - 1) * Number(limit);
     const [trades, total] = await Promise.all([
-      Trade.find(filter).sort({ createdAt: -1 }).skip(skip).limit(Number(limit)),
+      Trade.find(filter).sort({ createdAt: -1 }).skip(skip).limit(Number(limit))
+        .populate("poster", "Nickname FullName"),
       Trade.countDocuments(filter),
     ]);
-    res.json({ trades, total, page: Number(page), pages: Math.ceil(total / limit) });
+
+    const tradesWithNickname = trades.map((t) => {
+      const obj = t.toObject();
+      const poster = obj.poster;
+      if (poster) {
+        const displayName = poster.Nickname || poster.FullName;
+        if (displayName) obj.posterName = displayName;
+      }
+      obj.poster = poster?._id ?? poster;
+      return obj;
+    });
+
+    res.json({ trades: tradesWithNickname, total, page: Number(page), pages: Math.ceil(total / limit) });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -174,7 +187,7 @@ export async function createTrade(req, res) {
       type,
       poster: userId,
       posterWallet,
-      posterName: posterName || "Anonymous",
+      posterName: posterName || req.user?.Nickname || req.user?.FullName || "Anonymous",
       title,
       description,
       offering,
