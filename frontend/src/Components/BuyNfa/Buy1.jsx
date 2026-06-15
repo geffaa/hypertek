@@ -1649,29 +1649,33 @@ function Buy1() {
               {(() => {
                 const aType = collection.assetType || (collection.isNFA ? "NFA" : "NFT"); // NFC always has assetType set
                 const cfg = {
-                  NFA: { label: "NFA", bg: "bg-purple-500/20", text: "text-purple-400", border: "border-purple-500/30" },
-                  NFC: { label: "NFC", bg: "bg-blue-500/20", text: "text-blue-400", border: "border-blue-500/30" },
-                  NFT: { label: "NFT", bg: "bg-white/10", text: "text-white/50", border: "border-white/10" },
+                  NFA: { label: "NFA", bg: "#3b0764", color: "#e9d5ff", border: "rgba(167,139,250,0.70)" },
+                  NFC: { label: "NFC", bg: "#0a1a6e", color: "#bfdbfe", border: "rgba(59,130,246,0.70)" },
+                  NFT: { label: "NFT", bg: "#0f2d6b", color: "#bfdbfe", border: "rgba(59,130,246,0.65)" },
                 }[aType] || null;
                 return cfg ? (
-                  <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${cfg.bg} ${cfg.text} border ${cfg.border}`}>
+                  <span className="px-2.5 py-1 rounded-full text-xs font-semibold"
+                    style={{ background: cfg.bg, color: cfg.color, border: `1px solid ${cfg.border}` }}>
                     {cfg.label}
                   </span>
                 ) : null;
               })()}
               {listingData?.active && (
-                <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                <span className="px-2.5 py-1 rounded-full text-xs font-semibold"
+                  style={{ background: "#052e16", color: "#86efac", border: "1px solid rgba(74,222,128,0.65)" }}>
                   {t("buyNfa.marketplace.listed", "Listed")}
                 </span>
               )}
               {isOwner && collection.tokenId && (
-                <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-500/20 text-purple-400 border border-purple-500/30">
+                <span className="px-2.5 py-1 rounded-full text-xs font-semibold"
+                  style={{ background: "#2e1065", color: "#e9d5ff", border: "1px solid rgba(124,58,237,0.65)" }}>
                   {t("buyNfa.marketplace.youOwn", "You Own This")}
                 </span>
               )}
               {/* Edition count badge */}
               {(collection?.maxSupply || 1) > 1 && (
-                <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                <span className="px-2.5 py-1 rounded-full text-xs font-semibold"
+                  style={{ background: "#071a2e", color: "#67e8f9", border: "1px solid rgba(6,182,212,0.65)" }}>
                   {(collection.maxSupply || 1) - (collection.currentSupply || 0)}/{collection.maxSupply} {t("buyNfa.marketplace.remaining", "remaining")}
                 </span>
               )}

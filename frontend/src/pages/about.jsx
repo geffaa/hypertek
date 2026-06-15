@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ChevronRight, Layers3, Gem, Network, Rocket, CheckCircle2, Zap, Lock } from "lucide-react";
 import { useSiteContentPage } from "../hooks/useSiteContent";
 import { getImageUrl } from "../Config";
@@ -97,10 +97,20 @@ function CornerAccent({ color = "rgba(56,189,248,0.45)" }) {
 // ── Main ──────────────────────────────────────────────────────────────────────
 function About({ isPreview = false }) {
   const navigate = useNavigate();
+  const location = useLocation();
   const [showComingSoon, setShowComingSoon] = useState(false);
   const [showGamesComingSoon, setShowGamesComingSoon] = useState(false);
   const { t } = useTranslation();
   const { sections: cms } = useSiteContentPage("about");
+
+  useEffect(() => {
+    const target = location.state?.scrollTo;
+    if (!target) return;
+    const el = document.getElementById(target);
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top, behavior: "instant" });
+  }, [location.state?.scrollTo]);
   const top = cms.about_top || {};
 
   const heroHeading  = t("aboutPage.heroHeading") || top.heading;
@@ -345,7 +355,7 @@ function About({ isPreview = false }) {
       {/* ══════════════════════════════════════════════════════
           3 GAMES
       ══════════════════════════════════════════════════════ */}
-      <section className="relative w-full px-6 md:px-12 xl:px-20 pt-12 pb-10">
+      <section id="the-universe" className="relative w-full px-6 md:px-12 xl:px-20 pt-12 pb-10">
         <div className="max-w-[1400px] mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-10 text-center">
             <div className="flex items-center justify-center gap-3 mb-5">
@@ -361,7 +371,7 @@ function About({ isPreview = false }) {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4" id="the-universe">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {sec03Games.map((game, i) => {
               const gs = GAMES_STATIC[i] || GAMES_STATIC[0];
               return (
@@ -700,11 +710,11 @@ function About({ isPreview = false }) {
                 className="px-8 py-3 text-[11px] font-bold uppercase transition-all hover:brightness-110"
                 style={BTN_SECONDARY}
               >
-                {closing.viewGames || "View Games"}
+                {"Try the User Interface"}
               </button>
             ) : (
               <Link to="/gaming" className="px-8 py-3 text-[11px] font-bold uppercase transition-all hover:brightness-110" style={BTN_SECONDARY}>
-                {closing.viewGames || "View Games"}
+                {"Try the User Interface"}
               </Link>
             )}
           </div>

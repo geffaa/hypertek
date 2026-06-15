@@ -391,9 +391,9 @@ function CategoryMarketplace() {
                       {(() => {
                         const aType = item.assetType || (item.isNFA ? "NFA" : "NFT");
                         const cfg = {
-                          NFA: { bg: "rgba(124,58,237,0.9)", border: "rgba(124,58,237,0.6)", text: "#fff" },
-                          NFC: { bg: "rgba(0,42,168,0.9)",   border: "rgba(0,80,255,0.5)",   text: "#fff" },
-                          NFT: { bg: "rgba(255,255,255,0.12)", border: "rgba(255,255,255,0.25)", text: "rgba(255,255,255,0.7)" },
+                          NFA: { bg: "#3b0764",  border: "rgba(167,139,250,0.70)", text: "#e9d5ff" },
+                          NFC: { bg: "#0a1a6e",  border: "rgba(59,130,246,0.70)",  text: "#bfdbfe" },
+                          NFT: { bg: "#0f2d6b",  border: "rgba(59,130,246,0.65)",  text: "#bfdbfe" },
                         }[aType];
                         return (
                           <span
@@ -416,7 +416,7 @@ function CategoryMarketplace() {
                       {/* Edition count badge — bottom left */}
                       {(item.maxSupply || 1) > 1 && (
                         <span className="absolute bottom-2 left-2 px-1.5 py-0.5 rounded text-[9px] font-bold text-cyan-300"
-                          style={{ background: "rgba(6,182,212,0.15)", border: "1px solid rgba(6,182,212,0.35)" }}>
+                          style={{ background: "#071a2e", border: "1px solid rgba(6,182,212,0.65)" }}>
                           {(item.maxSupply || 1) - (item.currentSupply || 0)}/{item.maxSupply}
                         </span>
                       )}

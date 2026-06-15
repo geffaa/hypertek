@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import StarMapOverlay from "../Components/Gaming/StarMap";
@@ -544,8 +544,11 @@ function SimplePage({ data }) {
 export default function GameModePage() {
   const { mode } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation();
   const modeKey = mode?.toLowerCase() || "racing";
+  const backTo = location.state?.backTo || null;
+  const backSection = location.state?.section || null;
   const staticData = MODES_STATIC[modeKey] || MODES_STATIC.racing;
   const textData = t(`gamePage.${modeKey}`, { returnObjects: true }) || {};
   const data = { ...staticData, ...textData };
@@ -657,7 +660,7 @@ export default function GameModePage() {
 
             {/* ── Secondary: Back to Website ── */}
             <button
-              onClick={() => navigate("/", { state: { scrollTo: "gaming-section" } })}
+              onClick={() => navigate(backTo || "/", { state: backSection ? { scrollTo: backSection } : { scrollTo: "gaming-section" } })}
               className="flex items-center gap-2 text-[10px] tracking-[0.15em] uppercase shrink-0 transition-all duration-200"
               style={{
                 fontFamily: "Orbitron, sans-serif",

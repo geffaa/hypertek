@@ -631,13 +631,16 @@ function SettingsPanel({ onClose, isMobile, autoTranslate, setAutoTranslate, pan
     setTimeout(() => setSaved(false), 2000);
   };
 
-  const Toggle = ({ label, value, onChange }) => (
+  const Toggle = ({ label, value, onChange, locked }) => (
     <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center",
       padding: isMobile ? "7px 10px" : "10px 14px", borderBottom:"1px solid rgba(0,229,255,0.07)" }}>
-      <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 11, letterSpacing:"0.1em",
-        color:"#c7e9f7" }}>{label}</span>
-      <div onClick={() => onChange(!value)} style={{
-        width:38, height:20, borderRadius:10, cursor:"pointer",
+      <span style={{ display:"flex", alignItems:"center", gap:6, fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 11, letterSpacing:"0.1em",
+        color:"#c7e9f7" }}>
+        {label}
+        {locked && <span style={{ fontSize: isMobile ? 8 : 10, color:"rgba(167,139,250,0.7)", fontFamily:"Orbitron,sans-serif", letterSpacing:"0.05em" }}>🔒</span>}
+      </span>
+      <div onClick={locked ? undefined : () => onChange(!value)} style={{
+        width:38, height:20, borderRadius:10, cursor: locked ? "not-allowed" : "pointer",
         background: value ? "rgba(0,212,255,0.3)" : "rgba(255,255,255,0.08)",
         border: `1.5px solid ${value ? "#00D4FF" : "rgba(255,255,255,0.2)"}`,
         position:"relative", transition:"background 0.2s, border-color 0.2s",
@@ -662,8 +665,8 @@ function SettingsPanel({ onClose, isMobile, autoTranslate, setAutoTranslate, pan
         <div style={{ padding: isMobile ? "6px 10px 3px" : "8px 14px 4px", fontFamily:"Orbitron,sans-serif",
           fontSize: isMobile ? 7 : 9, letterSpacing:"0.15em", color:"rgba(167,139,250,0.85)",
           borderBottom:"1px solid rgba(167,139,250,0.2)" }}>{t("hud.settings.audio", "AUDIO")}</div>
-        <Toggle label={t("hud.settings.soundEffects", "Sound Effects")} value={sound} onChange={setSound} />
-        <Toggle label={t("hud.settings.music", "Music")}               value={music} onChange={setMusic} />
+        <Toggle label={t("hud.settings.soundEffects", "Sound Effects")} value={sound} onChange={setSound} locked />
+        <Toggle label={t("hud.settings.music", "Music")}               value={music} onChange={setMusic} locked />
 
         {/* Language */}
         <div style={{ padding: isMobile ? "6px 10px 3px" : "8px 14px 4px", marginTop:4, fontFamily:"Orbitron,sans-serif",

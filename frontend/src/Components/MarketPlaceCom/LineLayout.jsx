@@ -26,9 +26,9 @@ const CAT_I18N = {
 // ── Item card ─────────────────────────────────────────────────────────────────
 // Asset type badge config
 const ASSET_BADGE = {
-  NFA: { label: "NFA", bg: "rgba(124,58,237,0.9)", border: "rgba(124,58,237,0.6)", ring: "#7C3AED" },
-  NFC: { label: "NFC", bg: "rgba(0,42,168,0.9)",   border: "rgba(0,80,255,0.5)",   ring: "#002AA8" },
-  NFT: { label: "NFT", bg: "rgba(255,255,255,0.12)", border: "rgba(255,255,255,0.25)", ring: "transparent" },
+  NFA: { label: "NFA", bg: "#3b0764",  border: "rgba(167,139,250,0.70)", ring: "#7C3AED" },
+  NFC: { label: "NFC", bg: "#0a1a6e",  border: "rgba(59,130,246,0.70)",  ring: "#002AA8" },
+  NFT: { label: "NFT", bg: "#0f2d6b",  border: "rgba(59,130,246,0.65)",  ring: "#002AA8" },
 };
 
 // Varied gradient backgrounds per card — like OpenSea
@@ -105,7 +105,7 @@ function LineCard({ item }) {
         {/* Category badge — top right */}
         {item.parentCategory && (
           <div className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded text-[9px] font-semibold capitalize"
-            style={{ background: "rgba(0,0,0,0.55)", border: "1px solid rgba(255,255,255,0.18)", color: "rgba(255,255,255,0.7)" }}>
+            style={{ background: "#0a0f1e", border: "1px solid rgba(255,255,255,0.40)", color: "rgba(255,255,255,0.90)" }}>
             {(() => { const k = CAT_I18N[item.parentCategory]; return k ? t(`marketplace.general.categories.${k}`, item.parentCategory) : item.parentCategory; })()}
           </div>
         )}
@@ -121,7 +121,7 @@ function LineCard({ item }) {
         {/* Edition count badge — bottom left */}
         {(item.maxSupply || 1) > 1 && (
           <div className="absolute bottom-1.5 left-1.5 px-1.5 py-0.5 rounded text-[9px] font-bold text-cyan-300"
-            style={{ background: "rgba(6,182,212,0.15)", border: "1px solid rgba(6,182,212,0.35)" }}>
+            style={{ background: "#071a2e", border: "1px solid rgba(6,182,212,0.65)" }}>
             {(item.maxSupply || 1) - (item.currentSupply || 0)}/{item.maxSupply}
           </div>
         )}
