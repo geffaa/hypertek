@@ -163,9 +163,6 @@ export default function ProfileQuestingTab({ wallet, token }) {
   }
 
   return (
-    <div style={{ display: "grid" }}>
-    {/* Existing content */}
-    <div className="pointer-events-none select-none" style={{ gridRow: "1/1", gridColumn: "1/1" }}>
     <div className="pt-1 pb-4">
       {/* ── Header ── */}
       <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
@@ -269,142 +266,105 @@ export default function ProfileQuestingTab({ wallet, token }) {
 
       </div>
 
-      {/* ── Loading ── */}
-      {loading ? (
-        <div className="space-y-2">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="h-14 rounded-xl animate-pulse"
-              style={{ background: "rgba(255,255,255,0.04)" }} />
-          ))}
+      {/* ── Table section with lock overlay ── */}
+      <div style={{ display: "grid" }}>
+        {/* Content */}
+        <div style={{ gridRow: "1/1", gridColumn: "1/1" }}>
+          {loading ? (
+            <div className="space-y-2">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <div key={i} className="h-14 rounded-xl animate-pulse"
+                  style={{ background: "rgba(255,255,255,0.04)" }} />
+              ))}
+            </div>
+          ) : (
+            <div style={{ border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, overflow: "clip" }}>
+              {/* Header */}
+              <div className="overflow-x-auto" style={{ position: "sticky", top: 158, zIndex: 5, background: "rgba(4,8,28,0.98)" }}>
+                <div className="grid min-w-[760px] px-4 py-5 text-[10px] font-semibold uppercase tracking-widest text-white/30"
+                  style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1.1fr 1.1fr 1.1fr 1.8fr 1.5fr 1fr 1.1fr" }}>
+                  <span>{t("profile.questing.colQuestNo","Quest No")}</span>
+                  <span>{t("profile.questing.colPickupPlanet","Pickup Planet")}</span>
+                  <span>{t("profile.questing.colDropOffPlanet","Drop Off Planet")}</span>
+                  <span>{t("profile.questing.colItemGoods","Item / Goods")}</span>
+                  <span>{t("profile.questing.colSplit","Split")}</span>
+                  <span>{t("profile.questing.colTimeActive","Time Active")}</span>
+                  <span>{t("profile.questing.colAssignedTo","Assigned To")}</span>
+                </div>
+              </div>
+              {/* Body */}
+              <div className="overflow-x-auto">
+                {filtered.length === 0 ? (
+                  Array.from({ length: 6 }).map((_, i) => (
+                    <div key={i} className="grid min-w-[760px] px-4 py-4 items-center"
+                      style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)", gridTemplateColumns: "1.1fr 1.1fr 1.1fr 1.8fr 1.5fr 1fr 1.1fr" }}>
+                      {Array.from({ length: 7 }).map((_, j) => (
+                        <div key={j} className="h-3 rounded" style={{ background: "rgba(255,255,255,0.05)", width: "60%" }} />
+                      ))}
+                    </div>
+                  ))
+                ) : (
+                  filtered.map((q, i) => {
+                    const colors = STATUS_COLORS[q.status] || STATUS_COLORS.open;
+                    const acceptedName = q.acceptedByWallet ? shortAddr(q.acceptedByWallet) : "—";
+                    return (
+                      <div key={q._id} className="grid min-w-[760px] px-4 py-3 items-center text-sm"
+                        style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)", gridTemplateColumns: "1.1fr 1.1fr 1.1fr 1.8fr 1.5fr 1fr 1.1fr" }}>
+                        <div className="flex flex-col gap-1">
+                          <span className="text-white/80 text-xs font-mono">{shortId(q._id)}</span>
+                          <div className="flex items-center gap-1 flex-wrap">
+                            <span className={`text-[9px] font-semibold capitalize ${colors.text}`}
+                              style={{ background: colors.bg, border: `1px solid ${colors.border}`, borderRadius: 4, padding: "1px 5px", display: "inline-block" }}>
+                              {q.status}
+                            </span>
+                            <QuestTypeBadge questType={q.questType} />
+                          </div>
+                        </div>
+                        <span className="text-white/55 text-xs">{q.pickupPlanet || <span className="italic text-white/35">{t("profile.questing.inGame","In-game")}</span>}</span>
+                        <span className="text-white/55 text-xs">{q.dropOffPlanet || <span className="italic text-white/35">{t("profile.questing.inGame","In-game")}</span>}</span>
+                        <div className="flex flex-col gap-0.5 min-w-0">
+                          <span className="text-white/85 text-xs font-medium truncate">{q.title || "—"}</span>
+                          {q.offering && <span className="text-white/55 text-[10px] truncate">{q.offering}</span>}
+                        </div>
+                        <div className="flex flex-col gap-1 items-start">
+                          <WaitBadge waitHours={q.waitHours} buyerSavePercent={q.buyerSavePercent} />
+                          {q.playerSharePercent != null && (
+                            <div className="text-[9px] leading-tight">
+                              <span className="text-amber-300">{t("profile.questing.playerLabel","Player")} +{q.playerSharePercent}%</span>
+                              {" · "}
+                              <span className="text-white/50">{t("profile.questing.platLabel","Plat")} +{q.platformSharePercent}%</span>
+                            </div>
+                          )}
+                          {q.playerEarnsAmount != null && <span className="text-[9px] text-amber-300">{t("profile.questing.earned","Earned")}: {q.playerEarnsAmount} HB</span>}
+                        </div>
+                        <span className="text-white/60 text-xs font-mono">{formatTime(q.createdAt)}</span>
+                        <span className="text-white/50 text-xs font-mono">
+                          {q.status === "open" ? <span className="text-green-400/60">{t("profile.questing.statusOpen","Open")}</span> : acceptedName}
+                        </span>
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+            </div>
+          )}
         </div>
-      ) : filtered.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-16 text-white/25 gap-3">
-          <Swords className="w-8 h-8 opacity-20" />
-          <p className="text-sm">{t("profile.questing.noHistory", "No quest history yet")}</p>
-          <p className="text-xs text-white/15">{t("profile.questing.noHistoryHint", "Complete quests in-game to see them here")}</p>
-        </div>
-      ) : (
-        /* ── Table ── */
-        <div style={{ border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, overflow: "clip" }}>
-          {/* Sticky Header */}
-          <div className="overflow-x-auto" style={{ position: "sticky", top: 158, zIndex: 5, background: "rgba(4,8,28,0.98)" }}>
-            <div
-              className="grid min-w-[760px] px-4 py-5 text-[10px] font-semibold uppercase tracking-widest text-white/30"
-              style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1.1fr 1.1fr 1.1fr 1.8fr 1.5fr 1fr 1.1fr" }}
-            >
-              <span>{t("profile.questing.colQuestNo","Quest No")}</span>
-              <span>{t("profile.questing.colPickupPlanet","Pickup Planet")}</span>
-              <span>{t("profile.questing.colDropOffPlanet","Drop Off Planet")}</span>
-              <span>{t("profile.questing.colItemGoods","Item / Goods")}</span>
-              <span>{t("profile.questing.colSplit","Split")}</span>
-              <span>{t("profile.questing.colTimeActive","Time Active")}</span>
-              <span>{t("profile.questing.colAssignedTo","Assigned To")}</span>
+
+        {/* Lock card — overlays only the table, same as For Hire */}
+        {!loading && (
+          <div className="pointer-events-none" style={{ gridRow: "1/1", gridColumn: "1/1", position: "sticky", top: "calc(50vh - 80px)", zIndex: 10, display: "flex", justifyContent: "center", alignSelf: "start" }}>
+            <div className="flex flex-col items-center gap-3 px-8 py-6 rounded-2xl text-center"
+              style={{ background: "rgba(6,8,22,0.82)", border: "1px solid rgba(255,255,255,0.12)", backdropFilter: "blur(10px)", maxWidth: 420 }}>
+              <div className="w-12 h-12 rounded-full flex items-center justify-center"
+                style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.15)" }}>
+                <Lock className="w-5 h-5 text-white/60" />
+              </div>
+              <p className="text-white font-bold text-base leading-snug">HyperTek Gaming content for display purposes only.</p>
+              <p className="text-white/55 text-sm leading-relaxed">This is part of Hyper Tek's genuine 'Play to Earn' system, where players can earn real cash rewards, and or Materials/Resources.</p>
             </div>
           </div>
-
-          {/* Body — natural page scroll */}
-          <div className="overflow-x-auto">
-          {filtered.map((q, i) => {
-            const colors = STATUS_COLORS[q.status] || STATUS_COLORS.open;
-            const acceptedName = q.acceptedByWallet ? shortAddr(q.acceptedByWallet) : "—";
-
-            return (
-              <div
-                key={q._id}
-                className="grid min-w-[760px] px-4 py-3 items-center text-sm"
-                style={{
-                  background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent",
-                  borderTop: "1px solid rgba(255,255,255,0.04)",
-                  gridTemplateColumns: "1.1fr 1.1fr 1.1fr 1.8fr 1.5fr 1fr 1.1fr",
-                }}
-              >
-                {/* Quest No */}
-                <div className="flex flex-col gap-1">
-                  <span className="text-white/80 text-xs font-mono">{shortId(q._id)}</span>
-                  <div className="flex items-center gap-1 flex-wrap">
-                    <span
-                      className={`text-[9px] font-semibold capitalize ${colors.text}`}
-                      style={{ background: colors.bg, border: `1px solid ${colors.border}`, borderRadius: 4, padding: "1px 5px", display: "inline-block" }}
-                    >
-                      {q.status}
-                    </span>
-                    <QuestTypeBadge questType={q.questType} />
-                  </div>
-                </div>
-
-                {/* Pickup Planet */}
-                <span className="text-white/55 text-xs">
-                  {q.pickupPlanet || <span className="italic text-white/35">{t("profile.questing.inGame","In-game")}</span>}
-                </span>
-
-                {/* Drop Off Planet */}
-                <span className="text-white/55 text-xs">
-                  {q.dropOffPlanet || <span className="italic text-white/35">{t("profile.questing.inGame","In-game")}</span>}
-                </span>
-
-                {/* Item / Goods */}
-                <div className="flex flex-col gap-0.5 min-w-0">
-                  <span className="text-white/85 text-xs font-medium truncate">{q.title || "—"}</span>
-                  {q.offering && (
-                    <span className="text-white/55 text-[10px] truncate">{q.offering}</span>
-                  )}
-                </div>
-
-                {/* Split */}
-                <div className="flex flex-col gap-1 items-start">
-                  <WaitBadge waitHours={q.waitHours} buyerSavePercent={q.buyerSavePercent} />
-                  {q.playerSharePercent != null && (
-                    <div className="text-[9px] leading-tight">
-                      <span className="text-amber-300">{t("profile.questing.playerLabel","Player")} +{q.playerSharePercent}%</span>
-                      {" · "}
-                      <span className="text-white/50">{t("profile.questing.platLabel","Plat")} +{q.platformSharePercent}%</span>
-                    </div>
-                  )}
-                  {q.playerEarnsAmount != null && (
-                    <span className="text-[9px] text-amber-300">
-                      {t("profile.questing.earned","Earned")}: {q.playerEarnsAmount} HB
-                    </span>
-                  )}
-                </div>
-
-                {/* Time Active */}
-                <span className="text-white/60 text-xs font-mono">
-                  {formatTime(q.createdAt)}
-                </span>
-
-                {/* Assigned To */}
-                <span className="text-white/50 text-xs font-mono">
-                  {q.status === "open" ? (
-                    <span className="text-green-400/60">{t("profile.questing.statusOpen","Open")}</span>
-                  ) : (
-                    acceptedName
-                  )}
-                </span>
-              </div>
-            );
-          })}
-          </div>
-        </div>
-      )}
-    </div>
-    </div>
-
-    {/* Sticky lock card — bottom-right, does not cover content */}
-    <div className="pointer-events-none" style={{ gridRow: "1/1", gridColumn: "1/1", position: "sticky", top: "calc(100vh - 220px)", zIndex: 10, display: "flex", justifyContent: "center", alignSelf: "start", paddingLeft: "30%" }}>
-      <div className="flex flex-col items-center gap-3 px-6 py-4 rounded-2xl text-center"
-        style={{ background: "rgba(6,8,22,0.88)", border: "1px solid rgba(255,255,255,0.12)", backdropFilter: "blur(10px)", maxWidth: 340 }}>
-        <div className="w-12 h-12 rounded-full flex items-center justify-center"
-          style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.15)" }}>
-          <Lock className="w-5 h-5 text-white/60" />
-        </div>
-        <p className="text-white font-bold text-base leading-snug">
-          HyperTek Gaming content for display purposes only.
-        </p>
-        <p className="text-white/55 text-sm leading-relaxed">
-          This is part of Hyper Tek's genuine 'Play to Earn' system, where players can earn real cash rewards, and or Materials/Resources.
-        </p>
+        )}
       </div>
-    </div>
     </div>
   );
 }

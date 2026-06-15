@@ -12,9 +12,9 @@ import { FiSearch, FiEdit2, FiTrash2, FiTag, FiPackage, FiX, FiUploadCloud, FiAl
 import { Gavel, ArrowRightLeft, CheckCircle2, ChevronDown } from "lucide-react";
 
 const ASSET_BADGE = {
-  NFA: { bg: "rgba(124,58,237,0.2)", border: "rgba(124,58,237,0.5)", text: "#c4b5fd" },
-  NFC: { bg: "rgba(0,42,168,0.25)",  border: "rgba(0,80,255,0.4)",   text: "#93c5fd" },
-  NFT: { bg: "rgba(255,255,255,0.06)", border: "rgba(255,255,255,0.15)", text: "rgba(255,255,255,0.5)" },
+  NFA: { bg: "#2e1065", border: "rgba(167,139,250,0.70)", text: "#e9d5ff" },
+  NFC: { bg: "#0f2d6b", border: "rgba(59,130,246,0.70)",  text: "#bfdbfe" },
+  NFT: { bg: "#1e293b", border: "rgba(255,255,255,0.35)", text: "rgba(255,255,255,0.85)" },
 };
 
 const ALL_CATEGORIES = [
@@ -116,8 +116,10 @@ function NFTs() {
   const [deleteItem, setDeleteItem]         = useState(null);
   const [deleteLoading, setDeleteLoading]   = useState(false);
 
-  useEffect(() => {
+  // Canonical source of truth: fetch all four sources simultaneously so badge state is consistent with the Profile page
+  const loadItems = () => {
     if (!wallet) { setLoading(false); return; }
+    setLoading(true);
     Promise.all([
       axios.get(
         `${BACKEND_BASE_URL}/api/v1/nft/user/owned-with-subs/${encodeURIComponent(wallet)}`,
@@ -130,26 +132,47 @@ function NFTs() {
         params: { type: "trade", posterWallet: wallet, status: "open", limit: 50 },
         headers: { Authorization: `Bearer ${token}` },
       }).catch(() => ({ data: { trades: [] } })),
-    ]).then(([nftRes, auctionRes, tradeRes]) => {
+      // Fetch marketplace listings separately — same source used by Profile page — so Market badge is always in sync
+      axios.get(`${BACKEND_BASE_URL}/api/v1/listings/my`, {
+        headers: { Authorization: `Bearer ${token}` },
+      }).catch(() => ({ data: { grouped: {} } })),
+    ]).then(([nftRes, auctionRes, tradeRes, listingsRes]) => {
       if (nftRes.data.success) {
         const auctions = Array.isArray(auctionRes.data) ? auctionRes.data : (auctionRes.data?.auctions || []);
         const trades   = tradeRes.data?.trades || [];
+        // Active marketplace listings — same filter as Profile page
+        const activeListings = Object.values(listingsRes.data?.grouped || {}).flat()
+          .filter((l) => l.activityType === "selling_general" && l.status === "active");
+
         const items = (nftRes.data.nfts || []).flatMap((col) =>
           (col.subCollections || [])
             .filter((sub) => sub.owner?.toLowerCase() === wallet.toLowerCase())
-            .map((item) => ({
-              ...item,
-              parentId:  col._id,
-              category:  col.category || "general",
-              onAuction: auctions.some((a) => String(a.subCollectionId) === String(item._id) && a.status === "active" && new Date(a.endTime) > new Date()),
-              onTrade:   trades.some((t) => t.offering === item.name && t.status === "open"),
-            }))
+            .map((sub) => {
+              // Market: check both the subCollection.listed flag AND the listings collection record
+              const onMarket = sub.listed
+                || activeListings.some((l) =>
+                  (l.subCollectionId && l.subCollectionId === String(sub._id))
+                  || (!l.subCollectionId && l.itemName?.toLowerCase() === sub.name?.toLowerCase())
+                );
+              return {
+                ...sub,
+                parentId:  col._id,
+                category:  col.category || "general",
+                maxSupply: sub.maxSupply || col.maxSupply || 0,
+                currentSupply: sub.currentSupply ?? col.currentSupply ?? 0,
+                listed:    onMarket,
+                onAuction: auctions.some((a) => String(a.subCollectionId) === String(sub._id) && a.status === "active" && new Date(a.endTime) > new Date()),
+                onTrade:   trades.some((t) => t.offering === sub.name && t.status === "open"),
+              };
+            })
         );
         setAllItems(items);
       }
     }).catch(() => toast.error("Failed to load items"))
       .finally(() => setLoading(false));
-  }, [wallet, token]);
+  };
+
+  useEffect(() => { loadItems(); }, [wallet, token]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Close listing modal completely ─────────────────────────────────────────
   const closeListing = () => {
@@ -206,13 +229,18 @@ function NFTs() {
         { subCollectionId: listingItem._id, parentId: listingItem.parentId, seller: wallet, priceETH: parseFloat(listingPrice) },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setAllItems((prev) =>
-        prev.map((i) => i._id === listingItem._id ? { ...i, listed: true, priceETH: parseFloat(listingPrice) } : i)
-      );
       toast.success(`"${listingItem.name}" listed on Marketplace!`);
       const next = getNextStep("marketplace", selectedVenues);
-      if (next) setListStep(next);
-      else closeListing();
+      if (next) {
+        // Optimistic update for multi-step flow so UI stays responsive mid-wizard
+        setAllItems((prev) =>
+          prev.map((i) => i._id === listingItem._id ? { ...i, listed: true, priceETH: parseFloat(listingPrice) } : i)
+        );
+        setListStep(next);
+      } else {
+        closeListing();
+        loadItems(); // Refetch from server so badge state is canonical
+      }
     } catch (err) {
       toast.error(err.response?.data?.error || "Failed to list item");
     } finally {
@@ -245,17 +273,21 @@ function NFTs() {
       });
       const data = await r.json();
       if (!r.ok) throw new Error(data.error);
-      setAllItems((prev) =>
-        prev.map((i) => i._id === listingItem._id ? { ...i, onAuction: true } : i)
-      );
       toast.success("Auction listing created!");
     } catch (err) {
       toast.error(err.message || "Failed to create auction");
     } finally {
       setAuctionLoading(false);
       const next = getNextStep("auction", selectedVenues);
-      if (next) setListStep(next);
-      else closeListing();
+      if (next) {
+        setAllItems((prev) =>
+          prev.map((i) => i._id === listingItem._id ? { ...i, onAuction: true } : i)
+        );
+        setListStep(next);
+      } else {
+        closeListing();
+        loadItems();
+      }
     }
   };
 
@@ -288,15 +320,13 @@ function NFTs() {
       });
       const data = await r.json();
       if (!r.ok) throw new Error(data.error);
-      setAllItems((prev) =>
-        prev.map((i) => i._id === listingItem._id ? { ...i, onTrade: true } : i)
-      );
       toast.success("Trade listing created!");
     } catch (err) {
       toast.error(err.message || "Failed to create trade listing");
     } finally {
       setTradeLoading(false);
       closeListing();
+      loadItems(); // Refetch so all venue badges reflect server state
     }
   };
 
@@ -310,13 +340,11 @@ function NFTs() {
         { nftId: unlistItem.parentId, subId: unlistItem._id, seller: wallet },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setAllItems((prev) =>
-        prev.map((i) => i._id === unlistItem._id ? { ...i, listed: false, priceETH: 0, onAuction: false, onTrade: false } : i)
-      );
       const venues = res.data?.cancelledVenues;
       const extra  = venues?.length ? ` (also removed from ${venues.join(", ")})` : "";
       toast.success(`Listing cancelled${extra}`);
       setUnlistItem(null);
+      loadItems(); // Refetch so badges are in sync after unlist
     } catch (err) {
       toast.error(err.response?.data?.error || "Failed to cancel listing");
     } finally {
@@ -520,7 +548,7 @@ function NFTs() {
 
                     {/* Asset type badge — top left */}
                     <span className="absolute top-2 left-2 px-1.5 py-0.5 rounded text-[10px] font-bold"
-                      style={{ background: badge.bg, border: `1px solid ${badge.border}`, color: badge.text }}>
+                      style={{ background: badge.bg, border: `1px solid ${badge.border}`, color: badge.text, boxShadow: "0 2px 8px rgba(0,0,0,1)" }}>
                       {aType}
                     </span>
 
@@ -528,19 +556,19 @@ function NFTs() {
                     <div className="absolute top-2 right-2 flex flex-col gap-0.5 items-end">
                       {item.listed && (
                         <span className="px-1.5 py-0.5 rounded text-[10px] font-bold text-green-300"
-                          style={{ background: "rgba(74,222,128,0.15)", border: "1px solid rgba(74,222,128,0.3)" }}>
+                          style={{ background: "#052e16", border: "1px solid rgba(74,222,128,0.70)", boxShadow: "0 2px 8px rgba(0,0,0,1)" }}>
                           Market
                         </span>
                       )}
                       {item.onAuction && (
                         <span className="px-1.5 py-0.5 rounded text-[10px] font-bold text-amber-300"
-                          style={{ background: "rgba(251,191,36,0.15)", border: "1px solid rgba(251,191,36,0.3)" }}>
+                          style={{ background: "#422006", border: "1px solid rgba(251,191,36,0.70)", boxShadow: "0 2px 8px rgba(0,0,0,1)" }}>
                           Auction
                         </span>
                       )}
                       {item.onTrade && (
                         <span className="px-1.5 py-0.5 rounded text-[10px] font-bold text-blue-300"
-                          style={{ background: "rgba(0,80,255,0.15)", border: "1px solid rgba(0,80,255,0.3)" }}>
+                          style={{ background: "#172554", border: "1px solid rgba(59,130,246,0.70)", boxShadow: "0 2px 8px rgba(0,0,0,1)" }}>
                           Trade
                         </span>
                       )}
@@ -548,13 +576,13 @@ function NFTs() {
 
                     {isEdition && (
                       <span className="absolute bottom-2 left-2 px-1.5 py-0.5 rounded text-[9px] font-bold text-cyan-300"
-                        style={{ background: "rgba(6,182,212,0.15)", border: "1px solid rgba(6,182,212,0.35)" }}>
+                        style={{ background: "#071a2e", border: "1px solid rgba(6,182,212,0.65)", boxShadow: "0 2px 8px rgba(0,0,0,1)" }}>
                         {editionRemaining}/{item.maxSupply}
                       </span>
                     )}
                     {isOnChain && (
                       <span className="absolute bottom-2 right-2 px-1.5 py-0.5 rounded text-[9px] font-bold text-purple-300"
-                        style={{ background: "rgba(124,58,237,0.2)", border: "1px solid rgba(124,58,237,0.4)" }}>
+                        style={{ background: "#2e1065", border: "1px solid rgba(124,58,237,0.65)", boxShadow: "0 2px 8px rgba(0,0,0,1)" }}>
                         On-chain
                       </span>
                     )}
@@ -564,7 +592,7 @@ function NFTs() {
                     <p className="text-white text-xs font-medium truncate">{item.name || t("dashboard.collections.unnamed", "Unnamed")}</p>
                     {item.category && (
                       <span className="self-start px-1.5 py-0.5 rounded text-[9px] font-semibold capitalize mt-0.5"
-                        style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.4)" }}>
+                        style={{ background: "#0a0f1e", border: "1px solid rgba(255,255,255,0.30)", color: "rgba(255,255,255,0.75)" }}>
                         {item.category}
                       </span>
                     )}
@@ -574,23 +602,31 @@ function NFTs() {
                   </div>
 
                   <div className="px-3 pb-3 flex items-center gap-1.5 mt-1">
-                    {!(item.listed && item.onAuction && item.onTrade) ? (
-                      <button onClick={() => openListModal(item)}
-                        className="flex items-center gap-1.5 flex-1 h-8 rounded-md text-[11px] font-semibold text-blue-300 hover:text-white transition-all justify-center whitespace-nowrap"
-                        style={{ background: "rgba(0,42,168,0.3)", border: "1px solid rgba(0,80,255,0.35)" }}>
-                        {isAnywhere ? t("dashboard.collections.addVenueBtn", "+ Add Venue") : t("dashboard.collections.listBtn", "List")}
+                    {/* All venues active: show wide Unlist button filling the space */}
+                    {(item.listed && item.onAuction && item.onTrade) ? (
+                      <button onClick={() => setUnlistItem(item)}
+                        className="flex items-center gap-1.5 flex-1 h-8 rounded-md text-[11px] font-semibold text-red-300 hover:text-white transition-all justify-center whitespace-nowrap"
+                        style={{ background: "rgba(239,68,68,0.14)", border: "1px solid rgba(239,68,68,0.40)" }}>
+                        <FiX size={13} />
+                        {t("dashboard.collections.unlistBtn", "Unlist All")}
                       </button>
                     ) : (
-                      <div className="flex-1" />
+                      <>
+                        <button onClick={() => openListModal(item)}
+                          className="flex items-center gap-1.5 flex-1 h-8 rounded-md text-[11px] font-semibold text-blue-300 hover:text-white transition-all justify-center whitespace-nowrap"
+                          style={{ background: "rgba(0,42,168,0.3)", border: "1px solid rgba(0,80,255,0.35)" }}>
+                          {isAnywhere ? t("dashboard.collections.addVenueBtn", "+ Add Venue") : t("dashboard.collections.listBtn", "List")}
+                        </button>
+                        {item.listed && (
+                          <button onClick={() => setUnlistItem(item)}
+                            className="w-8 h-8 flex items-center justify-center rounded-md text-red-400 hover:text-red-300 transition-all shrink-0"
+                            style={{ background: "rgba(239,68,68,0.12)", border: "1px solid rgba(239,68,68,0.28)" }}>
+                            <FiX size={14} />
+                          </button>
+                        )}
+                      </>
                     )}
                     <div className="flex items-center gap-1 shrink-0">
-                      {item.listed && (
-                        <button onClick={() => setUnlistItem(item)}
-                          className="w-8 h-8 flex items-center justify-center rounded-md text-red-400 hover:text-red-300 transition-all"
-                          style={{ background: "rgba(239,68,68,0.12)", border: "1px solid rgba(239,68,68,0.28)" }}>
-                          <FiX size={14} />
-                        </button>
-                      )}
                       <button onClick={() => openEditModal(item)}
                         data-tooltip={item.listed ? t("dashboard.collections.cancelListingEdit", "Cancel listing to edit") : t("dashboard.collections.editTooltip", "Edit")}
                         className={`w-8 h-8 flex items-center justify-center rounded-md transition-all text-white hover:bg-white/10 ${item.listed ? "cursor-not-allowed" : ""}`}>

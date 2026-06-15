@@ -175,6 +175,8 @@ function MarketPlace() {
             userOwns: true,
             isNFA: subNft.isNFA || false,
             minimumBuybackUSD: subNft.minimumBuybackUSD || 0,
+            maxSupply: subNft.maxSupply || item.maxSupply || 0,
+            currentSupply: subNft.currentSupply ?? item.currentSupply ?? 0,
           });
         });
       }
@@ -560,44 +562,73 @@ function MarketPlace() {
                                 className="w-full h-full transition-transform duration-300 group-hover:scale-105"
                                 imgClassName="object-contain"
                               />
+                              {/* Top-left: category badge only */}
                               {item.category && (
-                                <div className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[10px] font-semibold text-white/80 capitalize"
-                                  style={{ background: "rgba(0,0,0,0.55)", backdropFilter: "blur(4px)", border: "1px solid rgba(255,255,255,0.12)" }}>
+                                <div className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[10px] font-semibold text-white capitalize"
+                                  style={{ background: "#0a0f1e", border: "1px solid rgba(255,255,255,0.35)", boxShadow: "0 2px 8px rgba(0,0,0,1)" }}>
                                   {item.category}
                                 </div>
                               )}
-                              {/* Venue badges stacked top-right */}
+                              {/* Top-right: venue badges stacked */}
                               <div className="absolute top-2 right-2 flex flex-col gap-0.5 items-end">
                                 {onMarket && (
                                   <span className="px-1.5 py-0.5 rounded text-[10px] font-bold text-green-300"
-                                    style={{ background: "rgba(0,0,0,0.60)", backdropFilter: "blur(4px)", border: "1px solid rgba(74,222,128,0.35)" }}>
+                                    style={{ background: "#052e16", border: "1px solid rgba(74,222,128,0.70)", boxShadow: "0 2px 8px rgba(0,0,0,1)" }}>
                                     {t("profile.badgeMarket", "Market")}
                                   </span>
                                 )}
                                 {onAuction && (
                                   <span className="px-1.5 py-0.5 rounded text-[10px] font-bold text-amber-300"
-                                    style={{ background: "rgba(0,0,0,0.60)", backdropFilter: "blur(4px)", border: "1px solid rgba(251,191,36,0.35)" }}>
+                                    style={{ background: "#422006", border: "1px solid rgba(251,191,36,0.70)", boxShadow: "0 2px 8px rgba(0,0,0,1)" }}>
                                     {t("profile.badgeAuction", "Auction")}
                                   </span>
                                 )}
                                 {onTrade && (
                                   <span className="px-1.5 py-0.5 rounded text-[10px] font-bold text-blue-300"
-                                    style={{ background: "rgba(0,0,0,0.60)", backdropFilter: "blur(4px)", border: "1px solid rgba(59,130,246,0.35)" }}>
+                                    style={{ background: "#172554", border: "1px solid rgba(59,130,246,0.70)", boxShadow: "0 2px 8px rgba(0,0,0,1)" }}>
                                     {t("profile.badgeTrade", "Trade")}
                                   </span>
                                 )}
                                 {!anyVenue && (
-                                  <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold text-white/40"
-                                    style={{ background: "rgba(0,0,0,0.55)", backdropFilter: "blur(4px)", border: "1px solid rgba(255,255,255,0.10)" }}>
+                                  <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold text-white/70"
+                                    style={{ background: "#111827", border: "1px solid rgba(255,255,255,0.30)", boxShadow: "0 2px 8px rgba(0,0,0,1)" }}>
                                     {t("profile.badgeUnlisted", "Unlisted")}
                                   </span>
                                 )}
                               </div>
+                              {/* Bottom-left: edition count badge (e.g. 31/31) */}
+                              {(item.maxSupply || 0) > 1 && (
+                                <span className="absolute bottom-2 left-2 px-1.5 py-0.5 rounded text-[9px] font-bold text-cyan-300"
+                                  style={{ background: "#071a2e", border: "1px solid rgba(6,182,212,0.65)", boxShadow: "0 2px 8px rgba(0,0,0,1)" }}>
+                                  {(item.maxSupply - (item.currentSupply || 0))}/{item.maxSupply}
+                                </span>
+                              )}
+                              {/* Bottom-right: on-chain badge */}
+                              {item.tokenId && (
+                                <span className="absolute bottom-2 right-2 px-1.5 py-0.5 rounded text-[9px] font-bold text-purple-300"
+                                  style={{ background: "#2e1065", border: "1px solid rgba(124,58,237,0.65)", boxShadow: "0 2px 8px rgba(0,0,0,1)" }}>
+                                  On-Chain
+                                </span>
+                              )}
                             </div>
 
                             {/* Info */}
-                            <div className="flex flex-col p-3 gap-0.5 flex-1">
-                              <h3 className="text-sm font-semibold text-white truncate">{item.name || "Unnamed"}</h3>
+                            <div className="flex flex-col p-3 gap-1 flex-1">
+                              <div className="flex items-center gap-1.5">
+                                <h3 className="text-sm font-semibold text-white truncate flex-1">{item.name || "Unnamed"}</h3>
+                                {/* NFT / NFA type badge inline with name */}
+                                {item.isNFA ? (
+                                  <span className="shrink-0 px-1.5 py-0.5 rounded text-[9px] font-bold"
+                                    style={{ background: "#3b0764", color: "#e9d5ff", border: "1px solid rgba(167,139,250,0.70)" }}>
+                                    NFA
+                                  </span>
+                                ) : (
+                                  <span className="shrink-0 px-1.5 py-0.5 rounded text-[9px] font-bold"
+                                    style={{ background: "#0f2d6b", color: "#bfdbfe", border: "1px solid rgba(59,130,246,0.70)" }}>
+                                    NFT
+                                  </span>
+                                )}
+                              </div>
                               <p className="text-[11px] text-white/40 truncate flex items-center gap-1">
                                 {item.priceETH ? (
                                   <>
@@ -1046,7 +1077,9 @@ function MarketPlace() {
             {activeTab === "Quests" && (
               <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
                 <div className="flex-1 min-w-0">
-                  <ProfileQuestingTab wallet={connectedWallet} token={token} />
+                  <div className="pointer-events-none select-none">
+                    <ProfileQuestingTab wallet={connectedWallet} token={token} />
+                  </div>
                 </div>
                 <div className="hidden xl:block"><StickyAvatarSidebar /></div>
               </div>

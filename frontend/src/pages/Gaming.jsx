@@ -29,11 +29,19 @@ import QuestMode      from "../Components/Gaming/QuestMode";
 import OverlordMode   from "../Components/Gaming/OverlordMode";
 import RotatePrompt   from "../Components/Gaming/RotatePrompt";
 
+const STORAGE_KEY = "gaming_loaded_date";
+
+function needsLoadingScreen(isPreview) {
+  if (isPreview) return false;
+  const today = new Date().toDateString();
+  return localStorage.getItem(STORAGE_KEY) !== today;
+}
+
 export default function Gaming({ isPreview = false }) {
   const location = useLocation();
-  const [loading,     setLoading]     = useState(!isPreview);
-  const [visible,     setVisible]     = useState(isPreview);
-  const [activeGame,  setActiveGame]  = useState(location.state?.startMode || null);
+  const [loading,      setLoading]      = useState(() => needsLoadingScreen(isPreview));
+  const [visible,      setVisible]      = useState(!needsLoadingScreen(isPreview));
+  const [activeGame,   setActiveGame]   = useState(location.state?.startMode || null);
   const [raceView,     setRaceView]     = useState("TRACK");  // "TRACK" | "GARAGE"
   const [questView,    setQuestView]    = useState("SPACE");  // "SPACE" | "GROUND"
   const [overlordView, setOverlordView] = useState("SPACE");  // "SPACE" | "WORLD"
@@ -43,14 +51,15 @@ export default function Gaming({ isPreview = false }) {
     if (activeGame) preloadVideo(VIDEO_SRCS[activeGame]);
   }, [activeGame]);
 
+  const handleDone = () => {
+    localStorage.setItem(STORAGE_KEY, new Date().toDateString());
+    setLoading(false);
+    requestAnimationFrame(() => requestAnimationFrame(() => setVisible(true)));
+  };
+
   const handleSelectGame = (game) => {
     setActiveGame(game);
     if (!game) { setRaceView("TRACK"); setQuestView("SPACE"); setOverlordView("SPACE"); }
-  };
-
-  const handleDone = () => {
-    setLoading(false);
-    requestAnimationFrame(() => requestAnimationFrame(() => setVisible(true)));
   };
 
   if (loading) return <LoadingScreen onDone={handleDone} />;
