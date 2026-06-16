@@ -27,11 +27,6 @@ async function saveImagePermanently(filePath, filename) {
     try {
       const result = await getCloudinary().uploader.upload(filePath, {
         folder: "hyper-tek/nft",
-        transformation: [
-          { width: 1200, crop: "limit" },
-          { quality: "auto" },
-          { fetch_format: "auto" },
-        ],
       });
       return result.secure_url;
     } finally {
@@ -620,12 +615,24 @@ export async function mintSubCollection(req, res) {
       });
     }
 
-    // Check if already minted
-    if (subCollection.tokenId) {
+    // Edition (maxSupply > 1) vs single item (maxSupply === 1).
+    // A single item's template IS the token, so once it has a tokenId it's minted.
+    // An edition's template is NEVER a token — each buyer gets a freshly-minted
+    // token of their own; the template only tracks how many have been minted.
+    const isEdition = (subCollection.maxSupply || 1) > 1;
+
+    if (!isEdition && subCollection.tokenId) {
       return res.status(400).json({
         success: false,
         error: "NFT already minted",
         tokenId: subCollection.tokenId,
+      });
+    }
+
+    if (isEdition && (subCollection.currentSupply || 0) >= (subCollection.maxSupply || 1)) {
+      return res.status(400).json({
+        success: false,
+        error: "All editions of this item have been sold out",
       });
     }
 
@@ -772,23 +779,16 @@ export async function mintSubCollection(req, res) {
     }
 
     // Update Database - ONLY sub-collection
-    console.log("💾 Updating database...");
-
-    subCollection.tokenId = tokenId;
-    subCollection.tokenURI = tokenURI;
-    subCollection.owner = creatorWallet.toLowerCase();
-    subCollection.listed = false;
-
-    // Record Mint as First Sale
-    console.log("📝 Recording Mint Sale...");
     const mintPrice = req.body.priceETH || subCollection.priceETH || 0;
-
     const deployerWallet = (process.env.PLATFORM_WALLET_ADDRESS || "").toLowerCase();
+    const buyerWallet = creatorWallet.toLowerCase();
+
+    // Record the mint as a first sale (audit trail).
     const saleRecord = {
-      buyer: creatorWallet.toLowerCase(),
-      seller: deployerWallet || "unknown", // Actual deployer wallet address
-      priceETH: String(mintPrice || "0"), // Already human-readable decimal
-      royaltyPaid: "0", // Mint record — no royalty split on initial mint
+      buyer: buyerWallet,
+      seller: deployerWallet || "unknown",
+      priceETH: String(mintPrice || "0"),
+      royaltyPaid: "0",
       platformFee: 0,
       sellerReceived: 0,
       txHash: receipt.hash,
@@ -796,11 +796,63 @@ export async function mintSubCollection(req, res) {
       createdAt: new Date(),
     };
 
-    if (!subCollection.salesHistory) subCollection.salesHistory = [];
-    subCollection.salesHistory.push(saleRecord);
+    if (isEdition) {
+      // Edition: the buyer's token was just minted on-chain to their wallet.
+      // The template stays unminted & listed — only its supply counter moves.
+      // (Never stamp tokenId/owner here, or the template would falsely appear
+      // "On-Chain" and become un-buyable for the next buyer.)
+      subCollection.currentSupply = (subCollection.currentSupply || 0) + 1;
 
-    // Mark as sold (next sale will be secondary)
-    subCollection.isFirstSale = false;
+      const soldOut = subCollection.currentSupply >= (subCollection.maxSupply || 1);
+      if (soldOut) {
+        subCollection.listed = false;
+        subCollection.priceETH = null;
+      }
+
+      // Keep the MarketListing shadow record's quantity in sync.
+      MarketListing.findOneAndUpdate(
+        { subCollectionId: subCollection._id.toString(), status: "active" },
+        {
+          $inc: { quantitySold: 1, quantityRemaining: -1 },
+          ...(soldOut ? { status: "sold" } : {}),
+        },
+      ).catch((e) => console.warn("[Edition mint] MarketListing sync error:", e.message));
+
+      // Give the buyer their own owned copy so the purchase shows in their
+      // profile. This copy is a unique owned token (maxSupply 1) — it carries
+      // the real tokenId, is not listed (won't re-appear in the marketplace),
+      // and can later be resold via the standard single-item flow.
+      parent.subCollections.push({
+        name: subCollection.name,
+        symbol: subCollection.symbol,
+        image: subCollection.image,
+        description: subCollection.description,
+        tokenId: tokenId,
+        tokenURI: tokenURI,
+        owner: buyerWallet,
+        listed: false,
+        priceETH: 0,
+        isFirstSale: false,
+        assetType: subCollection.assetType,
+        isNFA: subCollection.isNFA,
+        nfaFrame: subCollection.nfaFrame,
+        artistId: subCollection.artistId,
+        maxSupply: 1,
+        currentSupply: 1,
+        salesHistory: [saleRecord],
+      });
+    } else {
+      // Single item: the template IS the token — transfer it to the buyer and delist.
+      subCollection.tokenId = tokenId;
+      subCollection.tokenURI = tokenURI;
+      subCollection.owner = buyerWallet;
+      subCollection.listed = false;
+      // Mark as sold so the next sale is treated as secondary.
+      subCollection.isFirstSale = false;
+
+      if (!subCollection.salesHistory) subCollection.salesHistory = [];
+      subCollection.salesHistory.push(saleRecord);
+    }
 
     // Increment parent sales count
     parent.collection.salesCount = (parent.collection.salesCount || 0) + 1;

@@ -81,7 +81,7 @@ const fadeUp = {
 };
 
 /* ─── Video section with skeleton ─────────────────── */
-function VideoSection({ src, accent }) {
+function VideoSection({ src, accent, isQuest }) {
   const [videoReady, setVideoReady] = useState(false);
   const mimeType = src?.endsWith(".webm") ? "video/webm" : "video/mp4";
   return (
@@ -89,28 +89,46 @@ function VideoSection({ src, accent }) {
       <motion.div
         variants={fadeUp} custom={0} initial="hidden"
         whileInView="visible" viewport={{ once: true, amount: 0.2 }}
-        className="relative rounded-xl overflow-hidden"
-        style={{ border: `1px solid ${accent}44`, boxShadow: `0 0 32px ${accent}18` }}
+        className="flex flex-col items-center gap-6"
       >
-        <div className="absolute top-0 inset-x-0 h-[2px] z-10" style={{ background: accent }} />
-        {!videoReady && (
-          <div className="relative w-full" style={{ height: "540px", maxHeight: "56vw" }}>
-            <SkeletonOverlay />
-          </div>
+        {/* Title above video (Quest only) */}
+        {isQuest && (
+          <h2
+            className="font-goldman uppercase text-2xl md:text-3xl xl:text-4xl tracking-wide text-center"
+            style={{
+              color: accent,
+              textShadow: `0 0 40px ${accent}88, 0 0 80px ${accent}44`,
+              fontFamily: "Goldman, sans-serif",
+            }}
+          >
+            Galactic Mapping System
+          </h2>
         )}
-        <video
-          controls
-          playsInline
-          preload="metadata"
-          x-webkit-airplay="allow"
-          onLoadedMetadata={() => setVideoReady(true)}
-          style={{
-            width: "100%", display: videoReady ? "block" : "none",
-            background: "#000", maxHeight: "540px",
-          }}
+
+        <div
+          className="relative rounded-xl overflow-hidden w-full"
+          style={{ border: `1px solid ${accent}44`, boxShadow: `0 0 32px ${accent}18` }}
         >
-          <source src={src} type={mimeType} />
-        </video>
+          <div className="absolute top-0 inset-x-0 h-[2px] z-10" style={{ background: accent }} />
+          {!videoReady && (
+            <div className="relative w-full" style={{ height: "540px", maxHeight: "56vw" }}>
+              <SkeletonOverlay />
+            </div>
+          )}
+          <video
+            controls
+            playsInline
+            preload="metadata"
+            x-webkit-airplay="allow"
+            onLoadedMetadata={() => setVideoReady(true)}
+            style={{
+              width: "100%", display: videoReady ? "block" : "none",
+              background: "#000", maxHeight: "540px",
+            }}
+          >
+            <source src={src} type={mimeType} />
+          </video>
+        </div>
       </motion.div>
     </section>
   );
@@ -215,7 +233,7 @@ function DetailContent({ data }) {
       </section>
 
       {/* Video */}
-      {data.videoSrc && <VideoSection src={data.videoSrc} accent={accent} />}
+      {data.videoSrc && <VideoSection src={data.videoSrc} accent={accent} isQuest={data.isQuest} />}
 
       {/* Interactive Map (Quest only) */}
       {data.isQuest && (
@@ -296,6 +314,15 @@ function DetailContent({ data }) {
         </section>
       )}
 
+      {/* Callout Banner */}
+      <div className="relative overflow-hidden py-16 md:py-20" style={{ background: `linear-gradient(to right, rgba(6,6,20,0.95), ${accentDim} 50%, rgba(6,6,20,0.95))`, borderTop: `1px solid ${accent}22`, borderBottom: `1px solid ${accent}22` }}>
+        <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse at 50% 50%, ${accentDim} 0%, transparent 70%)` }} />
+        <div className="relative text-center px-6">
+          <motion.p variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }} className="font-goldman uppercase text-2xl md:text-4xl xl:text-5xl tracking-wide" style={{ color: accent, textShadow: `0 0 40px ${accent}` }}>{data.calloutLine1}</motion.p>
+          <motion.p variants={fadeUp} custom={0.3} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }} className="font-goldman uppercase text-2xl md:text-4xl xl:text-5xl tracking-wide mt-1" style={{ color: "rgba(255,255,255,0.9)", textShadow: `0 0 30px ${glow}` }}>{data.calloutLine2}</motion.p>
+        </div>
+      </div>
+
       {/* How It Works */}
       {data.howItWorks && (
         <section className="relative py-24" style={{ background: "rgba(6,6,20,0.6)", borderTop: "1px solid rgba(255,255,255,0.05)", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
@@ -325,15 +352,6 @@ function DetailContent({ data }) {
       {data.extraSection && (
         <StepsSection data={data} title={data.extraSection.title} glow={glow} accent={accent} accentDim={accentDim} items={data.extraSection.items} />
       )}
-
-      {/* Callout Banner */}
-      <div className="relative overflow-hidden py-16 md:py-20" style={{ background: `linear-gradient(to right, rgba(6,6,20,0.95), ${accentDim} 50%, rgba(6,6,20,0.95))`, borderTop: `1px solid ${accent}22`, borderBottom: `1px solid ${accent}22` }}>
-        <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse at 50% 50%, ${accentDim} 0%, transparent 70%)` }} />
-        <div className="relative text-center px-6">
-          <motion.p variants={fadeUp} custom={0} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }} className="font-goldman uppercase text-2xl md:text-4xl xl:text-5xl tracking-wide" style={{ color: accent, textShadow: `0 0 40px ${accent}` }}>{data.calloutLine1}</motion.p>
-          <motion.p variants={fadeUp} custom={0.3} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }} className="font-goldman uppercase text-2xl md:text-4xl xl:text-5xl tracking-wide mt-1" style={{ color: "rgba(255,255,255,0.9)", textShadow: `0 0 30px ${glow}` }}>{data.calloutLine2}</motion.p>
-        </div>
-      </div>
 
       {/* Upgrades (before rewards for Overlord) */}
       {data.upgradesBeforeRewards && data.upgrades && (

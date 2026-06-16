@@ -60,6 +60,3 @@ export default function Wraith3DViewer({ vehicleId = "wraith" }) {
     </Suspense>
   );
 }
-
-// Only preload the default model — others load on demand when selected
-useGLTF.preload(MODELS.wraith);

@@ -144,7 +144,7 @@ export default function Hero() {
   }, []);
 
   const headingLine1 = cms.heading_line1 || "HYPER TEK 100:";
-  const headingLine2 = t("hero.headingLine2") || cms.heading_line2 || "WHERE LEGENDS ARE FORGOTTEN";
+  const headingLine2 = t("hero.headingLine2") || cms.heading_line2 || "WHERE LEGENDS ARE FORGED";
   const btn1Text = t("hero.marketplace");
   const btn1Link = cms.button1_link || cms.cta_button_1_link || "/market-place";
   const btn2Text = t("hero.downloadGame");

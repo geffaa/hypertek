@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { STRIPE_PUBLISHABLE_KEY } from "../../Config";
@@ -23,7 +23,6 @@ import {
   BASE_USDC_ADDRESS,
   ERC20_ABI,
 } from "../../Web3/Config";
-import { createWalletClient, createPublicClient, custom, http } from 'viem';
 import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
 import { openTransakOnRamp } from "../../utils/transakUtils";
 import { FiEye, FiEdit2, FiCopy } from "react-icons/fi";
@@ -32,7 +31,6 @@ import { Wallet, Copy, CreditCard, ZoomIn, X as XIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import PriceHistory from "./BuyNfa2";
 
-// ── Stripe NFT Payment Modal ─────────────────────────────────────────────────
 const stripePromise = STRIPE_PUBLISHABLE_KEY ? loadStripe(STRIPE_PUBLISHABLE_KEY) : null;
 
 function StripeNFTCheckoutForm({ amount, onSuccess, onClose }) {
@@ -70,7 +68,6 @@ function StripeNFTCheckoutForm({ amount, onSuccess, onClose }) {
   return (
     <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-sm px-3 pb-3 sm:pb-0">
       <div className="bg-[#0f0f2a] border border-white/10 rounded-2xl w-full max-w-md shadow-2xl flex flex-col max-h-[92vh]">
-        {/* sticky header */}
         <div className="flex justify-between items-center px-5 pt-5 pb-3 flex-shrink-0">
           <div>
             <h3 className="text-base font-bold text-white">{t("buyNfa.stripe.title", "Pay with Card")}</h3>
@@ -78,14 +75,12 @@ function StripeNFTCheckoutForm({ amount, onSuccess, onClose }) {
           </div>
           <button onClick={onClose} className="text-white/40 hover:text-white text-xl leading-none">×</button>
         </div>
-        {/* scrollable body */}
         <div className="overflow-y-auto flex-1 px-5 pb-2">
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <PaymentElement options={{ layout: "tabs", wallets: { link: "never" } }} />
             {error && <p className="text-red-400 text-xs">{error}</p>}
           </form>
         </div>
-        {/* sticky footer */}
         <div className="flex gap-3 px-5 pb-5 pt-3 flex-shrink-0 border-t border-white/[0.06]">
           <button type="button" onClick={onClose}
             className="flex-1 py-2.5 rounded-lg border border-white/20 text-white/70 hover:text-white text-sm transition-colors">
@@ -105,39 +100,27 @@ function Buy1() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Extract parent and subCollection properly
   const {
     item,
     subCollection: passedSubCollection,
     parentId,
-    subCollectionId,
-    buyerWallet,
-    priceETH,
-    itemType,
-    tokenId,
     marketplaceScrollY,
   } = location.state || {};
 
-  // Determine which is parent and which is sub-collection
   let parentCollection, subCollection;
 
   if (passedSubCollection) {
-    // Explicit sub-collection passed alongside parent item
     parentCollection = item;
     subCollection = passedSubCollection;
   } else if (item?.isParentCollection) {
-    // Item is a parent — use its first sub-collection
     parentCollection = item;
     subCollection = item.subCollections?.[0];
   } else if (item?.isSubCollection || item?.parentId) {
-    // Item is a sub-collection (from Collectible.jsx / Profile flow)
     subCollection = item;
-    // parentCollection stays undefined — we use parentId from location.state or item.parentId
   } else {
     subCollection = item;
   }
 
-  // Resolve the effective parentId from all possible sources
   const resolvedParentId = parentCollection?._id || parentId || item?.parentId;
 
   const collection = subCollection || item;
@@ -145,30 +128,23 @@ function Buy1() {
   const assetType = collection.assetType || (collection.isNFA ? "NFA" : "NFT");
   const { token, user } = useSelector((state) => state.auth);
 
-  // RainbowKit hooks
-  const { address: connectedWallet, isConnected, chain, connector } = useAccount();
+  const { address: connectedWallet, chain } = useAccount();
   const { openConnectModal } = useConnectModal();
   const { data: walletClient } = useWalletClient();
 
-  // Dynamic Chain Configuration
   const TARGET_CHAIN_ID = BASE_CHAIN_ID;
   const publicClient = usePublicClient({ chainId: TARGET_CHAIN_ID });
   const { switchChain } = useSwitchChain();
 
-  // Primary Addresses
   const CURRENT_NFT_ADDRESS = BASE_NFT_ADDRESS;
   const CURRENT_MARKETPLACE_ADDRESS = BASE_MARKETPLACE_ADDRESS;
 
-  // Email Wallet Hook (Fallback for Email/Social Logins)
   const {
     emailWalletAddress,
     emailWalletClient,
     isEmailWalletConnected,
   } = useEmailWallet();
 
-  // Unified Address & Client Priority: standard Wagmi > local Email Wallet
-  // Only trust wagmiAddress if it matches the logged-in user's stored wallet (prevents
-  // cross-user leak when MetaMask stays connected with a different user's account).
   const userStoredWallet = user?.WalletAddress?.toLowerCase() || user?.MetaMaskAddress?.toLowerCase() || "";
   const resolvedWagmi = connectedWallet?.toLowerCase();
   const safeWagmiAddress = (resolvedWagmi && userStoredWallet && resolvedWagmi === userStoredWallet)
@@ -178,12 +154,11 @@ function Buy1() {
   const isAnyConnected = !!safeWagmiAddress || isEmailWalletConnected;
   const activeWalletClient = (safeWagmiAddress ? walletClient : null) || emailWalletClient;
 
-  // For card payments: always prefer email wallet so NFT lands in profile-visible address
-  // If user only has MetaMask (no email wallet), fall back to activeAddress
   const cardBuyerWallet = emailWalletAddress || activeAddress;
 
   const [activeTab, setActiveTab] = useState("marketplace");
   const [isOwner, setIsOwner] = useState(false);
+  const [ownershipChecked, setOwnershipChecked] = useState(false);
   const [listingData, setListingData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [onChainOwner, setOnChainOwner] = useState(null);
@@ -201,19 +176,16 @@ function Buy1() {
   const [gasModal, setGasModal] = useState(false); // true when no ETH for gas
   const [showZoom, setShowZoom] = useState(false);
 
-  // ── Auction tab data ──
   const [auctionInfo, setAuctionInfo] = useState(null);
   const [auctionInfoLoading, setAuctionInfoLoading] = useState(false);
   const [auctionFetched, setAuctionFetched] = useState(false);
   const [bidAmount, setBidAmount] = useState("");
   const [bidLoading, setBidLoading] = useState(false);
 
-  // ── Trade tab data ──
   const [tradeListings, setTradeListings] = useState([]);
   const [tradeListingsLoading, setTradeListingsLoading] = useState(false);
   const [tradeFetched, setTradeFetched] = useState(false);
 
-  // Fetch Native ETH Balance for Embedded Wallet display
   const { balance: ethBalance } = useTokenBalance("0x0000000000000000000000000000000000000000");
   const { t } = useTranslation();
 
@@ -223,12 +195,7 @@ function Buy1() {
     setTimeout(() => setWalletCopied(false), 2000);
   };
 
-  /* ================================ INIT ================================ */
   useEffect(() => {
-    console.log("📦 Location State:", location.state);
-    console.log("📦 Parent Collection:", parentCollection);
-    console.log("📦 Sub-Collection:", subCollection);
-    console.log("📦 Collection (display):", collection);
 
     if (!collection) {
       toast.error(" No NFT data found");
@@ -237,34 +204,13 @@ function Buy1() {
     }
   }, [collection, navigate]);
 
-  // Fetch Fresh Data on Mount
-  useEffect(() => {
-    const fetchFreshData = async () => {
-      if (collection?._id) {
-        try {
-          // If it's a sub-collection, we might need a specific endpoint or parent lookup
-          // But for now, let's rely on checking ownership on-chain which we already do.
-          // Or if we have an endpoint for single sub-collection:
-          // const res = await axios.get(...) 
-          // Since we don't have a direct "get sub-collection by ID" easily exposed without parentId, 
-          // we will rely on on-chain data primarily.
-
-          // However, we can re-verify the owner from the backend if possible.
-        } catch (e) {
-          console.error("Refetch error", e);
-        }
-      }
-    };
-    fetchFreshData();
-  }, [collection?._id]);
-
   useEffect(() => {
     if (publicClient && collection) {
+      setOwnershipChecked(false);
       checkWalletAndOwnership();
     }
   }, [collection, isAnyConnected, activeAddress, publicClient]);
 
-  /* ======================== FETCH OFFERS ======================== */
   useEffect(() => {
     if (!collection?._id || !user) return;
     const fetchOffers = async () => {
@@ -275,21 +221,17 @@ function Buy1() {
           { headers: { Authorization: `Bearer ${token}` } }
         );
         const all = res.data?.offers || res.data || [];
-        // Filter to only offers for this specific NFT
         const forThisNft = all.filter((o) => String(o.gameId) === String(collection._id));
-        // Non-owners only see their own offers (privacy)
         const filtered = isOwner
           ? forThisNft
           : forThisNft.filter((o) => String(o.userId) === String(user?.id || user?._id));
         setOffers(filtered);
       } catch {
-        // silently fail — offers are non-critical
       }
     };
     fetchOffers();
   }, [collection?._id, isOwner, showOffers]);
 
-  /* ====================== UPDATE OFFER STATUS ====================== */
   const handleOfferStatus = async (offerId, status) => {
     try {
       await axios.put(
@@ -297,7 +239,6 @@ function Buy1() {
         { status },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      // Update local state instantly — no re-fetch needed
       setOffers((prev) =>
         prev.map((o) => o._id === offerId ? { ...o, requestStatus: status } : o)
       );
@@ -307,18 +248,12 @@ function Buy1() {
     }
   };
 
-  /* ===================== WALLET + OWNERSHIP CHECK ===================== */
   const checkWalletAndOwnership = async () => {
     try {
       if (!publicClient || !collection) return;
 
       const wallet = activeAddress ? activeAddress.toLowerCase() : null;
-      if (wallet) {
-        console.log("Connected wallet:", wallet);
-      }
-      console.log("📋 Collection owner from DB:", collection.owner);
 
-      // Check BLOCKCHAIN ownership if tokenId exists
       if (collection.tokenId) {
         try {
           const nftContract = {
@@ -334,69 +269,52 @@ function Buy1() {
 
           const ownerLower = owner.toLowerCase();
 
-          // SMART CHECK: If on-chain owner is Platform (0x11dd...), but DB says it's a User (0x...),
-          // and we are on Immutable (default), it likely means the item is actually on Immutable.
-          // In this case, we TRUST THE DB OWNER for display purposes.
-
           const isPlatform = ownerLower === PLATFORM_WALLET_ADDRESS.toLowerCase();
+          const isEscrowed = ownerLower === CURRENT_MARKETPLACE_ADDRESS.toLowerCase();
           const dbOwnerIsUser = collection.owner && collection.owner.toLowerCase() !== PLATFORM_WALLET_ADDRESS.toLowerCase();
 
-          if (isPlatform && dbOwnerIsUser) {
-            console.warn("⚠️ Chain mismatch detected! On-chain is Platform, but DB is User. Likely on Immutable.");
+          if ((isPlatform || isEscrowed) && dbOwnerIsUser) {
             setOnChainOwner(collection.owner.toLowerCase());
           } else {
             setOnChainOwner(ownerLower);
           }
 
-          if (collection.owner !== ownerLower) {
-            // Only update if we are sure? No, let's keep local state sync but be careful about overwriting if mismatch
-            if (isPlatform && dbOwnerIsUser) {
-              // Do NOT overwrite collection.owner with Platform address if DB says User
-            } else {
-              console.log("🔄 Updating collection.owner to match blockchain");
-              collection.owner = ownerLower;
-            }
+          if (collection.owner !== ownerLower && !((isPlatform || isEscrowed) && dbOwnerIsUser)) {
+            collection.owner = ownerLower;
           }
 
-          const ownerToCompare = (isPlatform && dbOwnerIsUser) ? collection.owner.toLowerCase() : ownerLower;
+          const ownerToCompare = ((isPlatform || isEscrowed) && dbOwnerIsUser) ? collection.owner.toLowerCase() : ownerLower;
           const ownerMatch = wallet && wallet === ownerToCompare;
 
           setIsOwner(ownerMatch);
-          console.log("🔍 Is owner (blockchain check):", ownerMatch);
-        } catch (err) {
-          console.error(" Error checking on-chain owner:", err);
+        } catch {
 
-          // If read fails (e.g. wrong chain), trust DB
           if (collection.owner) {
             const ownerMatch = wallet && wallet === collection.owner.toLowerCase();
             setIsOwner(ownerMatch);
             setOnChainOwner(collection.owner.toLowerCase()); // Trust DB
-            console.log("🔍 Is owner (DB fallback):", ownerMatch);
           } else {
             setIsOwner(false);
           }
         }
       } else {
-        // Not minted yet
         if (collection.owner) {
           const ownerMatch = wallet && wallet === collection.owner.toLowerCase();
           setIsOwner(ownerMatch);
-          console.log("🔍 Is owner (not minted, DB check):", ownerMatch);
         } else {
           setIsOwner(false);
-          console.log("🆕 No owner - treated as Platform owned (Buy Now)");
         }
       }
 
       if (collection.tokenId) {
         await checkListingStatus();
       }
-    } catch (err) {
-      console.error(" Error checking wallet:", err);
+    } catch {
+    } finally {
+      setOwnershipChecked(true);
     }
   };
 
-  /* ========================= CHECK LISTING ========================= */
   const checkListingStatus = async () => {
     try {
       if (!collection.tokenId || !publicClient) return;
@@ -418,16 +336,11 @@ function Buy1() {
         active: listing[2],
       });
 
-      console.log("📊 Listing status:", listing[2] ? "Active" : "Inactive");
       collection.listed = listing[2];
-    } catch (err) {
-      console.error(" Error checking listing:", err);
+    } catch {
     }
   };
 
-  /* ================== FETCH AUCTION FOR THIS ITEM ================== */
-  // Uses seller/:wallet endpoint then filters client-side by subCollectionId,
-  // because the GET /auction list endpoint has no subCollectionId query param.
   const fetchAuctionInfo = async () => {
     if (auctionFetched) return;
     setAuctionInfoLoading(true);
@@ -450,9 +363,6 @@ function Buy1() {
     finally { setAuctionInfoLoading(false); setAuctionFetched(true); }
   };
 
-  /* ================== FETCH TRADE LISTINGS FOR THIS ITEM ================== */
-  // Uses posterWallet filter then filters client-side by offering name,
-  // because the GET /trade endpoint has no offering query filter.
   const fetchTradeListings = async () => {
     if (tradeFetched) return;
     setTradeListingsLoading(true);
@@ -500,14 +410,12 @@ function Buy1() {
         toast.error(" Network switch not supported by wallet", { id: toastId, duration: 6000 });
         return false;
       }
-    } catch (error) {
-      console.error(" Failed to switch network:", error);
+    } catch {
       toast.error(` Please switch to ${targetChainName} manually`, { id: toastId, duration: 6000 });
       return false;
     }
   };
 
-  /* ========================== BACKEND MINT ========================== */
   const mintNFTToWallet = async (buyerWallet) => {
     if (!user?.id || !collection._id) {
       throw new Error("Invalid user or item data");
@@ -526,8 +434,6 @@ function Buy1() {
         chainId: TARGET_CHAIN_ID,
       };
 
-      console.log("🎨 Minting NFA with payload:", payload);
-
       const res = await axios.post(
         `${BACKEND_BASE_URL}/api/v1/nft/sub-collection/mint`,
         payload,
@@ -540,14 +446,11 @@ function Buy1() {
       );
 
       if (res.data?.success && res.data?.tokenId) {
-        console.log("Mint successful, Token ID:", res.data.tokenId);
         return res.data.tokenId;
       } else {
-        console.error(" Mint response invalid:", res.data);
         throw new Error(res.data?.error || res.data?.message || "Mint response invalid");
       }
     } catch (err) {
-      console.error(" Mint error:", err.response?.data || err);
       if (err.response?.data?.error) {
         throw new Error(err.response.data.error);
       }
@@ -555,7 +458,6 @@ function Buy1() {
     }
   };
 
-  /* ======================= CREATE LISTING ======================= */
   const handleCreateListing = async () => {
     if (!isAnyConnected) {
       if (openConnectModal) {
@@ -591,17 +493,14 @@ function Buy1() {
       }
 
       const walletAddress = activeAddress;
-      console.log("👛 Wallet address:", walletAddress);
 
       let tokenId = collection.tokenId;
 
-      // Mint if not exists
       if (!tokenId) {
         toast.loading("🔧 Processing listing...", { id: toastId });
         try {
           tokenId = await mintNFTToWallet(walletAddress);
         } catch (mintErr) {
-          console.error(" Minting error:", mintErr);
           const errMsg = mintErr.message || "";
           if (errMsg.toLowerCase().includes("insufficient eth") || errMsg.toLowerCase().includes("fund")) {
             toast.error(" Minting Failed: Insufficient funds in backend wallet. Please contact support.", { id: toastId, duration: 8000 });
@@ -619,16 +518,10 @@ function Buy1() {
 
         toast.success("NFT Minted! Indexing...", { id: toastId });
 
-        // Short wait to allow indexing
         await new Promise((resolve) => setTimeout(resolve, 5000));
       }
 
-      // Verify ownership
       toast.loading("🔍 Verifying ownership...", { id: toastId });
-
-      console.log("🔍 Checking ownership on Contract:", CURRENT_NFT_ADDRESS);
-      console.log("🔍 Token ID:", tokenId);
-      console.log("🔍 Expected Owner:", walletAddress);
 
       const nftContract = {
         address: CURRENT_NFT_ADDRESS,
@@ -646,31 +539,22 @@ function Buy1() {
             args: [tokenId],
           });
 
-          console.log("⛓️ On-chain owner result:", owner);
-
           if (owner.toLowerCase() === walletAddress.toLowerCase()) {
             collection.owner = owner.toLowerCase();
             setOnChainOwner(owner.toLowerCase());
             setIsOwner(true);
-            console.log("Ownership verified");
             break;
           } else if (retries > 1) {
-            console.log(`⏳ Owner mismatch/pending (${retries - 1} retries left)...`);
             await new Promise((resolve) => setTimeout(resolve, 3000));
             retries--;
             continue;
           } else {
-            // ... existing failure logic
             toast.error(" Ownership mismatch after retries", { id: toastId, duration: 6000 });
             setLoading(false);
             return;
           }
-        } catch (err) {
-          console.error(" Error getting owner:", err);
+        } catch {
           if (retries > 1) {
-            console.log(
-              `⏳ Retrying blockchain check... (${retries - 1} left)`,
-            );
             await new Promise((resolve) => setTimeout(resolve, 2000));
             retries--;
           } else {
@@ -683,7 +567,6 @@ function Buy1() {
         }
       }
 
-      // Check ETH balance for gas before any on-chain writes
       let ethBal = await publicClient.getBalance({ address: walletAddress });
       if (ethBal === 0n) {
         if (emailWalletAddress && !safeWagmiAddress) {
@@ -697,7 +580,6 @@ function Buy1() {
             await new Promise((r) => setTimeout(r, 4000));
             ethBal = await publicClient.getBalance({ address: walletAddress });
           } catch {
-            // drip failed — fall through to gasModal
           }
         }
         if (ethBal === 0n) {
@@ -708,7 +590,6 @@ function Buy1() {
         }
       }
 
-      // Check approval (Use setApprovalForAll for Marketplace)
       toast.loading("✍️ Checking marketplace approval...", { id: toastId });
 
       const isApprovedForAll = await publicClient.readContract({
@@ -719,7 +600,6 @@ function Buy1() {
 
       if (!isApprovedForAll) {
         toast.loading("✍️ Approving marketplace (One-time)...", { id: toastId });
-        console.log("📝 sending setApprovalForAll tx...");
 
         try {
           const approveTx = await activeWalletClient.writeContract({
@@ -730,10 +610,7 @@ function Buy1() {
           });
           toast.loading("⏳ Waiting for approval confirmation...", { id: toastId });
           await publicClient.waitForTransactionReceipt({ hash: approveTx });
-          console.log("Marketplace approved for all");
         } catch (approveError) {
-          console.error(" Approval failed:", approveError);
-          // Special handling for user rejection
           if (approveError.message.includes("User rejected")) {
             toast.error(" Approval rejected by user", { id: toastId, duration: 6000 });
           } else {
@@ -744,7 +621,6 @@ function Buy1() {
         }
       }
 
-      // Check if already listed
       const marketplaceContract = {
         address: CURRENT_MARKETPLACE_ADDRESS,
         abi: MARKETPLACE_ABI,
@@ -763,7 +639,6 @@ function Buy1() {
         return;
       }
 
-      // Use custom listing price if owner set one, otherwise fallback to collection price
       const finalPrice = listingPrice && parseFloat(listingPrice) > 0
         ? listingPrice
         : String(collection.priceETH || "1");
@@ -776,9 +651,7 @@ function Buy1() {
         account: activeWalletClient.account || walletAddress,
       });
       await publicClient.waitForTransactionReceipt({ hash: listTx });
-      console.log("Listing created on blockchain");
 
-      // Record in backend
       toast.loading("💾 Saving listing data...", { id: toastId });
 
       const listingPayload = {
@@ -789,17 +662,13 @@ function Buy1() {
         parentId: resolvedParentId,
       };
 
-      console.log("📤 Sending listing payload:", listingPayload);
-
-      const response = await axios.post(
+      await axios.post(
         `${BACKEND_BASE_URL}/api/v1/nft/sub-collection/listing/create`,
         listingPayload,
         {
           headers: { Authorization: `Bearer ${token}` },
         },
       );
-
-      console.log("Backend response:", response.data);
 
       toast.success(
         `🎉 NFA listed for sale @ ${finalPrice} USDC!`,
@@ -820,8 +689,6 @@ function Buy1() {
 
       navigate("/List");
     } catch (err) {
-      console.error(" Listing error:", err);
-      console.error(" Error details:", err);
 
       let msg = " Listing failed";
       if (err.message?.includes("insufficient funds")) {
@@ -831,14 +698,12 @@ function Buy1() {
       } else {
         msg = ` Error: ${err.shortMessage || err.message?.substring(0, 50) || "Unknown"}`;
       }
-      console.error("Listing Error:", err);
       toast.error(msg, { id: toastId, duration: 8000 });
     } finally {
       setLoading(false);
     }
   };
 
-  /* ============================ BUY NFT ============================ */
   const handleBuyNFT = async () => {
     if (!isAnyConnected) {
       if (openConnectModal) {
@@ -873,13 +738,10 @@ function Buy1() {
       }
 
       const buyer = activeAddress;
-      console.log("👛 Buyer wallet:", buyer);
 
       let balance = await publicClient.getBalance({ address: buyer });
-      console.log("💰 Native ETH Balance:", ethers.formatEther(balance), "ETH");
 
       if (balance === 0n) {
-        // Email wallet — request backend to auto-drip ETH for gas
         if (emailWalletAddress && !safeWagmiAddress) {
           toast.loading("⛽ Menyiapkan gas untuk transaksi...", { id: toastId });
           try {
@@ -888,11 +750,9 @@ function Buy1() {
               {},
               { headers: { Authorization: `Bearer ${token}` } }
             );
-            // Wait briefly for tx to confirm, then re-check
             await new Promise((r) => setTimeout(r, 4000));
             balance = await publicClient.getBalance({ address: buyer });
           } catch {
-            // drip failed — fall through to gasModal
           }
         }
         if (balance === 0n) {
@@ -913,12 +773,9 @@ function Buy1() {
         functionName: 'balanceOf',
         args: [buyer],
       });
-      console.log("💰 USDC Balance:", ethers.formatUnits(usdcBalance, 6), "USDC");
 
-      /* ==================== SCENARIO 1: NOT MINTED ==================== */
       if (!collection.tokenId) {
         toast.loading("🛒 Processing purchase...", { id: toastId });
-        console.log("🆕 NFA not minted yet, processing first sale...");
 
         const mintPrice = collection.priceETH || 0.01;
         const priceWei = ethers.parseUnits(String(mintPrice), 6); // USDC uses 6 decimals
@@ -934,7 +791,6 @@ function Buy1() {
           return;
         }
 
-        // Check allowance
         toast.loading("🔒 Checking USDC allowance...", { id: toastId });
         const allowance = await publicClient.readContract({
           ...usdcContractOptions,
@@ -953,9 +809,7 @@ function Buy1() {
             });
             toast.loading("⏳ Waiting for USDC approval...", { id: toastId });
             await publicClient.waitForTransactionReceipt({ hash: approveTxHash });
-            console.log("USDC Approved for Marketplace (First Sale)");
           } catch (approveErr) {
-            console.error(" USDC Approval failed:", approveErr);
             let msg = " USDC Approval failed";
             if (approveErr.message?.includes("user rejected") || approveErr.code === 4001) {
               msg = " Transaction rejected by user";
@@ -968,14 +822,17 @@ function Buy1() {
           }
         }
 
-        // Determine creator to pay
-        // We fallback to PLATFORM_WALLET_ADDRESS if no known creator address
         const creatorWalletRaw = collection.creator || collection.owner;
         const creatorWallet = (creatorWalletRaw && creatorWalletRaw.toLowerCase() !== "admin" && ethers.isAddress(creatorWalletRaw))
           ? creatorWalletRaw.toLowerCase()
           : PLATFORM_WALLET_ADDRESS.toLowerCase();
 
-        // Call depositFirstSalePayment on Marketplace contract
+        if (buyer.toLowerCase() === creatorWallet && creatorWallet !== PLATFORM_WALLET_ADDRESS.toLowerCase()) {
+          toast.error(t("buyNfa.errors.selfPurchase", "You cannot buy your own NFT!"), { id: toastId, duration: 6000 });
+          setLoading(false);
+          return;
+        }
+
         toast.loading("💸 Depositing payment to smart contract...", { id: toastId });
         try {
           const marketplaceContract = {
@@ -992,9 +849,7 @@ function Buy1() {
 
           toast.loading("⏳ Finalizing payment...", { id: toastId });
           await publicClient.waitForTransactionReceipt({ hash: depositTxHash });
-          console.log("First sale payment deposited to creator:", creatorWallet);
         } catch (depositErr) {
-          console.error(" Payment failed:", depositErr);
           let msg = " Payment failed during deposit";
           if (depositErr.message?.includes("user rejected") || depositErr.code === 4001) {
             msg = " Transaction rejected by user";
@@ -1013,7 +868,6 @@ function Buy1() {
         try {
           mintedTokenId = await mintNFTToWallet(buyer);
         } catch (mintErr) {
-          console.error(" Minting error:", mintErr);
           const errMsg = mintErr.message || "";
           if (errMsg.toLowerCase().includes("insufficient eth") || errMsg.toLowerCase().includes("fund")) {
             toast.error(" Minting Failed: Insufficient funds in backend wallet. Please contact support.", { id: toastId, duration: 8000 });
@@ -1028,7 +882,6 @@ function Buy1() {
         collection.owner = buyer.toLowerCase();
         setIsOwner(true);
         setOnChainOwner(buyer.toLowerCase());
-        console.log("NFA prepared, Token ID:", mintedTokenId);
 
         toast.success(
           `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${mintedTokenId}\n💰 Price: ${mintPrice} USDC\n\n⛓️ Blockchain confirmation in progress...`,
@@ -1041,10 +894,8 @@ function Buy1() {
 
         navigate("/Profile", { state: { category: targetCategory } });
 
-
         return; // Scenario 1 completed
       }
-      /* ================= SCENARIO 2: ALREADY MINTED ================= */
       toast.loading("🔍 Checking NFT ownership...", { id: toastId });
 
       const nftContract = {
@@ -1060,9 +911,7 @@ function Buy1() {
           args: [collection.tokenId],
         });
         currentOwner = currentOwner.toLowerCase();
-        console.log("⛓️ Current NFT owner:", currentOwner);
-      } catch (err) {
-        console.error(" Error checking owner:", err);
+      } catch {
         toast.error(" NFT not found on blockchain", { id: toastId, duration: 6000 });
         setLoading(false);
         return;
@@ -1093,8 +942,13 @@ function Buy1() {
         return;
       }
 
+      if (buyer.toLowerCase() === listing[0].toLowerCase()) {
+        toast.error(t("buyNfa.errors.selfPurchase", "You cannot buy your own listed NFT!"), { id: toastId, duration: 6000 });
+        setLoading(false);
+        return;
+      }
+
       const price = listing[1];
-      console.log("💰 Listing price:", ethers.formatEther(price), "USDC/ETH Equivalent");
 
       if (usdcBalance < price) {
         toast.dismiss(toastId);
@@ -1126,9 +980,7 @@ function Buy1() {
           });
           toast.loading("⏳ Waiting for USDC approval...", { id: toastId });
           await publicClient.waitForTransactionReceipt({ hash: approveTxHash });
-          console.log("USDC Approved!");
-        } catch (approveErr) {
-          console.error(" Approval failed:", approveErr);
+        } catch {
           toast.error(" USDC Approval failed", { id: toastId, duration: 6000 });
           setLoading(false);
           return;
@@ -1136,7 +988,6 @@ function Buy1() {
       }
 
       toast.loading("💳 Processing purchase transaction...", { id: toastId });
-      console.log("🛒 Executing buyNFT...");
 
       const buyTx = await activeWalletClient.writeContract({
         ...marketplaceContract,
@@ -1150,12 +1001,10 @@ function Buy1() {
       });
 
       const receipt = await publicClient.waitForTransactionReceipt({ hash: buyTx });
-      console.log("Transaction confirmed:", receipt.transactionHash);
 
       toast.loading("💾 Recording purchase...", { id: toastId });
 
       try {
-        // Find accepted offer from this buyer (if purchase is completing an offer)
         const myAcceptedOffer = offers.find(
           (o) => String(o.userId) === String(user?.id || user?._id) && o.requestStatus === "accepted"
         );
@@ -1171,8 +1020,6 @@ function Buy1() {
           ...(myAcceptedOffer ? { offerId: myAcceptedOffer._id } : {}),
         };
 
-        console.log("📤 Recording sale with payload:", salePayload);
-
         await axios.post(
           `${BACKEND_BASE_URL}/api/v1/nft/sub-collection/sale/record`,
           salePayload,
@@ -1180,10 +1027,7 @@ function Buy1() {
             headers: { Authorization: `Bearer ${token}` },
           },
         );
-        console.log("Sale recorded in backend");
-      } catch (recordErr) {
-        console.error("⚠️ Error recording sale:", recordErr);
-        console.error("⚠️ Error response:", recordErr.response?.data);
+      } catch {
       }
 
       toast.dismiss(toastId);
@@ -1193,7 +1037,6 @@ function Buy1() {
       setListingData(null);
       setPurchaseSuccess(true);
     } catch (err) {
-      console.error(" Purchase error:", err);
       let msg = " Purchase failed";
 
       if (err.message?.includes("insufficient funds")) {
@@ -1212,7 +1055,6 @@ function Buy1() {
     }
   };
 
-  /* ======================== CARD PAYMENT ======================== */
   const handlePaymentCard = async () => {
     if (!user?.id) { toast.error(" Please login first"); return; }
     if (!stripePromise) { toast.error(" Card payments not configured"); return; }
@@ -1252,64 +1094,58 @@ function Buy1() {
       } else {
         toast.error(" Could not initiate card payment");
       }
-    } catch (err) {
+    } catch {
       toast.error(" Card payment setup failed", { id: toastId, duration: 6000 });
     }
   };
 
-  /* ======================== BUTTON LOGIC ======================== */
-  const isPlatformOwned =
-    !collection.owner ||
-    collection.owner === "admin" ||
-    (onChainOwner &&
-      onChainOwner === PLATFORM_WALLET_ADDRESS.toLowerCase()) ||
-    (collection.owner &&
-      collection.owner.toLowerCase() ===
-      PLATFORM_WALLET_ADDRESS.toLowerCase()) ||
-    // Unminted items with a price are first-sale platform items — always purchasable
-    (!collection.tokenId && collection.priceETH > 0);
+  const itemStatus = (() => {
+    const platform = PLATFORM_WALLET_ADDRESS.toLowerCase();
+    const dbOwner = collection.owner ? String(collection.owner).toLowerCase() : null;
+    const hasPrice = Number(collection.priceETH ?? collection.price ?? 0) > 0;
+
+    const isPlatformOwned =
+      !dbOwner ||
+      dbOwner === "admin" ||
+      dbOwner === platform ||
+      (onChainOwner && onChainOwner === platform);
+
+    const isListed =
+      listingData?.active === true ||
+      collection.listed === true ||
+      hasPrice;
+
+    return { isListed, isPlatformOwned };
+  })();
 
   const getButtonAction = () => {
-    if (loading) return { text: `⏳ ${t("buyNfa.marketplace.processing", "Processing...")}`, disabled: true };
+    const disabled = (text) => ({ text, disabled: true });
+    const action = (text, fn) => ({ text, action: fn });
 
-    if (collection.isDummy) {
-      return { text: t("buyNfa.marketplace.dummyNotForSale", "Sample Preview — Not Available for Purchase"), disabled: true };
+    if (loading) return disabled(`⏳ ${t("buyNfa.marketplace.processing", "Processing...")}`);
+    if (collection.isDummy)
+      return disabled(t("buyNfa.marketplace.dummyNotForSale", "Sample Preview — Not Available for Purchase"));
+    if (!isAnyConnected)
+      return action(t("buyNfa.marketplace.connectWallet", "Connect Wallet"),
+        () => { if (openConnectModal) openConnectModal(); });
+    if (!ownershipChecked)
+      return disabled(`⏳ ${t("buyNfa.marketplace.checking", "Checking...")}`);
+
+    if (isOwner) {
+      return itemStatus.isListed
+        ? disabled(t("buyNfa.marketplace.yourListed", "Your {{type}} (Listed)", { type: assetType }))
+        : action(`📝 ${t("buyNfa.marketplace.listNow", "List Now")}`, handleCreateListing);
     }
 
-    if (!isAnyConnected) {
-      return {
-        text: `${t("buyNfa.marketplace.connectWallet", "Connect Wallet")}`,
-        action: () => { if (openConnectModal) openConnectModal(); },
-      };
+    if (itemStatus.isListed || itemStatus.isPlatformOwned) {
+      return action(t("buyNfa.marketplace.buyNow", "Buy Now"), () => setShowPayModal(true));
     }
 
-    if (!isOwner && (listingData?.active || isPlatformOwned)) {
-      return {
-        text: t("buyNfa.marketplace.buyNow", "Buy Now"),
-        action: () => setShowPayModal(true),
-      };
-    }
-
-    if (isOwner && !listingData?.active && !collection.listed) {
-      return {
-        text: `📝 ${t("buyNfa.marketplace.listNow", "List Now")}`,
-        action: handleCreateListing,
-      };
-    }
-
-    if (isOwner && (listingData?.active || collection.listed)) {
-      return {
-        text: `${t("buyNfa.marketplace.yourListed", "Your {{type}} (Listed)", { type: assetType })}`,
-        disabled: true,
-      };
-    }
-
-    return { text: ` ${t("buyNfa.marketplace.notAvailable", "Not Available")}`, disabled: true };
+    return disabled(` ${t("buyNfa.marketplace.notAvailable", "Not Available")}`);
   };
 
   const buttonConfig = getButtonAction();
 
-  /* ========================== PLACE BID ========================== */
   const handlePlaceBid = async () => {
     if (!isAnyConnected || !activeAddress) return toast.error("Connect your wallet first");
     if (!user?.id) return toast.error("Login required to bid");
@@ -1336,7 +1172,6 @@ function Buy1() {
     } finally { setBidLoading(false); }
   };
 
-  /* ====================== TIME REMAINING HELPER ====================== */
   const timeRemaining = (endTime) => {
     const diff = new Date(endTime) - Date.now();
     if (diff <= 0) return "Ended";
@@ -1346,13 +1181,11 @@ function Buy1() {
     return `${h}h ${m}m remaining`;
   };
 
-  /* ================================== UI ================================== */
   if (!collection) return null;
 
   return (
     <div className="text-white px-4 sm:px-6 lg:px-12 xl:px-16 pb-8 max-w-6xl mx-auto pt-6 w-full">
 
-      {/* ── Payment Method Picker ── */}
       {showPayModal && (
         <div
           className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center bg-black/70 backdrop-blur-sm px-3 pb-3 sm:pb-0"
@@ -1399,7 +1232,6 @@ function Buy1() {
         </div>
       )}
 
-      {/* ── Insufficient USDC Modal ── */}
       {fundModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
           <div className="bg-[#0f0f2a] border border-white/10 rounded-2xl p-6 max-w-sm w-full shadow-2xl">
@@ -1409,14 +1241,12 @@ function Buy1() {
               <span className="text-white font-semibold">{fundModal.have} USDC</span>.
             </p>
             <div className="flex flex-col gap-3">
-              {/* Primary: pay with card — no USDC needed */}
               <button
                 onClick={() => { setFundModal(null); handlePaymentCard(); }}
                 className="w-full bg-[#002AA8] hover:bg-[#003BD4] transition-colors text-white font-semibold py-2.5 rounded-lg text-sm"
               >
                 Bayar dengan Card (Tanpa USDC)
               </button>
-              {/* Secondary: top up USDC via Transak (mainnet only) */}
               {BASE_CHAIN_ID !== 84532 && (
                 <button
                   onClick={() => {
@@ -1436,7 +1266,6 @@ function Buy1() {
         </div>
       )}
 
-      {/* ── No ETH Gas Modal ── */}
       {gasModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
           <div className="bg-[#0f0f2a] border border-white/10 rounded-2xl p-6 max-w-sm w-full shadow-2xl">
@@ -1480,7 +1309,6 @@ function Buy1() {
         </div>
       )}
 
-      {/* ── Stripe Card Payment Modal ── */}
       {stripeModal && stripePromise && (
         <Elements stripe={stripePromise} options={{ clientSecret: stripeModal.clientSecret, appearance: { theme: "night" }, paymentMethodOrder: ["card"] }}>
           <StripeNFTCheckoutForm
@@ -1504,7 +1332,6 @@ function Buy1() {
                   setTransferFailed({ paymentIntentId: paymentIntent.id, error: res.data?.error });
                 }
               } catch (err) {
-                console.error("⚠️ [Stripe] finalize error:", err.message);
                 setTransferFailed({ paymentIntentId: paymentIntent.id, error: err.message });
               }
             }}
@@ -1512,7 +1339,6 @@ function Buy1() {
         </Elements>
       )}
 
-      {/* ── Breadcrumb / Tabs ── */}
       <div className="flex items-end gap-6 mt-8 mb-8 border-b border-white/10 flex-wrap">
         <button
           onClick={() => navigate("/market-place", { state: { restoreScrollY: marketplaceScrollY ?? 0 } })}
@@ -1532,7 +1358,6 @@ function Buy1() {
         </button>
         <div className="pb-3 w-px h-4 bg-white/10 self-center mb-0.5" />
 
-        {/* NFT Detail label — clicking goes to marketplace tab */}
         <button
           onClick={() => setActiveTab("marketplace")}
           className="pb-3 text-sm font-medium transition-colors"
@@ -1543,7 +1368,6 @@ function Buy1() {
           {isOwner ? t("buyNfa.nav.detail", "{{type}} Detail", { type: assetType }) : t("buyNfa.nav.buy", "Buy {{type}}", { type: assetType })}
         </button>
 
-        {/* Offers tab */}
         <button
           onClick={() => setShowOffers(true)}
           className="pb-3 text-sm font-medium text-white/40 hover:text-white transition-colors flex items-center gap-1.5"
@@ -1559,7 +1383,6 @@ function Buy1() {
           )}
         </button>
 
-        {/* Marketplace / Auction / Trade — in-page tabs */}
         <div className="pb-3 w-px h-4 bg-white/10 self-center mb-0.5" />
         <button
           onClick={() => handleTabChange("marketplace")}
@@ -1590,10 +1413,8 @@ function Buy1() {
         </button>
       </div>
 
-      {/* ── Main Content ── */}
       <div className="flex flex-col md:flex-row gap-8 lg:gap-10 items-stretch">
 
-        {/* Left — Image (always visible) */}
         <div className="w-full md:w-[420px] lg:w-[520px] xl:w-[580px] shrink-0 relative group">
           <img
             src={collection?.image ? getImageUrl(collection.image) : overview1}
@@ -1602,7 +1423,6 @@ function Buy1() {
             style={{ background: "rgba(13,22,50,0.8)" }}
             onError={(e) => { e.target.src = overview1; }}
           />
-          {/* Zoom button */}
           <button
             onClick={() => setShowZoom(true)}
             className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center w-9 h-9 rounded-full text-white/80 hover:text-white"
@@ -1613,7 +1433,6 @@ function Buy1() {
           </button>
         </div>
 
-        {/* Image Lightbox */}
         {showZoom && (
           <div
             className="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-sm px-4"
@@ -1637,15 +1456,11 @@ function Buy1() {
           </div>
         )}
 
-        {/* Right — Tab panel */}
         <div className="flex-1 min-w-0 flex flex-col gap-4">
 
-          {/* ── Marketplace Panel ── */}
           {activeTab === "marketplace" && <>
 
-            {/* Badges */}
             <div className="flex items-center gap-2 flex-wrap">
-              {/* Asset type badge */}
               {(() => {
                 const aType = collection.assetType || (collection.isNFA ? "NFA" : "NFT"); // NFC always has assetType set
                 const cfg = {
@@ -1672,7 +1487,6 @@ function Buy1() {
                   {t("buyNfa.marketplace.youOwn", "You Own This")}
                 </span>
               )}
-              {/* Edition count badge */}
               {(collection?.maxSupply || 1) > 1 && (
                 <span className="px-2.5 py-1 rounded-full text-xs font-semibold"
                   style={{ background: "#071a2e", color: "#67e8f9", border: "1px solid rgba(6,182,212,0.65)" }}>
@@ -1681,7 +1495,6 @@ function Buy1() {
               )}
             </div>
 
-            {/* Name + meta */}
             <div>
               <h1 className="text-3xl font-bold text-white leading-tight">{collection?.name}</h1>
               <div className="flex items-center gap-3 mt-1.5 flex-wrap">
@@ -1706,7 +1519,6 @@ function Buy1() {
               </div>
             </div>
 
-            {/* Description */}
             <div
               className="rounded-xl p-4 min-h-[80px]"
               style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}
@@ -1718,12 +1530,10 @@ function Buy1() {
               </p>
             </div>
 
-            {/* Price Card */}
             <div
               className="rounded-2xl p-5 flex flex-col gap-4"
               style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
             >
-              {/* Price row */}
               <div>
                 <p className="text-white/40 text-xs font-semibold uppercase tracking-widest mb-1">{t("buyNfa.marketplace.price", "Price")}</p>
 
@@ -1744,7 +1554,6 @@ function Buy1() {
                 )}
               </div>
 
-              {/* Min Buyback + Reserve Price (NFA / NFC only) */}
               {(() => {
                 const aType = collection.assetType || (collection.isNFA ? "NFA" : "NFT"); // NFC always has assetType set
                 const minBB = collection.minimumBuybackUSD;
@@ -1774,8 +1583,6 @@ function Buy1() {
                 return null;
               })()}
 
-
-              {/* Embedded wallet display */}
               {isEmailWalletConnected && emailWalletAddress && (
                 <div
                   className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl p-3 cursor-pointer hover:bg-white/10 transition"
@@ -1801,13 +1608,11 @@ function Buy1() {
                 </div>
               )}
 
-              {/* Network info */}
               <div className="flex items-center gap-2 text-[11px] text-white/30 -mt-1">
                 <div className="w-2 h-2 rounded-full bg-green-400 flex-shrink-0" />
                 <span>{t("buyNfa.marketplace.networkNote", "USDC on Base · Base ETH required for gas (wallet payments)")}</span>
               </div>
 
-              {/* Action button */}
               <button
                 onClick={() => {
                   if (buttonConfig.disabled) return;
@@ -1825,7 +1630,6 @@ function Buy1() {
                 {buttonConfig.text}
               </button>
 
-              {/* Make Offer — only for non-owners */}
               {!isOwner && (
                 <button
                   onClick={() => {
@@ -1841,11 +1645,9 @@ function Buy1() {
 
           </>}
 
-          {/* ── Auction Panel ── */}
           {activeTab === "auction" && (
             <div className="flex flex-col gap-4">
 
-              {/* Item header */}
               <div>
                 <h1 className="text-3xl font-bold text-white leading-tight">{collection?.name}</h1>
                 <div className="flex items-center gap-3 mt-1.5 flex-wrap">
@@ -1863,7 +1665,6 @@ function Buy1() {
                 </div>
               </div>
 
-              {/* Description */}
               <div className="rounded-xl p-4"
                 style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
                 <p className="text-white/50 text-sm leading-relaxed">
@@ -1871,7 +1672,6 @@ function Buy1() {
                 </p>
               </div>
 
-              {/* Auction content */}
               {auctionInfoLoading ? (
                 <div className="rounded-2xl p-10 flex flex-col items-center gap-3"
                   style={{ background: "rgba(251,191,36,0.04)", border: "1px solid rgba(251,191,36,0.15)" }}>
@@ -1883,7 +1683,6 @@ function Buy1() {
                 <div className="rounded-2xl p-5 flex flex-col gap-5"
                   style={{ background: "rgba(251,191,36,0.04)", border: "1px solid rgba(251,191,36,0.2)" }}>
 
-                  {/* Status row */}
                   <div className="flex items-center justify-between flex-wrap gap-2">
                     <div className="flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
@@ -1896,7 +1695,6 @@ function Buy1() {
                     )}
                   </div>
 
-                  {/* Price grid */}
                   <div className="grid grid-cols-2 gap-3">
                     <div className="rounded-xl p-3 flex flex-col gap-0.5"
                       style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
@@ -1929,7 +1727,6 @@ function Buy1() {
                     )}
                   </div>
 
-                  {/* Bid history summary */}
                   {auctionInfo.bidHistory?.length > 0 && (
                     <div className="rounded-xl overflow-hidden"
                       style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
@@ -1949,7 +1746,6 @@ function Buy1() {
                     </div>
                   )}
 
-                  {/* Bid form — non-owners only */}
                   {!isOwner && (
                     <div className="flex flex-col gap-3 pt-1 border-t border-white/08">
                       <p className="text-white/40 text-xs">
@@ -2015,7 +1811,6 @@ function Buy1() {
                     </div>
                   )}
 
-                  {/* Owner view */}
                   {isOwner && (
                     <div className="pt-2 border-t border-white/08 flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-amber-400" />
@@ -2023,7 +1818,6 @@ function Buy1() {
                     </div>
                   )}
 
-                  {/* End time footer */}
                   {auctionInfo.endTime && (
                     <p className="text-white/25 text-[11px] text-right">
                       Ends {new Date(auctionInfo.endTime).toLocaleString()}
@@ -2032,7 +1826,6 @@ function Buy1() {
                 </div>
 
               ) : (
-                /* No auction empty state */
                 <div className="rounded-2xl p-10 flex flex-col items-center gap-3 text-center"
                   style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
                   <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-1"
@@ -2050,11 +1843,9 @@ function Buy1() {
             </div>
           )}
 
-          {/* ── Trade Panel ── */}
           {activeTab === "trade" && (
             <div className="flex flex-col gap-4">
 
-              {/* Item header */}
               <div>
                 <h1 className="text-3xl font-bold text-white leading-tight">{collection?.name}</h1>
                 <div className="flex items-center gap-3 mt-1.5 flex-wrap">
@@ -2072,7 +1863,6 @@ function Buy1() {
                 </div>
               </div>
 
-              {/* Description */}
               <div className="rounded-xl p-4"
                 style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
                 <p className="text-white/50 text-sm leading-relaxed">
@@ -2080,7 +1870,6 @@ function Buy1() {
                 </p>
               </div>
 
-              {/* Trade listings */}
               {tradeListingsLoading ? (
                 <div className="rounded-2xl p-10 flex flex-col items-center gap-3"
                   style={{ background: "rgba(0,80,255,0.04)", border: "1px solid rgba(0,80,255,0.15)" }}>
@@ -2097,7 +1886,6 @@ function Buy1() {
                     <div key={trade._id} className="rounded-xl p-4 flex flex-col gap-3"
                       style={{ background: "rgba(0,80,255,0.05)", border: "1px solid rgba(0,80,255,0.2)" }}>
 
-                      {/* Trade exchange row */}
                       <div className="flex items-center gap-3 flex-wrap">
                         <div className="flex-1 min-w-0 rounded-lg px-3 py-2"
                           style={{ background: "rgba(74,222,128,0.07)", border: "1px solid rgba(74,222,128,0.15)" }}>
@@ -2118,12 +1906,10 @@ function Buy1() {
                         </div>
                       </div>
 
-                      {/* Description */}
                       {trade.description && (
                         <p className="text-white/35 text-xs leading-relaxed px-1">{trade.description}</p>
                       )}
 
-                      {/* Footer: poster + action */}
                       <div className="flex items-center justify-between pt-1 border-t border-white/06">
                         <span className="text-white/30 text-xs">
                           {trade.posterName ? `${t("buyNfa.trade.by", "By")} ${trade.posterName}` : trade.posterWallet ? `${trade.posterWallet.substring(0, 6)}...${trade.posterWallet.substring(38)}` : ""}
@@ -2145,7 +1931,6 @@ function Buy1() {
                 </div>
 
               ) : (
-                /* No trades empty state */
                 <div className="rounded-2xl p-10 flex flex-col items-center gap-3 text-center"
                   style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
                   <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-1"
@@ -2166,7 +1951,6 @@ function Buy1() {
         </div>
       </div>
 
-      {/* ── Confirmation Modal 1 ── */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4"
@@ -2216,7 +2000,6 @@ function Buy1() {
         </div>
       )}
 
-      {/* ── Confirmation Modal 2 ── */}
       {isSecondOpen && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4"
@@ -2290,7 +2073,6 @@ function Buy1() {
         </div>
       )}
 
-      {/* ── Offers Modal ── */}
       {showOffers && (
         <div
           className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center px-4"
@@ -2367,7 +2149,6 @@ function Buy1() {
                             {t("buyNfa.offers.cancel", "Cancel")}
                           </button>
                         ) : isMyOffer && offer.requestStatus === "accepted" ? (
-                          // Seller accepted — buyer completes purchase via card
                           <div className="flex flex-col gap-1 items-start">
                             {offer.acceptDeadlineAt && (() => {
                               const diff = new Date(offer.acceptDeadlineAt) - Date.now();
@@ -2434,10 +2215,8 @@ function Buy1() {
         </div>
       )}
 
-      {/* ── Price History Chart ── */}
       <PriceHistory subId={collection?._id} />
 
-      {/* ── Purchase Success Modal ── */}
       {purchaseSuccess && (
         <div
           className="fixed inset-0 z-[110] flex items-center justify-center bg-black/75 backdrop-blur-sm px-4"
@@ -2447,7 +2226,6 @@ function Buy1() {
             className="bg-[#0f0f2a] border border-white/10 rounded-2xl p-8 max-w-sm w-full shadow-2xl flex flex-col items-center gap-5 text-center"
             style={{ animation: "scaleIn 0.25s ease" }}
           >
-            {/* Animated check */}
             <div
               className="w-20 h-20 rounded-full flex items-center justify-center"
               style={{ background: "rgba(74,222,128,0.12)", border: "2px solid rgba(74,222,128,0.4)" }}
@@ -2499,7 +2277,6 @@ function Buy1() {
         </div>
       )}
 
-      {/* ── Transfer Failed Modal ── */}
       {transferFailed && (
         <div
           className="fixed inset-0 z-[110] flex items-center justify-center bg-black/75 backdrop-blur-sm px-4"
@@ -2509,7 +2286,6 @@ function Buy1() {
             className="bg-[#0f0f2a] border border-red-500/30 rounded-2xl p-8 max-w-sm w-full shadow-2xl flex flex-col items-center gap-5 text-center"
             style={{ animation: "scaleIn 0.25s ease" }}
           >
-            {/* Warning icon */}
             <div
               className="w-20 h-20 rounded-full flex items-center justify-center"
               style={{ background: "rgba(239,68,68,0.1)", border: "2px solid rgba(239,68,68,0.35)" }}

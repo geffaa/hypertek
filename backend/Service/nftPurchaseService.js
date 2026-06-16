@@ -1,6 +1,7 @@
 import NFTSystem from "../Models/NFTSystem.js";
 import Artist from "../Models/Artist.js";
 import Activity from "../Models/ActivityModel.js";
+import MarketListing from "../Models/MarketListingModel.js";
 import { getBlockchain, ethers } from "./blockchain.js";
 import { dispatchRoyalty } from "../services/RoyaltyService.js";
 import { cancelSiblingListings } from "../services/cancelSiblingListings.js";
@@ -73,6 +74,10 @@ export async function finalizeNFAPurchase({
   // 2. Mint if not already minted
   let tokenId = subCollection.tokenId;
   let receiptHash = txHash;
+  // Edition (maxSupply > 1) templates are never minted/owned themselves — each
+  // buyer gets their own freshly-minted token (see project edition model).
+  const isEdition = (subCollection.maxSupply || 1) > 1;
+  let mintedTokenURI = subCollection.tokenURI || null;
 
   // Resolve artist/creator wallet before minting (used in mint call below)
   let creatorWallet = "admin";
@@ -144,9 +149,13 @@ export async function finalizeNFAPurchase({
     const markTx = await nftContract.markAsSold(tokenId, { nonce: currentNonce + 2 });
     await markTx.wait();
 
-    // Update sub-collection props
-    subCollection.tokenId = tokenId;
-    subCollection.tokenURI = tokenURI;
+    // Update sub-collection props — only a single item's template adopts the
+    // tokenId. Edition templates stay unminted (the buyer copy carries it).
+    mintedTokenURI = tokenURI;
+    if (!isEdition) {
+      subCollection.tokenId = tokenId;
+      subCollection.tokenURI = tokenURI;
+    }
   } else {
     // If already minted, ensure ownership transfer on chain if needed?
     // Usually for secondary sales, the Marketplace handles this on-chain.
@@ -272,15 +281,57 @@ export async function finalizeNFAPurchase({
     createdAt: new Date(),
   };
 
-  if (!subCollection.salesHistory) subCollection.salesHistory = [];
-  subCollection.salesHistory.push(saleRecord);
+  if (isEdition) {
+    // Edition: template keeps selling — only move the supply counter and give
+    // the buyer their own owned copy (so it appears in their profile).
+    subCollection.currentSupply = (subCollection.currentSupply || 0) + 1;
+    subCollection.isFirstSale = false;
 
-  subCollection.owner = buyerWallet.toLowerCase();
-  subCollection.seller = null; // Clear listing info
-  subCollection.buyer = null;
-  subCollection.listed = false;
-  subCollection.priceETH = 0;
-  subCollection.isFirstSale = false;
+    const soldOut = subCollection.currentSupply >= (subCollection.maxSupply || 1);
+    if (soldOut) {
+      subCollection.listed = false;
+      subCollection.priceETH = 0;
+    }
+
+    MarketListing.findOneAndUpdate(
+      { subCollectionId: subCollection._id.toString(), status: "active" },
+      {
+        $inc: { quantitySold: 1, quantityRemaining: -1 },
+        ...(soldOut ? { status: "sold" } : {}),
+      },
+    ).catch((e) => console.warn("[Edition purchase] MarketListing sync error:", e.message));
+
+    parent.subCollections.push({
+      name: subCollection.name,
+      symbol: subCollection.symbol,
+      image: subCollection.image,
+      description: subCollection.description,
+      tokenId: tokenId,
+      tokenURI: mintedTokenURI,
+      owner: buyerWallet.toLowerCase(),
+      listed: false,
+      priceETH: 0,
+      isFirstSale: false,
+      assetType: subCollection.assetType,
+      isNFA: subCollection.isNFA,
+      nfaFrame: subCollection.nfaFrame,
+      artistId: subCollection.artistId,
+      maxSupply: 1,
+      currentSupply: 1,
+      salesHistory: [saleRecord],
+    });
+  } else {
+    // Single item: transfer the template to the buyer and delist.
+    if (!subCollection.salesHistory) subCollection.salesHistory = [];
+    subCollection.salesHistory.push(saleRecord);
+
+    subCollection.owner = buyerWallet.toLowerCase();
+    subCollection.seller = null; // Clear listing info
+    subCollection.buyer = null;
+    subCollection.listed = false;
+    subCollection.priceETH = 0;
+    subCollection.isFirstSale = false;
+  }
 
   parent.collection.salesCount = (parent.collection.salesCount || 0) + 1;
 

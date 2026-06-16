@@ -9,43 +9,43 @@ import LazyImage from "../Components/Common/LazyImage";
 import GlowingOrb from "../Components/Common/BgColoring";
 import { useTranslation } from "react-i18next";
 
-import aboutBg   from "../assets/images/aboutpage/about_bg.webp";
-import charImg   from "../assets/images/aboutpage/char.webp";
+import aboutBg from "../assets/images/aboutpage/about_bg.webp";
+import charImg from "../assets/images/aboutpage/char.webp";
 import ourstory1 from "../assets/images/aboutpage/ourstory1.webp";
-import gamePng   from "../assets/images/aboutpage/game.webp";
+import gamePng from "../assets/images/aboutpage/game.webp";
 
 // ── Static visual data (no text) ─────────────────────────────────────────────
 const NFA_CARDS_STATIC = [
-  { Icon: Layers3,      accent: "#38bdf8",  glow: "rgba(56,189,248,0.12)",   border: "rgba(56,189,248,0.35)",  type: "tiers"    },
-  { Icon: Gem,          accent: "#fbbf24",  glow: "rgba(251,191,36,0.10)",   border: "rgba(251,191,36,0.4)",   type: "value"    },
-  { Icon: Network,      accent: "#818cf8",  glow: "rgba(129,140,248,0.10)",  border: "rgba(129,140,248,0.35)", type: "fair"     },
-  { Icon: Rocket,       accent: "#4ade80",  glow: "rgba(74,222,128,0.10)",   border: "rgba(74,222,128,0.35)",  type: "involved" },
+  { Icon: Layers3, accent: "#38bdf8", glow: "rgba(56,189,248,0.12)", border: "rgba(56,189,248,0.35)", type: "tiers" },
+  { Icon: Gem, accent: "#fbbf24", glow: "rgba(251,191,36,0.10)", border: "rgba(251,191,36,0.4)", type: "value" },
+  { Icon: Network, accent: "#818cf8", glow: "rgba(129,140,248,0.10)", border: "rgba(129,140,248,0.35)", type: "fair" },
+  { Icon: Rocket, accent: "#4ade80", glow: "rgba(74,222,128,0.10)", border: "rgba(74,222,128,0.35)", type: "involved" },
 ];
 
 const PHASES_STATIC = [
-  { num: 1, status: "done",   Icon: CheckCircle2, accent: "#38bdf8",              bg: "rgba(56,189,248,0.06)",   border: "rgba(56,189,248,0.3)"   },
-  { num: 2, status: "active", Icon: Zap,          accent: "#fbbf24",              bg: "rgba(251,191,36,0.08)",  border: "rgba(251,191,36,0.5)"   },
-  { num: 3, status: "locked", Icon: Lock,         accent: "rgba(255,255,255,0.22)", bg: "rgba(255,255,255,0.02)", border: "rgba(255,255,255,0.1)" },
-  { num: 4, status: "locked", Icon: Lock,         accent: "rgba(255,255,255,0.22)", bg: "rgba(255,255,255,0.02)", border: "rgba(255,255,255,0.1)" },
-  { num: 5, status: "locked", Icon: Lock,         accent: "rgba(255,255,255,0.22)", bg: "rgba(255,255,255,0.02)", border: "rgba(255,255,255,0.1)" },
-  { num: 6, status: "locked", Icon: Lock,         accent: "rgba(255,255,255,0.22)", bg: "rgba(255,255,255,0.02)", border: "rgba(255,255,255,0.1)" },
+  { num: 1, status: "done", Icon: CheckCircle2, accent: "#38bdf8", bg: "rgba(56,189,248,0.06)", border: "rgba(56,189,248,0.3)" },
+  { num: 2, status: "active", Icon: Zap, accent: "#fbbf24", bg: "rgba(251,191,36,0.08)", border: "rgba(251,191,36,0.5)" },
+  { num: 3, status: "locked", Icon: Lock, accent: "rgba(255,255,255,0.22)", bg: "rgba(255,255,255,0.02)", border: "rgba(255,255,255,0.1)" },
+  { num: 4, status: "locked", Icon: Lock, accent: "rgba(255,255,255,0.22)", bg: "rgba(255,255,255,0.02)", border: "rgba(255,255,255,0.1)" },
+  { num: 5, status: "locked", Icon: Lock, accent: "rgba(255,255,255,0.22)", bg: "rgba(255,255,255,0.02)", border: "rgba(255,255,255,0.1)" },
+  { num: 6, status: "locked", Icon: Lock, accent: "rgba(255,255,255,0.22)", bg: "rgba(255,255,255,0.02)", border: "rgba(255,255,255,0.1)" },
 ];
 
 const GAMES_STATIC = [
-  { img: "/racing3.webp",       accent: "#f59e0b", glow: "rgba(245,158,11,0.35)",  mode: "racing"   },
-  { img: "/quest1.webp",        accent: "#22c55e", glow: "rgba(34,197,94,0.35)",   mode: "quest"    },
-  { img: "/overlord_panel.webp",accent: "#a78bfa", glow: "rgba(167,139,250,0.35)", mode: "overlord" },
+  { img: "/racing3.webp", accent: "#f59e0b", glow: "rgba(245,158,11,0.35)", mode: "racing" },
+  { img: "/quest1.webp", accent: "#22c55e", glow: "rgba(34,197,94,0.35)", mode: "quest" },
+  { img: "/overlord_panel.webp", accent: "#a78bfa", glow: "rgba(167,139,250,0.35)", mode: "overlord" },
 ];
 
 const WEB3_CARD_ACCENTS = [
-  { accent: "#22c55e", bg: "rgba(34,197,94,0.04)",    border: "rgba(34,197,94,0.18)",   borderTop: "rgba(34,197,94,0.55)",   iconBg: "rgba(34,197,94,0.12)",   iconBorder: "rgba(34,197,94,0.3)"  },
-  { accent: "#38bdf8", bg: "rgba(56,189,248,0.05)",   border: "rgba(56,189,248,0.22)",  borderTop: "rgba(56,189,248,0.55)",  iconBg: "rgba(56,189,248,0.10)",  iconBorder: "rgba(56,189,248,0.35)" },
-  { accent: "#a78bfa", bg: "rgba(167,139,250,0.04)",  border: "rgba(167,139,250,0.18)", borderTop: "rgba(167,139,250,0.55)", iconBg: "rgba(167,139,250,0.12)", iconBorder: "rgba(167,139,250,0.3)" },
+  { accent: "#22c55e", bg: "rgba(34,197,94,0.04)", border: "rgba(34,197,94,0.18)", borderTop: "rgba(34,197,94,0.55)", iconBg: "rgba(34,197,94,0.12)", iconBorder: "rgba(34,197,94,0.3)" },
+  { accent: "#38bdf8", bg: "rgba(56,189,248,0.05)", border: "rgba(56,189,248,0.22)", borderTop: "rgba(56,189,248,0.55)", iconBg: "rgba(56,189,248,0.10)", iconBorder: "rgba(56,189,248,0.35)" },
+  { accent: "#a78bfa", bg: "rgba(167,139,250,0.04)", border: "rgba(167,139,250,0.18)", borderTop: "rgba(167,139,250,0.55)", iconBg: "rgba(167,139,250,0.12)", iconBorder: "rgba(167,139,250,0.3)" },
 ];
 
 const GAME_BADGE_ACCENTS = [
-  { accent: "#f59e0b", glow: "rgba(245,158,11,0.3)"  },
-  { accent: "#22c55e", glow: "rgba(34,197,94,0.3)"   },
+  { accent: "#f59e0b", glow: "rgba(245,158,11,0.3)" },
+  { accent: "#22c55e", glow: "rgba(34,197,94,0.3)" },
   { accent: "#a78bfa", glow: "rgba(167,139,250,0.3)" },
 ];
 
@@ -71,9 +71,9 @@ const BTN_SECONDARY = {
 };
 
 // ── Motion ────────────────────────────────────────────────────────────────────
-const fadeUp    = (delay = 0) => ({ hidden: { opacity: 0, y: 28 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay, ease: "easeOut" } } });
-const fadeLeft  = { hidden: { opacity: 0, x: -36 }, visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: "easeOut" } } };
-const fadeRight = { hidden: { opacity: 0, x:  36 }, visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: "easeOut" } } };
+const fadeUp = (delay = 0) => ({ hidden: { opacity: 0, y: 28 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay, ease: "easeOut" } } });
+const fadeLeft = { hidden: { opacity: 0, x: -36 }, visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: "easeOut" } } };
+const fadeRight = { hidden: { opacity: 0, x: 36 }, visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: "easeOut" } } };
 
 function SectionLabel({ number, label }) {
   return (
@@ -113,41 +113,41 @@ function About({ isPreview = false }) {
   }, [location.state?.scrollTo]);
   const top = cms.about_top || {};
 
-  const heroHeading  = t("aboutPage.heroHeading") || top.heading;
-  const bgImage      = top.bg_image   ? getImageUrl(top.bg_image)   : aboutBg;
-  const charImage    = top.char_image ? getImageUrl(top.char_image) : charImg;
+  const heroHeading = t("aboutPage.heroHeading") || top.heading;
+  const bgImage = top.bg_image ? getImageUrl(top.bg_image) : aboutBg;
+  const charImage = top.char_image ? getImageUrl(top.char_image) : charImg;
 
 
-  const subtitle   = t("aboutPage.subtitle",              { returnObjects: true });
-  const stats      = t("aboutPage.stats",                 { returnObjects: true });
-  const sec01      = t("aboutPage.section01",             { returnObjects: true }) || {};
-  const sec02      = t("aboutPage.section02",             { returnObjects: true }) || {};
-  const sec03      = t("aboutPage.section03",             { returnObjects: true }) || {};
-  const sec04      = t("aboutPage.section04",             { returnObjects: true }) || {};
-  const sec05      = t("aboutPage.section05",             { returnObjects: true }) || {};
-  const sec06      = t("aboutPage.section06",             { returnObjects: true }) || {};
-  const closing    = t("aboutPage.closing",               { returnObjects: true }) || {};
+  const subtitle = t("aboutPage.subtitle", { returnObjects: true });
+  const stats = t("aboutPage.stats", { returnObjects: true });
+  const sec01 = t("aboutPage.section01", { returnObjects: true }) || {};
+  const sec02 = t("aboutPage.section02", { returnObjects: true }) || {};
+  const sec03 = t("aboutPage.section03", { returnObjects: true }) || {};
+  const sec04 = t("aboutPage.section04", { returnObjects: true }) || {};
+  const sec05 = t("aboutPage.section05", { returnObjects: true }) || {};
+  const sec06 = t("aboutPage.section06", { returnObjects: true }) || {};
+  const closing = t("aboutPage.closing", { returnObjects: true }) || {};
 
-  const subtitleArr  = Array.isArray(subtitle) ? subtitle : [];
-  const statsArr     = Array.isArray(stats)    ? stats    : [];
-  const sec01Paras   = Array.isArray(sec01.paras) ? sec01.paras : [];
-  const sec01Games   = Array.isArray(sec01.games) ? sec01.games : [];
-  const sec03Games   = Array.isArray(sec03.games) ? sec03.games : [];
-  const sec04Cards   = Array.isArray(sec04.cards) ? sec04.cards : [];
-  const sec05Phases  = Array.isArray(sec05.phases) ? sec05.phases : [];
-  const sec05Help    = Array.isArray(sec05.helpItems) ? sec05.helpItems : [];
-  const sec06Cards   = Array.isArray(sec06.cards) ? sec06.cards : [];
-  const visionParas  = Array.isArray(sec02.vision?.paras) ? sec02.vision.paras : [];
+  const subtitleArr = Array.isArray(subtitle) ? subtitle : [];
+  const statsArr = Array.isArray(stats) ? stats : [];
+  const sec01Paras = Array.isArray(sec01.paras) ? sec01.paras : [];
+  const sec01Games = Array.isArray(sec01.games) ? sec01.games : [];
+  const sec03Games = Array.isArray(sec03.games) ? sec03.games : [];
+  const sec04Cards = Array.isArray(sec04.cards) ? sec04.cards : [];
+  const sec05Phases = Array.isArray(sec05.phases) ? sec05.phases : [];
+  const sec05Help = Array.isArray(sec05.helpItems) ? sec05.helpItems : [];
+  const sec06Cards = Array.isArray(sec06.cards) ? sec06.cards : [];
+  const visionParas = Array.isArray(sec02.vision?.paras) ? sec02.vision.paras : [];
   const missionParas = Array.isArray(sec02.mission?.paras) ? sec02.mission.paras : [];
 
   return (
     <div className="relative text-white overflow-hidden" style={{ background: "#060610" }}>
 
-      <GlowingOrb Xaxis={80}   Yaxis={900}  />
+      <GlowingOrb Xaxis={80} Yaxis={900} />
       <GlowingOrb Xaxis={1350} Yaxis={2200} />
-      <GlowingOrb Xaxis={200}  Yaxis={2800} />
+      <GlowingOrb Xaxis={200} Yaxis={2800} />
       <GlowingOrb Xaxis={1200} Yaxis={3600} />
-      <GlowingOrb Xaxis={100}  Yaxis={4400} />
+      <GlowingOrb Xaxis={100} Yaxis={4400} />
 
       {/* ══════════════════════════════════════════════════════
           HERO
@@ -289,11 +289,11 @@ function About({ isPreview = false }) {
           <SectionLabel number="02" label={sec02.label || "Vision & Mission"} />
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
 
           {/* Vision Card */}
           <motion.div
-            className="relative rounded-2xl p-7 flex flex-col gap-4"
+            className="relative rounded-2xl p-7 flex flex-col gap-4 h-full"
             style={{ background: "rgba(56,189,248,0.04)", border: "1px solid rgba(56,189,248,0.18)", borderTop: "3px solid rgba(56,189,248,0.6)" }}
             initial={{ opacity: 0, x: -28 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
           >
@@ -311,18 +311,20 @@ function About({ isPreview = false }) {
                 {sec02.vision?.label || "Vision"}
               </span>
             </div>
-            <p className="text-white/55 text-[12px] italic leading-relaxed"
-              style={{ fontFamily: "Orbitron, sans-serif" }}>
+            <p className="text-white/95 text-[15px] leading-relaxed font-medium pl-4 py-1"
+              style={{ borderLeft: "2px solid rgba(56,189,248,0.55)" }}>
               {sec02.vision?.quote}
             </p>
-            {visionParas.map((p, i) => (
-              <p key={i} className="text-white/70 text-sm leading-[1.9] text-justify">{p}</p>
-            ))}
+            <div className="flex flex-col gap-4">
+              {visionParas.map((p, i) => (
+                <p key={i} className="text-white/80 text-sm leading-[1.9] text-justify">{p}</p>
+              ))}
+            </div>
           </motion.div>
 
           {/* Mission Card */}
           <motion.div
-            className="relative rounded-2xl p-7 flex flex-col gap-4"
+            className="relative rounded-2xl p-7 flex flex-col gap-4 h-full"
             style={{ background: "rgba(167,139,250,0.04)", border: "1px solid rgba(167,139,250,0.18)", borderTop: "3px solid rgba(167,139,250,0.6)" }}
             initial={{ opacity: 0, x: 28 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
           >
@@ -340,13 +342,15 @@ function About({ isPreview = false }) {
                 {sec02.mission?.label || "Mission"}
               </span>
             </div>
-            <p className="text-white/55 text-[12px] italic leading-relaxed"
-              style={{ fontFamily: "Orbitron, sans-serif" }}>
+            <p className="text-white/95 text-[15px] leading-relaxed font-medium pl-4 py-1"
+              style={{ borderLeft: "2px solid rgba(167,139,250,0.55)" }}>
               {sec02.mission?.quote}
             </p>
-            {missionParas.map((p, i) => (
-              <p key={i} className="text-white/70 text-sm leading-[1.9] text-justify">{p}</p>
-            ))}
+            <div className="flex flex-col gap-4">
+              {missionParas.map((p, i) => (
+                <p key={i} className="text-white/80 text-sm leading-[1.9] text-justify">{p}</p>
+              ))}
+            </div>
           </motion.div>
 
         </div>
@@ -710,11 +714,11 @@ function About({ isPreview = false }) {
                 className="px-8 py-3 text-[11px] font-bold uppercase transition-all hover:brightness-110"
                 style={BTN_SECONDARY}
               >
-                {"Try the User Interface"}
+                {"Try the Gaming Interface"}
               </button>
             ) : (
               <Link to="/gaming" className="px-8 py-3 text-[11px] font-bold uppercase transition-all hover:brightness-110" style={BTN_SECONDARY}>
-                {"Try the User Interface"}
+                {"Try the Gaming Interface"}
               </Link>
             )}
           </div>

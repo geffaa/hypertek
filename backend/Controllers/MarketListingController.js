@@ -485,6 +485,7 @@ export const getPublicMarketplaceListings = async (req, res) => {
         supplyMap[String(sub._id)] = {
           maxSupply:     sub.maxSupply     || 1,
           currentSupply: sub.currentSupply || 0,
+          tokenId:       sub.tokenId       || null,
         };
       }
     }
@@ -510,6 +511,8 @@ export const getPublicMarketplaceListings = async (req, res) => {
         owner:          isPlatformOwned ? null : (l.userWallet || null),
         maxSupply:      supply.maxSupply     || 1,
         currentSupply:  supply.currentSupply || 0,
+        listed:         true,
+        tokenId:        supply.tokenId       || null,
       });
     });
 
@@ -541,6 +544,8 @@ export const getPublicMarketplaceListings = async (req, res) => {
           owner:          isPlatformOwned ? null : (sub.owner || null),
           maxSupply:      sub.maxSupply     || 1,
           currentSupply:  sub.currentSupply || 0,
+          listed:         true,
+          tokenId:        sub.tokenId       || null,
         });
       }
     }

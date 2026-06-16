@@ -41,7 +41,7 @@
       "rewards": [
         {
           "title": "In-Game Rewards",
-          "body": "Every race you finish pays out. Win, and the rewards multiply. Race victories unlock premium vehicle components, rare upgrade materials, exclusive crew recruitment tokens, and credits to fund your next build. Sell upgraded vehicles for profit, reinvest in new machines, and watch your racing empire grow with every podium finish."
+          "body": "Every race you finish pays out. Win, and the rewards multiply. Race victories have the potential to unlock premium vehicle components, rare upgrade materials, exclusive crew recruitment tokens, and credits to fund your next build. Sell upgraded vehicles for profit, reinvest in new machines, and watch your racing empire grow with every podium finish."
         },
         {
           "title": "Real Cash Events",
@@ -64,11 +64,11 @@
         },
         {
           "title": "Main Spaceship Upgrades",
-          "body": "Your racing garage is not just a workshop; it is the hangar bay of your personal spaceship. The same resources, credits, and materials you earn on the track can be invested into upgrading your main vessel. Better engines for interplanetary travel, stronger weapons systems for space combat, improved navigation for discovering new racing worlds, and reinforced hulls for surviving hostile encounters during transit. Your spaceship is your home base, your transport, and your battleship, and racing makes it stronger."
+          "body": "Your racing garage is not just a workshop; it is the hangar bay of your personal spaceship. The same resources, credits, and materials you earn on the track can be invested into upgrading your main vessel. Better engines for interplanetary travel, stronger weapons systems for space combat, improved navigation for discovering new racing worlds, and reinforced hulls for surviving hostile encounters during transit. Your spaceship is your home base, your transport, your battleship, and racing makes it stronger."
         },
         {
           "title": "The Upgrade Loop",
-          "body": "Race to earn. Earn to upgrade. Upgrade to win bigger races with greater rewards. Funnel those rewards into both your racing vehicles and your spaceship. The better your ship, the further you travel and the more dangerous and lucrative the circuits become. It is a progression loop that rewards dedication and skill at every level."
+          "body": "Race to earn, earn to upgrade, upgrade to win bigger races with greater rewards. Funnel those rewards into both your racing vehicles and your spaceship. The better your ship, the further you travel and the more dangerous and lucrative the circuits become. It is a progression loop that rewards dedication and skill at every level."
         },
         {
           "title": "Cross-Game Impact",
@@ -95,11 +95,11 @@
         },
         {
           "q": "Can I win real money?",
-          "a": "Yes. Ranked events and tournaments feature real cash prize pools. Qualify through ranked play, compete against similarly skilled opponents, and earn real payouts based on your finishing position. Weekly challenges and seasonal championships run continuously."
+          "a": "Yes. Ranked events and tournaments feature real cash prize pools. Qualify through ranked play, compete against similarly skilled opponents, and earn real payouts based on your finishing position. We intend to run weekly challenges and seasonal championships run continuously."
         },
         {
           "q": "How do race rewards work?",
-          "a": "Every race pays out credits, upgrade materials, and crew tokens. Victories multiply your earnings. Buy vehicles, upgrade them into racing machines, win races, and sell them at a profit to fund further enhancements and spaceship upgrades."
+          "a": "Every race has the potential to pay out credits, upgrade materials, and crew tokens. Victories multiply your earnings. Buy vehicles, upgrade them into racing machines, win races, and sell them at a profit to fund further enhancements and spaceship upgrades."
         },
         {
           "q": "Can I upgrade my main spaceship too?",
@@ -121,7 +121,7 @@
       "subtitle": "Your galaxy. Your rules. Your fortune.",
       "intro": [
         "Hyper Quest is an open-world space adventure where you command your own fully upgradable spaceship, the Quest Racer, across a vast and dangerous galaxy. You left your home civilisation years ago in search of power, wealth, and fame. Now the entire universe is your playground, and every quest you complete brings you closer to galactic dominance.",
-        "But Hyper Quest is not just a game. It is a competitive platform where real cash is on the line. Complete quests, conquer challenges, and walk away with real money in your pocket and or rewards. From quick missions that take minutes to epic multi-day expeditions, every quest pays out. The harder the challenge, the bigger the reward.",
+        "But Hyper Quest is not just a game. It is a competitive platform where real cash is on the line. Complete quests, conquer challenges, and walk away with payouts in real money and or rewards. From quick missions that take minutes to epic multi-day expeditions, every quest pays out. The harder the challenge, the bigger the reward.",
         "Upgrade your spaceship from hull to cockpit. Arm it with devastating weapons systems. Recruit specialists who stack powerful bonuses onto your ship's performance and power level. Mine asteroids, haul dangerous cargo, hunt hidden treasures, kidnap high-value targets, or become a hired gun. How you rule the universe is entirely your choice.",
         "Everything you build in Hyper Quest feeds directly into Hyper Racing and Overlord of the 7 Realms. One universe, seamless progression, unlimited potential. Read on to discover how questing works, what you can earn, and how you and your spaceship become the most feared vessel in the galaxy."
       ],
@@ -132,7 +132,7 @@
         {
           "num": "01",
           "title": "Accept Quests From the Mission Board",
-          "body": "The in-game questing board is your gateway to adventure. Browse available missions ranging from quick cargo runs that take just minutes to epic multi-day expeditions deep into uncharted space. Each quest comes with clear objectives, danger ratings, and reward tiers. Pick the missions that match your playstyle, whether that is hauling dangerous cargo, hunting hidden treasures, mining asteroid fields, or going undercover to recover lost artefacts."
+          "body": "The in-game questing board is your gateway to adventure. Browse available missions ranging from quick cargo runs that take just minutes to epic multi-day expeditions deep into uncharted space. Each quest comes with clear objectives, danger ratings, and reward tiers. Pick the missions that match your playstyle, whether that is hauling dangerous cargo, hunting hidden treasures, mining asteroid fields, or going undercover to recover lost artefacts, kidnap, rescue, or take out high-value targets."
         },
         {
           "num": "02",
@@ -251,7 +251,7 @@
       "intro": [
         "Overlord of the 7 Realms is a tri-level battle strategy game unlike anything else in gaming. You ventured through a portal into a parallel universe and crash-landed on a hostile alien planet. Your ship is wrecked, your systems are failing, and the planet's creatures are already closing in. Survival is just the beginning. Dominance is the goal.",
         "Rebuild your ship from the wreckage up. Clone and train armies in your onboard labs. Tame the planet's wildlife to create devastating mounted cavalry. Then take the fight across three battle dimensions: ground-to-ground combat against monsters and rival players, ground-to-space assaults on orbital or ground targets, and space-to-space warfare aboard the massive Battle Ring that orbits the planet.",
-        "This is not just another strategy game. Overlord features real-time VR interaction, real cash rewards for completing daily events and quests, and fortnightly invasions by the fearsome Hammerongs, the most powerful alien species in existence. Every fortnight, they arrive to strip-mine the planet, and every fortnight, brave players can challenge them for massive bonuses and legendary rewards.",
+        "This is not just another strategy game. Like Hyper Racing and Hyper Quest, Overlord features real-time VR interaction, real cash payouts and or rewards for completing events, quests, and fortnightly invasions by the fearsome Hammerongs, the most powerful alien species in existence. Every fortnight, they arrive to strip-mine the planet, and every fortnight, brave players can challenge them for massive bonuses and legendary rewards.",
         "Upgrade your spaceship, arm it with devastating weapons, recruit specialists who amplify your power level, and forge alliances to control entire regions. Everything you build connects directly to Hyper Racing and Hyper Quest through the shared Hyper Tek ecosystem. One universe, three games, unlimited warfare. Read on to discover how the battle system works and why Overlord changes everything."
       ],
       "calloutLine1": "Survival is Just the Beginning.",
@@ -304,7 +304,7 @@
       "upgrades": [
         {
           "title": "Spaceship Upgrades",
-          "body": "Your crashed ship is where it all begins. Rebuild it system by system, from the engine bay to the command deck. Every component is fully upgradable: hull reinforcement, structural integrity, outer shell composition, shield generators, power systems, and navigation arrays. In Overlord, you build not for speed but for battle. A fully upgraded warship is the foundation of every successful campaign, and the deeper you invest, the more formidable your vessel becomes."
+          "body": "Your crashed ship is where it all begins. Rebuild it system by system, from the engine bay to the command deck. Every component is fully upgradable: hull reinforcement, structural integrity, outer shell composition, shield generators, power systems, and navigation arrays. In Overlord, you build not for speed but for battle. A fully upgraded warship is the foundation of every successful campaign, and the more you develop your ship, the more formidable your vessel becomes."
         },
         {
           "title": "Weapons Systems and Tech Levels",
@@ -312,7 +312,7 @@
         },
         {
           "title": "Recruit Specialists",
-          "body": "Specialists are the force multipliers that separate good players from Overlords. Acquire unique specialists who bring powerful bonuses to your ship's overall performance and power level. Tactical specialists improve troop deployment efficiency, engineering specialists accelerate ship repairs and upgrades, weapons specialists increase damage output across all systems, and intelligence specialists reveal enemy positions and weaknesses. Stack multiple specialists to create devastating synergies that amplify every aspect of your operation."
+          "body": "Specialists are the force multiplier and, combined with skill, are what separates good players from Overlords. Acquire unique specialists who bring powerful bonuses to your ship's overall performance and power level. Tactical specialists improve troop deployment efficiency, engineering specialists accelerate ship repairs and upgrades, weapons specialists increase damage output across all systems, and intelligence specialists reveal enemy positions and weaknesses. Stack multiple specialists to create a devastating concerted effort that amplifies every aspect of your operation. However, non-coiners can find reassurance in the fact that Hyper Tek was created to tackle issues within gaming. While multiple stacking is possible, the fair game mechanics ensure that stacking is not a simple point-for-point system. Instead, it operates on a sliding scale to guarantee that raw power does not overshadow the importance of skill. This game emphasises both power and skill, rather than relying on chance!"
         },
         {
           "title": "Build Your Armies",
@@ -1093,11 +1093,11 @@
         },
         "geodians": {
           "type": "Mutagenic Metamorphic Hybrid",
-          "notes": "The Geodian species are classified as mutagenic, metamorphic hybrids. These remarkable beings possess a striking crystalised lattice exoskeleton that shimmers and refracts light with mesmerising beauty, while their inner core flows with a thermos fluidic substance that fluctuates with thermal energy. Intelligent and highly evolved, Geodians have established intricate cities, showcasing advanced engineering and architectural marvels that often flourish near thermal hot springs or regions of intense heat, where their unique biology thrives. Social in nature, Geodians embrace their communal existence, openly expressing their emotions and sexuality, fostering connections that bind them together. Their diet is versatile, comprising both lush plant life and various forms of meat, reflecting their adaptive nature. The Geodian society is marked by its democratic principles and well-structured systems, ensuring every voice is heard. They hold a deep reverence for light, which dances through their crystal lattice, creating a captivating spectacle that symbolises their spiritual beliefs and unity within the community."
+          "notes": "The Geodian species are classified as mutagenic metamorphic hybrids. These remarkable beings possess a striking crystalised lattice exoskeleton that shimmers and refracts light with mesmerising beauty, while their inner core flows with a fluidic substance that fluctuates with thermal energy. Intelligent and highly evolved, Geodians have established intricate cities, showcasing advanced engineering and architectural marvels that often flourish near thermal hot springs or regions of intense heat, where their unique biology thrives. Social in nature, Geodians embrace their communal existence, openly expressing their emotions and sexuality, fostering connections that bind them together. Their diet is versatile, comprising both lush plant life and various forms of meat, reflecting their adaptive nature. The Geodian society is marked by its democratic principles and well-structured systems, ensuring every voice is heard. They hold a deep reverence for light, which dances through their crystal lattice, creating a captivating spectacle that symbolises their spiritual beliefs and unity within the community."
         },
         "fawnus": {
           "type": "Goat Alien Hybrid",
-          "notes": "The Fawnus species resembles a captivating blend of goat and alien features. Their bodies are covered in coarse, short fur that varies in color, giving them an intriguing appearance that reflects their playful personalities. Inherently mischievous and spirited, Fawnus are known for their love of play, often engaging in activities that showcase their vibrant energy. Their diet is impressively diverse, as they thrive on both meat and plant-based foods, allowing them to adapt in varying environments that support their dynamic lifestyles. Socially, Fawnus are deeply connected, forming tight-knit communities where loyalty holds significant value. Their bonds are fierce, and they display a protective instinct towards both their kin and their territory, making them guardians of the places they inhabit. Culturally, the Fawnus are devout, worshipping an array of gods and religious symbols that are integral to their way of life. They take cues from Spanish culture, revelling in the joy of music and the allure of wealth, particularly gold, which they cherish as a symbol of prosperity. Architecturally, their creations are nothing short of magnificent, showcasing a steampunk style that reflects both their artistic flair and engineering prowess. Grand structures adorned with intricate designs and mechanisms stand as a testament to their creativity and innovation."
+          "notes": "The Fawnus species resembles a captivating blend of goat and alien features. Their bodies are covered in coarse, short hair that varies in color, giving them an intriguing appearance that reflects their playful personalities. Inherently mischievous and spirited, Fawnus are known for their love of play, often engaging in activities that showcase their vibrant energy. Their diet is impressively diverse, as they thrive on both meat and plant-based foods, allowing them to adapt in varying environments that support their dynamic lifestyles. Socially, Fawnus are deeply connected, forming tight-knit communities where loyalty holds significant value. Their bonds are fierce, and they display a protective instinct towards both their kin and their territory, making them guardians of the places they inhabit. Culturally, the Fawnus are devout, worshipping an array of gods and religious symbols that are integral to their way of life. They take cues from Spanish culture, revelling in the joy of music and the allure of wealth, particularly gold, which they cherish as a symbol of prosperity. Architecturally, their creations are nothing short of magnificent, showcasing a steampunk style that reflects both their artistic flair and engineering prowess. Grand structures adorned with intricate designs and mechanisms stand as a testament to their creativity and innovation."
         },
         "mantaquads": {
           "type": "4 Armed Alien Hybrid",
@@ -1105,7 +1105,7 @@
         },
         "dryads": {
           "type": "Tree Alien Hybrid",
-          "notes": "The Dryads are a fascinating and unique species, characterised by their hybrid nature that combines traits of trees and alien beings. This distinctive physiology allows them to thrive in diverse environments, often resembling the flora around them. They have a hive-like mind, which enables them to communicate seamlessly with one another. This collective consciousness fosters a deep sense of unity and cooperation, allowing them to operate as a cohesive group while maintaining an intricate connection to the natural world, and they can sense the health of their surroundings, making them exceptional guardians of nature. Their diet is primarily plant-based, consisting of leaves, fruits, and other botanical materials. However, they occasionally supplement their diet with small quantities of meat, which they acquire with great care and respect for the life they take. In addition to their physical attributes, the Dryads are known for their playful and mischievous behavior. They often engage in light-hearted pranks or games, reflecting their joyful spirit. Their loyalty to one another and their homeland is unwavering, and they will fiercely protect their community and territory when threatened. Spiritually, the Dryads hold a profound belief in an afterlife that is intertwined with the cycles of nature. They revere the natural elements (Earth, Air, Fire, and Water) as divine forces, and they also worship celestial bodies such as the sun and stars, which they perceive as guiding lights in their existence. This deep connection to both nature and the cosmos shapes their culture, rituals, and overall way of life."
+          "notes": "The Dryads are a fascinating and unique species, characterised by their hybrid nature that combines traits from plant and alien lifeforms. This distinctive physiology allows them to thrive in diverse environments, often resembling the flora around them. They have a hive-like mind, which enables them to communicate seamlessly with one another. This collective consciousness fosters a deep sense of unity and cooperation, allowing them to operate as a cohesive group while maintaining an intricate connection to the natural world, and they can sense the health of their surroundings, making them exceptional guardians of nature. Their diet is primarily plant-based, consisting of leaves, fruits, and other botanical materials. However, they occasionally supplement their diet with small quantities of meat, which they acquire with great care and respect for the life they take. In addition to their physical attributes, the Dryads are known for their playful and mischievous behavior. They often engage in light-hearted pranks or games, reflecting their joyful spirit. Their loyalty to one another and their homeland is unwavering, and they will fiercely protect their community and territory when threatened. Spiritually, the Dryads hold a profound belief in an afterlife that is intertwined with the cycles of nature. They revere the natural elements (Earth, Air, Fire, and Water) as divine forces, and they also worship celestial bodies such as the sun and stars, which they perceive as guiding lights in their existence. This deep connection to both nature and the cosmos shapes their culture, rituals, and overall way of life."
         }
       }
     },
