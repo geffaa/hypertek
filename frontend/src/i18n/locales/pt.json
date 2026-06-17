@@ -45,7 +45,7 @@
     }
   },
   "hero": {
-    "headingLine2": "ONDE LENDAS SÃO ESQUECIDAS",
+    "headingLine2": "ONDE LENDAS SÃO FORJADAS",
     "marketplace": "Mercado",
     "downloadGame": "Baixar Jogo",
     "tryUI": "Experimentar UI"
@@ -188,11 +188,15 @@
     }
   },
   "packages": {
-    "badge": "CAMPANHA DE CROWDFUNDING — ESTÁGIO 1",
-    "intro1": "Estamos animados em anunciar o lançamento de nossa campanha de crowdfunding para garantir recursos para a conclusão do revolucionário projeto Hyper Tek! Esta é sua chance de entrar no ecossistema Hyper Tek como participante inicial. Ao comprar diretamente em nossa plataforma, você pode aproveitar uma redução de 10% nos preços!",
-    "intro2": "Todos os itens digitais Não Fungíveis da Hyper Tek são respaldados por recompra mínima garantida, com a maioria oferecendo também substanciais bônus no jogo. Estamos introduzindo uma série de NFAs de edição limitada com os maiores níveis de bônus já oferecidos. Esta oportunidade não se repetirá!",
-    "intro3": "Já arrecadamos mais de US$ 440.000 e buscamos garantir mais US$ 460.000. Este é o seu momento de se juntar a esta iniciativa empolgante. Adquira hoje seus itens ou pacotes de disponibilidade limitada e faça parte do emocionante Ecossistema Hyper Tek.",
-    "intro4": "Lembre-se de se inscrever na lista de desejos e nos siga nas redes sociais para ficar por dentro! Aja agora, pois o tempo é precioso!",
+    "badge": "NFAS DE EDIÇÃO LIMITADA E PACOTES DE JOGO COM DESCONTO – AJA AGORA!",
+    "intro1": "Investimos estrategicamente mais de US$ 440.000 de financiamento pessoal e agora buscamos mais US$ 395.000 para concretizar este projeto inovador. Nosso objetivo é revolucionar os jogos ao proporcionar experiências emocionantes que enfrentam alguns dos desafios mais urgentes do setor. Com várias iniciativas de financiamento disponíveis, esta é a sua chance de fazer parte de algo verdadeiramente transformador.",
+    "intro2": "Antes de mais nada, estamos lançando vários itens Non-Fungible Asset (NFA) de Stage 1 extremamente raros, cada um oferecendo bônus dentro do jogo incomparáveis que NUNCA serão repetidos. Assim que esses itens se esgotarem ou atingirmos nossa meta de financiamento, quaisquer NFAs de edição limitada não cunhados restantes serão removidos do nosso site para sempre. Esta é uma garantia inabalável!",
+    "intro3": "Lembre-se, todo item Hyper Tek Non-Fungible Digital vem com uma recompra mínima garantida. Esses NFAs de edição limitada, que apresentam bônus significativos dentro do jogo—dos quais os mais altos nunca serão repetidos—aprimorarão sua experiência de jogo e a levarão a novos patamares.",
+    "intro4": "Se você é apaixonado pelo que viu ou leu sobre o Hyper Tek Project e quer se juntar a nós para remodelar a indústria de jogos, ou se é um investidor astuto em busca de uma oportunidade lucrativa, este é o seu momento. Garanta seus itens de disponibilidade limitada enquanto pode e torne-se parte integrante do próspero Ecossistema Hyper Tek. Não espere—uma vez esgotados, acabaram!",
+    "intro5": "Nossa segunda iniciativa envolve o lançamento de pacotes exclusivos em nosso próprio site, que planejamos listar em uma plataforma de crowdfunding. Ao fazer isso nós mesmos, economizamos cerca de 10% em taxas de crowdfunding e repassamos essa economia diretamente a você com um desconto total de 10%. Esta oferta está disponível por tempo limitado! Assim que listarmos esses pacotes em uma plataforma de crowdfunding como o Kickstarter, o preço com desconto não estará mais disponível.",
+    "keyPointsTitle": "Pontos-chave a lembrar:",
+    "intro6": "O primeiro NFT que lançamos foi vendido por impressionantes US$ 1,47 milhão, sem recompra mínima garantida ou bônus dentro do jogo! Esta é a sua chance de adquirir alguns dos NFTs mais raros do mundo, os Hyper Tek Non-Fungible Assets (HT NFAs), com recompra mínima garantida e os maiores bônus HT dentro do jogo disponíveis hoje. É o sonho de um investidor tornado realidade, mas apenas enquanto durarem os estoques.",
+    "intro7": "Embora a maioria dos jogos afirme oferecer \"Play to Earn\" (P2E), muitas vezes eles apenas oferecem tokens dentro do jogo para negociação. O Hyper Tek Project garante um \"P2E\" real, com mecânicas sólidas dentro do jogo, sustentadas por múltiplos fluxos de recompensa que podem ser convertidos em pagamentos reais em dinheiro. Prepare-se para experimentar o futuro dos jogos conosco!",
     "collectionsLabel": "Coleções",
     "sectionTitle": "Pacotes por Nível de Doação",
     "discount": "Economize 10% do preço listado",

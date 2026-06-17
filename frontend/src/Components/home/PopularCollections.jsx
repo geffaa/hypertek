@@ -605,6 +605,20 @@ function CrowdfundingPackages() {
             <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
               {t("packages.intro4")}
             </p>
+            <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
+              {t("packages.intro5")}
+            </p>
+
+            {/* Key Points subheading */}
+            <h3 className="text-white font-bold text-[14px] lg:text-[15px] mt-1" style={{ fontFamily: "Orbitron,sans-serif", letterSpacing: "0.04em" }}>
+              {t("packages.keyPointsTitle")}
+            </h3>
+            <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
+              {t("packages.intro6")}
+            </p>
+            <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
+              {t("packages.intro7")}
+            </p>
           </div>
 
           {/* ── Divider with section heading ── */}
