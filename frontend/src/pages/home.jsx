@@ -36,7 +36,7 @@ function Home() {
       <Hero />
       <StorySection />
       <News />
-      <PopularCollections />
+      <PopularCollections showPageLink />
       <MarketPlace />
 
     </div>

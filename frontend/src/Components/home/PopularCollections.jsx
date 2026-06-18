@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
@@ -557,7 +558,7 @@ function PackageModal({ pkg, onClose }) {
 }
 
 // ── Main component ─────────────────────────────────────────────────────────────
-function CrowdfundingPackages() {
+function CrowdfundingPackages({ showPageLink = false }) {
   const { t } = useTranslation();
   const [selected, setSelected] = useState(null);
   const [page, setPage] = useState(0);
@@ -725,6 +726,36 @@ function CrowdfundingPackages() {
                 </button>
               </div>
             </div>
+
+            {/* ── Entry CTA → dedicated Crowdfunding page (home only) ── */}
+            {showPageLink && (
+              <Link
+                to="/crowdfunding"
+                onClick={() => window.scrollTo(0, 0)}
+                className="group mt-1 flex items-center justify-between gap-4 rounded-xl px-5 py-4 transition-all duration-200 hover:brightness-125"
+                style={{
+                  background: "linear-gradient(135deg, rgba(56,189,248,0.14) 0%, rgba(56,189,248,0.04) 100%)",
+                  border: "1px solid rgba(56,189,248,0.4)",
+                  borderTop: "2px solid rgba(56,189,248,0.7)",
+                  boxShadow: "0 0 28px rgba(56,189,248,0.1)",
+                }}
+              >
+                <div className="flex flex-col gap-1">
+                  <span className="text-white font-bold text-[14px] sm:text-[15px]" style={{ fontFamily: "Orbitron,sans-serif", letterSpacing: "0.04em" }}>
+                    {t("packages.pageLinkTitle")}
+                  </span>
+                  <span className="text-white/55 text-[12px] leading-snug">
+                    {t("packages.pageLinkSubtitle")}
+                  </span>
+                </div>
+                <span
+                  className="flex items-center gap-2 whitespace-nowrap text-[12px] font-bold uppercase tracking-[0.12em] text-cyan-300 transition-transform duration-200 group-hover:translate-x-1"
+                  style={{ fontFamily: "Orbitron,sans-serif" }}
+                >
+                  {t("packages.pageLinkCta")} <span className="text-base leading-none">→</span>
+                </span>
+              </Link>
+            )}
           </div>
 
         </motion.div>

@@ -39,6 +39,7 @@ function shouldShowSplash() {
 // Route-level lazy loading — each page is only loaded when first visited
 const Home = lazy(() => import("./pages/home"));
 const About = lazy(() => import("./pages/about"));
+const Crowdfunding = lazy(() => import("./pages/Crowdfunding"));
 const Signup = lazy(() => import("./pages/Signup"));
 const Login = lazy(() => import("./pages/Signin"));
 const ForgotPasswor = lazy(() => import("./pages/ForgotPasswor"));
@@ -159,6 +160,7 @@ function AppWrapper() {
             {/* Main Pages */}
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/crowdfunding" element={<Crowdfunding />} />
 
             {/* Auth */}
             <Route path="/signup" element={<Signup />} />
