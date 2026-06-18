@@ -5,6 +5,7 @@ import { CheckCircle2, Zap, Lock } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import GlowingOrb from "../Components/Common/BgColoring";
 import CrowdfundingPackages from "../Components/home/PopularCollections";
+import FeaturedMarketplace from "../Components/home/MarketPlace";
 import gamePng from "../assets/images/aboutpage/game.webp";
 
 // ── Static visual data (text comes from i18n, moved verbatim from the About page) ──
@@ -303,6 +304,11 @@ function Crowdfunding() {
           LIMITED EDITION NFAS & PACKAGES (copied from Home — shared component)
       ══════════════════════════════════════════════════════ */}
       <CrowdfundingPackages />
+
+      {/* ══════════════════════════════════════════════════════
+          FEATURED LIMITED EDITION NFA ITEMS (copied from Home — shared component)
+      ══════════════════════════════════════════════════════ */}
+      <FeaturedMarketplace />
 
       {/* ══════════════════════════════════════════════════════
           CLOSING CTA
