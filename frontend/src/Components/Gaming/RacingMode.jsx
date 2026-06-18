@@ -105,6 +105,21 @@ const UNLOCKED_VEHICLES = [
   },
 ];
 
+/* Persist the selected racer across mount/unmount (leaving + returning to racing). */
+const SELECTED_VEHICLE_KEY = "racing.selectedVehicleIdx";
+function loadSelectedIdx() {
+  try {
+    const raw = window.localStorage.getItem(SELECTED_VEHICLE_KEY);
+    const idx = raw == null ? 0 : parseInt(raw, 10);
+    return Number.isInteger(idx) && idx >= 0 && idx < UNLOCKED_VEHICLES.length ? idx : 0;
+  } catch {
+    return 0;
+  }
+}
+function saveSelectedIdx(idx) {
+  try { window.localStorage.setItem(SELECTED_VEHICLE_KEY, String(idx)); } catch { /* ignore */ }
+}
+
 const LOCKED_VEHICLES = Array.from({ length: 21 }, (_, i) => ({
   id: `locked-${i}`,
   name: [
@@ -251,10 +266,10 @@ function TrackView({ speed }) {
 /* ══════════════════════════════════════════════════════════════════
    VEHICLE SELECTOR POPUP
    ══════════════════════════════════════════════════════════════════ */
-function VehicleSelectorPopup({ onClose, onSelect }) {
+function VehicleSelectorPopup({ onClose, onSelect, currentIdx = 0 }) {
   const { t } = useTranslation();
   const isMobile = useMobileLandscape();
-  const [vehicleIdx, setVehicleIdx] = useState(0);
+  const [vehicleIdx, setVehicleIdx] = useState(currentIdx);
   const [winH, setWinH] = useState(() => window.innerHeight);
   useEffect(() => {
     const onResize = () => setWinH(window.innerHeight);
@@ -693,7 +708,7 @@ function GarageView() {
   const isMobile = useMobileLandscape();
   const [selectorOpen,  setSelectorOpen]  = useState(false);
   const [customizeOpen, setCustomizeOpen] = useState(false);
-  const [vehicleIdx,    setVehicleIdx]    = useState(0);
+  const [vehicleIdx,    setVehicleIdx]    = useState(loadSelectedIdx);
   const [selectedPart,  setSelectedPart]  = useState(null);
   const [spinning,      setSpinning]      = useState(true);
   const [winH, setWinH] = useState(() => window.innerHeight);
@@ -1011,8 +1026,9 @@ function GarageView() {
       {/* ── Selector popup ── */}
       {selectorOpen && (
         <VehicleSelectorPopup
+          currentIdx={vehicleIdx}
           onClose={() => setSelectorOpen(false)}
-          onSelect={(idx) => { setVehicleIdx(idx); setSelectorOpen(false); }}
+          onSelect={(idx) => { setVehicleIdx(idx); saveSelectedIdx(idx); setSelectorOpen(false); }}
         />
       )}
     </div>
