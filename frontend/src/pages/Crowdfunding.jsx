@@ -264,7 +264,7 @@ function Crowdfunding() {
                   initial={{ opacity: 0, y: 22 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.45 }}
-                  viewport={{ once: true, margin: "-60px" }}
+                  viewport={{ once: true, amount: 0.1 }}
                 >
                   {/* Spine column: top connector + node + bottom connector (fills row height) */}
                   <div className="relative flex flex-col items-center flex-shrink-0 w-12 md:w-14">
