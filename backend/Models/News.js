@@ -23,6 +23,11 @@ const newsSchema = new mongoose.Schema(
       default: "active",
     },
 
+    sortOrder: {
+      type: Number,
+      default: 0,
+    },
+
     // Auto-translated versions keyed by locale code (e.g. "ko", "id", "ja")
     translations: {
       type: Map,

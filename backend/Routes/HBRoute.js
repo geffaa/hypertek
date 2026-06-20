@@ -8,6 +8,8 @@ import {
   getHBHistory,
   saveBankDetails,
   getBankDetails,
+  saveDebitCard,
+  getDebitCard,
   createHBTopupIntent,
   topupViaUSDC,
   getHBPlatformStats,
@@ -24,6 +26,8 @@ router.get("/balance", authMiddleware(), getHBBalance);
 router.get("/history", authMiddleware(), getHBHistory);
 router.get("/bank-details", authMiddleware(), getBankDetails);
 router.put("/bank-details", authMiddleware(), saveBankDetails);
+router.get("/debit-card", authMiddleware(), getDebitCard);
+router.put("/debit-card", authMiddleware(), saveDebitCard);
 router.post("/topup/intent", authMiddleware(), createHBTopupIntent);
 router.post("/topup/usdc", authMiddleware(), topupViaUSDC);
 router.get("/admin/stats", authMiddleware(), getHBPlatformStats);

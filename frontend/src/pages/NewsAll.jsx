@@ -27,6 +27,15 @@ const VIDEO_ITEMS = [
     description: "An exclusive look at the Overlord game mode in the Hyper Tek universe.",
     date: "May 2025",
   },
+  {
+    id: "vid-003",
+    src: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/quest_video2.webm",
+    tag: "GAME FOOTAGE",
+    tagColor: "#38bdf8",
+    title: "Hyper Tek — Quest Content Preview",
+    description: "Explore the Hyper Quest game mode in the Hyper Tek universe.",
+    date: "May 2025",
+  },
 ];
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -339,13 +348,6 @@ const AVATAR_FILES = [
   "overlord.webp","team-specialist-major.webp",
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i = 0) => ({
-    opacity: 1, y: 0,
-    transition: { duration: 0.55, delay: i * 0.08, ease: "easeOut" },
-  }),
-};
 
 function formatDate(str, lang) {
   return new Date(str).toLocaleDateString(lang || "en", { year: "numeric", month: "short", day: "numeric" });
@@ -357,13 +359,10 @@ function clip(str, n) {
 
 function NewsCard({ item, i, go, readLabel, lang }) {
   return (
-    <motion.div
+    <div
       className="group cursor-pointer rounded-xl overflow-hidden flex flex-col"
       style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", transition: "border-color 0.3s, box-shadow 0.3s" }}
       onClick={() => go(item)}
-      variants={fadeUp} custom={i}
-      initial="hidden" whileInView="visible"
-      viewport={{ once: true, amount: 0.15 }}
       onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(56,189,248,0.3)"; e.currentTarget.style.boxShadow = "0 0 30px rgba(56,189,248,0.08)"; }}
       onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)"; e.currentTarget.style.boxShadow = "none"; }}
     >
@@ -373,13 +372,11 @@ function NewsCard({ item, i, go, readLabel, lang }) {
         <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(6,6,16,0.6) 0%, transparent 60%)" }} />
       </div>
       <div className="flex flex-col flex-1 p-5 gap-2">
-        <span className="text-[10px] uppercase tracking-widest" style={{ color: "#38bdf8", fontFamily: "Orbitron, sans-serif" }}>
-          {formatDate(item.createdAt, lang)}
-        </span>
+        {/* date hidden until site goes live */}
         <h3 className="font-[Goldman] font-bold text-white text-[15px] leading-snug group-hover:text-[#38bdf8] transition-colors duration-300">
           {clip(item.heading, 65)}
         </h3>
-        <p className="text-white/50 text-[13px] leading-relaxed flex-1">{clip(item.description, 110)}</p>
+        <p className="text-white/50 text-[13px] leading-relaxed flex-1 text-justify">{clip(item.description, 160)}</p>
         <div className="flex items-center gap-1.5 mt-2 text-[#38bdf8]/70 text-[11px] font-bold uppercase tracking-widest" style={{ fontFamily: "Orbitron, sans-serif" }}>
           <span>{readLabel}</span>
           <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
@@ -387,12 +384,71 @@ function NewsCard({ item, i, go, readLabel, lang }) {
           </svg>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
+// ── Shimmer skeleton primitives ──────────────────────────────────────────────
+const shimmerKeyframes = `
+  @keyframes ht-shimmer {
+    0%   { background-position: -600px 0; }
+    100% { background-position:  600px 0; }
+  }
+`;
+
+function SkimBase({ style = {}, className = "" }) {
+  return (
+    <div
+      className={className}
+      style={{
+        background: "linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.09) 50%, rgba(255,255,255,0.04) 75%)",
+        backgroundSize: "600px 100%",
+        animation: "ht-shimmer 1.6s infinite linear",
+        borderRadius: 8,
+        ...style,
+      }}
+    />
+  );
+}
+
+function FeaturedSkeleton() {
+  return (
+    <div
+      className="relative w-full overflow-hidden rounded-2xl mb-12"
+      style={{ height: "clamp(320px,45vw,520px)", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+    >
+      <SkimBase style={{ position: "absolute", inset: 0, borderRadius: 0 }} />
+      <div className="absolute bottom-0 inset-x-0 p-8 md:p-12 flex flex-col gap-3">
+        <SkimBase style={{ width: 80, height: 24 }} />
+        <SkimBase style={{ width: "60%", height: 32 }} />
+        <SkimBase style={{ width: "80%", height: 18 }} />
+        <SkimBase style={{ width: "65%", height: 18 }} />
+      </div>
+    </div>
+  );
+}
+
+function CardSkeleton() {
+  return (
+    <div
+      className="rounded-xl overflow-hidden flex flex-col"
+      style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+    >
+      <SkimBase style={{ aspectRatio: "16/9", borderRadius: 0 }} />
+      <div className="flex flex-col gap-2 p-5">
+        <SkimBase style={{ height: 18, width: "90%" }} />
+        <SkimBase style={{ height: 14, width: "100%" }} />
+        <SkimBase style={{ height: 14, width: "80%" }} />
+        <SkimBase style={{ height: 14, width: "60%", marginTop: 8 }} />
+      </div>
+    </div>
+  );
+}
+// ─────────────────────────────────────────────────────────────────────────────
+
 export default function NewsList() {
   const [news, setNews]       = useState([]);
+  const [loading, setLoading] = useState(true);
   const [activeFaq, setFaq]   = useState(0);
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
@@ -402,10 +458,12 @@ export default function NewsList() {
 
   useEffect(() => {
     const lang = i18n.language || "en";
+    setLoading(true);
     fetch(`${BACKEND_BASE_URL}/api/v1/news/getNews?lang=${lang}`)
       .then(r => r.json())
       .then(d => { if (d.success) setNews(d.data); })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setLoading(false));
   }, [i18n.language]);
 
   const go = (item) => navigate("/more-news", { state: { newsItem: item } });
@@ -420,21 +478,27 @@ export default function NewsList() {
 
   return (
     <div className="min-h-screen text-white relative" style={{ background: "#060610" }}>
+      <style>{shimmerKeyframes}</style>
       <GlowingOrb Xaxis={200}  Yaxis={400} />
       <GlowingOrb Xaxis={1200} Yaxis={900} />
 
-      <div className="relative z-10 max-w-[1280px] mx-auto px-6 md:px-12 xl:px-16 pt-32 pb-24">
+      <div className="relative z-10 max-w-[1280px] mx-auto px-6 md:px-12 xl:px-16 pt-24 pb-24">
 
         {/* ── Page heading ── */}
         <motion.div
-          className="flex items-end gap-4 mb-12"
+          className="mb-10"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div>
+          {/* Top row: eyebrow label + back button side by side */}
+          <div className="flex items-center gap-6 mb-2">
+            <p className="text-xs font-bold uppercase tracking-[0.35em]"
+              style={{ color: "#38bdf8", fontFamily: "Orbitron, sans-serif" }}>
+              {t("newsPage.latestUpdates")}
+            </p>
             <button
               onClick={() => navigate("/")}
-              className="flex items-center gap-2 mb-4 text-white/40 hover:text-[#38bdf8] transition-colors duration-200 text-[11px] font-bold uppercase tracking-[0.25em]"
+              className="flex items-center gap-2 text-white/40 hover:text-[#38bdf8] transition-colors duration-200 text-[11px] font-bold uppercase tracking-[0.25em]"
               style={{ fontFamily: "Orbitron, sans-serif" }}
             >
               <svg width="14" height="10" viewBox="0 0 14 10" fill="none">
@@ -442,25 +506,22 @@ export default function NewsList() {
               </svg>
               {t("newsPage.backToHome")}
             </button>
-            <p className="text-xs font-bold uppercase tracking-[0.35em] mb-2"
-              style={{ color: "#38bdf8", fontFamily: "Orbitron, sans-serif" }}>
-              {t("newsPage.latestUpdates")}
-            </p>
-            <h1 className="font-[Goldman] font-bold text-3xl md:text-4xl xl:text-5xl uppercase text-white">
+          </div>
+          {/* Heading + decorative line */}
+          <div className="flex items-end gap-4">
+            <h1 className="font-[Goldman] font-bold text-3xl md:text-4xl xl:text-5xl uppercase text-white whitespace-nowrap">
               {t("newsPage.heading")}
             </h1>
+            <div className="flex-1 mb-2 h-px" style={{ background: "linear-gradient(to right, rgba(56,189,248,0.4), transparent)" }} />
           </div>
-          <div className="flex-1 mb-2 h-px" style={{ background: "linear-gradient(to right, rgba(56,189,248,0.4), transparent)" }} />
         </motion.div>
 
         {/* ── Featured article ── */}
-        {featured && (
-          <motion.div
+        {loading ? <FeaturedSkeleton /> : featured && (
+          <div
             className="relative w-full overflow-hidden rounded-2xl cursor-pointer mb-12 group"
             style={{ height: "clamp(320px, 45vw, 520px)" }}
             onClick={() => go(featured)}
-            initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
           >
             <img
               src={getImageUrl(featured.image)}
@@ -478,12 +539,12 @@ export default function NewsList() {
                   style={{ background: "rgba(56,189,248,0.15)", border: "1px solid rgba(56,189,248,0.5)", color: "#38bdf8", fontFamily: "Orbitron, sans-serif" }}>
                   {t("newsPage.latestBadge")}
                 </span>
-                <span className="text-white/40 text-xs">{formatDate(featured.createdAt, i18n.language)}</span>
+                {/* date hidden until site goes live */}
               </div>
               <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-4xl text-white leading-tight mb-3 max-w-3xl group-hover:text-[#38bdf8] transition-colors duration-300">
                 {featured.heading}
               </h2>
-              <p className="text-white/60 text-sm md:text-[15px] leading-relaxed max-w-2xl line-clamp-2">
+              <p className="text-white/60 text-sm md:text-[15px] leading-relaxed max-w-2xl line-clamp-2 text-justify">
                 {featured.description}
               </p>
               <div className="mt-5 flex items-center gap-2 text-[#38bdf8] text-xs font-bold uppercase tracking-widest" style={{ fontFamily: "Orbitron, sans-serif" }}>
@@ -493,14 +554,25 @@ export default function NewsList() {
                 </svg>
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
 
         {/* ── Game Videos carousel ── */}
         <VideoCarousel />
 
         {/* ── News: 3 cards + See All ── */}
-        {newsCards.length > 0 && (
+        {loading ? (
+          <>
+            <div className="flex items-center gap-4 mb-8">
+              <div className="w-5 h-[2px]" style={{ background: "#38bdf8" }} />
+              <SkimBase style={{ width: 120, height: 12 }} />
+              <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.07)" }} />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+              {[0, 1, 2].map(i => <CardSkeleton key={i} />)}
+            </div>
+          </>
+        ) : newsCards.length > 0 && (
           <>
             <div className="flex items-center gap-4 mb-8">
               <div className="w-5 h-[2px]" style={{ background: "#38bdf8" }} />
@@ -652,7 +724,7 @@ export default function NewsList() {
                   <h3 className="font-[Goldman] font-bold text-white text-xl md:text-2xl leading-snug mb-4">
                     {faqItems[activeFaq]?.q}
                   </h3>
-                  <p className="text-gray-400 text-sm leading-[1.85]">
+                  <p className="text-gray-400 text-sm leading-[1.85] text-justify">
                     {faqItems[activeFaq]?.a}
                   </p>
                 </motion.div>

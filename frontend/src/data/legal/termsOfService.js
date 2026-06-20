@@ -191,13 +191,13 @@ export const termsOfServiceData = {
       ],
     },
     {
-      id: "s20", title: "20. HyperBucks Virtual Currency",
+      id: "s20", title: "20. Hyper Bucks Virtual Currency",
       content: [
-        { type: "p", text: `HyperBucks (HB) is a virtual in-game currency issued by HT for use within the Hyper Tek Platform. The fixed exchange rate is 250 HB = $1 USD. HyperBucks have no value outside the platform and do not constitute legal tender, a financial product, or a security.` },
+        { type: "p", text: `Hyper Bucks (HB) is a virtual in-game currency issued by HT for use within the Hyper Tek Platform. The fixed exchange rate is 250 HB = $1 USD. Hyper Bucks have no value outside the platform and do not constitute legal tender, a financial product, or a security.` },
         {
-          type: "subsection", title: "Purchasing HyperBucks (Top-Up)",
+          type: "subsection", title: "Purchasing Hyper Bucks (Top-Up)",
           content: [
-            { type: "p", text: `Players may purchase HyperBucks using the following methods:` },
+            { type: "p", text: `Players may purchase Hyper Bucks using the following methods:` },
             { type: "list", items: [
               "Credit or debit card (Visa, Mastercard, Amex) — processed securely via Stripe. HB credited instantly.",
               "USDC cryptocurrency on the Base network — player sends USDC to the platform wallet and submits the transaction hash. HB credited after on-chain confirmation.",
@@ -206,9 +206,9 @@ export const termsOfServiceData = {
           ],
         },
         {
-          type: "subsection", title: "Cashing Out HyperBucks",
+          type: "subsection", title: "Cashing Out Hyper Bucks",
           content: [
-            { type: "p", text: `Players who have earned or purchased HyperBucks may cash out to real currency subject to the following conditions:` },
+            { type: "p", text: `Players who have earned or purchased Hyper Bucks may cash out to real currency subject to the following conditions:` },
             { type: "list", items: [
               "Minimum cashout: 250 HB ($1 USD).",
               "Identity verification (KYC) must be completed before the first cashout.",
@@ -221,7 +221,7 @@ export const termsOfServiceData = {
         {
           type: "important",
           label: "No Guarantee of Value",
-          text: `HT does not guarantee that HyperBucks will retain any particular value. HyperBucks are not an investment. HT reserves the right to adjust the HB–USD exchange rate with 30 days' notice. Cashout availability is subject to platform liquidity and compliance requirements.`,
+          text: `HT does not guarantee that Hyper Bucks will retain any particular value. Hyper Bucks are not an investment. HT reserves the right to adjust the HB–USD exchange rate with 30 days' notice. Cashout availability is subject to platform liquidity and compliance requirements.`,
         },
         { type: "p", text: `HT complies with applicable KYC and AML regulations. HT may suspend or cancel cashout requests where fraud, money laundering, or abuse is suspected, and may report such activity to relevant authorities.` },
       ],

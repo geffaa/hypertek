@@ -21,7 +21,8 @@ const MIN_TOPUP_HB = 250; // $1 minimum top-up
 
 async function getOrCreateConnectedAccount(user, stripe, userIp) {
   const isTestMode = process.env.STRIPE_SECRET_KEY?.startsWith("sk_test_");
-  const country = (user.bankDetails?.country || "US").toUpperCase().slice(0, 2);
+  // Connected account must always match platform country (AU) regardless of user's bank country
+  const country = "AU";
 
   if (user.stripeConnectAccountId) {
     // If capability not yet active in test mode, patch with test identity data
@@ -56,12 +57,13 @@ async function getOrCreateConnectedAccount(user, stripe, userIp) {
     type: "custom",
     country,
     email: user.Email || user.email,
-    capabilities: { transfers: { requested: true } },
+    capabilities: { card_payments: { requested: true }, transfers: { requested: true } },
     business_type: "individual",
     individual: individualData,
     business_profile: {
-      mcc: "7372", // software
-      url: process.env.FRONTEND_URL || "https://hypertek.gg",
+      mcc: "7372",
+      url: "https://hypertek100.com",
+      product_description: "In-game currency (Hyper Bucks) top-up and cashout platform for Hyper Tek gaming ecosystem — NFT marketplace, virtual assets, and gameplay rewards.",
     },
     tos_acceptance: {
       date: Math.floor(Date.now() / 1000),
@@ -89,35 +91,75 @@ async function _ensureTestCapabilities(stripe, accountId, country) {
     const account = await stripe.accounts.retrieve(accountId);
     if (account.capabilities?.transfers === "active") return true;
 
-    if (country === "US") {
-      await stripe.accounts.update(accountId, {
-        individual: {
-          ssn_last_4: "0000",
-          dob: { day: 1, month: 1, year: 1901 },
-          address: { line1: "123 Main St", city: "Anytown", state: "CA", postal_code: "90001", country: "US" },
-          phone: "+15005550000",
-        },
-        business_profile: {
-          mcc: "7372",
-          url: process.env.FRONTEND_URL || "https://hypertek.gg",
-        },
-      });
+    // Provide test identity data per country
+    const individualData =
+      country === "US"
+        ? {
+            ssn_last_4: "0000",
+            dob: { day: 1, month: 1, year: 1901 },
+            address: { line1: "123 Main St", city: "Anytown", state: "CA", postal_code: "90001", country: "US" },
+            phone: "+15005550000",
+          }
+        : country === "AU"
+        ? {
+            dob: { day: 1, month: 1, year: 1901 },
+            address: { line1: "123 Main St", city: "Sydney", state: "NSW", postal_code: "2000", country: "AU" },
+            phone: "+61200000000",
+            id_number: "000000000", // test TFN
+          }
+        : {
+            dob: { day: 1, month: 1, year: 1901 },
+            address: { line1: "123 Main St", city: "Sydney", state: "NSW", postal_code: "2000", country: country },
+            phone: "+61200000000",
+          };
 
-      // Stripe activates capabilities asynchronously — wait for propagation
-      await new Promise((r) => setTimeout(r, 4000));
-      const updated = await stripe.accounts.retrieve(accountId);
-      return updated.capabilities?.transfers === "active";
-    }
+    await stripe.accounts.update(accountId, {
+      individual: individualData,
+      business_profile: {
+        mcc: "7372",
+        url: "https://hypertek100.com",
+        product_description: "In-game currency (Hyper Bucks) top-up and cashout platform for Hyper Tek gaming ecosystem.",
+      },
+    });
+
+    // Stripe activates capabilities asynchronously — wait for propagation
+    await new Promise((r) => setTimeout(r, 5000));
+    const updated = await stripe.accounts.retrieve(accountId);
+    return updated.capabilities?.transfers === "active";
   } catch (e) {
     console.warn("[StripeConnect] Capability activation attempt failed:", e.message);
   }
   return false;
 }
 
+async function attachDebitCard(user, stripe, accountId) {
+  const card = user.debitCard;
+  if (!card?.stripeCardId) throw new Error("No debit card saved for this user");
+
+  // If already attached, skip
+  if (user.stripeExternalAccountId === card.stripeCardId) return card.stripeCardId;
+
+  // Remove old external account first
+  if (user.stripeExternalAccountId) {
+    try {
+      await stripe.accounts.deleteExternalAccount(accountId, user.stripeExternalAccountId);
+    } catch {}
+  }
+
+  const externalAccount = await stripe.accounts.createExternalAccount(accountId, {
+    external_account: card.stripeCardId,
+    default_for_currency: true,
+  });
+
+  user.stripeExternalAccountId = externalAccount.id;
+  await user.save();
+  return externalAccount.id;
+}
+
 async function attachExternalBankAccount(user, stripe, accountId) {
   const bd = user.bankDetails;
-  const country = (bd.country || "US").toUpperCase().slice(0, 2);
-  const currency = (bd.currency || "USD").toLowerCase();
+  const country = (bd.country || "AU").toUpperCase().slice(0, 2);
+  const currency = (bd.currency || "AUD").toLowerCase();
 
   let bankAccountParams = {
     country,
@@ -128,6 +170,10 @@ async function attachExternalBankAccount(user, stripe, accountId) {
 
   if (country === "US" && bd.routingNumber && bd.accountNumber) {
     bankAccountParams.routing_number = bd.routingNumber;
+    bankAccountParams.account_number = bd.accountNumber;
+  } else if (country === "AU" && bd.routingNumber && bd.accountNumber) {
+    // AU: routingNumber = BSB (e.g. 062-000), accountNumber = account number
+    bankAccountParams.routing_number = bd.routingNumber.replace(/-/g, "");
     bankAccountParams.account_number = bd.accountNumber;
   } else if (bd.iban) {
     bankAccountParams.account_number = bd.iban;
@@ -284,7 +330,7 @@ export async function requestCashoutOTP(req, res) {
       html: `
         <div style="font-family:Inter,sans-serif;max-width:480px;margin:0 auto;background:#0d0d0d;color:#fff;padding:32px;border-radius:12px">
           <h2 style="color:#fff;margin-bottom:8px">Cashout Verification</h2>
-          <p style="color:#aaa;margin-bottom:24px">Use the code below to confirm your HyperBucks cashout. This code expires in <strong>5 minutes</strong>.</p>
+          <p style="color:#aaa;margin-bottom:24px">Use the code below to confirm your Hyper Bucks cashout. This code expires in <strong>5 minutes</strong>.</p>
           <div style="background:#1a1a2e;border:1px solid #002AA8;border-radius:12px;padding:24px;text-align:center;margin-bottom:24px">
             <p style="color:#aaa;font-size:12px;margin-bottom:8px;text-transform:uppercase;letter-spacing:2px">Your OTP Code</p>
             <p style="color:#fff;font-size:36px;font-weight:700;letter-spacing:8px;margin:0">${otp}</p>
@@ -303,18 +349,15 @@ export async function requestCashoutOTP(req, res) {
 
 // ------------------ CASHOUT HB ------------------
 // POST /api/v1/hb/cashout
-// Auth required. Body: { amount (in HB), method ("usdc"|"bank"), walletAddress? }
+// Auth required. Body: { amount (in HB), method ("usdc"|"bank"), walletAddress?, payoutSpeed? ("standard"|"instant") }
 //
 // USDC method: on-chain USDC transfer from backend wallet → user's walletAddress
-//   Requires: PRIVATE_KEY wallet holds USDC on Base Mainnet.
-//
-// Bank method: Stripe payout from platform Stripe balance to platform bank,
-//   then manual admin disbursement to user. Full user-direct bank transfer
-//   requires Stripe Connect (future implementation).
+// Bank method (standard): Stripe Connect payout, 1-3 business days, $0.25 flat fee (absorbed by Stripe)
+// Bank method (instant): Stripe Connect instant payout, minutes, 1.5% fee deducted by Stripe automatically
 export async function cashoutHB(req, res) {
   try {
     const userId = req.user.id || req.user._id;
-    const { amount, method, walletAddress, otp } = req.body;
+    const { amount, method, walletAddress, otp, payoutSpeed = "standard" } = req.body;
 
     if (!amount || amount <= 0) {
       return res.status(400).json({ error: "Amount must be positive" });
@@ -322,6 +365,10 @@ export async function cashoutHB(req, res) {
 
     if (!["usdc", "bank"].includes(method)) {
       return res.status(400).json({ error: 'Method must be "usdc" or "bank"' });
+    }
+
+    if (method === "bank" && !["standard", "instant"].includes(payoutSpeed)) {
+      return res.status(400).json({ error: 'payoutSpeed must be "standard" or "instant"' });
     }
 
     if (!otp) {
@@ -381,7 +428,12 @@ export async function cashoutHB(req, res) {
           error: `Minimum bank cashout is ${MIN_BANK_CASHOUT_HB} HB ($${MIN_BANK_CASHOUT_HB / HB_TO_USD})`,
         });
       }
-      if (!user.bankDetails?.accountNumber) {
+      if (payoutSpeed === "instant" && !user.debitCard?.stripeCardId) {
+        return res.status(400).json({
+          error: "A debit card is required for instant payouts. Please add your debit card first.",
+        });
+      }
+      if (payoutSpeed === "standard" && !user.bankDetails?.accountNumber) {
         return res.status(400).json({
           error: "Bank details not found. Please add your bank details first.",
         });
@@ -499,7 +551,14 @@ export async function cashoutHB(req, res) {
       if (process.env.STRIPE_CONNECT_ENABLED === "true") {
         try {
           const connectAccountId = await getOrCreateConnectedAccount(user, stripe, req.ip);
-          await attachExternalBankAccount(user, stripe, connectAccountId);
+          const isInstant = payoutSpeed === "instant";
+
+          // Attach the right external account based on payout speed
+          if (isInstant) {
+            await attachDebitCard(user, stripe, connectAccountId);
+          } else {
+            await attachExternalBankAccount(user, stripe, connectAccountId);
+          }
 
           // Verify capability is active before attempting transfer
           const capAccount = await stripe.accounts.retrieve(connectAccountId);
@@ -507,27 +566,37 @@ export async function cashoutHB(req, res) {
             throw new Error("Connected account transfers capability not yet active. Please try again in a few moments.");
           }
 
+          // Determine currency from user's country/card
+          const currency = isInstant
+            ? (user.debitCard?.currency || "usd").toLowerCase()
+            : (user.bankDetails?.currency || "usd").toLowerCase();
+
           // Transfer from platform Stripe balance to connected account
           const transfer = await stripe.transfers.create({
             amount: Math.round(usdAmount * 100),
-            currency: "usd",
+            currency,
             destination: connectAccountId,
             transfer_group: `cashout_${ledgerEntry._id}`,
             metadata: {
               userId: String(userId),
               hbAmount: String(amount),
               ledgerId: String(ledgerEntry._id),
+              payoutSpeed,
             },
           });
 
-          // Payout from connected account balance to their bank
+          // Payout from connected account balance to their bank/card
+          // For instant: Stripe automatically deducts 1.5% fee (AU/US) or 1% (other)
+          const payoutParams = {
+            amount: Math.round(usdAmount * 100),
+            currency,
+            statement_descriptor: "HYPERTEK",
+            metadata: { userId: String(userId), transferId: transfer.id, payoutSpeed },
+          };
+          if (isInstant) payoutParams.method = "instant";
+
           const payout = await stripe.payouts.create(
-            {
-              amount: Math.round(usdAmount * 100),
-              currency: "usd",
-              statement_descriptor: "HYPERTEK",
-              metadata: { userId: String(userId), transferId: transfer.id },
-            },
+            payoutParams,
             { stripeAccount: connectAccountId }
           );
 
@@ -536,8 +605,8 @@ export async function cashoutHB(req, res) {
             cashoutTxHash: payout.id,
           });
 
-          cashoutResult = { status: "processing", stripePayoutId: payout.id, transferId: transfer.id };
-          console.log(`[HB Cashout Connect] Transfer: ${transfer.id} | Payout: ${payout.id} | $${usdAmount} → ${connectAccountId}`);
+          cashoutResult = { status: "processing", stripePayoutId: payout.id, transferId: transfer.id, isInstant };
+          console.log(`[HB Cashout Connect] Transfer: ${transfer.id} | Payout: ${payout.id} | $${usdAmount} → ${connectAccountId} | speed: ${payoutSpeed}`);
         } catch (connectErr) {
           console.error("[HB Cashout Connect] Failed:", connectErr.message);
           cashoutResult = { status: "pending", error: connectErr.message };
@@ -558,7 +627,7 @@ export async function cashoutHB(req, res) {
             to: adminEmail,
             subject: `[HyperTek] HB Bank Cashout $${usdAmount} USD — ${cashoutResult.status.toUpperCase()}`,
             html: `
-              <h2>HyperBucks Bank Cashout — ${isAutomated ? "Processed via Stripe Connect" : "ACTION REQUIRED: Manual Transfer Needed"}</h2>
+              <h2>Hyper Bucks Bank Cashout — ${isAutomated ? "Processed via Stripe Connect" : "ACTION REQUIRED: Manual Transfer Needed"}</h2>
               <table border="1" cellpadding="6" cellspacing="0">
                 <tr><td><strong>User ID</strong></td><td>${userId}</td></tr>
                 <tr><td><strong>User Email</strong></td><td>${user.Email || user.email || "N/A"}</td></tr>
@@ -761,6 +830,71 @@ export async function saveBankDetails(req, res) {
   }
 }
 
+// ------------------ DEBIT CARD (for instant payouts) ------------------
+// GET /api/v1/hb/debit-card
+export async function getDebitCard(req, res) {
+  try {
+    const userId = req.user.id || req.user._id;
+    const user = await User.findById(userId).select("debitCard");
+    if (!user) return res.status(404).json({ error: "User not found" });
+    return res.status(200).json({ debitCard: user.debitCard || null });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+}
+
+// PUT /api/v1/hb/debit-card
+// Body: { cardToken } — Stripe card token created on frontend via Stripe.js
+export async function saveDebitCard(req, res) {
+  try {
+    const userId = req.user.id || req.user._id;
+    const { cardToken } = req.body;
+
+    if (!cardToken) {
+      return res.status(400).json({ error: "cardToken is required (create via Stripe.js on frontend)" });
+    }
+
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2023-10-16" });
+
+    // Retrieve token details to get card metadata
+    const token = await stripe.tokens.retrieve(cardToken);
+    const card = token.card;
+
+    if (!card) return res.status(400).json({ error: "Invalid card token" });
+    // Stripe will reject ineligible cards at payout time
+
+    // Store token id — will be attached to connected account at cashout time
+    user.debitCard = {
+      cardHolderName: card.name || "",
+      last4: card.last4,
+      brand: card.brand,
+      stripeCardId: cardToken, // token id used to attach to connected account
+      country: card.country,
+      currency: (card.currency || "usd").toUpperCase(),
+    };
+
+    await user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Debit card saved successfully.",
+      debitCard: {
+        cardHolderName: user.debitCard.cardHolderName,
+        last4: user.debitCard.last4,
+        brand: user.debitCard.brand,
+        country: user.debitCard.country,
+        currency: user.debitCard.currency,
+      },
+    });
+  } catch (error) {
+    console.error("saveDebitCard error:", error);
+    return res.status(500).json({ error: error.message });
+  }
+}
+
 // ------------------ TOPUP VIA USDC (on-chain) ------------------
 // POST /api/v1/hb/topup/usdc
 // Auth required. Body: { txHash, usdcAmount }
@@ -872,7 +1006,7 @@ export async function createHBTopupIntent(req, res) {
         itemType: "hyperbucks",
         hbAmount: hbAmount.toString(),
         productId: userId,
-        gameTitle: "HyperBucks Top-Up",
+        gameTitle: "Hyper Bucks Top-Up",
         provider: "stripe",
         transactionId: "",
       },
@@ -914,7 +1048,7 @@ export async function getHBPlatformStats(req, res) {
       pendingCashoutsUSD: pendingUSD,
       totalUsers,
       stripeConnectEnabled: process.env.STRIPE_CONNECT_ENABLED === "true",
-      note: "Ensure your Stripe Balance is at least $" + totalUSDLiability + " USD to cover all outstanding HyperBucks.",
+      note: "Ensure your Stripe Balance is at least $" + totalUSDLiability + " USD to cover all outstanding Hyper Bucks.",
     });
   } catch (error) {
     console.error("getHBPlatformStats error:", error);

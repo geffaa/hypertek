@@ -126,6 +126,16 @@ const UserSchema = new mongoose.Schema(
     stripeConnectAccountId: { type: String, default: null },
     stripeExternalAccountId: { type: String, default: null },
 
+    // Debit card for instant payouts
+    debitCard: {
+      cardHolderName: String,
+      last4: String,
+      brand: String,
+      stripeCardId: String,
+      country: String,
+      currency: { type: String, default: "USD" },
+    },
+
     // KYC — required before cashout
     kyc: {
       status: { type: String, enum: ["not_started", "pending", "verified", "failed"], default: "not_started" },

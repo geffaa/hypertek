@@ -89,6 +89,95 @@ function CheckoutForm({ hbAmount, usdAmount, onBack }) {
   );
 }
 
+// Inner form — must be rendered inside <Elements>
+function DebitCardFormInner({ onSaved, onCancel, authToken, savingCard, setSavingCard }) {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [cardName, setCardName] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!stripe || !elements) return;
+    setSavingCard(true);
+    try {
+      const cardElement = elements.getElement('card');
+      const { token, error } = await stripe.createToken(cardElement, { name: cardName, currency: 'aud' });
+      if (error) { toast.error(error.message); return; }
+      const res = await fetch(`${BACKEND_BASE_URL}/api/v1/hb/debit-card`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${authToken}` },
+        body: JSON.stringify({ cardToken: token.id }),
+      });
+      const data = await res.json();
+      if (!res.ok) { toast.error(data.error || 'Failed to save card'); return; }
+      toast.success('Debit card saved!');
+      onSaved(data.debitCard);
+    } catch (err) {
+      toast.error('Failed to save card: ' + err.message);
+    } finally {
+      setSavingCard(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!stripe || !elements) return;
+    const existing = elements.getElement('card');
+    if (existing) return;
+    const card = elements.create('card', {
+      hidePostalCode: true,
+      style: {
+        base: { color: '#fff', fontSize: '14px', '::placeholder': { color: 'rgba(255,255,255,0.3)' } },
+        invalid: { color: '#f87171' },
+      },
+    });
+    card.mount('#stripe-debit-card-element');
+  }, [stripe, elements]);
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-3">
+      <div>
+        <label className="text-white/40 text-xs mb-1 block">Cardholder Name *</label>
+        <input
+          type="text"
+          value={cardName}
+          onChange={e => setCardName(e.target.value)}
+          placeholder="Name on card"
+          className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-white text-sm focus:outline-none focus:border-amber-500/50 transition-colors"
+          required
+        />
+      </div>
+      <div>
+        <label className="text-white/40 text-xs mb-1 block">Card Details *</label>
+        <div className="bg-white/5 border border-white/10 rounded-xl px-3 py-3">
+          <div id="stripe-debit-card-element" />
+        </div>
+      </div>
+      <div className="flex gap-2 pt-1">
+        {onCancel && (
+          <button type="button" onClick={onCancel} className="flex-1 py-2 rounded-xl border border-white/20 text-white/50 text-sm hover:text-white transition-colors">
+            Cancel
+          </button>
+        )}
+        <button
+          type="submit"
+          disabled={savingCard || !stripe}
+          className={`flex-1 py-2 rounded-xl font-semibold text-sm transition-all ${savingCard ? 'bg-white/10 text-white/40 cursor-not-allowed' : 'bg-amber-500 hover:bg-amber-400 text-black'}`}
+        >
+          {savingCard ? 'Saving...' : 'Save Debit Card'}
+        </button>
+      </div>
+    </form>
+  );
+}
+
+function DebitCardForm(props) {
+  return (
+    <Elements stripe={stripePromise}>
+      <DebitCardFormInner {...props} />
+    </Elements>
+  );
+}
+
 export default function HyperBucks() {
   const { t } = useTranslation();
   const { token: authToken } = useSelector((state) => state.auth);
@@ -114,15 +203,19 @@ export default function HyperBucks() {
   // Cashout states
   const [hbCashoutAmount, setHbCashoutAmount] = useState('');
   const [hbCashoutMethod, setHbCashoutMethod] = useState('usdc'); // 'usdc' | 'bank'
+  const [payoutSpeed, setPayoutSpeed] = useState('standard'); // 'standard' | 'instant'
   const [hbProcessing, setHbProcessing] = useState(false);
   const [cashoutStep, setCashoutStep] = useState('form'); // 'form' | 'confirm' | 'otp'
   const [otpCode, setOtpCode] = useState('');
   const [sendingOtp, setSendingOtp] = useState(false);
-  const [savedBankDetails, setSavedBankDetails] = useState(undefined); // undefined = not fetched yet, null = fetched but none
+  const [savedBankDetails, setSavedBankDetails] = useState(undefined);
   const [bankDetailsLoading, setBankDetailsLoading] = useState(false);
   const [showBankForm, setShowBankForm] = useState(false);
   const [bankForm, setBankForm] = useState({ accountHolderName: '', bankName: '', accountNumber: '', iban: '', swift: '', routingNumber: '', country: '', currency: 'USD' });
   const [savingBank, setSavingBank] = useState(false);
+  const [savedDebitCard, setSavedDebitCard] = useState(undefined); // undefined = not fetched, null = none
+  const [showDebitCardForm, setShowDebitCardForm] = useState(false);
+  const [savingCard, setSavingCard] = useState(false);
 
   // USDC top-up states
   const [usdcTopupStep, setUsdcTopupStep] = useState('idle'); // 'idle' | 'approving' | 'sending' | 'verifying' | 'done'
@@ -210,6 +303,31 @@ export default function HyperBucks() {
       fetchBankDetails();
     }
   }, [activeTab, hbCashoutMethod, savedBankDetails, fetchBankDetails]);
+
+  const fetchDebitCard = useCallback(async () => {
+    if (!authToken) return;
+    try {
+      const res = await fetch(`${BACKEND_BASE_URL}/api/v1/hb/debit-card`, {
+        headers: { Authorization: `Bearer ${authToken}` },
+      });
+      const data = await res.json();
+      setSavedDebitCard(data.debitCard || null);
+    } catch {}
+  }, [authToken]);
+
+  // Fetch debit card when instant speed is selected
+  useEffect(() => {
+    if (activeTab === 'cashout' && hbCashoutMethod === 'bank' && payoutSpeed === 'instant' && savedDebitCard === undefined) {
+      fetchDebitCard();
+    }
+  }, [activeTab, hbCashoutMethod, payoutSpeed, savedDebitCard, fetchDebitCard]);
+
+  // Instant payout fee: 1.5% for AU/US/NZ/AE, 1% for others
+  const getInstantFee = (usdAmount, country) => {
+    const highFeeCountries = ['AU', 'US', 'NZ', 'AE'];
+    const rate = highFeeCountries.includes((country || 'US').toUpperCase()) ? 0.015 : 0.01;
+    return { rate, fee: usdAmount * rate, receive: usdAmount * (1 - rate) };
+  };
 
   // ── Top Up ────────────────────────────────────────────────────────
   const parsedUsd = customUsd ? parseFloat(customUsd) : 0;
@@ -379,6 +497,7 @@ export default function HyperBucks() {
         otp: otpCode,
       };
       if (hbCashoutMethod === 'usdc') payload.walletAddress = activeAddress;
+      if (hbCashoutMethod === 'bank') payload.payoutSpeed = payoutSpeed;
 
       const res = await fetch(`${BACKEND_BASE_URL}/api/v1/hb/cashout`, {
         method: 'POST',
@@ -458,7 +577,7 @@ export default function HyperBucks() {
       )}
       {/* Header */}
       <div className="mb-6">
-        <h1 className="font-inter font-semibold text-[22px] md:text-[25px] text-white">{t("dashboard.hyperbucks.title", "HyperBucks")}</h1>
+        <h1 className="font-inter font-semibold text-[22px] md:text-[25px] text-white">{t("dashboard.hyperbucks.title", "Hyper Bucks")}</h1>
         <p className="text-white/50 text-sm mt-1">{t("dashboard.hyperbucks.subtitle", "250 HB = $1 USD · fixed rate")}</p>
       </div>
 
@@ -531,7 +650,7 @@ export default function HyperBucks() {
                   <div className="h-6 mb-5">
                     {activeHB > 0 && (
                       <p className="text-blue-300 text-sm font-semibold">
-                        = {activeHB.toLocaleString()} {t("dashboard.hyperbucks.topup.hyperBucks", "HyperBucks")}
+                        = {activeHB.toLocaleString()} {t("dashboard.hyperbucks.topup.hyperBucks", "Hyper Bucks")}
                       </p>
                     )}
                   </div>
@@ -608,7 +727,7 @@ export default function HyperBucks() {
                           </button>
                           {usdcTopupStep === 'done' && (
                             <div className="flex items-center gap-2 text-green-400 text-sm justify-center">
-                              <FiCheckCircle size={16} /> HyperBucks credited successfully!
+                              <FiCheckCircle size={16} /> Hyper Bucks credited successfully!
                             </div>
                           )}
                         </>
@@ -846,7 +965,7 @@ export default function HyperBucks() {
                   <div className="flex gap-3">
                     {[
                       { key: 'usdc', label: 'USDC Wallet', sub: 'Instant · Base network', Icon: Wallet },
-                      { key: 'bank', label: 'Bank Transfer', sub: 'Free · 1-3 business days', Icon: CreditCard },
+                      { key: 'bank', label: 'Bank Transfer', sub: 'Standard or Instant', Icon: CreditCard },
                     ].map(({ key, label, sub, Icon }) => (
                       <button
                         key={key}
@@ -864,6 +983,51 @@ export default function HyperBucks() {
                     ))}
                   </div>
                 </div>
+
+                {/* Payout speed selector — only for bank */}
+                {hbCashoutMethod === 'bank' && (
+                  <div>
+                    <label className="text-white/50 text-xs mb-2 block">Payout Speed</label>
+                    <div className="flex gap-3">
+                      <button
+                        onClick={() => setPayoutSpeed('standard')}
+                        className={`flex-1 rounded-2xl p-3 text-left border transition-all ${payoutSpeed === 'standard' ? 'bg-[#002AA8]/30 border-[#002AA8] text-white' : 'bg-white/5 border-white/10 text-white/50 hover:border-white/30'}`}
+                      >
+                        <p className="text-sm font-semibold">Standard</p>
+                        <p className="text-[10px] text-white/30 mt-0.5">1–3 business days · No fee</p>
+                        <p className="text-[10px] text-white/20 mt-0.5">Bank account required</p>
+                      </button>
+                      <button
+                        onClick={() => { setPayoutSpeed('instant'); if (savedDebitCard === undefined) fetchDebitCard(); }}
+                        className={`flex-1 rounded-2xl p-3 text-left border transition-all ${payoutSpeed === 'instant' ? 'bg-amber-500/20 border-amber-500/60 text-white' : 'bg-white/5 border-white/10 text-white/50 hover:border-white/30'}`}
+                      >
+                        <p className="text-sm font-semibold flex items-center gap-1.5">
+                          Instant <span className="text-[9px] bg-amber-500/30 text-amber-400 px-1.5 py-0.5 rounded font-bold">~minutes</span>
+                        </p>
+                        <p className="text-[10px] text-white/30 mt-0.5">
+                          {savedDebitCard?.country ? `${getInstantFee(1, savedDebitCard.country).rate * 100}% fee` : '1–1.5% fee'} · Deducted by Stripe
+                        </p>
+                        <p className="text-[10px] text-white/20 mt-0.5">Debit card required</p>
+                      </button>
+                    </div>
+                    {/* Instant fee preview */}
+                    {payoutSpeed === 'instant' && hbCashoutAmount && Number(hbCashoutAmount) >= 250 && (
+                      <div className="mt-2 bg-amber-500/10 border border-amber-500/20 rounded-xl px-3 py-2 text-xs space-y-0.5">
+                        {(() => {
+                          const usd = Number(hbCashoutAmount) / 250;
+                          const { rate, fee, receive } = getInstantFee(usd, savedDebitCard?.country);
+                          return (
+                            <>
+                              <div className="flex justify-between text-white/50"><span>Cashout amount</span><span>${usd.toFixed(2)}</span></div>
+                              <div className="flex justify-between text-amber-400/70"><span>Stripe instant fee ({(rate * 100).toFixed(1)}%)</span><span>-${fee.toFixed(2)}</span></div>
+                              <div className="flex justify-between text-white font-semibold border-t border-white/10 pt-1 mt-1"><span>You will receive</span><span>${receive.toFixed(2)}</span></div>
+                            </>
+                          );
+                        })()}
+                      </div>
+                    )}
+                  </div>
+                )}
 
                 {/* Amount input */}
                 <div>
@@ -895,8 +1059,8 @@ export default function HyperBucks() {
                   )
                 )}
 
-                {/* Bank: bank details section */}
-                {hbCashoutMethod === 'bank' && (
+                {/* Bank: bank details section (standard) */}
+                {hbCashoutMethod === 'bank' && payoutSpeed === 'standard' && (
                   <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
                     {bankDetailsLoading || savedBankDetails === undefined ? (
                       <p className="text-white/40 text-sm text-center py-2">Loading bank details...</p>
@@ -968,25 +1132,69 @@ export default function HyperBucks() {
                   </div>
                 )}
 
+                {/* Debit card section (instant only) */}
+                {hbCashoutMethod === 'bank' && payoutSpeed === 'instant' && (
+                  <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
+                    {savedDebitCard === undefined ? (
+                      <p className="text-white/40 text-sm text-center py-2">Loading card details...</p>
+                    ) : savedDebitCard && !showDebitCardForm ? (
+                      <div className="space-y-1">
+                        <div className="flex justify-between items-center mb-2">
+                          <p className="text-white/50 text-xs font-semibold uppercase tracking-wide">Saved Debit Card</p>
+                          <button onClick={() => setShowDebitCardForm(true)} className="text-blue-400 text-xs hover:text-blue-300">Change</button>
+                        </div>
+                        <p className="text-white text-sm font-semibold">{savedDebitCard.cardHolderName}</p>
+                        <p className="text-white/50 text-xs">{savedDebitCard.brand} •••• {savedDebitCard.last4}</p>
+                        <p className="text-white/30 text-xs">{savedDebitCard.country} · {savedDebitCard.currency}</p>
+                      </div>
+                    ) : (
+                      <div className="space-y-3">
+                        <p className="text-white/50 text-xs font-semibold uppercase tracking-wide mb-1">
+                          {savedDebitCard ? 'Update Debit Card' : 'Add Debit Card for Instant Payout'}
+                        </p>
+                        <p className="text-white/30 text-xs">Enter your debit card number below. Only Visa/Mastercard debit cards are accepted.</p>
+                        <DebitCardForm
+                          onSaved={(card) => { setSavedDebitCard(card); setShowDebitCardForm(false); }}
+                          onCancel={savedDebitCard ? () => setShowDebitCardForm(false) : null}
+                          authToken={authToken}
+                          savingCard={savingCard}
+                          setSavingCard={setSavingCard}
+                        />
+                      </div>
+                    )}
+                  </div>
+                )}
+
                 <button
                   onClick={handleRequestOTP}
                   disabled={sendingOtp}
                   className={`w-full py-4 rounded-2xl font-bold text-base transition-all ${
-                    sendingOtp ? 'bg-white/10 text-white/40 cursor-not-allowed' : 'bg-[#002AA8] hover:bg-blue-700 text-white'
+                    sendingOtp ? 'bg-white/10 text-white/40 cursor-not-allowed' : payoutSpeed === 'instant' ? 'bg-amber-500 hover:bg-amber-400 text-black' : 'bg-[#002AA8] hover:bg-blue-700 text-white'
                   }`}
                 >
-                  {sendingOtp ? 'Sending OTP...' : hbCashoutMethod === 'bank' ? 'Cashout to Bank Account' : 'Cashout to USDC Wallet'}
+                  {sendingOtp ? 'Sending OTP...' : hbCashoutMethod === 'bank'
+                    ? (payoutSpeed === 'instant' ? '⚡ Instant Cashout' : 'Cashout to Bank Account')
+                    : 'Cashout to USDC Wallet'}
                 </button>
               </div>
 
               <div className="w-full lg:w-[260px] flex-shrink-0 bg-white/5 border border-white/10 rounded-2xl p-4 space-y-3">
-                <p className="text-white font-semibold text-sm">{hbCashoutMethod === 'bank' ? 'Bank Transfer' : 'USDC Wallet'}</p>
+                <p className="text-white font-semibold text-sm">
+                  {hbCashoutMethod === 'usdc' ? 'USDC Wallet' : payoutSpeed === 'instant' ? '⚡ Instant Bank Transfer' : 'Bank Transfer'}
+                </p>
                 <div className="space-y-1.5 text-xs text-white/40">
                   <p>Min 250 HB ($1)</p>
-                  {hbCashoutMethod === 'bank' ? (
+                  {hbCashoutMethod === 'bank' && payoutSpeed === 'instant' ? (
                     <>
-                      <p>Free — no transfer fee</p>
-                      <p>Arrives in 1-3 business days</p>
+                      <p className="text-amber-400/70">1–1.5% Stripe fee (deducted automatically)</p>
+                      <p>Arrives within minutes</p>
+                      <p>Requires a Visa/Mastercard debit card</p>
+                      <p>Real money to your debit card</p>
+                    </>
+                  ) : hbCashoutMethod === 'bank' ? (
+                    <>
+                      <p>No transfer fee</p>
+                      <p>Typically 1–3 business days (often faster)</p>
                       <p>Real money to your bank account</p>
                     </>
                   ) : (

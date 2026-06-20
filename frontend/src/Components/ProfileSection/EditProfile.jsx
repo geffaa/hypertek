@@ -554,7 +554,7 @@ function EditProfile() {
                 <label className="block text-white text-[20px] md:text-[25px] font-medium mb-1">
                   Bank Details
                 </label>
-                <p className="text-white/40 text-sm mb-4">Required for HyperBucks bank cashout. Pending admin verification.</p>
+                <p className="text-white/40 text-sm mb-4">Required for Hyper Bucks bank cashout. Pending admin verification.</p>
               </div>
 
               {[

@@ -540,18 +540,18 @@ export default function WhitepaperPage() {
             </Card>
           </section>
 
-          {/* ── 05 HyperBucks ── */}
+          {/* ── 05 Hyper Bucks ── */}
           <section id="hyperbucks" className="pt-2">
-            <SectionHeading number="05" title="HyperBucks Economy" />
+            <SectionHeading number="05" title="Hyper Bucks Economy" />
 
             <Card className="mb-6">
-              <h3 className="font-semibold text-white mb-3">What Are HyperBucks (HB)?</h3>
+              <h3 className="font-semibold text-white mb-3">What Are Hyper Bucks (HB)?</h3>
               <p className="text-white/60 text-sm leading-relaxed mb-4">
-                HyperBucks (HB) are the primary in-game currency of Hyper Tek. The fixed exchange rate is <strong className="text-white">250 HB = $1 USD</strong>. Virtual currency separates entertainment from direct monetary transactions while providing granular pricing control across all three game worlds.
+                Hyper Bucks (HB) are the primary in-game currency of Hyper Tek. The fixed exchange rate is <strong className="text-white">250 HB = $1 USD</strong>. Virtual currency separates entertainment from direct monetary transactions while providing granular pricing control across all three game worlds.
               </p>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <p className="text-white/30 text-xs font-semibold tracking-widest uppercase mb-3">Earning HyperBucks</p>
+                  <p className="text-white/30 text-xs font-semibold tracking-widest uppercase mb-3">Earning Hyper Bucks</p>
                   <ul className="space-y-1.5">
                     {[
                       "Racing winnings: 15,000 – 75,000 HB per race",
@@ -587,7 +587,7 @@ export default function WhitepaperPage() {
             {/* Top-up & Cashout */}
             <div className="grid md:grid-cols-2 gap-5 mb-6">
               <Card>
-                <h3 className="font-semibold text-white mb-4">Topping Up HyperBucks</h3>
+                <h3 className="font-semibold text-white mb-4">Topping Up Hyper Bucks</h3>
                 <p className="text-white/50 text-xs mb-4">Minimum top-up: <strong className="text-white">250 HB ($1)</strong>. All payments processed securely via Stripe.</p>
                 <div className="space-y-3">
                   {[
@@ -606,7 +606,7 @@ export default function WhitepaperPage() {
               </Card>
 
               <Card>
-                <h3 className="font-semibold text-white mb-4">Cashing Out HyperBucks</h3>
+                <h3 className="font-semibold text-white mb-4">Cashing Out Hyper Bucks</h3>
                 <p className="text-white/50 text-xs mb-4">Minimum cashout: <strong className="text-white">250 HB ($1)</strong>. Identity verification (KYC) required before first cashout.</p>
                 <div className="space-y-3">
                   {[
@@ -632,7 +632,7 @@ export default function WhitepaperPage() {
               <h3 className="font-semibold text-white mb-4">Currency Types</h3>
               <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
                 {[
-                  { name: "HyperBucks (HB)", color: "#3b82f6", desc: "Primary currency. Earned through gameplay or purchased with credit/debit card and USDC crypto." },
+                  { name: "Hyper Bucks (HB)", color: "#3b82f6", desc: "Primary currency. Earned through gameplay or purchased with credit/debit card and USDC crypto." },
                   { name: "Gold", color: "#f59e0b", desc: "Specialty currency produced exclusively in Land Bases or won in special events." },
                   { name: "Diamonds", color: "#a855f7", desc: "Prestige currency for exclusive cosmetics, premium services, and rare auction access." },
                   { name: "Crystals", color: "#10b981", desc: "Furuseth (wormhole jumps), Energy (weapons/engines), Time (speed up research & travel)." },

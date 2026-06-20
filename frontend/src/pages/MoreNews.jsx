@@ -108,16 +108,16 @@ export default function NewsDetail() {
   })();
 
   return (
-    <div className="text-white relative" style={{ background: "#060610" }}>
+    <div className="text-white relative pt-[72px]" style={{ background: "#060610" }}>
       <GlowingOrb Xaxis={100}  Yaxis={600}  />
       <GlowingOrb Xaxis={1300} Yaxis={1200} />
 
       {/* ── Hero image ── */}
-      <div className="relative w-full" style={{ height: "clamp(260px, 40vw, 480px)" }}>
+      <div className="relative w-full" style={{ height: "clamp(340px, 55vw, 640px)" }}>
         <img
           src={newsItem.image ? getImageUrl(newsItem.image) : ""}
           alt={newsItem.heading}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover object-top"
           onError={e => { e.currentTarget.style.opacity = "0.15"; }}
         />
         <div className="absolute inset-0"
@@ -169,10 +169,7 @@ export default function NewsDetail() {
             style={{ background: "rgba(56,189,248,0.1)", border: "1px solid rgba(56,189,248,0.35)", color: "#38bdf8", fontFamily: "Orbitron, sans-serif" }}>
             {t("newsPage.newsUpdates")}
           </span>
-          <div className="flex items-center gap-1.5 text-white/40 text-[12px]">
-            <FaCalendarAlt size={11} />
-            <span>{formatDate(newsItem.createdAt)}</span>
-          </div>
+          {/* date hidden until site goes live */}
         </motion.div>
 
         {/* Title */}
@@ -233,8 +230,8 @@ export default function NewsDetail() {
             );
             return (
               <p key={i} className={i === 0
-                ? "text-white/90 text-[16px] md:text-[17px] leading-[1.85] font-medium"
-                : "text-white/65 text-[14px] md:text-[15px] leading-[1.9]"
+                ? "text-white/90 text-[16px] md:text-[17px] leading-[1.85] font-medium text-justify"
+                : "text-white/65 text-[14px] md:text-[15px] leading-[1.9] text-justify"
               }>
                 {parseBold(block.text)}
               </p>

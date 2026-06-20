@@ -157,7 +157,7 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
               </li>
             </Link>
 
-            {/* HyperBucks */}
+            {/* Hyper Bucks */}
             <Link to="/dashboard/topup" className="w-full max-w-[222px]">
               <li
                 className={`flex items-center px-3 mt-3 cursor-pointer rounded-md ${selectedItem === "topup" ? "bg-[#002AA8]" : "hover:bg-white/5"}`}
@@ -166,7 +166,7 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
               >
                 <FiZap className="text-white w-[20px] h-[20px] flex-shrink-0" />
                 <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px" }}>
-                  {t("dashboard.sidebar.hyperBucks","HyperBucks")}
+                  {t("dashboard.sidebar.hyperBucks","Hyper Bucks")}
                 </h1>
               </li>
             </Link>

@@ -93,7 +93,7 @@ export const createNews = async (req, res) => {
 export const getAllNews = async (req, res) => {
   try {
     const lang = req.query.lang || "en";
-    const news = await News.find({ status: "active" }).sort({ createdAt: -1 });
+    const news = await News.find({ status: "active" }).sort({ sortOrder: -1, createdAt: -1 });
 
     const data = news.map((item) => {
       const localized = getLocalizedNews(item, lang);

@@ -20,7 +20,7 @@ const NotificationSchema = new mongoose.Schema(
         "auction_sold",// your auction item was sold
         "trade",       // trade request received
         "trade_accepted", // your trade was accepted
-        "hb_credit",   // HyperBucks credited
+        "hb_credit",   // Hyper Bucks credited
         "withdrawal",  // withdrawal processed
         "kyc",         // KYC status update
         "system",      // general system message

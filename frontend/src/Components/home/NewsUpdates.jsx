@@ -10,7 +10,7 @@ const ARTICLE_ITEMS = [
     id: "article-001",
     tag: "PLATFORM UPDATE",
     tagColor: "#22c55e",
-    title: "HyperBucks — Top-Up & Cashout Now Live",
+    title: "Hyper Bucks — Top-Up & Cashout Now Live",
     date: "June 2025",
     points: [
       "Top up with credit/debit card or USDC crypto",
@@ -42,6 +42,15 @@ const VIDEO_ITEMS = [
     tagColor: "#38bdf8",
     title: "Hyper Tek — Overlord Content Preview",
     description: "An exclusive look at the Overlord game mode in the Hyper Tek universe.",
+    date: "May 2025",
+  },
+  {
+    id: "news-003",
+    src: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/quest_video2.webm",
+    tag: "GAME FOOTAGE",
+    tagColor: "#38bdf8",
+    title: "Hyper Tek — Quest Content Preview",
+    description: "Explore the Hyper Quest game mode in the Hyper Tek universe.",
     date: "May 2025",
   },
 ];
@@ -269,10 +278,7 @@ function VideoCard({ item, index }) {
           <p className="text-white/50 text-xs leading-relaxed line-clamp-2">
             {item.description}
           </p>
-          <div className="flex items-center gap-1.5 mt-1">
-            <Calendar size={11} style={{ color: "rgba(255,255,255,0.3)" }} />
-            <span className="text-white/30 text-[11px]">{item.date}</span>
-          </div>
+          {/* date hidden until site goes live */}
         </div>
       </motion.div>
 
@@ -302,10 +308,7 @@ function ArticleCard({ item, index }) {
         >
           {item.tag}
         </span>
-        <div className="flex items-center gap-1.5">
-          <Calendar size={11} style={{ color: "rgba(255,255,255,0.3)" }} />
-          <span className="text-white/30 text-[11px]">{item.date}</span>
-        </div>
+        {/* date hidden until site goes live */}
       </div>
 
       {/* Body */}

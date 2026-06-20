@@ -8,7 +8,7 @@ const STATUS_CONFIG = {
   not_started: {
     icon: <FiShield size={28} className="text-white/40" />,
     title: 'Identity Verification Required',
-    description: 'You need to verify your identity before you can cash out HyperBucks. This is required to prevent money laundering and protect all users on the platform.',
+    description: 'You need to verify your identity before you can cash out Hyper Bucks. This is required to prevent money laundering and protect all users on the platform.',
     badgeClass: 'bg-white/10 text-white/60',
     badge: 'Not Started',
   },
@@ -22,7 +22,7 @@ const STATUS_CONFIG = {
   verified: {
     icon: <FiCheckCircle size={28} className="text-green-400" />,
     title: 'Identity Verified',
-    description: 'Your identity has been successfully verified. You can now cash out HyperBucks.',
+    description: 'Your identity has been successfully verified. You can now cash out Hyper Bucks.',
     badgeClass: 'bg-green-500/20 text-green-300',
     badge: 'Verified',
   },

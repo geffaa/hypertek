@@ -12,7 +12,7 @@ HyperTek100 is a blockchain gaming ecosystem on the Base network. It combines:
 - A multi-feature NFT marketplace (General, Auctions, Trades, Quests, Hire/Rent, Bounties)
 - Three games: Racing, Quest, and Overlord
 - A layered digital asset system (NFA, NFC, NFT)
-- HyperBucks (HB) as the in-game currency
+- Hyper Bucks (HB) as the in-game currency
 - USDC as the primary payment and reward currency on Base network
 - Support for credit/debit card payments
 
@@ -46,7 +46,7 @@ HYPERBUCKS (HB) - IN-GAME CURRENCY
 
 Conversion Rate: 250 HB = 1 USD
 
-How to Earn HyperBucks
+How to Earn Hyper Bucks
 - Playing games: the game server awards HB automatically based on performance
 - Completing Quests in the marketplace: earning the quest reward in HB
 - Winning prizes or special events
@@ -56,17 +56,17 @@ How to Check Your HB Balance
 - Your balance shows in HB and also in USD equivalent (balance / 250)
 - Full transaction history is available under HB History
 
-How to Top Up HyperBucks
-You can add HyperBucks to your account in two ways:
+How to Top Up Hyper Bucks
+You can add Hyper Bucks to your account in two ways:
 1. Credit or debit card via Stripe — minimum top-up is 250 HB (= $1 USD). Payment is instant and HB is credited automatically.
 2. USDC on the Base network — send USDC to the platform wallet, submit your transaction hash, and HB is credited automatically after on-chain verification.
 
-You can also earn HyperBucks by:
+You can also earn Hyper Bucks by:
 - Playing the Racing, Quest, or Overlord game and earning rewards
 - Completing quest listings posted by other users in the marketplace
 - Winning prizes or special events
 
-How to Cash Out HyperBucks (Convert to Real Money)
+How to Cash Out Hyper Bucks (Convert to Real Money)
 
 Important: When you create a HyperTek account (sign up with email), the platform automatically creates a secure embedded crypto wallet for you — you do NOT need MetaMask or any external wallet to get started.
 
@@ -175,7 +175,7 @@ MARKETPLACE TAB 3: TRADES
 
 What it is:
 - Peer-to-peer exchange between users
-- You can offer items or HyperBucks and request items or HyperBucks in return
+- You can offer items or Hyper Bucks and request items or Hyper Bucks in return
 - Trades expire after 30 days if not accepted or completed
 
 How to create a trade offer:
@@ -232,7 +232,7 @@ How to accept a quest:
 How to earn the quest reward:
 1. Complete the task described in the quest
 2. The poster confirms your completion by clicking "Complete"
-3. Your HyperBucks balance is credited automatically with the player reward amount
+3. Your Hyper Bucks balance is credited automatically with the player reward amount
 4. The transaction is recorded in your HB ledger
 
 Quest expiry: quests expire automatically after 30 days if not accepted or completed
@@ -355,13 +355,13 @@ THE THREE GAMES
 Racing Game:
 - High-speed competitive racing on Base blockchain
 - Use your NFC characters and racing vehicles to compete
-- Earn HyperBucks rewards based on your race result and leaderboard position
+- Earn Hyper Bucks rewards based on your race result and leaderboard position
 - Seasonal prizes available
 
 Quest Game:
 - Adventure and exploration gameplay
 - Complete story-driven missions with your NFCs
-- Unlock rare items and earn HyperBucks as you progress
+- Unlock rare items and earn Hyper Bucks as you progress
 - Solo and cooperative modes available
 
 Overlord Game:
@@ -379,7 +379,7 @@ Step 2: Connect your Web3 wallet (MetaMask recommended) or sign up with email
 Step 3: Fund your wallet with USDC on Base network, or use credit card at checkout
 Step 4: Browse the Marketplace to find NFAs, NFCs, or NFTs
 Step 5: Purchase assets and start playing the games
-Step 6: Track your portfolio, HyperBucks balance, and earnings in your Dashboard
+Step 6: Track your portfolio, Hyper Bucks balance, and earnings in your Dashboard
 
 =====================
 DASHBOARD FEATURES
@@ -390,7 +390,7 @@ DASHBOARD FEATURES
 - Activity: full history of purchases, sales, trades, bids, and rentals
 - Transactions: payment and payout history
 - Support: live chat with the HyperTek support team
-- Withdraw: cash out your HyperBucks to USDC or bank transfer
+- Withdraw: cash out your Hyper Bucks to USDC or bank transfer
 
 =====================
 NFT 101 SECTION
@@ -417,15 +417,15 @@ Q: What blockchain does HyperTek use?
 A: HyperTek runs on the Base network, a fast and low-cost Ethereum Layer 2 chain.
 
 Q: What currency is used on the platform?
-A: USDC (USD Coin) is the main currency for buying, selling, and rewards. HyperBucks (HB) is the in-game currency earned through gameplay and quests.
+A: USDC (USD Coin) is the main currency for buying, selling, and rewards. Hyper Bucks (HB) is the in-game currency earned through gameplay and quests.
 
-Q: What is the HyperBucks conversion rate?
+Q: What is the Hyper Bucks conversion rate?
 A: 250 HB = 1 USD.
 
-Q: How do I earn HyperBucks?
+Q: How do I earn Hyper Bucks?
 A: Play the games (Racing, Quest, Overlord), complete marketplace quests, or win prizes. HB cannot be purchased directly.
 
-Q: How do I cash out my HyperBucks?
+Q: How do I cash out my Hyper Bucks?
 A: Go to Dashboard > Withdraw. Choose USDC cashout (minimum 250 HB, needs wallet address) or bank transfer (minimum 2,500 HB, needs saved bank details).
 
 Q: Do I need a crypto wallet?

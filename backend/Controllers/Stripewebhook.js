@@ -32,10 +32,10 @@ async function sendKycEmail(toEmail, status, failReason) {
       <div style="font-family:Inter,sans-serif;max-width:520px;margin:0 auto;background:#0d0d0d;color:#fff;padding:32px;border-radius:12px">
         <h2 style="color:#4ade80;margin-bottom:8px">Identity Verified</h2>
         <p style="color:#aaa;margin-bottom:24px">Your identity has been successfully verified on HyperTek.</p>
-        <p style="color:#ccc">You can now cash out your HyperBucks at any time by visiting your dashboard.</p>
+        <p style="color:#ccc">You can now cash out your Hyper Bucks at any time by visiting your dashboard.</p>
         <a href="${process.env.FRONTEND_URL || "https://hyper-tek.com"}/dashboard/topup"
            style="display:inline-block;margin-top:24px;padding:12px 24px;background:#002AA8;color:#fff;border-radius:8px;text-decoration:none;font-weight:600">
-          Go to HyperBucks
+          Go to Hyper Bucks
         </a>
         <p style="color:#555;font-size:12px;margin-top:32px">HyperTek — Building Worlds, One Game at a Time</p>
       </div>`
@@ -134,7 +134,7 @@ export const StripeWebhook = async (req, res) => {
             await markOfferCompleted(offerId);
           }
 
-          // Handle HyperBucks top-up
+          // Handle Hyper Bucks top-up
           if (paymentData.itemType === "hyperbucks") {
             const hbAmount = parseInt(dataObject.metadata?.hbAmount || 0);
             const topupUserId = dataObject.metadata?.userId;
@@ -152,10 +152,10 @@ export const StripeWebhook = async (req, res) => {
                     description: `Top-up: ${hbAmount} HB ($${(hbAmount / 250).toFixed(2)} USD)`,
                     reference: paymentData.paymentIntentId,
                   });
-                  console.log(`[StripeWebhook] HyperBucks credited: ${hbAmount} HB to user ${topupUserId}`);
+                  console.log(`[StripeWebhook] Hyper Bucks credited: ${hbAmount} HB to user ${topupUserId}`);
                 }
               } catch (hbErr) {
-                console.error(" [StripeWebhook] HyperBucks credit failed:", hbErr.message);
+                console.error(" [StripeWebhook] Hyper Bucks credit failed:", hbErr.message);
               }
             }
             break;
