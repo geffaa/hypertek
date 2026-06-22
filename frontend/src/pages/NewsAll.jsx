@@ -15,7 +15,7 @@ const VIDEO_ITEMS = [
     tag: "GAME FOOTAGE",
     tagColor: "#38bdf8",
     title: "Hyper Tek — Game Content Preview",
-    description: "A first look at in-game footage from the Hyper Tek universe.",
+    description: "In-game content of Hyper Racing Universe",
     date: "May 2025",
   },
   {
@@ -369,14 +369,13 @@ function NewsCard({ item, i, go, readLabel, lang }) {
       <div className="relative overflow-hidden" style={{ aspectRatio: "16/9" }}>
         <img src={getImageUrl(item.image)} alt={item.heading}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(6,6,16,0.6) 0%, transparent 60%)" }} />
       </div>
       <div className="flex flex-col flex-1 p-5 gap-2">
         {/* date hidden until site goes live */}
         <h3 className="font-[Goldman] font-bold text-white text-[15px] leading-snug group-hover:text-[#38bdf8] transition-colors duration-300">
           {clip(item.heading, 65)}
         </h3>
-        <p className="text-white/50 text-[13px] leading-relaxed flex-1 text-justify">{clip(item.description, 160)}</p>
+        <p className="text-white/50 text-[13px] leading-relaxed flex-1 text-justify">{clip(item.excerpt || (item.description?.includes("\n\n") ? item.description.split("\n\n").slice(1).join("\n\n") : item.description), 160)}</p>
         <div className="flex items-center gap-1.5 mt-2 text-[#38bdf8]/70 text-[11px] font-bold uppercase tracking-widest" style={{ fontFamily: "Orbitron, sans-serif" }}>
           <span>{readLabel}</span>
           <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
@@ -645,8 +644,8 @@ export default function NewsList() {
           </div>
 
           <div
-            className="rounded-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-[280px_1fr]"
-            style={{ border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.02)" }}
+            className="rounded-2xl grid grid-cols-1 lg:grid-cols-[260px_1fr]"
+            style={{ border: "1px solid rgba(255,255,255,0.08)" }}
           >
             {/* LEFT: Question list */}
             <div style={{ borderRight: "1px solid rgba(255,255,255,0.07)" }}>
@@ -685,65 +684,82 @@ export default function NewsList() {
             </div>
 
             {/* RIGHT: Answer + Character */}
-            <div className="relative overflow-hidden flex flex-col justify-between min-h-[340px]">
-              <AnimatePresence mode="wait">
-                <motion.img
-                  key={activeFaq}
-                  src={faqAvatars[activeFaq]}
-                  alt="character"
-                  className="absolute bottom-0 right-6 h-[92%] w-auto object-contain object-bottom pointer-events-none select-none"
-                  style={{ filter: "drop-shadow(0 0 40px rgba(167,139,250,0.15))" }}
-                  initial={{ opacity: 0, x: 40, scale: 0.95 }}
-                  animate={{ opacity: 1, x: 0, scale: 1 }}
-                  exit={{ opacity: 0, x: -20, scale: 0.97 }}
-                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                />
-              </AnimatePresence>
+            <div className="relative flex flex-col" style={{ minHeight: 580 }}>
 
-              <div className="absolute inset-0 pointer-events-none"
-                style={{ background: "linear-gradient(90deg, rgba(6,6,16,0.0) 30%, rgba(6,6,16,0.75) 100%)" }} />
-              <div className="absolute inset-0 pointer-events-none"
-                style={{ background: "linear-gradient(to top, rgba(6,6,16,0.5) 0%, transparent 50%)" }} />
+              {/* Character — large, pinned to right, full height */}
+              <div className="absolute top-0 right-0 bottom-0 hidden lg:block pointer-events-none select-none"
+                style={{ width: "clamp(300px, 40%, 460px)" }}>
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={activeFaq}
+                    src={faqAvatars[activeFaq]}
+                    alt="character"
+                    className="absolute right-0 w-auto object-contain object-bottom"
+                    style={{ bottom: "5%", height: "110%" }}
+                    initial={{ opacity: 0, x: 30, scale: 0.93 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    exit={{ opacity: 0, x: -15, scale: 0.96 }}
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  />
+                </AnimatePresence>
+                {/* fade left edge so text reads cleanly */}
+                <div className="absolute inset-y-0 left-0 w-20 pointer-events-none"
+                  style={{ background: "linear-gradient(to right, rgba(6,6,16,0.95), transparent)" }} />
+              </div>
 
+              {/* Scrollable text — max-width keeps it clear of the character */}
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeFaq}
-                  className="relative z-10 p-8 md:p-10 max-w-[520px]"
-                  initial={{ opacity: 0, y: 16 }}
+                  className="flex-1 overflow-y-auto pt-8 px-8 pb-4 md:pt-10 md:px-10 md:pb-4"
+                  style={{ maxHeight: 500, paddingRight: "clamp(2rem, 42%, 480px)" }}
+                  initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
+                  exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.35, ease: "easeOut" }}
                 >
-                  <div className="flex items-center gap-2 mb-4">
+                  <div className="flex items-center gap-2 mb-3">
                     <div className="w-4 h-[1px]" style={{ background: "#a78bfa" }} />
                     <span className="text-[10px] font-bold uppercase tracking-[0.3em]"
                       style={{ color: "#a78bfa", fontFamily: "Orbitron, sans-serif" }}>
                       {t("newsPage.faqLabel")}
                     </span>
                   </div>
-                  <h3 className="font-[Goldman] font-bold text-white text-xl md:text-2xl leading-snug mb-4">
+                  <h3 className="font-[Goldman] font-bold text-white text-xl md:text-2xl leading-snug mb-5">
                     {faqItems[activeFaq]?.q}
                   </h3>
-                  <p className="text-gray-400 text-sm leading-[1.85] text-justify">
-                    {faqItems[activeFaq]?.a}
-                  </p>
+                  <div className="text-white/55 text-[13.5px] leading-[1.85] flex flex-col gap-3">
+                    {faqItems[activeFaq]?.a?.split("\n\n").map((para, pi) => {
+                      const colonMatch = para.match(/^([A-Za-z][^:\n]{0,60}:)\s([\s\S]*)/);
+                      if (colonMatch) {
+                        return (
+                          <p key={pi}>
+                            <strong className="text-white/90 font-semibold">{colonMatch[1]}</strong>{" "}{colonMatch[2]}
+                          </p>
+                        );
+                      }
+                      if (/^\d+\.\s/.test(para)) {
+                        return (
+                          <ul key={pi} className="flex flex-col gap-1.5 pl-1">
+                            {para.split("\n").map((line, li) => (
+                              <li key={li} className="flex gap-3">
+                                <span className="flex-shrink-0 w-5 h-5 rounded flex items-center justify-center text-[10px] font-bold mt-0.5"
+                                  style={{ background: "rgba(167,139,250,0.15)", color: "#a78bfa", border: "1px solid rgba(167,139,250,0.3)" }}>
+                                  {line.match(/^\d+/)?.[0]}
+                                </span>
+                                <span>{line.replace(/^\d+\.\s*/, "")}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        );
+                      }
+                      return <p key={pi}>{para}</p>;
+                    })}
+                  </div>
                 </motion.div>
               </AnimatePresence>
 
-              <div className="relative z-10 flex items-center gap-2 px-8 md:px-10 pb-8">
-                {faqItems.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setFaq(i)}
-                    className="transition-all duration-300 rounded-full"
-                    style={{
-                      width: activeFaq === i ? 20 : 6,
-                      height: 6,
-                      background: activeFaq === i ? "#a78bfa" : "rgba(255,255,255,0.2)",
-                    }}
-                  />
-                ))}
-              </div>
+
             </div>
           </div>
         </motion.div>

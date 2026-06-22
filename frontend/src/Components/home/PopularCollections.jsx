@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { NFAItemsSection } from "./MarketPlace";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -570,7 +571,6 @@ function CrowdfundingPackages({ showPageLink = false }) {
     <section className="relative z-10 w-full px-6 pb-16">
       <div className="mx-auto max-w-[1400px]">
 
-        {/* ── Unified container: header text + packages grid ── */}
         <motion.div
           variants={fadeUp} custom={0}
           initial="hidden" whileInView="visible"
@@ -622,10 +622,22 @@ function CrowdfundingPackages({ showPageLink = false }) {
             </p>
           </div>
 
-          {/* ── Divider with section heading ── */}
+          {/* ── NFA Items Section (Limited Edition) ── */}
+          <NFAItemsSection />
+
+        </motion.div>
+
+        {/* ── Donation Tier Packages — standalone below card ── */}
+        <motion.div
+          variants={fadeUp} custom={1}
+          initial="hidden" whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="mt-6"
+        >
+          {/* Divider with section heading */}
           <div
-            className="px-8 py-4 flex items-center gap-4"
-            style={{ borderTop: "1px solid rgba(56,189,248,0.2)", background: "rgba(56,189,248,0.04)" }}
+            className="px-8 py-4 flex items-center gap-4 rounded-t-xl"
+            style={{ borderTop: "2px solid rgba(56,189,248,0.5)", borderLeft: "1px solid rgba(56,189,248,0.22)", borderRight: "1px solid rgba(56,189,248,0.22)", background: "rgba(56,189,248,0.04)" }}
           >
             <div className="flex items-center gap-3">
               <div className="w-10 h-[2px] bg-white/50" />
@@ -642,7 +654,9 @@ function CrowdfundingPackages({ showPageLink = false }) {
           </div>
 
           {/* ── Packages grid ── */}
-          <div className="px-8 pb-8 pt-5 flex flex-col gap-4">
+          <div className="px-8 pb-8 pt-5 flex flex-col gap-4"
+            style={{ border: "1px solid rgba(56,189,248,0.22)", borderTop: "none", borderBottomLeftRadius: 12, borderBottomRightRadius: 12, background: "linear-gradient(160deg, rgba(0,40,120,0.12) 0%, rgba(0,10,40,0.35) 100%)" }}
+          >
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
               {visible.map((pkg, index) => (
                 <motion.div

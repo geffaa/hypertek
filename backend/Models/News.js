@@ -12,6 +12,10 @@ const newsSchema = new mongoose.Schema(
       required: true,
     },
 
+    excerpt: {
+      type: String,
+    },
+
     image: {
       type: String,
       required: true,

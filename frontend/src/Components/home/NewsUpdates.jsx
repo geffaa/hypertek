@@ -32,7 +32,7 @@ const VIDEO_ITEMS = [
     tag: "GAME FOOTAGE",
     tagColor: "#38bdf8",
     title: "Hyper Tek — Game Content Preview",
-    description: "A first look at in-game footage from the Hyper Tek universe.",
+    description: "In-game content of Hyper Racing Universe",
     date: "May 2025",
   },
   {
@@ -198,17 +198,6 @@ function VideoCard({ item, index }) {
             }}
           />
 
-          {/* Gradient overlay */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: hovered
-                ? "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 100%)"
-                : "linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.05) 100%)",
-              transition: "background 0.3s",
-            }}
-          />
-
           {/* Top accent line */}
           <div
             className="absolute top-0 inset-x-0 h-[2px] transition-opacity duration-300"
@@ -276,7 +265,7 @@ function VideoCard({ item, index }) {
             {item.title}
           </h3>
           <p className="text-white/50 text-xs leading-relaxed line-clamp-2">
-            {item.description}
+            {item.excerpt || (item.description?.includes("\n\n") ? item.description.split("\n\n").slice(1).join("\n\n") : item.description)}
           </p>
           {/* date hidden until site goes live */}
         </div>

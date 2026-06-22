@@ -65,12 +65,16 @@ export default function NewsDetail() {
     );
   }
 
-  // Parse inline bold: split text on **...** markers into React nodes
+  // Parse inline bold (**text**) and italic (*text*) markers into React nodes
   const parseBold = (text) => {
-    const parts = text.split(/\*\*(.*?)\*\*/g);
-    return parts.map((part, i) =>
-      i % 2 === 1 ? <strong key={i} className="text-white font-semibold">{part}</strong> : part
-    );
+    const parts = text.split(/(\*\*.*?\*\*|\*[^*]+\*)/g);
+    return parts.map((part, i) => {
+      if (part.startsWith("**") && part.endsWith("**"))
+        return <strong key={i} className="text-white font-semibold">{part.slice(2, -2)}</strong>;
+      if (part.startsWith("*") && part.endsWith("*"))
+        return <em key={i}>{part.slice(1, -1)}</em>;
+      return part;
+    });
   };
 
   // Group lines into typed blocks: subtitle | table | para
@@ -120,8 +124,6 @@ export default function NewsDetail() {
           className="absolute inset-0 w-full h-full object-cover object-top"
           onError={e => { e.currentTarget.style.opacity = "0.15"; }}
         />
-        <div className="absolute inset-0"
-          style={{ background: "linear-gradient(to bottom, rgba(6,6,16,0.5) 0%, rgba(6,6,16,0.15) 35%, rgba(6,6,16,0.9) 100%)" }} />
         <div className="absolute bottom-0 inset-x-0 h-[2px]"
           style={{ background: "linear-gradient(to right, transparent, #38bdf8, transparent)", boxShadow: "0 0 24px rgba(56,189,248,0.5)" }} />
 

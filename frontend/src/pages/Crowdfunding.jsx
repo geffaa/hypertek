@@ -18,11 +18,10 @@ import {
 import { useTranslation } from "react-i18next";
 import GlowingOrb from "../Components/Common/BgColoring";
 import CrowdfundingPackages from "../Components/home/PopularCollections";
-import FeaturedMarketplace from "../Components/home/MarketPlace";
-import gamePng from "../assets/images/aboutpage/game.webp";
 
-// ── Hyper Tek Roadmap — 11 milestones (content verbatim from Don's roadmap deck) ──
-// Hardcoded in English on purpose: this is Don's exact copy and must not be paraphrased.
+
+
+// ── Hardcoded milestone data (Don's roadmap, verbatim) ──
 const ROADMAP_HEADING = "The Milestones of the Hyper Tek Roadmap";
 const MILESTONES = [
   {
@@ -31,10 +30,7 @@ const MILESTONES = [
     Icon: DraftingCompass,
     bullets: [
       { text: "Analyse the key issues facing the Gaming, Virtual Reality, and Digital Art industry." },
-      {
-        text: "Focused on developing innovative solutions designed to tackle these issues head-on",
-        sub: ["enhancing user experience", "advancing the overall quality of these digital mediums."],
-      },
+      { text: "Focused on developing innovative solutions designed to tackle these issues head-on", sub: ["enhancing user experience", "advancing the overall quality of these digital mediums."] },
     ],
   },
   {
@@ -120,7 +116,6 @@ const MILESTONES = [
   },
 ];
 
-// ── "Don't Miss the Early-Access Window" urgency block (verbatim from Don's deck) ──
 const EARLY_ACCESS = {
   eyebrow: "LIMITED-TIME OPPORTUNITY",
   heading: "Don't Miss the Early-Access Window",
@@ -139,14 +134,19 @@ const WEB3_CARD_ACCENTS = [
   { accent: "#a78bfa", bg: "rgba(167,139,250,0.04)", border: "rgba(167,139,250,0.18)", borderTop: "rgba(167,139,250,0.55)", iconBg: "rgba(167,139,250,0.12)", iconBorder: "rgba(167,139,250,0.3)" },
 ];
 
-// ── "How YOU Can Help" step colors (Buy / Create / Share) ──
 const HELP_META = [
   { accent: "#38bdf8", iconBg: "rgba(56,189,248,0.12)" },
   { accent: "#fbbf24", iconBg: "rgba(251,191,36,0.12)" },
   { accent: "#22c55e", iconBg: "rgba(34,197,94,0.12)" },
 ];
 
-// Rounded CTA buttons to match the page's rounded-card visual language
+const FIXED_AVATARS = [
+  { src: "/avatar/overlord.webp",           top: "10vh", side: "right", w: 220, delay: 0,   faction: "OVERLORD",          accentColor: "#fbbf24" },
+  { src: "/avatar/geodians-male.webp",      top: "32vh", side: "left",  w: 200, delay: 0.3, faction: "GEODIAN",           accentColor: "#22c55e" },
+  { src: "/avatar/mantasquads-female.webp", top: "54vh", side: "right", w: 210, delay: 0.6, faction: "MANTASQUAD",        accentColor: "#a78bfa" },
+  { src: "/avatar/dryads-female.webp",      top: "74vh", side: "left",  w: 195, delay: 0.9, faction: "DRYAD",             accentColor: "#38bdf8" },
+];
+
 const BTN_PRIMARY = {
   background: "linear-gradient(135deg, rgba(56,189,248,0.20) 0%, rgba(56,189,248,0.06) 100%)",
   border: "1px solid rgba(56,189,248,0.5)",
@@ -167,7 +167,6 @@ const BTN_SECONDARY = {
   letterSpacing: "0.12em",
 };
 
-// ── Section eyebrow label (no section number — irrelevant on this standalone page) ──
 function SectionLabel({ label, align = "left" }) {
   return (
     <div className={`flex items-center gap-3 mb-5 ${align === "center" ? "justify-center" : ""}`}>
@@ -175,6 +174,38 @@ function SectionLabel({ label, align = "left" }) {
       <span className="text-white/70 text-[12px] font-bold tracking-[0.3em] uppercase">{label}</span>
       {align === "center" && <div className="w-8 h-px" style={{ background: "rgba(56,189,248,0.55)" }} />}
     </div>
+  );
+}
+
+// HUD corner bracket SVG — purely decorative
+function HudCorners({ color = "#00D4FF", opacity = 0.5, size = 18 }) {
+  const s = size;
+  return (
+    <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }} viewBox="0 0 100 100" preserveAspectRatio="none">
+      <g stroke={color} strokeWidth="1.5" fill="none" opacity={opacity}>
+        {/* TL */}
+        <polyline points={`0,${s} 0,0 ${s},0`} vectorEffect="non-scaling-stroke" />
+        {/* TR */}
+        <polyline points={`${100 - s},0 100,0 100,${s}`} vectorEffect="non-scaling-stroke" />
+        {/* BR */}
+        <polyline points={`100,${100 - s} 100,100 ${100 - s},100`} vectorEffect="non-scaling-stroke" />
+        {/* BL */}
+        <polyline points={`${s},100 0,100 0,${100 - s}`} vectorEffect="non-scaling-stroke" />
+      </g>
+    </svg>
+  );
+}
+
+// Scan-line overlay stripe — decorative
+function ScanLines({ opacity = 0.025 }) {
+  return (
+    <div
+      className="absolute inset-0 pointer-events-none"
+      style={{
+        backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,212,255,1) 3px, rgba(0,212,255,1) 4px)",
+        opacity,
+      }}
+    />
   );
 }
 
@@ -186,8 +217,6 @@ function Crowdfunding() {
   const sec06Cards = Array.isArray(sec06.cards) ? sec06.cards : [];
   const closing = t("aboutPage.closing", { returnObjects: true }) || {};
 
-  // sec05.link looks like "[www.hypertek.com] — Back the Project. Own the Future."
-  // Split the URL from the slogan and clean the brackets for a tidier layout.
   const linkParts = (sec05.link || "").split("—");
   const linkUrl = (linkParts[0] || "").replace(/[[\]]/g, "").trim();
   const linkSlogan = linkParts.length > 1 ? linkParts.slice(1).join("—").trim() : "";
@@ -197,40 +226,164 @@ function Crowdfunding() {
   }, []);
 
   return (
-    <div className="relative text-white overflow-hidden" style={{ background: "#060610" }}>
-      <GlowingOrb Xaxis={80} Yaxis={500} />
+    <div className="relative text-white" style={{ background: "#060610" }}>
+
+      {/* ══════════════════════════════════════════════════════
+          FIXED BACKGROUND — stays in place while page scrolls
+      ══════════════════════════════════════════════════════ */}
+      <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 0 }}>
+        {/* avatar_complete — full background, fixed */}
+        <img src="/avatar_complete.webp" alt="" className="absolute inset-0 w-full h-full object-cover object-center"
+          style={{ opacity: 0.32, filter: "saturate(0.6)" }} />
+        {/* Dark overlay */}
+        <div className="absolute inset-0" style={{ background: "rgba(6,6,16,0.70)" }} />
+
+        {/* Fixed avatar panels — premium HUD-style character displays */}
+        {FIXED_AVATARS.map((av, i) => (
+          <motion.div
+            key={i}
+            className="absolute hidden lg:block pointer-events-none"
+            style={{
+              top: av.top,
+              [av.side]: 0,
+              width: av.w,
+            }}
+            initial={{ opacity: 0, x: av.side === "right" ? 60 : -60 }}
+            animate={{ opacity: 1, x: 0, y: [0, -8, 0] }}
+            transition={{
+              opacity: { delay: av.delay, duration: 1.4, ease: "easeOut" },
+              x: { delay: av.delay, duration: 1.2, ease: "easeOut" },
+              y: { delay: av.delay + 0.5, duration: 8 + i * 2, repeat: Infinity, ease: "easeInOut" },
+            }}
+          >
+            {/* Outer glow */}
+            <div className="absolute -inset-3 rounded-2xl pointer-events-none"
+              style={{
+                background: `radial-gradient(ellipse at ${av.side === "right" ? "30%" : "70%"} 50%, ${av.accentColor}15 0%, transparent 70%)`,
+                filter: "blur(20px)",
+              }}
+            />
+
+            <div className="relative overflow-hidden"
+              style={{
+                borderRadius: av.side === "right" ? "16px 0 0 16px" : "0 16px 16px 0",
+                border: `1px solid ${av.accentColor}40`,
+                [av.side === "right" ? "borderRight" : "borderLeft"]: "none",
+                background: `linear-gradient(${av.side === "right" ? "270deg" : "90deg"}, rgba(6,6,16,0.85) 0%, rgba(6,6,16,0.4) 100%)`,
+                backdropFilter: "blur(16px)",
+                WebkitBackdropFilter: "blur(16px)",
+                boxShadow: `${av.side === "right" ? "-" : ""}8px 0 40px ${av.accentColor}18, inset 0 0 30px rgba(0,0,0,0.4)`,
+              }}>
+
+              {/* Top accent bar */}
+              <div className="absolute top-0 left-0 right-0 h-[2px]"
+                style={{
+                  background: `linear-gradient(${av.side === "right" ? "270deg" : "90deg"}, ${av.accentColor}80, ${av.accentColor}10)`,
+                }}
+              />
+
+              {/* HUD corners */}
+              <HudCorners color={av.accentColor} opacity={0.5} size={14} />
+
+              {/* Character image with vignette */}
+              <div className="relative">
+                <img src={av.src} alt="" className="w-full h-auto object-contain block"
+                  style={{ filter: "saturate(1.1) brightness(1.05) contrast(1.05)" }}
+                />
+                {/* Bottom vignette */}
+                <div className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: `linear-gradient(to top, rgba(6,6,16,0.95) 0%, rgba(6,6,16,0.3) 25%, transparent 45%, rgba(6,6,16,0.15) 100%)`,
+                  }}
+                />
+                {/* Side vignette toward screen edge */}
+                <div className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: `linear-gradient(${av.side === "right" ? "to left" : "to right"}, rgba(6,6,16,0.5) 0%, transparent 30%)`,
+                  }}
+                />
+              </div>
+
+              {/* Holographic scan lines */}
+              <div className="absolute inset-0 pointer-events-none"
+                style={{
+                  backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.02) 2px, rgba(255,255,255,0.02) 3px)",
+                  mixBlendMode: "overlay",
+                }}
+              />
+
+              {/* Faction badge */}
+              <div className="absolute bottom-0 left-0 right-0 px-3 py-2.5"
+                style={{
+                  background: "transparent",
+                }}>
+                <div className="flex items-center gap-2">
+                  {/* Animated pulse dot */}
+                  <div className="relative flex-shrink-0">
+                    <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: av.accentColor, boxShadow: `0 0 8px ${av.accentColor}80` }} />
+                    <div className="absolute inset-0 w-2 h-2 rounded-full animate-ping" style={{ background: av.accentColor, opacity: 0.3 }} />
+                  </div>
+                  <span className="text-[9px] font-bold tracking-[0.25em] uppercase"
+                    style={{
+                      fontFamily: "Orbitron, sans-serif",
+                      color: av.accentColor,
+                      textShadow: `0 0 12px ${av.accentColor}60`,
+                    }}>
+                    {av.faction}
+                  </span>
+                </div>
+                {/* Small status bar */}
+                <div className="mt-1.5 h-[1px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
+                  <motion.div
+                    className="h-full rounded-full"
+                    style={{ background: `linear-gradient(90deg, ${av.accentColor}80, ${av.accentColor}20)` }}
+                    initial={{ width: "0%" }}
+                    animate={{ width: "100%" }}
+                    transition={{ delay: av.delay + 1.2, duration: 2, ease: "easeOut" }}
+                  />
+                </div>
+              </div>
+
+              {/* Side accent line */}
+              <div className="absolute top-[10%] bottom-[10%] w-[1px]"
+                style={{
+                  [av.side === "right" ? "left" : "right"]: 0,
+                  background: `linear-gradient(to bottom, transparent, ${av.accentColor}50, transparent)`,
+                }}
+              />
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* ══ Global ambient orbs ══ */}
+      <GlowingOrb Xaxis={80}   Yaxis={500} />
       <GlowingOrb Xaxis={1300} Yaxis={1400} />
-      <GlowingOrb Xaxis={150} Yaxis={2400} />
+      <GlowingOrb Xaxis={150}  Yaxis={2400} />
 
       {/* ══════════════════════════════════════════════════════
           HERO + CROWDFUNDING ROADMAP
       ══════════════════════════════════════════════════════ */}
-      <section className="relative w-full px-6 pt-32 pb-14 overflow-hidden">
-        {/* Hero ambient background — distinct top treatment */}
-        <div className="absolute inset-x-0 top-0 h-[560px] pointer-events-none" style={{ background: "radial-gradient(ellipse 70% 100% at 50% -10%, rgba(56,189,248,0.14) 0%, rgba(251,191,36,0.05) 35%, transparent 70%)" }} />
-        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg,transparent,rgba(251,191,36,0.35) 35%,rgba(56,189,248,0.35) 65%,transparent)" }} />
+      <section className="relative w-full px-6 pt-32 pb-14 overflow-hidden" style={{ zIndex: 1 }}>
 
-        <div className="relative max-w-[1400px] mx-auto">
+        {/* Hero accent glow */}
+        <div className="absolute inset-x-0 top-0 h-[560px] pointer-events-none"
+          style={{ background: "radial-gradient(ellipse 70% 100% at 50% -10%, rgba(56,189,248,0.14) 0%, rgba(251,191,36,0.05) 35%, transparent 70%)" }} />
+        <div className="absolute top-0 left-0 right-0 h-px"
+          style={{ background: "linear-gradient(90deg,transparent,rgba(251,191,36,0.35) 35%,rgba(56,189,248,0.35) 65%,transparent)" }} />
 
-          {/* ── Hero header (centered) ── */}
+
+        <div className="relative max-w-[1100px] mx-auto">
+
+          {/* ── Hero header ── */}
           <motion.div
-            className="text-center max-w-3xl mx-auto mb-14"
+            className="text-center max-w-5xl mx-auto mb-14"
             initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full mb-6"
-              style={{ background: "rgba(251,191,36,0.12)", border: "1px solid rgba(251,191,36,0.4)" }}>
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.28em] text-amber-300" style={{ fontFamily: "Orbitron, sans-serif" }}>
-                {sec05.crowdfundingNow || "Crowdfunding Now"}
-              </span>
-            </div>
-
-            <SectionLabel label={sec05.label || "Crowdfunding — Help Build the Future"} align="center" />
-
-            <h1 className="font-[Goldman] font-bold text-3xl sm:text-4xl xl:text-[50px] text-white leading-[1.1]">
-              {sec05.heading || "Your Support Powers the Hyper Tek Universe"}
+            <h1 className="font-[Goldman] font-bold text-3xl sm:text-4xl xl:text-[50px] text-white leading-[1.15]">
+              Your Support Powers<br />the Hyper Tek Universe
             </h1>
-            <p className="text-white/55 text-sm md:text-[15px] leading-relaxed max-w-2xl mx-auto mt-5">
+            <p className="text-white/55 text-sm md:text-[15px] leading-relaxed max-w-[1440px] mx-auto mt-5 whitespace-pre-line">
               {sec05.subtitle}
             </p>
           </motion.div>
@@ -246,11 +399,11 @@ function Crowdfunding() {
             <div className="w-16 h-px mx-auto mt-4" style={{ background: "linear-gradient(90deg,transparent,rgba(251,191,36,0.6),transparent)" }} />
           </motion.div>
 
-          {/* ── Roadmap milestones — vertical timeline with numbered nodes on a left spine ── */}
+          {/* ── Roadmap milestones — vertical timeline ── */}
           <div className="flex flex-col mb-8">
             {MILESTONES.map((m, i) => {
               const isFinale = i === MILESTONES.length - 1;
-              const isFirst = i === 0;
+              const isFirst  = i === 0;
               const isCurrent = !!m.current;
               const cardBorder = isCurrent
                 ? "rgba(56,189,248,0.45)"
@@ -266,10 +419,9 @@ function Crowdfunding() {
                   transition={{ duration: 0.45 }}
                   viewport={{ once: true, amount: 0.1 }}
                 >
-                  {/* Spine column: top connector + node + bottom connector (fills row height) */}
+                  {/* Spine */}
                   <div className="relative flex flex-col items-center flex-shrink-0 w-12 md:w-14">
                     <div className="w-px h-6" style={{ background: isFirst ? "transparent" : "rgba(56,189,248,0.3)" }} />
-                    {/* node — gaming neon HUD chip */}
                     <div className="relative z-10 flex items-center justify-center flex-shrink-0">
                       {isCurrent && (
                         <span className="absolute inset-0 rounded-full animate-ping" style={{ background: "rgba(56,189,248,0.4)" }} />
@@ -279,11 +431,7 @@ function Crowdfunding() {
                         style={{
                           background: "rgba(10,16,34,0.92)",
                           color: isFinale ? "#c4b5fd" : isCurrent ? "#bae6fd" : "#7dd3fc",
-                          border: isFinale
-                            ? "1.5px solid rgba(167,139,250,0.75)"
-                            : isCurrent
-                            ? "2px solid #38bdf8"
-                            : "1.5px solid rgba(56,189,248,0.6)",
+                          border: isFinale ? "1.5px solid rgba(167,139,250,0.75)" : isCurrent ? "2px solid #38bdf8" : "1.5px solid rgba(56,189,248,0.6)",
                           boxShadow: isFinale
                             ? "0 0 18px rgba(167,139,250,0.5), inset 0 0 12px rgba(167,139,250,0.15)"
                             : isCurrent
@@ -302,12 +450,25 @@ function Crowdfunding() {
                   <div
                     className={`relative flex-1 rounded-xl p-5 md:p-6 overflow-hidden ${isFinale ? "" : "mb-6"}`}
                     style={{
-                      background: isCurrent ? "rgba(56,189,248,0.05)" : isFinale ? "rgba(167,139,250,0.05)" : "rgba(255,255,255,0.025)",
+                      background: isCurrent
+                        ? "rgba(10,30,55,0.82)"
+                        : isFinale
+                        ? "rgba(25,15,50,0.82)"
+                        : "rgba(8,12,28,0.80)",
+                      backdropFilter: "blur(12px)",
+                      WebkitBackdropFilter: "blur(12px)",
                       border: `1px solid ${cardBorder}`,
-                      borderTop: isCurrent ? "2px solid rgba(56,189,248,0.55)" : isFinale ? "2px solid rgba(167,139,250,0.5)" : undefined,
+                      borderTop: isCurrent ? "2px solid rgba(56,189,248,0.55)" : isFinale ? "2px solid rgba(167,139,250,0.5)" : "1px solid rgba(255,255,255,0.10)",
                     }}
                   >
-                    {/* faded phase number — watermark, top-right with a little inset */}
+                    {/* HUD corners on cards */}
+                    <HudCorners
+                      color={isCurrent ? "#38bdf8" : isFinale ? "#c4b5fd" : "#00D4FF"}
+                      opacity={isCurrent ? 0.35 : isFinale ? 0.3 : 0.15}
+                      size={12}
+                    />
+
+                    {/* Watermark */}
                     <span
                       className="pointer-events-none select-none absolute top-3 right-4 md:top-4 md:right-5 font-[Goldman] font-bold leading-none text-[68px] md:text-[92px]"
                       style={{ color: isCurrent ? "rgba(56,189,248,0.10)" : isFinale ? "rgba(167,139,250,0.10)" : "rgba(255,255,255,0.045)" }}
@@ -316,55 +477,54 @@ function Crowdfunding() {
                     </span>
 
                     <div className="relative z-10">
-                    {/* header: icon + title (+ status pill) */}
-                    <div className="flex items-center gap-3 mb-3.5 flex-wrap">
-                      <div
-                        className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-                        style={{ background: "rgba(56,189,248,0.10)", border: "1px solid rgba(56,189,248,0.3)" }}
-                      >
-                        <m.Icon size={22} color="#38bdf8" strokeWidth={1.6} />
+                      <div className="flex items-center gap-3 mb-3.5 flex-wrap">
+                        <div
+                          className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+                          style={{ background: "rgba(56,189,248,0.10)", border: "1px solid rgba(56,189,248,0.3)" }}
+                        >
+                          <m.Icon size={22} color="#38bdf8" strokeWidth={1.6} />
+                        </div>
+                        <h3 className="font-bold text-white text-[15px] md:text-[18px] leading-snug" style={{ fontFamily: "Orbitron, sans-serif", letterSpacing: "0.02em" }}>
+                          {m.title}
+                        </h3>
+                        {isCurrent && (
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full" style={{ background: "rgba(56,189,248,0.15)", border: "1px solid rgba(56,189,248,0.45)" }}>
+                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                            <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-cyan-300" style={{ fontFamily: "Orbitron, sans-serif" }}>We are here</span>
+                          </span>
+                        )}
+                        {isFinale && (
+                          <span className="px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-[0.2em] text-violet-300" style={{ background: "rgba(167,139,250,0.15)", border: "1px solid rgba(167,139,250,0.45)", fontFamily: "Orbitron, sans-serif" }}>
+                            Final
+                          </span>
+                        )}
                       </div>
-                      <h3 className="font-bold text-white text-[15px] md:text-[18px] leading-snug" style={{ fontFamily: "Orbitron, sans-serif", letterSpacing: "0.02em" }}>
-                        {m.title}
-                      </h3>
-                      {isCurrent && (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full" style={{ background: "rgba(56,189,248,0.15)", border: "1px solid rgba(56,189,248,0.45)" }}>
-                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                          <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-cyan-300" style={{ fontFamily: "Orbitron, sans-serif" }}>We are here</span>
-                        </span>
-                      )}
-                      {isFinale && (
-                        <span className="px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-[0.2em] text-violet-300" style={{ background: "rgba(167,139,250,0.15)", border: "1px solid rgba(167,139,250,0.45)", fontFamily: "Orbitron, sans-serif" }}>
-                          Final
-                        </span>
-                      )}
-                    </div>
 
-                    {m.intro && (
-                      <p className="text-white/70 text-[14px] md:text-[15px] leading-relaxed mb-3">{m.intro}</p>
-                    )}
-                    {Array.isArray(m.bullets) && m.bullets.length > 0 && (
-                      <ul className="flex flex-col gap-2.5">
-                        {m.bullets.map((b, j) => (
-                          <li key={j}>
-                            <div className="flex gap-3 items-start">
-                              <div className="w-1.5 h-1.5 rounded-full mt-[8px] flex-shrink-0" style={{ background: "#38bdf8" }} />
-                              <span className="text-white/70 text-[14px] md:text-[15px] leading-relaxed">{b.text}</span>
-                            </div>
-                            {Array.isArray(b.sub) && b.sub.length > 0 && (
-                              <ul className="flex flex-col gap-1.5 mt-2 ml-6">
-                                {b.sub.map((s, k) => (
-                                  <li key={k} className="flex gap-2.5 items-start">
-                                    <div className="w-1 h-1 rounded-full mt-[9px] flex-shrink-0" style={{ background: "rgba(255,255,255,0.4)" }} />
-                                    <span className="text-white/55 text-[13.5px] md:text-[14px] leading-relaxed">{s}</span>
-                                  </li>
-                                ))}
-                              </ul>
-                            )}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
+                      {m.intro && (
+                        <p className="text-white/70 text-[14px] md:text-[15px] leading-relaxed mb-3">{m.intro}</p>
+                      )}
+                      {Array.isArray(m.bullets) && m.bullets.length > 0 && (
+                        <ul className="flex flex-col gap-2.5">
+                          {m.bullets.map((b, j) => (
+                            <li key={j}>
+                              <div className="flex gap-3 items-start">
+                                <div className="w-1.5 h-1.5 rounded-full mt-[8px] flex-shrink-0" style={{ background: "#38bdf8" }} />
+                                <span className="text-white/70 text-[14px] md:text-[15px] leading-relaxed">{b.text}</span>
+                              </div>
+                              {Array.isArray(b.sub) && b.sub.length > 0 && (
+                                <ul className="flex flex-col gap-1.5 mt-2 ml-6">
+                                  {b.sub.map((s, k) => (
+                                    <li key={k} className="flex gap-2.5 items-start">
+                                      <div className="w-1 h-1 rounded-full mt-[9px] flex-shrink-0" style={{ background: "rgba(255,255,255,0.4)" }} />
+                                      <span className="text-white/55 text-[13.5px] md:text-[14px] leading-relaxed">{s}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
                   </div>
                 </motion.div>
@@ -372,7 +532,7 @@ function Crowdfunding() {
             })}
           </div>
 
-          {/* ── How YOU Can Help — open layout (no card), framed by hairlines ── */}
+          {/* ── How YOU Can Help ── */}
           <motion.div
             className="py-14 md:py-16"
             initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }} viewport={{ once: true }}
@@ -402,53 +562,38 @@ function Crowdfunding() {
                 );
               })}
             </div>
-            {/* Closing slogan + clean site link */}
-            <div className="flex flex-col items-center mt-12">
-              <div className="flex items-center gap-3 w-full max-w-xs mb-6">
-                <div className="flex-1 h-px bg-white/10" />
-                <div className="w-1 h-1 rounded-full bg-cyan-400/60" />
-                <div className="flex-1 h-px bg-white/10" />
-              </div>
-              <p className="font-[Goldman] font-bold text-white text-lg md:text-2xl text-center leading-snug">
-                {linkSlogan || "Back the Project. Own the Future."}
-              </p>
-              {linkUrl && (
-                <Link
-                  to="/"
-                  onClick={() => window.scrollTo(0, 0)}
-                  className="mt-3 text-[13px] md:text-sm font-semibold tracking-[0.1em] text-cyan-400 hover:text-cyan-300 transition-colors"
-                  style={{ fontFamily: "Orbitron, sans-serif" }}
-                >
-                  {linkUrl}
-                </Link>
-              )}
-            </div>
           </motion.div>
 
-          {/* ── Don't Miss the Early-Access Window — centered closing CTA (ambient glow, no card) ── */}
+          {/* ── Early Access CTA ── */}
           <motion.div
             className="relative mt-12 md:mt-16 py-12 md:py-16 text-center"
             initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
           >
-            {/* ambient amber glow — gives weight without a hard box edge */}
-            <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 75% at 50% 42%, rgba(251,191,36,0.12) 0%, transparent 70%)" }} />
 
+            {/* Money decorative — top-left */}
+            <img
+              src="/money-left.webp"
+              alt=""
+              aria-hidden="true"
+              className="absolute top-0 pointer-events-none select-none object-contain"
+              style={{ left: "-80px", top: "-60px", width: "clamp(180px, 18vw, 280px)", mixBlendMode: "screen", opacity: 0.6 }}
+            />
+            {/* Money decorative — bottom-right */}
+            <img
+              src="/money-right.webp"
+              alt=""
+              aria-hidden="true"
+              className="absolute top-0 pointer-events-none select-none object-contain"
+              style={{ right: "-80px", top: "-60px", width: "clamp(180px, 18vw, 280px)", mixBlendMode: "screen", opacity: 0.6 }}
+            />
             <div className="relative">
-              {/* eyebrow with side ticks, centered */}
               <div className="flex items-center justify-center gap-3 mb-5">
                 <div className="w-8 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
-                <span className="text-amber-300 text-[11px] font-bold uppercase tracking-[0.3em]" style={{ fontFamily: "Orbitron, sans-serif" }}>
-                  {EARLY_ACCESS.eyebrow}
-                </span>
+                <span className="text-amber-300 text-[11px] font-bold uppercase tracking-[0.3em]" style={{ fontFamily: "Orbitron, sans-serif" }}>{EARLY_ACCESS.eyebrow}</span>
                 <div className="w-8 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
               </div>
-
-              <h3 className="font-[Goldman] font-bold text-white text-2xl md:text-[36px] leading-tight mb-4">
-                {EARLY_ACCESS.heading}
-              </h3>
+              <h3 className="font-[Goldman] font-bold text-white text-2xl md:text-[36px] leading-tight mb-4">{EARLY_ACCESS.heading}</h3>
               <div className="w-16 h-[3px] rounded-full mx-auto mb-9" style={{ background: "linear-gradient(90deg,#fbbf24,#f59e0b)" }} />
-
-              {/* urgency points — centered block, text left-aligned for readability */}
               <ul className="flex flex-col gap-3.5 mb-10 max-w-2xl mx-auto text-left">
                 {EARLY_ACCESS.bullets.map((b, i) => (
                   <li key={i} className="flex gap-3 items-start">
@@ -457,20 +602,32 @@ function Crowdfunding() {
                   </li>
                 ))}
               </ul>
-
-              {/* primary CTA, centered */}
-              <Link
-                to="/market-place"
-                onClick={() => window.scrollTo(0, 0)}
+              <Link to="/market-place" onClick={() => window.scrollTo(0, 0)}
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-[12px] md:text-[13px] font-bold uppercase tracking-[0.12em] text-[#0b0b14] transition-all hover:brightness-110"
-                style={{ background: "linear-gradient(135deg,#fbbf24,#f59e0b)", fontFamily: "Orbitron, sans-serif", boxShadow: "0 0 32px rgba(251,191,36,0.35)" }}
-              >
+                style={{ background: "linear-gradient(135deg,#fbbf24,#f59e0b)", fontFamily: "Orbitron, sans-serif", boxShadow: "0 0 32px rgba(251,191,36,0.35)" }}>
                 {EARLY_ACCESS.cta}
                 <ArrowRight size={16} strokeWidth={2.4} />
               </Link>
-              <p className="text-white/55 text-[13px] md:text-[14px] leading-relaxed max-w-md mx-auto mt-5">
-                {EARLY_ACCESS.note}
-              </p>
+              <p className="text-white/55 text-[13px] md:text-[14px] leading-relaxed max-w-md mx-auto mt-5">{EARLY_ACCESS.note}</p>
+
+              {/* ── Back the Project ── */}
+              <div className="flex flex-col items-center mt-12">
+                <div className="flex items-center gap-3 w-full max-w-xs mb-6">
+                  <div className="flex-1 h-px bg-white/10" />
+                  <div className="w-1 h-1 rounded-full bg-cyan-400/60" />
+                  <div className="flex-1 h-px bg-white/10" />
+                </div>
+                <p className="font-[Goldman] font-bold text-white text-lg md:text-2xl text-center leading-snug">
+                  {linkSlogan || "Back the Project. Own the Future."}
+                </p>
+                {linkUrl && (
+                  <Link to="/" onClick={() => window.scrollTo(0, 0)}
+                    className="mt-3 text-[13px] md:text-sm font-semibold tracking-[0.1em] text-cyan-400 hover:text-cyan-300 transition-colors"
+                    style={{ fontFamily: "Orbitron, sans-serif" }}>
+                    {linkUrl}
+                  </Link>
+                )}
+              </div>
             </div>
           </motion.div>
 
@@ -478,15 +635,12 @@ function Crowdfunding() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          WEB3 GAMING SOLUTION
+          WEB3 GAMING SOLUTION — with Quest BG
       ══════════════════════════════════════════════════════ */}
-      <section className="relative w-full pt-14 pb-16 overflow-hidden">
+      <section className="relative w-full pt-14 pb-16 overflow-hidden" style={{ zIndex: 1 }}>
         <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg,transparent,rgba(56,189,248,0.35) 35%,rgba(167,139,250,0.35) 65%,transparent)" }} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,rgba(0,8,40,0.35) 0%,rgba(6,6,16,0) 60%)" }} />
 
-        {/* Width matched to the packages section above (max-w-[1400px] + px-6) */}
-        <div className="relative w-full max-w-[1400px] mx-auto px-6">
-
+        <div className="relative w-full max-w-[1100px] mx-auto px-6">
           <motion.div
             className="mb-10 text-center max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }} viewport={{ once: true }}
@@ -495,41 +649,38 @@ function Crowdfunding() {
             <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[34px] text-white leading-tight mb-3">
               {sec06.heading || "HYPER TEK, A WEB3 GAMING SOLUTION AND THE KEY ADVANTAGES"}
             </h2>
-            <p className="text-white/50 text-[13px] leading-relaxed" style={{ fontFamily: "Orbitron, sans-serif" }}>
+            <p className="text-white/50 text-[13px] leading-relaxed max-w-lg mx-auto" style={{ fontFamily: "Orbitron, sans-serif" }}>
               {sec06.subtitle}
             </p>
           </motion.div>
 
-          {/* Numbered cards — one card per item, stacked; width matched to other sections */}
-          <div className="flex flex-col gap-5 max-w-[1400px] mx-auto">
+          {/* Cards — stacked vertically (original layout) */}
+          <div className="flex flex-col gap-5 max-w-[1100px] mx-auto">
             {sec06Cards.map((card, i) => {
               const ca = WEB3_CARD_ACCENTS[i] || WEB3_CARD_ACCENTS[0];
               const bullets = Array.isArray(card.bullets) ? card.bullets : [];
               return (
                 <motion.div
                   key={card.label}
-                  className="rounded-2xl p-6 md:p-8 flex gap-5 md:gap-8 items-center"
-                  style={{ background: ca.bg, border: `1px solid ${ca.border}`, borderLeft: `3px solid ${ca.borderTop}` }}
+                  className="relative rounded-2xl p-6 md:p-8 flex gap-5 md:gap-8 items-center overflow-hidden"
+                  style={{ background: "rgba(8,14,32,0.82)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", border: `1px solid ${ca.border}`, borderLeft: `3px solid ${ca.borderTop}` }}
                   initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.07 }} viewport={{ once: true }}
                   whileHover={{ y: -3, transition: { duration: 0.2 } }}
                 >
-                  {/* Index number — centered, sole visual anchor (icon removed) */}
+                  <HudCorners color={ca.accent} opacity={0.25} size={10} />
+
                   <div className="flex-shrink-0 w-12 md:w-20 text-center">
                     <span className="font-[Goldman] font-bold text-3xl md:text-[46px] leading-none" style={{ color: ca.accent }}>
                       0{i + 1}
                     </span>
                   </div>
 
-                  {/* Content */}
                   <div className="flex-1">
                     <h3 className="text-[16px] md:text-[20px] font-bold uppercase tracking-[0.12em] leading-snug mb-3.5" style={{ fontFamily: "Orbitron, sans-serif", color: ca.accent }}>
                       {card.label}
                     </h3>
-
                     {card.body && (
-                      <p className="text-white/75 text-[13px] md:text-[14.5px] leading-relaxed max-w-3xl">
-                        {card.body}
-                      </p>
+                      <p className="text-white/75 text-[13px] md:text-[14.5px] leading-relaxed max-w-3xl">{card.body}</p>
                     )}
                     {bullets.length > 0 && (
                       <ul className="flex flex-col gap-2.5">
@@ -547,39 +698,30 @@ function Crowdfunding() {
             })}
           </div>
 
+
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════
-          LIMITED EDITION NFAS & PACKAGES (copied from Home — shared component)
-      ══════════════════════════════════════════════════════ */}
-      <CrowdfundingPackages />
+      {/* Packages & Marketplace */}
+      <div className="relative" style={{ zIndex: 1 }}>
+        <div className="max-w-[1100px] mx-auto">
+          <CrowdfundingPackages />
+        </div>
+      </div>
 
       {/* ══════════════════════════════════════════════════════
-          FEATURED LIMITED EDITION NFA ITEMS (copied from Home — shared component)
+          CLOSING CTA — Overlord bg
       ══════════════════════════════════════════════════════ */}
-      <FeaturedMarketplace />
-
-      {/* ══════════════════════════════════════════════════════
-          CLOSING CTA
-      ══════════════════════════════════════════════════════ */}
-      <section className="relative w-full py-10 overflow-hidden">
-        <div className="absolute inset-0" style={{ backgroundImage: `url(${gamePng})`, backgroundSize: "cover", backgroundPosition: "center", opacity: 0.05 }} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom,#060610 0%,rgba(6,6,16,0.75) 50%,#060610 100%)" }} />
+      <section className="relative w-full py-10 overflow-hidden" style={{ zIndex: 1 }}>
 
         <motion.div className="relative z-10 max-w-[680px] mx-auto px-6 text-center"
           initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }} viewport={{ once: true }}>
-
           <div className="flex items-center gap-4 mb-8 justify-center">
             <div className="flex-1 h-px" style={{ background: "linear-gradient(to left,rgba(56,189,248,0.3),transparent)" }} />
             <div className="w-1.5 h-1.5 rounded-full bg-cyan-400/50" />
             <div className="flex-1 h-px" style={{ background: "linear-gradient(to right,rgba(56,189,248,0.3),transparent)" }} />
           </div>
-
-          <p className="text-white/48 text-sm md:text-[15px] leading-[1.9] italic mb-8">
-            {closing.body}
-          </p>
-
+          <p className="text-white/48 text-sm md:text-[15px] leading-[1.9] italic mb-8">{closing.body}</p>
           <div className="flex flex-wrap items-center justify-center gap-5">
             <Link to="/market-place" className="px-8 py-3 text-[11px] font-bold uppercase transition-all hover:brightness-125" style={BTN_PRIMARY}>
               {closing.exploreMarketplace || "Explore Marketplace"}
@@ -588,7 +730,6 @@ function Crowdfunding() {
               {t("packages.tryGaming")}
             </Link>
           </div>
-
           <div className="flex items-center gap-4 mt-10 justify-center">
             <div className="flex-1 h-px bg-white/8" />
             <span className="text-white/12 text-[10px] tracking-[0.5em] font-bold uppercase">Hyper Tek</span>
@@ -596,6 +737,7 @@ function Crowdfunding() {
           </div>
         </motion.div>
       </section>
+
     </div>
   );
 }

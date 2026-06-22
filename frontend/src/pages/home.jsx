@@ -4,7 +4,7 @@ import Hero from "../Components/home/Hero";
 import StorySection from "../Components/home/StorySection";
 import News from "../Components/home/News";
 import PopularCollections from "../Components/home/PopularCollections";
-import MarketPlace from "../Components/home/MarketPlace";
+
 import { useSelector, useDispatch } from "react-redux";
 
 
@@ -37,7 +37,6 @@ function Home() {
       <StorySection />
       <News />
       <PopularCollections showPageLink />
-      <MarketPlace />
 
     </div>
   );
