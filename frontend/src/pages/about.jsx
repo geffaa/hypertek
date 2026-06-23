@@ -499,7 +499,7 @@ function About({ isPreview = false }) {
             <ul className="flex flex-col gap-3.5 mb-10 max-w-2xl mx-auto text-left">
               {[
                 "Limited-edition NFAs and discounted packages are available now – only while early access stays open.",
-                "Discounts close for good the moment our crowdfunding campaign launches.",
+                "Discounts close for good the moment we launch our envisioned crowdfunding campaign.",
                 "Limited-edition items remain only until our funding target is reached – then they're gone for good.",
               ].map((b, i) => (
                 <li key={i} className="flex gap-3 items-start">

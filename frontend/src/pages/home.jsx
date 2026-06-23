@@ -4,6 +4,8 @@ import Hero from "../Components/home/Hero";
 import StorySection from "../Components/home/StorySection";
 import News from "../Components/home/News";
 import HomeCrowdfundingTeaser from "../Components/home/HomeCrowdfundingTeaser";
+import HomeWeb3Gaming from "../Components/home/HomeWeb3Gaming";
+import HomeNfaSection from "../Components/home/HomeNfaSection";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -36,6 +38,8 @@ function Home() {
       <Hero />
       <StorySection />
       <News />
+      <HomeWeb3Gaming />
+      <HomeNfaSection />
       <HomeCrowdfundingTeaser />
 
     </div>

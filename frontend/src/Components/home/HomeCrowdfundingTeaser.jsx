@@ -15,7 +15,7 @@ const EARLY_ACCESS = {
   heading: "Don't Miss the Early-Access Window",
   bullets: [
     "Limited-edition NFAs and discounted packages are available now – only while early access stays open.",
-    "Discounts close for good the moment our crowdfunding campaign launches.",
+    "Discounts close for good the moment we launch our envisioned crowdfunding campaign.",
     "Limited-edition items remain only until our funding target is reached – then they're gone for good.",
   ],
   note: "Watch for updates, read the White Paper, and lock in early pricing before the crowd arrives.",
@@ -76,10 +76,9 @@ export default function HomeCrowdfundingTeaser() {
 
         {/* ── Don't Miss the Early-Access Window ── */}
         <motion.div
-          className="relative mt-12 md:mt-16 py-12 md:py-16 text-center"
+          className="relative mt-6 md:mt-8 py-6 md:py-8 text-center"
           initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
         >
-          <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 75% at 50% 42%, rgba(251,191,36,0.12) 0%, transparent 70%)" }} />
 
           <div className="relative">
             <div className="flex items-center justify-center gap-3 mb-5">

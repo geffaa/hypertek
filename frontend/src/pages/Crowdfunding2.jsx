@@ -15,6 +15,7 @@ import {
   Cpu,
   ArrowRight,
   Lock,
+  LockOpen,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import GlowingOrb from "../Components/Common/BgColoring";
@@ -57,6 +58,7 @@ const MILESTONES = [
     num: 4,
     title: "Project Launch",
     Icon: ShoppingCart,
+    current: true,
     intro: "Website to go live to provide an overview of the Hyper Tek Project, featuring:",
     bullets: [
       { text: "Gaming and Marketplace Overview" },
@@ -68,7 +70,6 @@ const MILESTONES = [
     num: 5,
     title: "Crowdfunding Campaign",
     Icon: HandCoins,
-    current: true,
     intro: "Pending the success of the Project Launch, the official crowdfunding campaign kicks off!",
     bullets: [
       { text: "All discount packages will end permanently!" },
@@ -122,7 +123,7 @@ const EARLY_ACCESS = {
   heading: "Don't Miss the Early-Access Window",
   bullets: [
     "Limited-edition NFAs and discounted packages are available now – only while early access stays open.",
-    "Discounts close for good the moment our crowdfunding campaign launches.",
+    "Discounts close for good the moment we launch our envisioned crowdfunding campaign.",
     "Limited-edition items remain only until our funding target is reached – then they're gone for good.",
   ],
   cta: "Secure Your Place Today",
@@ -323,11 +324,98 @@ function Crowdfunding2() {
                       </ul>
                     )}
                   </div>
-                  <Lock className="absolute bottom-4 right-4" size={32} color="#ffffff" strokeWidth={1.5} />
+                  {m.num >= 5
+                    ? <Lock className="absolute bottom-4 right-4" size={32} color="#ffffff" strokeWidth={1.5} />
+                    : <LockOpen className="absolute bottom-4 right-4" size={32} color="#ffffff" strokeWidth={1.5} />
+                  }
                 </motion.div>
               );
             })}
           </div>
+
+          {/* ── Web3 Gaming Solution — Key Advantages ── */}
+          <div className="relative py-16 overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg,transparent,rgba(56,189,248,0.35) 35%,rgba(167,139,250,0.35) 65%,transparent)" }} />
+            <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,rgba(0,8,40,0.35) 0%,rgba(6,6,16,0) 60%)" }} />
+            <div className="relative">
+              <motion.div
+                className="mb-10 text-center max-w-3xl mx-auto"
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }} viewport={{ once: true }}
+              >
+                <SectionLabel label={sec06.label || "Web3 Gaming & Competitive Edge"} align="center" />
+                <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[34px] text-white leading-tight mb-3">
+                  {sec06.heading || "HYPER TEK, A WEB3 GAMING SOLUTION AND THE KEY ADVANTAGES"}
+                </h2>
+                <p className="text-white/50 text-[13px] leading-relaxed whitespace-pre-line" style={{ fontFamily: "Orbitron, sans-serif" }}>
+                  {sec06.subtitle}
+                </p>
+              </motion.div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                {sec06Cards.map((card, i) => {
+                  const ca = WEB3_CARD_ACCENTS[i] || WEB3_CARD_ACCENTS[0];
+                  const bullets = Array.isArray(card.bullets) ? card.bullets : [];
+                  return (
+                    <motion.div
+                      key={card.label}
+                      className="rounded-2xl p-6 md:p-7 flex flex-col gap-4"
+                      style={{ background: ca.bg, border: `1px solid ${ca.border}`, borderTop: `3px solid ${ca.borderTop}` }}
+                      initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.09 }} viewport={{ once: true }}
+                      whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                    >
+                      <span className="font-[Goldman] font-bold text-[42px] leading-none" style={{ color: ca.accent }}>
+                        0{i + 1}
+                      </span>
+                      <h3 className="text-[15px] md:text-[17px] font-bold uppercase tracking-[0.1em] leading-snug" style={{ fontFamily: "Orbitron, sans-serif", color: ca.accent }}>
+                        {card.label}
+                      </h3>
+                      {card.body && (
+                        <p className="text-white/75 text-[13px] md:text-[14px] leading-relaxed">{card.body}</p>
+                      )}
+                      {bullets.length > 0 && (
+                        <ul className="flex flex-col gap-2.5">
+                          {bullets.map((b, j) => (
+                            <li key={j} className="flex gap-2.5 items-start">
+                              <div className="w-1.5 h-1.5 rounded-full mt-[6px] flex-shrink-0" style={{ background: ca.accent }} />
+                              <span className="text-white/70 text-[13px] leading-relaxed">{b}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* ── Intro Text (from CrowdfundingPackages) ── */}
+          <motion.div
+            className="rounded-xl overflow-hidden mb-8"
+            style={{
+              background: "linear-gradient(160deg, rgba(0,40,120,0.22) 0%, rgba(0,10,40,0.55) 100%)",
+              border: "1px solid rgba(56,189,248,0.22)",
+              borderTop: "2px solid rgba(56,189,248,0.5)",
+              boxShadow: "0 0 50px rgba(56,189,248,0.08)",
+            }}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
+          >
+            <div className="px-8 py-7 flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 13, letterSpacing: "0.28em", color: "rgba(56,189,248,1)", fontWeight: "bold", textShadow: "0 0 14px rgba(56,189,248,0.7)" }}>
+                  {t("packages.badge")}
+                </span>
+              </div>
+              <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>{t("packages.intro1")}</p>
+              <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>{t("packages.intro2")}</p>
+              <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>{t("packages.intro3")}</p>
+              <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>{t("packages.intro4")}</p>
+              <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>{t("packages.intro5")}</p>
+              <h3 className="text-white font-bold text-[14px] lg:text-[15px] mt-1" style={{ fontFamily: "Orbitron,sans-serif", letterSpacing: "0.04em" }}>{t("packages.keyPointsTitle")}</h3>
+              <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>{t("packages.intro6")}</p>
+              <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>{t("packages.intro7")}</p>
+            </div>
+          </motion.div>
 
           {/* ── How YOU Can Help — wrapped in a card ── */}
           <motion.div
@@ -441,67 +529,7 @@ function Crowdfunding2() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════
-          KEY ADVANTAGES — 3 horizontal cards
-      ══════════════════════════════════════════════════════ */}
-      <section className="relative w-full pt-14 pb-16 overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg,transparent,rgba(56,189,248,0.35) 35%,rgba(167,139,250,0.35) 65%,transparent)" }} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,rgba(0,8,40,0.35) 0%,rgba(6,6,16,0) 60%)" }} />
-
-        <div className="relative w-full max-w-[1400px] mx-auto px-6">
-          <motion.div
-            className="mb-10 text-center max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }} viewport={{ once: true }}
-          >
-            <SectionLabel label={sec06.label || "Web3 Gaming & Competitive Edge"} align="center" />
-            <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[34px] text-white leading-tight mb-3">
-              {sec06.heading || "HYPER TEK, A WEB3 GAMING SOLUTION AND THE KEY ADVANTAGES"}
-            </h2>
-            <p className="text-white/50 text-[13px] leading-relaxed whitespace-pre-line" style={{ fontFamily: "Orbitron, sans-serif" }}>
-              {sec06.subtitle}
-            </p>
-          </motion.div>
-
-          {/* 3 horizontal cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {sec06Cards.map((card, i) => {
-              const ca = WEB3_CARD_ACCENTS[i] || WEB3_CARD_ACCENTS[0];
-              const bullets = Array.isArray(card.bullets) ? card.bullets : [];
-              return (
-                <motion.div
-                  key={card.label}
-                  className="rounded-2xl p-6 md:p-7 flex flex-col gap-4"
-                  style={{ background: ca.bg, border: `1px solid ${ca.border}`, borderTop: `3px solid ${ca.borderTop}` }}
-                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.09 }} viewport={{ once: true }}
-                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                >
-                  <span className="font-[Goldman] font-bold text-[42px] leading-none" style={{ color: ca.accent }}>
-                    0{i + 1}
-                  </span>
-                  <h3 className="text-[15px] md:text-[17px] font-bold uppercase tracking-[0.1em] leading-snug" style={{ fontFamily: "Orbitron, sans-serif", color: ca.accent }}>
-                    {card.label}
-                  </h3>
-                  {card.body && (
-                    <p className="text-white/75 text-[13px] md:text-[14px] leading-relaxed">{card.body}</p>
-                  )}
-                  {bullets.length > 0 && (
-                    <ul className="flex flex-col gap-2.5">
-                      {bullets.map((b, j) => (
-                        <li key={j} className="flex gap-2.5 items-start">
-                          <div className="w-1.5 h-1.5 rounded-full mt-[6px] flex-shrink-0" style={{ background: ca.accent }} />
-                          <span className="text-white/70 text-[13px] leading-relaxed">{b}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <CrowdfundingPackages />
+      <CrowdfundingPackages hideIntro />
 
       {/* ══════════════════════════════════════════════════════
           CLOSING CTA

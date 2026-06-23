@@ -559,7 +559,7 @@ function PackageModal({ pkg, onClose }) {
 }
 
 // ── Main component ─────────────────────────────────────────────────────────────
-function CrowdfundingPackages({ showPageLink = false }) {
+function CrowdfundingPackages({ showPageLink = false, hideIntro = false }) {
   const { t } = useTranslation();
   const [selected, setSelected] = useState(null);
   const [page, setPage] = useState(0);
@@ -584,7 +584,7 @@ function CrowdfundingPackages({ showPageLink = false }) {
           }}
         >
           {/* ── Header: crowdfunding intro text ── */}
-          <div className="px-8 py-7 flex flex-col gap-4">
+          {!hideIntro && <div className="px-8 py-7 flex flex-col gap-4">
 
             {/* Badge */}
             <div className="flex items-center gap-3">
@@ -620,7 +620,7 @@ function CrowdfundingPackages({ showPageLink = false }) {
             <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
               {t("packages.intro7")}
             </p>
-          </div>
+          </div>}
 
           {/* ── NFA Items Section (Limited Edition) ── */}
           <NFAItemsSection />

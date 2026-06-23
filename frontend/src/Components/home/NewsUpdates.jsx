@@ -31,8 +31,8 @@ const VIDEO_ITEMS = [
     src: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/racing_content.mp4",
     tag: "GAME FOOTAGE",
     tagColor: "#38bdf8",
-    title: "Hyper Tek — Game Content Preview",
-    description: "In-game content of Hyper Racing Universe",
+    title: "Hyper Tek - Racing Content Preview",
+    description: "Buckle up and hang on as we look at the Hyper Racing game mode in the Hyper Tek Universe.",
     date: "May 2025",
   },
   {

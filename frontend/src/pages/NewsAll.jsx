@@ -14,8 +14,8 @@ const VIDEO_ITEMS = [
     src: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/racing_content.mp4",
     tag: "GAME FOOTAGE",
     tagColor: "#38bdf8",
-    title: "Hyper Tek — Game Content Preview",
-    description: "In-game content of Hyper Racing Universe",
+    title: "Hyper Tek - Racing Content Preview",
+    description: "Buckle up and hang on as we look at the Hyper Racing game mode in the Hyper Tek Universe.",
     date: "May 2025",
   },
   {
@@ -353,6 +353,17 @@ function formatDate(str, lang) {
   return new Date(str).toLocaleDateString(lang || "en", { year: "numeric", month: "short", day: "numeric" });
 }
 
+function stripMarkdown(str) {
+  if (!str) return "";
+  return str
+    .replace(/^#{1,6}\s+/gm, "")
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/\*(.+?)\*/g, "$1")
+    .replace(/\[(.+?)\]\(.+?\)/g, "$1")
+    .replace(/\n+/g, " ")
+    .trim();
+}
+
 function clip(str, n) {
   return str?.length > n ? str.slice(0, n) + "…" : (str || "");
 }
@@ -375,7 +386,7 @@ function NewsCard({ item, i, go, readLabel, lang }) {
         <h3 className="font-[Goldman] font-bold text-white text-[15px] leading-snug group-hover:text-[#38bdf8] transition-colors duration-300">
           {clip(item.heading, 65)}
         </h3>
-        <p className="text-white/50 text-[13px] leading-relaxed flex-1 text-justify">{clip(item.excerpt || (item.description?.includes("\n\n") ? item.description.split("\n\n").slice(1).join("\n\n") : item.description), 160)}</p>
+        <p className="text-white/50 text-[13px] leading-relaxed flex-1 text-justify">{clip(item.excerpt || stripMarkdown(item.description), 160)}</p>
         <div className="flex items-center gap-1.5 mt-2 text-[#38bdf8]/70 text-[11px] font-bold uppercase tracking-widest" style={{ fontFamily: "Orbitron, sans-serif" }}>
           <span>{readLabel}</span>
           <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
