@@ -359,7 +359,7 @@ export default function ProfileQuestingTab({ wallet, token }) {
                 style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.15)" }}>
                 <Lock className="w-5 h-5 text-white/60" />
               </div>
-              <p className="text-white font-bold text-base leading-snug">HyperTek Gaming content for display purposes only.</p>
+              <p className="text-white font-bold text-base leading-snug">Hyper Tek Gaming content for display purposes only.</p>
               <p className="text-white/55 text-sm leading-relaxed">This is part of Hyper Tek's genuine 'Play to Earn' system, where players can earn real cash rewards, and or Materials/Resources.</p>
             </div>
           </div>

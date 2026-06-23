@@ -16,7 +16,7 @@ const CATEGORY_COLORS = {
   Basics:     { bg: "rgba(0,80,200,0.25)",  border: "rgba(0,100,255,0.35)",  text: "rgba(120,180,255,0.9)"  },
   Security:   { bg: "rgba(0,150,120,0.2)",  border: "rgba(0,180,150,0.35)", text: "rgba(80,220,190,0.9)"   },
   Blockchain: { bg: "rgba(120,50,200,0.2)", border: "rgba(150,80,230,0.35)", text: "rgba(200,150,255,0.9)" },
-  HyperTek:   { bg: "rgba(200,80,0,0.2)",   border: "rgba(230,100,0,0.35)", text: "rgba(255,160,80,0.9)"  },
+  "Hyper Tek": { bg: "rgba(200,80,0,0.2)",   border: "rgba(230,100,0,0.35)", text: "rgba(255,160,80,0.9)"  },
 };
 function categoryStyle(cat) {
   return CATEGORY_COLORS[cat] || CATEGORY_COLORS.Basics;
@@ -39,8 +39,8 @@ const STATIC_ARTICLES = [
     image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80",
   },
   {
-    _id: "s4", title: "What is HyperTek?", category: "HyperTek", readTime: 10,
-    description: "HyperTek is a play-to-earn NFT gaming universe where soldiers, land, weapons and vehicles are real digital assets you own.",
+    _id: "s4", title: "What is Hyper Tek?", category: "Hyper Tek", readTime: 10,
+    description: "Hyper Tek is a play-to-earn NFT gaming universe where soldiers, land, weapons and vehicles are real digital assets you own.",
     image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80",
   },
 ];

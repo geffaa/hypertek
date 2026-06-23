@@ -1029,12 +1029,12 @@ function AlliancePanel({ onClose, isMobile, panelRight }) {
 const MAIL_CATS = ["ALL", "SYSTEM", "ALLIANCE", "EVENTS", "BATTLE"];
 
 const MAIL_MESSAGES = [
-  { key: "welcome",       cat: "SYSTEM",   from: "HyperTek System",  subject: "Welcome to HyperTek!",          time: "Just now", unread: true  },
-  { key: "maintenance",   cat: "SYSTEM",   from: "HyperTek System",  subject: "Server Maintenance Notice",     time: "1h ago",   unread: true  },
+  { key: "welcome",       cat: "SYSTEM",   from: "Hyper Tek System",  subject: "Welcome to Hyper Tek!",          time: "Just now", unread: true  },
+  { key: "maintenance",   cat: "SYSTEM",   from: "Hyper Tek System",  subject: "Server Maintenance Notice",     time: "1h ago",   unread: true  },
   { key: "allianceWar",   cat: "ALLIANCE", from: "Commander Rex",    subject: "Alliance War Announcement",     time: "3h ago",   unread: false },
   { key: "galacticCup",   cat: "EVENTS",   from: "Events Team",      subject: "Galactic Cup Registration",     time: "1d ago",   unread: false },
   { key: "baseAttacked",  cat: "BATTLE",   from: "Battle System",    subject: "Your base was attacked!",       time: "1d ago",   unread: false },
-  { key: "loginReward",   cat: "SYSTEM",   from: "HyperTek System",  subject: "Daily Login Reward Ready",      time: "2d ago",   unread: false },
+  { key: "loginReward",   cat: "SYSTEM",   from: "Hyper Tek System",  subject: "Daily Login Reward Ready",      time: "2d ago",   unread: false },
   { key: "refiningEvent", cat: "EVENTS",   from: "Events Team",      subject: "Refining Master Event Starts",  time: "3d ago",   unread: false },
   { key: "meeting1800",   cat: "ALLIANCE", from: "Warden-7",         subject: "Meeting at 18:00",              time: "4d ago",   unread: false },
 ];

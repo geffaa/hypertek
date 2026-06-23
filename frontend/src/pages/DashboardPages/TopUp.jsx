@@ -702,7 +702,7 @@ export default function HyperBucks() {
                           </div>
                           <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl px-4 py-3 text-center">
                             <p className="text-yellow-300 text-sm font-semibold mb-1">External wallet required</p>
-                            <p className="text-yellow-300/60 text-xs">Your HyperTek account wallet cannot sign on-chain transactions directly. Connect MetaMask or WalletConnect to use USDC top-up.</p>
+                            <p className="text-yellow-300/60 text-xs">Your Hyper Tek account wallet cannot sign on-chain transactions directly. Connect MetaMask or WalletConnect to use USDC top-up.</p>
                           </div>
                         </>
                       ) : (

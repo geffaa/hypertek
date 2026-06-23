@@ -293,7 +293,7 @@ export default function Navbar() {
                     style={{ background: "rgba(0, 15, 60, 0.97)", backdropFilter: "blur(24px)" }}>
                     {[
                       { href: "https://discord.gg/XGvE2nFe", img: DiscordImg, label: "Discord", size: "w-[18px] h-[15px]" },
-                      { href: "https://x.com/HyperTek100", img: xImg, label: "X (Twitter)", size: "w-[17px] h-[17px]" },
+                      { href: "https://x.com/Hyper Tek100", img: xImg, label: "X (Twitter)", size: "w-[17px] h-[17px]" },
                       { href: "https://t.me", img: telegramImg, label: "Telegram", size: "w-[15px] h-[15px]" },
                     ].map(({ href, img, label, size }) => (
                       <a key={label} href={href} target="_blank" rel="noreferrer"
@@ -544,7 +544,7 @@ export default function Navbar() {
                 </a>
 
                 <a
-                  href="https://x.com/HyperTek100"
+                  href="https://x.com/Hyper Tek100"
                   target="_blank"
                   rel="noreferrer"
                   className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"

@@ -83,7 +83,7 @@ export default function SplashScreen({ onDone }) {
 
           <motion.img
             src={logo}
-            alt="HyperTek"
+            alt="Hyper Tek"
             animate={{ scale: [1, 1.04, 1] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             style={{

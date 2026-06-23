@@ -16,9 +16,9 @@ const MENU_KEYS = [
 ];
 
 const socials = [
-  { icon: FaFacebook,   href: "https://www.facebook.com/HyperTekProject",           label: "Facebook"  },
+  { icon: FaFacebook,   href: "https://www.facebook.com/Hyper TekProject",           label: "Facebook"  },
   { icon: FaInstagram,  href: "https://www.instagram.com/hypertekproject",           label: "Instagram" },
-  { icon: FaXTwitter,   href: "https://x.com/HyperTek100",                          label: "X"         },
+  { icon: FaXTwitter,   href: "https://x.com/Hyper Tek100",                          label: "X"         },
   { icon: FaTiktok,     href: "https://www.tiktok.com/@hypertek100",                 label: "TikTok"    },
   { icon: FaLinkedinIn, href: "https://www.linkedin.com/company/81534707",           label: "LinkedIn"  },
 ];
@@ -35,9 +35,9 @@ function Footer() {
         {/* Logo + brand name + Waitlist button inline */}
         <div className="flex items-center gap-4 flex-wrap justify-center">
           <Link to="/" onClick={() => window.scrollTo(0, 0)} className="flex items-center gap-3">
-            <img src={Logo} alt="Hypertek Logo" className="h-9 w-auto object-contain" />
+            <img src={Logo} alt="Hyper Tek Logo" className="h-9 w-auto object-contain" />
             <span className="text-white font-[Goldman] font-bold text-lg tracking-widest uppercase">
-              Hypertek
+              Hyper Tek
             </span>
           </Link>
           <Link

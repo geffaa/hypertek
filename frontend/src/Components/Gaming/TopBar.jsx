@@ -1366,7 +1366,7 @@ export default function TopBar({ activeGame, isPreview = false }) {
                   </div>
                   <div style={{ fontSize: 11, color: "rgba(148,192,210,0.65)", lineHeight: 1.5 }}>
                     A crypto wallet lets you interact with the blockchain.
-                    HyperTek will <strong style={{ color: "#7dd3fc" }}>never</strong> request
+                    Hyper Tek will <strong style={{ color: "#7dd3fc" }}>never</strong> request
                     your seed phrase or private key.
                   </div>
                 </div>

@@ -350,7 +350,7 @@ function EditProfile() {
 
               <div className="bg-[#1C1C1E] border border-blue-500/30 rounded-xl p-5 shadow-[0_0_15px_rgba(59,130,246,0.15)]">
                 <p className="text-sm text-gray-300 mb-4 leading-relaxed">
-                  Your account comes with a secure, embedded HyperTek wallet. <strong className="text-white">You don't need MetaMask to use the platform!</strong>
+                  Your account comes with a secure, embedded Hyper Tek wallet. <strong className="text-white">You don't need MetaMask to use the platform!</strong>
                   <br /><br />
                   To buy NFAs or list items, simply fund your wallet by sending ETH or USDC (on Base Sepolia) to your address below.
                 </p>

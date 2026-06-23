@@ -207,7 +207,7 @@ export default function WhitepaperPage() {
           <div className="mt-6">
             <a
               href="/whitepaper.pdf"
-              download="HyperTek-Whitepaper.pdf"
+              download="Hyper Tek-Whitepaper.pdf"
               className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-300 border border-white/20 hover:border-white/40"
               style={{ background: "#002AA8" }}
             >
@@ -814,7 +814,7 @@ export default function WhitepaperPage() {
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center pt-4">
               <a
                 href="/whitepaper.pdf"
-                download="HyperTek-Whitepaper.pdf"
+                download="Hyper Tek-Whitepaper.pdf"
                 className="inline-flex items-center gap-2 px-8 py-3 rounded-lg font-semibold text-sm text-white transition-all duration-300 border border-white/20 hover:border-white/40 hover:bg-[#003BD4]"
                 style={{ background: "#002AA8" }}
               >

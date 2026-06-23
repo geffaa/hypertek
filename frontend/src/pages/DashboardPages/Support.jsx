@@ -154,7 +154,7 @@ function Support() {
           </div>
           <div>
             <p className="text-white font-semibold text-sm leading-tight">
-              {t("dashboard.support.title", "HyperTek Support")}
+              {t("dashboard.support.title", "Hyper Tek Support")}
             </p>
             <p className="text-[11px] mt-0.5"
               style={{ color: isConnected ? "#4ade80" : "rgba(255,255,255,0.35)" }}>

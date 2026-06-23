@@ -139,22 +139,35 @@ function OverviewTab({ onTabChange }) {
 
                 <div className="mb-6" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }} />
 
+                {active.intro && (
+                  <p className="text-white/70 text-sm leading-relaxed mb-5">{active.intro}</p>
+                )}
+
                 <ul className="flex flex-col gap-4 mb-8">
-                  {(active.details || []).map((point, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <span
-                        className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold mt-0.5"
-                        style={{
-                          background: "rgba(0,80,255,0.25)",
-                          border: "1px solid rgba(0,100,255,0.4)",
-                          color: "rgba(100,180,255,0.9)",
-                        }}
-                      >
-                        {i + 1}
-                      </span>
-                      <p className="text-white/60 text-sm leading-relaxed">{point}</p>
-                    </li>
-                  ))}
+                  {(active.details || []).map((point, i) => {
+                    const parts = point.split(/\*\*(.+?)\*\*/g);
+                    return (
+                      <li key={i} className="flex items-start gap-3">
+                        <span
+                          className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold mt-0.5"
+                          style={{
+                            background: "rgba(0,80,255,0.25)",
+                            border: "1px solid rgba(0,100,255,0.4)",
+                            color: "rgba(100,180,255,0.9)",
+                          }}
+                        >
+                          {i + 1}
+                        </span>
+                        <p className="text-white/60 text-sm leading-relaxed">
+                          {parts.map((part, j) =>
+                            j % 2 === 1
+                              ? <strong key={j} className="text-white font-bold">{part}</strong>
+                              : part
+                          )}
+                        </p>
+                      </li>
+                    );
+                  })}
                 </ul>
 
                 <div className="mt-auto">

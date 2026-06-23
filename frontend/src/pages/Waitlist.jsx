@@ -133,7 +133,7 @@ function Waitlist() {
             />
             <img
               src={character1}
-              alt="HyperTek Character"
+              alt="Hyper Tek Character"
               className="relative z-10 w-full object-contain"
               style={{ maxHeight: "85vh" }}
             />
@@ -270,7 +270,7 @@ function Waitlist() {
           >
             {/* Logo + label */}
             <div className="flex items-center gap-3">
-              <img src={logoWhite} alt="HyperTek" className="h-14 w-auto opacity-90" />
+              <img src={logoWhite} alt="Hyper Tek" className="h-14 w-auto opacity-90" />
               <div className="h-4 w-px bg-white/20" />
               <span className="text-white/40 text-xs font-semibold tracking-widest uppercase">
                 {t("waitlist.stayInTouch")}

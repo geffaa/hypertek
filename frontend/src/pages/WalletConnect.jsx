@@ -98,7 +98,7 @@ function WalletConnect() {
             <div className="flex items-center gap-3 mb-4 justify-center">
               <img src={InfoIcon} alt="info" className="w-5 h-5" />
               <p className="text-sm text-blue-400">
-                HyperTek will never request your seed phrase or private key.
+                Hyper Tek will never request your seed phrase or private key.
               </p>
             </div>
 

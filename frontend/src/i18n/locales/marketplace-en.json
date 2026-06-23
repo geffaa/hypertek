@@ -26,16 +26,16 @@
     },
     "bottomBar": {
       "learnLabel": "Learn about NFAs / NFCs",
-      "educationPanel": "HyperTek Education Panel",
+      "educationPanel": "Hyper Tek Education Panel",
       "footerNote": "This panel is for quick reference. Visit the NFAs / NFCs 101 tab for full educational content.",
       "facts": [
         {
           "label": "NFA",
-          "desc": "Hypertek-only asset. Highest in-game bonuses. Guaranteed minimum buyback value that grows with every sale."
+          "desc": "Hyper Tek-only asset. Highest in-game bonuses. Guaranteed minimum buyback value that grows with every sale."
         },
         {
           "label": "NFC",
-          "desc": "Created by Hypertek or licensed players. In-game bonuses included. Minimum buyback guaranteed."
+          "desc": "Created by Hyper Tek or licensed players. In-game bonuses included. Minimum buyback guaranteed."
         },
         {
           "label": "NFT",
@@ -51,21 +51,22 @@
         },
         {
           "label": "Custodial Wallet",
-          "desc": "HyperTek auto-creates a crypto wallet for you on signup."
+          "desc": "Hyper Tek auto-creates a crypto wallet for you on signup."
         }
       ]
     },
     "overview": {
       "heading": "Overview",
-      "subtitle": "Welcome to the HyperTek Marketplace. Select a feature to learn more — then jump straight in.",
+      "subtitle": "Welcome to the Hyper Tek Marketplace. Select a feature to learn more, then jump straight in.",
       "features": [
         {
           "label": "NFAs / NFCs / NFTs",
           "tagline": "New to Web3 assets? Start here",
+          "intro": "NFAs/NFCs/NFTs are digital artworks that ALL have Guaranteed Minimum buy-backs and in-game bonuses",
           "details": [
-            "NFAs (Non-Fungible Assets) are Hypertek-issued items with a platform-guaranteed buyback price.",
-            "NFCs (Non-Fungible Characters) are licensed player items with in-game bonuses and buyback.",
-            "NFTs (Non-Fungible Tokens) are user-created collectibles — skins, weapons, and more."
+            "**NFAs** (Non-Fungible Assets) are Hyper Tek-issued items.",
+            "**NFCs** (Non-Fungible Collectables) are licensed player and Hyper Tek-issued items.",
+            "**NFTs** (Non-Fungible Tokens) are user-created items."
           ],
           "cta": "Learn the Basics"
         },
@@ -73,7 +74,7 @@
           "label": "The Marketplace",
           "tagline": "Buy & sell in-game assets instantly",
           "details": [
-            "Browse a wide catalog of NFAs, NFCs, and NFTs — skins, weapons, specialists, spaceships, and more.",
+            "Browse a wide catalog of NFAs, NFCs, and NFTs: skins, weapons, specialists, spaceships, and more.",
             "Filter by category, rarity, or price range to find exactly what you need.",
             "Listings are fulfilled on-chain, so ownership transfers are instant and verifiable."
           ],
@@ -84,7 +85,7 @@
           "tagline": "Compete for exclusive limited-edition items",
           "details": [
             "Bid on rare assets that are only available through time-limited auctions.",
-            "A live countdown shows exactly how much time is left — every second counts.",
+            "A live countdown shows exactly how much time is left, every second counts.",
             "Outbid others to secure legendary items that can't be bought any other way."
           ],
           "cta": "View Auctions"
@@ -93,7 +94,7 @@
           "label": "Trades",
           "tagline": "Swap assets peer-to-peer, no middleman",
           "details": [
-            "Propose or accept direct asset trades with other players — fully on-chain.",
+            "Propose or accept direct asset trades with other players which are fully on-chain.",
             "Set the terms yourself: choose what you offer and what you want in return.",
             "Browse open trade offers or post your own to find the perfect deal."
           ],
@@ -104,7 +105,7 @@
           "tagline": "Complete missions, earn exclusive rewards",
           "details": [
             "Take on quests to earn exclusive rewards and rare in-game assets.",
-            "Each quest has unique objectives — explore, battle, or build your way to victory.",
+            "Each quest has unique objectives which are explore, battle, or build your way to victory.",
             "Build your collection strategically through skill, not just spending."
           ],
           "cta": "Explore Quests"
@@ -115,7 +116,7 @@
           "details": [
             "Rent powerful specialists or gear for a single mission without buying outright.",
             "List your own idle assets for rent and earn passive income while you're away.",
-            "Flexible durations — hourly, daily, or per-mission agreements."
+            "Flexible durations: hourly, daily, or per-mission agreements."
           ],
           "cta": "Browse For Hire"
         },
@@ -136,7 +137,7 @@
       "subtitle": "Browse NFAs, NFCs, and NFTs available for immediate purchase — skins, weapons, specialists, spaceships, and more.",
       "filterAll": "All",
       "samplePreviewTitle": "Sample Marketplace Preview",
-      "samplePreviewDesc": "The items below are sample previews showcasing the types of digital assets that will be available on the HyperTek marketplace. Actual items with unique artwork and blockchain-verified ownership will be available at launch.",
+      "samplePreviewDesc": "The items below are sample previews showcasing the types of digital assets that will be available on the Hyper Tek marketplace. Actual items with unique artwork and blockchain-verified ownership will be available at launch.",
       "noItems": "No items available yet. Check back soon.",
       "search": "Search...",
       "filter": "Filter",
@@ -177,7 +178,7 @@
     "nfa101": {
       "sectionLabel": "Education",
       "heading": "NFAs / NFCs / NFTs 101",
-      "subtitle": "New to NFTs and Web3? Explore our articles to understand blockchain assets, wallets, security, and the HyperTek ecosystem.",
+      "subtitle": "New to NFTs and Web3? Explore our articles to understand blockchain assets, wallets, security, and the Hyper Tek ecosystem.",
       "minRead": "min read",
       "filterAll": "All"
     },
@@ -413,7 +414,7 @@
       "forHireLabel": "For Hire",
       "wantingToHire": "Wanting to Hire",
       "noListings": "No {{filter}} listings",
-      "lockedTitle": "HyperTek Gaming content for display purposes only.",
+      "lockedTitle": "Hyper Tek Gaming content for display purposes only.",
       "lockedDesc": "This is part of Hyper Tek's genuine 'Play to Earn' system, where players can earn real cash rewards, and or Materials/Resources.",
       "forHireBadge": "FOR HIRE",
       "wantedBadge": "WANTING TO HIRE",

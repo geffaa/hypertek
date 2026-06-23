@@ -49,9 +49,9 @@ export default function AuthLayout({ children }) {
         {/* Top: Logo + brand + back to home */}
         <div className="relative z-10 p-8 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3 group">
-            <img src={Logo} alt="Hypertek" className="h-8 w-auto object-contain" />
+            <img src={Logo} alt="Hyper Tek" className="h-8 w-auto object-contain" />
             <span className="text-white font-[Goldman] font-bold text-base tracking-widest uppercase">
-              Hypertek
+              Hyper Tek
             </span>
           </Link>
           <Link
@@ -109,9 +109,9 @@ export default function AuthLayout({ children }) {
         {/* Mobile: logo + back to home + language switcher */}
         <div className="lg:hidden relative z-10 flex items-center justify-between px-6 pt-6 pb-2">
           <Link to="/" className="flex items-center gap-2">
-            <img src={Logo} alt="Hypertek" className="h-7 w-auto object-contain" />
+            <img src={Logo} alt="Hyper Tek" className="h-7 w-auto object-contain" />
             <span className="text-white font-[Goldman] font-bold text-sm tracking-widest uppercase">
-              Hypertek
+              Hyper Tek
             </span>
           </Link>
           <div className="flex items-center gap-3">

@@ -222,7 +222,7 @@ export default function ProfileBountyTab({ wallet, token }) {
           <Lock className="w-5 h-5 text-white/60" />
         </div>
         <p className="text-white font-bold text-base leading-snug">
-          HyperTek Gaming content for display purposes only.
+          Hyper Tek Gaming content for display purposes only.
         </p>
         <p className="text-white/55 text-sm leading-relaxed">
           This is part of Hyper Tek's genuine 'Play to Earn' system, where players can earn real cash rewards, and or Materials/Resources.

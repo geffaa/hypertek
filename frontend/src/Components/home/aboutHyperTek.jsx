@@ -33,7 +33,7 @@ const fadeRight = {
   },
 };
 
-export default function HyperTekDesign() {
+export default function Hyper TekDesign() {
   const { t } = useTranslation();
   const { data: cms } = useSiteContent("home_about");
 
