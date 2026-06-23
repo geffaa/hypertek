@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { ChevronRight, Layers3, Gem, Network, Rocket } from "lucide-react";
+import { ChevronRight, Layers3, Gem, Network, Rocket, ArrowRight } from "lucide-react";
 import { useSiteContentPage } from "../hooks/useSiteContent";
 import { getImageUrl } from "../Config";
 import LazyImage from "../Components/Common/LazyImage";
@@ -32,16 +32,7 @@ const GAME_BADGE_ACCENTS = [
   { accent: "#a78bfa", glow: "rgba(167,139,250,0.3)" },
 ];
 
-const BTN_PRIMARY = {
-  background: "rgba(0,10,40,0.75)",
-  border: "1px solid rgba(56,189,248,0.55)",
-  borderTop: "2px solid rgba(56,189,248,0.85)",
-  clipPath: "polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)",
-  fontFamily: "Orbitron, sans-serif",
-  boxShadow: "0 0 28px rgba(56,189,248,0.22)",
-  color: "rgba(56,189,248,0.95)",
-  letterSpacing: "0.12em",
-};
+
 
 // ── Motion ────────────────────────────────────────────────────────────────────
 const fadeUp = (delay = 0) => ({ hidden: { opacity: 0, y: 28 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay, ease: "easeOut" } } });
@@ -186,64 +177,6 @@ function About({ isPreview = false }) {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          OUR MISSION
-      ══════════════════════════════════════════════════════ */}
-      <section
-        data-edit-section="about_story"
-        data-edit-label="About — Our Story"
-        className="relative w-full max-w-[1400px] mx-auto px-6 md:px-12 xl:px-20 pt-16 pb-10"
-      >
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-stretch">
-          <motion.div className="w-full lg:w-[45%] flex-shrink-0 flex" variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
-            <div className="relative rounded-2xl overflow-hidden w-full">
-              <LazyImage src="/about2.webp" alt="Our Mission" fallback={ourstory1}
-                className="w-full h-full min-h-[280px]" imgClassName="object-cover" />
-              <CornerAccent />
-              <div className="absolute inset-0 pointer-events-none rounded-2xl" style={{ border: "1px solid rgba(56,189,248,0.18)" }} />
-            </div>
-          </motion.div>
-
-          <motion.div className="flex-1 flex flex-col gap-5" variants={fadeRight} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
-            <SectionLabel number="01" label={sec01.label || "Our Mission"} />
-            <h2 className="font-[Goldman] font-bold text-4xl md:text-5xl xl:text-[56px] text-white leading-[1.1] uppercase">
-              {sec01.heading1 || "Redefining What"}<br />{sec01.heading2 || "Gaming Can Be"}
-            </h2>
-            <div className="space-y-4">
-              {sec01Paras.map((p, i) => (
-                <p key={i} className="text-white/70 text-sm md:text-[14px] leading-[1.9] text-justify">{p}</p>
-              ))}
-            </div>
-            {/* Game badges */}
-            <div className="flex flex-wrap gap-3 mt-2">
-              {sec01Games.map((g, i) => {
-                const ba = GAME_BADGE_ACCENTS[i] || GAME_BADGE_ACCENTS[0];
-                return (
-                  <span key={g.label}
-                    className="px-4 py-2 flex items-center gap-2"
-                    style={{
-                      background: `linear-gradient(135deg, ${ba.glow}, rgba(255,255,255,0.04))`,
-                      border: `1px solid ${ba.accent}55`,
-                      borderLeft: `3px solid ${ba.accent}`,
-                      borderRadius: 6,
-                      fontFamily: "Orbitron,sans-serif",
-                      fontSize: 9,
-                      fontWeight: 700,
-                      letterSpacing: "0.12em",
-                      color: ba.accent,
-                      textTransform: "uppercase",
-                      boxShadow: `0 0 12px ${ba.glow}`,
-                    }}>
-                    <span style={{ width: 6, height: 6, borderRadius: "50%", background: ba.accent, display: "inline-block", boxShadow: `0 0 6px ${ba.accent}` }} />
-                    {g.label}
-                  </span>
-                );
-              })}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════════
           VISION & MISSION
       ══════════════════════════════════════════════════════ */}
       <section className="relative w-full max-w-[1400px] mx-auto px-6 md:px-12 xl:px-20 pt-16 pb-10">
@@ -251,7 +184,7 @@ function About({ isPreview = false }) {
           className="text-center mb-10"
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
         >
-          <SectionLabel number="02" label={sec02.label || "Vision & Mission"} />
+          <SectionLabel number="01" label={sec02.label || "Vision & Mission"} />
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
@@ -318,6 +251,64 @@ function About({ isPreview = false }) {
             </div>
           </motion.div>
 
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
+          OUR MISSION
+      ══════════════════════════════════════════════════════ */}
+      <section
+        data-edit-section="about_story"
+        data-edit-label="About — Our Story"
+        className="relative w-full max-w-[1400px] mx-auto px-6 md:px-12 xl:px-20 pt-16 pb-10"
+      >
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-stretch">
+          <motion.div className="w-full lg:w-[45%] flex-shrink-0 flex" variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
+            <div className="relative rounded-2xl overflow-hidden w-full">
+              <LazyImage src="/about2.webp" alt="Our Mission" fallback={ourstory1}
+                className="w-full h-full min-h-[280px]" imgClassName="object-cover" />
+              <CornerAccent />
+              <div className="absolute inset-0 pointer-events-none rounded-2xl" style={{ border: "1px solid rgba(56,189,248,0.18)" }} />
+            </div>
+          </motion.div>
+
+          <motion.div className="flex-1 flex flex-col gap-5" variants={fadeRight} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
+            <SectionLabel number="02" label={sec01.label || "Our Mission"} />
+            <h2 className="font-[Goldman] font-bold text-4xl md:text-5xl xl:text-[56px] text-white leading-[1.1] uppercase">
+              {sec01.heading1 || "Redefining What"}<br />{sec01.heading2 || "Gaming Can Be"}
+            </h2>
+            <div className="space-y-4">
+              {sec01Paras.map((p, i) => (
+                <p key={i} className="text-white/70 text-sm md:text-[14px] leading-[1.9] text-justify">{p}</p>
+              ))}
+            </div>
+            {/* Game badges */}
+            <div className="flex flex-wrap gap-3 mt-2">
+              {sec01Games.map((g, i) => {
+                const ba = GAME_BADGE_ACCENTS[i] || GAME_BADGE_ACCENTS[0];
+                return (
+                  <span key={g.label}
+                    className="px-4 py-2 flex items-center gap-2"
+                    style={{
+                      background: `linear-gradient(135deg, ${ba.glow}, rgba(255,255,255,0.04))`,
+                      border: `1px solid ${ba.accent}55`,
+                      borderLeft: `3px solid ${ba.accent}`,
+                      borderRadius: 6,
+                      fontFamily: "Orbitron,sans-serif",
+                      fontSize: 9,
+                      fontWeight: 700,
+                      letterSpacing: "0.12em",
+                      color: ba.accent,
+                      textTransform: "uppercase",
+                      boxShadow: `0 0 12px ${ba.glow}`,
+                    }}>
+                    <span style={{ width: 6, height: 6, borderRadius: "50%", background: ba.accent, display: "inline-block", boxShadow: `0 0 6px ${ba.accent}` }} />
+                    {g.label}
+                  </span>
+                );
+              })}
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -482,37 +473,55 @@ function About({ isPreview = false }) {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          CROWDFUNDING CTA
+          EARLY-ACCESS CTA
       ══════════════════════════════════════════════════════ */}
       <section className="relative w-full px-6 md:px-12 xl:px-20 pt-6 pb-16">
         <motion.div
-          className="relative max-w-[1100px] mx-auto rounded-2xl px-7 py-9 md:px-10 md:py-11 flex flex-col items-center text-center gap-5 overflow-hidden"
-          style={{ background: "linear-gradient(135deg, rgba(56,189,248,0.12) 0%, rgba(251,191,36,0.05) 55%, rgba(56,189,248,0.03) 100%)", border: "1px solid rgba(56,189,248,0.35)", borderTop: "2px solid rgba(56,189,248,0.65)", boxShadow: "0 0 48px rgba(56,189,248,0.10)" }}
+          className="relative mt-4 py-12 md:py-16 text-center max-w-[1100px] mx-auto"
           initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
         >
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full"
-            style={{ background: "rgba(251,191,36,0.12)", border: "1px solid rgba(251,191,36,0.4)" }}>
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-            <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.28em] text-amber-300" style={{ fontFamily: "Orbitron, sans-serif" }}>
-              {t("aboutPage.section05.crowdfundingNow") || "Crowdfunding Now"}
-            </span>
+          <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 75% at 50% 42%, rgba(251,191,36,0.12) 0%, transparent 70%)" }} />
+
+          <div className="relative">
+            <div className="flex items-center justify-center gap-3 mb-5">
+              <div className="w-8 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
+              <span className="text-amber-300 text-[11px] font-bold uppercase tracking-[0.3em]" style={{ fontFamily: "Orbitron, sans-serif" }}>
+                LIMITED-TIME OPPORTUNITY
+              </span>
+              <div className="w-8 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
+            </div>
+
+            <h3 className="font-[Goldman] font-bold text-white text-2xl md:text-[36px] leading-tight mb-4">
+              Don&apos;t Miss the Early-Access Window
+            </h3>
+            <div className="w-16 h-[3px] rounded-full mx-auto mb-9" style={{ background: "linear-gradient(90deg,#fbbf24,#f59e0b)" }} />
+
+            <ul className="flex flex-col gap-3.5 mb-10 max-w-2xl mx-auto text-left">
+              {[
+                "Limited-edition NFAs and discounted packages are available now – only while early access stays open.",
+                "Discounts close for good the moment our crowdfunding campaign launches.",
+                "Limited-edition items remain only until our funding target is reached – then they're gone for good.",
+              ].map((b, i) => (
+                <li key={i} className="flex gap-3 items-start">
+                  <ArrowRight size={16} color="#fbbf24" strokeWidth={2} className="mt-[3px] flex-shrink-0" />
+                  <span className="text-white/75 text-[14px] md:text-[15px] leading-relaxed">{b}</span>
+                </li>
+              ))}
+            </ul>
+
+            <Link
+              to="/crowdfunding"
+              onClick={() => window.scrollTo(0, 0)}
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-[12px] md:text-[13px] font-bold uppercase tracking-[0.12em] text-[#0b0b14] transition-all hover:brightness-110"
+              style={{ background: "linear-gradient(135deg,#fbbf24,#f59e0b)", fontFamily: "Orbitron, sans-serif", boxShadow: "0 0 32px rgba(251,191,36,0.35)" }}
+            >
+              Learn More
+              <ArrowRight size={16} strokeWidth={2.4} />
+            </Link>
+            <p className="text-white/55 text-[13px] md:text-[14px] leading-relaxed max-w-md mx-auto mt-5">
+              Watch for updates, read the White Paper, and lock in early pricing before the crowd arrives.
+            </p>
           </div>
-
-          <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl text-white leading-tight max-w-2xl">
-            {t("packages.pageLinkTitle")}
-          </h2>
-          <p className="text-white/55 text-sm md:text-[15px] leading-relaxed max-w-xl">
-            {t("packages.pageLinkSubtitle")}
-          </p>
-
-          <Link
-            to="/crowdfunding"
-            onClick={() => window.scrollTo(0, 0)}
-            className="mt-2 inline-flex items-center gap-2 px-8 py-3 text-[11px] font-bold uppercase transition-all hover:brightness-125"
-            style={BTN_PRIMARY}
-          >
-            {t("packages.pageLinkCta")} <span className="text-base leading-none">→</span>
-          </Link>
         </motion.div>
       </section>
 

@@ -211,23 +211,15 @@ function Crowdfunding2() {
 
           {/* ── Hero header ── */}
           <motion.div
-            className="text-center max-w-3xl mx-auto mb-14"
+            className="text-center w-full mx-auto mb-14"
             initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full mb-6"
-              style={{ background: "rgba(251,191,36,0.12)", border: "1px solid rgba(251,191,36,0.4)" }}>
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.28em] text-amber-300" style={{ fontFamily: "Orbitron, sans-serif" }}>
-                {sec05.crowdfundingNow || "Crowdfunding Now"}
-              </span>
-            </div>
 
-            <SectionLabel label={sec05.label || "Crowdfunding — Help Build the Future"} align="center" />
 
-            <h1 className="font-[Goldman] font-bold text-3xl sm:text-4xl xl:text-[50px] text-white leading-[1.1]">
-              {sec05.heading || "Your Support Powers the Hyper Tek Universe"}
+            <h1 className="font-[Goldman] font-bold text-3xl sm:text-4xl xl:text-[50px] text-white leading-[1.1] whitespace-pre-line">
+              {sec05.heading || "Your Support Powers\nthe Hyper Tek Universe"}
             </h1>
-            <p className="text-white/55 text-sm md:text-[15px] leading-relaxed max-w-2xl mx-auto mt-5">
+            <p className="text-white/55 text-sm md:text-[15px] leading-relaxed w-full mt-5 whitespace-pre-line">
               {sec05.subtitle}
             </p>
           </motion.div>
@@ -298,9 +290,7 @@ function Crowdfunding2() {
                         Final
                       </span>
                     )}
-                    {!isCurrent && !isFinale && i > 4 && (
-                      <Lock size={12} color="rgba(255,255,255,0.3)" strokeWidth={1.8} />
-                    )}
+
                   </div>
 
                   <div className="relative z-10">
@@ -333,6 +323,7 @@ function Crowdfunding2() {
                       </ul>
                     )}
                   </div>
+                  <Lock className="absolute bottom-4 right-4" size={32} color="#ffffff" strokeWidth={1.5} />
                 </motion.div>
               );
             })}
@@ -377,27 +368,7 @@ function Crowdfunding2() {
               })}
             </div>
 
-            {/* Closing slogan */}
-            <div className="flex flex-col items-center mt-12">
-              <div className="flex items-center gap-3 w-full max-w-xs mb-6">
-                <div className="flex-1 h-px bg-white/10" />
-                <div className="w-1 h-1 rounded-full bg-cyan-400/60" />
-                <div className="flex-1 h-px bg-white/10" />
-              </div>
-              <p className="font-[Goldman] font-bold text-white text-lg md:text-2xl text-center leading-snug">
-                {linkSlogan || "Back the Project. Own the Future."}
-              </p>
-              {linkUrl && (
-                <Link
-                  to="/"
-                  onClick={() => window.scrollTo(0, 0)}
-                  className="mt-3 text-[13px] md:text-sm font-semibold tracking-[0.1em] text-cyan-400 hover:text-cyan-300 transition-colors"
-                  style={{ fontFamily: "Orbitron, sans-serif" }}
-                >
-                  {linkUrl}
-                </Link>
-              )}
-            </div>
+
           </motion.div>
 
           {/* ── Don't Miss the Early-Access Window ── */}
@@ -436,7 +407,7 @@ function Crowdfunding2() {
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-[12px] md:text-[13px] font-bold uppercase tracking-[0.12em] text-[#0b0b14] transition-all hover:brightness-110"
                 style={{ background: "linear-gradient(135deg,#fbbf24,#f59e0b)", fontFamily: "Orbitron, sans-serif", boxShadow: "0 0 32px rgba(251,191,36,0.35)" }}
               >
-                {EARLY_ACCESS.cta}
+                Learn More
                 <ArrowRight size={16} strokeWidth={2.4} />
               </Link>
               <p className="text-white/55 text-[13px] md:text-[14px] leading-relaxed max-w-md mx-auto mt-5">
@@ -444,6 +415,28 @@ function Crowdfunding2() {
               </p>
             </div>
           </motion.div>
+
+          {/* Closing slogan moved here */}
+          <div className="flex flex-col items-center mt-4 mb-8">
+            <div className="flex items-center gap-3 w-full max-w-xs mb-6">
+              <div className="flex-1 h-px bg-white/10" />
+              <div className="w-1 h-1 rounded-full bg-cyan-400/60" />
+              <div className="flex-1 h-px bg-white/10" />
+            </div>
+            <p className="font-[Goldman] font-bold text-white text-lg md:text-2xl text-center leading-snug">
+              {linkSlogan || "Back the Project. Own the Future."}
+            </p>
+            {linkUrl && (
+              <Link
+                to="/"
+                onClick={() => window.scrollTo(0, 0)}
+                className="mt-3 text-[13px] md:text-sm font-semibold tracking-[0.1em] text-cyan-400 hover:text-cyan-300 transition-colors"
+                style={{ fontFamily: "Orbitron, sans-serif" }}
+              >
+                {linkUrl}
+              </Link>
+            )}
+          </div>
 
         </div>
       </section>
@@ -464,7 +457,7 @@ function Crowdfunding2() {
             <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[34px] text-white leading-tight mb-3">
               {sec06.heading || "HYPER TEK, A WEB3 GAMING SOLUTION AND THE KEY ADVANTAGES"}
             </h2>
-            <p className="text-white/50 text-[13px] leading-relaxed" style={{ fontFamily: "Orbitron, sans-serif" }}>
+            <p className="text-white/50 text-[13px] leading-relaxed whitespace-pre-line" style={{ fontFamily: "Orbitron, sans-serif" }}>
               {sec06.subtitle}
             </p>
           </motion.div>

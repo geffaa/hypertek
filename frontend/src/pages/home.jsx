@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import Hero from "../Components/home/Hero";
 import StorySection from "../Components/home/StorySection";
 import News from "../Components/home/News";
-import PopularCollections from "../Components/home/PopularCollections";
+import HomeCrowdfundingTeaser from "../Components/home/HomeCrowdfundingTeaser";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -36,7 +36,7 @@ function Home() {
       <Hero />
       <StorySection />
       <News />
-      <PopularCollections showPageLink />
+      <HomeCrowdfundingTeaser />
 
     </div>
   );

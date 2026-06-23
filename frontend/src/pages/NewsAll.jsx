@@ -449,6 +449,7 @@ export default function NewsList() {
   const [news, setNews]       = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeFaq, setFaq]   = useState(0);
+  const [faq1Avatar, setFaq1Avatar] = useState("/avatar/dryads-female.webp");
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
@@ -471,9 +472,14 @@ export default function NewsList() {
   const newsCards  = news.slice(1, 4);
   const extraNews  = news.slice(4);
 
-  const faqAvatars = useMemo(() =>
-    Array.from({ length: 6 }, () => `/avatar/${AVATAR_FILES[Math.floor(Math.random() * AVATAR_FILES.length)]}`),
-  []);
+  const faqAvatars = useMemo(() => [
+    "/avatar_complete2.png",
+    faq1Avatar,
+    "/hyperbucks_money.png",
+    "/hyperbucks_treasure.png",
+    "/hypertek_game.png",
+    "/hypertek_vr.png"
+  ], [faq1Avatar]);
 
   return (
     <div className="min-h-screen text-white relative" style={{ background: "#060610" }}>
@@ -632,9 +638,11 @@ export default function NewsList() {
             FAQ SECTION — two-panel half-page layout
         ══════════════════════════════════════════ */}
         <motion.div
+          className="w-[100vw] relative left-1/2 -ml-[50vw]"
           initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }} viewport={{ once: true, amount: 0.1 }}
         >
+          <div className="max-w-[1800px] mx-auto px-6 md:px-12 xl:px-16">
           <div className="flex items-center gap-4 mb-8">
             <div className="w-5 h-[2px]" style={{ background: "#a78bfa" }} />
             <span className="text-white/40 text-xs uppercase tracking-[0.3em]" style={{ fontFamily: "Orbitron, sans-serif" }}>
@@ -644,15 +652,20 @@ export default function NewsList() {
           </div>
 
           <div
-            className="rounded-2xl grid grid-cols-1 lg:grid-cols-[260px_1fr]"
-            style={{ border: "1px solid rgba(255,255,255,0.08)" }}
+            className="rounded-2xl grid grid-cols-1 lg:grid-cols-[240px_1fr] overflow-hidden"
+            style={{ border: "1px solid rgba(255,255,255,0.08)", height: 588 }}
           >
             {/* LEFT: Question list */}
             <div style={{ borderRight: "1px solid rgba(255,255,255,0.07)" }}>
               {faqItems.map((item, i) => (
                 <button
                   key={i}
-                  onClick={() => setFaq(i)}
+                  onClick={() => {
+                    setFaq(i);
+                    if (i === 1) {
+                      setFaq1Avatar(`/avatar/${AVATAR_FILES[Math.floor(Math.random() * AVATAR_FILES.length)]}`);
+                    }
+                  }}
                   className="w-full text-left px-5 py-4 flex items-start gap-3 transition-all duration-200 group relative"
                   style={{
                     borderBottom: i < faqItems.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none",
@@ -683,84 +696,116 @@ export default function NewsList() {
               ))}
             </div>
 
-            {/* RIGHT: Answer + Character */}
-            <div className="relative flex flex-col" style={{ minHeight: 580 }}>
-
-              {/* Character — large, pinned to right, full height */}
-              <div className="absolute top-0 right-0 bottom-0 hidden lg:block pointer-events-none select-none"
-                style={{ width: "clamp(300px, 40%, 460px)" }}>
+            {/* RIGHT: Content + Avatar — FAQ #1 gets special full-panel image */}
+            <div className="flex-1 min-w-0 flex overflow-hidden" style={{ background: "rgba(6,6,16,0.5)", height: 588 }}>
+              {/* Text content */}
+              <div className="flex-1 min-w-0 overflow-y-auto scrollbar-hide" style={{ scrollbarWidth: "none" }}>
                 <AnimatePresence mode="wait">
-                  <motion.img
+                  <motion.div
                     key={activeFaq}
-                    src={faqAvatars[activeFaq]}
-                    alt="character"
-                    className="absolute right-0 w-auto object-contain object-bottom"
-                    style={{ bottom: "5%", height: "110%" }}
-                    initial={{ opacity: 0, x: 30, scale: 0.93 }}
-                    animate={{ opacity: 1, x: 0, scale: 1 }}
-                    exit={{ opacity: 0, x: -15, scale: 0.96 }}
-                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  />
+                    className="pt-8 px-8 pb-6 md:pt-10 md:px-10 md:pb-8"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                  >
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="w-4 h-[1px]" style={{ background: "#a78bfa" }} />
+                      <span className="text-[11px] font-bold uppercase tracking-[0.3em]"
+                        style={{ color: "#a78bfa", fontFamily: "Orbitron, sans-serif" }}>
+                        {t("newsPage.faqLabel")}
+                      </span>
+                    </div>
+                    <h3 className="font-[Goldman] font-bold text-white text-2xl md:text-3xl leading-snug mb-6">
+                      {faqItems[activeFaq]?.q}
+                    </h3>
+                    <div className="text-white/60 text-[13px] md:text-[14px] text-justify leading-[1.9] flex flex-col gap-4">
+                      {faqItems[activeFaq]?.a?.split("\n\n").map((para, pi) => {
+                        const colonMatch = para.match(/^([A-Za-z][^:\n]{0,60}:)\s([\s\S]*)/);
+                        if (colonMatch) {
+                          return (
+                            <p key={pi}>
+                              <strong className="text-white/90 font-semibold">{colonMatch[1]}</strong>{" "}{colonMatch[2]}
+                            </p>
+                          );
+                        }
+                        if (/^\d+\.\s/.test(para)) {
+                          return (
+                            <ul key={pi} className="flex flex-col gap-2 pl-1">
+                              {para.split("\n").map((line, li) => (
+                                <li key={li} className="flex gap-3">
+                                  <span className="flex-shrink-0 w-6 h-6 rounded flex items-center justify-center text-[11px] font-bold mt-0.5"
+                                    style={{ background: "rgba(167,139,250,0.15)", color: "#a78bfa", border: "1px solid rgba(167,139,250,0.3)" }}>
+                                    {line.match(/^\d+/)?.[0]}
+                                  </span>
+                                  <span>{line.replace(/^\d+\.\s*/, "")}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          );
+                        }
+                        {/* Bold NFA/NFC/NFT terms */}
+                        const nfMatch = para.match(/^(Non-Fungible\s+\w+\s*\([A-Z]+s?\))\s+(.*)/s);
+                        if (nfMatch) {
+                          return (
+                            <p key={pi}>
+                              <strong className="text-white/90 font-bold">{nfMatch[1]}</strong>{" "}{nfMatch[2]}
+                            </p>
+                          );
+                        }
+                        return <p key={pi}>{para}</p>;
+                      })}
+                    </div>
+                  </motion.div>
                 </AnimatePresence>
-                {/* fade left edge so text reads cleanly */}
-                <div className="absolute inset-y-0 left-0 w-20 pointer-events-none"
-                  style={{ background: "linear-gradient(to right, rgba(6,6,16,0.95), transparent)" }} />
               </div>
 
-              {/* Scrollable text — max-width keeps it clear of the character */}
+              {/* Avatar / Image column */}
               <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeFaq}
-                  className="flex-1 overflow-y-auto pt-8 px-8 pb-4 md:pt-10 md:px-10 md:pb-4"
-                  style={{ maxHeight: 500, paddingRight: "clamp(2rem, 42%, 480px)" }}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.35, ease: "easeOut" }}
-                >
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="w-4 h-[1px]" style={{ background: "#a78bfa" }} />
-                    <span className="text-[10px] font-bold uppercase tracking-[0.3em]"
-                      style={{ color: "#a78bfa", fontFamily: "Orbitron, sans-serif" }}>
-                      {t("newsPage.faqLabel")}
-                    </span>
-                  </div>
-                  <h3 className="font-[Goldman] font-bold text-white text-xl md:text-2xl leading-snug mb-5">
-                    {faqItems[activeFaq]?.q}
-                  </h3>
-                  <div className="text-white/55 text-[13.5px] leading-[1.85] flex flex-col gap-3">
-                    {faqItems[activeFaq]?.a?.split("\n\n").map((para, pi) => {
-                      const colonMatch = para.match(/^([A-Za-z][^:\n]{0,60}:)\s([\s\S]*)/);
-                      if (colonMatch) {
-                        return (
-                          <p key={pi}>
-                            <strong className="text-white/90 font-semibold">{colonMatch[1]}</strong>{" "}{colonMatch[2]}
-                          </p>
-                        );
-                      }
-                      if (/^\d+\.\s/.test(para)) {
-                        return (
-                          <ul key={pi} className="flex flex-col gap-1.5 pl-1">
-                            {para.split("\n").map((line, li) => (
-                              <li key={li} className="flex gap-3">
-                                <span className="flex-shrink-0 w-5 h-5 rounded flex items-center justify-center text-[10px] font-bold mt-0.5"
-                                  style={{ background: "rgba(167,139,250,0.15)", color: "#a78bfa", border: "1px solid rgba(167,139,250,0.3)" }}>
-                                  {line.match(/^\d+/)?.[0]}
-                                </span>
-                                <span>{line.replace(/^\d+\.\s*/, "")}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        );
-                      }
-                      return <p key={pi}>{para}</p>;
-                    })}
-                  </div>
-                </motion.div>
+                {activeFaq === 0 || activeFaq === 4 ? (
+                  /* Full-panel cover image layout */
+                  <motion.div
+                    key={`faq-img-${activeFaq}`}
+                    className="hidden lg:block relative flex-shrink-0 overflow-hidden"
+                    style={{ width: 460, minHeight: 480 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <img
+                      src={faqAvatars[activeFaq]}
+                      alt="Character"
+                      className="absolute inset-0 w-full h-full object-cover object-center"
+                      style={{ filter: "drop-shadow(0 0 40px rgba(167,139,250,0.15))" }}
+                    />
+                    {/* Fade left edge */}
+                    <div className="absolute inset-y-0 left-0 w-20 pointer-events-none" style={{ background: "linear-gradient(to right, rgba(6,6,16,0.8), transparent)" }} />
+                    {/* Subtle glow */}
+                    <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 70% 50% at 50% 80%, rgba(167,139,250,0.10) 0%, transparent 70%)" }} />
+                  </motion.div>
+                ) : (
+                  /* Other FAQs — avatar beside text */
+                  <motion.div
+                    key={`faq-img-${activeFaq}`}
+                    className="hidden lg:flex items-center justify-center flex-shrink-0"
+                    style={{ width: 330 }}
+                    initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.92, y: 20 }}
+                    transition={{ duration: 0.35, ease: "easeOut" }}
+                  >
+                    <img
+                      src={faqAvatars[activeFaq]}
+                      alt="Character"
+                      className="w-full h-full object-contain drop-shadow-2xl scale-[1.15]"
+                      style={{ filter: "drop-shadow(0 0 40px rgba(167,139,250,0.2))" }}
+                    />
+                  </motion.div>
+                )}
               </AnimatePresence>
-
-
             </div>
+          </div>
           </div>
         </motion.div>
 

@@ -161,8 +161,8 @@ function AppWrapper() {
             {/* Main Pages */}
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/crowdfunding" element={<Crowdfunding />} />
-            <Route path="/crowdfunding2" element={<Crowdfunding2 />} />
+            <Route path="/crowdfunding" element={<Crowdfunding2 />} />
+            <Route path="/crowdfunding2" element={<Crowdfunding />} />
 
             {/* Auth */}
             <Route path="/signup" element={<Signup />} />
