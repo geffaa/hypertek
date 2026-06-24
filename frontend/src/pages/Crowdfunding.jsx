@@ -326,7 +326,6 @@ function Crowdfunding2() {
           {/* ── Web3 Gaming Solution — Key Advantages ── */}
           <div className="relative py-16 overflow-hidden">
             <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg,transparent,rgba(56,189,248,0.35) 35%,rgba(167,139,250,0.35) 65%,transparent)" }} />
-            <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,rgba(0,8,40,0.35) 0%,rgba(6,6,16,0) 60%)" }} />
             <div className="relative">
               <motion.div
                 className="mb-10 text-center max-w-3xl mx-auto"
