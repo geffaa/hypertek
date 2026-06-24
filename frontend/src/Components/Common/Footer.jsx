@@ -26,7 +26,7 @@ const socials = [
 function Footer() {
   const { t } = useTranslation();
   return (
-    <footer className="w-full text-white relative z-10 overflow-hidden" style={{ background: "#060610" }}>
+    <footer className="w-full text-white overflow-hidden" style={{ background: "#060610", position: "relative", zIndex: 50, isolation: "isolate" }}>
       {/* Top divider */}
       <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-blue-600/60 to-transparent" />
 
