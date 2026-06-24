@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -130,9 +130,19 @@ const EARLY_ACCESS = {
 };
 
 const WEB3_CARD_ACCENTS = [
-  { accent: "#22c55e", bg: "rgba(34,197,94,0.14)", border: "rgba(34,197,94,0.35)", borderTop: "rgba(34,197,94,0.7)" },
-  { accent: "#38bdf8", bg: "rgba(56,189,248,0.14)", border: "rgba(56,189,248,0.38)", borderTop: "rgba(56,189,248,0.7)" },
-  { accent: "#a78bfa", bg: "rgba(167,139,250,0.13)", border: "rgba(167,139,250,0.35)", borderTop: "rgba(167,139,250,0.7)" },
+  { accent: "#22c55e", bg: "#0d1f12", border: "rgba(34,197,94,0.30)", borderTop: "rgba(34,197,94,0.7)" },
+  { accent: "#38bdf8", bg: "#0b1a24", border: "rgba(56,189,248,0.30)", borderTop: "rgba(56,189,248,0.7)" },
+  { accent: "#a78bfa", bg: "#140f20", border: "rgba(167,139,250,0.28)", borderTop: "rgba(167,139,250,0.65)" },
+];
+
+const VEHICLES = ["/vehicle1.webp", "/vehicle2-1.webp", "/vehicle2.webp", "/vehicle3-1.webp", "/vehicle3.webp"];
+const AVATARS = [
+  "/avatar/commander-elite.webp", "/avatar/dryads-female.webp", "/avatar/dryads-male.webp",
+  "/avatar/fawnus-female.webp", "/avatar/fawnus-male.webp", "/avatar/geodians-female.webp",
+  "/avatar/geodians-male.webp", "/avatar/lithionites-female.webp", "/avatar/lithionites-male.webp",
+  "/avatar/mantasquads-female.webp", "/avatar/mantasquads-male.webp", "/avatar/marmulus-female.webp",
+  "/avatar/marmulus-male.webp", "/avatar/ophidians-female.webp", "/avatar/ophidians-male.webp",
+  "/avatar/overlord.webp", "/avatar/team-specialist-major.webp",
 ];
 
 const HELP_META = [
@@ -143,9 +153,9 @@ const HELP_META = [
 
 // Milestone card accent — cycles every 3 so columns share a hue rhythm
 const MILESTONE_ACCENTS = [
-  { accent: "#38bdf8", bg: "rgba(56,189,248,0.13)", border: "rgba(56,189,248,0.38)", borderTop: "2px solid rgba(56,189,248,0.7)" },
-  { accent: "#a78bfa", bg: "rgba(167,139,250,0.12)", border: "rgba(167,139,250,0.35)", borderTop: "2px solid rgba(167,139,250,0.65)" },
-  { accent: "#22c55e", bg: "rgba(34,197,94,0.12)", border: "rgba(34,197,94,0.35)", borderTop: "2px solid rgba(34,197,94,0.65)" },
+  { accent: "#38bdf8", bg: "#0b1a24", border: "rgba(56,189,248,0.30)", borderTop: "2px solid rgba(56,189,248,0.65)" },
+  { accent: "#a78bfa", bg: "#140f20", border: "rgba(167,139,250,0.28)", borderTop: "2px solid rgba(167,139,250,0.60)" },
+  { accent: "#22c55e", bg: "#0d1f12", border: "rgba(34,197,94,0.28)", borderTop: "2px solid rgba(34,197,94,0.60)" },
 ];
 
 
@@ -156,6 +166,67 @@ function SectionLabel({ label, align = "left" }) {
       <span className="text-white/70 text-[12px] font-bold tracking-[0.3em] uppercase">{label}</span>
       {align === "center" && <div className="w-8 h-px" style={{ background: "rgba(56,189,248,0.55)" }} />}
     </div>
+  );
+}
+
+// Preload all images so src swaps are instant with no fetch/layout-shift
+function preloadImages(urls) {
+  urls.forEach(src => { const img = new Image(); img.src = src; });
+}
+
+function CyclingAvatar({ offset = 0, style = {}, className = "" }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    preloadImages(AVATARS);
+    let i = offset % AVATARS.length;
+    const t = setInterval(() => {
+      i = (i + 1) % AVATARS.length;
+      if (ref.current) {
+        ref.current.style.opacity = "0";
+        setTimeout(() => {
+          if (ref.current) { ref.current.src = AVATARS[i]; ref.current.style.opacity = "1"; }
+        }, 350);
+      }
+    }, 5000);
+    return () => clearInterval(t);
+  }, [offset]);
+  return (
+    <img
+      ref={ref}
+      src={AVATARS[offset % AVATARS.length]}
+      alt=""
+      aria-hidden="true"
+      className={`object-contain select-none pointer-events-none ${className}`}
+      style={{ transition: "opacity 0.35s ease", ...style }}
+    />
+  );
+}
+
+function CyclingVehicle({ style = {}, className = "" }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    preloadImages(VEHICLES);
+    let i = 0;
+    const t = setInterval(() => {
+      i = (i + 1) % VEHICLES.length;
+      if (ref.current) {
+        ref.current.style.opacity = "0";
+        setTimeout(() => {
+          if (ref.current) { ref.current.src = VEHICLES[i]; ref.current.style.opacity = "1"; }
+        }, 350);
+      }
+    }, 5000);
+    return () => clearInterval(t);
+  }, []);
+  return (
+    <img
+      ref={ref}
+      src={VEHICLES[0]}
+      alt=""
+      aria-hidden="true"
+      className={`select-none pointer-events-none ${className}`}
+      style={{ transition: "opacity 0.35s ease", ...style }}
+    />
   );
 }
 
@@ -174,7 +245,7 @@ function Crowdfunding2() {
   }, []);
 
   return (
-    <div className="relative text-white overflow-hidden" style={{ background: "#060610" }}>
+    <div className="relative text-white overflow-hidden" style={{ background: "#0b0d1a" }}>
       {/* ── Treasure vault background (fixed, low opacity) ── */}
       <div
         aria-hidden="true"
@@ -185,7 +256,7 @@ function Crowdfunding2() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          opacity: 0.20,
+          opacity: 0.55,
           pointerEvents: "none",
           zIndex: 0,
         }}
@@ -236,9 +307,9 @@ function Crowdfunding2() {
               const isFinale = i === MILESTONES.length - 1;
               const isCurrent = !!m.current;
               const ca = isCurrent
-                ? { accent: "#fbbf24", bg: "rgba(251,191,36,0.14)", border: "rgba(251,191,36,0.45)", borderTop: "2px solid rgba(251,191,36,0.8)" }
+                ? { accent: "#fbbf24", bg: "#1e1600", border: "rgba(251,191,36,0.35)", borderTop: "2px solid rgba(251,191,36,0.75)" }
                 : isFinale
-                ? { accent: "#c4b5fd", bg: "rgba(167,139,250,0.13)", border: "rgba(167,139,250,0.42)", borderTop: "2px solid rgba(167,139,250,0.72)" }
+                ? { accent: "#c4b5fd", bg: "#140f20", border: "rgba(167,139,250,0.30)", borderTop: "2px solid rgba(167,139,250,0.65)" }
                 : MILESTONE_ACCENTS[i % 3];
 
               return (
@@ -329,7 +400,7 @@ function Crowdfunding2() {
             <div className="relative">
               <motion.div
                 className="mb-10 text-center max-w-3xl mx-auto"
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }} viewport={{ once: true }}
+                initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.65 }} viewport={{ once: true }}
               >
                 <SectionLabel label={sec06.label || "Web3 Gaming & Competitive Edge"} align="center" />
                 <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[34px] text-white leading-tight mb-3">
@@ -348,7 +419,7 @@ function Crowdfunding2() {
                       key={card.label}
                       className="rounded-2xl p-6 md:p-7 flex flex-col gap-4"
                       style={{ background: ca.bg, border: `1px solid ${ca.border}`, borderTop: `3px solid ${ca.borderTop}` }}
-                      initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.09 }} viewport={{ once: true }}
+                      initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.5, delay: i * 0.09 }} viewport={{ once: true }}
                       whileHover={{ y: -4, transition: { duration: 0.2 } }}
                     >
                       <span className="font-[Goldman] font-bold text-[42px] leading-none" style={{ color: ca.accent }}>
@@ -377,59 +448,67 @@ function Crowdfunding2() {
             </div>
           </div>
 
-          {/* ── Card 1: LIMITED EDITION NFAs AND DISCOUNTED GAMING PACKAGES ── */}
-          <motion.div
-            className="rounded-xl overflow-hidden mb-5"
-            style={{
-              background: "linear-gradient(160deg, rgba(0,40,120,0.50) 0%, rgba(0,10,40,0.75) 100%)",
-              border: "1px solid rgba(56,189,248,0.38)",
-              borderTop: "2px solid rgba(56,189,248,0.7)",
-              boxShadow: "0 0 50px rgba(56,189,248,0.14)",
-            }}
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
-          >
-            <div className="px-8 py-7 flex flex-col gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 13, letterSpacing: "0.28em", color: "rgba(56,189,248,1)", fontWeight: "bold", textShadow: "0 0 14px rgba(56,189,248,0.7)" }}>
-                  {t("packages.badge")}
-                </span>
+          {/* ── Card 1: LIMITED EDITION — card full width, avatar absolutely outside ── */}
+          <div className="relative mb-5">
+            <motion.div
+              initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
+            >
+              <div className="flex flex-col gap-4 rounded-xl overflow-hidden"
+                style={{ padding: "32px 36px", maxWidth: "65%", background: "linear-gradient(160deg, #0b1a2e 0%, #060e1a 100%)", border: "1px solid rgba(56,189,248,0.30)", borderTop: "2px solid rgba(56,189,248,0.70)", boxShadow: "0 4px 32px rgba(56,189,248,0.10)" }}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                  <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 13, letterSpacing: "0.28em", color: "rgba(56,189,248,1)", fontWeight: "bold", textShadow: "0 0 14px rgba(56,189,248,0.7)" }}>
+                    {t("packages.badge")}
+                  </span>
+                </div>
+                <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro1")}</p>
+                <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro2")}</p>
+                <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro3")}</p>
+                <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro4")}</p>
+                <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro5")}</p>
               </div>
-              <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>{t("packages.intro1")}</p>
-              <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>{t("packages.intro2")}</p>
-              <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>{t("packages.intro3")}</p>
-              <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>{t("packages.intro4")}</p>
-              <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>{t("packages.intro5")}</p>
-            </div>
-          </motion.div>
+            </motion.div>
 
-          {/* ── Card 2: Key Points to Remember ── */}
-          <motion.div
-            className="rounded-xl overflow-hidden mb-8"
-            style={{
-              background: "linear-gradient(160deg, rgba(40,10,80,0.55) 0%, rgba(10,0,40,0.78) 100%)",
-              border: "1px solid rgba(167,139,250,0.38)",
-              borderTop: "2px solid rgba(167,139,250,0.72)",
-              boxShadow: "0 0 50px rgba(167,139,250,0.13)",
-            }}
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} viewport={{ once: true }}
-          >
-            <div className="px-8 py-7 flex flex-col gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: "#a78bfa" }} />
-                <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 13, letterSpacing: "0.28em", color: "rgba(167,139,250,1)", fontWeight: "bold", textShadow: "0 0 14px rgba(167,139,250,0.7)" }}>
-                  {t("packages.keyPointsTitle")}
-                </span>
-              </div>
-              <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>{t("packages.intro6")}</p>
-              <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>{t("packages.intro7")}</p>
+            {/* Avatar — fixed position relative to section, does not affect card layout */}
+            <div className="hidden xl:block pointer-events-none select-none" style={{ position: "absolute", right: "-60px", top: "-40px", width: "580px", zIndex: 10 }}>
+              <CyclingAvatar offset={0} className="w-full object-contain object-top" style={{ maxHeight: "960px", filter: "drop-shadow(0 0 64px rgba(56,189,248,0.50))" }} />
             </div>
-          </motion.div>
+          </div>
+
+          {/* ── Card 2: Key Points — avatar left (absolute) + card right ── */}
+          <div className="relative mb-2" style={{ minHeight: "320px" }}>
+            {/* Avatar — absolute kiri, dikecilkan agar tidak overlap section bawah */}
+            <div className="hidden xl:block pointer-events-none select-none" style={{ position: "absolute", left: "-60px", top: "0px", width: "420px", zIndex: 10 }}>
+              <CyclingAvatar offset={1} className="w-full object-contain object-top" style={{ maxHeight: "640px", filter: "drop-shadow(0 0 48px rgba(167,139,250,0.40))", transform: "scaleX(-1)" }} />
+            </div>
+
+            {/* Card — center-right, sejajar vertikal dengan tengah avatar */}
+            <motion.div
+              className="flex items-end justify-end"
+              style={{ minHeight: "400px" }}
+              initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.1 }} viewport={{ once: true }}
+            >
+              <div className="flex flex-col gap-4 rounded-xl overflow-hidden"
+                style={{ padding: "32px 36px", width: "65%", background: "linear-gradient(160deg, #160f28 0%, #0a0616 100%)", border: "1px solid rgba(167,139,250,0.28)", borderTop: "2px solid rgba(167,139,250,0.68)", boxShadow: "0 4px 32px rgba(167,139,250,0.08)" }}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: "#a78bfa" }} />
+                  <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 13, letterSpacing: "0.28em", color: "rgba(167,139,250,1)", fontWeight: "bold", textShadow: "0 0 14px rgba(167,139,250,0.7)" }}>
+                    {t("packages.keyPointsTitle")}
+                  </span>
+                </div>
+                <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro6")}</p>
+                <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro7")}</p>
+              </div>
+            </motion.div>
+          </div>
 
           {/* ── How YOU Can Help ── */}
           <motion.div
-            className="py-14 md:py-16 mb-8"
-            initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }} viewport={{ once: true }}
+            className="mb-8"
+            style={{ paddingTop: "160px", paddingBottom: "32px" }}
+            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.15 }} viewport={{ once: true }}
           >
             <h3 className="font-[Goldman] font-bold text-white text-2xl md:text-3xl text-center mb-10">
               {sec05.helpHeading || "How YOU Can Help Right Now"}
@@ -458,75 +537,66 @@ function Crowdfunding2() {
 
           </motion.div>
 
-          {/* ── Don't Miss the Early-Access Window ── */}
-          <motion.div
-            className="relative mt-2 md:mt-4 py-10 md:py-14 text-center w-full overflow-hidden"
-            initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
-          >
-            {/* Decorative left — vehicle */}
-            <img
-              src="/vehicle3.webp"
-              alt=""
-              aria-hidden="true"
-              className="absolute top-1/2 -translate-y-1/2 pointer-events-none select-none"
-              style={{ width: "clamp(280px, 34vw, 480px)", opacity: 0.75, transform: "translateY(-50%)", left: "-80px" }}
-            />
-            {/* Decorative right — avatar */}
-            <img
-              src="/avatar/commander-elite.webp"
-              alt=""
-              aria-hidden="true"
-              className="absolute right-0 pointer-events-none select-none"
-              style={{ width: "clamp(200px, 25vw, 360px)", opacity: 0.75, bottom: "-20px" }}
-            />
 
-            <div className="relative w-full">
-              <div className="flex items-center justify-center gap-4 mb-6">
-                <div className="w-12 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
-                <span className="text-amber-300 text-[15px] font-bold uppercase tracking-[0.3em]" style={{ fontFamily: "Orbitron, sans-serif" }}>
-                  {EARLY_ACCESS.eyebrow}
-                </span>
-                <div className="w-12 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
-              </div>
+        </div>
+      </section>
 
-              <h3 className="font-[Goldman] font-bold text-white text-3xl md:text-[48px] leading-tight mb-5">
-                {EARLY_ACCESS.heading}
-              </h3>
-              <div className="w-20 h-[3px] rounded-full mx-auto mb-10" style={{ background: "linear-gradient(90deg,#fbbf24,#f59e0b)" }} />
+      {/* ── Don't Miss the Early-Access Window ── */}
+      <section className="relative w-full px-6 pt-2 pb-10 md:pb-14 text-center">
+        <motion.div
+          className="relative"
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
+        >
+          {/* Decorative left — vehicle */}
+          <CyclingVehicle className="absolute top-1/2 transition-opacity duration-700" style={{ width: "clamp(320px, 38vw, 540px)", transform: "translateY(-50%)", left: "40px" }} />
+          {/* Decorative right — avatar */}
+          <CyclingAvatar offset={3} className="absolute transition-opacity duration-700" style={{ width: "clamp(240px, 28vw, 400px)", right: "80px", bottom: "-120px" }} />
 
-              <ul className="flex flex-col gap-5 mb-0 max-w-4xl mx-auto text-left">
-                {EARLY_ACCESS.bullets.map((b, i) => (
-                  <li key={i} className="flex gap-4 items-start">
-                    <ArrowRight size={20} color="#fbbf24" strokeWidth={2} className="mt-[3px] flex-shrink-0" />
-                    <span className="text-white/80 text-[17px] md:text-[19px] leading-relaxed">{b}</span>
-                  </li>
-                ))}
-              </ul>
+          <div className="relative w-full" style={{ paddingLeft: "clamp(180px, 28vw, 420px)", paddingRight: "clamp(180px, 28vw, 420px)" }}>
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="w-12 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
+              <span className="text-amber-300 text-[15px] font-bold uppercase tracking-[0.3em]" style={{ fontFamily: "Orbitron, sans-serif" }}>
+                {EARLY_ACCESS.eyebrow}
+              </span>
+              <div className="w-12 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
             </div>
-          </motion.div>
 
-          {/* Closing slogan moved here */}
-          <div className="flex flex-col items-center mt-4 mb-8">
-            <div className="flex items-center gap-3 w-full max-w-xs mb-6">
-              <div className="flex-1 h-px bg-white/10" />
-              <div className="w-1 h-1 rounded-full bg-cyan-400/60" />
-              <div className="flex-1 h-px bg-white/10" />
-            </div>
-            <p className="font-[Goldman] font-bold text-white text-lg md:text-2xl text-center leading-snug">
-              {linkSlogan || "Back the Project. Own the Future."}
-            </p>
-            {linkUrl && (
-              <Link
-                to="/"
-                onClick={() => window.scrollTo(0, 0)}
-                className="mt-3 text-[13px] md:text-sm font-semibold tracking-[0.1em] text-cyan-400 hover:text-cyan-300 transition-colors"
-                style={{ fontFamily: "Orbitron, sans-serif" }}
-              >
-                {linkUrl}
-              </Link>
-            )}
+            <h3 className="font-[Goldman] font-bold text-white text-3xl md:text-[48px] leading-tight mb-5">
+              {EARLY_ACCESS.heading}
+            </h3>
+            <div className="w-20 h-[3px] rounded-full mx-auto mb-10" style={{ background: "linear-gradient(90deg,#fbbf24,#f59e0b)" }} />
+
+            <ul className="flex flex-col gap-5 mb-0 text-left">
+              {EARLY_ACCESS.bullets.map((b, i) => (
+                <li key={i} className="flex gap-4 items-start">
+                  <ArrowRight size={20} color="#fbbf24" strokeWidth={2} className="mt-[3px] flex-shrink-0" />
+                  <span className="text-white text-[17px] md:text-[19px] leading-relaxed">{b}</span>
+                </li>
+              ))}
+            </ul>
           </div>
+        </motion.div>
 
+        {/* Closing slogan */}
+        <div className="flex flex-col items-center mt-10 mb-4">
+          <div className="flex items-center gap-3 w-full max-w-xs mb-6">
+            <div className="flex-1 h-px bg-white/10" />
+            <div className="w-1 h-1 rounded-full bg-cyan-400/60" />
+            <div className="flex-1 h-px bg-white/10" />
+          </div>
+          <p className="font-[Goldman] font-bold text-white text-lg md:text-2xl text-center leading-snug">
+            {linkSlogan || "Back the Project. Own the Future."}
+          </p>
+          {linkUrl && (
+            <Link
+              to="/"
+              onClick={() => window.scrollTo(0, 0)}
+              className="mt-3 text-[13px] md:text-sm font-semibold tracking-[0.1em] text-cyan-400 hover:text-cyan-300 transition-colors"
+              style={{ fontFamily: "Orbitron, sans-serif" }}
+            >
+              {linkUrl}
+            </Link>
+          )}
         </div>
       </section>
 
@@ -537,7 +607,7 @@ function Crowdfunding2() {
       ══════════════════════════════════════════════════════ */}
       <section className="relative w-full py-10 overflow-hidden">
         <motion.div className="relative z-10 max-w-[680px] mx-auto px-6 text-center"
-          initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }} viewport={{ once: true }}>
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.65 }} viewport={{ once: true }}>
           <div className="flex items-center gap-4 mb-8 justify-center">
             <div className="flex-1 h-px" style={{ background: "linear-gradient(to left,rgba(56,189,248,0.3),transparent)" }} />
             <div className="w-1.5 h-1.5 rounded-full bg-cyan-400/50" />
@@ -546,24 +616,24 @@ function Crowdfunding2() {
           <p className="text-white/48 text-sm md:text-[15px] leading-[1.9] italic mb-8">{t("aboutPage.closing.body")}</p>
           <div className="flex flex-wrap items-center justify-center gap-5">
             <Link to="/market-place" className="px-8 py-3 text-[11px] font-bold uppercase transition-all hover:brightness-125" style={{
-              background: "linear-gradient(135deg, rgba(56,189,248,0.20) 0%, rgba(56,189,248,0.06) 100%)",
+              background: "#0b1a2e",
               border: "1px solid rgba(56,189,248,0.5)",
               borderTop: "2px solid rgba(56,189,248,0.75)",
               borderRadius: "12px",
               fontFamily: "Orbitron, sans-serif",
-              boxShadow: "0 0 28px rgba(56,189,248,0.18)",
+              boxShadow: "0 0 28px rgba(56,189,248,0.15)",
               color: "rgba(56,189,248,0.95)",
               letterSpacing: "0.12em",
             }}>
               {t("aboutPage.closing.exploreMarketplace") || "Explore Marketplace"}
             </Link>
             <Link to="/gaming" className="px-8 py-3 text-[11px] font-bold uppercase transition-all hover:brightness-110" style={{
-              background: "rgba(255,255,255,0.04)",
-              border: "1px solid rgba(255,255,255,0.18)",
-              borderTop: "2px solid rgba(255,255,255,0.28)",
+              background: "#141820",
+              border: "1px solid rgba(255,255,255,0.22)",
+              borderTop: "2px solid rgba(255,255,255,0.35)",
               borderRadius: "12px",
               fontFamily: "Orbitron, sans-serif",
-              color: "rgba(255,255,255,0.6)",
+              color: "rgba(255,255,255,0.7)",
               letterSpacing: "0.12em",
             }}>
               {t("packages.tryGaming")}

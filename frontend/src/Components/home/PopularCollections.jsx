@@ -577,10 +577,10 @@ function CrowdfundingPackages({ showPageLink = false, hideIntro = false }) {
           viewport={{ once: true, amount: 0.1 }}
           className="overflow-hidden rounded-xl"
           style={{
-            background: "linear-gradient(160deg, rgba(0,40,120,0.22) 0%, rgba(0,10,40,0.55) 100%)",
-            border: "1px solid rgba(56,189,248,0.22)",
-            borderTop: "2px solid rgba(56,189,248,0.5)",
-            boxShadow: "0 0 50px rgba(56,189,248,0.08)",
+            background: "linear-gradient(160deg, rgba(11,26,46,0.6) 0%, rgba(6,14,26,0.75) 100%)",
+            border: "1px solid rgba(56,189,248,0.28)",
+            borderTop: "2px solid rgba(56,189,248,0.65)",
+            boxShadow: "0 4px 32px rgba(56,189,248,0.10)",
           }}
         >
           {/* ── Header: crowdfunding intro text ── */}
@@ -637,7 +637,7 @@ function CrowdfundingPackages({ showPageLink = false, hideIntro = false }) {
           {/* Divider with section heading */}
           <div
             className="px-8 py-4 flex items-center gap-4 rounded-t-xl"
-            style={{ borderTop: "2px solid rgba(56,189,248,0.5)", borderLeft: "1px solid rgba(56,189,248,0.22)", borderRight: "1px solid rgba(56,189,248,0.22)", background: "rgba(56,189,248,0.04)" }}
+            style={{ borderTop: "2px solid rgba(56,189,248,0.65)", borderLeft: "1px solid rgba(56,189,248,0.28)", borderRight: "1px solid rgba(56,189,248,0.28)", background: "rgba(11,26,46,0.6)" }}
           >
             <div className="flex items-center gap-3">
               <div className="w-10 h-[2px] bg-white/50" />
@@ -655,7 +655,7 @@ function CrowdfundingPackages({ showPageLink = false, hideIntro = false }) {
 
           {/* ── Packages grid ── */}
           <div className="px-8 pb-8 pt-5 flex flex-col gap-4"
-            style={{ border: "1px solid rgba(56,189,248,0.22)", borderTop: "none", borderBottomLeftRadius: 12, borderBottomRightRadius: 12, background: "linear-gradient(160deg, rgba(0,40,120,0.12) 0%, rgba(0,10,40,0.35) 100%)" }}
+            style={{ border: "1px solid rgba(56,189,248,0.28)", borderTop: "none", borderBottomLeftRadius: 12, borderBottomRightRadius: 12, background: "linear-gradient(160deg, rgba(11,26,46,0.6) 0%, rgba(6,14,26,0.75) 100%)" }}
           >
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
               {visible.map((pkg, index) => (
@@ -663,8 +663,8 @@ function CrowdfundingPackages({ showPageLink = false, hideIntro = false }) {
                   key={pkg.id}
                   className="rounded-xl overflow-hidden flex flex-col cursor-pointer group"
                   style={{
-                    background: "linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%)",
-                    border: "1px solid rgba(255,255,255,0.12)",
+                    background: "#0e1520",
+                    border: "1px solid rgba(255,255,255,0.14)",
                   }}
                   variants={fadeUp} custom={index + 1}
                   initial="hidden" whileInView="visible"

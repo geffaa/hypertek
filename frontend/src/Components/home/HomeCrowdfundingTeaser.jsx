@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -17,8 +18,17 @@ const EARLY_ACCESS = {
     "Discounts close for good the moment we launch our envisioned crowdfunding campaign.",
     "Limited-edition items remain only until our funding target is reached – then they're gone for good.",
   ],
-  note: "Watch for updates, read the White Paper, and lock in early pricing before the crowd arrives.",
 };
+
+const VEHICLES = ["/vehicle1.webp", "/vehicle2-1.webp", "/vehicle2.webp", "/vehicle3-1.webp", "/vehicle3.webp"];
+const AVATARS = [
+  "/avatar/commander-elite.webp", "/avatar/dryads-female.webp", "/avatar/dryads-male.webp",
+  "/avatar/fawnus-female.webp", "/avatar/fawnus-male.webp", "/avatar/geodians-female.webp",
+  "/avatar/geodians-male.webp", "/avatar/lithionites-female.webp", "/avatar/lithionites-male.webp",
+  "/avatar/mantasquads-female.webp", "/avatar/mantasquads-male.webp", "/avatar/marmulus-female.webp",
+  "/avatar/marmulus-male.webp", "/avatar/ophidians-female.webp", "/avatar/ophidians-male.webp",
+  "/avatar/overlord.webp", "/avatar/team-specialist-major.webp",
+];
 
 export default function HomeCrowdfundingTeaser() {
   const { t } = useTranslation();
@@ -28,6 +38,17 @@ export default function HomeCrowdfundingTeaser() {
   const linkParts = (sec05.link || "").split("—");
   const linkUrl = (linkParts[0] || "").replace(/[[\]]/g, "").trim();
   const linkSlogan = linkParts.length > 1 ? linkParts.slice(1).join("—").trim() : "";
+
+  const [vehicleIdx, setVehicleIdx] = useState(0);
+  const [avatarIdx, setAvatarIdx] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVehicleIdx(i => (i + 1) % VEHICLES.length);
+      setAvatarIdx(i => (i + 1) % AVATARS.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className="relative z-10 w-full px-6 pb-16">
@@ -63,68 +84,69 @@ export default function HomeCrowdfundingTeaser() {
           </div>
         </motion.div>
 
-        {/* ── Don't Miss the Early-Access Window ── */}
-        <motion.div
-          className="relative mt-2 md:mt-4 py-10 md:py-14 text-center w-full overflow-hidden"
-          initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
-        >
-          {/* Decorative left — vehicle */}
-          <img
-            src="/vehicle3.webp"
-            alt=""
-            aria-hidden="true"
-            className="absolute top-1/2 pointer-events-none select-none"
-            style={{ width: "clamp(280px, 34vw, 480px)", opacity: 0.75, transform: "translateY(-50%)", left: "-80px" }}
-          />
-          {/* Decorative right — avatar */}
-          <img
-            src="/avatar/commander-elite.webp"
-            alt=""
-            aria-hidden="true"
-            className="absolute right-0 pointer-events-none select-none"
-            style={{ width: "clamp(200px, 25vw, 360px)", opacity: 0.75, bottom: "-20px" }}
-          />
+      </div>
 
-          <div className="relative w-full">
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <div className="w-12 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
-              <span className="text-amber-300 text-[15px] font-bold uppercase tracking-[0.3em]" style={{ fontFamily: "Orbitron, sans-serif" }}>
-                {EARLY_ACCESS.eyebrow}
-              </span>
-              <div className="w-12 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
-            </div>
+      {/* ── Don't Miss the Early-Access Window — full width breakout ── */}
+      <motion.div
+        className="relative pt-2 pb-10 md:pb-14 text-center"
+        style={{ marginLeft: "calc(-1.5rem)", marginRight: "calc(-1.5rem)", width: "calc(100% + 3rem)" }}
+        initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
+      >
+        {/* Decorative left — vehicle */}
+        <img
+          src={VEHICLES[vehicleIdx]}
+          alt=""
+          aria-hidden="true"
+          className="absolute top-1/2 pointer-events-none select-none transition-opacity duration-700"
+          style={{ width: "clamp(320px, 38vw, 540px)", opacity: 1, transform: "translateY(-50%)", left: "40px" }}
+        />
+        {/* Decorative right — avatar */}
+        <img
+          src={AVATARS[avatarIdx]}
+          alt=""
+          aria-hidden="true"
+          className="absolute pointer-events-none select-none transition-opacity duration-700"
+          style={{ width: "clamp(240px, 28vw, 400px)", opacity: 1, right: "80px", bottom: "-120px" }}
+        />
 
-            <h3 className="font-[Goldman] font-bold text-white text-3xl md:text-[48px] leading-tight mb-5">
-              {EARLY_ACCESS.heading}
-            </h3>
-            <div className="w-20 h-[3px] rounded-full mx-auto mb-10" style={{ background: "linear-gradient(90deg,#fbbf24,#f59e0b)" }} />
-
-            <ul className="flex flex-col gap-5 mb-10 max-w-4xl mx-auto text-left">
-              {EARLY_ACCESS.bullets.map((b, i) => (
-                <li key={i} className="flex gap-4 items-start">
-                  <ArrowRight size={20} color="#fbbf24" strokeWidth={2} className="mt-[3px] flex-shrink-0" />
-                  <span className="text-white/80 text-[17px] md:text-[19px] leading-relaxed">{b}</span>
-                </li>
-              ))}
-            </ul>
-
-            <Link
-              to="/crowdfunding"
-              onClick={() => window.scrollTo(0, 0)}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-[12px] md:text-[13px] font-bold uppercase tracking-[0.12em] text-[#0b0b14] transition-all hover:brightness-110"
-              style={{ background: "linear-gradient(135deg,#fbbf24,#f59e0b)", fontFamily: "Orbitron, sans-serif", boxShadow: "0 0 32px rgba(251,191,36,0.35)" }}
-            >
-              Learn More
-              <ArrowRight size={16} strokeWidth={2.4} />
-            </Link>
-            <p className="text-white/55 text-[13px] md:text-[14px] leading-relaxed max-w-md mx-auto mt-5">
-              {EARLY_ACCESS.note}
-            </p>
+        <div className="relative w-full" style={{ paddingLeft: "clamp(180px, 28vw, 420px)", paddingRight: "clamp(180px, 28vw, 420px)" }}>
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <div className="w-12 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
+            <span className="text-amber-300 text-[15px] font-bold uppercase tracking-[0.3em]" style={{ fontFamily: "Orbitron, sans-serif" }}>
+              {EARLY_ACCESS.eyebrow}
+            </span>
+            <div className="w-12 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
           </div>
-        </motion.div>
 
+          <h3 className="font-[Goldman] font-bold text-white text-3xl md:text-[48px] leading-tight mb-5">
+            {EARLY_ACCESS.heading}
+          </h3>
+          <div className="w-20 h-[3px] rounded-full mx-auto mb-10" style={{ background: "linear-gradient(90deg,#fbbf24,#f59e0b)" }} />
+
+          <ul className="flex flex-col gap-5 mb-8 text-left">
+            {EARLY_ACCESS.bullets.map((b, i) => (
+              <li key={i} className="flex gap-4 items-start">
+                <ArrowRight size={20} color="#fbbf24" strokeWidth={2} className="mt-[3px] flex-shrink-0" />
+                <span className="text-white text-[17px] md:text-[19px] leading-relaxed">{b}</span>
+              </li>
+            ))}
+          </ul>
+
+          <Link
+            to="/crowdfunding"
+            onClick={() => window.scrollTo(0, 0)}
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-[12px] md:text-[13px] font-bold uppercase tracking-[0.12em] text-[#0b0b14] transition-all hover:brightness-110"
+            style={{ background: "linear-gradient(135deg,#fbbf24,#f59e0b)", fontFamily: "Orbitron, sans-serif", boxShadow: "0 0 32px rgba(251,191,36,0.35)" }}
+          >
+            Learn More
+            <ArrowRight size={16} strokeWidth={2.4} />
+          </Link>
+        </div>
+      </motion.div>
+
+      <div className="mx-auto max-w-[1400px]">
         {/* Closing slogan */}
-        <div className="flex flex-col items-center mt-4 mb-8">
+        <div className="flex flex-col items-center mt-16 mb-8">
           <div className="flex items-center gap-3 w-full max-w-xs mb-6">
             <div className="flex-1 h-px bg-white/10" />
             <div className="w-1 h-1 rounded-full bg-cyan-400/60" />
@@ -144,7 +166,6 @@ export default function HomeCrowdfundingTeaser() {
             </Link>
           )}
         </div>
-
       </div>
     </section>
   );
