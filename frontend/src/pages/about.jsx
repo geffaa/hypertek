@@ -315,7 +315,7 @@ function About({ isPreview = false }) {
       {/* ══════════════════════════════════════════════════════
           3 GAMES
       ══════════════════════════════════════════════════════ */}
-      <section id="the-universe" className="relative w-full px-6 md:px-12 xl:px-20 pt-12 pb-10">
+      <section id="the-universe" className="relative w-full px-6 md:px-12 xl:px-20 pt-12 pb-4">
         <div className="max-w-[1400px] mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-10 text-center">
             <div className="flex items-center justify-center gap-3 mb-5">
@@ -386,7 +386,7 @@ function About({ isPreview = false }) {
       {/* ══════════════════════════════════════════════════════
           NFA QUICK SUMMARY
       ══════════════════════════════════════════════════════ */}
-      <section className="relative w-full px-6 md:px-12 xl:px-20 pt-16 pb-10">
+      <section className="relative w-full px-6 md:px-12 xl:px-20 pt-6 pb-10">
         <div className="max-w-[1400px] mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-10">
             <SectionLabel number="04" label={sec04.label || "Non-Fungible Digital Artworks"} />
@@ -475,9 +475,9 @@ function About({ isPreview = false }) {
       {/* ══════════════════════════════════════════════════════
           EARLY-ACCESS CTA
       ══════════════════════════════════════════════════════ */}
-      <section className="relative w-full px-6 md:px-12 xl:px-20 pt-6 pb-16">
+      <section className="relative w-full px-6 md:px-12 xl:px-20 pt-2 pb-6">
         <motion.div
-          className="relative mt-4 py-12 md:py-16 text-center max-w-[1100px] mx-auto"
+          className="relative mt-0 py-8 md:py-10 text-center max-w-[1100px] mx-auto"
           initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
         >
           <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 75% at 50% 42%, rgba(251,191,36,0.12) 0%, transparent 70%)" }} />

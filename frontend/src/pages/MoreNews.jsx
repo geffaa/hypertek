@@ -230,12 +230,29 @@ export default function NewsDetail() {
                 </table>
               </div>
             );
+            const hasCta = block.text.includes("[CTA_GAMING]");
+            const cleanText = block.text.replace(" [CTA_GAMING]", "");
             return (
-              <p key={i} className={i === 0
+              <p key={i} className={`${i === 0
                 ? "text-white/90 text-[16px] md:text-[17px] leading-[1.85] font-medium text-justify"
                 : "text-white/65 text-[14px] md:text-[15px] leading-[1.9] text-justify"
-              }>
-                {parseBold(block.text)}
+              } ${hasCta ? "flex flex-wrap items-center gap-3" : ""}`}>
+                <span>{parseBold(cleanText)}</span>
+                {hasCta && (
+                  <button
+                    onClick={() => navigate("/gaming")}
+                    className="inline-flex items-center gap-1.5 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest transition-all duration-200 hover:brightness-125 shrink-0"
+                    style={{
+                      fontFamily: "Orbitron, sans-serif",
+                      background: "rgba(56,189,248,0.12)",
+                      border: "1px solid rgba(56,189,248,0.45)",
+                      color: "#38bdf8",
+                      borderRadius: "6px",
+                    }}
+                  >
+                    Try the UI →
+                  </button>
+                )}
               </p>
             );
           })}
