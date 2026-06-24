@@ -234,6 +234,18 @@ export default function Nft101Article() {
                   </figure>
                 );
               }
+              if (block.type === "list") {
+                return (
+                  <ul key={i} className="flex flex-col gap-2 pl-1">
+                    {(block.items || []).map((item, j) => (
+                      <li key={j} className="flex items-start gap-3 text-white/65 text-[15px] sm:text-base leading-[1.95]">
+                        <span className="mt-[0.45em] w-1.5 h-1.5 rounded-full bg-white/40 shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                );
+              }
               /* type === "text" */
               return (
                 <p

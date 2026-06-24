@@ -10,8 +10,9 @@ const nft101Schema = new mongoose.Schema(
       paragraphs: [{ type: String }],
     }],
     contentBlocks: [{                                      // rich article content
-      type:    { type: String, enum: ["heading", "text", "image"], required: true },
-      value:   { type: String, required: true },           // text content or image URL
+      type:    { type: String, enum: ["heading", "text", "image", "list"], required: true },
+      value:   { type: String, default: "" },              // text content or image URL
+      items:   [{ type: String }],                         // list items (for type=list)
       caption: { type: String, default: "" },              // optional image caption
     }],
     image:        { type: String, default: "" },          // cover image URL
