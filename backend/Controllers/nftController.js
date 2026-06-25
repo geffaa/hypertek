@@ -2439,6 +2439,7 @@ export async function recordSubCollectionSale(req, res) {
       dispatchRoyalty({
         subCollectionId: subCollection._id.toString(),
         parentId: parent._id.toString(),
+        artistId: subCollection.artistId,
         creatorWallet,
         amount: distribution.creatorAmount,
         payoutType: "artist_royalty",

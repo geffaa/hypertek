@@ -35,7 +35,9 @@ const PROVIDER_STYLE = {
 
 function formatDate(date) {
   if (!date) return "—";
-  return new Date(date).toLocaleDateString("en-US", {
+  const d = new Date(date);
+  if (isNaN(d.getTime())) return "—"; // guard against invalid/malformed dates
+  return d.toLocaleDateString("en-US", {
     year: "numeric", month: "short", day: "numeric",
   });
 }

@@ -359,6 +359,7 @@ export async function finalizeNFAPurchase({
     dispatchRoyalty({
       subCollectionId: cleanSubId,
       parentId: cleanParentId,
+      artistId: subCollection.artistId,
       creatorWallet,
       amount: royaltyPaid,
       saleRecordId: receiptHash || paymentIntentId,

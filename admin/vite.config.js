@@ -8,4 +8,8 @@ export default defineConfig({
     react(),
     tailwindcss(), // Add the Tailwind CSS plugin to your plugins array
   ],
+  server: {
+    port: 5174,
+    strictPort: true, // fail instead of silently picking another port (must match VITE_ADMIN_URL)
+  },
 });

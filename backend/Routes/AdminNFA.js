@@ -6,7 +6,7 @@
  */
 import express from "express";
 import { applyCPI, getPendingBuybacks, executeBuyback } from "../services/NFAService.js";
-import { RoyaltyPayout, dispatchRoyaltyOnChain } from "../services/RoyaltyService.js";
+import { RoyaltyPayout, dispatchRoyaltyOnChain, dispatchRoyaltyViaStripe } from "../services/RoyaltyService.js";
 import { authMiddleware } from "../Middleware/googleMiddle.js";
 import NFTSystem from "../Models/NFTSystem.js";
 import MarketListing from "../Models/MarketListingModel.js";
@@ -119,16 +119,25 @@ AdminNFARouter.get("/royalty-payouts", async (req, res) => {
 
 /**
  * POST /api/v1/admin/nfa/royalty-payouts/:id/retry
- * Admin retries a failed crypto payout — re-attempts on-chain USDC dispatch
+ * Admin retries a failed payout — crypto re-attempts on-chain USDC dispatch,
+ * bank re-attempts the automatic Stripe payout.
  */
 AdminNFARouter.post("/royalty-payouts/:id/retry", async (req, res) => {
   try {
     const payout = await RoyaltyPayout.findById(req.params.id);
     if (!payout) return res.status(404).json({ success: false, message: "Payout not found" });
-    if (payout.paymentType !== "crypto")
-      return res.status(400).json({ success: false, message: "Only crypto payouts can be retried" });
     if (payout.status === "dispatched")
       return res.status(400).json({ success: false, message: "Payout already dispatched" });
+
+    if (payout.paymentType === "bank") {
+      if (!payout.artistId)
+        return res.status(400).json({ success: false, message: "No artist linked to this bank payout" });
+      await RoyaltyPayout.findByIdAndUpdate(payout._id, { status: "pending", note: "Retry initiated by admin" });
+      const updated = await dispatchRoyaltyViaStripe(payout);
+      return res.json({ success: true, data: updated });
+    }
+
+    // Crypto
     if (!payout.creatorWallet || payout.creatorWallet === "admin")
       return res.status(400).json({ success: false, message: "No valid recipient wallet on this payout" });
 

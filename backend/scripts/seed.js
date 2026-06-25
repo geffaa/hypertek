@@ -66,10 +66,10 @@ const SITE_CONTENT = [
         ],
     },
 
-    // ── Home: About HyperTek ──
+    // ── Home: About Hyper Tek ──
     {
         sectionKey: "home_about",
-        sectionLabel: "About HyperTek",
+        sectionLabel: "About Hyper Tek",
         pageGroup: "home",
         fields: [
             { key: "vertical_label", label: "Vertical Label", type: "text", value: "HYPER TEK 100" },
@@ -200,20 +200,20 @@ const SITE_CONTENT = [
 
 const NEWS_DATA = [
     {
-        heading: "HyperTek Platform Launches on Base Mainnet",
-        description: "We are thrilled to announce the official launch of the HyperTek NFT marketplace on Base mainnet. Players can now buy, sell, and trade digital game assets with full on-chain ownership and guaranteed buy-back protection.",
+        heading: "Hyper Tek Platform Launches on Base Mainnet",
+        description: "We are thrilled to announce the official launch of the Hyper Tek NFT marketplace on Base mainnet. Players can now buy, sell, and trade digital game assets with full on-chain ownership and guaranteed buy-back protection.",
         image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80",
         status: "active",
     },
     {
         heading: "New Category: Land and Bases Now Available",
-        description: "Expand your territory in the HyperTek universe. Land and Bases NFTs are now live on the marketplace, offering players strategic locations with resource extraction capabilities and defensive advantages.",
+        description: "Expand your territory in the Hyper Tek universe. Land and Bases NFTs are now live on the marketplace, offering players strategic locations with resource extraction capabilities and defensive advantages.",
         image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
         status: "active",
     },
     {
-        heading: "Understanding the HyperTek Buy-Back Guarantee",
-        description: "Every NFA (Non-Fungible Asset) on HyperTek comes with a guaranteed minimum buy-back value. This means if you can't sell your asset at or above its reserve price, HyperTek will buy it back at the guaranteed minimum, adjusted for CPI each year.",
+        heading: "Understanding the Hyper Tek Buy-Back Guarantee",
+        description: "Every Non-Fungible Digital Artwork sold on the Hyper Tek Marketplace comes with a reserved guaranteed minimum buy-back value. This means that if you can't sell your asset at or above its reserve price, Hyper Tek will buy the Non-Fungible Digital Artwork back at the guaranteed minimum price, which is also adjusted for CPI twice per year!",
         image: "https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?w=800&q=80",
         status: "active",
     },
@@ -224,26 +224,26 @@ const NEWS_DATA = [
         status: "active",
     },
     {
-        heading: "HyperTek Integrates Transak for Easy Crypto On-Ramp",
-        description: "No crypto wallet? No problem. HyperTek now supports Transak — purchase USDC directly with your credit or debit card and start buying NFAs instantly. Your wallet is created automatically when you sign up.",
+        heading: "Hyper Tek Integrates Transak for Easy Crypto On-Ramp",
+        description: "No crypto wallet? No problem. Hyper Tek now supports Transak — purchase USDC directly with your credit or debit card and start buying NFAs instantly. Your wallet is created automatically when you sign up.",
         image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80",
         status: "active",
     },
     {
         heading: "Spaceships Category Now Open — Own Your Fleet",
-        description: "Command the skies with HyperTek's Spaceship NFAs. From the Viper Fighter Mk1 to the Phantom Stealth Ship, each vessel is a tradeable asset with real value and guaranteed buy-back protection for NFA holders.",
+        description: "Command the skies with Hyper Tek's Spaceship NFAs. From the Viper Fighter Mk1 to the Phantom Stealth Ship, each vessel is a tradeable asset with real value and guaranteed buy-back protection for NFA holders.",
         image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=80",
         status: "active",
     },
     {
         heading: "Annual CPI Adjustment: Protecting Your Asset Value",
-        description: "HyperTek announces its commitment to annual CPI-based adjustments on all NFA minimum buy-back values. This ensures your assets retain real purchasing power over time, making HyperTek NFAs a store of value as well as a gaming asset.",
+        description: "Hyper Tek announces its commitment to annual CPI-based adjustments on all NFA minimum buy-back values. This ensures your assets retain real purchasing power over time, making Hyper Tek NFAs a store of value as well as a gaming asset.",
         image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80",
         status: "active",
     },
     {
         heading: "Racing Vehicles Drop: Build Your Championship Team",
-        description: "Five new Racing Vehicle NFCs are now on the marketplace — from the HyperBike GT to the Combat Trike. Collect, trade, and race your way to the top of the HyperTek championship leaderboard.",
+        description: "Five new Racing Vehicle NFCs are now on the marketplace — from the HyperBike GT to the Combat Trike. Collect, trade, and race your way to the top of the Hyper Tek championship leaderboard.",
         image: "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?w=800&q=80",
         status: "active",
     },
@@ -282,9 +282,9 @@ const CATEGORIES = [
         items: [
             { name: "Commander's Cross", symbol: "CC", priceETH: 300, image: "https://images.unsplash.com/photo-1619468129361-605ebea04b44?w=400&q=80", description: "Rare commander's cross awarded for battlefield leadership." },
             { name: "Purple Valor Medal", symbol: "PVM", priceETH: 250, image: "https://images.unsplash.com/photo-1609743522653-52354461eb27?w=400&q=80", description: "Medal of valor for exceptional bravery under fire." },
-            { name: "HyperTek Coin 2025", symbol: "HTC", priceETH: 180, image: "https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?w=400&q=80", description: "Limited edition collectible coin for season 2025." },
+            { name: "Hyper Tek Coin 2025", symbol: "HTC", priceETH: 180, image: "https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?w=400&q=80", description: "Limited edition collectible coin for season 2025." },
             { name: "Iron Shield Badge", symbol: "ISB", priceETH: 140, image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80", description: "Badge denoting mastery of defensive tactics." },
-            { name: "Star of Honour", symbol: "SOH", priceETH: 500, image: "https://images.unsplash.com/photo-1574169208507-84376144848b?w=400&q=80", description: "The highest honour awarded in the HyperTek universe." },
+            { name: "Star of Honour", symbol: "SOH", priceETH: 500, image: "https://images.unsplash.com/photo-1574169208507-84376144848b?w=400&q=80", description: "The highest honour awarded in the Hyper Tek universe." },
         ],
     },
     {
@@ -335,10 +335,10 @@ const CATEGORIES = [
         name: "Artwork", chain: "Base", symbol: "ART",
         image: "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=600&q=80",
         items: [
-            { name: "Genesis Warrior Portrait", symbol: "GWP", priceETH: 800, image: "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=400&q=80", description: "Original digital oil portrait of the first HyperTek warrior." },
-            { name: "Neon City Skyline", symbol: "NCS", priceETH: 600, image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400&q=80", description: "Vibrant neon cityscape from the HyperTek universe." },
+            { name: "Genesis Warrior Portrait", symbol: "GWP", priceETH: 800, image: "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=400&q=80", description: "Original digital oil portrait of the first Hyper Tek warrior." },
+            { name: "Neon City Skyline", symbol: "NCS", priceETH: 600, image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400&q=80", description: "Vibrant neon cityscape from the Hyper Tek universe." },
             { name: "Cosmic Battle Scene", symbol: "CBS", priceETH: 1500, image: "https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=400&q=80", description: "Epic deep-space battle, hand-painted in 8K resolution." },
-            { name: "Hyper Soldier Sketch", symbol: "HSS", priceETH: 400, image: "https://images.unsplash.com/photo-1549490349-8643362247b5?w=400&q=80", description: "Concept sketch of the iconic HyperTek soldier." },
+            { name: "Hyper Soldier Sketch", symbol: "HSS", priceETH: 400, image: "https://images.unsplash.com/photo-1549490349-8643362247b5?w=400&q=80", description: "Concept sketch of the iconic Hyper Tek soldier." },
             { name: "Abstract Data Stream", symbol: "ADS", priceETH: 350, image: "https://images.unsplash.com/photo-1501366062246-723b4d3e4eb6?w=400&q=80", description: "Generative art piece representing blockchain data flow." },
         ],
     },
@@ -346,11 +346,11 @@ const CATEGORIES = [
         name: "General", chain: "Base", symbol: "GEN",
         image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80",
         items: [
-            { name: "HyperTek Starter Pack", symbol: "HSP", priceETH: 50, image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400&q=80", description: "A bundle of miscellaneous items to kick-start your HyperTek journey." },
+            { name: "Hyper Tek Starter Pack", symbol: "HSP", priceETH: 50, image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400&q=80", description: "A bundle of miscellaneous items to kick-start your Hyper Tek journey." },
             { name: "Collector's Badge", symbol: "CLB", priceETH: 30, image: "https://images.unsplash.com/photo-1619468129361-605ebea04b44?w=400&q=80", description: "Rare collectible badge for dedicated community members." },
-            { name: "Mystery Crate", symbol: "MYC", priceETH: 75, image: "https://images.unsplash.com/photo-1553481187-be93c21490a9?w=400&q=80", description: "Contains a random rare item from the HyperTek universe." },
+            { name: "Mystery Crate", symbol: "MYC", priceETH: 75, image: "https://images.unsplash.com/photo-1553481187-be93c21490a9?w=400&q=80", description: "Contains a random rare item from the Hyper Tek universe." },
             { name: "Season Pass Token", symbol: "SPT", priceETH: 120, image: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&q=80", description: "Grants access to exclusive season events and rewards." },
-            { name: "Community Tribute", symbol: "CMT", priceETH: 25, image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80", description: "A commemorative token for early HyperTek community supporters." },
+            { name: "Community Tribute", symbol: "CMT", priceETH: 25, image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80", description: "A commemorative token for early Hyper Tek community supporters." },
         ],
     },
     {
@@ -359,7 +359,7 @@ const CATEGORIES = [
         items: [
             { name: "Desert Outpost Alpha", symbol: "DOA", priceETH: 2000, image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&q=80", description: "Strategic desert base with resource extraction facilities." },
             { name: "Arctic Station Omega", symbol: "ASO", priceETH: 3500, image: "https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=400&q=80", description: "Fortified arctic base in the polar zone." },
-            { name: "City Block 47", symbol: "CB47", priceETH: 1800, image: "https://images.unsplash.com/photo-1465829235810-1f912537f253?w=400&q=80", description: "Prime urban land block in the central HyperTek city." },
+            { name: "City Block 47", symbol: "CB47", priceETH: 1800, image: "https://images.unsplash.com/photo-1465829235810-1f912537f253?w=400&q=80", description: "Prime urban land block in the central Hyper Tek city." },
             { name: "Mountain Fortress", symbol: "MFT", priceETH: 4200, image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80", description: "Defensible mountain stronghold with 360-degree visibility." },
             { name: "Ocean Platform Delta", symbol: "OPD", priceETH: 2800, image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400&q=80", description: "Off-shore naval platform for maritime operations." },
         ],
@@ -375,13 +375,13 @@ const NFT_101_DATA = [
     { title: "How to buy an NFT", icon: "🛒", order: 2, gradientFrom: "#16a34a", gradientTo: "#064e1e", description: "Connect your crypto wallet, browse the marketplace, select an item and click Buy Now. Confirm the transaction in your wallet." },
     { title: "What is minting?", icon: "⚡", order: 3, gradientFrom: "#7c3aed", gradientTo: "#3b0f8a", description: "Minting is the process of creating a new NFT on the blockchain — publishing a unique token that represents ownership of a digital asset." },
     { title: "How to stay protected", icon: "🛡️", order: 4, gradientFrom: "#0891b2", gradientTo: "#0c4a6e", description: "Never share your seed phrase. Use hardware wallets for high-value assets and always verify contract addresses before signing transactions." },
-    { title: "How to create an NFT", icon: "✨", order: 5, gradientFrom: "#ea580c", gradientTo: "#7c2d12", description: "Prepare your digital asset, connect your wallet, use the HyperTek minting tool, set your price, and publish it to the marketplace." },
+    { title: "How to create an NFT", icon: "✨", order: 5, gradientFrom: "#ea580c", gradientTo: "#7c2d12", description: "Prepare your digital asset, connect your wallet, use the Hyper Tek minting tool, set your price, and publish it to the marketplace." },
     { title: "How to sell an NFT", icon: "💰", order: 6, gradientFrom: "#dc2626", gradientTo: "#7f1d1d", description: "List your NFT on the marketplace by setting a price, approving the contract, and confirming the listing transaction in your wallet." },
     { title: "What is a crypto wallet?", icon: "👛", order: 7, gradientFrom: "#4338ca", gradientTo: "#1e1b4b", description: "A crypto wallet stores your private keys and lets you interact with blockchains. Popular options include MetaMask and Coinbase Wallet." },
     { title: "What is blockchain?", icon: "⛓️", order: 8, gradientFrom: "#0f766e", gradientTo: "#042f2e", description: "A blockchain is a distributed ledger that records all transactions transparently and immutably, making it impossible to tamper with records." },
     { title: "What are gas fees?", icon: "⛽", order: 9, gradientFrom: "#b45309", gradientTo: "#451a03", description: "Gas fees are payments made to blockchain validators for processing your transaction. They vary based on network congestion." },
     { title: "What is a smart contract?", icon: "📜", order: 10, gradientFrom: "#be185d", gradientTo: "#500724", description: "A smart contract is self-executing code on the blockchain that automatically enforces the rules of a transaction without intermediaries." },
-    { title: "What is HyperTek?", icon: "🚀", order: 11, gradientFrom: "#1d4ed8", gradientTo: "#172554", description: "HyperTek is a play-to-earn NFT gaming universe where soldiers, land, weapons and vehicles are real digital assets you own." },
+    { title: "What is Hyper Tek?", icon: "🚀", order: 11, gradientFrom: "#1d4ed8", gradientTo: "#172554", description: "Hyper Tek is a play-to-earn NFT gaming universe where soldiers, land, weapons and vehicles are real digital assets you own." },
     { title: "What is Web3?", icon: "🌐", order: 12, gradientFrom: "#0369a1", gradientTo: "#0c2840", description: "Web3 is the next evolution of the internet built on blockchain technology, giving users ownership of their digital assets and data." },
 ];
 

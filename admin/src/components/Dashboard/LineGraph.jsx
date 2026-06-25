@@ -308,7 +308,7 @@ function Chart({ points }) {
             ${tooltip.value.toLocaleString()}
           </p>
           {/* Arrow */}
-          <div style={{ position: "absolute", bottom: -6, left: "50%", transform: "translateX(-50%)", width: 10, height: 10, background: "#111126", border: "1px solid rgba(255,255,255,0.14)", borderTop: "none", borderLeft: "none", transform: "translateX(-50%) rotate(45deg)" }} />
+          <div style={{ position: "absolute", bottom: -6, left: "50%", width: 10, height: 10, background: "#111126", border: "1px solid rgba(255,255,255,0.14)", borderTop: "none", borderLeft: "none", transform: "translateX(-50%) rotate(45deg)" }} />
         </div>
       )}
     </div>

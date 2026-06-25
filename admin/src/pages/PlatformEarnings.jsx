@@ -163,16 +163,13 @@ function WithdrawHistory({ history }) {
 function PlatformEarnings() {
   const { address, isConnected } = useAccount();
   const [balanceDisplay, setBalanceDisplay] = useState("0.00");
-  const [creatorDisplay, setCreatorDisplay] = useState("0.00");
   const [history, setHistory] = useState(loadHistory);
 
   const { data: rawBalance,        isLoading: isReading,      error: balanceError } = useReadContract({ address: MARKETPLACE_ADDRESS, abi: MARKETPLACE_ABI, functionName: "platformBalance",  query: { refetchInterval: 10000 } });
-  const { data: rawCreatorBalance, refetch: refetchCreator }                         = useReadContract({ address: MARKETPLACE_ADDRESS, abi: MARKETPLACE_ABI, functionName: "creatorBalance",   args: address ? [address] : undefined, query: { enabled: !!address, refetchInterval: 10000 } });
   const { data: authorizedWallet,  isLoading: isWalletLoading, error: walletError } = useReadContract({ address: MARKETPLACE_ADDRESS, abi: MARKETPLACE_ABI, functionName: "platformWallet" });
   const { writeContractAsync } = useWriteContract();
 
   useEffect(() => { if (rawBalance        !== undefined) setBalanceDisplay(ethers.formatUnits(rawBalance, 6)); },        [rawBalance]);
-  useEffect(() => { if (rawCreatorBalance !== undefined) setCreatorDisplay(ethers.formatUnits(rawCreatorBalance, 6)); }, [rawCreatorBalance]);
 
   const isAuthorized = isConnected && authorizedWallet && address &&
     authorizedWallet.toLowerCase() === address.toLowerCase();
@@ -195,18 +192,6 @@ function PlatformEarnings() {
     } catch (e) { toast.error(e.shortMessage || e.message || "Failed", { id }); }
   };
 
-  const handleCreatorWithdraw = async () => {
-    if (!isConnected) { toast.error("Connect your wallet first."); return; }
-    if (Number(creatorDisplay) <= 0) { toast.error("No creator earnings to withdraw."); return; }
-    const id = toast.loading("Withdrawing creator earnings…");
-    try {
-      const tx = await writeContractAsync({ address: MARKETPLACE_ADDRESS, abi: MARKETPLACE_ABI, functionName: "withdrawCreator" });
-      toast.success(`Withdrawn! Tx: ${tx.slice(0, 10)}…`, { id, duration: 5000 });
-      recordHistory("creator", creatorDisplay, tx);
-      setTimeout(() => refetchCreator(), 15000);
-    } catch (e) { toast.error(e.shortMessage || e.message || "Failed", { id }); }
-  };
-
   const authBadge = !isConnected
     ? <Badge color="gray">Wallet not connected</Badge>
     : isWalletLoading
@@ -222,7 +207,7 @@ function PlatformEarnings() {
       <div style={{ marginBottom: 28 }}>
         <h1 style={{ fontFamily: F, fontSize: 22, fontWeight: 700, color: "white", margin: 0, lineHeight: 1.2 }}>Platform Treasury</h1>
         <p style={{ fontFamily: F, fontSize: 13, color: "rgba(255,255,255,0.4)", margin: "6px 0 0" }}>
-          Manage and withdraw accumulated platform fees and creator earnings from the smart contract.
+          Manage and withdraw accumulated platform fees from the smart contract.
         </p>
       </div>
 
@@ -262,14 +247,6 @@ function PlatformEarnings() {
           withdrawLabel={!isConnected ? "Connect wallet to withdraw" : !isAuthorized ? "Unauthorized wallet" : "Withdraw Platform Fees"}
           icon={<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>}
         />
-        <EarningsCard
-          title="Creator Earnings" subtitle={isConnected ? `Royalties for ${address?.slice(0, 8)}…${address?.slice(-6)}` : "Connect wallet to view"}
-          balance={creatorDisplay} isLoading={false}
-          onWithdraw={handleCreatorWithdraw}
-          canWithdraw={isConnected && Number(creatorDisplay) > 0}
-          withdrawLabel={!isConnected ? "Connect wallet to withdraw" : "Withdraw Creator Earnings"}
-          icon={<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a5 5 0 1 0 0 10A5 5 0 0 0 12 2z"/><path d="M2 22c0-4.418 4.477-8 10-8s10 3.582 10 8"/></svg>}
-        />
       </div>
 
       {/* authorized wallet */}
@@ -282,7 +259,7 @@ function PlatformEarnings() {
           {isWalletLoading ? "Loading…" : authorizedWallet || "Not configured"}
         </p>
         <p style={{ fontFamily: F, fontSize: 11, color: "rgba(255,255,255,0.28)", margin: "8px 0 0" }}>
-          Only this wallet can withdraw platform fees. Creator earnings can be withdrawn by any connected creator wallet.
+          Only this wallet can withdraw platform fees. To withdraw, connect this exact wallet.
         </p>
       </div>
 

@@ -29,7 +29,8 @@ const ArtistSchema = new mongoose.Schema(
       trim: true,
     },
 
-    // Bank details (for fiat payout via Wise)
+    // Bank details (used to attach an external bank account to the artist's
+    // Stripe connected account for automatic fiat payout via Stripe Connect)
     bankDetails: {
       accountHolderName: { type: String, default: "" },
       bankName:          { type: String, default: "" },
@@ -41,6 +42,12 @@ const ArtistSchema = new mongoose.Schema(
       currency:          { type: String, default: "USD" },
       verified:          { type: Boolean, default: false },
     },
+
+    // Stripe Connect — automatic bank payouts (mirrors the HyperBucks cash-out flow).
+    // stripeConnectAccountId: the artist's connected account.
+    // stripeExternalAccountId: their attached bank account on that connected account.
+    stripeConnectAccountId:  { type: String, default: "" },
+    stripeExternalAccountId: { type: String, default: "" },
 
     // Notes for admin (e.g. "hired for Season 1 skins")
     notes: {

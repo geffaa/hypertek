@@ -119,7 +119,7 @@ function ArtistForm() {
           <p className="text-white/40 text-xs mt-2">
             {form.paymentPreference === "crypto"
               ? "4% royalty will be sent automatically on-chain to the wallet address below."
-              : "4% royalty will be processed via bank transfer. Admin will be notified to process manually via Wise."}
+              : "4% royalty will be paid out to this bank account automatically via Stripe."}
           </p>
         </div>
 

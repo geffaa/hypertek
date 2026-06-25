@@ -631,7 +631,7 @@ export default function HyperBucksAdmin() {
             <div>
               <label className="block text-white/50 text-xs mb-1.5 uppercase tracking-wider">Admin Note (optional)</label>
               <input value={completeNote} onChange={e => setCompleteNote(e.target.value)}
-                placeholder="e.g. Wise transfer ref #12345" style={{ ...INPUT_STYLE, width: "100%" }} />
+                placeholder="e.g. Stripe payout ref #12345" style={{ ...INPUT_STYLE, width: "100%" }} />
             </div>
             <div className="flex gap-3">
               <button onClick={() => setCompleteTarget(null)}
