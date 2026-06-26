@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -147,8 +147,8 @@ const AVATARS = [
 
 const HELP_META = [
   { accent: "#38bdf8", iconBg: "rgba(56,189,248,0.12)" },
-  { accent: "#fbbf24", iconBg: "rgba(251,191,36,0.12)" },
-  { accent: "#22c55e", iconBg: "rgba(34,197,94,0.12)" },
+  { accent: "#38bdf8", iconBg: "rgba(56,189,248,0.12)" },
+  { accent: "#38bdf8", iconBg: "rgba(56,189,248,0.12)" },
 ];
 
 // Milestone card accent — cycles every 3 so columns share a hue rhythm
@@ -174,54 +174,28 @@ function preloadImages(urls) {
   urls.forEach(src => { const img = new Image(); img.src = src; });
 }
 
-function CyclingAvatar({ offset = 0, style = {}, className = "" }) {
-  const ref = useRef(null);
-  useEffect(() => {
-    preloadImages(AVATARS);
-    let i = offset % AVATARS.length;
-    const t = setInterval(() => {
-      i = (i + 1) % AVATARS.length;
-      if (ref.current) {
-        ref.current.style.opacity = "0";
-        setTimeout(() => {
-          if (ref.current) { ref.current.src = AVATARS[i]; ref.current.style.opacity = "1"; }
-        }, 350);
-      }
-    }, 5000);
-    return () => clearInterval(t);
-  }, [offset]);
+// Picks an avatar once per page visit (seed = per-visit rotation counter).
+// No interval — the image stays fixed while the user remains on the page,
+// and only advances when they leave and return (component remounts).
+function CyclingAvatar({ offset = 0, seed = 0, style = {}, className = "" }) {
+  const src = AVATARS[(seed + offset) % AVATARS.length];
   return (
     <img
-      ref={ref}
-      src={AVATARS[offset % AVATARS.length]}
+      src={src}
       alt=""
       aria-hidden="true"
       className={`object-contain select-none pointer-events-none ${className}`}
-      style={{ transition: "opacity 0.35s ease", ...style }}
+      style={style}
     />
   );
 }
 
-function CyclingVehicle({ style = {}, className = "" }) {
-  const ref = useRef(null);
-  useEffect(() => {
-    preloadImages(VEHICLES);
-    let i = 0;
-    const t = setInterval(() => {
-      i = (i + 1) % VEHICLES.length;
-      if (ref.current) {
-        ref.current.style.opacity = "0";
-        setTimeout(() => {
-          if (ref.current) { ref.current.src = VEHICLES[i]; ref.current.style.opacity = "1"; }
-        }, 350);
-      }
-    }, 5000);
-    return () => clearInterval(t);
-  }, []);
+// Picks a vehicle once per page visit (no interval) — same behaviour as CyclingAvatar.
+function CyclingVehicle({ seed = 0, style = {}, className = "" }) {
+  const src = VEHICLES[seed % VEHICLES.length];
   return (
     <img
-      ref={ref}
-      src={VEHICLES[0]}
+      src={src}
       alt=""
       aria-hidden="true"
       className={`select-none pointer-events-none ${className}`}
@@ -240,8 +214,21 @@ function Crowdfunding2() {
   const linkUrl = (linkParts[0] || "").replace(/[[\]]/g, "").trim();
   const linkSlogan = linkParts.length > 1 ? linkParts.slice(1).join("—").trim() : "";
 
+  // Avatar rotation: advance one step each time the page is visited, then keep
+  // the same set of images for the whole visit (no per-second cycling).
+  const [rotationSeed] = useState(() => {
+    const key = "cf_avatar_rotation";
+    let prev = 0;
+    try { prev = parseInt(localStorage.getItem(key) || "0", 10) || 0; } catch { prev = 0; }
+    const next = (prev + 1) % AVATARS.length;
+    try { localStorage.setItem(key, String(next)); } catch { /* ignore */ }
+    return next;
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    preloadImages(AVATARS);
+    preloadImages(VEHICLES);
   }, []);
 
   return (
@@ -448,39 +435,42 @@ function Crowdfunding2() {
             </div>
           </div>
 
-          {/* ── Card 1: LIMITED EDITION — card full width, avatar absolutely outside ── */}
+          {/* ── Card 1: LIMITED EDITION — transparent card with avatar inside ── */}
           <div className="relative mb-5">
             <motion.div
               initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
             >
-              <div className="flex flex-col gap-4 rounded-xl overflow-hidden"
-                style={{ padding: "32px 36px", maxWidth: "65%", background: "linear-gradient(160deg, #0b1a2e 0%, #060e1a 100%)", border: "1px solid rgba(56,189,248,0.30)", borderTop: "2px solid rgba(56,189,248,0.70)", boxShadow: "0 4px 32px rgba(56,189,248,0.10)" }}
+              <div className="flex flex-col xl:flex-row items-center gap-4 xl:gap-2 rounded-xl"
+                style={{ padding: "32px 36px", background: "linear-gradient(160deg, rgba(11,26,46,0.35) 0%, rgba(6,14,26,0.35) 100%)", border: "1px solid rgba(56,189,248,0.30)", borderTop: "2px solid rgba(56,189,248,0.70)", boxShadow: "0 4px 32px rgba(56,189,248,0.10)" }}
               >
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                  <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 13, letterSpacing: "0.28em", color: "rgba(56,189,248,1)", fontWeight: "bold", textShadow: "0 0 14px rgba(56,189,248,0.7)" }}>
-                    {t("packages.badge")}
-                  </span>
+                <div className="flex flex-col gap-4 flex-1">
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                    <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 13, letterSpacing: "0.28em", color: "rgba(56,189,248,1)", fontWeight: "bold", textShadow: "0 0 14px rgba(56,189,248,0.7)" }}>
+                      {t("packages.badge")}
+                    </span>
+                  </div>
+                  <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro1")}</p>
+                  <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro2")}</p>
+                  <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro3")}</p>
+                  <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro4")}</p>
+                  <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro5")}</p>
                 </div>
-                <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro1")}</p>
-                <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro2")}</p>
-                <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro3")}</p>
-                <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro4")}</p>
-                <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro5")}</p>
+
+                {/* Avatar — reserves a narrow slot; the image overflows it so it can
+                    render larger without widening the text panel */}
+                <div className="hidden xl:block flex-shrink-0 relative self-stretch pointer-events-none select-none" style={{ width: "300px" }}>
+                  <CyclingAvatar offset={0} seed={rotationSeed} className="absolute object-contain object-bottom" style={{ width: "460px", maxWidth: "none", height: "auto", right: "-90px", bottom: "-32px", filter: "drop-shadow(0 0 56px rgba(56,189,248,0.50))" }} />
+                </div>
               </div>
             </motion.div>
-
-            {/* Avatar — fixed position relative to section, does not affect card layout */}
-            <div className="hidden xl:block pointer-events-none select-none" style={{ position: "absolute", right: "-60px", top: "-40px", width: "580px", zIndex: 10 }}>
-              <CyclingAvatar offset={0} className="w-full object-contain object-top" style={{ maxHeight: "960px", filter: "drop-shadow(0 0 64px rgba(56,189,248,0.50))" }} />
-            </div>
           </div>
 
           {/* ── Card 2: Key Points — avatar left (absolute) + card right ── */}
           <div className="relative mb-2" style={{ minHeight: "320px" }}>
             {/* Avatar — absolute kiri, dikecilkan agar tidak overlap section bawah */}
             <div className="hidden xl:block pointer-events-none select-none" style={{ position: "absolute", left: "-60px", top: "0px", width: "420px", zIndex: 10 }}>
-              <CyclingAvatar offset={1} className="w-full object-contain object-top" style={{ maxHeight: "640px", filter: "drop-shadow(0 0 48px rgba(167,139,250,0.40))", transform: "scaleX(-1)" }} />
+              <CyclingAvatar offset={1} seed={rotationSeed} className="w-full object-contain object-top" style={{ maxHeight: "640px", filter: "drop-shadow(0 0 48px rgba(167,139,250,0.40))", transform: "scaleX(-1)" }} />
             </div>
 
             {/* Card — center-right, sejajar vertikal dengan tengah avatar */}
@@ -490,7 +480,7 @@ function Crowdfunding2() {
               initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.1 }} viewport={{ once: true }}
             >
               <div className="flex flex-col gap-4 rounded-xl overflow-hidden"
-                style={{ padding: "32px 36px", width: "65%", background: "linear-gradient(160deg, #160f28 0%, #0a0616 100%)", border: "1px solid rgba(167,139,250,0.28)", borderTop: "2px solid rgba(167,139,250,0.68)", boxShadow: "0 4px 32px rgba(167,139,250,0.08)" }}
+                style={{ padding: "32px 36px", width: "76%", background: "linear-gradient(160deg, rgba(22,15,40,0.35) 0%, rgba(10,6,22,0.35) 100%)", border: "1px solid rgba(167,139,250,0.28)", borderTop: "2px solid rgba(167,139,250,0.68)", boxShadow: "0 4px 32px rgba(167,139,250,0.08)" }}
               >
                 <div className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: "#a78bfa" }} />
@@ -523,7 +513,7 @@ function Crowdfunding2() {
                   <div key={item.bold} className="flex-1 flex flex-col items-center text-center gap-3">
                     <div
                       className="w-14 h-14 rounded-full flex items-center justify-center font-[Goldman] font-bold text-xl"
-                      style={{ background: m.iconBg, border: `1.5px solid ${m.accent}`, color: m.accent }}
+                      style={{ background: m.accent, border: `1.5px solid ${m.accent}`, color: "#06121c", boxShadow: `0 0 20px ${m.accent}80` }}
                     >
                       {idx + 1}
                     </div>
@@ -548,9 +538,9 @@ function Crowdfunding2() {
           initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
         >
           {/* Decorative left — vehicle */}
-          <CyclingVehicle className="absolute top-1/2 transition-opacity duration-700" style={{ width: "clamp(320px, 38vw, 540px)", transform: "translateY(-50%)", left: "40px" }} />
+          <CyclingVehicle seed={rotationSeed} className="absolute top-1/2 transition-opacity duration-700" style={{ width: "clamp(320px, 38vw, 540px)", transform: "translateY(-50%)", left: "40px" }} />
           {/* Decorative right — avatar */}
-          <CyclingAvatar offset={3} className="absolute transition-opacity duration-700" style={{ width: "clamp(240px, 28vw, 400px)", right: "80px", bottom: "-120px" }} />
+          <CyclingAvatar offset={3} seed={rotationSeed} className="absolute transition-opacity duration-700" style={{ width: "clamp(240px, 28vw, 400px)", right: "80px", bottom: "-120px" }} />
 
           <div className="relative w-full" style={{ paddingLeft: "clamp(180px, 28vw, 420px)", paddingRight: "clamp(180px, 28vw, 420px)" }}>
             <div className="flex items-center justify-center gap-4 mb-6">

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -6,8 +6,8 @@ import { useTranslation } from "react-i18next";
 
 const HELP_META = [
   { accent: "#38bdf8", iconBg: "rgba(56,189,248,0.12)" },
-  { accent: "#fbbf24", iconBg: "rgba(251,191,36,0.12)" },
-  { accent: "#22c55e", iconBg: "rgba(34,197,94,0.12)" },
+  { accent: "#38bdf8", iconBg: "rgba(56,189,248,0.12)" },
+  { accent: "#38bdf8", iconBg: "rgba(56,189,248,0.12)" },
 ];
 
 const EARLY_ACCESS = {
@@ -39,24 +39,27 @@ export default function HomeCrowdfundingTeaser() {
   const linkUrl = (linkParts[0] || "").replace(/[[\]]/g, "").trim();
   const linkSlogan = linkParts.length > 1 ? linkParts.slice(1).join("—").trim() : "";
 
-  const [vehicleIdx, setVehicleIdx] = useState(0);
-  const [avatarIdx, setAvatarIdx] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setVehicleIdx(i => (i + 1) % VEHICLES.length);
-      setAvatarIdx(i => (i + 1) % AVATARS.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+  // Vehicle + avatar advance once per visit (no per-second cycling) — same
+  // behaviour as the Crowdfunding page. They stay fixed while the user is on the
+  // page and only change when they leave and come back (component remounts).
+  const [rotationSeed] = useState(() => {
+    const key = "cf_avatar_rotation";
+    let prev = 0;
+    try { prev = parseInt(localStorage.getItem(key) || "0", 10) || 0; } catch { prev = 0; }
+    const next = (prev + 1) % AVATARS.length;
+    try { localStorage.setItem(key, String(next)); } catch { /* ignore */ }
+    return next;
+  });
+  const vehicleIdx = rotationSeed % VEHICLES.length;
+  const avatarIdx = rotationSeed % AVATARS.length;
 
   return (
-    <section className="relative z-10 w-full px-6 pb-16">
+    <section className="relative z-10 w-full px-6 pb-6">
       <div className="mx-auto max-w-[1400px]">
 
         {/* ── How YOU Can Help ── */}
         <motion.div
-          className="py-14 md:py-16 mb-8"
+          className="pt-2 pb-14 md:pt-4 md:pb-16 mb-0"
           initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }} viewport={{ once: true }}
         >
           <h3 className="font-[Goldman] font-bold text-white text-2xl md:text-3xl text-center mb-10">
@@ -72,7 +75,7 @@ export default function HomeCrowdfundingTeaser() {
                 <div key={item.bold} className="flex-1 flex flex-col items-center text-center gap-3">
                   <div
                     className="w-14 h-14 rounded-full flex items-center justify-center font-[Goldman] font-bold text-xl"
-                    style={{ background: m.iconBg, border: `1.5px solid ${m.accent}`, color: m.accent }}
+                    style={{ background: m.accent, border: `1.5px solid ${m.accent}`, color: "#06121c", boxShadow: `0 0 20px ${m.accent}80` }}
                   >
                     {idx + 1}
                   </div>
@@ -146,7 +149,7 @@ export default function HomeCrowdfundingTeaser() {
 
       <div className="mx-auto max-w-[1400px]">
         {/* Closing slogan */}
-        <div className="flex flex-col items-center mt-16 mb-8">
+        <div className="flex flex-col items-center mt-6 mb-2">
           <div className="flex items-center gap-3 w-full max-w-xs mb-6">
             <div className="flex-1 h-px bg-white/10" />
             <div className="w-1 h-1 rounded-full bg-cyan-400/60" />

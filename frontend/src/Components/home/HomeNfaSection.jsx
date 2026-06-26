@@ -12,7 +12,7 @@ const NFA_CARDS_STATIC = [
 function SectionLabel({ number, label }) {
   return (
     <div className="flex items-center gap-3 mb-5">
-      <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 14, fontWeight: "bold", color: "rgba(56,189,248,0.95)", letterSpacing: "0.35em", textShadow: "0 0 12px rgba(56,189,248,0.6)" }}>{number}</span>
+      {number && <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 14, fontWeight: "bold", color: "rgba(56,189,248,0.95)", letterSpacing: "0.35em", textShadow: "0 0 12px rgba(56,189,248,0.6)" }}>{number}</span>}
       <div className="w-8 h-px" style={{ background: "rgba(56,189,248,0.55)" }} />
       <span className="text-white/70 text-[12px] font-bold tracking-[0.3em] uppercase">{label}</span>
     </div>
@@ -25,10 +25,10 @@ export default function HomeNfaSection() {
   const sec04Cards = Array.isArray(sec04.cards) ? sec04.cards : [];
 
   return (
-    <section className="relative w-full px-6 md:px-12 xl:px-20 pt-16 pb-10">
+    <section className="relative w-full px-6 md:px-12 xl:px-20 pt-4 pb-10">
       <div className="max-w-[1400px] mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-10">
-          <SectionLabel number="04" label={sec04.label || "Non-Fungible Digital Artworks"} />
+          <SectionLabel label={sec04.label || "Non-Fungible Digital Artworks"} />
           <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[36px] text-white leading-tight">
             {sec04.heading || "Digital Art With Guaranteed Value"}
           </h2>
