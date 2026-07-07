@@ -205,7 +205,7 @@ function CyclingVehicle({ seed = 0, style = {}, className = "" }) {
   );
 }
 
-function Crowdfunding2() {
+function CrowdfundingStandalone() {
   const { t } = useTranslation();
   const sec05 = t("aboutPage.section05", { returnObjects: true }) || {};
   const sec06 = t("aboutPage.section06", { returnObjects: true }) || {};
@@ -650,4 +650,4 @@ function Crowdfunding2() {
   );
 }
 
-export default Crowdfunding2;
+export default CrowdfundingStandalone;

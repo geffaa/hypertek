@@ -158,7 +158,8 @@ const MARKET_ITEMS = [
 ];
 
 const LANG_LIST = [
-  { code: "en",    cc: "us", label: "English"         },
+  { code: "en-GB", cc: "gb", label: "English (UK)"    },
+  { code: "en-US", cc: "us", label: "English (US)"    },
   { code: "fr",    cc: "fr", label: "Français"        },
   { code: "it",    cc: "it", label: "Italiano"        },
   { code: "de",    cc: "de", label: "Deutsch"         },

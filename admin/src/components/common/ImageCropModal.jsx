@@ -43,7 +43,8 @@ const RATIOS = [
   { label: "Free", value: null },
 ];
 
-export default function ImageCropModal({ src, fileName, onConfirm, onCancel, aspect: forcedAspect }) {
+// originalFile — the raw File before any crop; used for the "Use Original" shortcut
+export default function ImageCropModal({ src, fileName, originalFile, onConfirm, onCancel, aspect: forcedAspect }) {
   const imgRef    = useRef(null);
   const canvasRef = useRef(document.createElement("canvas"));
 
@@ -97,7 +98,7 @@ export default function ImageCropModal({ src, fileName, onConfirm, onCancel, asp
           </div>
         )}
         {!locked && (
-          <div className="flex gap-2 flex-shrink-0">
+          <div className="flex gap-2 flex-shrink-0 flex-wrap">
             {RATIOS.map(({ label, value }) => (
               <button
                 key={label}
@@ -111,6 +112,16 @@ export default function ImageCropModal({ src, fileName, onConfirm, onCancel, asp
                 {label}
               </button>
             ))}
+
+            {/* "Use Original" — bypass crop entirely */}
+            {originalFile && (
+              <button
+                onClick={() => onConfirm(originalFile)}
+                className="px-3 py-1 rounded-md text-xs font-medium border border-white/10 text-white/50 hover:border-green-500/60 hover:text-green-400 transition-all ml-auto"
+              >
+                Use Original (no crop)
+              </button>
+            )}
           </div>
         )}
 

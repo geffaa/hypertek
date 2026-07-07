@@ -5,8 +5,9 @@ import { useTranslation } from "react-i18next";
 import { FiArrowRight, FiMail, FiCheck } from "react-icons/fi";
 
 import { Gauge, Compass, Crown } from "lucide-react";
-import Navbar from "../Components/Common/Navbar";
-import Footer from "../Components/Common/Footer";
+// Navbar & Footer hidden temporarily on the waitlist page
+// import Navbar from "../Components/Common/Navbar";
+// import Footer from "../Components/Common/Footer";
 import bgHero from "../assets/images/waitlist/bg-hero.webp";
 import alphabetImg from "../assets/images/waitlist/alphabet.webp";
 import character1 from "../assets/images/waitlist/character1.webp";
@@ -32,7 +33,7 @@ function Waitlist() {
   return (
     <div className="min-h-screen bg-[#060610] text-white overflow-x-hidden">
 
-      <Navbar />
+      {/* <Navbar /> hidden temporarily */}
 
       {/* ── SECTION 1: HERO ── */}
       <section className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden">
@@ -133,7 +134,7 @@ function Waitlist() {
             />
             <img
               src={character1}
-              alt="Hyper Tek Character"
+              alt="HyperTek Character"
               className="relative z-10 w-full object-contain"
               style={{ maxHeight: "85vh" }}
             />
@@ -270,7 +271,7 @@ function Waitlist() {
           >
             {/* Logo + label */}
             <div className="flex items-center gap-3">
-              <img src={logoWhite} alt="Hyper Tek" className="h-14 w-auto opacity-90" />
+              <img src={logoWhite} alt="HyperTek" className="h-14 w-auto opacity-90" />
               <div className="h-4 w-px bg-white/20" />
               <span className="text-white/40 text-xs font-semibold tracking-widest uppercase">
                 {t("waitlist.stayInTouch")}
@@ -350,7 +351,7 @@ function Waitlist() {
         </div>
       </section>
 
-      <Footer />
+      {/* <Footer /> hidden temporarily */}
 
     </div>
   );

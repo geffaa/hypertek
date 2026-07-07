@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import popularFallback from "../../assets/images/popular/popolar.webp";
 import LazyImage from "../Common/LazyImage";
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const fadeUp = {
@@ -26,7 +25,6 @@ export const DUMMY_FEATURED_NFA = [
 // Standalone NFA items grid — rendered inside PopularCollections card
 export function NFAItemsSection() {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const items = DUMMY_FEATURED_NFA;
 
   return (
@@ -52,12 +50,28 @@ export function NFAItemsSection() {
         <p className="text-white/70 text-sm sm:text-base font-semibold">{t("homeMarket.urgency")}</p>
       </div>
 
+      {/* Preview-only notice — marketplace is browsable but purchasing is locked until launch */}
+      <div className="px-8 pt-3">
+        <div
+          className="flex items-center gap-2.5 rounded-lg px-4 py-2.5"
+          style={{
+            background: "linear-gradient(135deg, rgba(56,189,248,0.10) 0%, rgba(56,189,248,0.03) 100%)",
+            border: "1px solid rgba(56,189,248,0.30)",
+          }}
+        >
+          <span className="text-cyan-300 text-sm leading-none">🔒</span>
+          <span className="text-cyan-100/90 text-[12px] sm:text-[13px] font-semibold tracking-wide">
+            {t("homeMarket.previewNotice", { defaultValue: "Preview only — buying opens at official launch" })}
+          </span>
+        </div>
+      </div>
+
       {/* Items grid */}
       <div className="px-8 pb-8 flex gap-3 overflow-x-auto snap-x snap-mandatory scrollbar-hide sm:grid sm:grid-cols-3 sm:overflow-visible lg:grid-cols-6 mt-4">
         {items.map((item, index) => (
           <motion.div
             key={item.id}
-            className="snap-start flex-shrink-0 w-[45vw] sm:w-auto rounded-xl overflow-hidden flex flex-col text-white cursor-pointer"
+            className="snap-start flex-shrink-0 w-[45vw] sm:w-auto rounded-xl overflow-hidden flex flex-col text-white"
             style={{
               background: "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)",
               backdropFilter: "blur(16px)",
@@ -68,7 +82,6 @@ export function NFAItemsSection() {
             initial="hidden" whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
             whileHover={{ y: -4, transition: { duration: 0.2 } }}
-            onClick={() => navigate("/buy-nfa")}
           >
             <div className="relative">
               <LazyImage
@@ -105,10 +118,11 @@ export function NFAItemsSection() {
               )}
               <div className="mt-auto pt-2">
                 <button
-                  onClick={(e) => { e.stopPropagation(); navigate("/buy-nfa"); }}
-                  className="w-full py-1.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-[10px] sm:text-xs rounded-md transition-all duration-300 border border-white/20"
+                  disabled
+                  className="w-full py-1.5 flex items-center justify-center gap-1.5 bg-white/5 text-white/50 font-semibold text-[10px] sm:text-xs rounded-md border border-white/10 cursor-not-allowed"
                 >
-                  {t("homeMarket.buyNow")}
+                  <span className="leading-none">🔒</span>
+                  {t("homeMarket.comingAtLaunch", { defaultValue: "Coming at launch" })}
                 </button>
               </div>
             </div>

@@ -134,25 +134,34 @@ export const StripeWebhook = async (req, res) => {
             await markOfferCompleted(offerId);
           }
 
-          // Handle Hyper Bucks top-up
+          // Handle Hyper Bucks top-up. Use an atomic $inc (not load-modify-save) so a
+          // single stale/corrupt field elsewhere on the user doc can't fail full-document
+          // validation and silently swallow a paid credit. Idempotent on paymentIntentId.
           if (paymentData.itemType === "hyperbucks") {
             const hbAmount = parseInt(dataObject.metadata?.hbAmount || 0);
             const topupUserId = dataObject.metadata?.userId;
             if (hbAmount > 0 && topupUserId) {
               try {
-                const topupUser = await User.findById(topupUserId);
-                if (topupUser) {
-                  topupUser.hyperBucks = (topupUser.hyperBucks || 0) + hbAmount;
-                  await topupUser.save();
-                  await HBLedger.create({
-                    userId: topupUserId,
-                    type: "earn",
-                    amount: hbAmount,
-                    balanceAfter: topupUser.hyperBucks,
-                    description: `Top-up: ${hbAmount} HB ($${(hbAmount / 250).toFixed(2)} USD)`,
-                    reference: paymentData.paymentIntentId,
-                  });
-                  console.log(`[StripeWebhook] Hyper Bucks credited: ${hbAmount} HB to user ${topupUserId}`);
+                const already = await HBLedger.findOne({ reference: paymentData.paymentIntentId });
+                if (!already) {
+                  const updated = await User.findByIdAndUpdate(
+                    topupUserId,
+                    { $inc: { hyperBucks: hbAmount } },
+                    { new: true, runValidators: false }
+                  );
+                  if (updated) {
+                    await HBLedger.create({
+                      userId: topupUserId,
+                      type: "earn",
+                      amount: hbAmount,
+                      balanceAfter: updated.hyperBucks,
+                      description: `Top-up: ${hbAmount} HB ($${(hbAmount / 250).toFixed(2)} USD)`,
+                      reference: paymentData.paymentIntentId,
+                    });
+                    console.log(`[StripeWebhook] Hyper Bucks credited: ${hbAmount} HB to user ${topupUserId}`);
+                  }
+                } else {
+                  console.log(`[StripeWebhook] Hyper Bucks already credited for ${paymentData.paymentIntentId}, skipping`);
                 }
               } catch (hbErr) {
                 console.error(" [StripeWebhook] Hyper Bucks credit failed:", hbErr.message);
@@ -268,6 +277,53 @@ export const StripeWebhook = async (req, res) => {
           }
         } catch (kycErr) {
           console.error(" [StripeWebhook] KYC failed update failed:", kycErr.message);
+        }
+        break;
+
+      // ── Bank cashout payout lifecycle (Connect events; event.account set) ──────
+      // Auto-advance the HB cashout ledger once the AUD payout settles or fails.
+      case "payout.paid":
+        try {
+          const completed = await HBLedger.findOneAndUpdate(
+            { cashoutTxHash: dataObject.id, type: "cashout", cashoutStatus: { $ne: "completed" } },
+            { cashoutStatus: "completed" },
+            { new: true }
+          );
+          if (completed) console.log(`[StripeWebhook] Cashout ${completed._id} completed via payout.paid ${dataObject.id}`);
+        } catch (poErr) {
+          console.error(" [StripeWebhook] payout.paid handling failed:", poErr.message);
+        }
+        break;
+
+      case "payout.failed":
+        try {
+          // Atomically claim the failure transition so a retried event can't double-refund.
+          const ledger = await HBLedger.findOneAndUpdate(
+            { cashoutTxHash: dataObject.id, type: "cashout", cashoutStatus: { $in: ["processing", "pending"] } },
+            { cashoutStatus: "failed" },
+            { new: true }
+          );
+          if (ledger) {
+            const refundHb = Math.abs(ledger.amount);
+            const u = await User.findByIdAndUpdate(
+              ledger.userId,
+              { $inc: { hyperBucks: refundHb } },
+              { new: true, runValidators: false }
+            );
+            if (u) {
+              await HBLedger.create({
+                userId: ledger.userId,
+                type: "admin_adjust",
+                amount: refundHb,
+                balanceAfter: u.hyperBucks,
+                description: `Refund: failed bank payout ${dataObject.id} (${dataObject.failure_message || "payout failed"})`,
+                reference: `refund_${ledger._id}`,
+              });
+            }
+            console.log(`⚠️ [StripeWebhook] Cashout ${ledger._id} failed via payout.failed; refunded ${refundHb} HB`);
+          }
+        } catch (poErr) {
+          console.error(" [StripeWebhook] payout.failed handling failed:", poErr.message);
         }
         break;
 

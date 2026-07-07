@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ChevronRight, Layers3, Gem, Network, Rocket, ArrowRight } from "lucide-react";
@@ -31,6 +31,24 @@ const GAME_BADGE_ACCENTS = [
   { accent: "#22c55e", glow: "rgba(34,197,94,0.3)" },
   { accent: "#a78bfa", glow: "rgba(167,139,250,0.3)" },
 ];
+
+// Cycling avatars/vehicles for the Early-Access CTA — mirrors the Crowdfunding
+// page: a vehicle (left) + an avatar (right) are picked per page visit and stay
+// fixed for the whole visit, advancing one step only on the next visit.
+const CTA_AVATARS = [
+  "/avatar/commander-elite.webp", "/avatar/dryads-female.webp", "/avatar/dryads-male.webp",
+  "/avatar/fawnus-female.webp", "/avatar/fawnus-male.webp", "/avatar/geodians-female.webp",
+  "/avatar/geodians-male.webp", "/avatar/lithionites-female.webp", "/avatar/lithionites-male.webp",
+  "/avatar/mantasquads-female.webp", "/avatar/mantasquads-male.webp", "/avatar/marmulus-female.webp",
+  "/avatar/marmulus-male.webp", "/avatar/ophidians-female.webp", "/avatar/ophidians-male.webp",
+  "/avatar/overlord.webp", "/avatar/team-specialist-major.webp",
+];
+const CTA_VEHICLES = ["/vehicle1.webp", "/vehicle2-1.webp", "/vehicle2.webp", "/vehicle3-1.webp", "/vehicle3.webp"];
+
+// Preload so the src swap is instant with no fetch/layout-shift.
+function preloadImages(urls) {
+  urls.forEach((src) => { const img = new Image(); img.src = src; });
+}
 
 
 
@@ -73,6 +91,22 @@ function About({ isPreview = false }) {
     const top = el.getBoundingClientRect().top + window.scrollY - 80;
     window.scrollTo({ top, behavior: "instant" });
   }, [location.state?.scrollTo]);
+
+  // Early-Access CTA avatar: advance one step per visit, then keep it fixed for
+  // the whole visit (same per-visit rotation the Crowdfunding page uses).
+  const [ctaAvatarSeed] = useState(() => {
+    const key = "about_cta_avatar_rotation";
+    let prev = 0;
+    try { prev = parseInt(localStorage.getItem(key) || "0", 10) || 0; } catch { prev = 0; }
+    const next = (prev + 1) % CTA_AVATARS.length;
+    try { localStorage.setItem(key, String(next)); } catch { /* ignore */ }
+    return next;
+  });
+  // Flanking the CTA — vehicle left, avatar right, exactly like the Crowdfunding page.
+  const ctaVehicleSrc = CTA_VEHICLES[ctaAvatarSeed % CTA_VEHICLES.length];
+  const ctaAvatarSrc = CTA_AVATARS[(ctaAvatarSeed + 3) % CTA_AVATARS.length];
+
+  useEffect(() => { preloadImages([...CTA_AVATARS, ...CTA_VEHICLES]); }, []);
   const top = cms.about_top || {};
 
   const heroHeading = t("aboutPage.heroHeading") || top.heading;
@@ -477,50 +511,74 @@ function About({ isPreview = false }) {
       ══════════════════════════════════════════════════════ */}
       <section className="relative w-full px-6 md:px-12 xl:px-20 pt-2 pb-6">
         <motion.div
-          className="relative mt-0 py-8 md:py-10 text-center max-w-[1100px] mx-auto"
+          className="relative mt-0 py-8 md:py-10 text-center"
           initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
         >
           <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 75% at 50% 42%, rgba(251,191,36,0.12) 0%, transparent 70%)" }} />
 
           <div className="relative">
-            <div className="flex items-center justify-center gap-3 mb-5">
-              <div className="w-8 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
-              <span className="text-amber-300 text-[11px] font-bold uppercase tracking-[0.3em]" style={{ fontFamily: "Orbitron, sans-serif" }}>
-                LIMITED-TIME OPPORTUNITY
-              </span>
-              <div className="w-8 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
+            {/* Decorative left — vehicle (same size + per-visit rotation as the Crowdfunding page) */}
+            <img
+              src={ctaVehicleSrc}
+              alt=""
+              aria-hidden="true"
+              className="hidden xl:block absolute top-1/2 select-none pointer-events-none"
+              style={{ width: "clamp(320px, 38vw, 540px)", transform: "translateY(-50%)", left: "40px" }}
+            />
+            {/* Decorative right — avatar (same size as Crowdfunding, vertically centered with the vehicle) */}
+            <img
+              src={ctaAvatarSrc}
+              alt=""
+              aria-hidden="true"
+              className="hidden xl:block absolute top-1/2 object-contain select-none pointer-events-none"
+              style={{ width: "clamp(240px, 28vw, 400px)", right: "80px", transform: "translateY(-50%)" }}
+            />
+
+            <div className="relative w-full xl:px-[clamp(180px,28vw,420px)]">
+              <div className="flex items-center justify-center gap-4 mb-6">
+                <div className="w-12 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
+                <span className="text-amber-300 text-[13px] md:text-[15px] font-bold uppercase tracking-[0.3em]" style={{ fontFamily: "Orbitron, sans-serif" }}>
+                  LIMITED-TIME OPPORTUNITY
+                </span>
+                <div className="w-12 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
+              </div>
+
+              <h3 className="font-[Goldman] font-bold text-white text-3xl md:text-[44px] leading-tight mb-5 text-center">
+                Don&apos;t Miss the Early-Access Window
+              </h3>
+              <div className="w-20 h-[3px] rounded-full mx-auto mb-10" style={{ background: "linear-gradient(90deg,#fbbf24,#f59e0b)" }} />
+
+              <ul className="flex flex-col gap-5 mb-9 text-left">
+                {[
+                  "Limited-edition NFAs and discounted packages are available now – only while early access stays open.",
+                  "Discounts close for good the moment we launch our envisioned crowdfunding campaign.",
+                  "Limited-edition items remain only until our funding target is reached – then they're gone for good.",
+                ].map((b, i) => (
+                  <li key={i} className="flex gap-4 items-start">
+                    <ArrowRight size={20} color="#fbbf24" strokeWidth={2} className="mt-[3px] flex-shrink-0" />
+                    <span className="text-white/80 text-[17px] md:text-[19px] leading-relaxed">{b}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {!isPreview && (
+                <div className="text-center mb-8">
+                  <Link
+                    to="/crowdfunding"
+                    onClick={() => window.scrollTo(0, 0)}
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-[12px] md:text-[13px] font-bold uppercase tracking-[0.12em] text-[#0b0b14] transition-all hover:brightness-110"
+                    style={{ background: "linear-gradient(135deg,#fbbf24,#f59e0b)", fontFamily: "Orbitron, sans-serif", boxShadow: "0 0 32px rgba(251,191,36,0.35)" }}
+                  >
+                    Learn More
+                    <ArrowRight size={16} strokeWidth={2.4} />
+                  </Link>
+                </div>
+              )}
+
+              <p className="text-white/60 text-[15px] md:text-[16px] leading-relaxed max-w-lg mx-auto text-center">
+                Watch for updates, read the White Paper, and lock in early pricing before the crowd arrives.
+              </p>
             </div>
-
-            <h3 className="font-[Goldman] font-bold text-white text-2xl md:text-[36px] leading-tight mb-4">
-              Don&apos;t Miss the Early-Access Window
-            </h3>
-            <div className="w-16 h-[3px] rounded-full mx-auto mb-9" style={{ background: "linear-gradient(90deg,#fbbf24,#f59e0b)" }} />
-
-            <ul className="flex flex-col gap-3.5 mb-10 max-w-2xl mx-auto text-left">
-              {[
-                "Limited-edition NFAs and discounted packages are available now – only while early access stays open.",
-                "Discounts close for good the moment we launch our envisioned crowdfunding campaign.",
-                "Limited-edition items remain only until our funding target is reached – then they're gone for good.",
-              ].map((b, i) => (
-                <li key={i} className="flex gap-3 items-start">
-                  <ArrowRight size={16} color="#fbbf24" strokeWidth={2} className="mt-[3px] flex-shrink-0" />
-                  <span className="text-white/75 text-[14px] md:text-[15px] leading-relaxed">{b}</span>
-                </li>
-              ))}
-            </ul>
-
-            <Link
-              to="/crowdfunding"
-              onClick={() => window.scrollTo(0, 0)}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-[12px] md:text-[13px] font-bold uppercase tracking-[0.12em] text-[#0b0b14] transition-all hover:brightness-110"
-              style={{ background: "linear-gradient(135deg,#fbbf24,#f59e0b)", fontFamily: "Orbitron, sans-serif", boxShadow: "0 0 32px rgba(251,191,36,0.35)" }}
-            >
-              Learn More
-              <ArrowRight size={16} strokeWidth={2.4} />
-            </Link>
-            <p className="text-white/55 text-[13px] md:text-[14px] leading-relaxed max-w-md mx-auto mt-5">
-              Watch for updates, read the White Paper, and lock in early pricing before the crowd arrives.
-            </p>
           </div>
         </motion.div>
       </section>

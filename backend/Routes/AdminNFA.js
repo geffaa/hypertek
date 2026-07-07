@@ -13,6 +13,7 @@ import MarketListing from "../Models/MarketListingModel.js";
 import Artist from "../Models/Artist.js";
 import BuybackRequest from "../Models/BuybackRequest.js";
 import User from "../Models/User.js";
+import { retryBankPayout } from "../Controllers/HBController.js";
 import HBLedger from "../Models/HBLedger.js";
 import Trade from "../Models/TradeModel.js";
 import { cancelSiblingListings } from "../services/cancelSiblingListings.js";
@@ -699,6 +700,38 @@ AdminNFARouter.put("/hb/cashouts/:ledgerId/fail", async (req, res) => {
 
     console.log(`[Admin HB] cashout ${entry._id} marked failed + ${hbAmount} HB refunded by admin ${req.user._id}`);
     res.json({ success: true, message: `Cashout marked failed. ${user ? `${hbAmount} HB refunded to user.` : "User not found — no refund."}`, entry });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+/**
+ * POST /api/v1/admin/nfa/hb/cashouts/:ledgerId/retry
+ * Re-run a PENDING bank cashout through Stripe Connect (e.g. after the platform balance
+ * was topped up). HB was already debited, so this only re-attempts the transfer→payout.
+ */
+AdminNFARouter.post("/hb/cashouts/:ledgerId/retry", async (req, res) => {
+  try {
+    const entry = await HBLedger.findById(req.params.ledgerId);
+    if (!entry) return res.status(404).json({ success: false, message: "Ledger entry not found" });
+    if (entry.type !== "cashout" || entry.cashoutMethod !== "bank") {
+      return res.status(400).json({ success: false, message: "Entry is not a bank cashout" });
+    }
+    if (entry.cashoutStatus !== "pending") {
+      return res.status(400).json({ success: false, message: `Only pending cashouts can be retried (current: ${entry.cashoutStatus})` });
+    }
+
+    const result = await retryBankPayout(entry, req.ip);
+    const updated = await HBLedger.findById(entry._id).lean();
+    console.log(`[Admin HB] cashout ${entry._id} retried by admin ${req.user._id} -> ${result.status}`);
+    res.json({
+      success: result.status === "processing",
+      message: result.status === "processing"
+        ? `Cashout re-submitted to Stripe (A$${result.payoutAud}).`
+        : `Retry still pending: ${result.error || "Stripe Connect unavailable"}`,
+      status: result.status,
+      entry: updated,
+    });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }

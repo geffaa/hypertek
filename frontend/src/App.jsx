@@ -11,7 +11,6 @@ import { Provider } from "react-redux";
 import { store } from "./Redux/Store";
 import ProtectedRoute from "./Components/ProtectRoutes";
 import { EmailWalletProvider } from "./context/EmailWalletContext";
-import Maintenance from "./pages/Maintenance";
 import SplashScreen from "./Components/Common/SplashScreen";
 import Navbar from "./Components/Common/Navbar";
 import Footer from "./Components/Common/Footer";
@@ -23,7 +22,7 @@ const MAINTENANCE_BYPASS_PATH = "/testing";
 
 // Public preview paths — bypass maintenance WITHOUT setting the bypass cookie.
 // Visitors can ONLY view these pages; navigating elsewhere shows "Coming Soon".
-const PUBLIC_PREVIEW_PATHS = ["/preview", "/waitlist", "/join-waitlist"];
+const PUBLIC_PREVIEW_PATHS = ["/preview", "/waitlist", "/join-waitlist", "/crowdfunding"];
 
 const SPLASH_COOLDOWN_MS = 60 * 60 * 1000; // 1 hour
 
@@ -39,7 +38,9 @@ function shouldShowSplash() {
 // Route-level lazy loading — each page is only loaded when first visited
 const Home = lazy(() => import("./pages/home"));
 const About = lazy(() => import("./pages/about"));
-const Crowdfunding = lazy(() => import("./pages/Crowdfunding"));
+// Original full-site crowdfunding page — re-import & route this when the main
+// site relaunches: const Crowdfunding = lazy(() => import("./pages/Crowdfunding"));
+const CrowdfundingStandalone = lazy(() => import("./pages/CrowdfundingStandalone"));
 const Signup = lazy(() => import("./pages/Signup"));
 const Login = lazy(() => import("./pages/Signin"));
 const ForgotPasswor = lazy(() => import("./pages/ForgotPasswor"));
@@ -121,6 +122,7 @@ function AppWrapper() {
   const hideLayoutRoutes = [
     "/waitlist",
     "/join-waitlist",
+    "/crowdfunding",
     "/dashboard/create-earning",
     "/stripe-payment",
     "/dashboard",
@@ -160,7 +162,10 @@ function AppWrapper() {
             {/* Main Pages */}
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/crowdfunding" element={<Crowdfunding />} />
+            {/* Standalone crowdfunding — public preview (bypasses maintenance),
+                navbar/footer hidden. Original <Crowdfunding /> kept for the full
+                site relaunch. */}
+            <Route path="/crowdfunding" element={<CrowdfundingStandalone />} />
 
             {/* Auth */}
             <Route path="/signup" element={<Signup />} />
@@ -315,17 +320,12 @@ function App() {
   const isBypassed = isBypassPath || isPublicPreview || localStorage.getItem("maintenance_bypass") === "1" || isLoggedIn;
 
   if (MAINTENANCE_MODE && !isBypassed) {
-    return (
-      <div
-        style={{
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <Maintenance />
-      </div>
-    );
+    // Funnel public visitors to the live Waitlist instead of a dead-end
+    // "Coming Soon" screen — the waitlist IS the gate, so no bypass is needed
+    // to view or join it. /waitlist & /join-waitlist are public preview paths
+    // (see PUBLIC_PREVIEW_PATHS), so this redirect never loops.
+    window.location.replace("/waitlist");
+    return null;
   }
 
   // Subtle parallax: orbs slowly drift as user scrolls

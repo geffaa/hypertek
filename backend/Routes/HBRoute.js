@@ -13,6 +13,7 @@ import {
   createHBTopupIntent,
   topupViaUSDC,
   getHBPlatformStats,
+  getFxRate,
 } from "../Controllers/HBController.js";
 import { authMiddleware } from "../Middleware/googleMiddle.js";
 
@@ -23,6 +24,7 @@ router.post("/spend", spendHB);
 router.post("/cashout/otp", authMiddleware(), requestCashoutOTP);
 router.post("/cashout", authMiddleware(), cashoutHB);
 router.get("/balance", authMiddleware(), getHBBalance);
+router.get("/fx-rate", authMiddleware(), getFxRate);
 router.get("/history", authMiddleware(), getHBHistory);
 router.get("/bank-details", authMiddleware(), getBankDetails);
 router.put("/bank-details", authMiddleware(), saveBankDetails);

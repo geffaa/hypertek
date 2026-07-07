@@ -57,8 +57,8 @@ const NETWORKS = {
 const instances = {};
 
 function getBlockchain(chainId) {
-  // Default to Base Mainnet if not specified or unknown
-  const id = chainId || parseInt(process.env.BASE_CHAIN_ID) || 8453;
+  // Default to the env-configured network (Base Sepolia testnet) if not specified or unknown
+  const id = chainId || parseInt(process.env.BASE_CHAIN_ID) || 84532;
   const config = NETWORKS[id];
 
   if (!config) {
@@ -93,9 +93,9 @@ function getBlockchain(chainId) {
   return instances[id];
 }
 
-// Initialize default (Base Mainnet) on startup to catch errors early
+// Initialize default network (from BASE_CHAIN_ID, testnet) on startup to catch errors early
 try {
-  getBlockchain(parseInt(process.env.BASE_CHAIN_ID) || 8453);
+  getBlockchain(parseInt(process.env.BASE_CHAIN_ID) || 84532);
 } catch (e) {
   console.error("⚠️ Failed to initialize default network:", e.message);
 }

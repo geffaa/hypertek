@@ -9,6 +9,10 @@ import dotenv from "dotenv";
 
 dotenv.config({ path: "./Config/.env" });
 
+// Single source of truth for the active chain. Driven by BASE_CHAIN_ID (84532 = Base
+// Sepolia testnet during the testing phase); never hardcode mainnet here.
+const ACTIVE_CHAIN_ID = Number(process.env.BASE_CHAIN_ID) || 84532;
+
 /**
  * Shared logic to finalize an NFA purchase (mint if needed, transfer, record sale)
  */
@@ -98,7 +102,7 @@ export async function finalizeNFAPurchase({
 
   if (!tokenId) {
     console.log("🎨 Minting NFT for purchase...");
-    const chainId = 8453; // Base Mainnet
+    const chainId = ACTIVE_CHAIN_ID; // from BASE_CHAIN_ID (testnet during testing)
     const { nftContract, wallet: backendWalletObj, provider } = getBlockchain(chainId);
 
     const backendWallet = await backendWalletObj.getAddress();
@@ -157,20 +161,32 @@ export async function finalizeNFAPurchase({
       subCollection.tokenURI = tokenURI;
     }
   } else {
-    // If already minted, ensure ownership transfer on chain if needed?
-    // Usually for secondary sales, the Marketplace handles this on-chain.
-    // But for Stripe "Buy Now" on already minted items, we might need backend to transfer if backend owns it.
-    // If subCollection.owner is the platform, we should transfer.
+    // Already minted. This service runs only for the Stripe (card) path, so the backend
+    // must move the token itself. It can only do that for platform-owned items (held by
+    // the backend/platform wallet). Guard against a null owner (seed/platform items).
     const platformWallet = (process.env.PLATFORM_WALLET_ADDRESS || "").toLowerCase();
-    if (subCollection.owner.toLowerCase() === platformWallet || subCollection.owner.toLowerCase() === "admin") {
+    const ownerLc = (subCollection.owner || "").toLowerCase();
+    const isPlatformOwned = !ownerLc || ownerLc === "admin" || ownerLc === platformWallet;
+
+    if (isPlatformOwned) {
       console.log("📦 Transferring already minted NFT from platform to buyer...");
-      const chainId = 84532; // Base Sepolia Testnet
-      const { nftContract, wallet: backendWalletObj } = getBlockchain(chainId);
+      const { nftContract, wallet: backendWalletObj } = getBlockchain(ACTIVE_CHAIN_ID);
       const backendWallet = await backendWalletObj.getAddress();
 
       const transferTx = await nftContract.transferFrom(backendWallet, buyerWallet, tokenId);
       await transferTx.wait();
       receiptHash = transferTx.hash;
+    } else {
+      // Secondary sale of a user-owned, already-minted token via card. The backend does
+      // not custody this token, so it cannot transfer it on-chain. Fail loudly instead of
+      // silently rewriting DB ownership (which would desync DB vs chain and collect money
+      // with no NFT delivered). The Stripe webhook catches this and marks the payment
+      // nftTransferFailed for manual review. Full support needs the seller-payout rail +
+      // custodial listing (pending Don's decision — see plan BAGIAN 2).
+      throw Object.assign(
+        new Error("Card purchase of a user-owned (secondary) item is not supported yet: backend cannot transfer a token it does not custody."),
+        { code: "P2P_ONCHAIN_UNSUPPORTED" }
+      );
     }
   }
 

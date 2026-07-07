@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import i18n from "../../i18n/index.js";
 
 const HUD_LANGS = [
-  { code: "en",    flag: "🇺🇸", label: "English",       engLabel: "English",            supported: true  },
+  { code: "en-GB", flag: "🇬🇧", label: "English (UK)",   engLabel: "English (UK)",       supported: true  },
+  { code: "en-US", flag: "🇺🇸", label: "English (US)",   engLabel: "English (US)",       supported: true  },
   { code: "fr",    flag: "🇫🇷", label: "Français",      engLabel: "French",             supported: false },
   { code: "it",    flag: "🇮🇹", label: "Italiano",      engLabel: "Italian",            supported: false },
   { code: "de",    flag: "🇩🇪", label: "Deutsch",       engLabel: "German",             supported: false },

@@ -170,12 +170,12 @@ export default function WaitlistForm() {
     6: (
       <div className="flex flex-col gap-3">
         <a
-          href="https://x.com/Hyper Tek100"
+          href="https://x.com/HyperTek100"
           target="_blank"
           rel="noopener noreferrer"
           className="h-11 rounded-full bg-white/10 border border-white/20 text-white font-semibold text-sm flex items-center justify-center gap-2 hover:bg-white/20 transition"
         >
-          <FaXTwitter size={15} /> Follow @Hyper Tek100
+          <FaXTwitter size={15} /> Follow @HyperTek100
         </a>
         <motion.button
           onClick={handleSubmit}

@@ -42,6 +42,7 @@ function CreateCollection() {
   const [loading,       setLoading]       = useState(false);
   const [cropSrc,       setCropSrc]       = useState(null);
   const [cropFileName,  setCropFileName]  = useState("");
+  const [originalFile,  setOriginalFile]  = useState(null);
 
   // NFA / NFC admin-only fields
   const [minBuyback,  setMinBuyback]  = useState("");
@@ -67,6 +68,7 @@ function CreateCollection() {
     if (!file) return;
     if (!file.type.startsWith("image/")) return toast.error("Please upload an image file");
     if (file.size > 25 * 1024 * 1024) return toast.error("Image must be under 25MB");
+    setOriginalFile(file);
     setCropFileName(file.name);
     const reader = new FileReader();
     reader.onload = () => setCropSrc(reader.result);
@@ -144,6 +146,7 @@ function CreateCollection() {
         <ImageCropModal
           src={cropSrc}
           fileName={cropFileName}
+          originalFile={originalFile}
           onConfirm={handleCropConfirm}
           onCancel={() => setCropSrc(null)}
         />
@@ -180,7 +183,7 @@ function CreateCollection() {
           >
             {imagePreview ? (
               <>
-                <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
+                <img src={imagePreview} alt="Preview" className="w-full h-full object-contain" />
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
                   <FiUploadCloud size={24} className="text-white" />
                   <span className="text-white text-xs font-medium">Change Image</span>

@@ -90,12 +90,12 @@
     }
   },
   "waitlist": {
-    "heading1": "Enter the Hyper Tek",
+    "heading1": "Enter the HyperTek",
     "heading2": "Waitlist",
-    "subtitle": "Join the first wave of builders, gamers, and innovators shaping Hyper Tek before the world catches up.",
+    "subtitle": "Join the first wave of builders, gamers, and innovators shaping HyperTek before the world catches up.",
     "joinBtn": "Join the Waitlist",
     "gameplayHeading": "Game Play",
-    "gameplayDesc": "Hyper Tek 100 is a living universe that evolves with every choice you make. Explore new worlds, complete quests, race across off-world tracks, or command armies in massive battles and watch your legacy grow. Upgrade your ships, vehicles, troops, and bases as you forge your path across three connected worlds: Hyper Racing, Hyper Quest, and Overlord Realm. Progress in one unlocks power in the others, creating a seamless multi-game adventure built to pull you in from the moment you enter.",
+    "gameplayDesc": "HyperTek 100 is a living universe that evolves with every choice you make. Explore new worlds, complete quests, race across off-world tracks, or command armies in massive battles and watch your legacy grow. Upgrade your ships, vehicles, troops, and bases as you forge your path across three connected worlds: Hyper Racing, Hyper Quest, and Overlord Realm. Progress in one unlocks power in the others, creating a seamless multi-game adventure built to pull you in from the moment you enter.",
     "stayInTouch": "Want to stay in touch?",
     "newsletter": "Newsletter Subscribe",
     "newsletterDesc": "In order to start receiving our news, all you have to do is enter your email address. Everything else will be taken care of by us. We will send you emails containing information about game. We don't spam.",
@@ -105,7 +105,7 @@
     "threeWorlds": "Three Worlds.",
     "noSpam": "No spam. Unsubscribe anytime.",
     "subscribedTitle": "You're subscribed!",
-    "subscribedDesc": "We'll keep you updated on Hyper Tek news.",
+    "subscribedDesc": "We'll keep you updated on HyperTek news.",
     "worlds": {
       "racing": {
         "desc": "Race across alien tracks, upgrade vehicles, and dominate the leaderboards."
@@ -125,8 +125,8 @@
       "0": "Let's get to know you",
       "1": "Add your email",
       "2": "How excited are you about a universe where three full games are connected into one experience?",
-      "3": "Which part of Hyper Tek 100 interests you the most?",
-      "4": "What would make Hyper Tek 100 a 'must-play' game for you?",
+      "3": "Which part of HyperTek 100 interests you the most?",
+      "4": "What would make HyperTek 100 a 'must-play' game for you?",
       "5": "Would you consider supporting this project when we open our crowdfunding campaign?",
       "6": "Follow us on X"
     },
@@ -144,8 +144,8 @@
     "submit": "Submit",
     "submitting": "Submitting...",
     "successTitle": "You're on the list!",
-    "successDesc": "Thanks for joining the Hyper Tek waitlist. We'll be in touch.",
-    "visitWebsite": "Visit Hyper Tek Website",
+    "successDesc": "Thanks for joining the HyperTek waitlist. We'll be in touch.",
+    "visitWebsite": "Visit HyperTek Website",
     "errorTitle": "Something went wrong",
     "errorDesc": "We couldn't submit your form. Please try again.",
     "tryAgain": "Try Again"

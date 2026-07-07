@@ -14,10 +14,16 @@
 import mongoose from "mongoose";
 import nodemailer from "nodemailer";
 import { ethers } from "ethers";
-import Stripe from "stripe";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
+import {
+  getStripe,
+  createConnectedAccount,
+  ensureTestCapabilities,
+  attachAuBankAccount,
+} from "./stripeConnect.js";
+import { convertUsdToAud } from "./fxService.js";
 import Artist from "../Models/Artist.js";
 
 // Minimal ERC-20 ABI — only transfer + balanceOf needed
@@ -212,72 +218,34 @@ export async function dispatchRoyaltyOnChain(payout) {
 //     (hosted account links). The custom-account creation below works for test mode and
 //     simple cases; production may need a hosted onboarding step.
 
-let _stripe = null;
-function getStripe() {
-  if (!process.env.STRIPE_SECRET_KEY) throw new Error("STRIPE_SECRET_KEY not set");
-  if (!_stripe) _stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2023-10-16" });
-  return _stripe;
-}
-
+// Shared, AU-only Connect logic lives in ./stripeConnect.js. These wrappers add Artist
+// persistence on top (mirrors the HyperBucks cashout flow).
 async function getOrCreateArtistConnectedAccount(artist, stripe) {
-  if (artist.stripeConnectAccountId) return artist.stripeConnectAccountId;
-
-  const nameParts = (artist.name || "").trim().split(" ");
-  const account = await stripe.accounts.create({
-    type: "custom",
-    country: "AU", // connected account country = platform country (matches HyperBucks flow)
-    email: artist.email || undefined,
-    capabilities: { transfers: { requested: true } },
-    business_type: "individual",
-    individual: {
-      email: artist.email || undefined,
-      first_name: nameParts[0] || "Artist",
-      last_name: nameParts.slice(1).join(" ") || "Account",
-    },
-    business_profile: {
-      mcc: "7372",
-      url: "https://hypertek100.com",
-      product_description: "Artist royalty payouts for the Hyper Tek NFT gaming ecosystem.",
-    },
-    tos_acceptance: { date: Math.floor(Date.now() / 1000), ip: "127.0.0.1" },
-    settings: { payouts: { schedule: { interval: "manual" } } },
+  if (artist.stripeConnectAccountId) {
+    await ensureTestCapabilities(stripe, artist.stripeConnectAccountId);
+    return artist.stripeConnectAccountId;
+  }
+  const account = await createConnectedAccount(stripe, {
+    email: artist.email,
+    fullName: artist.name,
+    productDescription: "Artist royalty payouts for the Hyper Tek NFT gaming ecosystem.",
   });
-
   await Artist.findByIdAndUpdate(artist._id, { stripeConnectAccountId: account.id });
+  await ensureTestCapabilities(stripe, account.id);
   return account.id;
 }
 
+// AU-only: bankDetails.routingNumber holds the BSB, accountNumber the account number.
 async function attachArtistBankAccount(artist, stripe, accountId) {
   const bd = artist.bankDetails || {};
-  const country = (bd.country || "AU").toUpperCase().slice(0, 2);
-  const currency = (bd.currency || "USD").toLowerCase();
-
-  const bankAccountParams = {
-    country,
-    currency,
-    account_holder_name: bd.accountHolderName || artist.name,
-    account_holder_type: "individual",
-  };
-  if (country === "US" && bd.routingNumber && bd.accountNumber) {
-    bankAccountParams.routing_number = bd.routingNumber;
-    bankAccountParams.account_number = bd.accountNumber;
-  } else if (country === "AU" && bd.routingNumber && bd.accountNumber) {
-    bankAccountParams.routing_number = bd.routingNumber.replace(/-/g, "");
-    bankAccountParams.account_number = bd.accountNumber;
-  } else if (bd.iban) {
-    bankAccountParams.account_number = bd.iban;
-  } else {
-    bankAccountParams.account_number = bd.accountNumber;
-  }
-
-  const token = await stripe.tokens.create({ bank_account: bankAccountParams });
-  const externalAccount = await stripe.accounts.createExternalAccount(accountId, {
-    external_account: token.id,
-    default_for_currency: true,
-  });
-
-  await Artist.findByIdAndUpdate(artist._id, { stripeExternalAccountId: externalAccount.id });
-  return externalAccount.id;
+  const extId = await attachAuBankAccount(
+    stripe,
+    accountId,
+    { accountHolderName: bd.accountHolderName || artist.name, bsb: bd.routingNumber, accountNumber: bd.accountNumber },
+    artist.stripeExternalAccountId
+  );
+  await Artist.findByIdAndUpdate(artist._id, { stripeExternalAccountId: extId });
+  return extId;
 }
 
 /**
@@ -293,6 +261,11 @@ export async function dispatchRoyaltyViaStripe(payout) {
     const artist = await Artist.findById(payout.artistId);
     if (!artist) throw new Error("Artist not found");
 
+    // Bank royalty payouts are AU-only (platform is an AU Stripe account; no cross-border).
+    if ((artist.bankDetails?.country || "").toUpperCase() !== "AU") {
+      throw new Error("Artist bank is not Australian — automatic Stripe payout is AU-only. Pay manually or via crypto.");
+    }
+
     const stripe = getStripe();
     const accountId = await getOrCreateArtistConnectedAccount(artist, stripe);
 
@@ -302,22 +275,23 @@ export async function dispatchRoyaltyViaStripe(payout) {
       await attachArtistBankAccount(fresh, stripe, accountId);
     }
 
-    const currency = (artist.bankDetails?.currency || "USD").toLowerCase();
-    const amountMinor = Math.round(payout.amount * 100);
+    // payout.amount is a USD figure (the royalty value); convert to AUD for the AU payout.
+    const { rate: fxRate, aud } = await convertUsdToAud(payout.amount);
+    const amountMinor = Math.round(aud * 100);
 
-    // 1) Platform balance → artist connected account
+    // 1) Platform balance → artist connected account (AUD)
     const transfer = await stripe.transfers.create({
       amount: amountMinor,
-      currency,
+      currency: "aud",
       destination: accountId,
-      metadata: { payoutId: String(payout._id), artistId: String(artist._id), type: payout.payoutType },
+      metadata: { payoutId: String(payout._id), artistId: String(artist._id), type: payout.payoutType, usd: String(payout.amount), fxRate: String(fxRate) },
     });
 
-    // 2) Connected account balance → artist's bank account
+    // 2) Connected account balance → artist's bank account (AUD)
     const stripePayout = await stripe.payouts.create(
       {
         amount: amountMinor,
-        currency,
+        currency: "aud",
         statement_descriptor: "HYPERTEK",
         metadata: { payoutId: String(payout._id), transferId: transfer.id },
       },
@@ -326,11 +300,11 @@ export async function dispatchRoyaltyViaStripe(payout) {
 
     const updated = await RoyaltyPayout.findByIdAndUpdate(
       payout._id,
-      { status: "dispatched", txHash: stripePayout.id, note: `Auto-paid via Stripe at ${new Date().toISOString()}` },
+      { status: "dispatched", txHash: stripePayout.id, note: `Auto-paid A$${aud} (USD ${payout.amount} @ ${fxRate}) via Stripe at ${new Date().toISOString()}` },
       { new: true }
     );
 
-    console.log(`[RoyaltyService] Stripe payout: ${payout.amount} ${currency} → artist ${artist._id} | payout ${stripePayout.id}`);
+    console.log(`[RoyaltyService] Stripe payout: A$${aud} (USD ${payout.amount}) → artist ${artist._id} | payout ${stripePayout.id}`);
     return updated;
   } catch (err) {
     console.error("[RoyaltyService] Stripe payout failed:", err.message);

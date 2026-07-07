@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import logo from "../assets/logo1.webp";
 import Gaming from "./Gaming";
-import LanguageSwitcher from "../Components/Common/LanguageSwitcher";
 
 export default function PreviewUI() {
   const navigate = useNavigate();
@@ -67,7 +66,6 @@ export default function PreviewUI() {
               >
                 Waitlist
               </a>
-              <LanguageSwitcher />
             </div>
           </motion.div>
         </div>

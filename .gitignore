@@ -2,6 +2,13 @@
 HYPERTEK_CREDENTIALS_DOC.md
 HYPERTEK_ADMIN_BRIEF.md
 
+# Internal working docs — keep local, not in the repo
+/docs/
+/ADMIN_GUIDE.md
+/ADMIN_GUIDE.docx
+/ADMIN_GUIDE/
+/admin-guide-images/
+
 # Deployment artifacts
 hardhat/deployment.json
 hardhat/abis/

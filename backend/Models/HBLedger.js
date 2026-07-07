@@ -14,9 +14,12 @@ const hbLedgerSchema = new mongoose.Schema(
     reference: String, // game event ID, order ID, etc.
     // cashout-specific
     cashoutMethod: { type: String, enum: ["usdc", "bank"] },
+    cashoutSpeed: { type: String, enum: ["standard", "instant"] }, // bank cashout speed (for retry)
     cashoutStatus: { type: String, enum: ["pending", "processing", "completed", "failed"] },
     cashoutTxHash: String,
-    cashoutUSD: Number, // USD equivalent (amount / 250)
+    cashoutUSD: Number, // USD equivalent (amount / 250) — the HB peg value
+    cashoutAUD: Number, // AUD actually paid for bank cashouts (USD converted at fxRate)
+    fxRate: Number, // USD→AUD rate used for this cashout (bank only)
   },
   { timestamps: true }
 );

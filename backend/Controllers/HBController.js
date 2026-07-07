@@ -1,8 +1,16 @@
 import User from "../Models/User.js";
 import HBLedger from "../Models/HBLedger.js";
 import { ethers } from "ethers";
-import Stripe from "stripe";
 import nodemailer from "nodemailer";
+import {
+  getStripe,
+  createConnectedAccount,
+  ensureTestCapabilities,
+  transfersActive,
+  attachAuBankAccount,
+  attachDebitCard as attachDebitCardExternal,
+} from "../services/stripeConnect.js";
+import { convertUsdToAud } from "../services/fxService.js";
 
 // Minimal ERC-20 ABI for USDC transfer
 const ERC20_ABI = [
@@ -16,188 +24,57 @@ const MIN_USDC_CASHOUT_HB = 250; // $1 minimum for USDC cashout
 const MIN_BANK_CASHOUT_HB = 250; // $1 minimum for bank cashout
 const MIN_TOPUP_HB = 250; // $1 minimum top-up
 
+// Bank cashout is AU-only: the platform is an AU Stripe account and Stripe does not support
+// cross-border payouts from AU, so connected accounts and payouts are always AUD.
+const INSTANT_FEE_RATE_AU = 0.015; // Stripe instant payout fee for AU
+const AU_ONLY_BANK_MSG =
+  "Bank cashout currently supports Australian (AUD) accounts only. Please use USDC cashout for other countries.";
 
-// ── Stripe Connect helpers ───────────────────────────────────────────────────
 
-async function getOrCreateConnectedAccount(user, stripe, userIp) {
-  const isTestMode = process.env.STRIPE_SECRET_KEY?.startsWith("sk_test_");
-  // Connected account must always match platform country (AU) regardless of user's bank country
-  const country = "AU";
+// ── Stripe Connect helpers (thin wrappers over services/stripeConnect.js) ─────
+// The shared, AU-only connected-account logic lives in services/stripeConnect.js.
+// These wrappers add User persistence on top.
 
+async function getOrCreateUserConnectedAccount(user, stripe, userIp) {
   if (user.stripeConnectAccountId) {
-    // If capability not yet active in test mode, patch with test identity data
-    if (isTestMode) {
-      await _ensureTestCapabilities(stripe, user.stripeConnectAccountId, country);
-    }
+    await ensureTestCapabilities(stripe, user.stripeConnectAccountId);
     return user.stripeConnectAccountId;
   }
-
-  const nameParts = (user.FullName || "").trim().split(" ");
-  const firstName = nameParts[0] || "User";
-  const lastName = nameParts.slice(1).join(" ") || "Account";
-
-  const individualData = {
+  const account = await createConnectedAccount(stripe, {
     email: user.Email || user.email,
-    first_name: firstName,
-    last_name: lastName,
-  };
-
-  // Test mode: supply Stripe's canonical test identity values so the transfers
-  // capability activates immediately without requiring a real KYC flow.
-  if (isTestMode && country === "US") {
-    Object.assign(individualData, {
-      ssn_last_4: "0000",
-      dob: { day: 1, month: 1, year: 1901 },
-      address: { line1: "123 Main St", city: "Anytown", state: "CA", postal_code: "90001", country: "US" },
-      phone: "+15005550000",
-    });
-  }
-
-  const account = await stripe.accounts.create({
-    type: "custom",
-    country,
-    email: user.Email || user.email,
-    capabilities: { card_payments: { requested: true }, transfers: { requested: true } },
-    business_type: "individual",
-    individual: individualData,
-    business_profile: {
-      mcc: "7372",
-      url: "https://hypertek100.com",
-      product_description: "In-game currency (Hyper Bucks) top-up and cashout platform for Hyper Tek gaming ecosystem — NFT marketplace, virtual assets, and gameplay rewards.",
-    },
-    tos_acceptance: {
-      date: Math.floor(Date.now() / 1000),
-      ip: userIp || "127.0.0.1",
-    },
-    settings: {
-      payouts: { schedule: { interval: "manual" } },
-    },
+    fullName: user.FullName,
+    productDescription:
+      "In-game currency (Hyper Bucks) top-up and cashout platform for the Hyper Tek gaming ecosystem.",
+    ip: userIp,
   });
-
   user.stripeConnectAccountId = account.id;
   await user.save();
-
-  if (isTestMode) {
-    await _ensureTestCapabilities(stripe, account.id, country);
-  }
-
+  await ensureTestCapabilities(stripe, account.id);
   return account.id;
 }
 
-// Pushes required test-identity fields so Stripe activates the transfers capability.
-// Returns true if capability is (or became) active.
-async function _ensureTestCapabilities(stripe, accountId, country) {
-  try {
-    const account = await stripe.accounts.retrieve(accountId);
-    if (account.capabilities?.transfers === "active") return true;
-
-    // Provide test identity data per country
-    const individualData =
-      country === "US"
-        ? {
-            ssn_last_4: "0000",
-            dob: { day: 1, month: 1, year: 1901 },
-            address: { line1: "123 Main St", city: "Anytown", state: "CA", postal_code: "90001", country: "US" },
-            phone: "+15005550000",
-          }
-        : country === "AU"
-        ? {
-            dob: { day: 1, month: 1, year: 1901 },
-            address: { line1: "123 Main St", city: "Sydney", state: "NSW", postal_code: "2000", country: "AU" },
-            phone: "+61200000000",
-            id_number: "000000000", // test TFN
-          }
-        : {
-            dob: { day: 1, month: 1, year: 1901 },
-            address: { line1: "123 Main St", city: "Sydney", state: "NSW", postal_code: "2000", country: country },
-            phone: "+61200000000",
-          };
-
-    await stripe.accounts.update(accountId, {
-      individual: individualData,
-      business_profile: {
-        mcc: "7372",
-        url: "https://hypertek100.com",
-        product_description: "In-game currency (Hyper Bucks) top-up and cashout platform for Hyper Tek gaming ecosystem.",
-      },
-    });
-
-    // Stripe activates capabilities asynchronously — wait for propagation
-    await new Promise((r) => setTimeout(r, 5000));
-    const updated = await stripe.accounts.retrieve(accountId);
-    return updated.capabilities?.transfers === "active";
-  } catch (e) {
-    console.warn("[StripeConnect] Capability activation attempt failed:", e.message);
-  }
-  return false;
-}
-
-async function attachDebitCard(user, stripe, accountId) {
+async function attachUserDebitCard(user, stripe, accountId) {
   const card = user.debitCard;
   if (!card?.stripeCardId) throw new Error("No debit card saved for this user");
-
-  // If already attached, skip
   if (user.stripeExternalAccountId === card.stripeCardId) return card.stripeCardId;
-
-  // Remove old external account first
-  if (user.stripeExternalAccountId) {
-    try {
-      await stripe.accounts.deleteExternalAccount(accountId, user.stripeExternalAccountId);
-    } catch {}
-  }
-
-  const externalAccount = await stripe.accounts.createExternalAccount(accountId, {
-    external_account: card.stripeCardId,
-    default_for_currency: true,
-  });
-
-  user.stripeExternalAccountId = externalAccount.id;
+  const extId = await attachDebitCardExternal(stripe, accountId, card.stripeCardId, user.stripeExternalAccountId);
+  user.stripeExternalAccountId = extId;
   await user.save();
-  return externalAccount.id;
+  return extId;
 }
 
-async function attachExternalBankAccount(user, stripe, accountId) {
-  const bd = user.bankDetails;
-  const country = (bd.country || "AU").toUpperCase().slice(0, 2);
-  const currency = (bd.currency || "AUD").toLowerCase();
-
-  let bankAccountParams = {
-    country,
-    currency,
-    account_holder_name: bd.accountHolderName,
-    account_holder_type: "individual",
-  };
-
-  if (country === "US" && bd.routingNumber && bd.accountNumber) {
-    bankAccountParams.routing_number = bd.routingNumber;
-    bankAccountParams.account_number = bd.accountNumber;
-  } else if (country === "AU" && bd.routingNumber && bd.accountNumber) {
-    // AU: routingNumber = BSB (e.g. 062-000), accountNumber = account number
-    bankAccountParams.routing_number = bd.routingNumber.replace(/-/g, "");
-    bankAccountParams.account_number = bd.accountNumber;
-  } else if (bd.iban) {
-    bankAccountParams.account_number = bd.iban;
-  } else {
-    bankAccountParams.account_number = bd.accountNumber;
-  }
-
-  const token = await stripe.tokens.create({ bank_account: bankAccountParams });
-
-  // Remove old external accounts first
-  if (user.stripeExternalAccountId) {
-    try {
-      await stripe.accounts.deleteExternalAccount(accountId, user.stripeExternalAccountId);
-    } catch {}
-  }
-
-  const externalAccount = await stripe.accounts.createExternalAccount(accountId, {
-    external_account: token.id,
-    default_for_currency: true,
-  });
-
-  user.stripeExternalAccountId = externalAccount.id;
+// AU-only: bankDetails.routingNumber holds the BSB, accountNumber the account number.
+async function attachUserBankAccount(user, stripe, accountId) {
+  const bd = user.bankDetails || {};
+  const extId = await attachAuBankAccount(
+    stripe,
+    accountId,
+    { accountHolderName: bd.accountHolderName, bsb: bd.routingNumber, accountNumber: bd.accountNumber },
+    user.stripeExternalAccountId
+  );
+  user.stripeExternalAccountId = extId;
   await user.save();
-  return externalAccount.id;
+  return extId;
 }
 
 // ------------------ SMTP TRANSPORTER ------------------
@@ -210,6 +87,137 @@ const transporter = nodemailer.createTransport({
     pass: process.env.SMTP_PASS?.replace(/"/g, ""),
   },
 });
+
+// ── Bank cashout execution (shared by cashoutHB + admin retry) ───────────────
+// Converts the USD-pegged value to AUD, runs the Stripe Connect transfer→payout, and
+// updates the ledger. Returns { status, ... }. Emails admin only when left pending.
+async function executeBankPayout({ user, ledgerEntry, amount, usdAmount, payoutSpeed, reqIp }) {
+  const stripe = getStripe();
+  const isInstant = payoutSpeed === "instant";
+
+  // Platform balance and connected account are both AUD, so Stripe charges no
+  // cross-currency FX fee on the payout — this rate only sets how many AUD we owe.
+  const { rate: fxRate, aud: grossAud } = await convertUsdToAud(usdAmount);
+
+  // Instant payouts incur a Stripe fee deducted from the connected-account balance.
+  // Size the payout so payout + fee ≤ the gross we transfer in.
+  const payoutAud = isInstant
+    ? Math.round((grossAud / (1 + INSTANT_FEE_RATE_AU)) * 100) / 100
+    : grossAud;
+
+  await HBLedger.findByIdAndUpdate(ledgerEntry._id, { cashoutAUD: payoutAud, fxRate });
+
+  let result;
+  if (process.env.STRIPE_CONNECT_ENABLED === "true") {
+    try {
+      const connectAccountId = await getOrCreateUserConnectedAccount(user, stripe, reqIp);
+
+      if (isInstant) {
+        await attachUserDebitCard(user, stripe, connectAccountId);
+      } else {
+        await attachUserBankAccount(user, stripe, connectAccountId);
+      }
+
+      if (!(await transfersActive(stripe, connectAccountId))) {
+        throw new Error("Connected account transfers capability not yet active. Please try again in a few moments.");
+      }
+
+      const transfer = await stripe.transfers.create({
+        amount: Math.round(grossAud * 100),
+        currency: "aud",
+        destination: connectAccountId,
+        transfer_group: `cashout_${ledgerEntry._id}`,
+        metadata: {
+          userId: String(user._id),
+          hbAmount: String(amount),
+          ledgerId: String(ledgerEntry._id),
+          payoutSpeed,
+          usdAmount: String(usdAmount),
+          fxRate: String(fxRate),
+        },
+      });
+
+      const payoutParams = {
+        amount: Math.round(payoutAud * 100),
+        currency: "aud",
+        statement_descriptor: "HYPERTEK",
+        metadata: { userId: String(user._id), transferId: transfer.id, payoutSpeed, ledgerId: String(ledgerEntry._id) },
+      };
+      if (isInstant) payoutParams.method = "instant";
+
+      const payout = await stripe.payouts.create(payoutParams, { stripeAccount: connectAccountId });
+
+      await HBLedger.findByIdAndUpdate(ledgerEntry._id, {
+        cashoutStatus: "processing",
+        cashoutTxHash: payout.id,
+      });
+
+      result = { status: "processing", stripePayoutId: payout.id, transferId: transfer.id, isInstant, payoutAud, fxRate };
+      console.log(`[HB Cashout Connect] Transfer ${transfer.id} | Payout ${payout.id} | A$${payoutAud} (gross A$${grossAud}) → ${connectAccountId} | ${payoutSpeed}`);
+    } catch (connectErr) {
+      console.error("[HB Cashout Connect] Failed:", connectErr.message);
+      result = { status: "pending", error: connectErr.message, payoutAud, fxRate, isInstant };
+      await HBLedger.findByIdAndUpdate(ledgerEntry._id, { cashoutStatus: "pending" });
+    }
+  } else {
+    result = { status: "pending", detail: "awaiting_admin", payoutAud, fxRate, isInstant };
+  }
+
+  if (result.status === "pending") {
+    await notifyAdminBankCashoutPending({ user, amount, usdAmount, payoutAud, fxRate, ledgerEntry, error: result.error });
+  }
+  return result;
+}
+
+// Emails the admin when a bank cashout needs manual handling (Connect disabled or errored).
+async function notifyAdminBankCashoutPending({ user, amount, usdAmount, payoutAud, fxRate, ledgerEntry, error }) {
+  const adminEmail = process.env.ADMIN_EMAIL || process.env.SMTP_USER || process.env.SMTP_EMAIL;
+  if (!adminEmail) return;
+  try {
+    await transporter.sendMail({
+      from: process.env.SMTP_EMAIL,
+      to: adminEmail,
+      subject: `[HyperTek] HB Bank Cashout A$${payoutAud} — ACTION REQUIRED`,
+      html: `
+        <h2>Hyper Bucks Bank Cashout — ACTION REQUIRED: Manual Transfer Needed</h2>
+        <table border="1" cellpadding="6" cellspacing="0">
+          <tr><td><strong>User ID</strong></td><td>${user._id}</td></tr>
+          <tr><td><strong>User Email</strong></td><td>${user.Email || user.email || "N/A"}</td></tr>
+          <tr><td><strong>HB Amount</strong></td><td>${amount} HB</td></tr>
+          <tr><td><strong>USD (peg)</strong></td><td>$${usdAmount}</td></tr>
+          <tr><td><strong>AUD to pay</strong></td><td>A$${payoutAud} (rate ${fxRate})</td></tr>
+          <tr><td><strong>Ledger Entry ID</strong></td><td>${ledgerEntry._id}</td></tr>
+          <tr><td><strong>Reason</strong></td><td>${error || "Stripe Connect not enabled"}</td></tr>
+          <tr style="background:#fff3cd"><td><strong>Account Holder</strong></td><td>${user.bankDetails?.accountHolderName || "N/A"}</td></tr>
+          <tr style="background:#fff3cd"><td><strong>Bank Name</strong></td><td>${user.bankDetails?.bankName || "N/A"}</td></tr>
+          <tr style="background:#fff3cd"><td><strong>BSB</strong></td><td>${user.bankDetails?.routingNumber || "N/A"}</td></tr>
+          <tr style="background:#fff3cd"><td><strong>Account Number</strong></td><td>${user.bankDetails?.accountNumber || "N/A"}</td></tr>
+          <tr style="background:#fff3cd"><td><strong>Country</strong></td><td>${user.bankDetails?.country || "N/A"}</td></tr>
+        </table>
+        <p style="color:red"><strong>ACTION REQUIRED:</strong> Please transfer A$${payoutAud} manually to the Australian bank account above.</p>
+      `,
+    });
+  } catch (emailErr) {
+    console.error("Admin notification email failed:", emailErr.message);
+  }
+}
+
+// Re-run a pending bank cashout's Stripe payout (used by the admin retry endpoint).
+// Returns the executeBankPayout result. Does not re-debit HB (already debited).
+export async function retryBankPayout(ledgerEntry, reqIp) {
+  const user = await User.findById(ledgerEntry.userId);
+  if (!user) throw new Error("User not found for this cashout");
+  const usdAmount = ledgerEntry.cashoutUSD ?? Math.abs(ledgerEntry.amount) / HB_TO_USD;
+  const payoutSpeed = ledgerEntry.cashoutSpeed || "standard";
+  return executeBankPayout({
+    user,
+    ledgerEntry,
+    amount: Math.abs(ledgerEntry.amount),
+    usdAmount,
+    payoutSpeed,
+    reqIp,
+  });
+}
 
 // ------------------ EARN HB ------------------
 // POST /api/v1/hb/earn
@@ -428,15 +436,29 @@ export async function cashoutHB(req, res) {
           error: `Minimum bank cashout is ${MIN_BANK_CASHOUT_HB} HB ($${MIN_BANK_CASHOUT_HB / HB_TO_USD})`,
         });
       }
-      if (payoutSpeed === "instant" && !user.debitCard?.stripeCardId) {
-        return res.status(400).json({
-          error: "A debit card is required for instant payouts. Please add your debit card first.",
-        });
+      if (payoutSpeed === "instant") {
+        if (!user.debitCard?.stripeCardId) {
+          return res.status(400).json({
+            error: "A debit card is required for instant payouts. Please add your debit card first.",
+          });
+        }
+        // AU-only: instant payouts must go to an Australian debit card.
+        const cardCountry = (user.debitCard?.country || "").toUpperCase();
+        if (cardCountry && cardCountry !== "AU") {
+          return res.status(400).json({ error: AU_ONLY_BANK_MSG });
+        }
       }
-      if (payoutSpeed === "standard" && !user.bankDetails?.accountNumber) {
-        return res.status(400).json({
-          error: "Bank details not found. Please add your bank details first.",
-        });
+      if (payoutSpeed === "standard") {
+        if (!user.bankDetails?.accountNumber || !user.bankDetails?.routingNumber) {
+          return res.status(400).json({
+            error: "Australian bank details (BSB + account number) are required. Please add your bank details first.",
+          });
+        }
+        // AU-only: standard bank payouts must go to an Australian (AUD) bank account.
+        const bankCountry = (user.bankDetails?.country || "").toUpperCase();
+        if (bankCountry !== "AU") {
+          return res.status(400).json({ error: AU_ONLY_BANK_MSG });
+        }
       }
     }
 
@@ -458,6 +480,7 @@ export async function cashoutHB(req, res) {
       balanceAfter: user.hyperBucks,
       description: `HB cashout via ${method.toUpperCase()}`,
       cashoutMethod: method,
+      cashoutSpeed: method === "bank" ? payoutSpeed : undefined,
       cashoutStatus: "pending",
       cashoutUSD: usdAmount,
     });
@@ -542,131 +565,26 @@ export async function cashoutHB(req, res) {
       }
     }
 
-    // ── Bank: Stripe Connect (automated) or manual admin flow ───────────────
+    // ── Bank: Stripe Connect (AU-only, AUD) — shared with the admin retry endpoint ──
     if (method === "bank") {
-      const stripeKey = process.env.STRIPE_SECRET_KEY;
-      if (!stripeKey) throw new Error("STRIPE_SECRET_KEY not configured");
-      const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
-
-      if (process.env.STRIPE_CONNECT_ENABLED === "true") {
-        try {
-          const connectAccountId = await getOrCreateConnectedAccount(user, stripe, req.ip);
-          const isInstant = payoutSpeed === "instant";
-
-          // Attach the right external account based on payout speed
-          if (isInstant) {
-            await attachDebitCard(user, stripe, connectAccountId);
-          } else {
-            await attachExternalBankAccount(user, stripe, connectAccountId);
-          }
-
-          // Verify capability is active before attempting transfer
-          const capAccount = await stripe.accounts.retrieve(connectAccountId);
-          if (capAccount.capabilities?.transfers !== "active") {
-            throw new Error("Connected account transfers capability not yet active. Please try again in a few moments.");
-          }
-
-          // Determine currency from user's country/card
-          const currency = isInstant
-            ? (user.debitCard?.currency || "usd").toLowerCase()
-            : (user.bankDetails?.currency || "usd").toLowerCase();
-
-          // Transfer from platform Stripe balance to connected account
-          const transfer = await stripe.transfers.create({
-            amount: Math.round(usdAmount * 100),
-            currency,
-            destination: connectAccountId,
-            transfer_group: `cashout_${ledgerEntry._id}`,
-            metadata: {
-              userId: String(userId),
-              hbAmount: String(amount),
-              ledgerId: String(ledgerEntry._id),
-              payoutSpeed,
-            },
-          });
-
-          // Payout from connected account balance to their bank/card
-          // For instant: Stripe automatically deducts 1.5% fee (AU/US) or 1% (other)
-          const payoutParams = {
-            amount: Math.round(usdAmount * 100),
-            currency,
-            statement_descriptor: "HYPERTEK",
-            metadata: { userId: String(userId), transferId: transfer.id, payoutSpeed },
-          };
-          if (isInstant) payoutParams.method = "instant";
-
-          const payout = await stripe.payouts.create(
-            payoutParams,
-            { stripeAccount: connectAccountId }
-          );
-
-          await HBLedger.findByIdAndUpdate(ledgerEntry._id, {
-            cashoutStatus: "processing",
-            cashoutTxHash: payout.id,
-          });
-
-          cashoutResult = { status: "processing", stripePayoutId: payout.id, transferId: transfer.id, isInstant };
-          console.log(`[HB Cashout Connect] Transfer: ${transfer.id} | Payout: ${payout.id} | $${usdAmount} → ${connectAccountId} | speed: ${payoutSpeed}`);
-        } catch (connectErr) {
-          console.error("[HB Cashout Connect] Failed:", connectErr.message);
-          cashoutResult = { status: "pending", error: connectErr.message };
-          await HBLedger.findByIdAndUpdate(ledgerEntry._id, { cashoutStatus: "pending" });
-        }
-      } else {
-        // Stripe Connect not yet enabled — notify admin to process manually
-        cashoutResult = { status: "pending", detail: "awaiting_admin" };
-      }
-
-      // Notify admin for all bank cashouts (automated or manual)
-      const adminEmail = process.env.ADMIN_EMAIL || process.env.SMTP_USER || process.env.SMTP_EMAIL;
-      if (adminEmail) {
-        const isAutomated = process.env.STRIPE_CONNECT_ENABLED === "true" && cashoutResult.status === "processing";
-        try {
-          await transporter.sendMail({
-            from: process.env.SMTP_EMAIL,
-            to: adminEmail,
-            subject: `[HyperTek] HB Bank Cashout $${usdAmount} USD — ${cashoutResult.status.toUpperCase()}`,
-            html: `
-              <h2>Hyper Bucks Bank Cashout — ${isAutomated ? "Processed via Stripe Connect" : "ACTION REQUIRED: Manual Transfer Needed"}</h2>
-              <table border="1" cellpadding="6" cellspacing="0">
-                <tr><td><strong>User ID</strong></td><td>${userId}</td></tr>
-                <tr><td><strong>User Email</strong></td><td>${user.Email || user.email || "N/A"}</td></tr>
-                <tr><td><strong>HB Amount</strong></td><td>${amount} HB</td></tr>
-                <tr><td><strong>USD Amount</strong></td><td>$${usdAmount}</td></tr>
-                <tr><td><strong>Ledger Entry ID</strong></td><td>${ledgerEntry._id}</td></tr>
-                <tr><td><strong>Status</strong></td><td>${cashoutResult.status}</td></tr>
-                <tr><td><strong>Stripe Payout ID</strong></td><td>${cashoutResult.stripePayoutId || "N/A"}</td></tr>
-                <tr style="background:#fff3cd"><td><strong>Account Holder</strong></td><td>${user.bankDetails?.accountHolderName || "N/A"}</td></tr>
-                <tr style="background:#fff3cd"><td><strong>Bank Name</strong></td><td>${user.bankDetails?.bankName || "N/A"}</td></tr>
-                <tr style="background:#fff3cd"><td><strong>Account Number</strong></td><td>${user.bankDetails?.accountNumber || "N/A"}</td></tr>
-                <tr style="background:#fff3cd"><td><strong>IBAN</strong></td><td>${user.bankDetails?.iban || "N/A"}</td></tr>
-                <tr style="background:#fff3cd"><td><strong>SWIFT/BIC</strong></td><td>${user.bankDetails?.swift || "N/A"}</td></tr>
-                <tr style="background:#fff3cd"><td><strong>Routing Number</strong></td><td>${user.bankDetails?.routingNumber || "N/A"}</td></tr>
-                <tr style="background:#fff3cd"><td><strong>Country</strong></td><td>${user.bankDetails?.country || "N/A"}</td></tr>
-                <tr style="background:#fff3cd"><td><strong>Currency</strong></td><td>${user.bankDetails?.currency || "USD"}</td></tr>
-              </table>
-              ${!isAutomated ? `<p style="color:red"><strong>ACTION REQUIRED:</strong> Please transfer $${usdAmount} USD manually to the bank account above. Stripe Connect is not yet enabled.</p>` : "<p style='color:green'>This payout was processed automatically via Stripe Connect. No action needed.</p>"}
-            `,
-          });
-        } catch (emailErr) {
-          console.error("Admin notification email failed:", emailErr.message);
-        }
-      }
+      cashoutResult = await executeBankPayout({ user, ledgerEntry, amount, usdAmount, payoutSpeed, reqIp: req.ip });
     }
 
     const finalStatus = cashoutResult.status;
+    // For bank cashouts the user is paid in AUD (cashoutResult.payoutAud); USDC stays USD.
+    const audStr = cashoutResult.payoutAud != null ? `A$${cashoutResult.payoutAud}` : `$${usdAmount}`;
     const messageMap = {
       completed: method === "bank"
-        ? `${amount} HB ($${usdAmount}) bank transfer completed successfully.`
+        ? `${amount} HB (${audStr}) bank transfer completed successfully.`
         : `${amount} HB ($${usdAmount}) sent as USDC to your wallet successfully.`,
       processing: method === "bank"
-        ? `${amount} HB ($${usdAmount}) bank transfer initiated. Funds will arrive in 1-3 business days.`
+        ? `${amount} HB (${audStr}) bank transfer initiated. ${cashoutResult.isInstant ? "Funds typically arrive within minutes." : "Funds will arrive in 1-3 business days."}`
         : `${amount} HB ($${usdAmount}) USDC transfer is being processed on-chain.`,
       pending: method === "bank"
-        ? `${amount} HB ($${usdAmount}) cashout request received. Admin will process the bank transfer to your account shortly.`
+        ? `${amount} HB (${audStr}) cashout request received. Admin will process the bank transfer to your account shortly.`
         : `${amount} HB ($${usdAmount}) USDC cashout is queued — platform wallet is being topped up. Admin will send the funds to your wallet shortly.`,
       failed: method === "bank"
-        ? `Bank transfer of ${amount} HB ($${usdAmount}) failed. Your HB balance has been restored. Please try again or contact support.`
+        ? `Bank transfer of ${amount} HB (${audStr}) failed. Your HB balance has been restored. Please try again or contact support.`
         : `USDC cashout of ${amount} HB failed. Your HB balance has been restored. Please try again or contact support.`,
     };
 
@@ -674,6 +592,8 @@ export async function cashoutHB(req, res) {
       success: finalStatus !== "failed",
       ledgerEntry,
       usdAmount,
+      audAmount: cashoutResult.payoutAud ?? null,
+      fxRate: cashoutResult.fxRate ?? null,
       newBalance: user.hyperBucks,
       cashoutStatus: finalStatus,
       cashoutTxHash: cashoutResult.txHash || cashoutResult.stripePayoutId || null,
@@ -688,6 +608,19 @@ export async function cashoutHB(req, res) {
 // ------------------ GET HB BALANCE ------------------
 // GET /api/v1/hb/balance
 // Auth required.
+// ------------------ GET USD→AUD FX RATE ------------------
+// GET /api/v1/hb/fx-rate
+// Used by the cashout UI to preview the AUD a bank cashout will pay.
+export async function getFxRate(req, res) {
+  try {
+    const { rate } = await convertUsdToAud(1);
+    return res.json({ usdToAud: rate, instantFeeRate: INSTANT_FEE_RATE_AU });
+  } catch (error) {
+    console.error("getFxRate error:", error);
+    return res.status(500).json({ error: error.message });
+  }
+}
+
 export async function getHBBalance(req, res) {
   try {
     const userId = req.user.id || req.user._id;
@@ -778,10 +711,15 @@ export async function saveBankDetails(req, res) {
       currency,
     } = req.body;
 
-    if (!accountHolderName || !bankName || !accountNumber) {
+    if (!accountHolderName || !bankName || !accountNumber || !routingNumber) {
       return res.status(400).json({
-        error: "accountHolderName, bankName, and accountNumber are required",
+        error: "accountHolderName, bankName, accountNumber and BSB (routingNumber) are required",
       });
+    }
+
+    // Bank cashout is AU-only (platform is an AU Stripe account; no cross-border payouts).
+    if ((country || "").toUpperCase() !== "AU") {
+      return res.status(400).json({ error: AU_ONLY_BANK_MSG });
     }
 
     const user = await User.findById(userId);
@@ -793,9 +731,9 @@ export async function saveBankDetails(req, res) {
       accountNumber,
       iban: iban || "",
       swift: swift || "",
-      routingNumber: routingNumber || "",
-      country: country || "",
-      currency: currency || "USD",
+      routingNumber: routingNumber || "", // AU BSB
+      country: "AU",
+      currency: "AUD",
       // Auto-verify when Connect not enabled — admin handles payout manually via email
       verified: process.env.STRIPE_CONNECT_ENABLED !== "true",
     };
@@ -806,9 +744,9 @@ export async function saveBankDetails(req, res) {
     let connectMessage = "Bank details saved. Verification is pending.";
     if (process.env.STRIPE_CONNECT_ENABLED === "true") {
       try {
-        const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2023-10-16" });
-        const connectAccountId = await getOrCreateConnectedAccount(user, stripe, req.ip);
-        await attachExternalBankAccount(user, stripe, connectAccountId);
+        const stripe = getStripe();
+        const connectAccountId = await getOrCreateUserConnectedAccount(user, stripe, req.ip);
+        await attachUserBankAccount(user, stripe, connectAccountId);
         user.bankDetails.verified = true;
         await user.save();
         connectMessage = "Bank details saved and verified via Stripe Connect.";
@@ -857,14 +795,20 @@ export async function saveDebitCard(req, res) {
     const user = await User.findById(userId);
     if (!user) return res.status(404).json({ error: "User not found" });
 
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2023-10-16" });
+    const stripe = getStripe();
 
     // Retrieve token details to get card metadata
     const token = await stripe.tokens.retrieve(cardToken);
     const card = token.card;
 
     if (!card) return res.status(400).json({ error: "Invalid card token" });
-    // Stripe will reject ineligible cards at payout time
+
+    // Instant payouts are AU-only — reject non-Australian debit cards up front.
+    if ((card.country || "").toUpperCase() !== "AU") {
+      return res.status(400).json({
+        error: "Instant payouts require an Australian debit card. Please use USDC cashout instead.",
+      });
+    }
 
     // Store token id — will be attached to connected account at cashout time
     user.debitCard = {
@@ -996,7 +940,7 @@ export async function createHBTopupIntent(req, res) {
     const usdAmount = hbAmount / HB_TO_USD;
     const stripeAmountCents = Math.round(usdAmount * 100);
 
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+    const stripe = getStripe();
     const paymentIntent = await stripe.paymentIntents.create({
       amount: stripeAmountCents,
       currency: "usd",

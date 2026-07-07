@@ -10,6 +10,7 @@ import { FiZap, FiCheckCircle, FiArrowLeft, FiTrendingUp, FiArrowDownCircle } fr
 import { CreditCard, Wallet } from 'lucide-react';
 import { useAccount, useWalletClient, usePublicClient } from 'wagmi';
 import { useEmailWallet } from '../../hooks/useEmailWallet';
+import { useTransak } from '../../hooks/useTransak';
 import KYCVerification from '../../Components/Dashboard/KYCVerification';
 import HBCoinIcon from '../../Components/Common/HBCoinIcon';
 
@@ -192,6 +193,8 @@ export default function HyperBucks() {
   const activeWalletClient = walletClient || emailWalletClient;
   // True only when a wallet capable of signing txs is connected (MetaMask / WalletConnect or email wallet with PK loaded)
   const hasSigningWallet = !!(walletClient || emailWalletClient);
+  const { openWidget } = useTransak();
+  const [transakBusy, setTransakBusy] = useState(false);
 
   const [activeTab, setActiveTab] = useState('topup');
 
@@ -205,13 +208,14 @@ export default function HyperBucks() {
   const [hbCashoutMethod, setHbCashoutMethod] = useState('usdc'); // 'usdc' | 'bank'
   const [payoutSpeed, setPayoutSpeed] = useState('standard'); // 'standard' | 'instant'
   const [hbProcessing, setHbProcessing] = useState(false);
+  const [usdToAud, setUsdToAud] = useState(null); // live USD→AUD rate for bank cashout preview
   const [cashoutStep, setCashoutStep] = useState('form'); // 'form' | 'confirm' | 'otp'
   const [otpCode, setOtpCode] = useState('');
   const [sendingOtp, setSendingOtp] = useState(false);
   const [savedBankDetails, setSavedBankDetails] = useState(undefined);
   const [bankDetailsLoading, setBankDetailsLoading] = useState(false);
   const [showBankForm, setShowBankForm] = useState(false);
-  const [bankForm, setBankForm] = useState({ accountHolderName: '', bankName: '', accountNumber: '', iban: '', swift: '', routingNumber: '', country: '', currency: 'USD' });
+  const [bankForm, setBankForm] = useState({ accountHolderName: '', bankName: '', accountNumber: '', iban: '', swift: '', routingNumber: '', country: 'AU', currency: 'AUD' });
   const [savingBank, setSavingBank] = useState(false);
   const [savedDebitCard, setSavedDebitCard] = useState(undefined); // undefined = not fetched, null = none
   const [showDebitCardForm, setShowDebitCardForm] = useState(false);
@@ -322,6 +326,20 @@ export default function HyperBucks() {
     }
   }, [activeTab, hbCashoutMethod, payoutSpeed, savedDebitCard, fetchDebitCard]);
 
+  // Fetch the live USD→AUD rate when the user is doing a bank cashout (AU/AUD).
+  useEffect(() => {
+    if (activeTab !== 'cashout' || hbCashoutMethod !== 'bank' || usdToAud != null) return;
+    (async () => {
+      try {
+        const res = await fetch(`${BACKEND_BASE_URL}/api/v1/hb/fx-rate`, {
+          headers: { Authorization: `Bearer ${authToken}` },
+        });
+        const data = await res.json();
+        if (res.ok && data.usdToAud) setUsdToAud(data.usdToAud);
+      } catch { /* preview only — backend recomputes authoritatively at cashout */ }
+    })();
+  }, [activeTab, hbCashoutMethod, usdToAud, authToken]);
+
   // Instant payout fee: 1.5% for AU/US/NZ/AE, 1% for others
   const getInstantFee = (usdAmount, country) => {
     const highFeeCountries = ['AU', 'US', 'NZ', 'AE'];
@@ -429,9 +447,40 @@ export default function HyperBucks() {
     }
   };
 
+  // Buy USDC into the user's OWN wallet via Transak. They then top up HB with the existing
+  // "USDC via Wallet" method (or spend the USDC on a marketplace purchase). No HB is credited
+  // by Transak — the on-chain USDC is the source of truth.
+  const handleBuyUsdc = async () => {
+    if (!activeAddress) { toast.error('Connect or log in your wallet first'); return; }
+    const fiatAmount = activeUSD >= 1 ? Math.ceil(activeUSD) : undefined;
+    setTransakBusy(true);
+    try {
+      const res = await fetch(`${BACKEND_BASE_URL}/api/v1/transak/fund/session`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${authToken}` },
+        body: JSON.stringify({ walletAddress: activeAddress, fiatAmount, referrerDomain: window.location.origin }),
+      });
+      const session = await res.json();
+      if (!res.ok) { toast.error(session.error || 'Failed to start Transak'); return; }
+
+      openWidget({
+        widgetUrl: session.widgetUrl,
+        onSuccess: () => {
+          toast.success('USDC added to your wallet — now complete your top-up with USDC below.', { duration: 8000 });
+          setTopupMethod('usdc'); // switch to the USDC method so they can convert it to HB
+        },
+        onFailed: () => toast.error('Transak order was not completed.'),
+      });
+    } catch (err) {
+      toast.error('Failed to start Transak: ' + err.message);
+    } finally {
+      setTransakBusy(false);
+    }
+  };
+
   const handleSaveBankDetails = async () => {
-    if (!bankForm.accountHolderName || !bankForm.bankName || !bankForm.accountNumber) {
-      toast.error('Account holder name, bank name, and account number are required');
+    if (!bankForm.accountHolderName || !bankForm.bankName || !bankForm.accountNumber || !bankForm.routingNumber) {
+      toast.error('Account holder name, bank name, BSB and account number are required');
       return;
     }
     setSavingBank(true);
@@ -439,7 +488,8 @@ export default function HyperBucks() {
       const res = await fetch(`${BACKEND_BASE_URL}/api/v1/hb/bank-details`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${authToken}` },
-        body: JSON.stringify(bankForm),
+        // Bank cashout is AU-only — always send AU/AUD regardless of stale form state.
+        body: JSON.stringify({ ...bankForm, country: 'AU', currency: 'AUD' }),
       });
       const data = await res.json();
       if (!res.ok) { toast.error(data.error || 'Failed to save bank details'); return; }
@@ -460,6 +510,7 @@ export default function HyperBucks() {
     if (kycStatus !== 'verified') { setKycGateOpen(true); return; }
     if (hbAmount < 250) { toast.error('Minimum cashout is 250 HB ($1)'); return; }
     if (hbCashoutMethod === 'usdc' && !activeAddress) { toast.error('Connect a wallet to receive USDC'); return; }
+    if (hbCashoutMethod === 'transak' && !activeAddress) { toast.error('Connect a wallet to receive USDC before withdrawing to your bank'); return; }
     if (hbCashoutMethod === 'bank' && !savedBankDetails) { toast.error('Please add your bank details first'); return; }
     setCashoutStep('confirm');
   };
@@ -491,6 +542,30 @@ export default function HyperBucks() {
     setHbProcessing(true);
     const toastId = toast.loading('Verifying OTP & processing cashout...');
     try {
+      // Transak off-ramp: backend debits HB + sends USDC to the user's wallet, then we open
+      // the Transak SELL widget so the user cashes that USDC out to their bank.
+      if (hbCashoutMethod === 'transak') {
+        const res = await fetch(`${BACKEND_BASE_URL}/api/v1/transak/cashout/session`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${authToken}` },
+          body: JSON.stringify({ amount: parseInt(hbCashoutAmount, 10), otp: otpCode, referrerDomain: window.location.origin }),
+        });
+        const data = await res.json();
+        if (!res.ok) { toast.error(data.error || 'Cashout failed', { id: toastId }); return; }
+
+        toast.success(data.message || 'USDC sent to your wallet — complete the Transak withdrawal.', { id: toastId, duration: 8000 });
+        openWidget({
+          widgetUrl: data.widgetUrl,
+          onFailed: () => toast('You still hold the USDC — you can withdraw it anytime.', { icon: 'ℹ️' }),
+        });
+        setHbCashoutAmount('');
+        setOtpCode('');
+        setCashoutStep('form');
+        fetchBalance();
+        fetchHistory();
+        return;
+      }
+
       const payload = {
         amount: parseInt(hbCashoutAmount, 10),
         method: hbCashoutMethod,
@@ -659,7 +734,7 @@ export default function HyperBucks() {
                   <div className="flex gap-3 mb-4">
                     {[
                       { key: 'card', label: 'Credit / Debit Card', sub: 'Visa, Mastercard, etc.', Icon: CreditCard },
-                      { key: 'usdc', label: 'USDC via Wallet', sub: 'Base network · no extra fee', Icon: Wallet },
+                      { key: 'usdc', label: 'USDC via Wallet', sub: 'Base network · buy USDC with card inside', Icon: Wallet },
                     ].map(({ key, label, sub, Icon }) => (
                       <button
                         key={key}
@@ -692,6 +767,22 @@ export default function HyperBucks() {
 
                   {topupMethod === 'usdc' && (
                     <div className="space-y-3">
+                      {/* Don't have USDC? Buy it with a card straight into your wallet (Transak on-ramp) */}
+                      {activeAddress && (
+                        <div className="bg-[#002AA8]/10 border border-[#002AA8]/30 rounded-xl p-3">
+                          <div className="flex items-center justify-between gap-3">
+                            <p className="text-white/60 text-xs">No USDC yet? Buy it with your card.</p>
+                            <button
+                              onClick={handleBuyUsdc}
+                              disabled={transakBusy}
+                              className={`flex-shrink-0 text-xs font-semibold px-3 py-2 rounded-lg transition-colors ${transakBusy ? 'bg-white/10 text-white/40 cursor-not-allowed' : 'bg-[#002AA8] hover:bg-blue-700 text-white'}`}
+                            >
+                              {transakBusy ? 'Opening…' : 'Buy USDC'}
+                            </button>
+                          </div>
+                          <p className="text-white/25 text-[10px] mt-1.5">USDC arrives in your wallet, then pay it below to top up HB.</p>
+                        </div>
+                      )}
                       {!activeAddress ? (
                         <p className="text-yellow-400 text-sm text-center py-2">{t("dashboard.hyperbucks.cashout.noWallet", "Connect a wallet to continue")}</p>
                       ) : !hasSigningWallet ? (
@@ -843,7 +934,7 @@ export default function HyperBucks() {
                   <div className="mb-2 text-white/50 text-xs">
                     {t("dashboard.hyperbucks.otp.cashingOut", "Cashing out")} <span className="text-white font-semibold">{parseInt(hbCashoutAmount, 10).toLocaleString()} HB</span>
                     {' '}≈ <span className="text-white font-semibold">${(parseInt(hbCashoutAmount, 10) / 250).toFixed(2)} USD</span>
-                    {' '}via <span className="text-white font-semibold">{hbCashoutMethod === 'bank' ? 'Bank Transfer' : 'USDC on Base'}</span>
+                    {' '}via <span className="text-white font-semibold">{hbCashoutMethod === 'bank' ? 'Bank Transfer' : hbCashoutMethod === 'transak' ? 'Bank via Transak' : 'USDC on Base'}</span>
                   </div>
                 </div>
 
@@ -899,9 +990,9 @@ export default function HyperBucks() {
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-white/50 text-sm">{t("dashboard.hyperbucks.confirm.method", "Method")}</span>
-                    <span className="text-white font-semibold">{hbCashoutMethod === 'bank' ? 'Bank Transfer' : 'USDC on Base'}</span>
+                    <span className="text-white font-semibold">{hbCashoutMethod === 'bank' ? 'Bank Transfer' : hbCashoutMethod === 'transak' ? 'Bank via Transak' : 'USDC on Base'}</span>
                   </div>
-                  {hbCashoutMethod === 'usdc' ? (
+                  {(hbCashoutMethod === 'usdc' || hbCashoutMethod === 'transak') ? (
                     <>
                       <div className="flex justify-between items-center">
                         <span className="text-white/50 text-sm">{t("dashboard.hyperbucks.confirm.wallet", "To Wallet")}</span>
@@ -914,7 +1005,11 @@ export default function HyperBucks() {
                         </div>
                       </div>
                       <div className="bg-[#002AA8]/10 border border-[#002AA8]/30 rounded-xl p-3">
-                        <p className="text-white/50 text-xs">USDC will be sent to your wallet on Base network. Near-instant transfer.</p>
+                        <p className="text-white/50 text-xs">
+                          {hbCashoutMethod === 'transak'
+                            ? 'USDC is sent to your wallet on Base, then the Transak withdrawal pays fiat to your bank.'
+                            : 'USDC will be sent to your wallet on Base network. Near-instant transfer.'}
+                        </p>
                       </div>
                     </>
                   ) : (
@@ -931,14 +1026,39 @@ export default function HyperBucks() {
                         <span className="text-white/50 text-sm">Account</span>
                         <span className="text-white font-mono text-sm">****{savedBankDetails?.accountNumber?.slice(-4)}</span>
                       </div>
-                      <div className="border-t border-white/10 pt-4">
+                      <div className="border-t border-white/10 pt-4 space-y-2">
                         <div className="flex justify-between items-center">
-                          <span className="text-white/50 text-sm">Transfer Fee</span>
-                          <span className="text-white/70 font-semibold">Free</span>
+                          <span className="text-white/50 text-sm">Paid in AUD {usdToAud ? `(rate ${usdToAud.toFixed(4)})` : ''}</span>
+                          <span className="text-white font-semibold">
+                            {usdToAud ? `≈ A$${((parseInt(hbCashoutAmount, 10) / 250) * usdToAud).toFixed(2)}` : 'Calculating…'}
+                          </span>
                         </div>
+                        {payoutSpeed === 'instant' ? (
+                          <>
+                            <div className="flex justify-between items-center">
+                              <span className="text-white/50 text-sm">Instant fee (1.5%)</span>
+                              <span className="text-amber-300/80 font-semibold">deducted by Stripe</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                              <span className="text-white/70 text-sm">You receive</span>
+                              <span className="text-white font-bold">
+                                {usdToAud ? `≈ A$${(((parseInt(hbCashoutAmount, 10) / 250) * usdToAud) / 1.015).toFixed(2)}` : '—'}
+                              </span>
+                            </div>
+                          </>
+                        ) : (
+                          <div className="flex justify-between items-center">
+                            <span className="text-white/50 text-sm">Transfer Fee</span>
+                            <span className="text-white/70 font-semibold">Free</span>
+                          </div>
+                        )}
                       </div>
                       <div className="bg-[#002AA8]/10 border border-[#002AA8]/30 rounded-xl p-3">
-                        <p className="text-white/50 text-xs">Funds will arrive in your bank account within 1 to 3 business days. This is standard banking processing time and not a platform limitation.</p>
+                        <p className="text-white/50 text-xs">
+                          {payoutSpeed === 'instant'
+                            ? 'Funds typically arrive within minutes to your Australian debit card. The instant fee is deducted by Stripe.'
+                            : 'Funds will arrive in your Australian (AUD) bank account within 1 to 3 business days. The AUD figure reflects the current USD→AUD rate; no extra platform FX fee.'}
+                        </p>
                       </div>
                     </>
                   )}
@@ -965,7 +1085,9 @@ export default function HyperBucks() {
                   <div className="flex gap-3">
                     {[
                       { key: 'usdc', label: 'USDC Wallet', sub: 'Instant · Base network', Icon: Wallet },
-                      { key: 'bank', label: 'Bank Transfer', sub: 'Standard or Instant', Icon: CreditCard },
+                      { key: 'transak', label: 'Bank (off-ramp)', sub: 'USDC → fiat to your bank', Icon: CreditCard },
+                      // Stripe 'bank' cashout hidden: per Don's architecture all payouts are crypto/off-ramp
+                      // (Stripe is money-in only; UAE Stripe won't do payouts). Backend flow kept intact.
                     ].map(({ key, label, sub, Icon }) => (
                       <button
                         key={key}
@@ -1059,6 +1181,20 @@ export default function HyperBucks() {
                   )
                 )}
 
+                {/* Transak off-ramp: USDC is sent to the user's wallet, then the SELL widget pays their bank */}
+                {hbCashoutMethod === 'transak' && (
+                  <div className="bg-[#002AA8]/10 border border-[#002AA8]/30 rounded-2xl p-4 space-y-1">
+                    {activeAddress ? (
+                      <p className="text-white/40 text-xs">
+                        USDC delivered to <span className="font-mono text-white/60">{activeAddress.slice(0, 6)}...{activeAddress.slice(-4)}</span>, then Transak withdraws it to your bank.
+                      </p>
+                    ) : (
+                      <p className="text-yellow-400 text-xs">Connect a wallet to receive USDC before withdrawing to your bank.</p>
+                    )}
+                    <p className="text-white/25 text-[11px]">Bank payout currency &amp; availability depend on your country (EUR/GBP/USD etc.).</p>
+                  </div>
+                )}
+
                 {/* Bank: bank details section (standard) */}
                 {hbCashoutMethod === 'bank' && payoutSpeed === 'standard' && (
                   <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
@@ -1076,8 +1212,8 @@ export default function HyperBucks() {
                               iban: savedBankDetails.iban || '',
                               swift: savedBankDetails.swift || '',
                               routingNumber: savedBankDetails.routingNumber || '',
-                              country: savedBankDetails.country || '',
-                              currency: savedBankDetails.currency || 'USD',
+                              country: 'AU',
+                              currency: 'AUD',
                             });
                             setShowBankForm(true);
                           }} className="text-blue-400 text-xs hover:text-blue-300">Edit</button>
@@ -1093,15 +1229,14 @@ export default function HyperBucks() {
                     ) : (
                       <div className="space-y-3">
                         <p className="text-white/50 text-xs font-semibold uppercase tracking-wide mb-1">{savedBankDetails ? 'Update Bank Details' : 'Add Bank Details'}</p>
+                        <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl px-3 py-2">
+                          <p className="text-blue-200/80 text-xs">🇦🇺 Bank transfer currently supports <span className="font-semibold">Australian (AUD)</span> accounts only. For other countries, use <span className="font-semibold">USDC</span> cashout.</p>
+                        </div>
                         {[
                           { field: 'accountHolderName', label: 'Account Holder Name', required: true },
                           { field: 'bankName', label: 'Bank Name', required: true },
+                          { field: 'routingNumber', label: 'BSB (e.g. 062-000)', required: true },
                           { field: 'accountNumber', label: 'Account Number', required: true },
-                          { field: 'iban', label: 'IBAN (international)', required: false },
-                          { field: 'swift', label: 'SWIFT / BIC', required: false },
-                          { field: 'routingNumber', label: 'Routing / Sort / BSB Code', required: false },
-                          { field: 'country', label: 'Country', required: false },
-                          { field: 'currency', label: 'Currency (e.g. USD, EUR, AUD)', required: false },
                         ].map(({ field, label, required }) => (
                           <div key={field}>
                             <label className="text-white/40 text-xs mb-1 block">{label}{required && ' *'}</label>
@@ -1152,7 +1287,7 @@ export default function HyperBucks() {
                         <p className="text-white/50 text-xs font-semibold uppercase tracking-wide mb-1">
                           {savedDebitCard ? 'Update Debit Card' : 'Add Debit Card for Instant Payout'}
                         </p>
-                        <p className="text-white/30 text-xs">Enter your debit card number below. Only Visa/Mastercard debit cards are accepted.</p>
+                        <p className="text-white/30 text-xs">Enter your debit card number below. Instant payouts require an Australian Visa/Mastercard debit card (AUD). For other countries, use USDC cashout.</p>
                         <DebitCardForm
                           onSaved={(card) => { setSavedDebitCard(card); setShowDebitCardForm(false); }}
                           onCancel={savedDebitCard ? () => setShowDebitCardForm(false) : null}
@@ -1174,17 +1309,24 @@ export default function HyperBucks() {
                 >
                   {sendingOtp ? 'Sending OTP...' : hbCashoutMethod === 'bank'
                     ? (payoutSpeed === 'instant' ? '⚡ Instant Cashout' : 'Cashout to Bank Account')
+                    : hbCashoutMethod === 'transak' ? 'Cashout to Bank (Transak)'
                     : 'Cashout to USDC Wallet'}
                 </button>
               </div>
 
               <div className="w-full lg:w-[260px] flex-shrink-0 bg-white/5 border border-white/10 rounded-2xl p-4 space-y-3">
                 <p className="text-white font-semibold text-sm">
-                  {hbCashoutMethod === 'usdc' ? 'USDC Wallet' : payoutSpeed === 'instant' ? '⚡ Instant Bank Transfer' : 'Bank Transfer'}
+                  {hbCashoutMethod === 'usdc' ? 'USDC Wallet' : hbCashoutMethod === 'transak' ? 'Bank via Transak' : payoutSpeed === 'instant' ? '⚡ Instant Bank Transfer' : 'Bank Transfer'}
                 </p>
                 <div className="space-y-1.5 text-xs text-white/40">
                   <p>Min 250 HB ($1)</p>
-                  {hbCashoutMethod === 'bank' && payoutSpeed === 'instant' ? (
+                  {hbCashoutMethod === 'transak' ? (
+                    <>
+                      <p>USDC sent to your wallet, then withdrawn to your bank</p>
+                      <p>Payout currency depends on your country</p>
+                      <p>Transak KYC required in the widget</p>
+                    </>
+                  ) : hbCashoutMethod === 'bank' && payoutSpeed === 'instant' ? (
                     <>
                       <p className="text-amber-400/70">1–1.5% Stripe fee (deducted automatically)</p>
                       <p>Arrives within minutes</p>
