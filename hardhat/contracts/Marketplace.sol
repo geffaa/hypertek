@@ -1,4 +1,13 @@
 // SPDX-License-Identifier: MIT
+//
+// SUPERSEDED — DO NOT REDEPLOY FROM THIS FILE.
+// This source produced the mainnet deployment at 0xfA9AFd6A073Da44bDDb4B7f3C396A39c782cC9df
+// (2026-03-14), which was never wired into any .env and never used in production. It has
+// PLATFORM_FEE_BPS = 2000 (20%), inconsistent with the tested/live 10% fee used everywhere
+// else. Kept here only for historical provenance of that address.
+//
+// The live mainnet Marketplace is deployed from backend/contracts/Marketplace.sol (10% fee,
+// matches testnet) — see backend/deployment-mainnet.json for the current address.
 pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";

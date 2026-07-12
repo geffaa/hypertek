@@ -17,6 +17,7 @@ import { retryBankPayout } from "../Controllers/HBController.js";
 import HBLedger from "../Models/HBLedger.js";
 import Trade from "../Models/TradeModel.js";
 import { cancelSiblingListings } from "../services/cancelSiblingListings.js";
+import { reconcileMarketplaceSales } from "../services/marketplaceReconcileJob.js";
 
 const AdminNFARouter = express.Router();
 
@@ -853,6 +854,23 @@ AdminNFARouter.post("/sync-listed-flags", authMiddleware("admin"), async (req, r
       }
     }
     res.json({ success: true, synced, checked: listings.length });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// Authoritative reconcile path: scan on-chain NFTSold events directly for a block range and
+// apply any sale the frontend's POST never reported (empty-catch{} failure mode). Chain data
+// only — never trusts the client. Run manually here, or hook this up to a scheduler later.
+AdminNFARouter.post("/marketplace/reconcile-sales", authMiddleware("admin"), async (req, res) => {
+  try {
+    const { chainId, fromBlock, toBlock } = req.body || {};
+    const result = await reconcileMarketplaceSales({
+      chainId: chainId || undefined,
+      fromBlock,
+      toBlock: toBlock || "latest",
+    });
+    res.json({ success: true, ...result });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }

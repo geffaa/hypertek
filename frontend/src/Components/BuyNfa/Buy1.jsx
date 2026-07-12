@@ -1034,6 +1034,12 @@ function Buy1() {
 
       toast.loading("💾 Recording purchase...", { id: toastId });
 
+      // The purchase already succeeded on-chain (receipt confirmed above), so this POST is a
+      // fast-path UX sync only — never block the user's success state on it. But don't pretend
+      // it's fine if it fails either: the backend independently verifies + reconciles sales
+      // straight from the chain (see backend/services/marketplaceReconcileJob.js), so a failure
+      // here just means the account view lags briefly instead of silently going out of sync.
+      let saleRecordFailed = false;
       try {
         const myAcceptedOffer = offers.find(
           (o) => String(o.userId) === String(user?.id || user?._id) && o.requestStatus === "accepted"
@@ -1057,7 +1063,9 @@ function Buy1() {
             headers: { Authorization: `Bearer ${token}` },
           },
         );
-      } catch {
+      } catch (recordErr) {
+        saleRecordFailed = true;
+        console.error("Sale record sync failed (purchase still succeeded on-chain):", recordErr);
       }
 
       toast.dismiss(toastId);
@@ -1066,6 +1074,13 @@ function Buy1() {
       setOnChainOwner(buyer.toLowerCase());
       setListingData(null);
       setPurchaseSuccess(true);
+
+      if (saleRecordFailed) {
+        toast("Purchase confirmed on-chain. It may take a few minutes to fully reflect in your account — this syncs automatically.", {
+          icon: "⏳",
+          duration: 8000,
+        });
+      }
     } catch (err) {
       let msg = " Purchase failed";
 

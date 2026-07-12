@@ -1,0 +1,21 @@
+{
+  "network": "base",
+  "deployer": "0x0c40B9CC8e482432A357fB115a757c7D1b63A5C8",
+  "contracts": {
+    "MyNFT": "0x62a7939c1871f7CCBF50d1d4E66FDD89F0B72e88",
+    "Marketplace": "0x51cB1c4Cc1435a154608f8Fad883AAa1587c0C21"
+  },
+  "usdc": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+  "platformWallet": "0xb0EBB8CB24b663f99fcF8Ee12dEd7bf5201c4b6b",
+  "platformWalletPendingTransfer": {
+    "note": "0xb0EBB8CB... belongs to Don; its private key is not available to the backend. Don needs to call updatePlatformWallet(0x0c40B9CC8e482432A357fB115a757c7D1b63A5C8) once from that wallet via BaseScan Write Contract so the backend's existing deployer key can manage platform fees. Update the 'platformWallet' field above to 0x0c40B9CC8e482432A357fB115a757c7D1b63A5C8 once that transaction confirms.",
+    "targetAddress": "0x0c40B9CC8e482432A357fB115a757c7D1b63A5C8"
+  },
+  "platformFeeBps": 1000,
+  "marketplaceAuthorized": true,
+  "supersedes": {
+    "note": "Replaces the old hardhat/contracts/Marketplace.sol deployment (20% fee)",
+    "oldMarketplace": "0xfA9AFd6A073Da44bDDb4B7f3C396A39c782cC9df"
+  },
+  "timestamp": "2026-07-12T08:39:17.759Z"
+}

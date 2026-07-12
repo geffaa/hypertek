@@ -19,6 +19,7 @@ import Stripe from "stripe";
 import { Payment } from "../Models/Payment.js";
 import { finalizeNFAPurchase } from "../Service/nftPurchaseService.js";
 import License from "../Models/License.js";
+import { verifySaleOnChain } from "../services/marketplaceSyncService.js";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Helper: save uploaded image permanently (Cloudinary or local /uploads/nft/)
@@ -2184,14 +2185,13 @@ export async function recordSubCollectionSale(req, res) {
   try {
     const {
       tokenId,
-      buyer,
-      seller,
       priceETH,
       txHash,
       parentId,
       subCollectionId,
       offerId,
     } = req.body;
+    let { buyer, seller } = req.body;
 
     console.log("💰 Recording Sub-Collection Sale:", {
       tokenId,
@@ -2232,30 +2232,21 @@ export async function recordSubCollectionSale(req, res) {
       });
     }
 
-    // Validate transaction on blockchain
-    // Validate transaction on blockchain
-    // Default to Base Sepolia if no chainId provided
+    // Verify the sale actually happened on-chain before touching the DB. The frontend's POST
+    // is a fast-path UX trigger only — it is never trusted blindly (mirrors how Transak orders
+    // are re-verified against transak.getOrder() before being applied; see transakController.js).
+    // Default to Base Sepolia if no chainId provided.
     const chainId = req.body.chainId || 84532;
-    const { provider } = getBlockchain(chainId);
-
-    if (provider) {
-      try {
-        const tx = await provider.getTransaction(txHash);
-        if (!tx) {
-          return res.status(400).json({
-            success: false,
-            error: "Transaction not found on blockchain",
-          });
-        }
-
-        // We could wait for receipt here, but usually frontend sends this after confirmation
-        // const receipt = await tx.wait(); 
-      } catch (txErr) {
-        console.error("Transaction validation error:", txErr);
-      }
-    } else {
-      console.warn("⚠️ No provider available for transaction validation");
+    const verification = await verifySaleOnChain({ chainId, tokenId, buyer, seller, txHash });
+    if (!verification.verified) {
+      return res.status(400).json({
+        success: false,
+        error: `On-chain verification failed: ${verification.reason}`,
+      });
     }
+    // From here on, use the chain's own buyer/seller/price — not whatever the client claimed.
+    buyer = verification.event.buyer;
+    seller = verification.event.seller;
 
     // Find parent collection
     let parent;
@@ -2286,6 +2277,22 @@ export async function recordSubCollectionSale(req, res) {
       });
     }
 
+    // Idempotency guard: if this exact on-chain transaction was already recorded (e.g. the
+    // frontend retried after a timeout, or the reconcile job and the frontend both fired),
+    // return the existing state instead of re-applying distribution/royalty side effects twice.
+    if ((subCollection.salesHistory || []).some((s) => s.txHash === txHash)) {
+      return res.json({
+        success: true,
+        message: "Sale already recorded (idempotent)",
+        subCollection: {
+          tokenId: subCollection.tokenId,
+          owner: subCollection.owner,
+          listed: subCollection.listed,
+          isFirstSale: subCollection.isFirstSale,
+        },
+      });
+    }
+
     // Validate seller ownership
     // If owner is undefined/null/"admin", it's a first-sale platform item — allow any valid seller
     const currentOwner = subCollection.owner;
@@ -2301,10 +2308,10 @@ export async function recordSubCollectionSale(req, res) {
     const creatorWallet =
       parent.collection?.royaltyWallet || parent.collection?.owner;
 
-    // Sanitize priceETH to prevent scientific notation in DB (e.g. 2e-10 → 200)
-    const cleanPrice = parseFloat(String(priceETH));
-    const priceUSDC = isNaN(cleanPrice) ? 0 : parseFloat(cleanPrice.toFixed(6));
-    console.log(`💰 Sub-collection sale: ${priceUSDC} USDC (raw received: ${priceETH})`);
+    // Price comes from the verified on-chain event, not the client-supplied priceETH — this
+    // is the value actually paid, so it's what distribution/buyback math must use.
+    const priceUSDC = parseFloat(verification.event.priceUSDC.toFixed(6));
+    console.log(`💰 Sub-collection sale: ${priceUSDC} USDC (client claimed: ${priceETH})`);
 
     // ── Fix 5: Reserve price enforcement (on-chain path) ─────────────────────
     const currentMinBB = subCollection.minimumBuybackUSD || 0;
