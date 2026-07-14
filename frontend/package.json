@@ -21,6 +21,7 @@
     "@metamask/sdk": "^0.34.0",
     "@mui/material": "^7.3.2",
     "@mui/x-charts": "^8.12.0",
+    "@privy-io/react-auth": "^3.35.0",
     "@rainbow-me/rainbowkit": "^2.2.10",
     "@ramp-network/ramp-instant-sdk": "^6.2.0",
     "@react-oauth/google": "^0.12.2",

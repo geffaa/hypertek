@@ -1,18 +1,94 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { createWalletClient, http } from 'viem';
+import { createWalletClient, http, custom } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
 import { base, baseSepolia } from 'viem/chains';
+import { useWallets } from '@privy-io/react-auth';
 
 const chainId = Number(import.meta.env.VITE_CHAIN_ID) || 8453;
 const activeChain = chainId === 84532 ? baseSepolia : base;
 const activeRpc = chainId === 84532 ? 'https://base-sepolia-rpc.publicnode.com' : 'https://mainnet.base.org';
 import axios from 'axios';
-import { BACKEND_BASE_URL } from '../Config.js';
+import { BACKEND_BASE_URL, PRIVY_ENABLED } from '../Config.js';
 
 const EmailWalletContext = createContext({});
 
-export const EmailWalletProvider = ({ children }) => {
+// ─────────────────────────────────────────────────────────────────────────────
+// Privy implementation — the embedded wallet lives on the user's device; the
+// signer comes from Privy's EIP-1193 provider and no private key ever reaches
+// this app or the backend. Exposes the exact same context shape as the legacy
+// provider so call sites (`walletClient || emailWalletClient`) are untouched.
+// Only mounted when PRIVY_ENABLED (requires PrivyIntegrationProvider above us).
+// ─────────────────────────────────────────────────────────────────────────────
+const PrivyEmailWalletProvider = ({ children }) => {
+    const { token, user } = useSelector((state) => state.auth);
+    const { wallets, ready } = useWallets();
+
+    const [emailWalletAddress, setEmailWalletAddress] = useState(null);
+    const [emailWalletClient, setEmailWalletClient] = useState(null);
+    const [emailWalletError, setEmailWalletError] = useState(null);
+
+    const embedded = wallets.find(
+        (w) => w.walletClientType === 'privy' || w.walletClientType === 'privy-v2'
+    );
+    const embeddedAddress = embedded?.address || null;
+
+    useEffect(() => {
+        let isMounted = true;
+
+        const initFromPrivy = async () => {
+            if (!token || !user || !embedded) {
+                if (isMounted) {
+                    setEmailWalletClient(null);
+                    setEmailWalletAddress(null);
+                }
+                return;
+            }
+            try {
+                const provider = await embedded.getEthereumProvider();
+                const client = createWalletClient({
+                    account: embedded.address,
+                    chain: activeChain,
+                    transport: custom(provider),
+                });
+                if (isMounted) {
+                    setEmailWalletAddress(embedded.address);
+                    setEmailWalletClient(client);
+                    setEmailWalletError(null);
+                    console.log('Privy Wallet Client Initialized:', embedded.address);
+                }
+            } catch (e) {
+                console.warn('Privy wallet client init failed:', e.message);
+                if (isMounted) setEmailWalletError(e.message);
+            }
+        };
+
+        initFromPrivy();
+        return () => { isMounted = false; };
+    }, [token, user, embeddedAddress]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <EmailWalletContext.Provider value={{
+            emailWalletAddress,
+            emailWalletClient,
+            isEmailWalletConnecting: Boolean(token && user) && !ready,
+            isEmailWalletConnected: !!emailWalletAddress,
+            emailWalletError,
+            privateKey: null, // non-custodial: the key never exists in the app
+            initWalletWithPrivateKey: () => {
+                console.warn('initWalletWithPrivateKey is disabled: wallets are non-custodial (Privy).');
+            },
+        }}>
+            {children}
+        </EmailWalletContext.Provider>
+    );
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Legacy custodial implementation — backend decrypts the user's private key
+// and this context turns it into a signer. Being replaced by the Privy path.
+// ─────────────────────────────────────────────────────────────────────────────
+const LegacyEmailWalletProvider = ({ children }) => {
     const { token, user } = useSelector((state) => state.auth);
 
     const [emailWalletAddress, setEmailWalletAddress] = useState(null);
@@ -109,5 +185,7 @@ export const EmailWalletProvider = ({ children }) => {
         </EmailWalletContext.Provider>
     );
 };
+
+export const EmailWalletProvider = PRIVY_ENABLED ? PrivyEmailWalletProvider : LegacyEmailWalletProvider;
 
 export const useGlobalEmailWallet = () => useContext(EmailWalletContext);

@@ -1,5 +1,6 @@
 import UserModel from "../Models/User.js";
 import bcrypt from "bcrypt";
+import fs from "fs";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
 import { OAuth2Client } from "google-auth-library";
@@ -1084,6 +1085,37 @@ export const GetWalletAddress = async (req, res) => {
   } catch (err) {
     console.error("GetWalletAddress error:", err);
     res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
+
+// ------------------ PRIVY TOKEN (custom auth handshake) ------------------
+// Privy verifies user identity with an RS256-signed JWT (they only accept
+// asymmetric keys). The session token stays HS256; this endpoint just mints a
+// short-lived RS256 token for the Privy SDK. The matching public key is
+// pasted into the Privy dashboard (JWT-based auth settings, ID claim "sub").
+let privyJwtPrivateKey = null;
+const getPrivyJwtPrivateKey = () => {
+  if (privyJwtPrivateKey) return privyJwtPrivateKey;
+  if (process.env.PRIVY_JWT_PRIVATE_KEY_BASE64) {
+    privyJwtPrivateKey = Buffer.from(process.env.PRIVY_JWT_PRIVATE_KEY_BASE64, "base64").toString("utf8");
+  } else {
+    privyJwtPrivateKey = fs.readFileSync(new URL("../Config/privy-jwt-private.pem", import.meta.url), "utf8");
+  }
+  return privyJwtPrivateKey;
+};
+
+export const GetPrivyToken = async (req, res) => {
+  try {
+    const userId = String(req.user._id);
+    const token = jwt.sign(
+      { sub: userId },
+      getPrivyJwtPrivateKey(),
+      { algorithm: "RS256", expiresIn: "15m", issuer: "hypertek-backend" }
+    );
+    res.status(200).json({ success: true, token });
+  } catch (err) {
+    console.error("GetPrivyToken error:", err);
+    res.status(500).json({ message: "Could not issue wallet token", error: err.message });
   }
 };
 
