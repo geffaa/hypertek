@@ -9,7 +9,7 @@ export function LockCard({ title, desc, icon }) {
   return (
     <div
       className="pointer-events-none"
-      style={{ gridRow: "1/1", gridColumn: "1/1", position: "sticky", top: "calc(50vh - 70px)", zIndex: 10, display: "flex", justifyContent: "center", alignSelf: "start" }}
+      style={{ gridRow: "1/1", gridColumn: "1/1", position: "sticky", top: "calc(50vh - 70px)", zIndex: 10, display: "flex", justifyContent: "center", alignSelf: "start", justifySelf: "start", width: "min(100%, calc(100vw - 64px))" }}
     >
       <div className="flex flex-col items-center gap-3 px-8 py-6 rounded-2xl text-center"
         style={{ background: "rgba(6,8,22,0.82)", border: "1px solid rgba(255,255,255,0.12)", backdropFilter: "blur(10px)", maxWidth: 400 }}>
