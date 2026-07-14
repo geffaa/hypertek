@@ -6,7 +6,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { ArrowLeft } from "lucide-react";
 import FullScreenLoader from "../Components/Common/Spinner";
-import { BACKEND_BASE_URL, getImageUrl } from "../Config";
+import { BACKEND_BASE_URL, LAUNCH_LOCKED, getImageUrl } from "../Config";
+import LockOverlay from "../Components/Common/LockOverlay";
 import overview1 from "../assets/images/Overview/overview1.webp";
 import NavLinks from "../Components/MarketPlaceCom/NavLinks";
 import MarketplaceBanner from "../Components/MarketPlaceCom/MarketplaceBanner";
@@ -362,7 +363,14 @@ function CategoryMarketplace() {
           )}
 
 
-          {/* GRID — responsive: 2 cols mobile → 3 sm → 5 lg → 6 xl */}
+          {/* GRID — responsive: 2 cols mobile → 3 sm → 5 lg → 6 xl.
+              Pre-launch: grid is dimmed behind the lock card; heading and
+              category chips above stay browsable. */}
+          <LockOverlay
+            locked={LAUNCH_LOCKED}
+            title={t("marketplace.launchLock.marketplaceTitle", "The marketplace is locked until the official launch")}
+            desc={t("marketplace.launchLock.desc", "But nothing is stopping you from checking the site out.")}
+          >
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 lg:gap-4">
             {filteredItems && filteredItems.length > 0 ? (
               filteredItems.map((item) => {
@@ -444,6 +452,7 @@ function CategoryMarketplace() {
               </div>
             )}
           </div>
+          </LockOverlay>
         </section>
       </div>
 

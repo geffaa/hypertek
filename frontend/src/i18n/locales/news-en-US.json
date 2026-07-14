@@ -19,6 +19,15 @@
     "allArticles": "All Articles",
     "copied": "Copied!",
     "share": "Share",
+    "moreStories": "More stories",
+    "keepExploring": "Keep exploring Hyper Tek",
+    "exploreLinks": {
+      "faq": "Read the FAQ",
+      "waitlist": "Join the Waitlist",
+      "home": "Front Page",
+      "ui": "Interactive UI Preview",
+      "about": "About Us"
+    },
     "gameVideos": "Game Videos",
     "close": "Close",
     "faq": [

@@ -14,7 +14,8 @@ import TradesTab         from "../Components/MarketPlaceCom/tabs/TradesTab";
 import HireRentTab       from "../Components/MarketPlaceCom/tabs/HireRentTab";
 import BountyTab         from "../Components/MarketPlaceCom/tabs/BountyTab";
 import MusicPlayer        from "../Components/MarketPlaceCom/MusicPlayer";
-import { BACKEND_BASE_URL } from "../Config";
+import LockOverlay        from "../Components/Common/LockOverlay";
+import { BACKEND_BASE_URL, LAUNCH_LOCKED } from "../Config";
 
 // Navbar height = py-3 (24px) + h-12 logo (48px) = 72px
 const HEADER_H = 72;
@@ -103,17 +104,30 @@ function MarketPlace() {
   }, []);
 
   // ── Tab content ────────────────────────────────────────────────────────────
+  // Pre-launch: Overview and NFAs/NFCs/NFTs stay readable (educational);
+  // the transactional tabs are locked. Quests/For Hire/Bounty keep their
+  // own game-content locks.
+  const launchLock = (tab) => (
+    <LockOverlay
+      locked={LAUNCH_LOCKED}
+      title={t("marketplace.launchLock.marketplaceTitle", "The marketplace is locked until the official launch")}
+      desc={t("marketplace.launchLock.desc", "But nothing is stopping you from checking the site out.")}
+    >
+      {tab}
+    </LockOverlay>
+  );
+
   const renderTab = () => {
     switch (activeTab) {
       case "overview":  return <OverviewTab onTabChange={(tab) => handleTabChange(tab)} />;
-      case "general":   return <GeneralTab />;
+      case "general":   return launchLock(<GeneralTab />);
       case "nfa101":    return <Nfa101Tab />;
-      case "auctions":  return <AuctionsTab />;
-      case "trades":    return <TradesTab />;
+      case "auctions":  return launchLock(<AuctionsTab />);
+      case "trades":    return launchLock(<TradesTab />);
       case "quests":    return <QuestsTab />;
       case "hire":      return <HireRentTab />;
       case "bounty":    return <BountyTab />;
-      default:          return <GeneralTab />;
+      default:          return launchLock(<GeneralTab />);
     }
   };
 

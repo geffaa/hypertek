@@ -11,6 +11,7 @@ export default function NewsDetail() {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [newsItem, setNewsItem] = useState(null);
+  const [moreStories, setMoreStories] = useState([]);
   const [copied, setCopied] = useState(false);
   const articleIdRef = useRef(null);
 
@@ -19,23 +20,26 @@ export default function NewsDetail() {
     if (location.state?.newsItem) {
       setNewsItem(location.state.newsItem);
       articleIdRef.current = location.state.newsItem._id;
+      window.scrollTo({ top: 0, behavior: "instant" });
     } else {
       navigate("/news");
     }
   }, [location.state, navigate]);
 
-  // Re-fetch when language changes
+  // Re-fetch when language changes; also feeds the "more stories" links
   useEffect(() => {
     const id = articleIdRef.current;
     if (!id) return;
     fetch(`${BACKEND_BASE_URL}/api/v1/news/getNews?lang=${i18n.language}`)
       .then((r) => r.json())
       .then((data) => {
-        const found = (data.data || []).find((n) => String(n._id) === String(id));
+        const list = data.data || [];
+        const found = list.find((n) => String(n._id) === String(id));
         if (found) setNewsItem(found);
+        setMoreStories(list.filter((n) => String(n._id) !== String(id)).slice(0, 2));
       })
       .catch(() => {});
-  }, [i18n.language]);
+  }, [i18n.language, newsItem?._id]);
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString(i18n.language || "en", {
@@ -281,6 +285,73 @@ export default function NewsDetail() {
             {copied ? <FaCheck size={10} /> : <FaShareAlt size={10} />}
             {copied ? t("newsPage.copied") : t("newsPage.share")}
           </button>
+        </div>
+
+        {/* ── More stories — keeps visitors arriving from shared links exploring ── */}
+        {moreStories.length > 0 && (
+          <div className="mt-12">
+            <h3 className="font-[Goldman] font-bold text-white text-[15px] md:text-[17px] uppercase tracking-wide mb-5">
+              {t("newsPage.moreStories", "More stories")}
+            </h3>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {moreStories.map((story) => (
+                <button
+                  key={story._id}
+                  onClick={() => navigate("/more-news", { state: { newsItem: story } })}
+                  className="text-left rounded-xl overflow-hidden group transition-all duration-200 hover:brightness-110"
+                  style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(56,189,248,0.18)" }}
+                >
+                  <div className="h-32 overflow-hidden">
+                    <img
+                      src={story.image ? getImageUrl(story.image) : ""}
+                      alt={story.heading}
+                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                      onError={(e) => { e.currentTarget.style.opacity = "0.15"; }}
+                    />
+                  </div>
+                  <div className="p-4">
+                    <p className="text-white/85 text-[13px] font-semibold leading-snug line-clamp-2">{story.heading}</p>
+                    <span className="mt-2 inline-block text-[10px] font-bold uppercase tracking-widest text-cyan-400/80"
+                      style={{ fontFamily: "Orbitron, sans-serif" }}>
+                      {t("newsPage.readArticle", "Read article")} →
+                    </span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ── Keep exploring — buttons to the allowed pages only ── */}
+        <div className="mt-10 pt-6" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+          <p className="text-white/40 text-[11px] font-bold uppercase tracking-widest mb-4"
+            style={{ fontFamily: "Orbitron, sans-serif" }}>
+            {t("newsPage.keepExploring", "Keep exploring Hyper Tek")}
+          </p>
+          <div className="flex flex-wrap gap-3">
+            {[
+              { label: t("newsPage.exploreLinks.faq", "Read the FAQ"), to: "/news", state: { scrollTo: "faq" } },
+              { label: t("newsPage.exploreLinks.waitlist", "Join the Waitlist"), to: "/waitlist" },
+              { label: t("newsPage.exploreLinks.home", "Front Page"), to: "/" },
+              { label: t("newsPage.exploreLinks.ui", "Interactive UI Preview"), to: "/gaming" },
+              { label: t("newsPage.exploreLinks.about", "About Us"), to: "/about" },
+            ].map((l) => (
+              <button
+                key={l.to + l.label}
+                onClick={() => navigate(l.to, l.state ? { state: l.state } : undefined)}
+                className="px-4 py-2 text-[11px] font-bold uppercase tracking-widest transition-all duration-200 hover:brightness-125"
+                style={{
+                  fontFamily: "Orbitron, sans-serif",
+                  background: "rgba(56,189,248,0.10)",
+                  border: "1px solid rgba(56,189,248,0.4)",
+                  color: "#38bdf8",
+                  borderRadius: 6,
+                }}
+              >
+                {l.label}
+              </button>
+            ))}
+          </div>
         </div>
       </main>
     </div>

@@ -1,10 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useAccount } from "wagmi";
-import { Users, Package, Plus, X, Clock, RotateCcw, ShieldAlert, Gamepad2, Info, CheckCircle2, Coins, Gem, Lock } from "lucide-react";
+import { Users, Package, Plus, X, Clock, RotateCcw, ShieldAlert, Gamepad2, Info, CheckCircle2, Coins, Gem } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
 import LazyImage from "../../Common/LazyImage";
+import { LockCard } from "../../Common/LockOverlay";
 import popularFallback from "../../../assets/images/popular/popolar.webp";
 
 const DURATION_LABELS = { 8: "8 hours", 24: "1 day", 72: "3 days", 168: "1 week", 720: "1 month" };
@@ -599,21 +600,7 @@ export default function HireRentTab() {
         </div>
 
         {/* Sticky lock message — overlaps cards, stays centered in viewport */}
-        <div className="pointer-events-none" style={{ gridRow: '1/1', gridColumn: '1/1', position: 'sticky', top: 'calc(50vh - 70px)', zIndex: 10, display: 'flex', justifyContent: 'center', alignSelf: 'start' }}>
-          <div className="flex flex-col items-center gap-3 px-8 py-6 rounded-2xl text-center"
-            style={{ background: "rgba(6,8,22,0.82)", border: "1px solid rgba(255,255,255,0.12)", backdropFilter: "blur(10px)", maxWidth: 400 }}>
-            <div className="w-10 h-10 rounded-full flex items-center justify-center"
-              style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.15)" }}>
-              <Lock className="w-5 h-5 text-white/60" />
-            </div>
-            <p className="text-white font-bold text-base leading-snug">
-              {t("marketplace.hire.lockedTitle")}
-            </p>
-            <p className="text-white/55 text-sm leading-relaxed">
-              {t("marketplace.hire.lockedDesc")}
-            </p>
-          </div>
-        </div>
+        <LockCard title={t("marketplace.hire.lockedTitle")} desc={t("marketplace.hire.lockedDesc")} />
       </div>
 
       {/* Pagination */}

@@ -6,6 +6,12 @@ import axios from "axios";
 
 const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:4700";
 
+// Pre-launch lock: while true, the marketplace's transactional tabs and the
+// user dashboard show a lock overlay and all buy/list/bid actions are
+// disabled. Sign-up and wallet creation stay open. Flip to false at the
+// official launch.
+const LAUNCH_LOCKED = true;
+
 // Global axios interceptor — logs full error response in dev
 axios.interceptors.response.use(
   (res) => res,
@@ -34,4 +40,4 @@ function getImageUrl(imagePath) {
   return `${BACKEND_BASE_URL}${imagePath}`;
 }
 
-export { BACKEND_BASE_URL, STRIPE_PUBLISHABLE_KEY, User_Dashboard_Url, NewsImage_Url, MarketPlace_Url, getImageUrl };
+export { BACKEND_BASE_URL, LAUNCH_LOCKED, STRIPE_PUBLISHABLE_KEY, User_Dashboard_Url, NewsImage_Url, MarketPlace_Url, getImageUrl };

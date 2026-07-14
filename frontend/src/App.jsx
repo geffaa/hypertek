@@ -17,7 +17,7 @@ import Footer from "./Components/Common/Footer";
 import Loading from "./Components/Common/Loading";
 import ChatbotWidget from "./Components/Chatbot/ChatbotWidget";
 
-const MAINTENANCE_MODE = true;
+const MAINTENANCE_MODE = false;
 const MAINTENANCE_BYPASS_PATH = "/testing";
 
 // Public preview paths — bypass maintenance WITHOUT setting the bypass cookie.

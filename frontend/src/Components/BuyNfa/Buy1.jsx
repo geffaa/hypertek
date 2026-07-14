@@ -24,7 +24,7 @@ import {
   BASE_USDC_ADDRESS,
   ERC20_ABI,
 } from "../../Web3/Config";
-import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
+import { BACKEND_BASE_URL, LAUNCH_LOCKED, getImageUrl } from "../../Config";
 import { FiEye, FiEdit2, FiCopy } from "react-icons/fi";
 import { useTokenBalance } from "../../hooks/useTokenBalance";
 import { Wallet, Copy, CreditCard, ZoomIn, X as XIcon } from "lucide-react";
@@ -464,6 +464,10 @@ function Buy1() {
   };
 
   const handleCreateListing = async () => {
+    if (LAUNCH_LOCKED) {
+      toast.error(t("marketplace.launchLock.buttonLabel", "Locked until the official launch"));
+      return;
+    }
     if (!isAnyConnected) {
       if (openConnectModal) {
         openConnectModal();
@@ -750,6 +754,10 @@ function Buy1() {
   };
 
   const handleBuyNFT = async () => {
+    if (LAUNCH_LOCKED) {
+      toast.error(t("marketplace.launchLock.buttonLabel", "Locked until the official launch"));
+      return;
+    }
     if (!isAnyConnected) {
       if (openConnectModal) {
         openConnectModal();
@@ -1168,6 +1176,8 @@ function Buy1() {
     const action = (text, fn) => ({ text, action: fn });
 
     if (loading) return disabled(`⏳ ${t("buyNfa.marketplace.processing", "Processing...")}`);
+    if (LAUNCH_LOCKED)
+      return disabled(`🔒 ${t("marketplace.launchLock.buttonLabel", "Locked until the official launch")}`);
     if (collection.isDummy)
       return disabled(t("buyNfa.marketplace.dummyNotForSale", "Sample Preview — Not Available for Purchase"));
     if (!isAnyConnected)
@@ -1192,6 +1202,7 @@ function Buy1() {
   const buttonConfig = getButtonAction();
 
   const handlePlaceBid = async () => {
+    if (LAUNCH_LOCKED) return toast.error(t("marketplace.launchLock.buttonLabel", "Locked until the official launch"));
     if (!isAnyConnected || !activeAddress) return toast.error("Connect your wallet first");
     if (!user?.id) return toast.error("Login required to bid");
     if (!bidAmount || parseFloat(bidAmount) <= 0) return toast.error("Enter a valid bid amount");

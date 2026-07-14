@@ -18,7 +18,7 @@ import land1Image from "../../assets/images/Overview/land1.webp";
 import NavLinks from "../ProfileSection/Navlinks";
 import FullScreenLoader from "../Common/Spinner";
 
-import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
+import { BACKEND_BASE_URL, LAUNCH_LOCKED, getImageUrl } from "../../Config";
 import {
   MARKETPLACE_ADDRESS,
   NFT_ADDRESS,
@@ -304,6 +304,10 @@ function ProfileCategory() {
 
   /* ================= HANDLE LIST FOR SALE ================= */
   const handleListForSale = async (item) => {
+    if (LAUNCH_LOCKED) {
+      toast.error("Locked until the official launch");
+      return;
+    }
     if (!connectedWallet) {
       toast.error("Please connect wallet first");
       return;

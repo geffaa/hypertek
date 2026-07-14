@@ -5,7 +5,7 @@ import { FiArrowLeft, FiChevronDown, FiClock, FiCheck } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { getImageUrl, BACKEND_BASE_URL } from "../../Config";
+import { getImageUrl, BACKEND_BASE_URL, LAUNCH_LOCKED } from "../../Config";
 
 function Pay1({ item }) {
   const { t } = useTranslation();
@@ -44,6 +44,10 @@ function Pay1({ item }) {
     : null;
 
   const handleSubmit = async () => {
+    if (LAUNCH_LOCKED) {
+      toast.error(t("marketplace.launchLock.buttonLabel", "Locked until the official launch"));
+      return;
+    }
     if (!totalPay) return;
 
     if (!user) {

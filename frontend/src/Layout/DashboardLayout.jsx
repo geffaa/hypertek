@@ -4,8 +4,12 @@ import Header from "../Components/Dashboard/Header";
 import { Outlet } from "react-router-dom";
 import LogoutModal from "../Components/Dashboard/LogoutModal";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import LockOverlay from "../Components/Common/LockOverlay";
+import { LAUNCH_LOCKED } from "../Config";
 
 const DashboardLayout = () => {
+  const { t } = useTranslation();
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -46,10 +50,19 @@ const DashboardLayout = () => {
           <Header onMenuClick={toggleSidebar} />
         </div>
 
-        {/* Scrollable main content */}
+        {/* Scrollable main content.
+            Pre-launch: every dashboard sub-page is locked behind one overlay.
+            Sign-up and wallet creation live outside this shell, so they keep
+            working while this lock is up. */}
         <main className="flex-1 min-h-0 flex flex-col mt-[1px] overflow-hidden pt-4 pb-4 pl-4 md:pt-6 md:pb-6 md:pl-6 relative z-10">
           <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar flex flex-col pr-4 md:pr-6">
-            <Outlet />
+            <LockOverlay
+              locked={LAUNCH_LOCKED}
+              title={t("marketplace.launchLock.dashboardTitle", "The dashboard is locked until the official launch")}
+              desc={t("marketplace.launchLock.desc", "But nothing is stopping you from checking the site out.")}
+            >
+              <Outlet />
+            </LockOverlay>
           </div>
         </main>
       </div>

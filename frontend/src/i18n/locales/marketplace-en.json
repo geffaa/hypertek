@@ -12,6 +12,12 @@
       "hire": "For Hire",
       "bounty": "Bounty"
     },
+    "launchLock": {
+      "marketplaceTitle": "The marketplace is locked until the official launch",
+      "dashboardTitle": "The dashboard is locked until the official launch",
+      "desc": "But nothing is stopping you from checking the site out.",
+      "buttonLabel": "Locked until the official launch"
+    },
     "banner": {
       "defaultHeading": "A New Era Dawns in Hyper Tek",
       "defaultDesc": "It's the start of a living, breathing universe where every decision shapes the journey. Whether you're racing at light speed, forging alliances in the Overlord Realm, or uncovering secrets in HyperQuest, this is your chance to leave your mark on the story.",

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Play, X, Calendar } from "lucide-react";
 import { BACKEND_BASE_URL, getImageUrl } from "../Config";
@@ -463,9 +463,18 @@ export default function NewsList() {
   const [faq1Avatar, setFaq1Avatar] = useState("/avatar/dryads-female.webp");
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const { t, i18n } = useTranslation();
+  const faqRef = useRef(null);
 
   const faqItems = t("newsPage.faq", { returnObjects: true }) || [];
+
+  // Arriving via a "Read the FAQ" link — jump straight to the FAQ section
+  useEffect(() => {
+    if (location.state?.scrollTo === "faq" && faqRef.current) {
+      requestAnimationFrame(() => faqRef.current.scrollIntoView({ behavior: "smooth" }));
+    }
+  }, [location.state]);
 
   useEffect(() => {
     const lang = i18n.language || "en";
@@ -649,6 +658,7 @@ export default function NewsList() {
             FAQ SECTION — two-panel half-page layout
         ══════════════════════════════════════════ */}
         <motion.div
+          ref={faqRef}
           className="w-[100vw] relative left-1/2 -ml-[50vw]"
           initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }} viewport={{ once: true, amount: 0.1 }}
@@ -819,6 +829,38 @@ export default function NewsList() {
           </div>
           </div>
         </motion.div>
+
+        {/* ── Keep exploring — buttons to the allowed pages only ── */}
+        <div className="mt-14 pt-8 flex flex-col items-center gap-5"
+          style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+          <p className="text-white/40 text-[11px] font-bold uppercase tracking-[0.3em]"
+            style={{ fontFamily: "Orbitron, sans-serif" }}>
+            {t("newsPage.keepExploring", "Keep exploring Hyper Tek")}
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {[
+              { label: t("newsPage.exploreLinks.waitlist", "Join the Waitlist"), to: "/waitlist" },
+              { label: t("newsPage.exploreLinks.home", "Front Page"), to: "/" },
+              { label: t("newsPage.exploreLinks.ui", "Interactive UI Preview"), to: "/gaming" },
+              { label: t("newsPage.exploreLinks.about", "About Us"), to: "/about" },
+            ].map((l) => (
+              <button
+                key={l.to}
+                onClick={() => navigate(l.to)}
+                className="px-4 py-2 text-[11px] font-bold uppercase tracking-widest transition-all duration-200 hover:brightness-125"
+                style={{
+                  fontFamily: "Orbitron, sans-serif",
+                  background: "rgba(56,189,248,0.10)",
+                  border: "1px solid rgba(56,189,248,0.4)",
+                  color: "#38bdf8",
+                  borderRadius: 6,
+                }}
+              >
+                {l.label}
+              </button>
+            ))}
+          </div>
+        </div>
 
       </div>
     </div>

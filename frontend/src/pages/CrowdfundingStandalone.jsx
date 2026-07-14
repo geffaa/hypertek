@@ -522,7 +522,7 @@ function CrowdfundingStandalone() {
                       {idx + 1}
                     </div>
                     <h4 className="font-bold text-white text-[15px] md:text-[17px] uppercase tracking-wide leading-snug">{item.bold}</h4>
-                    <p className="text-white/65 text-[13.5px] md:text-[14.5px] leading-relaxed">{sentence}</p>
+                    <p className="text-white/90 text-[13.5px] md:text-[14.5px] leading-relaxed">{sentence}</p>
                   </div>
                 );
               })}
