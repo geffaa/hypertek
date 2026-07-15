@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { createWalletClient, http } from 'viem';
 import { privateKeyToAccount, toAccount } from 'viem/accounts';
@@ -15,96 +15,203 @@ import { isCdpUser } from './CdpIntegration.jsx';
 const EmailWalletContext = createContext({});
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Coinbase CDP implementation — the embedded wallet's keys live in a TEE and
-// never exist inside this app or our backend. viem prepares each transaction
-// as usual; only the signing step is delegated to CDP (its transaction type
-// IS viem's TransactionSerializableEIP1559), then viem broadcasts through the
-// normal RPC transport. Exposes the exact same context shape as the legacy
-// provider so call sites (`walletClient || emailWalletClient`) are untouched.
-// Only mounted when CDP_WALLET_ENABLED (requires CdpIntegrationProvider above).
+// Unified provider (mounted when CDP_WALLET_ENABLED). One component serves
+// both wallet engines so logging in never swaps the provider identity — a
+// swap would remount the whole subtree and wipe page state (e.g. the signup
+// wallet modal). Which engine's value is exposed is decided per render:
+//
+// • CDP path (new accounts, HasCustodialWallet: false, + tester accounts):
+//   the embedded wallet's keys live in a TEE and never exist inside this app
+//   or our backend. viem prepares each transaction as usual; only the signing
+//   step is delegated to CDP (its transaction type IS viem's
+//   TransactionSerializableEIP1559), then viem broadcasts through the normal
+//   RPC transport. The address is persisted once via POST /user/link-wallet
+//   with a signature proving ownership.
+//
+// • Legacy path (accounts with an existing managed wallet, incl. Don's):
+//   backend decrypts the stored key and this context turns it into a signer.
+//   Unchanged behavior — these accounts keep their address, items, balances.
 // ─────────────────────────────────────────────────────────────────────────────
-const CdpEmailWalletProvider = ({ children }) => {
+const UnifiedEmailWalletProvider = ({ children }) => {
     const { token, user } = useSelector((state) => state.auth);
+    const cdp = isCdpUser(user);
+    const loggedIn = Boolean(token && user);
+
+    // ── CDP engine (hooks always called; inert while signed out of CDP) ──
     const { isInitialized } = useIsInitialized();
     const { evmAddress } = useEvmAddress();
     const { signEvmTransaction } = useSignEvmTransaction();
     const { signEvmMessage } = useSignEvmMessage();
     const { signEvmTypedData } = useSignEvmTypedData();
-    const linkAttempted = React.useRef(false);
+    const linkAttempted = useRef(false);
 
-    const loggedIn = Boolean(token && user);
-    const emailWalletAddress = loggedIn && evmAddress ? evmAddress : null;
+    const cdpAddress = cdp && loggedIn && evmAddress ? evmAddress : null;
 
     // Persist the embedded-wallet address once, proving ownership with a
     // signature. Idempotent server-side; safe to fire on every fresh session.
     useEffect(() => {
-        if (!emailWalletAddress || !token || !user?.id || linkAttempted.current) return;
-        if (user.WalletAddress && user.WalletAddress.toLowerCase() === emailWalletAddress.toLowerCase()) return;
+        if (!cdpAddress || !token || !user?.id || linkAttempted.current) return;
+        if (user.WalletAddress && user.WalletAddress.toLowerCase() === cdpAddress.toLowerCase()) return;
         linkAttempted.current = true;
         (async () => {
             try {
                 const { signature } = await signEvmMessage({
-                    evmAccount: emailWalletAddress,
+                    evmAccount: cdpAddress,
                     message: `hypertek-link-wallet:${user.id}`,
                 });
                 await axios.post(
                     `${BACKEND_BASE_URL}/api/v1/user/link-wallet`,
-                    { address: emailWalletAddress, signature },
+                    { address: cdpAddress, signature },
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
-                console.log('CDP wallet linked to account:', emailWalletAddress);
+                console.log('CDP wallet linked to account:', cdpAddress);
             } catch (e) {
                 linkAttempted.current = false; // retry on next session/render cycle
                 console.warn('link-wallet failed:', e.response?.data?.message || e.message);
             }
         })();
-    }, [emailWalletAddress, token, user?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [cdpAddress, token, user?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const emailWalletClient = useMemo(() => {
-        if (!emailWalletAddress) return null;
+    const cdpClient = useMemo(() => {
+        if (!cdpAddress) return null;
         const account = toAccount({
-            address: emailWalletAddress,
+            address: cdpAddress,
             async signMessage({ message }) {
                 const raw = typeof message === 'string'
                     ? message
                     : (typeof message.raw === 'string' ? message.raw : new TextDecoder().decode(message.raw));
-                const { signature } = await signEvmMessage({ evmAccount: emailWalletAddress, message: raw });
+                const { signature } = await signEvmMessage({ evmAccount: cdpAddress, message: raw });
                 return signature;
             },
             async signTransaction(transaction) {
-                const { signedTransaction } = await signEvmTransaction({ evmAccount: emailWalletAddress, transaction });
+                const { signedTransaction } = await signEvmTransaction({ evmAccount: cdpAddress, transaction });
                 return signedTransaction;
             },
             async signTypedData(typedData) {
-                const { signature } = await signEvmTypedData({ evmAccount: emailWalletAddress, typedData });
+                const { signature } = await signEvmTypedData({ evmAccount: cdpAddress, typedData });
                 return signature;
             },
         });
         const client = createWalletClient({ account, chain: activeChain, transport: http(activeRpc) });
-        console.log('CDP Wallet Client Initialized:', emailWalletAddress);
+        console.log('CDP Wallet Client Initialized:', cdpAddress);
         return client;
-    }, [emailWalletAddress]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [cdpAddress]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    return (
-        <EmailWalletContext.Provider value={{
-            emailWalletAddress,
-            emailWalletClient,
+    // ── Legacy engine (fetch gated off for CDP users) ──
+    const [legacyAddress, setLegacyAddress] = useState(null);
+    const [legacyClient, setLegacyClient] = useState(null);
+    const [isLegacyConnecting, setIsLegacyConnecting] = useState(false);
+    const [legacyError, setLegacyError] = useState(null);
+    const [privateKey, setPrivateKey] = useState(null);
+
+    useEffect(() => {
+        let isMounted = true;
+
+        const initializeEmailWallet = async () => {
+            if (!token || !user || cdp) {
+                if (isMounted) {
+                    setLegacyClient(null);
+                    setLegacyAddress(null);
+                    setPrivateKey(null);
+                }
+                return;
+            }
+
+            try {
+                setIsLegacyConnecting(true);
+                const response = await axios.get(`${BACKEND_BASE_URL}/api/v1/user/wallet-address`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+
+                if (response.data?.WalletAddress && isMounted) {
+                    setLegacyAddress(response.data.WalletAddress);
+                    setLegacyError(null);
+                    console.log("Email Wallet Address Loaded:", response.data.WalletAddress);
+
+                    // Auto-init wallet client from private key so user can sign transactions
+                    // without needing MetaMask. The private key is decrypted server-side and
+                    // returned only to the authenticated user (JWT-protected endpoint).
+                    if (response.data?.PrivateKey) {
+                        try {
+                            const pk = response.data.PrivateKey;
+                            const formattedPk = pk.startsWith('0x') ? pk : `0x${pk}`;
+                            const account = privateKeyToAccount(formattedPk);
+                            const client = createWalletClient({ account, chain: activeChain, transport: http(activeRpc) });
+                            if (isMounted) {
+                                setLegacyClient(client);
+                                setPrivateKey(formattedPk);
+                                console.log("Email Wallet Client Auto-Initialized");
+                            }
+                        } catch (e) {
+                            console.warn("Auto-init wallet client failed:", e.message);
+                        }
+                    }
+                }
+            } catch (err) {
+                if (isMounted) {
+                    console.log("ℹ️ No email wallet found for this user.");
+                    setLegacyError(err.message);
+                    setLegacyAddress(null);
+                }
+            } finally {
+                if (isMounted) setIsLegacyConnecting(false);
+            }
+        };
+
+        initializeEmailWallet();
+
+        return () => {
+            isMounted = false;
+        };
+    }, [token, user, cdp]);
+
+    const initWalletWithPrivateKey = (pk) => {
+        if (cdp) {
+            console.warn('initWalletWithPrivateKey is disabled: this account is non-custodial (Coinbase CDP).');
+            return;
+        }
+        try {
+            const formattedPk = pk.startsWith('0x') ? pk : `0x${pk}`;
+            const account = privateKeyToAccount(formattedPk);
+            const client = createWalletClient({ account, chain: activeChain, transport: http(activeRpc) });
+            setLegacyAddress(account.address);
+            setLegacyClient(client);
+            setPrivateKey(formattedPk);
+        } catch (e) {
+            console.error("Failed to init wallet from private key:", e);
+        }
+    };
+
+    const value = cdp
+        ? {
+            emailWalletAddress: cdpAddress,
+            emailWalletClient: cdpClient,
             isEmailWalletConnecting: loggedIn && (!isInitialized || !evmAddress),
-            isEmailWalletConnected: !!emailWalletAddress,
+            isEmailWalletConnected: !!cdpAddress,
             emailWalletError: null,
             privateKey: null, // non-custodial: the key never exists in the app
-            initWalletWithPrivateKey: () => {
-                console.warn('initWalletWithPrivateKey is disabled: wallets are non-custodial (Coinbase CDP).');
-            },
-        }}>
+            initWalletWithPrivateKey,
+        }
+        : {
+            emailWalletAddress: legacyAddress,
+            emailWalletClient: legacyClient,
+            isEmailWalletConnecting: isLegacyConnecting,
+            isEmailWalletConnected: !!legacyAddress,
+            emailWalletError: legacyError,
+            privateKey,
+            initWalletWithPrivateKey,
+        };
+
+    return (
+        <EmailWalletContext.Provider value={value}>
             {children}
         </EmailWalletContext.Provider>
     );
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Legacy custodial implementation — backend decrypts the user's private key
-// and this context turns it into a signer. Being replaced by the Privy path.
+// Legacy-only provider — used when the CDP integration is disabled at build
+// time (no VITE_CDP_PROJECT_ID). Identical to the pre-CDP behavior.
 // ─────────────────────────────────────────────────────────────────────────────
 const LegacyEmailWalletProvider = ({ children }) => {
     const { token, user } = useSelector((state) => state.auth);
@@ -137,11 +244,7 @@ const LegacyEmailWalletProvider = ({ children }) => {
                 if (response.data?.WalletAddress && isMounted) {
                     setEmailWalletAddress(response.data.WalletAddress);
                     setEmailWalletError(null);
-                    console.log("Email Wallet Address Loaded:", response.data.WalletAddress);
 
-                    // Auto-init wallet client from private key so user can sign transactions
-                    // without needing MetaMask. The private key is decrypted server-side and
-                    // returned only to the authenticated user (JWT-protected endpoint).
                     if (response.data?.PrivateKey) {
                         try {
                             const pk = response.data.PrivateKey;
@@ -151,7 +254,6 @@ const LegacyEmailWalletProvider = ({ children }) => {
                             if (isMounted) {
                                 setEmailWalletClient(client);
                                 setPrivateKey(formattedPk);
-                                console.log("Email Wallet Client Auto-Initialized");
                             }
                         } catch (e) {
                             console.warn("Auto-init wallet client failed:", e.message);
@@ -160,7 +262,6 @@ const LegacyEmailWalletProvider = ({ children }) => {
                 }
             } catch (err) {
                 if (isMounted) {
-                    console.log("ℹ️ No email wallet found for this user.");
                     setEmailWalletError(err.message);
                     setEmailWalletAddress(null);
                 }
@@ -204,15 +305,7 @@ const LegacyEmailWalletProvider = ({ children }) => {
     );
 };
 
-// Runtime provider choice: new accounts (HasCustodialWallet: false) and
-// tester accounts use the CDP embedded wallet; every account that already
-// has a managed wallet keeps the legacy custodial flow. Switching component
-// identity on login/logout remounts the subtree, which is fine.
-export const EmailWalletProvider = ({ children }) => {
-    const { user } = useSelector((state) => state.auth);
-    const useCdp = CDP_WALLET_ENABLED && isCdpUser(user);
-    const Provider = useCdp ? CdpEmailWalletProvider : LegacyEmailWalletProvider;
-    return <Provider>{children}</Provider>;
-};
+// Build-time choice only — stable across logins, so the tree never remounts.
+export const EmailWalletProvider = CDP_WALLET_ENABLED ? UnifiedEmailWalletProvider : LegacyEmailWalletProvider;
 
 export const useGlobalEmailWallet = () => useContext(EmailWalletContext);
