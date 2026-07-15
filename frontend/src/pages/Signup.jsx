@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
-import { FiCopy, FiEye, FiEyeOff } from "react-icons/fi";
+import { FiCopy } from "react-icons/fi";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { loginSuccess } from "../Redux/AuthSlice";
@@ -19,33 +19,10 @@ function Signup() {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", email: "", password: "", confirmPassword: "" });
 
-  // Wallet modal state
-  const [walletModal, setWalletModal] = useState(null); // { walletAddress, password }
-  const [privateKey, setPrivateKey] = useState("");
-  const [showPrivateKey, setShowPrivateKey] = useState(false);
-  const [pkPassword, setPkPassword] = useState("");
-  const [revealLoading, setRevealLoading] = useState(false);
-  const [signupToken, setSignupToken] = useState("");
+  // Wallet modal state — address only; key export lives in Profile settings
+  const [walletModal, setWalletModal] = useState(null); // { walletAddress }
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const handleRevealPrivateKey = async (e) => {
-    e.preventDefault();
-    setRevealLoading(true);
-    try {
-      const res = await axios.post(
-        `${BACKEND_BASE_URL}/api/v1/user/export-wallet`,
-        { password: pkPassword },
-        { headers: { Authorization: `Bearer ${signupToken}` } }
-      );
-      setPrivateKey(res.data.PrivateKey);
-      setPkPassword("");
-    } catch (err) {
-      toast.error(err.response?.data?.message || "Incorrect password.");
-    } finally {
-      setRevealLoading(false);
-    }
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -78,8 +55,7 @@ function Signup() {
         if (formData.fullName.trim()) {
           localStorage.setItem("hypertek_display_name", formData.fullName.trim().toUpperCase());
         }
-        setSignupToken(res.data.token);
-        setWalletModal({ walletAddress: res.data.user.WalletAddress, password: formData.password });
+        setWalletModal({ walletAddress: res.data.user.WalletAddress });
       } else {
         toast.error(res.data.message || "Signup failed. Please try again.");
       }
@@ -95,19 +71,13 @@ function Signup() {
     <AuthLayout>
       {loading && <FullScreenLoader />}
 
-      {/* Wallet Info Modal */}
+      {/* Wallet Info Modal — shows the new wallet's address only. Key export
+          lives in Profile settings, never on the signup screen. */}
       {walletModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4">
           <div className="bg-[#0f0f1a] border border-blue-500/30 rounded-2xl p-6 max-w-md w-full shadow-2xl">
             <h2 className="text-white text-xl font-bold mb-1">{t("auth.walletReady")}</h2>
             <p className="text-gray-400 text-sm mb-4">{t("auth.walletReadyDesc")}</p>
-
-            {/* Warning */}
-            <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3 mb-4">
-              <p className="text-red-400 text-xs font-semibold">
-                {t("auth.walletWarning")}
-              </p>
-            </div>
 
             {/* Wallet Address */}
             <div className="bg-black/40 border border-white/10 rounded-lg p-3 mb-4">
@@ -124,54 +94,19 @@ function Signup() {
               </div>
             </div>
 
-            {/* Private Key Section */}
-            {!privateKey ? (
-              <form onSubmit={handleRevealPrivateKey} className="space-y-2">
-                <p className="text-xs text-gray-400">{t("auth.enterPasswordReveal")}</p>
-                <div className="relative">
-                  <input
-                    type={showPrivateKey ? "text" : "password"}
-                    value={pkPassword}
-                    onChange={(e) => setPkPassword(e.target.value)}
-                    placeholder={t("auth.reEnterPassword")}
-                    className="w-full bg-white/5 border border-white/15 text-white text-sm rounded-lg px-3 py-2 pr-10 focus:outline-none focus:border-blue-500/60"
-                    required
-                  />
-                  <button type="button" onClick={() => setShowPrivateKey(!showPrivateKey)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white">
-                    {showPrivateKey ? <FiEyeOff size={15} /> : <FiEye size={15} />}
-                  </button>
-                </div>
-                <button
-                  type="submit"
-                  disabled={revealLoading}
-                  className="w-full py-2 bg-[#002AA8] hover:bg-[#003BD4] disabled:opacity-50 text-white text-sm font-semibold rounded-lg transition-all"
-                >
-                  {revealLoading ? t("auth.verifying") : t("auth.revealPrivateKey")}
-                </button>
-              </form>
-            ) : (
-              <div className="bg-black/40 border border-white/10 rounded-lg p-3 mb-2">
-                <p className="text-xs text-gray-400 mb-1">{t("auth.privateKeyLabel")}</p>
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs font-mono text-green-400 break-all">{showPrivateKey ? privateKey : "•".repeat(32)}</span>
-                  <div className="flex gap-2 shrink-0">
-                    <button type="button" onClick={() => setShowPrivateKey(!showPrivateKey)} className="text-gray-400 hover:text-white">
-                      {showPrivateKey ? <FiEyeOff size={15} /> : <FiEye size={15} />}
-                    </button>
-                    <button type="button" onClick={() => { navigator.clipboard.writeText(privateKey); toast.success("Private key copied!"); }} className="text-gray-400 hover:text-white">
-                      <FiCopy size={15} />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
+            {/* Self-custody note */}
+            <div className="bg-blue-500/10 border border-blue-500/25 rounded-lg p-3">
+              <p className="text-blue-300/90 text-xs leading-relaxed">
+                {t("auth.walletKeyNote", "This wallet belongs to you. Your address is always available in your Profile, where you can also export your private key if you ever need it. Never share that key with anyone.")}
+              </p>
+            </div>
 
             <button
               type="button"
               onClick={() => { setWalletModal(null); navigate("/"); }}
-              className="w-full mt-4 py-2 border border-white/15 text-white/70 hover:text-white text-sm rounded-lg transition-all"
+              className="w-full mt-4 py-2 bg-[#002AA8] hover:bg-[#003BD4] text-white text-sm font-semibold rounded-lg transition-all"
             >
-              {t("auth.savedWalletContinue")}
+              {t("auth.walletContinue", "Continue")}
             </button>
           </div>
         </div>
