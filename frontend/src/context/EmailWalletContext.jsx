@@ -10,6 +10,7 @@ const activeChain = chainId === 84532 ? baseSepolia : base;
 const activeRpc = chainId === 84532 ? 'https://base-sepolia-rpc.publicnode.com' : 'https://mainnet.base.org';
 import axios from 'axios';
 import { BACKEND_BASE_URL, CDP_WALLET_ENABLED } from '../Config.js';
+import { isWalletTester } from './CdpIntegration.jsx';
 
 const EmailWalletContext = createContext({});
 
@@ -177,6 +178,14 @@ const LegacyEmailWalletProvider = ({ children }) => {
     );
 };
 
-export const EmailWalletProvider = CDP_WALLET_ENABLED ? CdpEmailWalletProvider : LegacyEmailWalletProvider;
+// Runtime provider choice: CDP only for designated tester accounts during the
+// staged rollout; everyone else keeps the legacy custodial flow. Switching
+// component identity on login/logout remounts the subtree, which is fine.
+export const EmailWalletProvider = ({ children }) => {
+    const { user } = useSelector((state) => state.auth);
+    const useCdp = CDP_WALLET_ENABLED && isWalletTester(user);
+    const Provider = useCdp ? CdpEmailWalletProvider : LegacyEmailWalletProvider;
+    return <Provider>{children}</Provider>;
+};
 
 export const useGlobalEmailWallet = () => useContext(EmailWalletContext);

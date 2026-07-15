@@ -78,6 +78,7 @@ const NoItem = lazy(() => import("./pages/NoItem"));
 const Stripe = lazy(() => import("./pages/Stripe"));
 const Funnel = lazy(() => import("./pages/Funnel"));
 const Gaming = lazy(() => import("./pages/Gaming"));
+const WalletTest = lazy(() => import("./pages/WalletTest"));
 const Nft101Article = lazy(() => import("./pages/Nft101Article"));
 const GameModePage = lazy(() => import("./pages/GameModePage"));
 const Preview = lazy(() => import("./pages/Preview"));
@@ -224,6 +225,8 @@ function AppWrapper() {
 
             {/* Gaming Interface */}
             <Route path="/gaming" element={<Gaming />} />
+            {/* Staged CDP wallet smoke test — tester accounts only, redirects home otherwise */}
+            <Route path="/wallet-test" element={<WalletTest />} />
 
             {/* Public Preview — shareable links for social media */}
             <Route path="/preview" element={<Preview />} />

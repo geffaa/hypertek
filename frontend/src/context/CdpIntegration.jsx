@@ -16,7 +16,18 @@ import { BACKEND_BASE_URL, CDP_PROJECT_ID, CDP_WALLET_ENABLED } from "../Config.
  * read them. The user can export their key at any time.
  *
  * Everything here is inert unless VITE_CDP_PROJECT_ID is set.
+ *
+ * Staged rollout: while isWalletTester() gates the CDP path, only designated
+ * test accounts get CDP wallets in production; every other user keeps the
+ * legacy custodial flow. Widen the gate at cutover, once existing users'
+ * wallet migration is decided.
  */
+
+// Production testing happens under throwaway accounts on this domain only.
+export function isWalletTester(user) {
+  const email = user?.Email || user?.email || "";
+  return email.toLowerCase().endsWith("@hypertektest.com");
+}
 
 // Called by the CDP SDK whenever it needs to authenticate a request.
 // Reads the session token straight from the redux store since this runs
@@ -47,7 +58,7 @@ function CdpAuthBridge() {
 
   useEffect(() => {
     if (!isInitialized || busy.current) return;
-    const shouldBeSignedIn = Boolean(token && user);
+    const shouldBeSignedIn = Boolean(token && user) && isWalletTester(user);
 
     if (shouldBeSignedIn && !isSignedIn) {
       busy.current = true;

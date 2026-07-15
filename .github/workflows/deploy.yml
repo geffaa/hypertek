@@ -60,6 +60,9 @@ jobs:
           VITE_TRANSAK_ENVIRONMENT: STAGING
           VITE_GOOGLE_CLIENT_ID: 338330586933-u9j6r5kre5a8tbht14pp2jokh7d32qi5.apps.googleusercontent.com
           VITE_STRIPE_PUBLISHABLE_KEY: pk_test_51SHewG3UIHQiuHTy62JP9SiQzYm4kVI8uDg158N2RxzmQMUKU0tr5zSVlrSwOCaGmIxFTwEJL59vKJ9cVDzWdUxH005IuFlux3
+          # CDP embedded wallets — runtime-gated to @hypertektest.com tester
+          # accounts until the full non-custodial cutover
+          VITE_CDP_PROJECT_ID: 5dbc73a1-fe5a-4878-a29e-e149fd107398
 
       # ── Build Admin Panel ──
       - name: 📦 Install admin dependencies
