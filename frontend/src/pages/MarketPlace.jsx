@@ -30,6 +30,7 @@ function MarketPlace() {
   // Per-tab scroll position memory
   const scrollPositions = useRef({});
   const pendingScroll   = useRef(null);
+  const contentRef      = useRef(null);
 
   // Restore scroll when coming back from item detail (Back to Marketplace)
   useEffect(() => {
@@ -53,12 +54,31 @@ function MarketPlace() {
     setSearch("");
   };
 
-  // Restore scroll position after tab content renders
+  // Restore scroll position after tab content renders. First visit to a tab
+  // (no saved position): snap to the top of the tab content so short tabs
+  // like Auctions or NFAs/NFCs/NFTs never open at their tail end / footer.
+  const firstTabRender = useRef(true);
   useEffect(() => {
-    if (pendingScroll.current === null) return;
+    if (firstTabRender.current) {
+      // Initial mount keeps the existing behaviors (restoreScrollY etc.)
+      firstTabRender.current = false;
+      return;
+    }
     const pos = pendingScroll.current;
     pendingScroll.current = null;
-    requestAnimationFrame(() => window.scrollTo({ top: pos, behavior: "instant" }));
+    requestAnimationFrame(() => {
+      if (pos !== null && pos !== undefined) {
+        window.scrollTo({ top: pos, behavior: "instant" });
+        return;
+      }
+      const content = contentRef.current;
+      if (!content) return;
+      const navH = navRef.current?.offsetHeight || 0;
+      const contentTop = content.getBoundingClientRect().top + window.scrollY - HEADER_H - navH;
+      if (window.scrollY > contentTop) {
+        window.scrollTo({ top: Math.max(0, contentTop), behavior: "instant" });
+      }
+    });
   }, [activeTab]);
 
   // ── Banner stats from API ──────────────────────────────────────────────────
@@ -178,7 +198,7 @@ function MarketPlace() {
       {navFixed && <div style={{ height: navHeight }} />}
 
       {/* ── Tab content */}
-      <div className="max-w-[1450px] mx-auto px-4 sm:px-6 md:px-8 pb-24">
+      <div ref={contentRef} className="max-w-[1450px] mx-auto px-4 sm:px-6 md:px-8 pb-24">
         {renderTab()}
       </div>
 
