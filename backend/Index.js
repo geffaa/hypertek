@@ -136,6 +136,19 @@ app.use((req, res, next) => {
   next();
 });
 
+// JWKS endpoint — publishes the RS256 public key so the embedded-wallet
+// provider (Coinbase CDP custom auth) can verify our wallet-auth JWTs.
+// Standard well-known location, must be public over HTTPS.
+app.get("/.well-known/jwks.json", async (req, res) => {
+  try {
+    const { getWalletAuthJwks } = await import("./utils/walletAuthKeys.js");
+    res.json(getWalletAuthJwks());
+  } catch (e) {
+    console.error("jwks endpoint error:", e.message);
+    res.status(500).json({ error: "jwks unavailable" });
+  }
+});
+
 // Routes
 // NOTE: specific /api/v1/admin/* routes MUST be registered before the generic
 // /api/v1 User router — otherwise Route.get("/admin/:adminId") swallows them.
