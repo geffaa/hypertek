@@ -15,6 +15,31 @@ export default function CdpKeyExport({ address }) {
     address,
     containerRef,
     label: "Copy Private Key",
+    copiedLabel: "Copied to clipboard!",
+    // The button renders inside Coinbase's cross-origin iframe; this theme
+    // makes its page transparent and matches the site's primary button style.
+    theme: {
+      pageBg: "transparent",
+      buttonBg: "#002AA8",
+      buttonBgHover: "#003BD4",
+      buttonBgPressed: "#001F7A",
+      buttonBgFocus: "#003BD4",
+      buttonBorder: "#FFFFFF33",
+      buttonBorderHover: "#FFFFFF4D",
+      buttonBorderPressed: "#FFFFFF33",
+      buttonBorderFocus: "#60A5FA",
+      buttonBorderFocusInset: "transparent",
+      buttonText: "#FFFFFF",
+      buttonTextHover: "#FFFFFF",
+      buttonTextPressed: "#FFFFFF",
+      buttonTextFocus: "#FFFFFF",
+      buttonBorderRadius: 8,
+      buttonFontSize: 14,
+      buttonFontWeight: 600,
+      buttonSize: "md",
+      fontUrl: "https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap",
+      fontFamily: "Inter, sans-serif",
+    },
   });
 
   return (
