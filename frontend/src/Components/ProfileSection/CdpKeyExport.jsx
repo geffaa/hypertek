@@ -28,7 +28,6 @@ export default function CdpKeyExport({ address }) {
       buttonBorderHover: "#FFFFFF4D",
       buttonBorderPressed: "#FFFFFF33",
       buttonBorderFocus: "#60A5FA",
-      buttonBorderFocusInset: "transparent",
       buttonText: "#FFFFFF",
       buttonTextHover: "#FFFFFF",
       buttonTextPressed: "#FFFFFF",
@@ -37,8 +36,6 @@ export default function CdpKeyExport({ address }) {
       buttonFontSize: 14,
       buttonFontWeight: 600,
       buttonSize: "md",
-      fontUrl: "https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap",
-      fontFamily: "Inter, sans-serif",
     },
   });
 
