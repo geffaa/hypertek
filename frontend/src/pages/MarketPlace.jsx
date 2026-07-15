@@ -27,10 +27,7 @@ function MarketPlace() {
   const [activeTab, setActiveTab] = useState(searchParams.get("tab") || "general");
   const [search, setSearch]       = useState("");
 
-  // Per-tab scroll position memory
-  const scrollPositions = useRef({});
-  const pendingScroll   = useRef(null);
-  const contentRef      = useRef(null);
+  const contentRef = useRef(null);
 
   // Restore scroll when coming back from item detail (Back to Marketplace)
   useEffect(() => {
@@ -44,40 +41,27 @@ function MarketPlace() {
     if (tab && tab !== activeTab) handleTabChange(tab, true);
   }, [searchParams]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Save current scroll → set new tab → restore saved scroll after render
   const handleTabChange = (tab, fromUrl = false) => {
-    scrollPositions.current[activeTab] = window.scrollY;
-    const saved = scrollPositions.current[tab];
-    pendingScroll.current = saved !== undefined ? saved : null;
     if (!fromUrl) setSearchParams({ tab });
     setActiveTab(tab);
     setSearch("");
   };
 
-  // Restore scroll position after tab content renders. First visit to a tab
-  // (no saved position): snap to the top of the tab content so short tabs
-  // like Auctions or NFAs/NFCs/NFTs never open at their tail end / footer.
+  // Opening any tab jumps straight to the tab bar docked under the site
+  // header (banner scrolled out of view), from any starting position.
   const firstTabRender = useRef(true);
   useEffect(() => {
     if (firstTabRender.current) {
-      // Initial mount keeps the existing behaviors (restoreScrollY etc.)
+      // Initial page load keeps the banner visible (and restoreScrollY intact)
       firstTabRender.current = false;
       return;
     }
-    const pos = pendingScroll.current;
-    pendingScroll.current = null;
     requestAnimationFrame(() => {
-      if (pos !== null && pos !== undefined) {
-        window.scrollTo({ top: pos, behavior: "instant" });
-        return;
-      }
       const content = contentRef.current;
       if (!content) return;
       const navH = navRef.current?.offsetHeight || 0;
       const contentTop = content.getBoundingClientRect().top + window.scrollY - HEADER_H - navH;
-      if (window.scrollY > contentTop) {
-        window.scrollTo({ top: Math.max(0, contentTop), behavior: "instant" });
-      }
+      window.scrollTo({ top: Math.max(0, contentTop), behavior: "instant" });
     });
   }, [activeTab]);
 
