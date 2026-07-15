@@ -456,6 +456,17 @@ function CardSkeleton() {
 }
 // ─────────────────────────────────────────────────────────────────────────────
 
+// Per-FAQ keywords matching news-article headings, so each FAQ answer can
+// link straight to the article(s) covering the same topic.
+const FAQ_RELATED_KEYWORDS = [
+  ["base mainnet"],                       // What is Hyper Tek?
+  ["non-fungible"],                       // What are NFAs, NFCs, and NFTs?
+  ["buy-back"],                           // How does the buy-back guarantee work?
+  ["cash out"],                           // How Do I Unlock Real-World Rewards Today!
+  ["overlord", "velocity", "awakening"],  // What games are available?
+  ["user interface"],                     // Is VR/AR supported?
+];
+
 export default function NewsList() {
   const [news, setNews]       = useState([]);
   const [loading, setLoading] = useState(true);
@@ -487,6 +498,10 @@ export default function NewsList() {
   }, [i18n.language]);
 
   const go = (item) => navigate("/more-news", { state: { newsItem: item } });
+
+  const relatedArticles = (FAQ_RELATED_KEYWORDS[activeFaq] || [])
+    .map((kw) => news.find((n) => (n.heading || "").toLowerCase().includes(kw)))
+    .filter((n, i, arr) => n && arr.indexOf(n) === i);
 
   const featured   = news[0];
   const newsCards  = news.slice(1, 4);
@@ -777,6 +792,28 @@ export default function NewsList() {
                         return <p key={pi}>{para}</p>;
                       })}
                     </div>
+
+                    {/* Jump to the news article(s) covering this FAQ topic */}
+                    {relatedArticles.length > 0 && (
+                      <div className="mt-7 pt-5" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+                        <p className="text-[10px] font-bold uppercase tracking-[0.3em] mb-3"
+                          style={{ color: "rgba(167,139,250,0.8)", fontFamily: "Orbitron, sans-serif" }}>
+                          {t("newsPage.relatedNews", "Read more in the news")}
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {relatedArticles.map((a) => (
+                            <button
+                              key={a._id}
+                              onClick={() => go(a)}
+                              className="px-4 py-2 rounded-lg text-left text-[12px] font-semibold transition-all duration-200 hover:brightness-125"
+                              style={{ background: "rgba(167,139,250,0.10)", border: "1px solid rgba(167,139,250,0.35)", color: "#c4b5fd" }}
+                            >
+                              {a.heading} →
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -829,38 +866,6 @@ export default function NewsList() {
           </div>
           </div>
         </motion.div>
-
-        {/* ── Keep exploring — buttons to the allowed pages only ── */}
-        <div className="mt-14 pt-8 flex flex-col items-center gap-5"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-          <p className="text-white/40 text-[11px] font-bold uppercase tracking-[0.3em]"
-            style={{ fontFamily: "Orbitron, sans-serif" }}>
-            {t("newsPage.keepExploring", "Keep exploring Hyper Tek")}
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {[
-              { label: t("newsPage.exploreLinks.waitlist", "Join the Waitlist"), to: "/waitlist" },
-              { label: t("newsPage.exploreLinks.home", "Front Page"), to: "/" },
-              { label: t("newsPage.exploreLinks.ui", "Interactive UI Preview"), to: "/gaming" },
-              { label: t("newsPage.exploreLinks.about", "About Us"), to: "/about" },
-            ].map((l) => (
-              <button
-                key={l.to}
-                onClick={() => navigate(l.to)}
-                className="px-4 py-2 text-[11px] font-bold uppercase tracking-widest transition-all duration-200 hover:brightness-125"
-                style={{
-                  fontFamily: "Orbitron, sans-serif",
-                  background: "rgba(56,189,248,0.10)",
-                  border: "1px solid rgba(56,189,248,0.4)",
-                  color: "#38bdf8",
-                  borderRadius: 6,
-                }}
-              >
-                {l.label}
-              </button>
-            ))}
-          </div>
-        </div>
 
       </div>
     </div>

@@ -322,37 +322,6 @@ export default function NewsDetail() {
           </div>
         )}
 
-        {/* ── Keep exploring — buttons to the allowed pages only ── */}
-        <div className="mt-10 pt-6" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-          <p className="text-white/40 text-[11px] font-bold uppercase tracking-widest mb-4"
-            style={{ fontFamily: "Orbitron, sans-serif" }}>
-            {t("newsPage.keepExploring", "Keep exploring Hyper Tek")}
-          </p>
-          <div className="flex flex-wrap gap-3">
-            {[
-              { label: t("newsPage.exploreLinks.faq", "Read the FAQ"), to: "/news", state: { scrollTo: "faq" } },
-              { label: t("newsPage.exploreLinks.waitlist", "Join the Waitlist"), to: "/waitlist" },
-              { label: t("newsPage.exploreLinks.home", "Front Page"), to: "/" },
-              { label: t("newsPage.exploreLinks.ui", "Interactive UI Preview"), to: "/gaming" },
-              { label: t("newsPage.exploreLinks.about", "About Us"), to: "/about" },
-            ].map((l) => (
-              <button
-                key={l.to + l.label}
-                onClick={() => navigate(l.to, l.state ? { state: l.state } : undefined)}
-                className="px-4 py-2 text-[11px] font-bold uppercase tracking-widest transition-all duration-200 hover:brightness-125"
-                style={{
-                  fontFamily: "Orbitron, sans-serif",
-                  background: "rgba(56,189,248,0.10)",
-                  border: "1px solid rgba(56,189,248,0.4)",
-                  color: "#38bdf8",
-                  borderRadius: 6,
-                }}
-              >
-                {l.label}
-              </button>
-            ))}
-          </div>
-        </div>
       </main>
     </div>
   );
