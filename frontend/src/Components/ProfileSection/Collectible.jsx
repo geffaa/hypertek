@@ -30,6 +30,7 @@ import {
 import { useAccount, useReadContract } from "wagmi";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useEmailWallet } from "../../hooks/useEmailWallet";
+import { useActiveWallet } from "../../hooks/useActiveWallet";
 import UserProfileHeader from "./UserProfileHeader";
 
 
@@ -44,21 +45,20 @@ function MarketPlace() {
     isEmailWalletConnected,
   } = useEmailWallet();
 
-  const { address: wagmiAddress, isConnected: isWagmiConnected } = useAccount();
   const { openConnectModal } = useConnectModal();
 
-  // Combine wallet state — fallback to Redux user wallet so items show even without active wagmi session
-  const activeAddress = isEmailWalletConnected ? emailWalletAddress : wagmiAddress;
-  const isConnected = isEmailWalletConnected || isWagmiConnected;
-  const fallbackWallet = user?.WalletAddress || user?.MetaMaskAddress || null;
+  // Unified wallet rule: the profile always shows THIS account's items.
+  // A foreign connected wallet never changes the view; the backend expands
+  // the primary address to every linked address server-side.
+  const { primaryAddress, isAnyConnected } = useActiveWallet();
+  const isConnected = isAnyConnected;
 
   const [connectedWallet, setConnectedWallet] = useState(null);
 
   // Sync state
   useEffect(() => {
-    const addr = activeAddress || fallbackWallet;
-    setConnectedWallet(addr ? addr.toLowerCase() : null);
-  }, [activeAddress, fallbackWallet]);
+    setConnectedWallet(primaryAddress ? primaryAddress.toLowerCase() : null);
+  }, [primaryAddress]);
 
   // Read internal balances from Marketplace Contract
   const { data: rawSellerBalance } = useReadContract({

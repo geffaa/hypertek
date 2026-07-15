@@ -11,8 +11,9 @@ import FaceOne from "../../assets/images/noActivity1.webp";
 import FaceTwo from "../../assets/images/noActivity2.webp";
 import CustomButton from "../Buttons/Button1";
 import CustomButton4 from "../Buttons/Button4";
-import { useAccount, useWalletClient, usePublicClient, useSwitchChain, useReadContract, useWriteContract } from "wagmi";
+import { usePublicClient, useSwitchChain, useReadContract, useWriteContract } from "wagmi";
 import { useEmailWallet } from "../../hooks/useEmailWallet";
+import { useActiveWallet } from "../../hooks/useActiveWallet";
 import { Wallet, Copy } from "lucide-react";
 
 import {
@@ -33,8 +34,6 @@ function UserListings() {
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
   /* ================= HOOKS ================= */
-  const { address: wagmiAddress, isConnected: isWagmiConnected } = useAccount();
-  const { data: walletClient } = useWalletClient();
   const publicClient = usePublicClient({ chainId: BASE_CHAIN_ID });
   const { writeContractAsync } = useWriteContract(); // Legacy
 
@@ -44,10 +43,12 @@ function UserListings() {
     isEmailWalletConnected,
   } = useEmailWallet() || {};
 
-  // Combine wallet state
-  const connectedWallet = wagmiAddress?.toLowerCase() || emailWalletAddress?.toLowerCase() || null;
-  const isConnected = isWagmiConnected || isEmailWalletConnected;
-  const activeWalletClient = walletClient || emailWalletClient;
+  // Unified wallet rule: a foreign connected wallet never hijacks the view;
+  // external signing only when the address is linked to this account.
+  const { signingAddress, signingClient, isAnyConnected } = useActiveWallet();
+  const connectedWallet = signingAddress?.toLowerCase() || null;
+  const isConnected = isAnyConnected;
+  const activeWalletClient = signingClient;
 
   const [selectedItems, setSelectedItems] = useState([]);
   const [showModal, setShowModal] = useState(false);

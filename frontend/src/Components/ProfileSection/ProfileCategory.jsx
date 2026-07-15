@@ -19,6 +19,7 @@ import NavLinks from "../ProfileSection/Navlinks";
 import FullScreenLoader from "../Common/Spinner";
 
 import { BACKEND_BASE_URL, LAUNCH_LOCKED, getImageUrl } from "../../Config";
+import { useActiveWallet } from "../../hooks/useActiveWallet";
 import {
   MARKETPLACE_ADDRESS,
   NFT_ADDRESS,
@@ -37,11 +38,9 @@ function ProfileCategory() {
     isEmailWalletConnected,
   } = useEmailWallet();
 
-  const { address: wagmiAddress, isConnected: isWagmiConnected } = useAccount();
-
-  // Combine wallet state
-  const activeAddress = isEmailWalletConnected ? emailWalletAddress : wagmiAddress;
-  const isConnected = isEmailWalletConnected || isWagmiConnected;
+  // Unified wallet rule: this page shows THIS account's items; a foreign
+  // connected wallet never changes the view (backend expands linked addresses).
+  const { primaryAddress: activeAddress, isAnyConnected: isConnected, signingClient } = useActiveWallet();
 
   // Read internal balances from Marketplace Contract
   const { data: rawSellerBalance } = useReadContract({
@@ -137,38 +136,13 @@ function ProfileCategory() {
       });
   }, [token]);
 
-  /* ================= WALLET ================= */
+  /* ================= WALLET =================
+     Legacy window.ethereum account-sync removed: connectedWallet is driven
+     solely by useActiveWallet so a foreign MetaMask account can never hijack
+     which items are shown. */
   useEffect(() => {
-    checkWallet();
-    if (window.ethereum) {
-      window.ethereum.on("accountsChanged", handleAccountsChanged);
-    }
-    return () => {
-      window.ethereum?.removeListener("accountsChanged", handleAccountsChanged);
-    };
-  }, []);
-
-  const handleAccountsChanged = (accounts) => {
-    if (accounts.length) {
-      const wallet = accounts[0].toLowerCase();
-      setConnectedWallet(wallet);
-      fetchOwnedNFTs(wallet);
-    } else {
-      setConnectedWallet(null);
-      setItems([]);
-      setMarketData([]);
-    }
-  };
-
-  const checkWallet = async () => {
-    if (!window.ethereum) return setLoading(false);
-    const accounts = await window.ethereum.request({ method: "eth_accounts" });
-    if (accounts.length) {
-      const wallet = accounts[0].toLowerCase();
-      setConnectedWallet(wallet);
-      fetchOwnedNFTs(wallet);
-    } else setLoading(false);
-  };
+    if (!activeAddress) setLoading(false);
+  }, [activeAddress]);
 
   /* ================= FETCH OWNED NFTs ================= */
   const fetchOwnedNFTs = async (wallet) => {
@@ -197,25 +171,6 @@ function ProfileCategory() {
     }
   }, [connectedWallet, token, category]);
 
-  const connectWallet = async () => {
-    try {
-      if (!window.ethereum) {
-        toast.error("MetaMask not installed");
-        return;
-      }
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
-      if (accounts.length) {
-        const wallet = accounts[0].toLowerCase();
-        setConnectedWallet(wallet);
-        await fetchOwnedNFTs(wallet);
-        toast.success("Wallet connected!");
-      }
-    } catch (err) {
-      if (err.code !== 4001) toast.error("Wallet connection failed");
-    }
-  };
 
   /* ================= HANDLE SELL NOW CLICK ================= */
   const handleSellNowClick = async (itemId) => {

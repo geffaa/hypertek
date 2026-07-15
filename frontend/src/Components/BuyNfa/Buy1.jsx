@@ -10,6 +10,7 @@ import { ethers } from "ethers";
 import { useAccount, useWalletClient, usePublicClient, useSwitchChain } from "wagmi";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useEmailWallet } from "../../hooks/useEmailWallet";
+import { useActiveWallet } from "../../hooks/useActiveWallet";
 import { useTransak } from "../../hooks/useTransak";
 
 import FaceOne from "../../assets/images/noActivity1.webp";
@@ -150,14 +151,15 @@ function Buy1() {
     isEmailWalletConnected,
   } = useEmailWallet();
 
-  const userStoredWallet = user?.WalletAddress?.toLowerCase() || user?.MetaMaskAddress?.toLowerCase() || "";
-  const resolvedWagmi = connectedWallet?.toLowerCase();
-  const safeWagmiAddress = (resolvedWagmi && userStoredWallet && resolvedWagmi === userStoredWallet)
-    ? connectedWallet
-    : undefined;
-  const activeAddress = safeWagmiAddress || emailWalletAddress;
-  const isAnyConnected = !!safeWagmiAddress || isEmailWalletConnected;
-  const activeWalletClient = (safeWagmiAddress ? walletClient : null) || emailWalletClient;
+  // Unified wallet rule (see hooks/useActiveWallet): the connected external
+  // wallet is only used when its address is proven to belong to this account.
+  const {
+    signingAddress: activeAddress,
+    signingClient: activeWalletClient,
+    isAnyConnected,
+    externalLinked,
+    connectedUnlinkedAddress,
+  } = useActiveWallet();
 
   const cardBuyerWallet = emailWalletAddress || activeAddress;
 
@@ -492,7 +494,7 @@ function Buy1() {
         return;
       }
 
-      if (!emailWalletAddress || safeWagmiAddress) {
+      if (!emailWalletAddress || externalLinked) {
         const networkOk = await ensureCorrectNetwork();
         if (!networkOk) {
           toast.dismiss(toastId);
@@ -781,7 +783,7 @@ function Buy1() {
         return;
       }
 
-      if (!emailWalletAddress || safeWagmiAddress) {
+      if (!emailWalletAddress || externalLinked) {
         const networkOk = await ensureCorrectNetwork();
         if (!networkOk) {
           toast.dismiss(toastId);
@@ -1697,6 +1699,18 @@ function Buy1() {
                 <div className="w-2 h-2 rounded-full bg-green-400 flex-shrink-0" />
                 <span>{t("buyNfa.marketplace.networkNote", "USDC on Base · Base ETH required for gas (wallet payments)")}</span>
               </div>
+
+              {/* External wallet connected but not linked to this account */}
+              {connectedUnlinkedAddress && (
+                <div className="flex items-start gap-2 text-[11px] text-amber-300/80 rounded-lg px-3 py-2"
+                  style={{ background: "rgba(245,158,11,0.08)", border: "1px solid rgba(245,158,11,0.25)" }}>
+                  <span>
+                    {t("buyNfa.marketplace.unlinkedWallet",
+                      "A wallet is connected ({{addr}}) but it is not linked to your account yet, so purchases will use your built-in wallet. Link it in Profile settings to buy with it.",
+                      { addr: `${connectedUnlinkedAddress.slice(0, 6)}...${connectedUnlinkedAddress.slice(-4)}` })}
+                  </span>
+                </div>
+              )}
 
               <button
                 onClick={() => {

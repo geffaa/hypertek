@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useAccount } from "wagmi";
+import { useActiveWallet } from "../../../hooks/useActiveWallet";
 import axios from "axios";
 import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
 import LazyImage from "../../Common/LazyImage";
@@ -104,8 +104,10 @@ export default function MyMarketTab() {
   const [loadingAct, setLoadingAct]     = useState(false);
   const [actFilter, setActFilter]       = useState("all"); // all | Sale | Purchase | Transfer
 
-  const { address: wagmiAddress } = useAccount();
-  const walletAddress = wagmiAddress || user?.WalletAddress || user?.MetaMaskAddress;
+  // Unified wallet rule: always this account's primary address; the backend
+  // expands it to every linked address.
+  const { primaryAddress } = useActiveWallet();
+  const walletAddress = primaryAddress || user?.WalletAddress || user?.MetaMaskAddress;
   const userId = user?.id || user?._id;
 
   // ── Fetch owned NFAs ────────────────────────────────────────────────────────
