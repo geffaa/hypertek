@@ -9,6 +9,7 @@ import crypto from "crypto";
 
 export const WALLET_AUTH_KID = "hypertek-wallet-auth-1";
 export const WALLET_AUTH_ISSUER = process.env.WALLET_AUTH_ISSUER || "https://api.hypertek100.com";
+export const WALLET_AUTH_AUDIENCE = process.env.WALLET_AUTH_AUDIENCE || "hypertek-cdp";
 
 let privateKeyPem = null;
 export const getWalletAuthPrivateKey = () => {

@@ -1094,12 +1094,12 @@ export const GetWalletAddress = async (req, res) => {
 // RS256 token identifying the logged-in user (claim "sub").
 export const GetPrivyToken = async (req, res) => {
   try {
-    const { getWalletAuthPrivateKey, WALLET_AUTH_KID, WALLET_AUTH_ISSUER } = await import("../utils/walletAuthKeys.js");
+    const { getWalletAuthPrivateKey, WALLET_AUTH_KID, WALLET_AUTH_ISSUER, WALLET_AUTH_AUDIENCE } = await import("../utils/walletAuthKeys.js");
     const userId = String(req.user._id);
     const token = jwt.sign(
       { sub: userId },
       getWalletAuthPrivateKey(),
-      { algorithm: "RS256", expiresIn: "15m", issuer: WALLET_AUTH_ISSUER, keyid: WALLET_AUTH_KID }
+      { algorithm: "RS256", expiresIn: "15m", issuer: WALLET_AUTH_ISSUER, audience: WALLET_AUTH_AUDIENCE, keyid: WALLET_AUTH_KID }
     );
     res.status(200).json({ success: true, token });
   } catch (err) {
