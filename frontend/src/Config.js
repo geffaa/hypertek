@@ -12,11 +12,11 @@ const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:4
 // official launch.
 const LAUNCH_LOCKED = true;
 
-// Privy embedded wallets (non-custodial player wallets). The whole
-// integration is inert until VITE_PRIVY_APP_ID is set in the build env,
+// Coinbase CDP embedded wallets (non-custodial player wallets). The whole
+// integration is inert until VITE_CDP_PROJECT_ID is set in the build env,
 // so production keeps the legacy custodial flow until the cutover.
-const PRIVY_APP_ID = import.meta.env.VITE_PRIVY_APP_ID || "";
-const PRIVY_ENABLED = PRIVY_APP_ID.length > 0;
+const CDP_PROJECT_ID = import.meta.env.VITE_CDP_PROJECT_ID || "";
+const CDP_WALLET_ENABLED = CDP_PROJECT_ID.length > 0;
 
 // Global axios interceptor — logs full error response in dev
 axios.interceptors.response.use(
@@ -46,4 +46,4 @@ function getImageUrl(imagePath) {
   return `${BACKEND_BASE_URL}${imagePath}`;
 }
 
-export { BACKEND_BASE_URL, LAUNCH_LOCKED, PRIVY_APP_ID, PRIVY_ENABLED, STRIPE_PUBLISHABLE_KEY, User_Dashboard_Url, NewsImage_Url, MarketPlace_Url, getImageUrl };
+export { BACKEND_BASE_URL, LAUNCH_LOCKED, CDP_PROJECT_ID, CDP_WALLET_ENABLED, STRIPE_PUBLISHABLE_KEY, User_Dashboard_Url, NewsImage_Url, MarketPlace_Url, getImageUrl };

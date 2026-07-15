@@ -1,82 +1,73 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { createWalletClient, http, custom } from 'viem';
-import { privateKeyToAccount } from 'viem/accounts';
+import { createWalletClient, http } from 'viem';
+import { privateKeyToAccount, toAccount } from 'viem/accounts';
 import { base, baseSepolia } from 'viem/chains';
-import { useWallets } from '@privy-io/react-auth';
+import { useEvmAddress, useIsInitialized, useSignEvmTransaction, useSignEvmMessage, useSignEvmTypedData } from '@coinbase/cdp-hooks';
 
 const chainId = Number(import.meta.env.VITE_CHAIN_ID) || 8453;
 const activeChain = chainId === 84532 ? baseSepolia : base;
 const activeRpc = chainId === 84532 ? 'https://base-sepolia-rpc.publicnode.com' : 'https://mainnet.base.org';
 import axios from 'axios';
-import { BACKEND_BASE_URL, PRIVY_ENABLED } from '../Config.js';
+import { BACKEND_BASE_URL, CDP_WALLET_ENABLED } from '../Config.js';
 
 const EmailWalletContext = createContext({});
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Privy implementation — the embedded wallet lives on the user's device; the
-// signer comes from Privy's EIP-1193 provider and no private key ever reaches
-// this app or the backend. Exposes the exact same context shape as the legacy
+// Coinbase CDP implementation — the embedded wallet's keys live in a TEE and
+// never exist inside this app or our backend. viem prepares each transaction
+// as usual; only the signing step is delegated to CDP (its transaction type
+// IS viem's TransactionSerializableEIP1559), then viem broadcasts through the
+// normal RPC transport. Exposes the exact same context shape as the legacy
 // provider so call sites (`walletClient || emailWalletClient`) are untouched.
-// Only mounted when PRIVY_ENABLED (requires PrivyIntegrationProvider above us).
+// Only mounted when CDP_WALLET_ENABLED (requires CdpIntegrationProvider above).
 // ─────────────────────────────────────────────────────────────────────────────
-const PrivyEmailWalletProvider = ({ children }) => {
+const CdpEmailWalletProvider = ({ children }) => {
     const { token, user } = useSelector((state) => state.auth);
-    const { wallets, ready } = useWallets();
+    const { isInitialized } = useIsInitialized();
+    const { evmAddress } = useEvmAddress();
+    const { signEvmTransaction } = useSignEvmTransaction();
+    const { signEvmMessage } = useSignEvmMessage();
+    const { signEvmTypedData } = useSignEvmTypedData();
 
-    const [emailWalletAddress, setEmailWalletAddress] = useState(null);
-    const [emailWalletClient, setEmailWalletClient] = useState(null);
-    const [emailWalletError, setEmailWalletError] = useState(null);
+    const loggedIn = Boolean(token && user);
+    const emailWalletAddress = loggedIn && evmAddress ? evmAddress : null;
 
-    const embedded = wallets.find(
-        (w) => w.walletClientType === 'privy' || w.walletClientType === 'privy-v2'
-    );
-    const embeddedAddress = embedded?.address || null;
-
-    useEffect(() => {
-        let isMounted = true;
-
-        const initFromPrivy = async () => {
-            if (!token || !user || !embedded) {
-                if (isMounted) {
-                    setEmailWalletClient(null);
-                    setEmailWalletAddress(null);
-                }
-                return;
-            }
-            try {
-                const provider = await embedded.getEthereumProvider();
-                const client = createWalletClient({
-                    account: embedded.address,
-                    chain: activeChain,
-                    transport: custom(provider),
-                });
-                if (isMounted) {
-                    setEmailWalletAddress(embedded.address);
-                    setEmailWalletClient(client);
-                    setEmailWalletError(null);
-                    console.log('Privy Wallet Client Initialized:', embedded.address);
-                }
-            } catch (e) {
-                console.warn('Privy wallet client init failed:', e.message);
-                if (isMounted) setEmailWalletError(e.message);
-            }
-        };
-
-        initFromPrivy();
-        return () => { isMounted = false; };
-    }, [token, user, embeddedAddress]); // eslint-disable-line react-hooks/exhaustive-deps
+    const emailWalletClient = useMemo(() => {
+        if (!emailWalletAddress) return null;
+        const account = toAccount({
+            address: emailWalletAddress,
+            async signMessage({ message }) {
+                const raw = typeof message === 'string'
+                    ? message
+                    : (typeof message.raw === 'string' ? message.raw : new TextDecoder().decode(message.raw));
+                const { signature } = await signEvmMessage({ evmAccount: emailWalletAddress, message: raw });
+                return signature;
+            },
+            async signTransaction(transaction) {
+                const { signedTransaction } = await signEvmTransaction({ evmAccount: emailWalletAddress, transaction });
+                return signedTransaction;
+            },
+            async signTypedData(typedData) {
+                const { signature } = await signEvmTypedData({ evmAccount: emailWalletAddress, typedData });
+                return signature;
+            },
+        });
+        const client = createWalletClient({ account, chain: activeChain, transport: http(activeRpc) });
+        console.log('CDP Wallet Client Initialized:', emailWalletAddress);
+        return client;
+    }, [emailWalletAddress]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <EmailWalletContext.Provider value={{
             emailWalletAddress,
             emailWalletClient,
-            isEmailWalletConnecting: Boolean(token && user) && !ready,
+            isEmailWalletConnecting: loggedIn && (!isInitialized || !evmAddress),
             isEmailWalletConnected: !!emailWalletAddress,
-            emailWalletError,
+            emailWalletError: null,
             privateKey: null, // non-custodial: the key never exists in the app
             initWalletWithPrivateKey: () => {
-                console.warn('initWalletWithPrivateKey is disabled: wallets are non-custodial (Privy).');
+                console.warn('initWalletWithPrivateKey is disabled: wallets are non-custodial (Coinbase CDP).');
             },
         }}>
             {children}
@@ -186,6 +177,6 @@ const LegacyEmailWalletProvider = ({ children }) => {
     );
 };
 
-export const EmailWalletProvider = PRIVY_ENABLED ? PrivyEmailWalletProvider : LegacyEmailWalletProvider;
+export const EmailWalletProvider = CDP_WALLET_ENABLED ? CdpEmailWalletProvider : LegacyEmailWalletProvider;
 
 export const useGlobalEmailWallet = () => useContext(EmailWalletContext);

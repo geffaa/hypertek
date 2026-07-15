@@ -11,7 +11,7 @@ import { Provider } from "react-redux";
 import { store } from "./Redux/Store";
 import ProtectedRoute from "./Components/ProtectRoutes";
 import { EmailWalletProvider } from "./context/EmailWalletContext";
-import { PrivyIntegrationProvider } from "./context/PrivyIntegration";
+import { CdpIntegrationProvider } from "./context/CdpIntegration";
 import SplashScreen from "./Components/Common/SplashScreen";
 import Navbar from "./Components/Common/Navbar";
 import Footer from "./Components/Common/Footer";
@@ -381,11 +381,11 @@ function App() {
       {showSplash && <SplashScreen onDone={handleSplashDone} />}
       <BrowserRouter>
         <ScrollToTop />
-        <PrivyIntegrationProvider>
+        <CdpIntegrationProvider>
           <EmailWalletProvider>
             <AppWrapper />
           </EmailWalletProvider>
-        </PrivyIntegrationProvider>
+        </CdpIntegrationProvider>
       </BrowserRouter>
     </div>
   );
