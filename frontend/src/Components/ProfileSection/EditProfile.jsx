@@ -14,6 +14,7 @@ import { useEmailWallet } from "../../hooks/useEmailWallet";
 import { CDP_WALLET_ENABLED } from "../../Config";
 import { isCdpUser } from "../../context/CdpIntegration";
 import CdpKeyExport from "./CdpKeyExport";
+import LinkedWalletsSection from "./LinkedWalletsSection";
 
 function EditProfile() {
   const location = useLocation();
@@ -492,6 +493,9 @@ function EditProfile() {
                 )}
               </div>
             </div>
+
+            {/* Linked external wallets (MetaMask etc.) */}
+            <LinkedWalletsSection />
 
             {/* Bio */}
             <div className="w-full max-w-md mt-4">
