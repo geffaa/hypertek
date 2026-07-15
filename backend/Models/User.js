@@ -85,6 +85,17 @@ const UserSchema = new mongoose.Schema(
       type: String,
     },
 
+    // External wallets (MetaMask etc.) the user has proven they own via a
+    // signed message. Purchases from any linked address count toward this
+    // account's profile and collections.
+    LinkedWallets: [
+      {
+        address: { type: String, lowercase: true, required: true },
+        label: { type: String, default: "" },
+        linkedAt: { type: Date, default: Date.now },
+      },
+    ],
+
     Avatar: {
       type: String,
       default: "",

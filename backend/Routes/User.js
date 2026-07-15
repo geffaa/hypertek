@@ -19,6 +19,8 @@ import {
   FundGasWallet,
   GetPrivyToken,
   LinkWallet,
+  LinkExternalWallet,
+  UnlinkExternalWallet,
 } from "../Controllers/User.js";
 import { authMiddleware } from "../Middleware/googleMiddle.js";
 import { auth } from "../Middleware/userAuth.js";
@@ -58,6 +60,9 @@ Route.post("/user/fund-gas", auth, FundGasWallet);
 Route.get("/user/privy-token", auth, GetPrivyToken);
 // Persist the CDP embedded-wallet address (signature-verified, non-custodial accounts only)
 Route.post("/user/link-wallet", auth, LinkWallet);
+// Link/unlink an external wallet (MetaMask etc.) to this account, signature-verified
+Route.post("/user/link-external-wallet", auth, LinkExternalWallet);
+Route.delete("/user/link-external-wallet", auth, UnlinkExternalWallet);
 // Get all users (admin only)
 Route.get("/users", GetAllUsers);
 // Toggle user active/inactive status (admin only)

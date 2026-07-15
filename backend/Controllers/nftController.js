@@ -20,6 +20,38 @@ import { Payment } from "../Models/Payment.js";
 import { finalizeNFAPurchase } from "../Service/nftPurchaseService.js";
 import License from "../Models/License.js";
 import { verifySaleOnChain } from "../services/marketplaceSyncService.js";
+import UserModel from "../Models/User.js";
+
+// ── Linked-wallet support ────────────────────────────────────────────────────
+// Ownership records store a single lowercase address, but one account can own
+// several addresses (built-in wallet + linked external wallets). Given any of
+// a user's addresses, return ALL of them so profile/collection/sale lookups
+// cover the whole account. Falls back to just the given address when no user
+// owns it (e.g. platform or unknown wallets).
+export async function resolveAddressSet(address) {
+  const addr = String(address || "").toLowerCase();
+  if (!addr) return [addr];
+  try {
+    const user = await UserModel.findOne({
+      $or: [
+        { WalletAddress: addr },
+        { MetaMaskAddress: addr },
+        { "LinkedWallets.address": addr },
+      ],
+    }).select("WalletAddress MetaMaskAddress LinkedWallets");
+    if (!user) return [addr];
+    const set = new Set([addr]);
+    if (user.WalletAddress) set.add(user.WalletAddress.toLowerCase());
+    if (user.MetaMaskAddress) set.add(user.MetaMaskAddress.toLowerCase());
+    for (const w of user.LinkedWallets || []) {
+      if (w.address) set.add(w.address.toLowerCase());
+    }
+    return [...set];
+  } catch (e) {
+    console.warn("resolveAddressSet failed, using single address:", e.message);
+    return [addr];
+  }
+}
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Helper: save uploaded image permanently (Cloudinary or local /uploads/nft/)
@@ -1238,8 +1270,10 @@ export async function recordOnchainSale(req, res) {
       });
     }
 
-    // Prevent self-purchase
-    if (buyer.toLowerCase() === seller.toLowerCase()) {
+    // Prevent self-purchase — account-aware: buying from any of your own
+    // linked addresses counts as buying from yourself
+    const buyerAddressSet = new Set(await resolveAddressSet(buyer));
+    if (buyerAddressSet.has(seller.toLowerCase())) {
       return res.status(400).json({
         success: false,
         error: "Buyer and seller cannot be the same",
@@ -1899,8 +1933,9 @@ export async function getNFTsByWallet(req, res) {
       return res.status(400).json({ error: "Wallet address is required" });
     }
 
+    const addresses = await resolveAddressSet(walletAddress);
     const nfts = await NFTSystem.find({
-      owner: walletAddress.toLowerCase(),
+      owner: { $in: addresses },
       status: "active",
     }).sort({ createdAt: -1 });
 
@@ -1931,9 +1966,13 @@ export async function getNFTsWithSubCollections(req, res) {
 
     console.log("🔍 Fetching NFTs for wallet:", walletAddress);
 
+    // All addresses belonging to this wallet's account (linked wallets incl.)
+    const addresses = await resolveAddressSet(walletAddress);
+    const addressSet = new Set(addresses);
+
     // Find all parent collections where user owns sub-collections
     const parentCollections = await NFTSystem.find({
-      "subCollections.owner": walletAddress.toLowerCase(),
+      "subCollections.owner": { $in: addresses },
       status: "active",
     }).sort({ createdAt: -1 });
 
@@ -1941,7 +1980,7 @@ export async function getNFTsWithSubCollections(req, res) {
 
     // Also find regular NFTs (non-parent collections)
     const regularNFTs = await NFTSystem.find({
-      owner: walletAddress.toLowerCase(),
+      owner: { $in: addresses },
       status: "active",
       $or: [
         { isParentCollection: { $exists: false } },
@@ -1959,7 +1998,7 @@ export async function getNFTsWithSubCollections(req, res) {
         const staleIds = [];
         for (const parent of parentCollections) {
           for (const sub of parent.subCollections) {
-            if (sub.listed && sub.owner?.toLowerCase() === walletAddress.toLowerCase()) {
+            if (sub.listed && addressSet.has(sub.owner?.toLowerCase())) {
               staleIds.push({ parentId: parent._id, subId: sub._id });
             }
           }
@@ -2224,8 +2263,10 @@ export async function recordSubCollectionSale(req, res) {
       });
     }
 
-    // Prevent self-purchase
-    if (buyer.toLowerCase() === seller.toLowerCase()) {
+    // Prevent self-purchase — account-aware: buying from any of your own
+    // linked addresses counts as buying from yourself
+    const buyerAddressSet = new Set(await resolveAddressSet(buyer));
+    if (buyerAddressSet.has(seller.toLowerCase())) {
       return res.status(400).json({
         success: false,
         error: "Buyer and seller cannot be the same",
@@ -2294,15 +2335,19 @@ export async function recordSubCollectionSale(req, res) {
     }
 
     // Validate seller ownership
-    // If owner is undefined/null/"admin", it's a first-sale platform item — allow any valid seller
+    // If owner is undefined/null/"admin", it's a first-sale platform item — allow any valid seller.
+    // Account-aware: the recorded owner may be any of the seller's linked addresses.
     const currentOwner = subCollection.owner;
     if (currentOwner && currentOwner !== "admin" && currentOwner.toLowerCase() !== seller.toLowerCase()) {
-      return res.status(400).json({
-        success: false,
-        error: "Seller does not match sub-collection owner",
-        expectedSeller: currentOwner,
-        providedSeller: seller,
-      });
+      const sellerAddressSet = new Set(await resolveAddressSet(seller));
+      if (!sellerAddressSet.has(currentOwner.toLowerCase())) {
+        return res.status(400).json({
+          success: false,
+          error: "Seller does not match sub-collection owner",
+          expectedSeller: currentOwner,
+          providedSeller: seller,
+        });
+      }
     }
 
     const creatorWallet =
@@ -2674,11 +2719,12 @@ export async function getOwnedSubCollectionsOnly(req, res) {
       return res.status(400).json({ error: "Wallet address is required" });
     }
 
-    const walletLower = walletAddress.toLowerCase();
+    const ownedAddresses = await resolveAddressSet(walletAddress);
+    const ownedSet = new Set(ownedAddresses);
 
     // Find parent collections with owned sub-collections
     const parents = await NFTSystem.find({
-      "subCollections.owner": walletLower,
+      "subCollections.owner": { $in: ownedAddresses },
       status: "active",
       isParentCollection: true,
     }).select("collection.name collection.image category");
@@ -2688,7 +2734,7 @@ export async function getOwnedSubCollectionsOnly(req, res) {
 
     parents.forEach((parent) => {
       parent.subCollections.forEach((sub) => {
-        if (sub.owner && sub.owner.toLowerCase() === walletLower) {
+        if (sub.owner && ownedSet.has(sub.owner.toLowerCase())) {
           ownedSubCollections.push({
             ...sub.toObject(),
             parentInfo: {
@@ -2732,14 +2778,15 @@ export async function getListedSubCollections(req, res) {
       });
     }
 
-    const walletLower = walletAddress.toLowerCase();
+    const listedAddresses = await resolveAddressSet(walletAddress);
+    const listedSet = new Set(listedAddresses);
 
     // Find parent collections with LISTED sub-collections owned by this wallet
     // NOTE: do NOT filter on isParentCollection — some collections may have it false/unset
     // but still have valid sub-collections. JS filter below is the authoritative check.
     const parents = await NFTSystem.find({
       subCollections: {
-        $elemMatch: { owner: walletLower, listed: true },
+        $elemMatch: { owner: { $in: listedAddresses }, listed: true },
       },
       status: "active",
     }).select("collection.name collection.image category subCollections isParentCollection");
@@ -2753,7 +2800,7 @@ export async function getListedSubCollections(req, res) {
       const listedSubs = parent.subCollections.filter(
         (sub) =>
           sub.owner &&
-          sub.owner.toLowerCase() === walletLower &&
+          listedSet.has(sub.owner.toLowerCase()) &&
           sub.listed === true,
       );
 
@@ -3070,14 +3117,15 @@ export async function getUserTransactions(req, res) {
     if (!walletAddress) {
       return res.status(400).json({ success: false, error: "walletAddress is required" });
     }
-    const walletLower = walletAddress.toLowerCase();
+    const txAddresses = await resolveAddressSet(walletAddress);
+    const txSet = new Set(txAddresses);
 
     // Find all parent collections that have sub-collections with matching salesHistory
     const parents = await NFTSystem.find({
       isParentCollection: true,
       $or: [
-        { "subCollections.salesHistory.buyer": walletLower },
-        { "subCollections.salesHistory.seller": walletLower },
+        { "subCollections.salesHistory.buyer": { $in: txAddresses } },
+        { "subCollections.salesHistory.seller": { $in: txAddresses } },
       ],
     }).select("collection.name category subCollections.name subCollections.salesHistory");
 
@@ -3088,7 +3136,7 @@ export async function getUserTransactions(req, res) {
         sub.salesHistory.forEach((sale) => {
           const buyerLow = (sale.buyer || "").toLowerCase();
           const sellerLow = (sale.seller || "").toLowerCase();
-          if (buyerLow !== walletLower && sellerLow !== walletLower) return;
+          if (!txSet.has(buyerLow) && !txSet.has(sellerLow)) return;
           transactions.push({
             txHash: sale.txHash || null,
             itemName: sub.name,
@@ -3097,7 +3145,7 @@ export async function getUserTransactions(req, res) {
             priceETH: sale.priceETH,
             buyer: sale.buyer,
             seller: sale.seller,
-            type: buyerLow === walletLower ? "buy" : "sell",
+            type: txSet.has(buyerLow) ? "buy" : "sell",
             royaltyPaid: sale.royaltyPaid,
             sellerReceived: sale.sellerReceived,
             createdAt: sale.createdAt,

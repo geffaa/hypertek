@@ -104,6 +104,8 @@ const SignupUser = async (req, res) => {
         Role: newUser.Role,
         isActive: newUser.isActive,
         WalletAddress: newUser.WalletAddress,
+        MetaMaskAddress: null,
+        LinkedWallets: [],
         HasCustodialWallet: false,
       },
     });
@@ -167,6 +169,8 @@ const LoginUser = async (req, res) => {
         Role: user.Role,
         isActive: user.isActive,
         WalletAddress: user.WalletAddress,
+        MetaMaskAddress: user.MetaMaskAddress || null,
+        LinkedWallets: user.LinkedWallets || [],
         // false → frontend uses the CDP embedded-wallet path; true keeps the
         // legacy custodial signer (existing accounts stay untouched)
         HasCustodialWallet: Boolean(user.EncryptedPrivateKey),
@@ -1153,6 +1157,82 @@ export const LinkWallet = async (req, res) => {
     res.status(200).json({ success: true, WalletAddress: user.WalletAddress });
   } catch (err) {
     console.error("LinkWallet error:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
+
+// ------------------ LINK EXTERNAL WALLET (MetaMask etc.) ------------------
+// A user proves they own an external wallet by signing a user-scoped message
+// with it. The address is then added to their LinkedWallets, and purchases
+// made from it count toward this account. Works for every account type
+// (CDP and legacy custodial alike). One address can belong to one account.
+export const LinkExternalWallet = async (req, res) => {
+  try {
+    const userId = String(req.user._id);
+    const { address, signature, label } = req.body;
+    if (!address || !signature) {
+      return res.status(400).json({ message: "address and signature are required" });
+    }
+
+    const expectedMessage = `hypertek-link-external:${userId}`;
+    let recovered;
+    try {
+      recovered = ethers.verifyMessage(expectedMessage, signature);
+    } catch {
+      return res.status(400).json({ message: "Invalid signature" });
+    }
+    const addressLc = String(address).toLowerCase();
+    if (recovered.toLowerCase() !== addressLc) {
+      return res.status(401).json({ message: "Signature does not match the address" });
+    }
+
+    // One address, one account — reject if any OTHER user already owns it
+    const conflict = await UserModel.findOne({
+      _id: { $ne: userId },
+      $or: [
+        { WalletAddress: addressLc },
+        { MetaMaskAddress: addressLc },
+        { "LinkedWallets.address": addressLc },
+      ],
+    }).select("_id");
+    if (conflict) {
+      return res.status(409).json({ message: "This wallet is already linked to another account" });
+    }
+
+    const user = await UserModel.findById(userId).select("WalletAddress MetaMaskAddress LinkedWallets");
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const alreadyMine =
+      user.WalletAddress === addressLc ||
+      user.MetaMaskAddress === addressLc ||
+      (user.LinkedWallets || []).some((w) => w.address === addressLc);
+    if (!alreadyMine) {
+      user.LinkedWallets.push({ address: addressLc, label: label || "" });
+      await user.save();
+    }
+
+    res.status(200).json({ success: true, LinkedWallets: user.LinkedWallets });
+  } catch (err) {
+    console.error("LinkExternalWallet error:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
+
+export const UnlinkExternalWallet = async (req, res) => {
+  try {
+    const userId = String(req.user._id);
+    const { address } = req.body;
+    if (!address) return res.status(400).json({ message: "address is required" });
+    const addressLc = String(address).toLowerCase();
+
+    const user = await UserModel.findById(userId).select("LinkedWallets");
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    user.LinkedWallets = (user.LinkedWallets || []).filter((w) => w.address !== addressLc);
+    await user.save();
+    res.status(200).json({ success: true, LinkedWallets: user.LinkedWallets });
+  } catch (err) {
+    console.error("UnlinkExternalWallet error:", err);
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
