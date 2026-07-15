@@ -35,7 +35,9 @@ export const welcomeEmailTemplate = ({ name, walletAddress, encryptedPrivateKey 
             </td>
           </tr>
 
-          <!-- Wallet Address -->
+          <!-- Wallet Address (omitted for non-custodial signups — the wallet
+               is created on first login and always visible in Profile) -->
+          ${walletAddress ? `
           <tr>
             <td style="padding:0 40px 24px;">
               <div style="background-color:#1a1a3a;border:1px solid #2e2e6a;border-radius:8px;padding:20px;">
@@ -44,7 +46,7 @@ export const welcomeEmailTemplate = ({ name, walletAddress, encryptedPrivateKey 
                 <p style="margin:10px 0 0;font-size:12px;color:#64748b;">This is your public address — safe to share. Use it to receive crypto or NFAs.</p>
               </div>
             </td>
-          </tr>
+          </tr>` : ""}
 
           <!-- How to view private key -->
           <tr>

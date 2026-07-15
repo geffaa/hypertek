@@ -10,7 +10,7 @@ const activeChain = chainId === 84532 ? baseSepolia : base;
 const activeRpc = chainId === 84532 ? 'https://base-sepolia-rpc.publicnode.com' : 'https://mainnet.base.org';
 import axios from 'axios';
 import { BACKEND_BASE_URL, CDP_WALLET_ENABLED } from '../Config.js';
-import { isWalletTester } from './CdpIntegration.jsx';
+import { isCdpUser } from './CdpIntegration.jsx';
 
 const EmailWalletContext = createContext({});
 
@@ -30,9 +30,35 @@ const CdpEmailWalletProvider = ({ children }) => {
     const { signEvmTransaction } = useSignEvmTransaction();
     const { signEvmMessage } = useSignEvmMessage();
     const { signEvmTypedData } = useSignEvmTypedData();
+    const linkAttempted = React.useRef(false);
 
     const loggedIn = Boolean(token && user);
     const emailWalletAddress = loggedIn && evmAddress ? evmAddress : null;
+
+    // Persist the embedded-wallet address once, proving ownership with a
+    // signature. Idempotent server-side; safe to fire on every fresh session.
+    useEffect(() => {
+        if (!emailWalletAddress || !token || !user?.id || linkAttempted.current) return;
+        if (user.WalletAddress && user.WalletAddress.toLowerCase() === emailWalletAddress.toLowerCase()) return;
+        linkAttempted.current = true;
+        (async () => {
+            try {
+                const { signature } = await signEvmMessage({
+                    evmAccount: emailWalletAddress,
+                    message: `hypertek-link-wallet:${user.id}`,
+                });
+                await axios.post(
+                    `${BACKEND_BASE_URL}/api/v1/user/link-wallet`,
+                    { address: emailWalletAddress, signature },
+                    { headers: { Authorization: `Bearer ${token}` } }
+                );
+                console.log('CDP wallet linked to account:', emailWalletAddress);
+            } catch (e) {
+                linkAttempted.current = false; // retry on next session/render cycle
+                console.warn('link-wallet failed:', e.response?.data?.message || e.message);
+            }
+        })();
+    }, [emailWalletAddress, token, user?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const emailWalletClient = useMemo(() => {
         if (!emailWalletAddress) return null;
@@ -178,12 +204,13 @@ const LegacyEmailWalletProvider = ({ children }) => {
     );
 };
 
-// Runtime provider choice: CDP only for designated tester accounts during the
-// staged rollout; everyone else keeps the legacy custodial flow. Switching
-// component identity on login/logout remounts the subtree, which is fine.
+// Runtime provider choice: new accounts (HasCustodialWallet: false) and
+// tester accounts use the CDP embedded wallet; every account that already
+// has a managed wallet keeps the legacy custodial flow. Switching component
+// identity on login/logout remounts the subtree, which is fine.
 export const EmailWalletProvider = ({ children }) => {
     const { user } = useSelector((state) => state.auth);
-    const useCdp = CDP_WALLET_ENABLED && isWalletTester(user);
+    const useCdp = CDP_WALLET_ENABLED && isCdpUser(user);
     const Provider = useCdp ? CdpEmailWalletProvider : LegacyEmailWalletProvider;
     return <Provider>{children}</Provider>;
 };

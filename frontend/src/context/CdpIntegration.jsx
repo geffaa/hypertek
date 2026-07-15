@@ -29,6 +29,16 @@ export function isWalletTester(user) {
   return email.toLowerCase().endsWith("@hypertektest.com");
 }
 
+// Cutover rule: accounts that already have a managed (custodial) wallet stay
+// on the legacy path — their address, items, and balances are tied to it.
+// Only accounts the backend explicitly marks HasCustodialWallet: false (new
+// signups) plus our tester accounts use the CDP embedded wallet. Old sessions
+// without the flag default safely to legacy.
+export function isCdpUser(user) {
+  if (!user) return false;
+  return user.HasCustodialWallet === false || isWalletTester(user);
+}
+
 // Called by the CDP SDK whenever it needs to authenticate a request.
 // Reads the session token straight from the redux store since this runs
 // outside the React tree. Must return undefined (not throw) when logged out.
@@ -58,7 +68,7 @@ function CdpAuthBridge() {
 
   useEffect(() => {
     if (!isInitialized || busy.current) return;
-    const shouldBeSignedIn = Boolean(token && user) && isWalletTester(user);
+    const shouldBeSignedIn = Boolean(token && user) && isCdpUser(user);
 
     if (shouldBeSignedIn && !isSignedIn) {
       busy.current = true;
@@ -89,7 +99,7 @@ function CdpWalletCreator() {
   const attempted = useRef(false);
 
   useEffect(() => {
-    if (!isSignedIn || evmAddress || attempted.current || !isWalletTester(user)) return;
+    if (!isSignedIn || evmAddress || attempted.current || !isCdpUser(user)) return;
     attempted.current = true;
     createEvmEoaAccount()
       .then((account) => console.log("CDP EVM account created:", account?.address || account))

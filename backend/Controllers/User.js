@@ -69,18 +69,19 @@ const SignupUser = async (req, res) => {
       return res.status(400).json({ message: "The passwords you entered do not match. Please try again." });
     }
 
-    const { address, encryptedPrivateKey } = generateWallet();
-
+    // Non-custodial cutover: new email signups get a Coinbase CDP embedded
+    // wallet created client-side after login — the server never generates or
+    // stores a key. The address is saved later via POST /user/link-wallet.
+    // Existing accounts with an EncryptedPrivateKey keep the legacy flow.
     const newUser = new UserModel({
       FullName: FullName || "",
       Email,
       Password,
       isActive: true,
-      WalletAddress: address,
-      EncryptedPrivateKey: encryptedPrivateKey,
+      WalletAddress: "",
     });
     await newUser.save();
-    sendWelcomeEmail(newUser.Email, newUser.FullName || "", address, encryptedPrivateKey);
+    sendWelcomeEmail(newUser.Email, newUser.FullName || "", null, null);
 
     const token = jwt.sign(
       {
@@ -103,6 +104,7 @@ const SignupUser = async (req, res) => {
         Role: newUser.Role,
         isActive: newUser.isActive,
         WalletAddress: newUser.WalletAddress,
+        HasCustodialWallet: false,
       },
     });
   } catch (error) {
@@ -165,6 +167,9 @@ const LoginUser = async (req, res) => {
         Role: user.Role,
         isActive: user.isActive,
         WalletAddress: user.WalletAddress,
+        // false → frontend uses the CDP embedded-wallet path; true keeps the
+        // legacy custodial signer (existing accounts stay untouched)
+        HasCustodialWallet: Boolean(user.EncryptedPrivateKey),
       },
     });
   } catch (err) {
@@ -1105,6 +1110,50 @@ export const GetPrivyToken = async (req, res) => {
   } catch (err) {
     console.error("GetPrivyToken error:", err);
     res.status(500).json({ message: "Could not issue wallet token", error: err.message });
+  }
+};
+
+// ------------------ LINK WALLET (persist the CDP embedded-wallet address) ------------------
+// Called once by the frontend after the embedded wallet is created. Ownership
+// is proven with a signature over a user-scoped message, so a client cannot
+// register an address it does not control. Legacy custodial accounts are
+// rejected — their address must never be silently replaced.
+export const LinkWallet = async (req, res) => {
+  try {
+    const userId = String(req.user._id);
+    const { address, signature } = req.body;
+    if (!address || !signature) {
+      return res.status(400).json({ message: "address and signature are required" });
+    }
+
+    const expectedMessage = `hypertek-link-wallet:${userId}`;
+    let recovered;
+    try {
+      recovered = ethers.verifyMessage(expectedMessage, signature);
+    } catch {
+      return res.status(400).json({ message: "Invalid signature" });
+    }
+    if (recovered.toLowerCase() !== String(address).toLowerCase()) {
+      return res.status(401).json({ message: "Signature does not match the address" });
+    }
+
+    const user = await UserModel.findById(userId).select("WalletAddress EncryptedPrivateKey");
+    if (!user) return res.status(404).json({ message: "User not found" });
+    if (user.EncryptedPrivateKey) {
+      return res.status(400).json({ message: "This account uses a managed wallet and cannot be re-linked" });
+    }
+    if (user.WalletAddress && user.WalletAddress.toLowerCase() !== String(address).toLowerCase()) {
+      return res.status(409).json({ message: "A different wallet is already linked to this account" });
+    }
+
+    if (!user.WalletAddress) {
+      user.WalletAddress = address;
+      await user.save();
+    }
+    res.status(200).json({ success: true, WalletAddress: user.WalletAddress });
+  } catch (err) {
+    console.error("LinkWallet error:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
   }
 };
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { useGlobalEmailWallet } from "../context/EmailWalletContext";
-import { isWalletTester } from "../context/CdpIntegration";
+import { isCdpUser } from "../context/CdpIntegration";
 import { CDP_WALLET_ENABLED } from "../Config";
 
 /**
@@ -17,7 +17,7 @@ export default function WalletTest() {
   const [busy, setBusy] = useState(false);
   const add = (m) => setLog((l) => [...l, `${new Date().toISOString().slice(11, 19)}  ${m}`]);
 
-  if (!CDP_WALLET_ENABLED || !isWalletTester(user)) return <Navigate to="/" replace />;
+  if (!CDP_WALLET_ENABLED || !isCdpUser(user)) return <Navigate to="/" replace />;
 
   const signTest = async () => {
     if (!emailWalletClient) return add("wallet client not ready");

@@ -18,6 +18,7 @@ import {
   GetWalletAddress,
   FundGasWallet,
   GetPrivyToken,
+  LinkWallet,
 } from "../Controllers/User.js";
 import { authMiddleware } from "../Middleware/googleMiddle.js";
 import { auth } from "../Middleware/userAuth.js";
@@ -52,8 +53,10 @@ Route.get("/user/wallet-address", auth, GetWalletAddress);
 Route.post("/user/export-wallet", auth, ExportWallet);
 // Auto-drip ETH for gas to email wallet (JWT only, rate-limited by balance threshold)
 Route.post("/user/fund-gas", auth, FundGasWallet);
-// Short-lived RS256 token for the Privy custom-auth handshake
+// Short-lived RS256 token for the embedded-wallet custom-auth handshake
 Route.get("/user/privy-token", auth, GetPrivyToken);
+// Persist the CDP embedded-wallet address (signature-verified, non-custodial accounts only)
+Route.post("/user/link-wallet", auth, LinkWallet);
 // Get all users (admin only)
 Route.get("/users", GetAllUsers);
 // Toggle user active/inactive status (admin only)

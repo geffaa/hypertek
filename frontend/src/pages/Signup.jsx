@@ -10,6 +10,7 @@ import { BACKEND_BASE_URL } from "../Config";
 import FullScreenLoader from "../Components/Common/Spinner";
 import AuthLayout from "../Components/Common/AuthLayout";
 import { useTranslation } from "react-i18next";
+import { useGlobalEmailWallet } from "../context/EmailWalletContext";
 
 function Signup() {
   const dispatch = useDispatch();
@@ -19,8 +20,13 @@ function Signup() {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", email: "", password: "", confirmPassword: "" });
 
-  // Wallet modal state — address only; key export lives in Profile settings
-  const [walletModal, setWalletModal] = useState(null); // { walletAddress }
+  // Wallet modal state — address only; key export lives in Profile settings.
+  // For non-custodial signups the address arrives a moment after login (the
+  // embedded wallet is created client-side), so the modal starts in a
+  // "creating" state and fills in from the wallet context.
+  const [walletModal, setWalletModal] = useState(null); // { walletAddress: string | null }
+  const { emailWalletAddress } = useGlobalEmailWallet();
+  const modalAddress = walletModal?.walletAddress || emailWalletAddress || null;
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -55,7 +61,7 @@ function Signup() {
         if (formData.fullName.trim()) {
           localStorage.setItem("hypertek_display_name", formData.fullName.trim().toUpperCase());
         }
-        setWalletModal({ walletAddress: res.data.user.WalletAddress });
+        setWalletModal({ walletAddress: res.data.user.WalletAddress || null });
       } else {
         toast.error(res.data.message || "Signup failed. Please try again.");
       }
@@ -82,16 +88,23 @@ function Signup() {
             {/* Wallet Address */}
             <div className="bg-black/40 border border-white/10 rounded-lg p-3 mb-4">
               <p className="text-xs text-gray-400 mb-1">{t("auth.walletAddress")}</p>
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-sm font-mono text-blue-400 break-all">{walletModal.walletAddress}</span>
-                <button
-                  type="button"
-                  onClick={() => { navigator.clipboard.writeText(walletModal.walletAddress); toast.success("Copied!"); }}
-                  className="text-gray-400 hover:text-white shrink-0"
-                >
-                  <FiCopy size={15} />
-                </button>
-              </div>
+              {modalAddress ? (
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-sm font-mono text-blue-400 break-all">{modalAddress}</span>
+                  <button
+                    type="button"
+                    onClick={() => { navigator.clipboard.writeText(modalAddress); toast.success("Copied!"); }}
+                    className="text-gray-400 hover:text-white shrink-0"
+                  >
+                    <FiCopy size={15} />
+                  </button>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2 py-1">
+                  <span className="w-3.5 h-3.5 rounded-full border-2 border-blue-400/40 border-t-blue-400 animate-spin" />
+                  <span className="text-sm text-blue-300/80">{t("auth.walletCreating", "Creating your secure wallet...")}</span>
+                </div>
+              )}
             </div>
 
             {/* Self-custody note */}
