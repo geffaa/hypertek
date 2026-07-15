@@ -33,14 +33,15 @@ Route.post("/user/login", LoginUser);
 Route.post("/user/forgot-password", ForgotPassword);
 // :lock: Reset password (verify token and update password)
 Route.post("/user/reset-password/:token", ResetPassword);
-// :globe_with_meridians: Google authentication
-Route.post("/user/google", GoogleAuth);
-// :speech_balloon: Discord authentication
-Route.post("/user/discord", DiscordAuth);
-// :blue_book: Meta / Facebook authentication
-Route.post("/user/MetaMask", MetaMaskAuth);
-// :bird: Twitter authentication
-Route.post("/user/twitter", TwitterAuth);
+// Social logins disabled for now: no frontend uses them and they still
+// generate legacy custodial wallets, which conflicts with the non-custodial
+// cutover. Re-enable only after they are wired to the CDP wallet flow.
+const socialLoginDisabled = (req, res) =>
+  res.status(410).json({ message: "Social login is not available. Please sign in with your email and password." });
+Route.post("/user/google", socialLoginDisabled);
+Route.post("/user/discord", socialLoginDisabled);
+Route.post("/user/MetaMask", socialLoginDisabled);
+Route.post("/user/twitter", socialLoginDisabled);
 // :bust_in_silhouette: Get user profile (protected route)
 Route.get("/getProfile", auth, GetProfile);
 Route.put("/edit/:userId", upload.single("Avatar"), EditUser);

@@ -11,11 +11,16 @@ import { BACKEND_BASE_URL } from "../../Config";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useEmailWallet } from "../../hooks/useEmailWallet";
+import { CDP_WALLET_ENABLED } from "../../Config";
+import { isCdpUser } from "../../context/CdpIntegration";
+import CdpKeyExport from "./CdpKeyExport";
 
 function EditProfile() {
   const location = useLocation();
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token) || JSON.parse(localStorage.getItem("auth"))?.token;
+  const authUser = useSelector((state) => state.auth.user);
+  const cdpAccount = CDP_WALLET_ENABLED && isCdpUser(authUser);
   const { emailWalletAddress } = useEmailWallet();
 
   const userData = location.state?.userData || {};
@@ -352,7 +357,7 @@ function EditProfile() {
                 <p className="text-sm text-gray-300 mb-4 leading-relaxed">
                   Your account comes with a secure, embedded Hyper Tek wallet. <strong className="text-white">You don't need MetaMask to use the platform!</strong>
                   <br /><br />
-                  To buy NFAs or list items, simply fund your wallet by sending ETH or USDC (on Base Sepolia) to your address below.
+                  To buy NFAs or list items, simply fund your wallet by sending ETH or USDC (on Base) to your address below.
                 </p>
 
                 {emailWalletAddress && (
@@ -375,7 +380,11 @@ function EditProfile() {
                   </div>
                 )}
 
-                {!privateKey ? (
+                {cdpAccount ? (
+                  // Non-custodial accounts: key export happens through a secure
+                  // Coinbase iframe — the key never touches our code or backend.
+                  emailWalletAddress ? <CdpKeyExport address={emailWalletAddress} /> : null
+                ) : !privateKey ? (
                   <div>
                     {!showPasswordPrompt ? (
                       <button
