@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { CDPHooksProvider, useAuthenticateWithJWT, useIsInitialized, useIsSignedIn, useSignOut } from "@coinbase/cdp-hooks";
+import { CDPHooksProvider, useAuthenticateWithJWT, useIsInitialized, useIsSignedIn, useSignOut, useEvmAddress, useCreateEvmEoaAccount } from "@coinbase/cdp-hooks";
 import { store } from "../Redux/Store";
 import { BACKEND_BASE_URL, CDP_PROJECT_ID, CDP_WALLET_ENABLED } from "../Config.js";
 
@@ -79,11 +79,35 @@ function CdpAuthBridge() {
   return null;
 }
 
+// In the JWT (custom auth) flow CDP does NOT create a wallet automatically —
+// the EVM account must be created explicitly once per user.
+function CdpWalletCreator() {
+  const { user } = useSelector((state) => state.auth);
+  const { isSignedIn } = useIsSignedIn();
+  const { evmAddress } = useEvmAddress();
+  const { createEvmEoaAccount } = useCreateEvmEoaAccount();
+  const attempted = useRef(false);
+
+  useEffect(() => {
+    if (!isSignedIn || evmAddress || attempted.current || !isWalletTester(user)) return;
+    attempted.current = true;
+    createEvmEoaAccount()
+      .then((account) => console.log("CDP EVM account created:", account?.address || account))
+      .catch((e) => {
+        // "already has an account" races are fine; anything else, surface it
+        console.warn("CDP createEvmEoaAccount:", e?.message);
+      });
+  }, [isSignedIn, evmAddress, user, createEvmEoaAccount]);
+
+  return null;
+}
+
 export function CdpIntegrationProvider({ children }) {
   if (!CDP_WALLET_ENABLED) return children;
   return (
     <CDPHooksProvider config={{ projectId: CDP_PROJECT_ID, customAuth: { getJwt: getWalletAuthJwt } }}>
       <CdpAuthBridge />
+      <CdpWalletCreator />
       {children}
     </CDPHooksProvider>
   );
