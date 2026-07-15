@@ -1,6 +1,29 @@
 import React, { useRef, useState } from "react";
 import { useEvmKeyExportIframe } from "@coinbase/cdp-hooks";
 
+// Must live at module scope: the hook recreates the iframe whenever its
+// options change identity, so an inline object here puts it in a mount loop.
+// Transparent page + the site's primary button style.
+const EXPORT_IFRAME_THEME = {
+  pageBg: "transparent",
+  buttonBg: "#002AA8",
+  buttonBgHover: "#003BD4",
+  buttonBgPressed: "#001F7A",
+  buttonBgFocus: "#003BD4",
+  buttonBorder: "#FFFFFF33",
+  buttonBorderHover: "#FFFFFF4D",
+  buttonBorderPressed: "#FFFFFF33",
+  buttonBorderFocus: "#60A5FA",
+  buttonText: "#FFFFFF",
+  buttonTextHover: "#FFFFFF",
+  buttonTextPressed: "#FFFFFF",
+  buttonTextFocus: "#FFFFFF",
+  buttonBorderRadius: 8,
+  buttonFontSize: 14,
+  buttonFontWeight: 600,
+  buttonSize: "md",
+};
+
 /**
  * Private-key export for non-custodial (CDP) accounts. The button lives in a
  * secure Coinbase-hosted iframe that copies the key straight to the user's
@@ -16,27 +39,7 @@ export default function CdpKeyExport({ address }) {
     containerRef,
     label: "Copy Private Key",
     copiedLabel: "Copied to clipboard!",
-    // The button renders inside Coinbase's cross-origin iframe; this theme
-    // makes its page transparent and matches the site's primary button style.
-    theme: {
-      pageBg: "transparent",
-      buttonBg: "#002AA8",
-      buttonBgHover: "#003BD4",
-      buttonBgPressed: "#001F7A",
-      buttonBgFocus: "#003BD4",
-      buttonBorder: "#FFFFFF33",
-      buttonBorderHover: "#FFFFFF4D",
-      buttonBorderPressed: "#FFFFFF33",
-      buttonBorderFocus: "#60A5FA",
-      buttonText: "#FFFFFF",
-      buttonTextHover: "#FFFFFF",
-      buttonTextPressed: "#FFFFFF",
-      buttonTextFocus: "#FFFFFF",
-      buttonBorderRadius: 8,
-      buttonFontSize: 14,
-      buttonFontWeight: 600,
-      buttonSize: "md",
-    },
+    theme: EXPORT_IFRAME_THEME,
   });
 
   return (
