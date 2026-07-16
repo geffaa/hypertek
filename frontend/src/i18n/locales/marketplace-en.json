@@ -13,10 +13,10 @@
       "bounty": "Bounty"
     },
     "launchLock": {
-      "marketplaceTitle": "The marketplace is locked until the official launch",
-      "dashboardTitle": "The dashboard is locked until the official launch",
-      "desc": "But nothing is stopping you from checking the site out.",
-      "buttonLabel": "Locked until the official launch"
+      "marketplaceTitle": "The Marketplace is locked until launch — and launch is coming very soon!",
+      "dashboardTitle": "Your dashboard unlocks at launch — coming very soon!",
+      "desc": "Don't let that stop you. Sign up, explore this amazing project, see how it could reward you, and help make it happen. Become a Hyper Tekin and create something new!",
+      "buttonLabel": "Unlocking very soon"
     },
     "banner": {
       "defaultHeading": "A New Era Dawns in Hyper Tek",
