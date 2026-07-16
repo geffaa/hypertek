@@ -3,12 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
-
-const HELP_META = [
-  { accent: "#38bdf8", iconBg: "rgba(56,189,248,0.12)" },
-  { accent: "#38bdf8", iconBg: "rgba(56,189,248,0.12)" },
-  { accent: "#38bdf8", iconBg: "rgba(56,189,248,0.12)" },
-];
+import HelpCards from "./HelpCards";
 
 const EARLY_ACCESS = {
   eyebrow: "LIMITED-TIME OPPORTUNITY",
@@ -66,25 +61,7 @@ export default function HomeCrowdfundingTeaser() {
             {sec05.helpHeading || "How YOU Can Help Right Now"}
           </h3>
 
-          <div className="flex flex-col md:flex-row md:items-start gap-10 md:gap-8 w-full">
-            {sec05Help.map((item, idx) => {
-              const m = HELP_META[idx] || HELP_META[0];
-              const desc = (item.text || "").replace(/^[\s—–-]+/, "");
-              const sentence = desc ? desc.charAt(0).toUpperCase() + desc.slice(1) : "";
-              return (
-                <div key={item.bold} className="flex-1 flex flex-col items-center text-center gap-3">
-                  <div
-                    className="w-14 h-14 rounded-full flex items-center justify-center font-[Goldman] font-bold text-xl"
-                    style={{ background: m.accent, border: `1.5px solid ${m.accent}`, color: "#06121c", boxShadow: `0 0 20px ${m.accent}80` }}
-                  >
-                    {idx + 1}
-                  </div>
-                  <h4 className="font-bold text-white text-[15px] md:text-[17px] uppercase tracking-wide leading-snug">{item.bold}</h4>
-                  <p className="text-white/90 text-[13.5px] md:text-[14.5px] leading-relaxed">{sentence}</p>
-                </div>
-              );
-            })}
-          </div>
+          <HelpCards items={sec05Help} />
         </motion.div>
 
       </div>

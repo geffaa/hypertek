@@ -21,6 +21,8 @@ import { useTranslation } from "react-i18next";
 import GlowingOrb from "../Components/Common/BgColoring";
 import CrowdfundingPackages from "../Components/home/PopularCollections";
 import ComingSoonModal from "../Components/Common/ComingSoonModal";
+import HelpCards from "../Components/home/HelpCards";
+import { CARD_ACCENTS_SOLID } from "../Components/home/cardAccents";
 
 
 // ── 11 Milestones (same content as Crowdfunding.jsx) ──
@@ -130,11 +132,7 @@ const EARLY_ACCESS = {
   note: "Watch for updates, read the White Paper, and lock in early pricing before the crowd arrives.",
 };
 
-const WEB3_CARD_ACCENTS = [
-  { accent: "#22c55e", bg: "#0d1f12", border: "rgba(34,197,94,0.30)", borderTop: "rgba(34,197,94,0.7)" },
-  { accent: "#38bdf8", bg: "#0b1a24", border: "rgba(56,189,248,0.30)", borderTop: "rgba(56,189,248,0.7)" },
-  { accent: "#a78bfa", bg: "#140f20", border: "rgba(167,139,250,0.28)", borderTop: "rgba(167,139,250,0.65)" },
-];
+const WEB3_CARD_ACCENTS = CARD_ACCENTS_SOLID;
 
 const VEHICLES = ["/vehicle1.webp", "/vehicle2-1.webp", "/vehicle2.webp", "/vehicle3-1.webp", "/vehicle3.webp"];
 const AVATARS = [
@@ -144,12 +142,6 @@ const AVATARS = [
   "/avatar/mantasquads-female.webp", "/avatar/mantasquads-male.webp", "/avatar/marmulus-female.webp",
   "/avatar/marmulus-male.webp", "/avatar/ophidians-female.webp", "/avatar/ophidians-male.webp",
   "/avatar/overlord.webp", "/avatar/team-specialist-major.webp",
-];
-
-const HELP_META = [
-  { accent: "#38bdf8", iconBg: "rgba(56,189,248,0.12)" },
-  { accent: "#38bdf8", iconBg: "rgba(56,189,248,0.12)" },
-  { accent: "#38bdf8", iconBg: "rgba(56,189,248,0.12)" },
 ];
 
 // Milestone card accent — cycles every 3 so columns share a hue rhythm
@@ -508,25 +500,7 @@ function CrowdfundingStandalone() {
               {sec05.helpHeading || "How YOU Can Help Right Now"}
             </h3>
 
-            <div className="flex flex-col md:flex-row md:items-start gap-10 md:gap-8 w-full">
-              {sec05Help.map((item, idx) => {
-                const m = HELP_META[idx] || HELP_META[0];
-                const desc = (item.text || "").replace(/^[\s—–-]+/, "");
-                const sentence = desc ? desc.charAt(0).toUpperCase() + desc.slice(1) : "";
-                return (
-                  <div key={item.bold} className="flex-1 flex flex-col items-center text-center gap-3">
-                    <div
-                      className="w-14 h-14 rounded-full flex items-center justify-center font-[Goldman] font-bold text-xl"
-                      style={{ background: m.accent, border: `1.5px solid ${m.accent}`, color: "#06121c", boxShadow: `0 0 20px ${m.accent}80` }}
-                    >
-                      {idx + 1}
-                    </div>
-                    <h4 className="font-bold text-white text-[15px] md:text-[17px] uppercase tracking-wide leading-snug">{item.bold}</h4>
-                    <p className="text-white/90 text-[13.5px] md:text-[14.5px] leading-relaxed">{sentence}</p>
-                  </div>
-                );
-              })}
-            </div>
+            <HelpCards items={sec05Help} solid />
 
 
           </motion.div>

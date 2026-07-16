@@ -1,11 +1,6 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-
-const WEB3_CARD_ACCENTS = [
-  { accent: "#22c55e", bg: "rgba(34,197,94,0.04)", border: "rgba(34,197,94,0.18)", borderTop: "rgba(34,197,94,0.55)" },
-  { accent: "#38bdf8", bg: "rgba(56,189,248,0.05)", border: "rgba(56,189,248,0.22)", borderTop: "rgba(56,189,248,0.55)" },
-  { accent: "#a78bfa", bg: "rgba(167,139,250,0.04)", border: "rgba(167,139,250,0.18)", borderTop: "rgba(167,139,250,0.55)" },
-];
+import { CARD_ACCENTS } from "./cardAccents";
 
 function SectionLabel({ label, align = "left" }) {
   return (
@@ -43,7 +38,7 @@ export default function HomeWeb3Gaming() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {sec06Cards.map((card, i) => {
-            const ca = WEB3_CARD_ACCENTS[i] || WEB3_CARD_ACCENTS[0];
+            const ca = CARD_ACCENTS[i] || CARD_ACCENTS[0];
             const bullets = Array.isArray(card.bullets) ? card.bullets : [];
             return (
               <motion.div
