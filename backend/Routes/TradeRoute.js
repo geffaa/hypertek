@@ -9,7 +9,7 @@ import {
   getPosterTrades,
   getQuestStats,
 } from "../Controllers/TradeController.js";
-import { authMiddleware } from "../Middleware/googleMiddle.js";
+import { authMiddleware } from "../Middleware/authMiddleware.js";
 import uploadTemp from "../Middleware/UploadMulter.js";
 
 const TradeRouter = express.Router();

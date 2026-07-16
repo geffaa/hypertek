@@ -15,7 +15,7 @@ import {
   getHBPlatformStats,
   getFxRate,
 } from "../Controllers/HBController.js";
-import { authMiddleware } from "../Middleware/googleMiddle.js";
+import { authMiddleware } from "../Middleware/authMiddleware.js";
 
 const router = express.Router();
 

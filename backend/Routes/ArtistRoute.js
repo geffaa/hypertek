@@ -1,6 +1,6 @@
 import express from "express";
 import { getArtists, getArtist, createArtist, updateArtist, deleteArtist } from "../Controllers/ArtistController.js";
-import { authMiddleware } from "../Middleware/googleMiddle.js";
+import { authMiddleware } from "../Middleware/authMiddleware.js";
 
 const router = express.Router();
 

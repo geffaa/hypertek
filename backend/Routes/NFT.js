@@ -53,7 +53,7 @@ import {
 } from "../Controllers/nftController.js";
 
 import uploadTemp from "../Middleware/UploadMulter.js";
-import { authMiddleware } from "../Middleware/googleMiddle.js";
+import { authMiddleware } from "../Middleware/authMiddleware.js";
 
 const NFTRouter = express.Router();
 

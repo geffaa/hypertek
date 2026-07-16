@@ -9,7 +9,7 @@ import {
   getTrades,
 } from "../Controllers/Dashboard.js";
 import express from "express";
-import { authMiddleware } from "../Middleware/googleMiddle.js";
+import { authMiddleware } from "../Middleware/authMiddleware.js";
 
 
 const Dashboard = express.Router();

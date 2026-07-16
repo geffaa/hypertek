@@ -1,6 +1,6 @@
 import express from "express";
 import { submitBuybackRequest, getBuybackRequests, approveBuybackRequest, rejectBuybackRequest } from "../Controllers/BuybackController.js";
-import { authMiddleware } from "../Middleware/googleMiddle.js";
+import { authMiddleware } from "../Middleware/authMiddleware.js";
 
 const BuybackRouter = express.Router();
 

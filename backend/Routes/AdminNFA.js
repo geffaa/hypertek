@@ -7,7 +7,7 @@
 import express from "express";
 import { applyCPI, getPendingBuybacks, executeBuyback } from "../services/NFAService.js";
 import { RoyaltyPayout, dispatchRoyaltyOnChain, dispatchRoyaltyViaStripe } from "../services/RoyaltyService.js";
-import { authMiddleware } from "../Middleware/googleMiddle.js";
+import { authMiddleware } from "../Middleware/authMiddleware.js";
 import NFTSystem from "../Models/NFTSystem.js";
 import MarketListing from "../Models/MarketListingModel.js";
 import Artist from "../Models/Artist.js";

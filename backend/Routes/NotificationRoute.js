@@ -5,7 +5,7 @@ import {
   markAllRead,
   deleteNotification,
 } from "../Controllers/NotificationController.js";
-import { authMiddleware } from "../Middleware/googleMiddle.js";
+import { authMiddleware } from "../Middleware/authMiddleware.js";
 
 const NotificationRouter = express.Router();
 

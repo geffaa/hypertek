@@ -22,7 +22,7 @@ import {
   LinkExternalWallet,
   UnlinkExternalWallet,
 } from "../Controllers/User.js";
-import { authMiddleware } from "../Middleware/googleMiddle.js";
+import { authMiddleware } from "../Middleware/authMiddleware.js";
 import { auth } from "../Middleware/userAuth.js";
 import upload from "../Middleware/UploadMulter.js";
 import express from "express";

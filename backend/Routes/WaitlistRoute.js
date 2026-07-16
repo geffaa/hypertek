@@ -6,7 +6,7 @@ import {
   exportWaitlistCSV,
   sendWaitlistNotification,
 } from "../Controllers/WaitlistController.js";
-import { authMiddleware } from "../Middleware/googleMiddle.js";
+import { authMiddleware } from "../Middleware/authMiddleware.js";
 
 const WaitlistRouter = express.Router();
 

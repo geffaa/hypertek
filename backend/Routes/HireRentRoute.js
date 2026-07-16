@@ -8,7 +8,7 @@ import {
   cancelListing,
   getOwnerListings,
 } from "../Controllers/HireRentController.js";
-import { authMiddleware } from "../Middleware/googleMiddle.js";
+import { authMiddleware } from "../Middleware/authMiddleware.js";
 
 const HireRentRouter = express.Router();
 

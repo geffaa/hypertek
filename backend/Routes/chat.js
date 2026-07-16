@@ -4,7 +4,7 @@ import express from "express";
 import ChatRoom from "../Models/ChatRoom.js";
 import Message from "../Models/Message.js";
 import User from "../Models/User.js"; // Your User model
-import { authMiddleware } from "../Middleware/googleMiddle.js";
+import { authMiddleware } from "../Middleware/authMiddleware.js";
 
 const router = express.Router();
 

@@ -1,5 +1,5 @@
 import { auth } from "../Middleware/userAuth.js"
-import { authMiddleware } from "../Middleware/googleMiddle.js"
+import { authMiddleware } from "../Middleware/authMiddleware.js"
 
 import express from "express";
 import {
