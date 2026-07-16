@@ -1,12 +1,9 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useAccount, useSignMessage, useDisconnect } from "wagmi";
+import React from "react";
+import { useSelector } from "react-redux";
+import { useAccount, useDisconnect } from "wagmi";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
-import axios from "axios";
-import toast from "react-hot-toast";
 import { FiLink, FiTrash2 } from "react-icons/fi";
-import { BACKEND_BASE_URL } from "../../Config";
-import { loginSuccess } from "../../Redux/AuthSlice";
+import { useLinkExternalWallet } from "../../hooks/useLinkExternalWallet";
 
 const short = (a) => (a ? `${a.slice(0, 6)}...${a.slice(-4)}` : "");
 
@@ -16,13 +13,11 @@ const short = (a) => (a ? `${a.slice(0, 6)}...${a.slice(-4)}` : "");
  * the wallet appear in this account's profile and collections.
  */
 export default function LinkedWalletsSection() {
-  const dispatch = useDispatch();
-  const { user, token } = useSelector((s) => s.auth);
+  const { user } = useSelector((s) => s.auth);
   const { address: connectedAddress, isConnected } = useAccount();
-  const { signMessageAsync } = useSignMessage();
   const { disconnect } = useDisconnect();
   const { openConnectModal } = useConnectModal();
-  const [busy, setBusy] = useState(false);
+  const { linkWallet, unlinkWallet, busy } = useLinkExternalWallet();
 
   const linked = user?.LinkedWallets || [];
   const myAddresses = new Set(
@@ -33,51 +28,17 @@ export default function LinkedWalletsSection() {
   const connectedLc = connectedAddress?.toLowerCase();
   const connectedIsMine = connectedLc && myAddresses.has(connectedLc);
 
-  const refreshUser = (LinkedWallets) => {
-    dispatch(loginSuccess({ user: { ...user, LinkedWallets }, token, isLoggedInUser: true }));
-  };
-
   const handleLink = async () => {
     if (!isConnected || !connectedAddress) {
       openConnectModal?.();
       return;
     }
-    setBusy(true);
-    const toastId = toast.loading("Confirm the signature in your wallet...");
-    try {
-      const signature = await signMessageAsync({
-        message: `hypertek-link-external:${user.id}`,
-      });
-      const res = await axios.post(
-        `${BACKEND_BASE_URL}/api/v1/user/link-external-wallet`,
-        { address: connectedAddress, signature },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      refreshUser(res.data.LinkedWallets);
-      toast.success("Wallet linked to your account!", { id: toastId });
-    } catch (e) {
-      const msg = e?.response?.data?.message || (e?.name === "UserRejectedRequestError" ? "Signature cancelled" : "Linking failed");
-      toast.error(msg, { id: toastId });
-    } finally {
-      setBusy(false);
-    }
+    await linkWallet(connectedAddress);
   };
 
   const handleUnlink = async (address) => {
-    setBusy(true);
-    try {
-      const res = await axios.delete(`${BACKEND_BASE_URL}/api/v1/user/link-external-wallet`, {
-        headers: { Authorization: `Bearer ${token}` },
-        data: { address },
-      });
-      refreshUser(res.data.LinkedWallets);
-      if (connectedLc === address.toLowerCase()) disconnect();
-      toast.success("Wallet unlinked");
-    } catch (e) {
-      toast.error(e?.response?.data?.message || "Unlink failed");
-    } finally {
-      setBusy(false);
-    }
+    const ok = await unlinkWallet(address);
+    if (ok && connectedLc === address.toLowerCase()) disconnect();
   };
 
   return (

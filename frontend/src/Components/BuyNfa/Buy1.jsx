@@ -1706,7 +1706,7 @@ function Buy1() {
                   style={{ background: "rgba(245,158,11,0.08)", border: "1px solid rgba(245,158,11,0.25)" }}>
                   <span>
                     {t("buyNfa.marketplace.unlinkedWallet",
-                      "A wallet is connected ({{addr}}) but it is not linked to your account yet, so purchases will use your built-in wallet. Link it in Profile settings to buy with it.",
+                      "A wallet is connected ({{addr}}) but not linked to your account yet, so purchases will use your built-in wallet. Use the Link wallet prompt (bottom left) to buy with it.",
                       { addr: `${connectedUnlinkedAddress.slice(0, 6)}...${connectedUnlinkedAddress.slice(-4)}` })}
                   </span>
                 </div>

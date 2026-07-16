@@ -17,6 +17,7 @@ import Navbar from "./Components/Common/Navbar";
 import Footer from "./Components/Common/Footer";
 import Loading from "./Components/Common/Loading";
 import ChatbotWidget from "./Components/Chatbot/ChatbotWidget";
+import LinkWalletPrompt from "./Components/Common/LinkWalletPrompt";
 
 const MAINTENANCE_MODE = false;
 const MAINTENANCE_BYPASS_PATH = "/testing";
@@ -287,6 +288,8 @@ function AppWrapper() {
         <Toaster position="top-right" reverseOrder={false} />
         {!shouldHideLayout && <Footer />}
         {location.pathname !== "/gaming" && <ChatbotWidget />}
+        {/* In-context external wallet linking, shown on any page when needed */}
+        <LinkWalletPrompt />
     </>
   );
 }

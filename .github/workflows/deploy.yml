@@ -63,9 +63,9 @@ jobs:
           # CDP embedded wallets — runtime-gated to @hypertektest.com tester
           # accounts until the full non-custodial cutover
           VITE_CDP_PROJECT_ID: 5dbc73a1-fe5a-4878-a29e-e149fd107398
-          # WalletConnect Cloud (Reown) — TODO: isi dengan project ID milik
-          # sendiri (menggantikan ID developer lama yang sudah dicabut dari kode)
-          VITE_WALLETCONNECT_PROJECT_ID: ""
+          # WalletConnect Cloud (Reown) — project milik sendiri, hanya untuk
+          # relay koneksi QR/mobile (ekstensi browser tidak memakainya)
+          VITE_WALLETCONNECT_PROJECT_ID: d05819ddfe73fb4abe6b1af3cc9a0524
 
       # ── Build Admin Panel ──
       - name: 📦 Install admin dependencies
