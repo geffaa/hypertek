@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, ChevronDown, LayoutGrid, Package, Layers, Timer, Gamepad2, Store } from "lucide-react";
+import { Menu, X, ChevronDown, LayoutGrid, Package, Layers, Timer, Gamepad2, Store, Wallet as WalletIcon } from "lucide-react";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
+import { useActiveWallet } from "../../hooks/useActiveWallet";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
@@ -31,6 +33,9 @@ export default function Navbar() {
   const location = useLocation();
   const [isLoggedIn, setIsLogin] = useState(false);
   const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
+  const { openConnectModal } = useConnectModal();
+  const { externalConnected, externalLinked, signingAddress, connectedUnlinkedAddress } = useActiveWallet();
+  const externalAddr = connectedUnlinkedAddress || (externalLinked ? signingAddress : null);
   const [shopOpen, setShopOpen] = useState(false);
   const [socialOpen, setSocialOpen] = useState(false);
   const shopTimer = useRef(null);
@@ -417,6 +422,20 @@ export default function Navbar() {
                         className="flex items-center gap-2 px-4 py-2.5 text-white/80 text-sm font-medium transition-colors hover:bg-white/8 hover:text-white border-t border-white/5">
                         <Store className="w-3.5 h-3.5" /> {t("nav.marketplace")}
                       </Link>
+                      {/* External wallet: connect from anywhere; managing/linking lives in Profile settings */}
+                      {!externalConnected ? (
+                        <button onClick={() => { setProfileOpen(false); openConnectModal?.(); }}
+                          className="w-full flex items-center gap-2 px-4 py-2.5 text-white/80 text-sm font-medium transition-colors hover:bg-white/8 hover:text-white border-t border-white/5">
+                          <WalletIcon className="w-3.5 h-3.5" /> {t("nav.connectWallet", "Connect Wallet")}
+                        </button>
+                      ) : (
+                        <Link to="/edit" onClick={() => setProfileOpen(false)}
+                          className="w-full flex items-center gap-2 px-4 py-2.5 text-white/80 text-sm font-medium transition-colors hover:bg-white/8 hover:text-white border-t border-white/5">
+                          <span className={`w-2 h-2 rounded-full flex-shrink-0 ${externalLinked ? "bg-green-400" : "bg-amber-400"}`} />
+                          <span className="font-mono text-xs">{externalAddr ? `${externalAddr.slice(0, 6)}...${externalAddr.slice(-4)}` : "Wallet"}</span>
+                          <span className="text-white/40 text-[10px] ml-auto">{externalLinked ? t("nav.walletLinked", "linked") : t("nav.walletNotLinked", "not linked")}</span>
+                        </Link>
+                      )}
                       <button onClick={() => { setProfileOpen(false); setShowModal(true); }}
                         className="w-full flex items-center gap-2 px-4 py-2.5 text-red-400/80 text-sm font-medium transition-colors hover:bg-red-500/10 hover:text-red-400 border-t border-white/5">
                         <img src={logoutImage} alt="Logout" className="w-3.5 h-3.5 opacity-70" style={{ filter: "invert(40%) sepia(80%) saturate(500%) hue-rotate(320deg)" }} />

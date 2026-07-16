@@ -42,7 +42,7 @@ export default function LinkedWalletsSection() {
   };
 
   return (
-    <div className="w-full max-w-md mt-4">
+    <div className="w-full">
       <label
         className="block text-white font-bold text-[18px] md:text-[20.97px] leading-[100%] my-4"
         style={{ fontFamily: "Inter, sans-serif" }}

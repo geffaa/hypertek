@@ -53,57 +53,6 @@ function EditProfile() {
   const [showPasswordPrompt, setShowPasswordPrompt] = useState(false);
   const [pkPassword, setPkPassword] = useState("");
 
-  // Bank details
-  const [bankDetails, setBankDetails] = useState({
-    accountHolderName: "",
-    bankName: "",
-    accountNumber: "",
-    iban: "",
-    swift: "",
-    routingNumber: "",
-    country: "",
-    currency: "USD",
-  });
-  const [savingBank, setSavingBank] = useState(false);
-  const [bankSaved, setBankSaved] = useState(false);
-
-  useEffect(() => {
-    if (!token) return;
-    fetch(`${BACKEND_BASE_URL}/api/v1/hb/bank-details`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((r) => r.ok ? r.json() : null)
-      .then((data) => {
-        if (data?.bankDetails) {
-          setBankDetails((prev) => ({ ...prev, ...data.bankDetails }));
-        }
-      })
-      .catch(() => {});
-  }, [token]);
-
-  const handleSaveBankDetails = async () => {
-    if (!bankDetails.accountHolderName || !bankDetails.bankName || !bankDetails.accountNumber) {
-      toast.error("Account holder name, bank name, and account number are required");
-      return;
-    }
-    setSavingBank(true);
-    try {
-      const res = await fetch(`${BACKEND_BASE_URL}/api/v1/hb/bank-details`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-        body: JSON.stringify(bankDetails),
-      });
-      const data = await res.json();
-      if (!res.ok) { toast.error(data.error || "Failed to save bank details"); return; }
-      toast.success("Bank details saved successfully");
-      setBankSaved(true);
-    } catch (err) {
-      toast.error(err.message || "Something went wrong");
-    } finally {
-      setSavingBank(false);
-    }
-  };
-
   const handleFileChange = (e) => {
     const selected = e.target.files[0];
     if (!selected) return;
@@ -248,17 +197,20 @@ function EditProfile() {
       </div>
 
       {/* Form ported from EditUser.jsx */}
-      <section className="max-w-3xl mx-auto mb-10 px-4">
+      <section className="max-w-5xl mx-auto mb-10 px-4">
         <div className="p-6 sm:p-10 bg-transparent rounded-2xl">
           <form
-            className="flex flex-col gap-6 items-center"
+            className="w-full"
             onSubmit={(e) => {
               e.preventDefault();
               handleSubmit();
             }}
           >
+            <div className="grid md:grid-cols-2 gap-x-10 gap-y-8 items-start">
+            {/* ── Left column: account details ── */}
+            <div className="flex flex-col gap-6">
             {/* Name */}
-            <div className="w-full max-w-md z-10">
+            <div className="w-full z-10">
               <label
                 className="block text-[18px] md:text-[20.97px] text-white font-bold leading-[100%] mb-4 md:mb-8"
                 style={{ fontFamily: "Inter, sans-serif" }}
@@ -266,7 +218,7 @@ function EditProfile() {
                 Enter your details
               </label>
 
-              <div className="w-full space-y-8 max-w-md">
+              <div className="w-full space-y-8">
                 <div>
                   <input
                     type="text"
@@ -290,7 +242,7 @@ function EditProfile() {
             </div>
 
             {/* Nickname */}
-            <div className="w-full max-w-md mt-2">
+            <div className="w-full">
               <label
                 className="block text-[18px] md:text-[20.97px] text-white font-bold leading-[100%] mb-2"
                 style={{ fontFamily: "Inter, sans-serif" }}
@@ -327,7 +279,7 @@ function EditProfile() {
             </div>
 
             {/* Email */}
-            <div className="w-full max-w-md mt-2">
+            <div className="w-full">
               <label
                 className="block text-white font-bold text-[18px] md:text-[20.97px] leading-[100%] my-5"
                 style={{ fontFamily: "Inter, sans-serif" }}
@@ -345,8 +297,77 @@ function EditProfile() {
               />
             </div>
 
+            {/* Bio */}
+            <div className="w-full">
+              <label
+                className="block text-white font-bold text-[18px] md:text-[20.97px] leading-[100%] my-5"
+                style={{ fontFamily: "Inter, sans-serif", opacity: 1 }}
+              >
+                Enter Your Bio
+              </label>
+
+              <textarea
+                rows="4"
+                value={bio}
+                onChange={(e) => setBio(e.target.value)}
+                placeholder="Enter Your Bio"
+                className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200"
+              ></textarea>
+            </div>
+
+            {/* Reset Password */}
+            <div className="w-full flex flex-col gap-4">
+              <label className="block text-white text-[20px] md:text-[25px] font-medium mb-2">
+                Reset Password
+              </label>
+
+              <div className="relative">
+                <input
+                  type={showCurrent ? "text" : "password"}
+                  placeholder="Current Password"
+                  value={currentPass}
+                  onChange={(e) => setCurrentPass(e.target.value)}
+                  className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 pr-10"
+                />
+                <div className="absolute right-3 top-2.5 cursor-pointer text-gray-400 hover:text-white" onClick={() => setShowCurrent(!showCurrent)}>
+                  {showCurrent ? <FiEyeOff /> : <FiEye />}
+                </div>
+              </div>
+
+              <div className="relative">
+                <input
+                  type={showNew ? "text" : "password"}
+                  placeholder="New Password"
+                  value={newPass}
+                  onChange={(e) => setNewPass(e.target.value)}
+                  className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 pr-10"
+                />
+                <div className="absolute right-3 top-2.5 cursor-pointer text-gray-400 hover:text-white" onClick={() => setShowNew(!showNew)}>
+                  {showNew ? <FiEyeOff /> : <FiEye />}
+                </div>
+              </div>
+
+              <div className="relative">
+                <input
+                  type={showConfirm ? "text" : "password"}
+                  placeholder="Confirm New Password"
+                  value={confirmPass}
+                  onChange={(e) => setConfirmPass(e.target.value)}
+                  className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 pr-10"
+                />
+                <div className="absolute right-3 top-2.5 cursor-pointer text-gray-400 hover:text-white" onClick={() => setShowConfirm(!showConfirm)}>
+                  {showConfirm ? <FiEyeOff /> : <FiEye />}
+                </div>
+              </div>
+            </div>
+
+            </div>
+
+            {/* ── Right column: wallets ── */}
+            <div className="flex flex-col gap-6">
+
             {/* Embedded Wallet Settings */}
-            <div className="w-full max-w-md mt-4">
+            <div className="w-full">
               <label
                 className="block text-white font-bold text-[18px] md:text-[20.97px] leading-[100%] my-4"
                 style={{ fontFamily: "Inter, sans-serif" }}
@@ -496,111 +517,9 @@ function EditProfile() {
 
             {/* Linked external wallets (MetaMask etc.) */}
             <LinkedWalletsSection />
-
-            {/* Bio */}
-            <div className="w-full max-w-md mt-4">
-              <label
-                className="block text-white font-bold text-[18px] md:text-[20.97px] leading-[100%] my-5"
-                style={{ fontFamily: "Inter, sans-serif", opacity: 1 }}
-              >
-                Enter Your Bio
-              </label>
-
-              <textarea
-                rows="4"
-                value={bio}
-                onChange={(e) => setBio(e.target.value)}
-                placeholder="Enter Your Bio"
-                className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200"
-              ></textarea>
+            </div>
             </div>
 
-            {/* Reset Password */}
-            <div className="w-full max-w-md flex flex-col gap-4 mt-6">
-              <label className="block text-white text-[20px] md:text-[25px] font-medium mb-2">
-                Reset Password
-              </label>
-
-              <div className="relative">
-                <input
-                  type={showCurrent ? "text" : "password"}
-                  placeholder="Current Password"
-                  value={currentPass}
-                  onChange={(e) => setCurrentPass(e.target.value)}
-                  className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 pr-10"
-                />
-                <div className="absolute right-3 top-2.5 cursor-pointer text-gray-400 hover:text-white" onClick={() => setShowCurrent(!showCurrent)}>
-                  {showCurrent ? <FiEyeOff /> : <FiEye />}
-                </div>
-              </div>
-
-              <div className="relative">
-                <input
-                  type={showNew ? "text" : "password"}
-                  placeholder="New Password"
-                  value={newPass}
-                  onChange={(e) => setNewPass(e.target.value)}
-                  className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 pr-10"
-                />
-                <div className="absolute right-3 top-2.5 cursor-pointer text-gray-400 hover:text-white" onClick={() => setShowNew(!showNew)}>
-                  {showNew ? <FiEyeOff /> : <FiEye />}
-                </div>
-              </div>
-
-              <div className="relative">
-                <input
-                  type={showConfirm ? "text" : "password"}
-                  placeholder="Confirm New Password"
-                  value={confirmPass}
-                  onChange={(e) => setConfirmPass(e.target.value)}
-                  className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 pr-10"
-                />
-                <div className="absolute right-3 top-2.5 cursor-pointer text-gray-400 hover:text-white" onClick={() => setShowConfirm(!showConfirm)}>
-                  {showConfirm ? <FiEyeOff /> : <FiEye />}
-                </div>
-              </div>
-            </div>
-
-            {/* Bank Details */}
-            <div className="w-full max-w-md flex flex-col gap-4 mt-6">
-              <div>
-                <label className="block text-white text-[20px] md:text-[25px] font-medium mb-1">
-                  Bank Details
-                </label>
-                <p className="text-white/40 text-sm mb-4">Required for Hyper Bucks bank cashout. Pending admin verification.</p>
-              </div>
-
-              {[
-                { label: "Account Holder Name *", key: "accountHolderName", placeholder: "Full name as on bank account" },
-                { label: "Bank Name *", key: "bankName", placeholder: "e.g. Chase, BCA, HSBC" },
-                { label: "Account Number *", key: "accountNumber", placeholder: "Your account number" },
-                { label: "IBAN", key: "iban", placeholder: "For EU/international banks" },
-                { label: "SWIFT / BIC", key: "swift", placeholder: "e.g. BOFAUS3N" },
-                { label: "Routing Number", key: "routingNumber", placeholder: "For US banks" },
-                { label: "Country", key: "country", placeholder: "e.g. United States, Indonesia" },
-                { label: "Currency", key: "currency", placeholder: "e.g. USD, IDR, EUR" },
-              ].map(({ label, key, placeholder }) => (
-                <div key={key}>
-                  <label className="block text-white/60 text-sm mb-1">{label}</label>
-                  <input
-                    type="text"
-                    value={bankDetails[key]}
-                    onChange={(e) => setBankDetails((prev) => ({ ...prev, [key]: e.target.value }))}
-                    placeholder={placeholder}
-                    className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200"
-                  />
-                </div>
-              ))}
-
-              <button
-                type="button"
-                onClick={handleSaveBankDetails}
-                disabled={savingBank}
-                className="w-full sm:w-[190px] h-[42px] rounded-md font-medium text-white border-none cursor-pointer bg-[#002AA8] hover:bg-[#001f7a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {savingBank ? "Saving..." : bankSaved ? "Saved ✓" : "Save Bank Details"}
-              </button>
-            </div>
 
             <div className="flex justify-center w-full my-12 md:my-16">
               <div className="w-full max-w-md">
