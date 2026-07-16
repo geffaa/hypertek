@@ -4,6 +4,7 @@ import { useAccount, useDisconnect } from "wagmi";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { FiLink, FiTrash2 } from "react-icons/fi";
 import { useLinkExternalWallet } from "../../hooks/useLinkExternalWallet";
+import SettingsCard from "./SettingsCard";
 
 const short = (a) => (a ? `${a.slice(0, 6)}...${a.slice(-4)}` : "");
 
@@ -42,25 +43,15 @@ export default function LinkedWalletsSection() {
   };
 
   return (
-    <div className="w-full">
-      <label
-        className="block text-white font-bold text-[18px] md:text-[20.97px] leading-[100%] my-4"
-        style={{ fontFamily: "Inter, sans-serif" }}
-      >
-        Linked External Wallets
-      </label>
-
-      <div className="bg-[#1C1C1E] border border-blue-500/30 rounded-xl p-5 shadow-[0_0_15px_rgba(59,130,246,0.15)]">
-        <p className="text-sm text-gray-300 mb-4 leading-relaxed">
-          Already have MetaMask or another wallet? Link it here and purchases made
-          from it will show up in your collections, right next to items from your
-          built-in wallet.
-        </p>
-
+    <SettingsCard
+      title="Linked External Wallets"
+      subtitle="Link MetaMask or another wallet and purchases made from it will show up in your collections, right next to items from your built-in wallet."
+    >
+      <div>
         {linked.length > 0 && (
           <div className="space-y-2 mb-4">
             {linked.map((w) => (
-              <div key={w.address} className="flex items-center justify-between bg-black/40 border border-white/10 rounded-lg px-3 py-2">
+              <div key={w.address} className="flex items-center justify-between bg-black/40 border border-white/10 rounded-lg px-3.5 py-2.5">
                 <span className="text-sm font-mono text-blue-400">{short(w.address)}</span>
                 <button
                   type="button"
@@ -91,7 +82,7 @@ export default function LinkedWalletsSection() {
           type="button"
           disabled={busy}
           onClick={handleLink}
-          className="w-full flex items-center justify-center gap-2 py-2 bg-[#002AA8] hover:bg-[#003BD4] disabled:opacity-50 text-white text-sm font-semibold rounded-lg transition-all"
+          className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] disabled:opacity-50 text-white text-sm font-semibold rounded-lg transition-all"
         >
           <FiLink size={14} />
           {!isConnected ? "Connect a wallet to link" : connectedIsMine ? "Link another wallet" : `Link ${short(connectedAddress)}`}
@@ -102,6 +93,6 @@ export default function LinkedWalletsSection() {
           </p>
         )}
       </div>
-    </div>
+    </SettingsCard>
   );
 }

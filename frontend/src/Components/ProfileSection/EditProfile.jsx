@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import overview1 from "../../assets/images/Profile/Hero1.webp";
-import Profile from "../../assets/images/Profile/Profile.webp";
 import { FaUserCircle } from "react-icons/fa";
 import { FiCamera, FiCopy, FiEye, FiEyeOff } from "react-icons/fi";
 import ImageCropModal from "../ImageCropModal";
@@ -15,6 +14,12 @@ import { CDP_WALLET_ENABLED } from "../../Config";
 import { isCdpUser } from "../../context/CdpIntegration";
 import CdpKeyExport from "./CdpKeyExport";
 import LinkedWalletsSection from "./LinkedWalletsSection";
+import SettingsCard from "./SettingsCard";
+
+const INPUT_CLS =
+  "w-full bg-white/5 border border-white/15 rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-gray-500 hover:border-white/25 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none transition-colors";
+const LABEL_CLS =
+  "block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2";
 
 function EditProfile() {
   const location = useLocation();
@@ -25,12 +30,11 @@ function EditProfile() {
   const { emailWalletAddress } = useEmailWallet();
 
   const userData = location.state?.userData || {};
-  console.log("your recieved data are :", userData);
 
-  const [name, setName] = useState(userData.FullName || "");
+  const [name, setName] = useState(userData.FullName || authUser?.FullName || "");
   const storedNickname = userData.Nickname && !userData.Nickname.includes("@") ? userData.Nickname : "";
   const [nickname, setNickname] = useState(storedNickname);
-  const [email, setEmail] = useState(userData.Email || "");
+  const [email, setEmail] = useState(userData.Email || authUser?.Email || "");
   const [bio, setBio] = useState(userData.Bio || "");
   const [profileImage, setProfileImage] = useState(userData.Avatar ? `${BACKEND_BASE_URL}${userData.Avatar}` : null);
   const [currentPass, setCurrentPass] = useState("");
@@ -40,7 +44,6 @@ function EditProfile() {
   const [showCurrent, setShowCurrent] = useState(false);
   const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [copied, setCopied] = useState(false);
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState(null);
   const [cropSrc, setCropSrc] = useState(null);
@@ -73,12 +76,6 @@ function EditProfile() {
 
   const handleProfileClick = () => fileInputRef.current.click();
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(userData._id || "");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   const handleSubmit = async () => {
     if (newPass && newPass !== confirmPass) {
       toast.error("New password and confirm password do not match");
@@ -96,7 +93,7 @@ function EditProfile() {
 
     try {
       setLoading(true);
-      const res = await fetch(`${BACKEND_BASE_URL}/api/v1/profile`, { // updated route
+      const res = await fetch(`${BACKEND_BASE_URL}/api/v1/profile`, {
         method: "PUT",
         headers: { Authorization: `Bearer ${token}` },
         body: formData,
@@ -116,9 +113,6 @@ function EditProfile() {
       toast.error(err.message || "Something went wrong");
     }
   };
-
-
-
 
   return (
     <div className="min-h-screen bg-transparent relative z-10 mt-16">
@@ -153,10 +147,6 @@ function EditProfile() {
         style={{ backgroundImage: `url(${overview1})` }}
       ></div>
 
-
-
-
-
       {/* Profile Info */}
       <div className="relative -mt-16 sm:-mt-24 md:-mt-32 lg:-mt-36 px-4 sm:px-6 lg:px-12 flex flex-col items-center text-center">
         <div className="relative flex-shrink-0 cursor-pointer">
@@ -186,42 +176,29 @@ function EditProfile() {
 
         <div className="mt-3 text-white">
           <h2 className="text-lg md:text-xl font-semibold">{name || authUser?.FullName || ""}</h2>
-          {(userData._id || userData.id || authUser?.id) && (
-            <p className="text-xs sm:text-sm text-gray-400 flex items-center gap-2">
-              {userData._id || userData.id || authUser?.id}
-              <button onClick={handleCopy} className="text-gray-400 hover:text-white transition" data-tooltip="Copy">
-                <FiCopy className="w-4 h-4" />
-              </button>
-              {copied && <span className="text-green-400 text-[10px]">Copied!</span>}
-            </p>
+          {(email || authUser?.Email) && (
+            <p className="text-xs sm:text-sm text-gray-400">{email || authUser?.Email}</p>
           )}
         </div>
       </div>
 
-      {/* Form ported from EditUser.jsx */}
-      <section className="max-w-5xl mx-auto mb-10 px-4">
-        <div className="p-6 sm:p-10 bg-transparent rounded-2xl">
-          <form
-            className="w-full"
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSubmit();
-            }}
-          >
-            <div className="grid md:grid-cols-2 gap-x-10 gap-y-8 items-start">
+      <section className="max-w-5xl mx-auto mt-10 mb-10 px-4">
+        <form
+          className="w-full"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+        >
+          <div className="grid md:grid-cols-2 gap-6 items-start">
             {/* ── Left column: account details ── */}
             <div className="flex flex-col gap-6">
-            {/* Name */}
-            <div className="w-full z-10">
-              <label
-                className="block text-[18px] md:text-[20.97px] text-white font-bold leading-[100%] mb-4 md:mb-8"
-                style={{ fontFamily: "Inter, sans-serif" }}
+              <SettingsCard
+                title="Profile Details"
+                subtitle="How you appear across Hyper Tek."
               >
-                Enter your details
-              </label>
-
-              <div className="w-full space-y-8">
                 <div>
+                  <label className={LABEL_CLS}>Full Name</label>
                   <input
                     type="text"
                     value={name}
@@ -231,163 +208,124 @@ function EditProfile() {
                         setName(value);
                       }
                     }}
-                    placeholder={userData?.FullName || "Full Name"}
-                    className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200"
+                    placeholder="Full Name"
+                    className={INPUT_CLS}
                   />
                   {name.length >= 30 && (
-                    <p className="text-yellow-400 text-xs mt-1">
-                      Maximum 30 characters allowed
+                    <p className="text-yellow-400 text-xs mt-1.5">Maximum 30 characters allowed</p>
+                  )}
+                </div>
+
+                <div>
+                  <label className={LABEL_CLS}>Marketplace Nickname</label>
+                  <input
+                    type="text"
+                    value={nickname}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (value.length <= 30) setNickname(value);
+                    }}
+                    placeholder={name || "e.g. ShadowTrader99"}
+                    className={INPUT_CLS}
+                  />
+                  {nickname.length >= 30 ? (
+                    <p className="text-yellow-400 text-xs mt-1.5">Maximum 30 characters allowed</p>
+                  ) : (
+                    <p className="text-xs text-gray-500 mt-1.5">
+                      Shown publicly on marketplace cards, e.g. <span className="text-gray-300">by {nickname || name || "YourNickname"}</span>. Leave blank to use your full name.
                     </p>
                   )}
                 </div>
-              </div>
-            </div>
 
-            {/* Nickname */}
-            <div className="w-full">
-              <label
-                className="block text-[18px] md:text-[20.97px] text-white font-bold leading-[100%] mb-2"
-                style={{ fontFamily: "Inter, sans-serif" }}
-              >
-                Marketplace Nickname
-              </label>
-
-              {/* Info callout */}
-              <div
-                className="flex items-start gap-2 rounded-lg px-3 py-2.5 mb-3"
-                style={{ background: "rgba(0,42,168,0.18)", border: "1px solid rgba(99,179,237,0.25)" }}
-              >
-                <svg className="w-4 h-4 mt-0.5 flex-shrink-0 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z" />
-                </svg>
-                <p className="text-xs text-blue-200/80 leading-relaxed">
-                  This nickname will be shown publicly in the marketplace; for example, <span className="text-white/90 font-medium">by {nickname || name || "YourNickname"}</span> on trade and listing cards. Leave blank to use your full name instead.
-                </p>
-              </div>
-
-              <input
-                type="text"
-                value={nickname}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  if (value.length <= 30) setNickname(value);
-                }}
-                placeholder={name || "e.g. ShadowTrader99"}
-                className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200"
-              />
-              {nickname.length >= 30 && (
-                <p className="text-yellow-400 text-xs mt-1">Maximum 30 characters allowed</p>
-              )}
-            </div>
-
-            {/* Email */}
-            <div className="w-full">
-              <label
-                className="block text-white font-bold text-[18px] md:text-[20.97px] leading-[100%] my-5"
-                style={{ fontFamily: "Inter, sans-serif" }}
-              >
-                Enter your email
-              </label>
-
-              <input
-                type="email"
-                value={email}
-                disabled
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder={userData?.Email || "Email"}
-                className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white opacity-60 cursor-not-allowed transition-all duration-200"
-              />
-            </div>
-
-            {/* Bio */}
-            <div className="w-full">
-              <label
-                className="block text-white font-bold text-[18px] md:text-[20.97px] leading-[100%] my-5"
-                style={{ fontFamily: "Inter, sans-serif", opacity: 1 }}
-              >
-                Enter Your Bio
-              </label>
-
-              <textarea
-                rows="4"
-                value={bio}
-                onChange={(e) => setBio(e.target.value)}
-                placeholder="Enter Your Bio"
-                className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200"
-              ></textarea>
-            </div>
-
-            {/* Reset Password */}
-            <div className="w-full flex flex-col gap-4">
-              <label className="block text-white text-[20px] md:text-[25px] font-medium mb-2">
-                Reset Password
-              </label>
-
-              <div className="relative">
-                <input
-                  type={showCurrent ? "text" : "password"}
-                  placeholder="Current Password"
-                  value={currentPass}
-                  onChange={(e) => setCurrentPass(e.target.value)}
-                  className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 pr-10"
-                />
-                <div className="absolute right-3 top-2.5 cursor-pointer text-gray-400 hover:text-white" onClick={() => setShowCurrent(!showCurrent)}>
-                  {showCurrent ? <FiEyeOff /> : <FiEye />}
+                <div>
+                  <label className={LABEL_CLS}>Email</label>
+                  <input
+                    type="email"
+                    value={email}
+                    disabled
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email"
+                    className={`${INPUT_CLS} opacity-60 cursor-not-allowed`}
+                  />
+                  <p className="text-xs text-gray-500 mt-1.5">Your email is your sign-in and can't be changed.</p>
                 </div>
-              </div>
 
-              <div className="relative">
-                <input
-                  type={showNew ? "text" : "password"}
-                  placeholder="New Password"
-                  value={newPass}
-                  onChange={(e) => setNewPass(e.target.value)}
-                  className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 pr-10"
-                />
-                <div className="absolute right-3 top-2.5 cursor-pointer text-gray-400 hover:text-white" onClick={() => setShowNew(!showNew)}>
-                  {showNew ? <FiEyeOff /> : <FiEye />}
+                <div>
+                  <label className={LABEL_CLS}>Bio</label>
+                  <textarea
+                    rows="4"
+                    value={bio}
+                    onChange={(e) => setBio(e.target.value)}
+                    placeholder="Tell other players a bit about yourself"
+                    className={`${INPUT_CLS} resize-none`}
+                  ></textarea>
                 </div>
-              </div>
+              </SettingsCard>
 
-              <div className="relative">
-                <input
-                  type={showConfirm ? "text" : "password"}
-                  placeholder="Confirm New Password"
-                  value={confirmPass}
-                  onChange={(e) => setConfirmPass(e.target.value)}
-                  className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 pr-10"
-                />
-                <div className="absolute right-3 top-2.5 cursor-pointer text-gray-400 hover:text-white" onClick={() => setShowConfirm(!showConfirm)}>
-                  {showConfirm ? <FiEyeOff /> : <FiEye />}
+              <SettingsCard
+                title="Change Password"
+                subtitle="Leave these blank to keep your current password."
+              >
+                <div>
+                  <label className={LABEL_CLS}>Current Password</label>
+                  <div className="relative">
+                    <input
+                      type={showCurrent ? "text" : "password"}
+                      placeholder="Current Password"
+                      value={currentPass}
+                      onChange={(e) => setCurrentPass(e.target.value)}
+                      className={`${INPUT_CLS} pr-10`}
+                    />
+                    <div className="absolute right-3 top-3 cursor-pointer text-gray-400 hover:text-white" onClick={() => setShowCurrent(!showCurrent)}>
+                      {showCurrent ? <FiEyeOff /> : <FiEye />}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
 
+                <div>
+                  <label className={LABEL_CLS}>New Password</label>
+                  <div className="relative">
+                    <input
+                      type={showNew ? "text" : "password"}
+                      placeholder="New Password"
+                      value={newPass}
+                      onChange={(e) => setNewPass(e.target.value)}
+                      className={`${INPUT_CLS} pr-10`}
+                    />
+                    <div className="absolute right-3 top-3 cursor-pointer text-gray-400 hover:text-white" onClick={() => setShowNew(!showNew)}>
+                      {showNew ? <FiEyeOff /> : <FiEye />}
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label className={LABEL_CLS}>Confirm New Password</label>
+                  <div className="relative">
+                    <input
+                      type={showConfirm ? "text" : "password"}
+                      placeholder="Confirm New Password"
+                      value={confirmPass}
+                      onChange={(e) => setConfirmPass(e.target.value)}
+                      className={`${INPUT_CLS} pr-10`}
+                    />
+                    <div className="absolute right-3 top-3 cursor-pointer text-gray-400 hover:text-white" onClick={() => setShowConfirm(!showConfirm)}>
+                      {showConfirm ? <FiEyeOff /> : <FiEye />}
+                    </div>
+                  </div>
+                </div>
+              </SettingsCard>
             </div>
 
             {/* ── Right column: wallets ── */}
             <div className="flex flex-col gap-6">
-
-            {/* Embedded Wallet Settings */}
-            <div className="w-full">
-              <label
-                className="block text-white font-bold text-[18px] md:text-[20.97px] leading-[100%] my-4"
-                style={{ fontFamily: "Inter, sans-serif" }}
+              <SettingsCard
+                title="Embedded Wallet"
+                subtitle="Your account comes with a built-in Hyper Tek wallet — no MetaMask needed."
               >
-                Embedded Wallet Settings
-              </label>
-
-              <div className="bg-[#1C1C1E] border border-blue-500/30 rounded-xl p-5 shadow-[0_0_15px_rgba(59,130,246,0.15)]">
-                <p className="text-sm text-gray-300 mb-4 leading-relaxed">
-                  Your account comes with a secure, embedded Hyper Tek wallet. <strong className="text-white">You don't need MetaMask to use the platform!</strong>
-                  <br /><br />
-                  To buy NFAs or list items, simply fund your wallet by sending ETH or USDC (on Base) to your address below.
-                </p>
-
                 {emailWalletAddress && (
-                  <div className="bg-black/40 p-3 rounded-lg border border-white/10 mb-4">
-                    <p className="text-xs text-gray-400 mb-1">Your Wallet Address (Fund via any exchange)</p>
-                    <div className="flex items-center justify-between">
+                  <div className="bg-black/40 p-3.5 rounded-lg border border-white/10">
+                    <p className="text-xs text-gray-400 mb-1.5">Wallet address — fund it by sending ETH or USDC (on Base)</p>
+                    <div className="flex items-center justify-between gap-2">
                       <span className="text-sm font-mono text-blue-400 break-all">{emailWalletAddress}</span>
                       <button
                         type="button"
@@ -395,7 +333,7 @@ function EditProfile() {
                           navigator.clipboard.writeText(emailWalletAddress);
                           toast.success("Wallet address copied!");
                         }}
-                        className="text-gray-400 hover:text-white p-2"
+                        className="text-gray-400 hover:text-white p-2 flex-shrink-0"
                         data-tooltip="Copy to clipboard"
                       >
                         <FiCopy size={16} />
@@ -427,7 +365,7 @@ function EditProfile() {
                             value={pkPassword}
                             onChange={(e) => setPkPassword(e.target.value)}
                             placeholder="Your password"
-                            className="w-full bg-white/5 border border-white/15 text-white text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500/60"
+                            className={INPUT_CLS}
                             autoFocus
                             onKeyDown={(e) => {
                               if (e.key === "Enter") {
@@ -478,14 +416,14 @@ function EditProfile() {
                     )}
                   </div>
                 ) : (
-                  <div className="space-y-3 mt-4 pt-4 border-t border-white/10">
+                  <div className="space-y-3 pt-4 border-t border-white/10">
                     <div className="relative">
                       <p className="text-xs text-gray-400 mb-1">Private Key (Advanced)</p>
                       <input
                         type={showPrivateKey ? "text" : "password"}
                         value={privateKey}
                         readOnly
-                        className="w-full bg-transparent border border-white/20 rounded-lg px-3 py-2 text-sm text-white pr-20 font-mono focus:outline-none"
+                        className={`${INPUT_CLS} pr-20 font-mono`}
                       />
                       <div className="absolute right-2 bottom-2 flex gap-2">
                         <button
@@ -514,27 +452,22 @@ function EditProfile() {
                     </p>
                   </div>
                 )}
-              </div>
-            </div>
+              </SettingsCard>
 
-            {/* Linked external wallets (MetaMask etc.) */}
-            <LinkedWalletsSection />
+              {/* Linked external wallets (MetaMask etc.) */}
+              <LinkedWalletsSection />
             </div>
-            </div>
+          </div>
 
-
-            <div className="flex justify-center w-full my-12 md:my-16">
-              <div className="w-full max-w-md">
-                <button
-                  type="submit"
-                  className="mx-auto block bg-[#002AA8] hover:bg-[#001f7a] transition-colors w-full sm:w-[190px] h-[42px] rounded-md font-medium text-white border-none cursor-pointer"
-                >
-                  Save Profile
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
+          <div className="flex justify-center w-full mt-10 mb-4">
+            <button
+              type="submit"
+              className="bg-[#002AA8] hover:bg-[#001f7a] transition-colors w-full sm:w-[190px] h-[42px] rounded-md font-medium text-white border-none cursor-pointer"
+            >
+              Save Profile
+            </button>
+          </div>
+        </form>
       </section>
     </div>
   );
