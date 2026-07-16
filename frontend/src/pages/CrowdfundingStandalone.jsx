@@ -20,7 +20,6 @@ import {
 import { useTranslation } from "react-i18next";
 import GlowingOrb from "../Components/Common/BgColoring";
 import CrowdfundingPackages from "../Components/home/PopularCollections";
-import ComingSoonModal from "../Components/Common/ComingSoonModal";
 import HelpCards from "../Components/home/HelpCards";
 import { CARD_ACCENTS_SOLID } from "../Components/home/cardAccents";
 
@@ -208,7 +207,6 @@ function CrowdfundingStandalone() {
   const linkSlogan = linkParts.length > 1 ? linkParts.slice(1).join("—").trim() : "";
 
   // "Coming soon" notice for features that unlock at official launch.
-  const [comingSoon, setComingSoon] = useState(null); // null | "Marketplace" | "Gaming Interface"
 
   // Avatar rotation: advance one step each time the page is visited, then keep
   // the same set of images for the whole visit (no per-second cycling).
@@ -573,7 +571,7 @@ function CrowdfundingStandalone() {
       {/* ══════════════════════════════════════════════════════
           CLOSING CTA
       ══════════════════════════════════════════════════════ */}
-      <section className="relative w-full py-10 overflow-hidden">
+      <section className="relative w-full pt-2 pb-10 overflow-hidden">
         <motion.div className="relative z-10 max-w-[680px] mx-auto px-6 text-center"
           initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.65 }} viewport={{ once: true }}>
           <div className="flex items-center gap-4 mb-8 justify-center">
@@ -583,7 +581,7 @@ function CrowdfundingStandalone() {
           </div>
           <p className="text-white/48 text-sm md:text-[15px] leading-[1.9] italic mb-8">{t("aboutPage.closing.body")}</p>
           <div className="flex flex-wrap items-center justify-center gap-5">
-            <button type="button" onClick={() => setComingSoon("The Marketplace")} className="px-8 py-3 text-[11px] font-bold uppercase transition-all hover:brightness-125" style={{
+            <Link to="/market-place" onClick={() => window.scrollTo(0, 0)} className="px-8 py-3 text-[11px] font-bold uppercase transition-all hover:brightness-125" style={{
               background: "#0b1a2e",
               border: "1px solid rgba(56,189,248,0.5)",
               borderTop: "2px solid rgba(56,189,248,0.75)",
@@ -594,8 +592,8 @@ function CrowdfundingStandalone() {
               letterSpacing: "0.12em",
             }}>
               {t("aboutPage.closing.exploreMarketplace") || "Explore Marketplace"}
-            </button>
-            <button type="button" onClick={() => setComingSoon("The Gaming Interface")} className="px-8 py-3 text-[11px] font-bold uppercase transition-all hover:brightness-110" style={{
+            </Link>
+            <Link to="/gaming" onClick={() => window.scrollTo(0, 0)} className="px-8 py-3 text-[11px] font-bold uppercase transition-all hover:brightness-110" style={{
               background: "#141820",
               border: "1px solid rgba(255,255,255,0.22)",
               borderTop: "2px solid rgba(255,255,255,0.35)",
@@ -605,7 +603,7 @@ function CrowdfundingStandalone() {
               letterSpacing: "0.12em",
             }}>
               {t("packages.tryGaming")}
-            </button>
+            </Link>
           </div>
           <div className="flex items-center gap-4 mt-10 justify-center">
             <div className="flex-1 h-px bg-white/8" />
@@ -615,11 +613,6 @@ function CrowdfundingStandalone() {
         </motion.div>
       </section>
 
-      <ComingSoonModal
-        isOpen={comingSoon !== null}
-        onClose={() => setComingSoon(null)}
-        feature={comingSoon}
-      />
     </div>
   );
 }

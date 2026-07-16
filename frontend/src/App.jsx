@@ -125,7 +125,6 @@ function AppWrapper() {
   const hideLayoutRoutes = [
     "/waitlist",
     "/join-waitlist",
-    "/crowdfunding",
     "/dashboard/create-earning",
     "/stripe-payment",
     "/dashboard",
@@ -166,8 +165,9 @@ function AppWrapper() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             {/* Standalone crowdfunding — public preview (bypasses maintenance),
-                navbar/footer hidden. Original <Crowdfunding /> kept for the full
-                site relaunch. */}
+                with the site navbar/footer so visitors can get back to the rest
+                of the site. Original <Crowdfunding /> kept for the full site
+                relaunch. */}
             <Route path="/crowdfunding" element={<CrowdfundingStandalone />} />
 
             {/* Auth */}
