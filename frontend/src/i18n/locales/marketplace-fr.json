@@ -534,6 +534,12 @@
       "connectWallet": "Connectez d'abord votre portefeuille",
       "loginFirst": "Connectez-vous d'abord",
       "cancelFailed": "Could not cancel trade. Please try again."
+    },
+    "launchLock": {
+      "marketplaceTitle": "La Marketplace est verrouillée jusqu'au lancement, et le lancement arrive très bientôt !",
+      "dashboardTitle": "Votre tableau de bord se déverrouille au lancement, très bientôt !",
+      "desc": "Ne laissez pas cela vous arrêter. Inscrivez-vous, explorez ce projet incroyable, découvrez comment il peut vous récompenser et aidez à le concrétiser. Devenez un Hyper Tekin et créez quelque chose de nouveau !",
+      "buttonLabel": "Déverrouillage très bientôt"
     }
   },
   "musicPlayer": {

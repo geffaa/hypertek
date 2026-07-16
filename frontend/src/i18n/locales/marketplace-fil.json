@@ -534,6 +534,12 @@
       "connectWallet": "I-connect muna ang iyong wallet",
       "loginFirst": "Mag-login muna",
       "cancelFailed": "Could not cancel trade. Please try again."
+    },
+    "launchLock": {
+      "marketplaceTitle": "Naka-lock ang Marketplace hanggang sa paglunsad, at malapit na ang paglunsad!",
+      "dashboardTitle": "Mabubuksan ang iyong dashboard sa paglunsad, malapit na!",
+      "desc": "Huwag mong hayaang pigilan ka nito. Mag-sign up, tuklasin ang kamangha-manghang proyektong ito, tingnan kung paano ka nito magagantimpalaan, at tumulong na maisakatuparan ito. Maging isang Hyper Tekin at lumikha ng bago!",
+      "buttonLabel": "Malapit nang mabuksan"
     }
   },
   "musicPlayer": {

@@ -58,7 +58,7 @@ const DashboardLayout = () => {
           <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar flex flex-col pr-4 md:pr-6">
             <LockOverlay
               locked={LAUNCH_LOCKED}
-              title={t("marketplace.launchLock.dashboardTitle", "Your dashboard unlocks at launch — coming very soon!")}
+              title={t("marketplace.launchLock.dashboardTitle", "Your dashboard unlocks at launch, coming very soon!")}
               desc={t("marketplace.launchLock.desc", "Don't let that stop you. Sign up, explore this amazing project, see how it could reward you, and help make it happen. Become a Hyper Tekin and create something new!")}
             >
               <Outlet />

@@ -534,6 +534,12 @@
       "connectWallet": "请先连接您的钱包",
       "loginFirst": "请先登录",
       "cancelFailed": "Could not cancel trade. Please try again."
+    },
+    "launchLock": {
+      "marketplaceTitle": "市场在正式上线前处于锁定状态，上线即将到来！",
+      "dashboardTitle": "您的仪表板将在上线时解锁，敬请期待！",
+      "desc": "别让这阻止你。立即注册，探索这个精彩的项目，看看它能为你带来什么回报，并帮助它成为现实。成为一名 Hyper Tekin，创造全新的事物！",
+      "buttonLabel": "即将解锁"
     }
   },
   "musicPlayer": {

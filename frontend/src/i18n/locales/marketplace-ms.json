@@ -534,6 +534,12 @@
       "connectWallet": "Sambungkan dompet anda dahulu",
       "loginFirst": "Log masuk dahulu",
       "cancelFailed": "Could not cancel trade. Please try again."
+    },
+    "launchLock": {
+      "marketplaceTitle": "Marketplace dikunci sehingga pelancaran, dan pelancaran akan tiba tidak lama lagi!",
+      "dashboardTitle": "Papan pemuka anda dibuka semasa pelancaran, tidak lama lagi!",
+      "desc": "Jangan biarkan itu menghalang anda. Daftar, terokai projek hebat ini, lihat bagaimana ia boleh memberi ganjaran kepada anda, dan bantu merealisasikannya. Jadilah seorang Hyper Tekin dan cipta sesuatu yang baharu!",
+      "buttonLabel": "Dibuka tidak lama lagi"
     }
   },
   "musicPlayer": {

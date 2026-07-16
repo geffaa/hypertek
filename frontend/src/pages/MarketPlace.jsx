@@ -114,7 +114,7 @@ function MarketPlace() {
   const launchLock = (tab) => (
     <LockOverlay
       locked={LAUNCH_LOCKED}
-      title={t("marketplace.launchLock.marketplaceTitle", "The Marketplace is locked until launch — and launch is coming very soon!")}
+      title={t("marketplace.launchLock.marketplaceTitle", "The Marketplace is locked until launch, and launch is coming very soon!")}
       desc={t("marketplace.launchLock.desc", "Don't let that stop you. Sign up, explore this amazing project, see how it could reward you, and help make it happen. Become a Hyper Tekin and create something new!")}
     >
       {tab}

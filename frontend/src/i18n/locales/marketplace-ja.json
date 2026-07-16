@@ -534,6 +534,12 @@
       "connectWallet": "まずウォレットを接続してください",
       "loginFirst": "まずログインしてください",
       "cancelFailed": "Could not cancel trade. Please try again."
+    },
+    "launchLock": {
+      "marketplaceTitle": "マーケットプレイスはローンチまでロックされています。ローンチはまもなくです！",
+      "dashboardTitle": "ダッシュボードはローンチ時に解除されます。まもなくです！",
+      "desc": "それで止まらないでください。登録して、この素晴らしいプロジェクトを探索し、どのように報酬が得られるかを確認し、実現に協力しましょう。Hyper Tekin になって、新しいものを創造しましょう！",
+      "buttonLabel": "まもなく解除されます"
     }
   },
   "musicPlayer": {

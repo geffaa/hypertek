@@ -534,6 +534,12 @@
       "connectWallet": "Conecta tu cartera primero",
       "loginFirst": "Inicia sesión primero",
       "cancelFailed": "Could not cancel trade. Please try again."
+    },
+    "launchLock": {
+      "marketplaceTitle": "El Marketplace está bloqueado hasta el lanzamiento, ¡y el lanzamiento llegará muy pronto!",
+      "dashboardTitle": "Tu panel se desbloquea en el lanzamiento, ¡muy pronto!",
+      "desc": "No dejes que eso te detenga. Regístrate, explora este increíble proyecto, descubre cómo puede recompensarte y ayuda a hacerlo realidad. ¡Conviértete en un Hyper Tekin y crea algo nuevo!",
+      "buttonLabel": "Se desbloquea muy pronto"
     }
   },
   "musicPlayer": {

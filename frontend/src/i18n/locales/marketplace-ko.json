@@ -534,6 +534,12 @@
       "connectWallet": "먼저 지갑을 연결하세요",
       "loginFirst": "먼저 로그인하세요",
       "cancelFailed": "Could not cancel trade. Please try again."
+    },
+    "launchLock": {
+      "marketplaceTitle": "마켓플레이스는 출시 전까지 잠겨 있으며, 출시가 곧 다가옵니다!",
+      "dashboardTitle": "대시보드는 출시 시 잠금 해제됩니다. 곧 공개됩니다!",
+      "desc": "그렇다고 멈추지 마세요. 가입하고, 이 놀라운 프로젝트를 탐색하고, 어떤 보상을 받을 수 있는지 확인하고, 실현에 도움을 주세요. Hyper Tekin이 되어 새로운 것을 만들어 보세요!",
+      "buttonLabel": "곧 잠금 해제"
     }
   },
   "musicPlayer": {

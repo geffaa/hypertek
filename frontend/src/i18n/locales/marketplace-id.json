@@ -534,6 +534,12 @@
       "connectWallet": "Hubungkan dompet Anda terlebih dahulu",
       "loginFirst": "Masuk terlebih dahulu",
       "cancelFailed": "Could not cancel trade. Please try again."
+    },
+    "launchLock": {
+      "marketplaceTitle": "Marketplace terkunci hingga peluncuran, dan peluncuran akan segera hadir!",
+      "dashboardTitle": "Dasbor Anda terbuka saat peluncuran, segera hadir!",
+      "desc": "Jangan biarkan itu menghentikanmu. Daftar, jelajahi proyek luar biasa ini, lihat bagaimana ia bisa memberimu keuntungan, dan bantu mewujudkannya. Jadilah seorang Hyper Tekin dan ciptakan sesuatu yang baru!",
+      "buttonLabel": "Segera terbuka"
     }
   },
   "musicPlayer": {

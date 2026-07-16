@@ -534,6 +534,12 @@
       "connectWallet": "Koble til lommeboken din forst",
       "loginFirst": "Logg inn forst",
       "cancelFailed": "Could not cancel trade. Please try again."
+    },
+    "launchLock": {
+      "marketplaceTitle": "Markedsplassen er låst frem til lansering, og lanseringen kommer veldig snart!",
+      "dashboardTitle": "Dashbordet ditt låses opp ved lansering, veldig snart!",
+      "desc": "Ikke la det stoppe deg. Registrer deg, utforsk dette fantastiske prosjektet, se hvordan det kan belønne deg, og bidra til å gjøre det til virkelighet. Bli en Hyper Tekin og skap noe nytt!",
+      "buttonLabel": "Låses opp veldig snart"
     }
   },
   "musicPlayer": {

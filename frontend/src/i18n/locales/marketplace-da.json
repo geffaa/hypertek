@@ -534,6 +534,12 @@
       "connectWallet": "Tilslut din pung først",
       "loginFirst": "Log ind først",
       "cancelFailed": "Could not cancel trade. Please try again."
+    },
+    "launchLock": {
+      "marketplaceTitle": "Markedspladsen er låst indtil lancering, og lanceringen er lige om hjørnet!",
+      "dashboardTitle": "Dit dashboard låses op ved lancering, lige om hjørnet!",
+      "desc": "Lad ikke det stoppe dig. Tilmeld dig, udforsk dette fantastiske projekt, se hvordan det kan belønne dig, og hjælp med at gøre det til virkelighed. Bliv en Hyper Tekin og skab noget nyt!",
+      "buttonLabel": "Låses op meget snart"
     }
   },
   "musicPlayer": {

@@ -534,6 +534,12 @@
       "connectWallet": "חבר קודם את הארנק שלך",
       "loginFirst": "התחבר קודם",
       "cancelFailed": "Could not cancel trade. Please try again."
+    },
+    "launchLock": {
+      "marketplaceTitle": "השוק נעול עד ההשקה, וההשקה מגיעה ממש בקרוב!",
+      "dashboardTitle": "לוח הבקרה שלך נפתח בהשקה, ממש בקרוב!",
+      "desc": "אל תיתן לזה לעצור אותך. הירשם, גלה את הפרויקט המדהים הזה, ראה כיצד הוא יכול לתגמל אותך, ועזור להגשים אותו. הפוך ל-Hyper Tekin וצור משהו חדש!",
+      "buttonLabel": "נפתח ממש בקרוב"
     }
   },
   "musicPlayer": {

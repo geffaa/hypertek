@@ -534,6 +534,12 @@
       "connectWallet": "Verbind eerst je wallet",
       "loginFirst": "Log eerst in",
       "cancelFailed": "Could not cancel trade. Please try again."
+    },
+    "launchLock": {
+      "marketplaceTitle": "De Marketplace is vergrendeld tot de lancering, en de lancering komt heel binnenkort!",
+      "dashboardTitle": "Je dashboard wordt ontgrendeld bij de lancering, heel binnenkort!",
+      "desc": "Laat dat je niet tegenhouden. Meld je aan, ontdek dit geweldige project, zie hoe het je kan belonen en help het werkelijkheid te maken. Word een Hyper Tekin en creëer iets nieuws!",
+      "buttonLabel": "Binnenkort ontgrendeld"
     }
   },
   "musicPlayer": {

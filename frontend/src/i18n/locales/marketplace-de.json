@@ -534,6 +534,12 @@
       "connectWallet": "Verbinde zuerst deine Wallet",
       "loginFirst": "Melde dich zuerst an",
       "cancelFailed": "Could not cancel trade. Please try again."
+    },
+    "launchLock": {
+      "marketplaceTitle": "Der Marktplatz ist bis zum Start gesperrt, und der Start steht kurz bevor!",
+      "dashboardTitle": "Dein Dashboard wird zum Start freigeschaltet, schon sehr bald!",
+      "desc": "Lass dich davon nicht aufhalten. Registriere dich, entdecke dieses großartige Projekt, sieh, wie es dich belohnen kann, und hilf mit, es Wirklichkeit werden zu lassen. Werde ein Hyper Tekin und erschaffe etwas Neues!",
+      "buttonLabel": "Wird bald freigeschaltet"
     }
   },
   "musicPlayer": {

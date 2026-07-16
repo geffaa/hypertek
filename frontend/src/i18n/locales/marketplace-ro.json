@@ -534,6 +534,12 @@
       "connectWallet": "Conectați mai întâi portofelul",
       "loginFirst": "Autentificați-vă mai întâi",
       "cancelFailed": "Could not cancel trade. Please try again."
+    },
+    "launchLock": {
+      "marketplaceTitle": "Marketplace-ul este blocat până la lansare, iar lansarea vine foarte curând!",
+      "dashboardTitle": "Panoul tău se deblochează la lansare, foarte curând!",
+      "desc": "Nu lăsa asta să te oprească. Înscrie-te, explorează acest proiect uimitor, vezi cum te poate recompensa și ajută la realizarea lui. Devino un Hyper Tekin și creează ceva nou!",
+      "buttonLabel": "Se deblochează foarte curând"
     }
   },
   "musicPlayer": {
