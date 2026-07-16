@@ -86,7 +86,6 @@ createRoot(document.getElementById('root')).render(
 // createRoot(document.getElementById('root')).render(
 //   <StrictMode>
 //     <Provider store={store}>
-//       <GoogleOAuthProvider clientId={"338330586933-u9j6r5kre5a8tbht14pp2jokh7d32qi5.apps.googleusercontent.com"}>
 //         <App />
 //       </GoogleOAuthProvider>
 //     </Provider>

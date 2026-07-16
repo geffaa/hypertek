@@ -32,8 +32,9 @@ axios.interceptors.response.use(
   }
 );
 
-const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY
-    || "pk_test_51SHewG3UIHQiuHTy62JP9SiQzYm4kVI8uDg158N2RxzmQMUKU0tr5zSVlrSwOCaGmIxFTwEJL59vKJ9cVDzWdUxH005IuFlux3";
+// Publishable (not secret) by design, but still env-driven only — set
+// VITE_STRIPE_PUBLISHABLE_KEY in .env.local / deploy.yml.
+const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || "";
 
 const User_Dashboard_Url = `${BACKEND_BASE_URL}/api/v1`;
 const MarketPlace_Url = `${BACKEND_BASE_URL}/api/v1`;
