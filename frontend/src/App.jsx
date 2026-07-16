@@ -81,6 +81,7 @@ const Funnel = lazy(() => import("./pages/Funnel"));
 const Gaming = lazy(() => import("./pages/Gaming"));
 const WalletTest = lazy(() => import("./pages/WalletTest"));
 const Nft101Article = lazy(() => import("./pages/Nft101Article"));
+const WhatIsAWallet = lazy(() => import("./pages/WhatIsAWallet"));
 const GameModePage = lazy(() => import("./pages/GameModePage"));
 const Preview = lazy(() => import("./pages/Preview"));
 const PreviewGameMode = lazy(() => import("./pages/PreviewGameMode"));
@@ -187,6 +188,7 @@ function AppWrapper() {
             <Route path="/more-news" element={<HypeGamePage />} />
             <Route path="/news" element={<NewsAll />} />
             <Route path="/learn/:id" element={<Nft101Article />} />
+            <Route path="/what-is-a-wallet" element={<WhatIsAWallet />} />
 
 
             {/* NFA Pages */}

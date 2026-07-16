@@ -1,4 +1,19 @@
-import { getDefaultConfig } from '@rainbow-me/rainbowkit';
+import { connectorsForWallets } from '@rainbow-me/rainbowkit';
+import {
+  metaMaskWallet,
+  coinbaseWallet,
+  walletConnectWallet,
+  rainbowWallet,
+  trustWallet,
+  ledgerWallet,
+  phantomWallet,
+  okxWallet,
+  rabbyWallet,
+  binanceWallet,
+  uniswapWallet,
+  injectedWallet,
+} from '@rainbow-me/rainbowkit/wallets';
+import { createConfig } from 'wagmi';
 import { base, baseSepolia } from 'wagmi/chains';
 import { http } from 'wagmi';
 
@@ -14,9 +29,32 @@ const activeRpc = chainId === 84532
 // without it; the ID is needed for WalletConnect/mobile-QR connections.
 const walletConnectProjectId = import.meta.env.VITE_WALLETCONNECT_PROJECT_ID || 'placeholder-set-vite-walletconnect-project-id';
 
-export const config = getDefaultConfig({
-  appName: 'Hyper-Tek Game Marketplace',
-  projectId: walletConnectProjectId,
+// Explicit, grouped wallet menu so players can bring almost any wallet they
+// already own. WalletConnect at the end is the catch-all: any wallet not
+// listed can still connect through its QR code.
+const connectors = connectorsForWallets(
+  [
+    {
+      groupName: 'Popular',
+      wallets: [metaMaskWallet, coinbaseWallet, trustWallet, rainbowWallet],
+    },
+    {
+      groupName: 'More wallets',
+      wallets: [okxWallet, rabbyWallet, ledgerWallet, phantomWallet, binanceWallet, uniswapWallet, injectedWallet],
+    },
+    {
+      groupName: 'Connect any other wallet',
+      wallets: [walletConnectWallet],
+    },
+  ],
+  {
+    appName: 'Hyper Tek',
+    projectId: walletConnectProjectId,
+  }
+);
+
+export const config = createConfig({
+  connectors,
   chains: [activeChain],
   transports: {
     [activeChain.id]: activeRpc,

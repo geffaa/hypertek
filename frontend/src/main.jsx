@@ -55,7 +55,18 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider initialChain={config.chains[0]}>
+        <RainbowKitProvider
+          initialChain={config.chains[0]}
+          // Compact modal drops the library's two fixed "What is a Wallet?"
+          // intro cards (their text is baked into RainbowKit and cannot be
+          // reworded) and leads with the wallet list instead, with a small
+          // Learn More link that points to our own explainer below.
+          modalSize="compact"
+          appInfo={{
+            appName: 'Hyper Tek',
+            learnMoreUrl: 'https://hypertek100.com/what-is-a-wallet',
+          }}
+        >
           <Provider store={store}>
             <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
               <Toaster position="top-right" />
