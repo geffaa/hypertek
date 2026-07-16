@@ -1,7 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { Dashboard_Base_Url } from "../Config";
+
+/* The backend composes these notifications on the fly from buyback requests,
+   sales, payouts and signups — they are not stored documents, so read/dismiss
+   state lives in localStorage keyed by the synthetic notification id. */
+const READ_KEY = "ht_admin_notif_read";
+const DISMISSED_KEY = "ht_admin_notif_dismissed";
+const loadIds = (key) => {
+  try { return new Set(JSON.parse(localStorage.getItem(key)) || []); }
+  catch { return new Set(); }
+};
+const saveIds = (key, set) => {
+  localStorage.setItem(key, JSON.stringify([...set].slice(-500)));
+};
 
 const F    = "Inter, sans-serif";
 const CARD = { background: "#0c0c18", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "14px" };
@@ -36,6 +50,7 @@ export default function NotificationsPage() {
   const [filter,        setFilter]        = useState("all");
 
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetch = async () => {
@@ -44,7 +59,12 @@ export default function NotificationsPage() {
         const res = await axios.get(`${Dashboard_Base_Url}/v1/admin/nfa/notifications`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setNotifications(res.data.notifications || res.data.data || []);
+        const readIds = loadIds(READ_KEY);
+        const dismissedIds = loadIds(DISMISSED_KEY);
+        const list = (res.data.notifications || res.data.data || [])
+          .filter((n) => !dismissedIds.has(n._id || n.id))
+          .map((n) => ({ ...n, read: n.read || readIds.has(n._id || n.id) }));
+        setNotifications(list);
       } catch {
         setNotifications([]);
       } finally {
@@ -54,25 +74,31 @@ export default function NotificationsPage() {
     fetch();
   }, [token]);
 
-  const markAllRead = async () => {
-    try {
-      await axios.put(`${Dashboard_Base_Url}/v1/admin/notifications/read-all`, {}, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
-      toast.success("All notifications marked as read");
-    } catch {
-      setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
-    }
+  const markAllRead = () => {
+    const readIds = loadIds(READ_KEY);
+    notifications.forEach((n) => readIds.add(n._id || n.id));
+    saveIds(READ_KEY, readIds);
+    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
+    toast.success("All notifications marked as read");
   };
 
-  const dismiss = async (id) => {
-    setNotifications((prev) => prev.filter((n) => n._id !== id));
-    try {
-      await axios.delete(`${Dashboard_Base_Url}/v1/admin/notifications/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-    } catch { /* optimistic — already removed from UI */ }
+  const dismiss = (id) => {
+    const dismissedIds = loadIds(DISMISSED_KEY);
+    dismissedIds.add(id);
+    saveIds(DISMISSED_KEY, dismissedIds);
+    setNotifications((prev) => prev.filter((n) => (n._id || n.id) !== id));
+  };
+
+  const open = (notif) => {
+    const id = notif._id || notif.id;
+    const readIds = loadIds(READ_KEY);
+    readIds.add(id);
+    saveIds(READ_KEY, readIds);
+    setNotifications((prev) => prev.map((n) => ((n._id || n.id) === id ? { ...n, read: true } : n)));
+    if (!notif.link) return;
+    let adminId = "";
+    try { adminId = JSON.parse(localStorage.getItem("admin_data"))?._id || ""; } catch { /* ignore */ }
+    navigate(adminId ? `/${adminId}/${notif.link}` : `/${notif.link}`);
   };
 
   const unreadCount = notifications.filter((n) => !n.read).length;
@@ -143,6 +169,7 @@ export default function NotificationsPage() {
             return (
               <div
                 key={notif._id || notif.id}
+                onClick={() => open(notif)}
                 style={{
                   ...CARD,
                   padding: "16px 18px",
@@ -152,7 +179,10 @@ export default function NotificationsPage() {
                   background: isUnread ? "rgba(0,42,168,0.06)" : "#0c0c18",
                   borderColor: isUnread ? "rgba(0,80,255,0.15)" : "rgba(255,255,255,0.07)",
                   transition: "background 0.15s",
+                  cursor: notif.link ? "pointer" : "default",
                 }}
+                onMouseEnter={(e) => { if (notif.link) e.currentTarget.style.background = "rgba(0,42,168,0.12)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = isUnread ? "rgba(0,42,168,0.06)" : "#0c0c18"; }}
               >
                 {/* Icon / Avatar */}
                 <div style={{ width: 36, height: 36, borderRadius: 10, flexShrink: 0, background: cfg.bg, border: `1px solid ${cfg.border}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -186,7 +216,7 @@ export default function NotificationsPage() {
                     <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#4d7aff", flexShrink: 0 }} />
                   )}
                   <button
-                    onClick={() => dismiss(notif._id || notif.id)}
+                    onClick={(e) => { e.stopPropagation(); dismiss(notif._id || notif.id); }}
                     style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.2)", padding: 2, display: "flex", transition: "color 0.15s" }}
                     onMouseEnter={(e) => e.currentTarget.style.color = "rgba(255,255,255,0.6)"}
                     onMouseLeave={(e) => e.currentTarget.style.color = "rgba(255,255,255,0.2)"}

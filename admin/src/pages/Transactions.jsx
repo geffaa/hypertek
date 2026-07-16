@@ -7,6 +7,11 @@ import { Dashboard_Base_Url } from "../Config";
 
 const PAGE_SIZE_OPTIONS = [10, 25, 50];
 
+const SOURCES = [
+  { key: "payments", label: "Card Payments" },
+  { key: "sales",    label: "Marketplace Sales" },
+];
+
 const STATUS_FILTERS = [
   { key: "all",       label: "All"       },
   { key: "succeeded", label: "Succeeded" },
@@ -78,6 +83,7 @@ function Transactions() {
   const [search,       setSearch]       = useState("");
   const [searchInput,  setSearchInput]  = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [source,       setSource]       = useState("payments");
   const [page,         setPage]         = useState(1);
   const [pageSize,     setPageSize]     = useState(PAGE_SIZE_OPTIONS[0]);
 
@@ -87,13 +93,14 @@ function Transactions() {
     setLoading(true);
     try {
       const params = new URLSearchParams();
-      if (statusFilter !== "all") params.set("status", statusFilter);
+      if (source === "payments" && statusFilter !== "all") params.set("status", statusFilter);
       if (search.trim())          params.set("search", search.trim());
       params.set("page",  String(page));
       params.set("limit", String(pageSize));
 
+      const endpoint = source === "sales" ? "marketplace-sales" : "get-history";
       const res = await axios.get(
-        `${Dashboard_Base_Url}/v1/history/get-history?${params.toString()}`
+        `${Dashboard_Base_Url}/v1/history/${endpoint}?${params.toString()}`
       );
       if (res.data.success) {
         setTransactions(res.data.data       || []);
@@ -107,10 +114,10 @@ function Transactions() {
     } finally {
       setLoading(false);
     }
-  }, [statusFilter, search, page, pageSize]);
+  }, [source, statusFilter, search, page, pageSize]);
 
   useEffect(() => { fetchHistory(); }, [fetchHistory]);
-  useEffect(() => { setPage(1); }, [statusFilter, search, pageSize]);
+  useEffect(() => { setPage(1); }, [source, statusFilter, search, pageSize]);
 
   // Search on Enter or after 500ms debounce
   useEffect(() => {
@@ -147,6 +154,26 @@ function Transactions() {
         </p>
       </div>
 
+      {/* ── Source tabs ── */}
+      <div className="flex gap-1.5 mb-4">
+        {SOURCES.map(s => (
+          <button
+            key={s.key}
+            onClick={() => setSource(s.key)}
+            style={{
+              padding: "7px 16px", borderRadius: 10, fontSize: 13, fontWeight: 600, cursor: "pointer",
+              border: "1px solid",
+              borderColor: source === s.key ? "rgba(0,80,255,0.5)" : "rgba(255,255,255,0.1)",
+              background: source === s.key ? "rgba(0,42,168,0.35)" : "rgba(255,255,255,0.04)",
+              color: source === s.key ? "white" : "rgba(255,255,255,0.5)",
+              transition: "all 0.15s",
+            }}
+          >
+            {s.label}
+          </button>
+        ))}
+      </div>
+
       {/* ── Search + Filters ── */}
       <div className="flex flex-wrap items-center gap-3 mb-5">
 
@@ -170,8 +197,8 @@ function Transactions() {
           )}
         </div>
 
-        {/* Status filters */}
-        <div className="flex gap-1.5 flex-wrap">
+        {/* Status filters (card payments only) */}
+        <div className="flex gap-1.5 flex-wrap" style={{ display: source === "sales" ? "none" : undefined }}>
           {STATUS_FILTERS.map(f => (
             <button
               key={f.key}
@@ -202,6 +229,77 @@ function Transactions() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
           </svg>
           <p style={{ color: "rgba(255,255,255,0.35)", fontSize: 13 }}>No transactions found</p>
+        </div>
+      ) : source === "sales" ? (
+        <div style={{ overflowX: "auto", borderRadius: 12, border: "1px solid rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.015)" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 820 }}>
+            <thead>
+              <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+                {["Date", "Item", "Buyer / Seller", "Price (USDC)", "Platform Fee", "Royalty", "Tx"].map(h => (
+                  <th key={h} style={{ padding: "10px 20px", textAlign: "left", color: "rgba(255,255,255,0.4)", fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", whiteSpace: "nowrap" }}>
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {transactions.map((sale, idx) => (
+                <tr
+                  key={sale.txHash || idx}
+                  style={{ borderBottom: "1px solid rgba(255,255,255,0.04)", transition: "background 0.12s" }}
+                  onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.02)"}
+                  onMouseLeave={e => e.currentTarget.style.background = "transparent"}
+                >
+                  <td style={{ padding: "12px 20px", color: "rgba(255,255,255,0.45)", fontSize: 12, whiteSpace: "nowrap" }}>
+                    {formatDate(sale.createdAt)}
+                  </td>
+                  <td style={{ padding: "12px 20px" }}>
+                    <p style={{ color: "white", fontSize: 13, fontWeight: 600, margin: 0, lineHeight: 1.3 }}>
+                      {sale.itemName || "—"}
+                    </p>
+                    {sale.collectionName && sale.collectionName !== sale.itemName && (
+                      <p style={{ color: "rgba(255,255,255,0.3)", fontSize: 11, margin: "2px 0 0" }}>{sale.collectionName}</p>
+                    )}
+                    {sale.isFirstSale && (
+                      <span style={{ display: "inline-block", marginTop: 3, padding: "1px 7px", borderRadius: 5, background: "rgba(34,197,94,0.12)", border: "1px solid rgba(34,197,94,0.25)", color: "#4ade80", fontSize: 10, fontWeight: 700 }}>
+                        First sale
+                      </span>
+                    )}
+                  </td>
+                  <td style={{ padding: "12px 20px", fontFamily: "monospace", fontSize: 11 }}>
+                    <p style={{ color: "rgba(255,255,255,0.6)", margin: 0 }} title={sale.buyer}>B: {sale.buyer ? `${sale.buyer.slice(0, 8)}…${sale.buyer.slice(-4)}` : "—"}</p>
+                    <p style={{ color: "rgba(255,255,255,0.35)", margin: "2px 0 0" }} title={sale.seller}>S: {sale.seller ? `${sale.seller.slice(0, 8)}…${sale.seller.slice(-4)}` : "—"}</p>
+                  </td>
+                  <td style={{ padding: "12px 20px", whiteSpace: "nowrap" }}>
+                    <span style={{ color: "rgba(255,255,255,0.9)", fontSize: 13, fontWeight: 600, fontFamily: "monospace" }}>
+                      {sale.priceUSDC != null ? `$${Number(sale.priceUSDC).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : "—"}
+                    </span>
+                  </td>
+                  <td style={{ padding: "12px 20px", color: "rgba(255,255,255,0.55)", fontSize: 12, fontFamily: "monospace", whiteSpace: "nowrap" }}>
+                    {sale.platformFee != null ? `$${Number(sale.platformFee).toFixed(2)}` : "—"}
+                  </td>
+                  <td style={{ padding: "12px 20px", color: "rgba(255,255,255,0.55)", fontSize: 12, fontFamily: "monospace", whiteSpace: "nowrap" }}>
+                    {sale.royaltyPaid != null ? `$${Number(sale.royaltyPaid).toFixed(2)}` : "—"}
+                  </td>
+                  <td style={{ padding: "12px 20px" }}>
+                    {sale.txHash ? (
+                      <a
+                        href={`https://basescan.org/tx/${sale.txHash}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        title={sale.txHash}
+                        style={{ color: "#60a5fa", fontSize: 12, fontFamily: "monospace", textDecoration: "none" }}
+                      >
+                        {truncateTx(sale.txHash)} ↗
+                      </a>
+                    ) : (
+                      <span style={{ color: "rgba(255,255,255,0.3)", fontSize: 12 }}>—</span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       ) : (
         <div style={{ overflowX: "auto", borderRadius: 12, border: "1px solid rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.015)" }}>

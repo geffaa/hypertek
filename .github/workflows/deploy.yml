@@ -83,9 +83,13 @@ jobs:
           VITE_MY_NFT_ADDRESS: "0x62a7939c1871f7CCBF50d1d4E66FDD89F0B72e88"
           VITE_MARKETPLACE_ADDRESS: "0x51cB1c4Cc1435a154608f8Fad883AAa1587c0C21"
           VITE_USDC_ADDRESS: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+          # Same platform wallet as the frontend build's VITE_PLATFORM_WALLET;
+          # CreateCollection blocks item creation when this is missing.
+          VITE_PLATFORM_WALLET_ADDRESS: "0x0c40B9CC8e482432A357fB115a757c7D1b63A5C8"
           VITE_CHAIN_ID: "8453"
           VITE_TRANSAK_API_KEY: 685f8b52-0f85-404c-a49b-d6d2a58786ef
           VITE_TRANSAK_ENVIRONMENT: STAGING
+          VITE_WALLETCONNECT_PROJECT_ID: d05819ddfe73fb4abe6b1af3cc9a0524
 
       # ── Setup SSH ──
       - name: 🔑 Setup SSH key

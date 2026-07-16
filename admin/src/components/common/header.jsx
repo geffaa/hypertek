@@ -4,7 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import HeaderIcon from "../../assets/Sidebar/headerIcon.png";
 import NotificationIcon from "../../assets/notification.png";
 import NotificationDropdown from "../common/Notification";
-import { Image_Base_Url } from "../../Config";
+import { Dashboard_Base_Url, Image_Base_Url } from "../../Config";
+import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { FaUserCircle, FaGamepad, FaStore } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -24,7 +25,24 @@ const Header = ({ toggleSidebar }) => {
   const [isProfileHovered, setIsProfileHovered] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const profileMenuRef = useRef(null);
-  const [notificationCount] = useState(3);
+  const [notificationCount, setNotificationCount] = useState(0);
+
+  // Real unread count: server-composed notifications minus the ones this
+  // browser has read/dismissed (state lives in localStorage — see Notifications.jsx).
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await axios.get(`${Dashboard_Base_Url}/v1/admin/nfa/notifications`);
+        const list = res.data.notifications || res.data.data || [];
+        const read = new Set(JSON.parse(localStorage.getItem("ht_admin_notif_read")) || []);
+        const dismissed = new Set(JSON.parse(localStorage.getItem("ht_admin_notif_dismissed")) || []);
+        setNotificationCount(
+          list.filter((n) => !dismissed.has(n._id || n.id) && !read.has(n._id || n.id) && !n.read).length
+        );
+      } catch { /* badge stays hidden */ }
+    };
+    load();
+  }, [location.pathname]);
 
   useEffect(() => {
     const handler = (e) => {
@@ -66,14 +84,10 @@ const Header = ({ toggleSidebar }) => {
     }
   };
 
-  // Simulate new notifications
+  // Shake the bell only when there are actual unread notifications.
   useEffect(() => {
-    const interval = setInterval(() => {
-      triggerBellAnimation();
-    }, 15000);
-
-    return () => clearInterval(interval);
-  }, []);
+    if (notificationCount > 0) triggerBellAnimation();
+  }, [notificationCount]);
 
   // Sync Redux user to localStorage when available
   useEffect(() => {
@@ -153,7 +167,7 @@ const Header = ({ toggleSidebar }) => {
         {/* 🔔 Notification Bell */}
         <div
           onClick={handleNotification}
-          className="bg-white flex items-center justify-center rounded-full cursor-pointer"
+          className="relative bg-white flex items-center justify-center rounded-full cursor-pointer"
           style={{ width: "32.21484375px", height: "32.21484375px" }}
         >
           <img
@@ -161,6 +175,14 @@ const Header = ({ toggleSidebar }) => {
             alt="Notifications"
             style={{ width: "13px", height: "12.4px", objectFit: "contain" }}
           />
+          {notificationCount > 0 && (
+            <span
+              className="absolute flex items-center justify-center text-white font-bold"
+              style={{ top: -4, right: -4, minWidth: 16, height: 16, padding: "0 4px", borderRadius: 8, background: "#ef4444", fontSize: 10, lineHeight: 1 }}
+            >
+              {notificationCount > 9 ? "9+" : notificationCount}
+            </span>
+          )}
         </div>
 
         {/* 👤 Profile Dropdown */}
