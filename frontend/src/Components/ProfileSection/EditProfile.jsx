@@ -185,14 +185,16 @@ function EditProfile() {
         </div>
 
         <div className="mt-3 text-white">
-          <h2 className="text-lg md:text-xl font-semibold">{name}</h2>
-          <p className="text-xs sm:text-sm text-gray-400 flex items-center gap-2">
-            {userData._id || userData.id || "null"}
-            <button onClick={handleCopy} className="text-gray-400 hover:text-white transition" data-tooltip="Copy">
-              <FiCopy className="w-4 h-4" />
-            </button>
-            {copied && <span className="text-green-400 text-[10px]">Copied!</span>}
-          </p>
+          <h2 className="text-lg md:text-xl font-semibold">{name || authUser?.FullName || ""}</h2>
+          {(userData._id || userData.id || authUser?.id) && (
+            <p className="text-xs sm:text-sm text-gray-400 flex items-center gap-2">
+              {userData._id || userData.id || authUser?.id}
+              <button onClick={handleCopy} className="text-gray-400 hover:text-white transition" data-tooltip="Copy">
+                <FiCopy className="w-4 h-4" />
+              </button>
+              {copied && <span className="text-green-400 text-[10px]">Copied!</span>}
+            </p>
+          )}
         </div>
       </div>
 
