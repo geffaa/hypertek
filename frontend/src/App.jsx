@@ -123,8 +123,6 @@ function AppWrapper() {
 
   // Routes where Navbar & Footer should be hidden
   const hideLayoutRoutes = [
-    "/waitlist",
-    "/join-waitlist",
     "/dashboard/create-earning",
     "/stripe-payment",
     "/dashboard",
