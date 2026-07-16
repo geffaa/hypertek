@@ -132,38 +132,41 @@ NFTRouter.get("/owner", getNFTsByOwner);
 NFTRouter.get("/creator", getNFTsByCreator);
 NFTRouter.get("/listing/:tokenId", getListingDetails);
 
-NFTRouter.get("/royalties/summary", getRoyaltiesSummary);
-NFTRouter.get("/platform/revenue", getPlatformRevenue);
+NFTRouter.get("/royalties/summary", authMiddleware("admin"), getRoyaltiesSummary);
+NFTRouter.get("/platform/revenue", authMiddleware("admin"), getPlatformRevenue);
 
 NFTRouter.get("/user/owned/:walletAddress", getNFTsByWallet);
 NFTRouter.get("/user/owned-with-subs/:walletAddress", getNFTsWithSubCollections);
 
 /* =====================================================
-   COLLECTION CRUD (NO ADMIN AUTH NOW)
+   COLLECTION CRUD (ADMIN)
 ===================================================== */
 
 NFTRouter.post(
   "/admin/collection/create",
+  authMiddleware("admin"),
   uploadTemp.single("image"),
   createCollection
 );
 
 NFTRouter.put(
   "/collection/update/:id",
+  authMiddleware("admin"),
   uploadTemp.single("image"),
   updateCollection
 );
 
 NFTRouter.delete(
   "/collection/delete/:id",
+  authMiddleware("admin"),
   deleteCollection
 );
 
 NFTRouter.get("/user/owned-subs-only/:walletAddress", getOwnedSubCollectionsOnly);
 
-NFTRouter.get("/dashboard/total-counts", getTotalCounts);
+NFTRouter.get("/dashboard/total-counts", authMiddleware("admin"), getTotalCounts);
 
-NFTRouter.put("/admin/status/:id", updateNFTStatus);
+NFTRouter.put("/admin/status/:id", authMiddleware("admin"), updateNFTStatus);
 NFTRouter.post("/admin/fix-unlisted-priced-items", authMiddleware("admin"), fixUnlistedPricedItems);
 
 /* =====================================================
@@ -192,7 +195,7 @@ NFTRouter.delete(
   deleteCollection
 );
 
-NFTRouter.put("/status/:id", updateNFTStatus);
+NFTRouter.put("/status/:id", authMiddleware("admin"), updateNFTStatus);
 
 /* =====================================================
    AUTHENTICATED MARKETPLACE ROUTES

@@ -6,13 +6,15 @@ import {
   exportWaitlistCSV,
   sendWaitlistNotification,
 } from "../Controllers/WaitlistController.js";
+import { authMiddleware } from "../Middleware/googleMiddle.js";
 
 const WaitlistRouter = express.Router();
 
+// Public signup; everything else is admin-only.
 WaitlistRouter.post("/", createWaitlistEntry);
-WaitlistRouter.get("/", getWaitlistEntries);
-WaitlistRouter.get("/export/csv", exportWaitlistCSV);
-WaitlistRouter.post("/notify", sendWaitlistNotification);
-WaitlistRouter.patch("/:id/role", updateWaitlistRole);
+WaitlistRouter.get("/", authMiddleware("admin"), getWaitlistEntries);
+WaitlistRouter.get("/export/csv", authMiddleware("admin"), exportWaitlistCSV);
+WaitlistRouter.post("/notify", authMiddleware("admin"), sendWaitlistNotification);
+WaitlistRouter.patch("/:id/role", authMiddleware("admin"), updateWaitlistRole);
 
 export default WaitlistRouter;

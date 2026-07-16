@@ -7,6 +7,7 @@ import {
     uploadSectionImage,
 } from "../Controllers/SiteContentController.js";
 import uploadTemp from "../Middleware/UploadMulter.js";
+import { authMiddleware } from "../Middleware/googleMiddle.js";
 
 const ContentRoute = express.Router();
 
@@ -20,11 +21,12 @@ ContentRoute.get("/page/:pageGroup", getSectionsByPage);
 ContentRoute.get("/:sectionKey", getSectionByKey);
 
 // ADMIN — Update section text fields
-ContentRoute.put("/:sectionKey", updateSection);
+ContentRoute.put("/:sectionKey", authMiddleware("admin"), updateSection);
 
 // ADMIN — Upload image for a section field
 ContentRoute.post(
     "/:sectionKey/upload-image",
+    authMiddleware("admin"),
     (req, res, next) => {
         uploadTemp.single("image")(req, res, (err) => {
             if (err) {

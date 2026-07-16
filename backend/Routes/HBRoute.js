@@ -19,8 +19,8 @@ import { authMiddleware } from "../Middleware/googleMiddle.js";
 
 const router = express.Router();
 
-router.post("/earn", earnHB);
-router.post("/spend", spendHB);
+router.post("/earn", authMiddleware(), earnHB);
+router.post("/spend", authMiddleware(), spendHB);
 router.post("/cashout/otp", authMiddleware(), requestCashoutOTP);
 router.post("/cashout", authMiddleware(), cashoutHB);
 router.get("/balance", authMiddleware(), getHBBalance);
@@ -32,6 +32,6 @@ router.get("/debit-card", authMiddleware(), getDebitCard);
 router.put("/debit-card", authMiddleware(), saveDebitCard);
 router.post("/topup/intent", authMiddleware(), createHBTopupIntent);
 router.post("/topup/usdc", authMiddleware(), topupViaUSDC);
-router.get("/admin/stats", authMiddleware(), getHBPlatformStats);
+router.get("/admin/stats", authMiddleware("admin"), getHBPlatformStats);
 
 export default router;

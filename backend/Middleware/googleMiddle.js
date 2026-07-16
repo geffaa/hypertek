@@ -17,23 +17,10 @@ function authMiddleware(requiredRoles = null) {
     }
 
     try {
-      // Try JWT verification first
-      let verified;
-      try {
-        verified = jwt.verify(token, process.env.JWT_SECRET);
-        console.log("JWT verified successfully");
-      } catch (jwtErr) {
-        // Fallback: try base64 decode for temporary tokens
-        try {
-          const decoded = JSON.parse(Buffer.from(token, 'base64').toString());
-          verified = decoded;
-          console.log("⚠️ Using temporary token (base64)");
-        } catch (decodeErr) {
-          throw jwtErr; // Rethrow original JWT error
-        }
-      }
+      // Signed JWT only — an unsigned "temporary token" fallback here would
+      // let anyone forge a role and bypass every protected route.
+      const verified = jwt.verify(token, process.env.JWT_SECRET);
 
-      console.log("👤 Decoded user:", verified);
 
       // 🔍 Detect role from token (multiple possibilities)
       const userRole =

@@ -9,9 +9,13 @@ import {
   getTrades,
 } from "../Controllers/Dashboard.js";
 import express from "express";
+import { authMiddleware } from "../Middleware/googleMiddle.js";
 
 
 const Dashboard = express.Router();
+
+// Every dashboard metric is admin-only.
+Dashboard.use(authMiddleware("admin"));
 
 Dashboard.get("/user/Count", GetTotalUsers);
 Dashboard.get("/buyers/Count", getTotalBuyers);

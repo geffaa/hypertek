@@ -46,8 +46,8 @@ Route.post("/user/MetaMask", socialLoginDisabled);
 Route.post("/user/twitter", socialLoginDisabled);
 // :bust_in_silhouette: Get user profile (protected route)
 Route.get("/getProfile", auth, GetProfile);
-Route.put("/edit/:userId", upload.single("Avatar"), EditUser);
-Route.delete("/delete/:userId", DeleteUser);
+Route.put("/edit/:userId", authMiddleware("admin"), upload.single("Avatar"), EditUser);
+Route.delete("/delete/:userId", authMiddleware("admin"), DeleteUser);
 // :pencil2: Edit user profile (update info or upload avatar)
 Route.put("/profile", auth, upload.single("Avatar"), EditProfile);
 // Get wallet address only (no private key, no password needed)
@@ -64,11 +64,11 @@ Route.post("/user/link-wallet", auth, LinkWallet);
 Route.post("/user/link-external-wallet", auth, LinkExternalWallet);
 Route.delete("/user/link-external-wallet", auth, UnlinkExternalWallet);
 // Get all users (admin only)
-Route.get("/users", GetAllUsers);
+Route.get("/users", authMiddleware("admin"), GetAllUsers);
 // Toggle user active/inactive status (admin only)
-Route.patch("/user/status/:userId", ToggleUserStatus);
+Route.patch("/user/status/:userId", authMiddleware("admin"), ToggleUserStatus);
 
-Route.get("/admin/:adminId", GetAdminByAdminId);
+Route.get("/admin/:adminId", authMiddleware("admin"), GetAdminByAdminId);
 
 
 export { Route };
