@@ -28,7 +28,9 @@ const TYPE_CONFIG = {
 };
 
 function timeAgo(dateStr) {
-  const diff = Date.now() - new Date(dateStr).getTime();
+  const ts = new Date(dateStr).getTime();
+  if (Number.isNaN(ts)) return "";
+  const diff = Date.now() - ts;
   const mins  = Math.floor(diff / 60000);
   const hours = Math.floor(diff / 3600000);
   const days  = Math.floor(diff / 86400000);
