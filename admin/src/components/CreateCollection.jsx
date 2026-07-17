@@ -163,7 +163,7 @@ function CreateCollection() {
         <div>
           <h1 className="text-white font-semibold text-[22px]">Create Item</h1>
           <p className="text-white/40 text-xs mt-0.5">
-            Admin can create NFT, NFC, or NFA — item is saved to storage until listed on the marketplace.
+            Admin can create NFT, NFC, or NFA — item is saved to storage until you list it from the Items page.
           </p>
         </div>
       </div>
@@ -426,10 +426,10 @@ function CreateCollection() {
             </p>
             <ul className="text-white/40 text-[11px] space-y-1 leading-relaxed">
               <li>• Item is saved to storage — no gas fees at this stage.</li>
-              <li>• From <span className="text-white/60 font-medium">Collection Details</span>, set a price and list it on the Marketplace, Auction, or Trade.</li>
-              <li>• <span className="text-white/60 font-medium">NFA</span> — only Hypertek creates. Guaranteed min buyback. Released from packages.</li>
-              <li>• <span className="text-white/60 font-medium">NFC</span> — created by Hypertek or licensed players. Has in-game bonuses.</li>
-              <li>• <span className="text-white/60 font-medium">NFT</span> — created by anyone. No in-game bonus.</li>
+              <li>• From the <span className="text-white/60 font-medium">Items</span> page, click <span className="text-white/60 font-medium">List</span> to set a price and put it for sale on the public marketplace.</li>
+              <li>• <span className="text-white/60 font-medium">NFA</span> (Non-Fungible Asset) — created only by Hyper Tek. Guaranteed minimum buy-back: it can never be sold below that value (buy-back is capped at 35% of the reserve price). Carries the biggest in-game bonuses. Sell only — NFAs cannot be traded.</li>
+              <li>• <span className="text-white/60 font-medium">NFC</span> (Collectible) — created by Hyper Tek or licensed players. Has in-game bonuses.</li>
+              <li>• <span className="text-white/60 font-medium">NFT</span> (Token) — created by anyone. No in-game bonus.</li>
             </ul>
           </div>
 
