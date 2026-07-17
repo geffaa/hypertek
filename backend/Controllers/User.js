@@ -534,6 +534,29 @@ const GetAllUsers = async (req, res) => {
   }
 };
 
+// ------------------ SEARCH USERS FOR ADMIN (artist picker etc.) ------------------
+const SearchUsers = async (req, res) => {
+  try {
+    const q = (req.query.q || "").trim();
+    const limit = Math.min(Number(req.query.limit) || 10, 25);
+    if (!q) return res.status(200).json({ success: true, users: [] });
+
+    const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const re = new RegExp(escaped, "i");
+    const users = await UserModel.find({
+      $or: [{ FullName: re }, { Email: re }, { WalletAddress: re }],
+    })
+      .select("FullName Email WalletAddress Avatar")
+      .limit(limit);
+
+    res.status(200).json({ success: true, users });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: false, message: "Server error", error: err.message });
+  }
+};
+
 // ------------------ PROFILE ------------------
 const GetProfile = async (req, res) => {
   try {
@@ -1382,6 +1405,7 @@ export {
   TwitterAuth,
   MetaMaskAuth,
   GetAllUsers,
+  SearchUsers,
   ToggleUserStatus,
   EditUser, // New export
   DeleteUser, // New export

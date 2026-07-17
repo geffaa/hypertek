@@ -8,6 +8,14 @@ const ArtistSchema = new mongoose.Schema(
       trim: true,
     },
 
+    // Linked platform account when the artist was picked from registered users.
+    // Null for external artists added manually.
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: null,
+    },
+
     email: {
       type: String,
       default: "",

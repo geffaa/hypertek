@@ -9,6 +9,11 @@ const EMPTY = {
   bankDetails: { accountHolderName: "", bankName: "", accountNumber: "", iban: "", swift: "", routingNumber: "", country: "", currency: "USD" },
 };
 
+function shortAddr(addr) {
+  if (!addr || addr.length < 10) return addr || "";
+  return `${addr.slice(0, 6)}…${addr.slice(-4)}`;
+}
+
 function ArtistForm() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -26,29 +31,81 @@ function ArtistForm() {
 
   const [saving, setSaving] = useState(false);
 
+  // Picker: link the artist to a registered platform account (default for new
+  // artists) or type details manually for external artists.
+  const [mode, setMode] = useState(existing ? "manual" : "user");
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [userQuery,    setUserQuery]    = useState("");
+  const [userResults,  setUserResults]  = useState([]);
+  const [searching,    setSearching]    = useState(false);
+
   const token = localStorage.getItem("token");
   const adminId = JSON.parse(localStorage.getItem("admin_data") || "{}")?._id;
+
+  // Debounced user search
+  useEffect(() => {
+    if (mode !== "user" || selectedUser) return;
+    const q = userQuery.trim();
+    if (q.length < 2) { setUserResults([]); return; }
+    const timer = setTimeout(async () => {
+      setSearching(true);
+      try {
+        const res = await axios.get(`${Dashboard_Base_Url}/v1/users/search`, {
+          params: { q, limit: 10 },
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setUserResults(res.data.users || []);
+      } catch {
+        setUserResults([]);
+      } finally {
+        setSearching(false);
+      }
+    }, 350);
+    return () => clearTimeout(timer);
+  }, [userQuery, mode, selectedUser, token]);
+
+  const pickUser = (u) => {
+    setSelectedUser(u);
+    setUserResults([]);
+    setForm((prev) => ({
+      ...prev,
+      name:          u.FullName || u.Email?.split("@")[0] || "",
+      email:         u.Email || "",
+      walletAddress: (u.WalletAddress || "").toLowerCase(),
+    }));
+  };
+
+  const clearUser = () => {
+    setSelectedUser(null);
+    setUserQuery("");
+    setForm((prev) => ({ ...prev, name: "", email: "", walletAddress: "" }));
+  };
 
   const setBank = (field, value) =>
     setForm((prev) => ({ ...prev, bankDetails: { ...prev.bankDetails, [field]: value } }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!existing && mode === "user" && !selectedUser) {
+      toast.error("Search and select a registered user, or switch to Manual entry"); return;
+    }
     if (!form.name.trim()) { toast.error("Name is required"); return; }
 
     if (form.paymentPreference === "crypto" && form.walletAddress && form.walletAddress.length !== 42) {
       toast.error("Wallet address must be 42 characters"); return;
     }
 
+    const payload = { ...form, userId: selectedUser?._id || existing?.userId || null };
+
     setSaving(true);
     try {
       if (existing) {
-        await axios.put(`${Dashboard_Base_Url}/v1/admin/artists/${existing._id}`, form, {
+        await axios.put(`${Dashboard_Base_Url}/v1/admin/artists/${existing._id}`, payload, {
           headers: { Authorization: `Bearer ${token}` },
         });
         toast.success("Artist updated");
       } else {
-        await axios.post(`${Dashboard_Base_Url}/v1/admin/artists`, form, {
+        await axios.post(`${Dashboard_Base_Url}/v1/admin/artists`, payload, {
           headers: { Authorization: `Bearer ${token}` },
         });
         toast.success("Artist created");
@@ -76,15 +133,93 @@ function ArtistForm() {
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+        {/* Source: registered user vs manual (create only) */}
+        {!existing && (
+          <div>
+            <label className={labelCls}>Artist Source</label>
+            <div className="flex gap-3">
+              {[
+                { key: "user",   label: "👤 Registered user" },
+                { key: "manual", label: "✍️ Manual entry" },
+              ].map((opt) => (
+                <button key={opt.key} type="button"
+                  onClick={() => { setMode(opt.key); if (opt.key === "manual") clearUser(); }}
+                  className={`flex-1 py-2 rounded-md text-sm font-medium border transition-colors ${
+                    mode === opt.key
+                      ? "bg-blue-700 border-blue-600 text-white"
+                      : "bg-white/5 border-white/15 text-white/60 hover:bg-white/10"
+                  }`}>
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+            <p className="text-white/40 text-xs mt-2">
+              {mode === "user"
+                ? "Pick someone who already signed up — their name, email, and wallet are filled in from their account."
+                : "For external artists who don't have a platform account yet."}
+            </p>
+          </div>
+        )}
+
+        {/* User picker */}
+        {!existing && mode === "user" && (
+          <div>
+            {selectedUser ? (
+              <div className="flex items-center justify-between rounded-md border border-blue-500/40 bg-blue-500/10 px-3 py-2.5">
+                <div className="min-w-0">
+                  <p className="text-white text-sm font-medium truncate">{selectedUser.FullName || selectedUser.Email}</p>
+                  <p className="text-white/50 text-xs truncate">
+                    {selectedUser.Email}
+                    {selectedUser.WalletAddress ? ` · ${shortAddr(selectedUser.WalletAddress)}` : " · no wallet yet"}
+                  </p>
+                </div>
+                <button type="button" onClick={clearUser} className="text-white/50 hover:text-white text-xs border border-white/20 rounded px-2 py-1 ml-3 flex-shrink-0">
+                  Change
+                </button>
+              </div>
+            ) : (
+              <div className="relative">
+                <label className={labelCls}>Search user *</label>
+                <input
+                  className={inputCls}
+                  value={userQuery}
+                  onChange={(e) => setUserQuery(e.target.value)}
+                  placeholder="Type a name, email, or wallet address…"
+                  autoFocus
+                />
+                {(searching || userResults.length > 0 || (userQuery.trim().length >= 2 && !searching)) && (
+                  <div className="absolute z-20 mt-1 w-full rounded-md border border-white/15 max-h-56 overflow-y-auto" style={{ background: "#0d0e1f" }}>
+                    {searching ? (
+                      <p className="px-3 py-2.5 text-white/40 text-xs">Searching…</p>
+                    ) : userResults.length === 0 ? (
+                      <p className="px-3 py-2.5 text-white/40 text-xs">No users found</p>
+                    ) : (
+                      userResults.map((u) => (
+                        <button key={u._id} type="button" onClick={() => pickUser(u)}
+                          className="w-full text-left px-3 py-2.5 hover:bg-white/5 transition-colors border-b border-white/5 last:border-0">
+                          <p className="text-white text-sm">{u.FullName || u.Email}</p>
+                          <p className="text-white/40 text-xs">
+                            {u.Email}{u.WalletAddress ? ` · ${shortAddr(u.WalletAddress)}` : ""}
+                          </p>
+                        </button>
+                      ))
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Name + Email */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className={labelCls}>Name *</label>
-            <input className={inputCls} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Artist full name" required />
+            <input className={inputCls} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Artist full name" required readOnly={!!selectedUser} />
           </div>
           <div>
             <label className={labelCls}>Email</label>
-            <input className={inputCls} type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="artist@example.com" />
+            <input className={inputCls} type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="artist@example.com" readOnly={!!selectedUser} />
           </div>
         </div>
 
@@ -127,7 +262,10 @@ function ArtistForm() {
         {form.paymentPreference === "crypto" && (
           <div>
             <label className={labelCls}>Wallet Address (Base network)</label>
-            <input className={inputCls} value={form.walletAddress} onChange={(e) => setForm({ ...form, walletAddress: e.target.value.toLowerCase() })} placeholder="0x..." maxLength={42} />
+            <input className={inputCls} value={form.walletAddress} onChange={(e) => setForm({ ...form, walletAddress: e.target.value.toLowerCase() })} placeholder="0x..." maxLength={42} readOnly={!!selectedUser} />
+            {selectedUser && (
+              <p className="text-white/40 text-xs mt-1.5">Filled from the user's account wallet.</p>
+            )}
           </div>
         )}
 

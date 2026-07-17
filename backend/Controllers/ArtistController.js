@@ -25,11 +25,12 @@ export const getArtist = async (req, res) => {
 // POST create artist
 export const createArtist = async (req, res) => {
   try {
-    const { name, email, paymentPreference, walletAddress, bankDetails, notes } = req.body;
+    const { name, email, paymentPreference, walletAddress, bankDetails, notes, userId } = req.body;
     if (!name) return res.status(400).json({ success: false, message: "Name is required" });
 
     const artist = await Artist.create({
       name, email, paymentPreference, walletAddress, bankDetails, notes,
+      userId: userId || null,
     });
     res.status(201).json({ success: true, artist });
   } catch (err) {

@@ -10,6 +10,7 @@ import {
   MetaMaskAuth,
   TwitterAuth,
   GetAllUsers,
+  SearchUsers,
   ToggleUserStatus,
   EditUser,
   DeleteUser,
@@ -65,6 +66,8 @@ Route.post("/user/link-external-wallet", auth, LinkExternalWallet);
 Route.delete("/user/link-external-wallet", auth, UnlinkExternalWallet);
 // Get all users (admin only)
 Route.get("/users", authMiddleware("admin"), GetAllUsers);
+// Search users by name/email/wallet (admin only — powers the artist picker)
+Route.get("/users/search", authMiddleware("admin"), SearchUsers);
 // Toggle user active/inactive status (admin only)
 Route.patch("/user/status/:userId", authMiddleware("admin"), ToggleUserStatus);
 
