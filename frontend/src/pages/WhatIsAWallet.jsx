@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Wallet, ShieldCheck, Boxes, Sparkles } from "lucide-react";
 
@@ -35,12 +35,19 @@ const CARDS = [
 
 export default function WhatIsAWallet() {
   const navigate = useNavigate();
+  const location = useLocation();
+  // The connect modal's Learn More opens this page in a new tab, where there
+  // is no history to go back to — fall back to the home page in that case.
+  const goBack = () => {
+    if (location.key === "default") navigate("/");
+    else navigate(-1);
+  };
 
   return (
     <div className="min-h-screen bg-[#060610] text-white">
       <div className="max-w-3xl mx-auto px-6 pt-28 pb-20">
         <button
-          onClick={() => navigate(-1)}
+          onClick={goBack}
           className="flex items-center gap-2 text-white/50 hover:text-white transition-colors text-sm mb-8"
         >
           <ArrowLeft size={16} /> Back
