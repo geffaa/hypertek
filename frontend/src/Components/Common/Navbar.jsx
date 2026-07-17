@@ -218,41 +218,31 @@ export default function Navbar() {
                     transition={{ duration: 0.15 }}
                     onMouseEnter={openShop}
                     onMouseLeave={closeShop}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[560px] max-w-[95vw] rounded-2xl shadow-2xl overflow-hidden border border-white/10"
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[680px] max-w-[95vw] rounded-2xl shadow-2xl overflow-hidden border border-white/10"
                     style={{ background: "rgba(0, 15, 60, 0.97)", backdropFilter: "blur(24px)" }}>
-                    {[
-                      [
+                    <div className="grid grid-cols-3 gap-2 px-4 py-3">
+                      {[
                         { to: "/market-place?tab=overview", icon: <LayoutGrid className="w-5 h-5" />, label: t("nav.shop.overview"),  desc: t("nav.shop.overviewDesc") },
-                        { to: isLoggedIn ? "/Profile" : "/signin", icon: <Package className="w-5 h-5" />, label: t("nav.shop.myAssets"), desc: t("nav.shop.myAssetsDesc") },
-                      ],
-                      [
                         { to: "/market-place?tab=general",  icon: <Layers className="w-5 h-5" />, label: t("nav.shop.theMarketplace"), desc: t("nav.shop.theMarketplaceDesc") },
-                        { to: "/market-place?tab=auctions", icon: <Timer  className="w-5 h-5" />, label: t("nav.shop.auction"),      desc: t("nav.shop.auctionDesc") },
-                      ],
-                    ].map((row, rowIdx) => (
-                      <div key={rowIdx}>
-                        {rowIdx > 0 && <div className="mx-5" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }} />}
-                        <div className="grid grid-cols-2 gap-2 px-4 py-3">
-                          {row.map(({ to, icon, label, desc }) => (
-                            <Link
-                              key={label}
-                              to={to}
-                              onClick={() => setShopOpen(false)}
-                              className="group flex items-start gap-3 px-4 py-3 rounded-xl transition-all duration-200"
-                              style={{ background: "rgba(255,255,255,0.03)" }}
-                              onMouseEnter={e => e.currentTarget.style.background = "rgba(0,42,168,0.35)"}
-                              onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.03)"}
-                            >
-                              <span className="mt-0.5 text-blue-400 group-hover:text-blue-300 transition-colors flex-shrink-0">{icon}</span>
-                              <div className="flex flex-col gap-1.5">
-                                <p className="text-white font-semibold text-sm leading-tight pb-1.5" style={{ borderBottom: "1px solid rgba(255,255,255,0.25)" }}>{label}</p>
-                                <p className="text-white/45 text-xs leading-relaxed">{desc}</p>
-                              </div>
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
+                        { to: isLoggedIn ? "/Profile" : "/signin", icon: <Package className="w-5 h-5" />, label: t("nav.shop.myAssets"), desc: t("nav.shop.myAssetsDesc") },
+                      ].map(({ to, icon, label, desc }) => (
+                        <Link
+                          key={label}
+                          to={to}
+                          onClick={() => setShopOpen(false)}
+                          className="group flex items-start gap-3 px-4 py-3 rounded-xl transition-all duration-200"
+                          style={{ background: "rgba(255,255,255,0.03)" }}
+                          onMouseEnter={e => e.currentTarget.style.background = "rgba(0,42,168,0.35)"}
+                          onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.03)"}
+                        >
+                          <span className="mt-0.5 text-blue-400 group-hover:text-blue-300 transition-colors flex-shrink-0">{icon}</span>
+                          <div className="flex flex-col gap-1.5">
+                            <p className="text-white font-semibold text-sm leading-tight pb-1.5" style={{ borderBottom: "1px solid rgba(255,255,255,0.25)" }}>{label}</p>
+                            <p className="text-white/45 text-xs leading-relaxed">{desc}</p>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
                   </motion.div>
                 )}
                 </AnimatePresence>
@@ -269,6 +259,13 @@ export default function Navbar() {
                 className="hover:text-blue-300 transition-colors duration-200 uppercase tracking-wide text-sm"
               >
                 {t("nav.news")}
+              </Link>
+              <Link
+                to="/crowdfunding"
+                onClick={() => window.scrollTo(0, 0)}
+                className="hover:text-blue-300 transition-colors duration-200 uppercase tracking-wide text-sm"
+              >
+                {t("nav.crowdfunding", "Crowdfunding")}
               </Link>
 
               {/* Social Dropdown */}
@@ -532,6 +529,13 @@ export default function Navbar() {
               className="block w-full py-3 hover:text-blue-300 transition-colors duration-200 font-semibold"
             >
               {t("nav.news")}
+            </Link>
+            <Link
+              to="/crowdfunding"
+              onClick={() => window.scrollTo(0, 0)}
+              className="block w-full py-3 hover:text-blue-300 transition-colors duration-200 font-semibold"
+            >
+              {t("nav.crowdfunding", "Crowdfunding")}
             </Link>
 
             {/* Social */}
