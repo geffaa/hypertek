@@ -120,6 +120,11 @@ function Items() {
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [deleting,     setDeleting]     = useState(false);
 
+  // List / Unlist modal — { item, mode: "list" | "unlist" }
+  const [listModal, setListModal] = useState(null);
+  const [listPrice, setListPrice] = useState("");
+  const [listBusy,  setListBusy]  = useState(false);
+
   // ── Fetch ──────────────────────────────────────────────────────────────────
 
   const fetchItems = useCallback(async () => {
@@ -187,6 +192,38 @@ function Items() {
     }
   };
 
+  const openListModal = (item) => {
+    setListPrice(item.listed ? "" : (item.priceETH > 0 ? String(item.priceETH) : ""));
+    setListModal({ item, mode: item.listed ? "unlist" : "list" });
+  };
+
+  const handleListConfirm = async () => {
+    if (!listModal) return;
+    const { item, mode } = listModal;
+    const price = Number(listPrice);
+    if (mode === "list" && !(price > 0)) return toast.error("Enter a price greater than 0");
+
+    setListBusy(true);
+    try {
+      const res = await axios.post(
+        `${Dashboard_Base_Url}/v1/admin/nfa/items/${item.parentId}/${item._id}/${mode}`,
+        mode === "list" ? { priceUSD: price } : {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setItems(prev => prev.map(i =>
+        i._id.toString() === item._id.toString()
+          ? { ...i, listed: mode === "list", priceETH: mode === "list" ? price : 0 }
+          : i
+      ));
+      toast.success(res.data?.message || (mode === "list" ? "Item listed" : "Item unlisted"));
+      setListModal(null);
+    } catch (err) {
+      toast.error(err.response?.data?.message || `Failed to ${mode} item`);
+    } finally {
+      setListBusy(false);
+    }
+  };
+
   const handleEditItem = (item) => {
     if (!adminId) return toast.error("Admin ID not found");
     navigate(`/${adminId}/edit-sub-collection`, {
@@ -239,7 +276,7 @@ function Items() {
       <div className="flex items-center justify-between mb-6 gap-4 flex-wrap">
         <div>
           <h1 className="font-inter font-semibold text-[25px] text-white mb-1">Items</h1>
-          <p className="text-white/40 text-sm">All NFT / NFC / NFA items across all categories</p>
+          <p className="text-white/40 text-sm">All NFT / NFC / NFA items across all categories — use List to put an item for sale on the public marketplace</p>
         </div>
         <button
           onClick={() => adminId && navigate(`/${adminId}/create-collection`)}
@@ -419,10 +456,22 @@ function Items() {
 
                     {/* Listed */}
                     <td className="px-5 py-3">
-                      <span className={`inline-flex items-center gap-1.5 text-xs font-semibold ${item.listed ? "text-green-400" : "text-white/30"}`}>
-                        <span className={`w-1.5 h-1.5 rounded-full ${item.listed ? "bg-green-400" : "bg-white/20"}`} />
-                        {item.listed ? "Listed" : "Unlisted"}
-                      </span>
+                      <div className="flex flex-col items-start gap-1">
+                        <span className={`inline-flex items-center gap-1.5 text-xs font-semibold ${item.listed ? "text-green-400" : "text-white/30"}`}>
+                          <span className={`w-1.5 h-1.5 rounded-full ${item.listed ? "bg-green-400" : "bg-white/20"}`} />
+                          {item.listed ? `Listed · $${(item.priceETH || 0).toFixed(2)}` : "Unlisted"}
+                        </span>
+                        <button
+                          onClick={() => openListModal(item)}
+                          className={`px-2 py-0.5 rounded text-[11px] font-semibold border transition-colors cursor-pointer ${
+                            item.listed
+                              ? "border-red-500/30 text-red-300 hover:bg-red-500/10"
+                              : "border-green-500/30 text-green-300 hover:bg-green-500/10"
+                          }`}
+                        >
+                          {item.listed ? "Unlist" : "List"}
+                        </button>
+                      </div>
                     </td>
 
                     {/* Min Buyback */}
@@ -565,6 +614,65 @@ function Items() {
           </div>
         );
       })()}
+
+      {/* ── List / Unlist Modal ── */}
+      {listModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50 backdrop-blur-sm">
+          <div
+            className="rounded-xl p-6 w-[400px] border border-white/10"
+            style={{ background: "#0d0e1f" }}
+          >
+            {listModal.mode === "list" ? (
+              <>
+                <h2 className="text-white font-semibold text-lg mb-2">List Item for Sale</h2>
+                <p className="text-white/60 text-sm mb-4">
+                  <span className="text-white font-semibold">"{listModal.item.name}"</span>{" "}
+                  will become visible and buyable on the public marketplace.
+                </p>
+                <label className="block text-white/50 text-xs mb-1.5">Price (USD)</label>
+                <input
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={listPrice}
+                  onChange={e => setListPrice(e.target.value)}
+                  placeholder="e.g. 350.00"
+                  autoFocus
+                  className="w-full px-3 py-2 rounded-lg text-sm bg-white/5 text-white border border-white/10 outline-none placeholder-white/25 mb-6"
+                />
+              </>
+            ) : (
+              <>
+                <h2 className="text-white font-semibold text-lg mb-2">Unlist Item</h2>
+                <p className="text-white/60 text-sm mb-6">
+                  <span className="text-white font-semibold">"{listModal.item.name}"</span>{" "}
+                  will be removed from the public marketplace. You can list it again anytime.
+                </p>
+              </>
+            )}
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => setListModal(null)}
+                disabled={listBusy}
+                className="px-4 py-2 rounded-lg text-sm text-white/60 border border-white/15 hover:bg-white/5 transition-colors cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleListConfirm}
+                disabled={listBusy}
+                className={`px-4 py-2 rounded-lg text-sm text-white transition-colors cursor-pointer disabled:opacity-50 ${
+                  listModal.mode === "list" ? "bg-[#002AA8] hover:bg-blue-700" : "bg-red-600 hover:bg-red-700"
+                }`}
+              >
+                {listBusy
+                  ? (listModal.mode === "list" ? "Listing…" : "Unlisting…")
+                  : (listModal.mode === "list" ? "List for Sale" : "Unlist")}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── Delete Modal ── */}
       {deleteTarget && (

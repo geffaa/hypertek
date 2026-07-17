@@ -18,6 +18,7 @@ import HBLedger from "../Models/HBLedger.js";
 import Trade from "../Models/TradeModel.js";
 import { cancelSiblingListings } from "../services/cancelSiblingListings.js";
 import { reconcileMarketplaceSales } from "../services/marketplaceReconcileJob.js";
+import { syncSubCollectionPrice, normalizeCat } from "../Controllers/MarketListingController.js";
 
 const AdminNFARouter = express.Router();
 
@@ -217,7 +218,8 @@ AdminNFARouter.get("/items", async (req, res) => {
           buybackPending:    sub.buybackPending || false,
           artistId:     sub.artistId || null,
           artistName:   "",   // populated below
-          createdAt:    sub.createdAt,
+          // Legacy sub-docs lack createdAt — fall back to the ObjectId timestamp
+          createdAt:    sub.createdAt || (sub._id?.getTimestamp ? sub._id.getTimestamp() : null),
         });
       }
     }
@@ -321,6 +323,97 @@ AdminNFARouter.put("/items/:parentId/:subId/status", async (req, res) => {
 });
 
 /**
+ * POST /api/v1/admin/nfa/items/:parentId/:subId/list
+ * Body: { priceUSD }
+ * Lists a platform item on the public marketplace: creates the MarketListing
+ * document AND flips subCollection.listed, so the Items page and the Market
+ * Listings page stay in sync.
+ */
+AdminNFARouter.post("/items/:parentId/:subId/list", async (req, res) => {
+  try {
+    const { parentId, subId } = req.params;
+    const priceUSD = Number(req.body.priceUSD);
+    if (!(priceUSD > 0)) {
+      return res.status(400).json({ success: false, message: "priceUSD must be greater than 0" });
+    }
+
+    const parent = await NFTSystem.findById(parentId);
+    if (!parent) return res.status(404).json({ success: false, message: "Parent collection not found" });
+    const sub = parent.subCollections.id(subId);
+    if (!sub) return res.status(404).json({ success: false, message: "Item not found" });
+    if (sub.status === "inactive") {
+      return res.status(400).json({ success: false, message: "Item is inactive — activate it before listing" });
+    }
+
+    const existing = await MarketListing.findOne({
+      subCollectionId: String(subId),
+      activityType:    "selling_general",
+      status:          { $in: ["active", "pending"] },
+    });
+    if (existing) {
+      return res.status(400).json({ success: false, message: "Item already has an active listing" });
+    }
+
+    const listing = await MarketListing.create({
+      userId:          req.user._id,
+      userName:        "Hyper Tek",
+      userWallet:      sub.owner || "",
+      category:        normalizeCat(parent.category),
+      activityType:    "selling_general",
+      itemName:        sub.name,
+      itemDescription: sub.description || "",
+      itemImage:       sub.image || parent.collection?.image || "",
+      assetType:       sub.assetType || "NFT",
+      isNFA:           sub.isNFA || false,
+      nftSystemId:     parent._id,
+      subCollectionId: String(subId),
+      price:           priceUSD,
+      commissionTier:  20,
+      maxSupply:         sub.maxSupply || 1,
+      quantityRemaining: Math.max((sub.maxSupply || 1) - (sub.currentSupply || 0), 1),
+      // Platform store listings don't follow the 7-day player-listing expiry
+      expiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
+    });
+
+    await syncSubCollectionPrice(parent._id, subId, priceUSD, true);
+
+    res.json({ success: true, message: `"${sub.name}" listed at $${priceUSD.toFixed(2)}`, data: listing });
+  } catch (err) {
+    console.error("POST /admin/items/:parentId/:subId/list error:", err);
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+/**
+ * POST /api/v1/admin/nfa/items/:parentId/:subId/unlist
+ * Cancels any active listing for the item and clears the listed flag.
+ */
+AdminNFARouter.post("/items/:parentId/:subId/unlist", async (req, res) => {
+  try {
+    const { parentId, subId } = req.params;
+    const parent = await NFTSystem.findById(parentId);
+    if (!parent) return res.status(404).json({ success: false, message: "Parent collection not found" });
+    const sub = parent.subCollections.id(subId);
+    if (!sub) return res.status(404).json({ success: false, message: "Item not found" });
+
+    const result = await MarketListing.updateMany(
+      { subCollectionId: String(subId), status: { $in: ["active", "pending"] } },
+      { status: "cancelled", cancelledByAdmin: true, adminCancelReason: "Unlisted by admin" }
+    );
+
+    await syncSubCollectionPrice(parent._id, subId, 0, false);
+
+    res.json({
+      success: true,
+      message: `"${sub.name}" unlisted (${result.modifiedCount} listing${result.modifiedCount === 1 ? "" : "s"} cancelled)`,
+    });
+  } catch (err) {
+    console.error("POST /admin/items/:parentId/:subId/unlist error:", err);
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+/**
  * GET /api/v1/admin/nfa/market-listings
  * All marketplace listings — filterable by status, activityType, search; paginated at DB level.
  */
@@ -380,6 +473,18 @@ AdminNFARouter.put("/market-listings/:id/cancel", async (req, res) => {
     listing.cancelledByAdmin  = true;
     listing.adminCancelReason = req.body.reason?.trim() || "Cancelled by admin";
     await listing.save();
+
+    // Keep the NFT-side listed flag in sync when no other active listing remains
+    if (listing.nftSystemId && listing.subCollectionId) {
+      const sibling = await MarketListing.findOne({
+        _id:             { $ne: listing._id },
+        subCollectionId: String(listing.subCollectionId),
+        status:          { $in: ["active", "pending"] },
+      });
+      if (!sibling) {
+        await syncSubCollectionPrice(listing.nftSystemId, listing.subCollectionId, 0, false);
+      }
+    }
 
     res.json({ success: true, message: "Listing cancelled by admin", data: listing });
   } catch (err) {

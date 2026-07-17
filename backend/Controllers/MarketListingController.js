@@ -7,7 +7,7 @@ import { createNotification } from "../services/notificationService.js";
 import { cancelSiblingListings } from "../services/cancelSiblingListings.js";
 
 // Sync priceETH + listed flag on the NFTSystem subCollection
-async function syncSubCollectionPrice(nftSystemId, subCollectionId, priceETH, listed) {
+export async function syncSubCollectionPrice(nftSystemId, subCollectionId, priceETH, listed) {
   if (!nftSystemId || !subCollectionId) return;
   try {
     const parent = await NFTSystem.findById(nftSystemId);
@@ -32,7 +32,7 @@ const CAT_ALIAS_ML = {
 };
 const VALID_CATS_ML = ["skins", "military badges", "specialists", "weapons", "body armour", "spaceships", "racing vehicles", "artwork", "land and bases", "general"];
 
-function normalizeCat(cat) {
+export function normalizeCat(cat) {
   const raw = (cat || "general").toLowerCase().trim();
   return CAT_ALIAS_ML[raw] || (VALID_CATS_ML.includes(raw) ? raw : "general");
 }
