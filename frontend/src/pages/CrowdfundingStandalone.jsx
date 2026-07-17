@@ -247,6 +247,11 @@ function CrowdfundingStandalone() {
       <GlowingOrb Xaxis={1300} Yaxis={1400} />
       <GlowingOrb Xaxis={150} Yaxis={2400} />
 
+      {/* Owner feedback: the whole page felt too large, so all content renders
+          at 90% scale. The fixed treasure-vault background stays outside this
+          wrapper so it keeps covering the full viewport. */}
+      <div style={{ zoom: 0.9 }}>
+
       {/* ══════════════════════════════════════════════════════
           HERO + MILESTONES
       ══════════════════════════════════════════════════════ */}
@@ -612,6 +617,7 @@ function CrowdfundingStandalone() {
           </div>
         </motion.div>
       </section>
+      </div>
 
     </div>
   );
