@@ -53,6 +53,10 @@ export default function BuybackApproval() {
 
   const handleAction = async () => {
     if (!actionModal) return;
+    if (actionModal.type === "approve" && txHash && !/^0x[0-9a-fA-F]{64}$/.test(txHash.trim())) {
+      toast.error("TX hash must be 66 characters starting with 0x");
+      return;
+    }
     setSubmitting(true);
     try {
       const url = actionModal.type === "approve"
@@ -76,7 +80,7 @@ export default function BuybackApproval() {
   };
 
   const openModal = (req, type) => {
-    setActionModal({ id: req._id, type, itemName: req.itemName || "this item" });
+    setActionModal({ id: req._id, type, itemName: req.itemName || "this item", req });
     setTxHash("");
     setAdminNote("");
   };
@@ -283,20 +287,42 @@ export default function BuybackApproval() {
               {actionModal.itemName}
             </p>
 
-            {/* TX Hash — approve only */}
+            {/* Payout summary + TX Hash — approve only */}
             {actionModal.type === "approve" && (
-              <div className="mb-4">
-                <label className="block text-white/50 text-xs font-medium mb-1.5">
-                  TX Hash <span className="text-white/25">(optional)</span>
-                </label>
-                <input
-                  type="text"
-                  value={txHash}
-                  onChange={(e) => setTxHash(e.target.value)}
-                  placeholder="0x..."
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm outline-none focus:border-blue-500/60 transition-all font-mono placeholder:text-white/20"
-                />
-              </div>
+              <>
+                <div className="mb-4 rounded-lg border border-amber-500/25 bg-amber-500/[0.06] px-3.5 py-3">
+                  <div className="flex items-baseline justify-between mb-1.5">
+                    <span className="text-white/50 text-xs">Payout amount</span>
+                    <span className="text-amber-300 font-semibold text-base">
+                      ${actionModal.req?.minimumBuybackUSD?.toFixed(2) ?? "—"} USDC
+                    </span>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-3">
+                    <span className="text-white/50 text-xs flex-shrink-0">Send to (holder)</span>
+                    <span className="text-white/70 text-[11px] font-mono truncate" title={actionModal.req?.userWallet || ""}>
+                      {actionModal.req?.userWallet
+                        ? `${actionModal.req.userWallet.slice(0, 10)}…${actionModal.req.userWallet.slice(-8)}`
+                        : "—"}
+                    </span>
+                  </div>
+                  <p className="text-white/40 text-[11px] leading-relaxed mt-2.5 pt-2.5 border-t border-white/10">
+                    Payouts are manual for now: send the USDC from the Buy Back wallet to the
+                    holder's address above, then paste the transaction hash below as the record.
+                  </p>
+                </div>
+                <div className="mb-4">
+                  <label className="block text-white/50 text-xs font-medium mb-1.5">
+                    TX Hash <span className="text-white/25">(optional — add it once the transfer is done)</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={txHash}
+                    onChange={(e) => setTxHash(e.target.value)}
+                    placeholder="0x..."
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm outline-none focus:border-blue-500/60 transition-all font-mono placeholder:text-white/20"
+                  />
+                </div>
+              </>
             )}
 
             {/* Admin note */}
