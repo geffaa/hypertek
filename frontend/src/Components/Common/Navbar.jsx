@@ -506,13 +506,6 @@ export default function Navbar() {
                   {t("nav.shop.theMarketplace")}
                 </Link>
 
-                <Link
-                  to="/land"
-                  className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
-                >
-                  {t("nav.shop.land")}
-                </Link>
-
               </div>
             )}
 
