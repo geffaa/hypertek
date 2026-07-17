@@ -536,10 +536,10 @@
       "cancelFailed": "Could not cancel trade. Please try again."
     },
     "launchLock": {
-      "marketplaceTitle": "Der Marktplatz ist bis zum Start gesperrt, und der Start steht kurz bevor!",
-      "dashboardTitle": "Dein Dashboard wird zum Start freigeschaltet, schon sehr bald!",
-      "desc": "Lass dich davon nicht aufhalten. Registriere dich, entdecke dieses großartige Projekt, sieh, wie es dich belohnen kann, und hilf mit, es Wirklichkeit werden zu lassen. Werde ein Hyper Tekin und erschaffe etwas Neues!",
-      "buttonLabel": "Wird bald freigeschaltet"
+      "marketplaceTitle": "Der Marktplatz ist derzeit gesperrt, aber mach dich bereit; der offizielle Start steht kurz bevor!",
+      "dashboardTitle": "Dein Dashboard ist derzeit gesperrt, aber mach dich bereit; der offizielle Start steht kurz bevor!",
+      "desc": "Lass dich davon nicht abhalten, dich zu registrieren und in dieses unglaubliche Projekt einzutauchen. Entdecke die vielen Vorteile und wie dein Beitrag seinen Erfolg vorantreiben kann! Mach jetzt mit und werde noch heute ein Hyper Tekken!",
+      "buttonLabel": "Öffnet zum offiziellen Start"
     }
   },
   "musicPlayer": {

@@ -536,10 +536,10 @@
       "cancelFailed": "Could not cancel trade. Please try again."
     },
     "launchLock": {
-      "marketplaceTitle": "Marknadsplatsen är låst fram till lanseringen, och lanseringen kommer mycket snart!",
-      "dashboardTitle": "Din instrumentpanel låses upp vid lanseringen, mycket snart!",
-      "desc": "Låt inte det stoppa dig. Registrera dig, utforska detta fantastiska projekt, se hur det kan belöna dig och hjälp till att förverkliga det. Bli en Hyper Tekin och skapa något nytt!",
-      "buttonLabel": "Låses upp mycket snart"
+      "marketplaceTitle": "Marknadsplatsen är låst just nu, men gör dig redo; den officiella lanseringen är runt hörnet!",
+      "dashboardTitle": "Din instrumentpanel är låst just nu, men gör dig redo; den officiella lanseringen är runt hörnet!",
+      "desc": "Låt inte detta hindra dig från att registrera dig och dyka in i detta otroliga projekt. Upptäck de många fördelarna och hur ditt engagemang kan driva dess framgång! Gå med nu och bli en Hyper Tekken idag!",
+      "buttonLabel": "Öppnar vid den officiella lanseringen"
     }
   },
   "musicPlayer": {

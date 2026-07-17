@@ -536,10 +536,10 @@
       "cancelFailed": "Could not cancel trade. Please try again."
     },
     "launchLock": {
-      "marketplaceTitle": "Marketplace lansmana kadar kilitli ve lansman çok yakında geliyor!",
-      "dashboardTitle": "Kontrol panelin lansmanda açılıyor, çok yakında!",
-      "desc": "Bunun seni durdurmasına izin verme. Kaydol, bu harika projeyi keşfet, sana nasıl kazandırabileceğini gör ve gerçekleşmesine yardım et. Bir Hyper Tekin ol ve yeni bir şey yarat!",
-      "buttonLabel": "Çok yakında açılıyor"
+      "marketplaceTitle": "Marketplace şu anda kilitli, ama hazır ol; resmi lansman çok yakında!",
+      "dashboardTitle": "Kontrol panelin şu anda kilitli, ama hazır ol; resmi lansman çok yakında!",
+      "desc": "Bunun seni kaydolmaktan ve bu inanılmaz projeye dalmaktan alıkoymasına izin verme. Sayısız avantajını keşfet ve katılımının başarısını nasıl ileriye taşıyabileceğini gör! Şimdi katıl ve bugün bir Hyper Tekken ol!",
+      "buttonLabel": "Resmi lansmanda açılıyor"
     }
   },
   "musicPlayer": {

@@ -536,10 +536,10 @@
       "cancelFailed": "Could not cancel trade. Please try again."
     },
     "launchLock": {
-      "marketplaceTitle": "El Marketplace está bloqueado hasta el lanzamiento, ¡y el lanzamiento llegará muy pronto!",
-      "dashboardTitle": "Tu panel se desbloquea en el lanzamiento, ¡muy pronto!",
-      "desc": "No dejes que eso te detenga. Regístrate, explora este increíble proyecto, descubre cómo puede recompensarte y ayuda a hacerlo realidad. ¡Conviértete en un Hyper Tekin y crea algo nuevo!",
-      "buttonLabel": "Se desbloquea muy pronto"
+      "marketplaceTitle": "¡El Marketplace está bloqueado por ahora, pero prepárate; el lanzamiento oficial está a la vuelta de la esquina!",
+      "dashboardTitle": "¡Tu panel está bloqueado por ahora, pero prepárate; el lanzamiento oficial está a la vuelta de la esquina!",
+      "desc": "No dejes que esto te impida registrarte y sumergirte en este increíble proyecto. ¡Descubre sus numerosos beneficios y cómo tu participación puede impulsar su éxito! ¡Únete ahora y conviértete en un Hyper Tekken hoy!",
+      "buttonLabel": "Se abre en el lanzamiento oficial"
     }
   },
   "musicPlayer": {

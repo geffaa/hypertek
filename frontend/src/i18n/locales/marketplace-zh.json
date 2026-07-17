@@ -536,10 +536,10 @@
       "cancelFailed": "Could not cancel trade. Please try again."
     },
     "launchLock": {
-      "marketplaceTitle": "市场在正式上线前处于锁定状态，上线即将到来！",
-      "dashboardTitle": "您的仪表板将在上线时解锁，敬请期待！",
-      "desc": "别让这阻止你。立即注册，探索这个精彩的项目，看看它能为你带来什么回报，并帮助它成为现实。成为一名 Hyper Tekin，创造全新的事物！",
-      "buttonLabel": "即将解锁"
+      "marketplaceTitle": "市场目前处于锁定状态，但请做好准备；正式上线近在眼前！",
+      "dashboardTitle": "您的仪表板目前处于锁定状态，但请做好准备；正式上线近在眼前！",
+      "desc": "别让这阻止你注册并深入探索这个不可思议的项目。发现它的众多好处，看看你的参与如何推动它走向成功！立即加入，今天就成为一名 Hyper Tekken！",
+      "buttonLabel": "正式上线时开放"
     }
   },
   "musicPlayer": {

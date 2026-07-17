@@ -536,10 +536,10 @@
       "cancelFailed": "Could not cancel trade. Please try again."
     },
     "launchLock": {
-      "marketplaceTitle": "Naka-lock ang Marketplace hanggang sa paglunsad, at malapit na ang paglunsad!",
-      "dashboardTitle": "Mabubuksan ang iyong dashboard sa paglunsad, malapit na!",
-      "desc": "Huwag mong hayaang pigilan ka nito. Mag-sign up, tuklasin ang kamangha-manghang proyektong ito, tingnan kung paano ka nito magagantimpalaan, at tumulong na maisakatuparan ito. Maging isang Hyper Tekin at lumikha ng bago!",
-      "buttonLabel": "Malapit nang mabuksan"
+      "marketplaceTitle": "Naka-lock pa ang Marketplace, pero maghanda ka; paparating na ang opisyal na paglunsad!",
+      "dashboardTitle": "Naka-lock pa ang iyong dashboard, pero maghanda ka; paparating na ang opisyal na paglunsad!",
+      "desc": "Huwag mong hayaang pigilan ka nito sa pag-sign up at pagsisid sa kamangha-manghang proyektong ito. Tuklasin ang maraming benepisyo nito at kung paano makakatulong ang iyong pakikilahok sa tagumpay nito! Sumali ka na at maging isang Hyper Tekken ngayon!",
+      "buttonLabel": "Magbubukas sa opisyal na paglunsad"
     }
   },
   "musicPlayer": {

@@ -536,10 +536,10 @@
       "cancelFailed": "Could not cancel trade. Please try again."
     },
     "launchLock": {
-      "marketplaceTitle": "Marketplace bị khóa cho đến khi ra mắt, và ngày ra mắt sắp đến rất gần!",
-      "dashboardTitle": "Bảng điều khiển của bạn sẽ mở khóa khi ra mắt, sắp tới rồi!",
-      "desc": "Đừng để điều đó ngăn cản bạn. Đăng ký, khám phá dự án tuyệt vời này, xem nó có thể mang lại lợi ích gì cho bạn và giúp biến nó thành hiện thực. Trở thành một Hyper Tekin và tạo ra điều mới mẻ!",
-      "buttonLabel": "Sắp mở khóa"
+      "marketplaceTitle": "Marketplace hiện đang khóa, nhưng hãy sẵn sàng; buổi ra mắt chính thức đang đến rất gần!",
+      "dashboardTitle": "Bảng điều khiển của bạn hiện đang khóa, nhưng hãy sẵn sàng; buổi ra mắt chính thức đang đến rất gần!",
+      "desc": "Đừng để điều này ngăn bạn đăng ký và khám phá dự án tuyệt vời này. Khám phá vô số lợi ích và cách sự tham gia của bạn có thể thúc đẩy thành công của nó! Tham gia ngay và trở thành một Hyper Tekken hôm nay!",
+      "buttonLabel": "Mở khi ra mắt chính thức"
     }
   },
   "musicPlayer": {

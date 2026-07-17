@@ -536,10 +536,10 @@
       "cancelFailed": "Could not cancel trade. Please try again."
     },
     "launchLock": {
-      "marketplaceTitle": "De Marketplace is vergrendeld tot de lancering, en de lancering komt heel binnenkort!",
-      "dashboardTitle": "Je dashboard wordt ontgrendeld bij de lancering, heel binnenkort!",
-      "desc": "Laat dat je niet tegenhouden. Meld je aan, ontdek dit geweldige project, zie hoe het je kan belonen en help het werkelijkheid te maken. Word een Hyper Tekin en creëer iets nieuws!",
-      "buttonLabel": "Binnenkort ontgrendeld"
+      "marketplaceTitle": "De Marketplace is momenteel vergrendeld, maar maak je klaar; de officiële lancering staat voor de deur!",
+      "dashboardTitle": "Je dashboard is momenteel vergrendeld, maar maak je klaar; de officiële lancering staat voor de deur!",
+      "desc": "Laat dit je er niet van weerhouden je aan te melden en in dit ongelooflijke project te duiken. Ontdek de vele voordelen en hoe jouw betrokkenheid het succes kan aandrijven! Doe nu mee en word vandaag nog een Hyper Tekken!",
+      "buttonLabel": "Opent bij de officiële lancering"
     }
   },
   "musicPlayer": {

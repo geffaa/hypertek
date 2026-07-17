@@ -536,10 +536,10 @@
       "cancelFailed": "Could not cancel trade. Please try again."
     },
     "launchLock": {
-      "marketplaceTitle": "Marketplace terkunci hingga peluncuran, dan peluncuran akan segera hadir!",
-      "dashboardTitle": "Dasbor Anda terbuka saat peluncuran, segera hadir!",
-      "desc": "Jangan biarkan itu menghentikanmu. Daftar, jelajahi proyek luar biasa ini, lihat bagaimana ia bisa memberimu keuntungan, dan bantu mewujudkannya. Jadilah seorang Hyper Tekin dan ciptakan sesuatu yang baru!",
-      "buttonLabel": "Segera terbuka"
+      "marketplaceTitle": "Marketplace saat ini terkunci, tapi bersiaplah; peluncuran resmi sudah di depan mata!",
+      "dashboardTitle": "Dasbor Anda saat ini terkunci, tapi bersiaplah; peluncuran resmi sudah di depan mata!",
+      "desc": "Jangan biarkan ini menghalangimu mendaftar dan menyelami proyek luar biasa ini. Temukan berbagai manfaatnya dan bagaimana keterlibatanmu bisa mendorong kesuksesannya! Bergabunglah sekarang dan jadilah seorang Hyper Tekken hari ini!",
+      "buttonLabel": "Terbuka saat peluncuran resmi"
     }
   },
   "musicPlayer": {

@@ -13,10 +13,10 @@
       "bounty": "Bounty"
     },
     "launchLock": {
-      "marketplaceTitle": "The Marketplace is locked until launch, and launch is coming very soon!",
-      "dashboardTitle": "Your dashboard unlocks at launch, coming very soon!",
-      "desc": "Don't let that stop you. Sign up, explore this amazing project, see how it could reward you, and help make it happen. Become a Hyper Tekin and create something new!",
-      "buttonLabel": "Unlocking very soon"
+      "marketplaceTitle": "The Marketplace is currently locked but get ready; the official launch is just around the corner!",
+      "dashboardTitle": "Your dashboard is currently locked but get ready; the official launch is just around the corner!",
+      "desc": "Don't let this hold you back from signing up and diving into this incredible project. Uncover the numerous benefits it offers and discover how your involvement can drive its success! Join us now and become a Hyper Tekken today!",
+      "buttonLabel": "Unlocking at the official launch"
     },
     "banner": {
       "defaultHeading": "A New Era Dawns in Hyper Tek",
