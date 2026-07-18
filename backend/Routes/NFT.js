@@ -86,11 +86,12 @@ NFTRouter.put(
 NFTRouter.delete("/parent-collection/:id", deleteCollection);
 
 /* =====================================================
-   SUB COLLECTION ROUTES (NO AUTH)
+   SUB COLLECTION ROUTES
 ===================================================== */
 
 NFTRouter.post(
   "/parent-collection/:parentId/sub-collection",
+  authMiddleware(), // logged in user required — controller still gates NFA/NFC/admin-only fields internally
   uploadTemp.single("image"),
   addSubCollection
 );
@@ -102,12 +103,14 @@ NFTRouter.get(
 
 NFTRouter.put(
   "/parent-collection/:parentId/sub-collection/:subCollectionId",
+  authMiddleware(), // logged in user required — controller still gates NFA/NFC/admin-only fields internally
   uploadTemp.single("image"),
   updateSubCollection
 );
 
 NFTRouter.delete(
   "/parent-collection/:parentId/sub-collection/:subCollectionId",
+  authMiddleware(), // logged in user required
   deleteSubCollection
 );
 
