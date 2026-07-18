@@ -218,8 +218,13 @@ AdminNFARouter.get("/items", async (req, res) => {
           buybackPending:    sub.buybackPending || false,
           artistId:     sub.artistId || null,
           artistName:   "",   // populated below
-          // Legacy sub-docs lack createdAt — fall back to the ObjectId timestamp
-          createdAt:    sub.createdAt || (sub._id?.getTimestamp ? sub._id.getTimestamp() : null),
+          // Legacy sub-docs have a missing or empty-object createdAt — fall
+          // back to the ObjectId timestamp so newest-first sorting holds
+          createdAt:    (() => {
+            const d = new Date(sub.createdAt);
+            if (sub.createdAt && !isNaN(d)) return d;
+            return sub._id?.getTimestamp ? sub._id.getTimestamp() : new Date(0);
+          })(),
         });
       }
     }
