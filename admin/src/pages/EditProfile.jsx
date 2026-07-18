@@ -92,7 +92,7 @@ function EditAdminProfile() {
       const data = await res.json();
       if (data.success) {
         toast.success("Profile updated successfully");
-        navigate("/dashboard");
+        navigate(`/${adminId}/dashboard`);
       } else {
         toast.error(data.message || "Failed to update profile");
       }
@@ -104,8 +104,10 @@ function EditAdminProfile() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("admin_data");
-    navigate("/login");
+    localStorage.clear();
+    sessionStorage.clear();
+    const frontendUrl = import.meta.env.VITE_FRONTEND_URL || "http://localhost:5173";
+    window.location.href = `${frontendUrl}/signin`;
   };
 
   const avatarSrc = profileImage?.startsWith("data:") ? profileImage : profileImage ? `${Image_Base_Url}${profileImage}` : null;
