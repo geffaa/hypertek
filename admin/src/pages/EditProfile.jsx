@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { FiCamera, FiCopy, FiEye, FiEyeOff, FiLogOut } from "react-icons/fi";
-import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
+import { BACKEND_BASE_URL, Image_Base_Url } from "../Config";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
@@ -78,20 +78,36 @@ function EditAdminProfile() {
       toast.error("New password and confirm password do not match");
       return;
     }
+    if (newPass && !currentPass) {
+      toast.error("Enter your current password to set a new one");
+      return;
+    }
     const formData = new FormData();
     formData.append("FullName", name);
-    formData.append("Username", username);
+    formData.append("Nickname", username);
     formData.append("Email", email);
     formData.append("Bio", bio);
-    if (newPass) formData.append("Password", newPass);
-    if (file)    formData.append("Avatar", file);
+    if (newPass) {
+      formData.append("Password", currentPass);
+      formData.append("NewPassword", newPass);
+    }
+    if (file) formData.append("Avatar", file);
 
     try {
       setLoading(true);
-      const res  = await fetch(`${Dashboard_Base_Url}/v1/edit/${adminId}`, { method: "PUT", body: formData });
+      const token = localStorage.getItem("token");
+      // Self-service profile endpoint: verifies the current password via
+      // bcrypt before allowing a change, unlike the admin-edits-anyone route.
+      const res  = await fetch(`${BACKEND_BASE_URL}/api/v1/profile`, {
+        method: "PUT",
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      });
       const data = await res.json();
-      if (data.success) {
+      if (res.ok && data.user) {
+        localStorage.setItem("admin_data", JSON.stringify({ ...adminData, ...data.user, _id: adminId }));
         toast.success("Profile updated successfully");
+        setCurrentPass(""); setNewPass(""); setConfirmPass("");
         navigate(`/${adminId}/dashboard`);
       } else {
         toast.error(data.message || "Failed to update profile");
