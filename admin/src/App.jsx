@@ -5,13 +5,9 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import Dashboard from "./pages/Dashboard";
 import Transactions from "./pages/Transactions";
 import CreateCollections from "./pages/CreateCollections";
-import CreatorEarning from "./pages/CreatorEarning";
-import Character from "./pages/Character";
-import Land from "./pages/Land";
 import PlatformEarnings from "./pages/PlatformEarnings";
 import UpdateNews from "./pages/UpdateNews";
 import CollectionListedForSale from "./pages/CollectionListedForSale";
-import CollectionDetails2 from "./pages/CollectionDetails2";
 import UserDetails from "./pages/UserDetails";
 import UploadedNews from "./pages/UploadedNews";
 import OtherNews from "./pages/OtherNews";
@@ -19,7 +15,6 @@ import Support from "./pages/Support";
 import ProtectedRoute from "./ProtectedRoute";
 import NotificationsPage from "./pages/Notifications";
 import EditAdminProfile from "./pages/EditProfile";
-import AddSubCollection from "./pages/AddSubCollection";
 import EditSubCollection from "./pages/EditSubCollection";
 import WebsiteEditor from "./pages/WebsiteEditor";
 import WaitlistPage from "./pages/WaitlistPage";
@@ -46,19 +41,11 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="transactions" element={<Transactions />} />
             <Route path="create-collection" element={<CreateCollections />} />
-            <Route path="creator-earning" element={<CreatorEarning />} />
             <Route path="platform-earnings" element={<PlatformEarnings />} />
-            <Route path="add-sub-collection" element={<AddSubCollection />} />
             <Route path="edit-sub-collection" element={<EditSubCollection />} />
-            <Route path="character-collection" element={<Character />} />
-            <Route path="land-collection" element={<Land />} />
             <Route
               path="collection-listed-sale"
               element={<CollectionListedForSale />}
-            />
-            <Route
-              path="collection-details-2"
-              element={<CollectionDetails2 />}
             />
             <Route path="users" element={<UserDetails />} />
             <Route path="add-news" element={<UpdateNews />} />
