@@ -360,7 +360,7 @@ AdminNFARouter.post("/items/:parentId/:subId/list", async (req, res) => {
     }
 
     const listing = await MarketListing.create({
-      userId:          req.user._id,
+      userId:          req.user._id || req.user.id,
       userName:        "Hyper Tek",
       userWallet:      sub.owner || "",
       category:        normalizeCat(parent.category),
