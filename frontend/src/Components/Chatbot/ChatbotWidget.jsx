@@ -182,7 +182,12 @@ export default function ChatbotWidget() {
   const peekTimer = useRef(null);
 
   useEffect(() => {
-    if (open) {
+    // The peek bubble is a fixed-position, non-wrapping tooltip anchored to
+    // the bottom-right corner. On narrow (phone-width) screens there's no
+    // safe empty space for it, so it ends up sitting on top of real page
+    // content. Skip the auto-peek entirely below the sm breakpoint — the
+    // pulsing toggle button alone is still an inviting affordance there.
+    if (open || (typeof window !== "undefined" && window.innerWidth < 640)) {
       clearTimeout(peekTimer.current);
       setPeekState({ phase: "idle", text: "" });
       return;
