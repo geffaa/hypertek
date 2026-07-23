@@ -599,5 +599,12 @@
         ]
       }
     ]
+  },
+  "dashboard": {
+    "mobileNotice": {
+      "title": "Vises bedst på en større skærm",
+      "desc": "Dashboardet er designet til tablet og computer. Åbn det på en tablet eller computer for at bruge alle funktioner.",
+      "backHome": "Tilbage til forsiden"
+    }
   }
 }

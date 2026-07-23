@@ -599,5 +599,12 @@
         ]
       }
     ]
+  },
+  "dashboard": {
+    "mobileNotice": {
+      "title": "Het best te bekijken op een groter scherm",
+      "desc": "Het dashboard is ontworpen voor tablet en desktop. Open het op een tablet of computer om alle functies te gebruiken.",
+      "backHome": "Terug naar home"
+    }
   }
 }

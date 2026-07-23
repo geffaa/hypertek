@@ -599,5 +599,12 @@
         ]
       }
     ]
+  },
+  "dashboard": {
+    "mobileNotice": {
+      "title": "Paling sesuai dilihat pada skrin lebih besar",
+      "desc": "Papan pemuka direka untuk tablet dan desktop. Sila buka pada tablet atau komputer untuk menggunakan semua cirinya.",
+      "backHome": "Kembali ke Laman Utama"
+    }
   }
 }

@@ -599,5 +599,12 @@
         ]
       }
     ]
+  },
+  "dashboard": {
+    "mobileNotice": {
+      "title": "Vises best på en større skjerm",
+      "desc": "Dashbordet er laget for nettbrett og datamaskin. Åpne det på et nettbrett eller en datamaskin for å bruke alle funksjonene.",
+      "backHome": "Tilbake til hjem"
+    }
   }
 }

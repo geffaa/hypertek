@@ -594,19 +594,19 @@ function CrowdfundingPackages({ showPageLink = false, hideIntro = false }) {
               </span>
             </div>
 
-            <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
+            <p className="text-[13px] lg:text-[14px] leading-[1.85] text-left sm:text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
               {t("packages.intro1")}
             </p>
-            <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
+            <p className="text-[13px] lg:text-[14px] leading-[1.85] text-left sm:text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
               {t("packages.intro2")}
             </p>
-            <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
+            <p className="text-[13px] lg:text-[14px] leading-[1.85] text-left sm:text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
               {t("packages.intro3")}
             </p>
-            <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
+            <p className="text-[13px] lg:text-[14px] leading-[1.85] text-left sm:text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
               {t("packages.intro4")}
             </p>
-            <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
+            <p className="text-[13px] lg:text-[14px] leading-[1.85] text-left sm:text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
               {t("packages.intro5")}
             </p>
 
@@ -614,10 +614,10 @@ function CrowdfundingPackages({ showPageLink = false, hideIntro = false }) {
             <h3 className="text-white font-bold text-[14px] lg:text-[15px] mt-1" style={{ fontFamily: "Orbitron,sans-serif", letterSpacing: "0.04em" }}>
               {t("packages.keyPointsTitle")}
             </h3>
-            <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
+            <p className="text-[13px] lg:text-[14px] leading-[1.85] text-left sm:text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
               {t("packages.intro6")}
             </p>
-            <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
+            <p className="text-[13px] lg:text-[14px] leading-[1.85] text-left sm:text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
               {t("packages.intro7")}
             </p>
           </div>}
@@ -634,27 +634,27 @@ function CrowdfundingPackages({ showPageLink = false, hideIntro = false }) {
           viewport={{ once: true, amount: 0.1 }}
           className="mt-6"
         >
-          {/* Divider with section heading */}
+          {/* Divider with section heading — stacks on mobile so nothing overflows */}
           <div
-            className="px-8 py-4 flex items-center gap-4 rounded-t-xl"
+            className="px-5 sm:px-8 py-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 rounded-t-xl"
             style={{ borderTop: "2px solid rgba(56,189,248,0.65)", borderLeft: "1px solid rgba(56,189,248,0.28)", borderRight: "1px solid rgba(56,189,248,0.28)", background: "rgba(11,26,46,0.6)" }}
           >
             <div className="flex items-center gap-3">
               <div className="w-10 h-[2px] bg-white/50" />
               <span className="text-white/70 font-bold text-xs tracking-[0.3em] uppercase">{t("packages.collectionsLabel")}</span>
             </div>
-            <div className="flex-1 h-px" style={{ background: "rgba(56,189,248,0.15)" }} />
-            <h2 className="text-white font-[Goldman] font-bold text-xl sm:text-2xl uppercase whitespace-nowrap">
+            <div className="hidden sm:block flex-1 h-px" style={{ background: "rgba(56,189,248,0.15)" }} />
+            <h2 className="text-white font-[Goldman] font-bold text-lg sm:text-2xl uppercase sm:whitespace-nowrap">
               {t("packages.sectionTitle")}
             </h2>
-            <div className="flex-1 h-px" style={{ background: "rgba(56,189,248,0.15)" }} />
+            <div className="hidden sm:block flex-1 h-px" style={{ background: "rgba(56,189,248,0.15)" }} />
             <span className="text-white/50 text-[12px] font-semibold whitespace-nowrap">
               {t("packages.discount")}
             </span>
           </div>
 
           {/* ── Packages grid ── */}
-          <div className="px-8 pb-8 pt-5 flex flex-col gap-4"
+          <div className="px-5 sm:px-8 pb-8 pt-5 flex flex-col gap-4"
             style={{ border: "1px solid rgba(56,189,248,0.28)", borderTop: "none", borderBottomLeftRadius: 12, borderBottomRightRadius: 12, background: "linear-gradient(160deg, rgba(11,26,46,0.6) 0%, rgba(6,14,26,0.75) 100%)" }}
           >
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">

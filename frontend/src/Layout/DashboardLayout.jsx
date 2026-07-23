@@ -3,6 +3,7 @@ import Sidebar from "../Components/Dashboard/Sidebar";
 import Header from "../Components/Dashboard/Header";
 import { Outlet } from "react-router-dom";
 import LogoutModal from "../Components/Dashboard/LogoutModal";
+import MobileNotice from "../Components/Dashboard/MobileNotice";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import LockOverlay from "../Components/Common/LockOverlay";
@@ -18,6 +19,9 @@ const DashboardLayout = () => {
 
   return (
     <div className="flex h-screen text-white relative bg-[#100F0F] w-full overflow-hidden">
+
+      {/* Phone-width notice: the dashboard is a desktop/tablet experience */}
+      <MobileNotice />
 
       {/* Global Background Effects */}
       <div

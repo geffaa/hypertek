@@ -29,29 +29,29 @@ export function NFAItemsSection() {
 
   return (
     <>
-      {/* Header row */}
-      <div className="flex items-center gap-4 px-8 py-4"
+      {/* Header row — stacks on mobile so the long title never overflows */}
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 px-5 sm:px-8 py-4"
         style={{ borderTop: "1px solid rgba(56,189,248,0.1)", borderBottom: "1px solid rgba(56,189,248,0.1)", background: "rgba(56,189,248,0.03)" }}>
         <div className="flex items-center gap-3 shrink-0">
           <div className="w-10 h-[2px] bg-white/50" />
           <span className="text-white/70 font-bold text-xs tracking-[0.3em] uppercase">{t("homeMarket.featured")}</span>
         </div>
-        <div className="flex-1 h-px" style={{ background: "rgba(56,189,248,0.15)" }} />
-        <h2 className="text-white font-[Goldman] font-bold text-xl sm:text-2xl uppercase whitespace-nowrap">
+        <div className="hidden sm:block flex-1 h-px" style={{ background: "rgba(56,189,248,0.15)" }} />
+        <h2 className="text-white font-[Goldman] font-bold text-lg sm:text-2xl uppercase sm:whitespace-nowrap">
           {t("homeMarket.sectionTitle")}
         </h2>
-        <div className="flex-1 h-px" style={{ background: "rgba(56,189,248,0.15)" }} />
-        <span className="flex items-center gap-1.5 text-[11px] font-semibold text-[#50C878] bg-[#50C878]/10 border border-[#50C878]/30 rounded-full px-3 py-1 shrink-0">
+        <div className="hidden sm:block flex-1 h-px" style={{ background: "rgba(56,189,248,0.15)" }} />
+        <span className="self-start sm:self-auto flex items-center gap-1.5 text-[11px] font-semibold text-[#50C878] bg-[#50C878]/10 border border-[#50C878]/30 rounded-full px-3 py-1 shrink-0">
           <span>✦</span> {t("homeMarket.buybackBadge")}
         </span>
       </div>
 
-      <div className="px-8 pt-3 pb-1">
+      <div className="px-5 sm:px-8 pt-3 pb-1">
         <p className="text-white/70 text-sm sm:text-base font-semibold">{t("homeMarket.urgency")}</p>
       </div>
 
       {/* Preview-only notice — marketplace is browsable but purchasing is locked until launch */}
-      <div className="px-8 pt-3">
+      <div className="px-5 sm:px-8 pt-3">
         <div
           className="flex items-center gap-2.5 rounded-lg px-4 py-2.5"
           style={{
@@ -67,7 +67,7 @@ export function NFAItemsSection() {
       </div>
 
       {/* Items grid */}
-      <div className="px-8 pb-8 flex gap-3 overflow-x-auto snap-x snap-mandatory scrollbar-hide sm:grid sm:grid-cols-3 sm:overflow-visible lg:grid-cols-6 mt-4">
+      <div className="px-5 sm:px-8 pb-8 flex gap-3 overflow-x-auto snap-x snap-mandatory scrollbar-hide sm:grid sm:grid-cols-3 sm:overflow-visible lg:grid-cols-6 mt-4">
         {items.map((item, index) => (
           <motion.div
             key={item.id}

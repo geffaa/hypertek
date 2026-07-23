@@ -599,5 +599,12 @@
         ]
       }
     ]
+  },
+  "dashboard": {
+    "mobileNotice": {
+      "title": "Am besten auf einem größeren Bildschirm",
+      "desc": "Das Dashboard ist für Tablet und Desktop konzipiert. Bitte öffne es auf einem Tablet oder Computer, um alle Funktionen zu nutzen.",
+      "backHome": "Zurück zur Startseite"
+    }
   }
 }

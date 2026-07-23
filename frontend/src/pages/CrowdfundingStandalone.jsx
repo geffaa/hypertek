@@ -439,8 +439,8 @@ function CrowdfundingStandalone() {
             <motion.div
               initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
             >
-              <div className="flex flex-col xl:flex-row items-center gap-4 xl:gap-2 rounded-xl"
-                style={{ padding: "32px 36px", background: "linear-gradient(160deg, rgba(11,26,46,0.35) 0%, rgba(6,14,26,0.35) 100%)", border: "1px solid rgba(56,189,248,0.30)", borderTop: "2px solid rgba(56,189,248,0.70)", boxShadow: "0 4px 32px rgba(56,189,248,0.10)" }}
+              <div className="flex flex-col xl:flex-row items-center gap-4 xl:gap-2 rounded-xl p-6 sm:p-9"
+                style={{ background: "linear-gradient(160deg, rgba(11,26,46,0.35) 0%, rgba(6,14,26,0.35) 100%)", border: "1px solid rgba(56,189,248,0.30)", borderTop: "2px solid rgba(56,189,248,0.70)", boxShadow: "0 4px 32px rgba(56,189,248,0.10)" }}
               >
                 <div className="flex flex-col gap-4 flex-1">
                   <div className="flex items-center gap-3">
@@ -449,11 +449,11 @@ function CrowdfundingStandalone() {
                       {t("packages.badge")}
                     </span>
                   </div>
-                  <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro1")}</p>
-                  <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro2")}</p>
-                  <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro3")}</p>
-                  <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro4")}</p>
-                  <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro5")}</p>
+                  <p className="text-[15px] lg:text-[16px] leading-[1.85] text-left sm:text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro1")}</p>
+                  <p className="text-[15px] lg:text-[16px] leading-[1.85] text-left sm:text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro2")}</p>
+                  <p className="text-[15px] lg:text-[16px] leading-[1.85] text-left sm:text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro3")}</p>
+                  <p className="text-[15px] lg:text-[16px] leading-[1.85] text-left sm:text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro4")}</p>
+                  <p className="text-[15px] lg:text-[16px] leading-[1.85] text-left sm:text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro5")}</p>
                 </div>
 
                 {/* Avatar — reserves a narrow slot; the image overflows it so it can
@@ -466,20 +466,19 @@ function CrowdfundingStandalone() {
           </div>
 
           {/* ── Card 2: Key Points — avatar left (absolute) + card right ── */}
-          <div className="relative mb-2" style={{ minHeight: "320px" }}>
+          <div className="relative mb-2 xl:min-h-[320px]">
             {/* Avatar — absolute kiri, dikecilkan agar tidak overlap section bawah */}
             <div className="hidden xl:block pointer-events-none select-none" style={{ position: "absolute", left: "-60px", top: "0px", width: "420px", zIndex: 10 }}>
               <CyclingAvatar offset={1} seed={rotationSeed} className="w-full object-contain object-top" style={{ maxHeight: "640px", filter: "drop-shadow(0 0 48px rgba(167,139,250,0.40))", transform: "scaleX(-1)" }} />
             </div>
 
-            {/* Card — center-right, sejajar vertikal dengan tengah avatar */}
+            {/* Card — full width on mobile; center-right beside the avatar on desktop */}
             <motion.div
-              className="flex items-end justify-end"
-              style={{ minHeight: "400px" }}
+              className="flex justify-center xl:justify-end xl:items-end xl:min-h-[400px]"
               initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.1 }} viewport={{ once: true }}
             >
-              <div className="flex flex-col gap-4 rounded-xl overflow-hidden"
-                style={{ padding: "32px 36px", width: "76%", background: "linear-gradient(160deg, rgba(22,15,40,0.35) 0%, rgba(10,6,22,0.35) 100%)", border: "1px solid rgba(167,139,250,0.28)", borderTop: "2px solid rgba(167,139,250,0.68)", boxShadow: "0 4px 32px rgba(167,139,250,0.08)" }}
+              <div className="flex flex-col gap-4 rounded-xl overflow-hidden p-6 sm:p-9 w-full xl:w-[76%]"
+                style={{ background: "linear-gradient(160deg, rgba(22,15,40,0.35) 0%, rgba(10,6,22,0.35) 100%)", border: "1px solid rgba(167,139,250,0.28)", borderTop: "2px solid rgba(167,139,250,0.68)", boxShadow: "0 4px 32px rgba(167,139,250,0.08)" }}
               >
                 <div className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: "#a78bfa" }} />
@@ -487,16 +486,15 @@ function CrowdfundingStandalone() {
                     {t("packages.keyPointsTitle")}
                   </span>
                 </div>
-                <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro6")}</p>
-                <p className="text-[15px] lg:text-[16px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro7")}</p>
+                <p className="text-[15px] lg:text-[16px] leading-[1.85] text-left sm:text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro6")}</p>
+                <p className="text-[15px] lg:text-[16px] leading-[1.85] text-left sm:text-justify" style={{ color: "rgba(255,255,255,0.85)" }}>{t("packages.intro7")}</p>
               </div>
             </motion.div>
           </div>
 
-          {/* ── How YOU Can Help ── */}
+          {/* ── How YOU Can Help ── (big top gap only on desktop, to clear the avatar overflow) */}
           <motion.div
-            className="mb-8"
-            style={{ paddingTop: "160px", paddingBottom: "32px" }}
+            className="mb-8 pt-10 xl:pt-40 pb-8"
             initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.15 }} viewport={{ once: true }}
           >
             <h3 className="font-[Goldman] font-bold text-white text-2xl md:text-3xl text-center mb-10">
@@ -518,30 +516,30 @@ function CrowdfundingStandalone() {
           className="relative"
           initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
         >
-          {/* Decorative left — vehicle */}
-          <CyclingVehicle seed={rotationSeed} className="absolute top-1/2 transition-opacity duration-700" style={{ width: "clamp(320px, 38vw, 540px)", transform: "translateY(-50%)", left: "40px" }} />
+          {/* Decorative left — vehicle (hidden below xl: no room next to the text) */}
+          <CyclingVehicle seed={rotationSeed} className="hidden xl:block absolute top-1/2 transition-opacity duration-700" style={{ width: "clamp(320px, 38vw, 540px)", transform: "translateY(-50%)", left: "40px" }} />
           {/* Decorative right — avatar */}
-          <CyclingAvatar offset={3} seed={rotationSeed} className="absolute transition-opacity duration-700" style={{ width: "clamp(240px, 28vw, 400px)", right: "80px", bottom: "-120px" }} />
+          <CyclingAvatar offset={3} seed={rotationSeed} className="hidden xl:block absolute transition-opacity duration-700" style={{ width: "clamp(240px, 28vw, 400px)", right: "80px", bottom: "-120px" }} />
 
-          <div className="relative w-full" style={{ paddingLeft: "clamp(180px, 28vw, 420px)", paddingRight: "clamp(180px, 28vw, 420px)" }}>
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <div className="w-12 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
-              <span className="text-amber-300 text-[15px] font-bold uppercase tracking-[0.3em]" style={{ fontFamily: "Orbitron, sans-serif" }}>
+          <div className="relative w-full xl:px-[clamp(180px,28vw,420px)]">
+            <div className="flex items-center justify-center gap-3 md:gap-4 mb-6">
+              <div className="w-8 md:w-12 h-px flex-shrink-0" style={{ background: "rgba(251,191,36,0.6)" }} />
+              <span className="text-amber-300 text-[12px] md:text-[15px] font-bold uppercase tracking-[0.2em] md:tracking-[0.3em] text-center pl-[0.2em] md:pl-[0.3em]" style={{ fontFamily: "Orbitron, sans-serif" }}>
                 {EARLY_ACCESS.eyebrow}
               </span>
-              <div className="w-12 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
+              <div className="w-8 md:w-12 h-px flex-shrink-0" style={{ background: "rgba(251,191,36,0.6)" }} />
             </div>
 
-            <h3 className="font-[Goldman] font-bold text-white text-3xl md:text-[48px] leading-tight mb-5">
+            <h3 className="font-[Goldman] font-bold text-white text-2xl sm:text-3xl md:text-[48px] leading-tight mb-5">
               {EARLY_ACCESS.heading}
             </h3>
             <div className="w-20 h-[3px] rounded-full mx-auto mb-10" style={{ background: "linear-gradient(90deg,#fbbf24,#f59e0b)" }} />
 
-            <ul className="flex flex-col gap-5 mb-0 text-left">
+            <ul className="flex flex-col gap-4 md:gap-5 mb-0 text-left max-w-2xl mx-auto">
               {EARLY_ACCESS.bullets.map((b, i) => (
-                <li key={i} className="flex gap-4 items-start">
+                <li key={i} className="flex gap-3 md:gap-4 items-start">
                   <ArrowRight size={20} color="#fbbf24" strokeWidth={2} className="mt-[3px] flex-shrink-0" />
-                  <span className="text-white text-[17px] md:text-[19px] leading-relaxed">{b}</span>
+                  <span className="text-white text-[15px] md:text-[19px] leading-relaxed">{b}</span>
                 </li>
               ))}
             </ul>

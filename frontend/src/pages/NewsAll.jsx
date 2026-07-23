@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Play, X, Calendar } from "lucide-react";
+import { Play, X, Calendar, ChevronDown } from "lucide-react";
 import { BACKEND_BASE_URL, getImageUrl } from "../Config";
 import GlowingOrb from "../Components/Common/BgColoring";
 
@@ -467,6 +467,49 @@ const FAQ_RELATED_KEYWORDS = [
   ["user interface"],                     // Is VR/AR supported?
 ];
 
+// Formats a single FAQ answer string (shared by the desktop panel and the
+// mobile accordion). Handles "Label:" leads, numbered lists, and bold NF* terms.
+function FaqAnswerBody({ answer }) {
+  return (
+    <div className="text-white/60 text-[13px] md:text-[14px] text-left sm:text-justify leading-[1.9] flex flex-col gap-4">
+      {answer?.split("\n\n").map((para, pi) => {
+        const colonMatch = para.match(/^([A-Za-z][^:\n]{0,60}:)\s([\s\S]*)/);
+        if (colonMatch) {
+          return (
+            <p key={pi}>
+              <strong className="text-white/90 font-semibold">{colonMatch[1]}</strong>{" "}{colonMatch[2]}
+            </p>
+          );
+        }
+        if (/^\d+\.\s/.test(para)) {
+          return (
+            <ul key={pi} className="flex flex-col gap-2 pl-1">
+              {para.split("\n").map((line, li) => (
+                <li key={li} className="flex gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded flex items-center justify-center text-[11px] font-bold mt-0.5"
+                    style={{ background: "rgba(167,139,250,0.15)", color: "#a78bfa", border: "1px solid rgba(167,139,250,0.3)" }}>
+                    {line.match(/^\d+/)?.[0]}
+                  </span>
+                  <span>{line.replace(/^\d+\.\s*/, "")}</span>
+                </li>
+              ))}
+            </ul>
+          );
+        }
+        const nfMatch = para.match(/^(Non-Fungible\s+\w+\s*\([A-Z]+s?\))\s+(.*)/s);
+        if (nfMatch) {
+          return (
+            <p key={pi}>
+              <strong className="text-white/90 font-bold">{nfMatch[1]}</strong>{" "}{nfMatch[2]}
+            </p>
+          );
+        }
+        return <p key={pi}>{para}</p>;
+      })}
+    </div>
+  );
+}
+
 export default function NewsList() {
   const [news, setNews]       = useState([]);
   const [loading, setLoading] = useState(true);
@@ -672,13 +715,17 @@ export default function NewsList() {
         {/* ══════════════════════════════════════════
             FAQ SECTION — two-panel half-page layout
         ══════════════════════════════════════════ */}
+        {/* Full-bleed breakout only from lg up. Below lg the breakout is skipped:
+            the global mobile rule `div { max-width: 100% }` clamps the widened
+            width but keeps the negative margin, which shifts the FAQ off-centre.
+            On mobile the section just uses the page's normal gutters. */}
         <motion.div
           ref={faqRef}
-          className="w-[100vw] relative left-1/2 -ml-[50vw]"
+          className="lg:w-[100vw] lg:relative lg:left-1/2 lg:-ml-[50vw]"
           initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }} viewport={{ once: true, amount: 0.1 }}
         >
-          <div className="max-w-[1800px] mx-auto px-6 md:px-12 xl:px-16">
+          <div className="max-w-[1800px] mx-auto px-0 lg:px-12 xl:px-16">
           <div className="flex items-center gap-4 mb-8">
             <div className="w-5 h-[2px]" style={{ background: "#a78bfa" }} />
             <span className="text-white/40 text-xs uppercase tracking-[0.3em]" style={{ fontFamily: "Orbitron, sans-serif" }}>
@@ -688,52 +735,97 @@ export default function NewsList() {
           </div>
 
           <div
-            className="rounded-2xl grid grid-cols-1 lg:grid-cols-[240px_1fr] overflow-hidden"
-            style={{ border: "1px solid rgba(255,255,255,0.08)", height: 588 }}
+            className="rounded-2xl grid grid-cols-1 lg:grid-cols-[240px_1fr] overflow-hidden lg:h-[588px]"
+            style={{ border: "1px solid rgba(255,255,255,0.08)" }}
           >
-            {/* LEFT: Question list */}
-            <div style={{ borderRight: "1px solid rgba(255,255,255,0.07)" }}>
+            {/* LEFT: Question list. On desktop it drives the right panel; on
+                mobile each question is an accordion that expands its own answer. */}
+            <div className="lg:border-r lg:border-white/[0.07]">
               {faqItems.map((item, i) => (
-                <button
+                <div
                   key={i}
-                  onClick={() => {
-                    setFaq(i);
-                    if (i === 1) {
-                      setFaq1Avatar(`/avatar/${AVATAR_FILES[Math.floor(Math.random() * AVATAR_FILES.length)]}`);
-                    }
-                  }}
-                  className="w-full text-left px-5 py-4 flex items-start gap-3 transition-all duration-200 group relative"
-                  style={{
-                    borderBottom: i < faqItems.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none",
-                    background: activeFaq === i ? "rgba(167,139,250,0.08)" : "transparent",
-                  }}
+                  style={{ borderBottom: i < faqItems.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none" }}
                 >
-                  {activeFaq === i && (
-                    <div className="absolute left-0 top-0 bottom-0 w-[3px] rounded-r"
-                      style={{ background: "linear-gradient(to bottom, #a78bfa, rgba(167,139,250,0.3))" }} />
-                  )}
-                  <span
-                    className="flex-shrink-0 w-5 h-5 rounded flex items-center justify-center text-[10px] font-bold mt-0.5 transition-colors duration-200"
-                    style={{
-                      background: activeFaq === i ? "rgba(167,139,250,0.2)" : "rgba(255,255,255,0.05)",
-                      color: activeFaq === i ? "#a78bfa" : "rgba(255,255,255,0.3)",
-                      border: `1px solid ${activeFaq === i ? "rgba(167,139,250,0.4)" : "rgba(255,255,255,0.08)"}`,
+                  <button
+                    onClick={() => {
+                      setFaq(i);
+                      if (i === 1) {
+                        setFaq1Avatar(`/avatar/${AVATAR_FILES[Math.floor(Math.random() * AVATAR_FILES.length)]}`);
+                      }
                     }}
+                    className="w-full text-left px-5 py-4 flex items-start gap-3 transition-all duration-200 group relative"
+                    style={{ background: activeFaq === i ? "rgba(167,139,250,0.08)" : "transparent" }}
                   >
-                    {i + 1}
-                  </span>
-                  <span
-                    className="text-[12.5px] font-semibold leading-snug transition-colors duration-200"
-                    style={{ color: activeFaq === i ? "#fff" : "rgba(255,255,255,0.5)" }}
-                  >
-                    {item.q}
-                  </span>
-                </button>
+                    {activeFaq === i && (
+                      <div className="absolute left-0 top-0 bottom-0 w-[3px] rounded-r"
+                        style={{ background: "linear-gradient(to bottom, #a78bfa, rgba(167,139,250,0.3))" }} />
+                    )}
+                    <span
+                      className="flex-shrink-0 w-5 h-5 rounded flex items-center justify-center text-[10px] font-bold mt-0.5 transition-colors duration-200"
+                      style={{
+                        background: activeFaq === i ? "rgba(167,139,250,0.2)" : "rgba(255,255,255,0.05)",
+                        color: activeFaq === i ? "#a78bfa" : "rgba(255,255,255,0.3)",
+                        border: `1px solid ${activeFaq === i ? "rgba(167,139,250,0.4)" : "rgba(255,255,255,0.08)"}`,
+                      }}
+                    >
+                      {i + 1}
+                    </span>
+                    <span
+                      className="flex-1 text-[12.5px] font-semibold leading-snug transition-colors duration-200"
+                      style={{ color: activeFaq === i ? "#fff" : "rgba(255,255,255,0.5)" }}
+                    >
+                      {item.q}
+                    </span>
+                    {/* Chevron — mobile only, signals the accordion */}
+                    <ChevronDown
+                      className={`lg:hidden flex-shrink-0 w-4 h-4 mt-0.5 transition-transform duration-200 ${activeFaq === i ? "rotate-180" : ""}`}
+                      style={{ color: activeFaq === i ? "#a78bfa" : "rgba(255,255,255,0.35)" }}
+                    />
+                  </button>
+
+                  {/* Mobile accordion answer — expands inline under the tapped question */}
+                  <AnimatePresence initial={false}>
+                    {activeFaq === i && (
+                      <motion.div
+                        className="lg:hidden overflow-hidden"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.28, ease: "easeInOut" }}
+                        style={{ background: "rgba(6,6,16,0.5)" }}
+                      >
+                        <div className="px-5 pt-2 pb-6">
+                          <FaqAnswerBody answer={item.a} />
+                          {relatedArticles.length > 0 && (
+                            <div className="mt-6 pt-5" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+                              <p className="text-[10px] font-bold uppercase tracking-[0.3em] mb-3"
+                                style={{ color: "rgba(167,139,250,0.8)", fontFamily: "Orbitron, sans-serif" }}>
+                                {t("newsPage.relatedNews", "Read more in the news")}
+                              </p>
+                              <div className="flex flex-col gap-2">
+                                {relatedArticles.map((a) => (
+                                  <button
+                                    key={a._id}
+                                    onClick={() => go(a)}
+                                    className="px-4 py-2 rounded-lg text-left text-[12px] font-semibold transition-all duration-200 hover:brightness-125"
+                                    style={{ background: "rgba(167,139,250,0.10)", border: "1px solid rgba(167,139,250,0.35)", color: "#c4b5fd" }}
+                                  >
+                                    {a.heading} →
+                                  </button>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               ))}
             </div>
 
-            {/* RIGHT: Content + Avatar — FAQ #1 gets special full-panel image */}
-            <div className="flex-1 min-w-0 flex overflow-hidden" style={{ background: "rgba(6,6,16,0.5)", height: 588 }}>
+            {/* RIGHT: Content + Avatar — desktop only; mobile uses the accordion above */}
+            <div className="hidden lg:flex flex-1 min-w-0 overflow-hidden lg:h-[588px]" style={{ background: "rgba(6,6,16,0.5)" }}>
               {/* Text content */}
               <div className="flex-1 min-w-0 overflow-y-auto scrollbar-hide" style={{ scrollbarWidth: "none" }}>
                 <AnimatePresence mode="wait">
@@ -755,43 +847,7 @@ export default function NewsList() {
                     <h3 className="font-[Goldman] font-bold text-white text-2xl md:text-3xl leading-snug mb-6">
                       {faqItems[activeFaq]?.q}
                     </h3>
-                    <div className="text-white/60 text-[13px] md:text-[14px] text-justify leading-[1.9] flex flex-col gap-4">
-                      {faqItems[activeFaq]?.a?.split("\n\n").map((para, pi) => {
-                        const colonMatch = para.match(/^([A-Za-z][^:\n]{0,60}:)\s([\s\S]*)/);
-                        if (colonMatch) {
-                          return (
-                            <p key={pi}>
-                              <strong className="text-white/90 font-semibold">{colonMatch[1]}</strong>{" "}{colonMatch[2]}
-                            </p>
-                          );
-                        }
-                        if (/^\d+\.\s/.test(para)) {
-                          return (
-                            <ul key={pi} className="flex flex-col gap-2 pl-1">
-                              {para.split("\n").map((line, li) => (
-                                <li key={li} className="flex gap-3">
-                                  <span className="flex-shrink-0 w-6 h-6 rounded flex items-center justify-center text-[11px] font-bold mt-0.5"
-                                    style={{ background: "rgba(167,139,250,0.15)", color: "#a78bfa", border: "1px solid rgba(167,139,250,0.3)" }}>
-                                    {line.match(/^\d+/)?.[0]}
-                                  </span>
-                                  <span>{line.replace(/^\d+\.\s*/, "")}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          );
-                        }
-                        {/* Bold NFA/NFC/NFT terms */}
-                        const nfMatch = para.match(/^(Non-Fungible\s+\w+\s*\([A-Z]+s?\))\s+(.*)/s);
-                        if (nfMatch) {
-                          return (
-                            <p key={pi}>
-                              <strong className="text-white/90 font-bold">{nfMatch[1]}</strong>{" "}{nfMatch[2]}
-                            </p>
-                          );
-                        }
-                        return <p key={pi}>{para}</p>;
-                      })}
-                    </div>
+                    <FaqAnswerBody answer={faqItems[activeFaq]?.a} />
 
                     {/* Jump to the news article(s) covering this FAQ topic */}
                     {relatedArticles.length > 0 && (

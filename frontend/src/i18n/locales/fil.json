@@ -599,5 +599,12 @@
         ]
       }
     ]
+  },
+  "dashboard": {
+    "mobileNotice": {
+      "title": "Mas maganda tingnan sa mas malaking screen",
+      "desc": "Ang dashboard ay idinisenyo para sa tablet at desktop. Pakibuksan ito sa isang tablet o computer para magamit ang lahat ng feature nito.",
+      "backHome": "Bumalik sa Home"
+    }
   }
 }

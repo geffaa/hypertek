@@ -10,12 +10,13 @@ const TAB_KEYS = ["overview", "nfa101", "general", "auctions", "trades", "quests
 const LAUNCH_LOCKED_TABS = ["general", "auctions", "trades"];
 const GAME_LOCKED_TABS   = ["quests", "hire", "bounty"];
 
-function NavLinks({ activeTab, onTabChange, search = "", onSearch, className = "" }) {
+function NavLinks({ activeTab, onTabChange, search = "", onSearch, trailing = null, className = "" }) {
   const { t } = useTranslation();
 
   return (
-    <div className={`flex items-center gap-0 ${className}`}>
-      <ul className="flex gap-1 overflow-x-auto scrollbar-hide flex-1 pr-3" style={{ scrollbarWidth: "none" }}>
+    <div className={`flex flex-col gap-2 md:flex-row md:items-center md:gap-0 ${className}`}>
+      {/* Tabs — full-width and freely swipeable on mobile */}
+      <ul className="flex gap-1 overflow-x-auto scrollbar-hide w-full md:w-auto md:flex-1 md:pr-3" style={{ scrollbarWidth: "none" }}>
         {TAB_KEYS.map((key) => {
           const isActive = activeTab === key;
           const showLock = (LAUNCH_LOCKED && LAUNCH_LOCKED_TABS.includes(key)) || GAME_LOCKED_TABS.includes(key);
@@ -39,20 +40,25 @@ function NavLinks({ activeTab, onTabChange, search = "", onSearch, className = "
         })}
       </ul>
 
-      {onSearch && (
-        <div className="relative flex-shrink-0">
-          <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/35 pointer-events-none" />
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => onSearch(e.target.value)}
-            placeholder={t("marketplace.searchPlaceholder")}
-            className="pl-8 pr-3 py-1.5 rounded-lg text-xs text-white placeholder-white/30 outline-none w-[140px] lg:w-[180px]"
-            style={{
-              background: "rgba(255,255,255,0.07)",
-              border: "1px solid rgba(255,255,255,0.12)",
-            }}
-          />
+      {(onSearch || trailing) && (
+        <div className="flex items-center gap-2 flex-shrink-0">
+          {onSearch && (
+            <div className="relative flex-1 md:flex-none">
+              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/35 pointer-events-none" />
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => onSearch(e.target.value)}
+                placeholder={t("marketplace.searchPlaceholder")}
+                className="pl-8 pr-3 py-1.5 rounded-lg text-xs text-white placeholder-white/30 outline-none w-full md:w-[140px] lg:w-[180px]"
+                style={{
+                  background: "rgba(255,255,255,0.07)",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                }}
+              />
+            </div>
+          )}
+          {trailing}
         </div>
       )}
     </div>

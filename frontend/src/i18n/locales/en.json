@@ -601,5 +601,12 @@
         ]
       }
     ]
+  },
+  "dashboard": {
+    "mobileNotice": {
+      "title": "Best viewed on a larger screen",
+      "desc": "The dashboard is designed for tablet and desktop. Please open it on a tablet or computer to use all of its features.",
+      "backHome": "Back to Home"
+    }
   }
 }

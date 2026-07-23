@@ -170,12 +170,16 @@ export default function MusicPlayer({ audioSrc = "/audio/marketplace_ambient.mp3
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 6, scale: 0.97 }}
             transition={{ duration: 0.18 }}
-            className="absolute right-0 mt-2 w-[300px] rounded-2xl shadow-2xl overflow-hidden"
+            className="absolute right-0 mt-2 rounded-2xl shadow-2xl overflow-hidden"
             style={{
               background: "rgba(4, 8, 30, 0.97)",
               border: "1px solid rgba(255,255,255,0.1)",
               backdropFilter: "blur(24px)",
               zIndex: 999,
+              // Explicit width: a global mobile rule (index.css `div { max-width: 100% }`)
+              // otherwise clamps this absolute panel to its narrow trigger-button parent.
+              width: "300px",
+              maxWidth: "calc(100vw - 32px)",
             }}
           >
             {/* Header */}

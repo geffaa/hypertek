@@ -174,8 +174,8 @@ export default function Navbar() {
       style={
         isHome
           ? {
-              background: scrolled ? "rgba(0, 17, 66, 0.55)" : "transparent",
-              backdropFilter: scrolled ? "blur(20px)" : "none",
+              background: scrolled || mobileMenuOpen ? "rgba(0, 17, 66, 0.9)" : "transparent",
+              backdropFilter: scrolled || mobileMenuOpen ? "blur(20px)" : "none",
             }
           : {
               background: "rgba(0, 17, 66, 0.85)",
@@ -330,8 +330,9 @@ export default function Navbar() {
               </button>
             )}
 
-            {/* Mobile Menu Button */}
-            <div className="flex items-center md:hidden z-50">
+            {/* Mobile: Language switcher + Menu Button */}
+            <div className="flex items-center gap-2 md:hidden z-50">
+              <LanguageSwitcher />
               <button
                 className="text-white focus:outline-none transition-transform duration-200 hover:scale-110"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -466,7 +467,16 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden  bg-[#001554D9] text-white px-4 py-4 flex flex-col space-y-3 border-t border-white/20">
+          <>
+          {/* Backdrop: tap outside the panel to close */}
+          <div
+            className="md:hidden fixed inset-x-0 bottom-0 top-[72px] bg-black/50"
+            onClick={closeMobileMenu}
+          />
+          <div
+            className="md:hidden relative text-white px-4 py-4 flex flex-col space-y-3 border-t border-white/20 max-h-[calc(100dvh-76px)] overflow-y-auto"
+            style={{ background: "rgba(0, 13, 50, 0.97)", backdropFilter: "blur(24px)" }}
+          >
             {/* Shop */}
             <button
               onClick={(e) => {
@@ -487,6 +497,7 @@ export default function Navbar() {
 
                 <Link
                   to="/market-place?tab=overview"
+                  onClick={closeMobileMenu}
                   className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
                 >
                   {t("nav.shop.overview")}
@@ -494,6 +505,7 @@ export default function Navbar() {
 
                 <Link
                   to={isLoggedIn ? "/Profile" : "/signin"}
+                  onClick={closeMobileMenu}
                   className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
                 >
                   {t("nav.shop.myAssets")}
@@ -501,6 +513,7 @@ export default function Navbar() {
 
                 <Link
                   to="/market-place?tab=general"
+                  onClick={closeMobileMenu}
                   className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
                 >
                   {t("nav.shop.theMarketplace")}
@@ -513,19 +526,21 @@ export default function Navbar() {
             {/* About & News */}
             <Link
               to="/about"
+              onClick={closeMobileMenu}
               className="block w-full py-3 hover:text-blue-300 transition-colors duration-200 font-semibold"
             >
               {t("nav.aboutUs")}
             </Link>
             <Link
               to="/more-news"
+              onClick={closeMobileMenu}
               className="block w-full py-3 hover:text-blue-300 transition-colors duration-200 font-semibold"
             >
               {t("nav.news")}
             </Link>
             <Link
               to="/crowdfunding"
-              onClick={() => window.scrollTo(0, 0)}
+              onClick={() => { closeMobileMenu(); window.scrollTo(0, 0); }}
               className="block w-full py-3 hover:text-blue-300 transition-colors duration-200 font-semibold"
             >
               {t("nav.crowdfunding", "Crowdfunding")}
@@ -553,6 +568,7 @@ export default function Navbar() {
                   href="https://discord.gg/XGvE2nFe"
                   target="_blank"
                   rel="noreferrer"
+                  onClick={closeMobileMenu}
                   className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
                 >
                   <img src={DiscordImg} alt="Discord" className="w-4 h-4" />
@@ -563,6 +579,7 @@ export default function Navbar() {
                   href="https://x.com/Hyper Tek100"
                   target="_blank"
                   rel="noreferrer"
+                  onClick={closeMobileMenu}
                   className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
                 >
                   <img src={xImg} alt="X.com" className="w-4 h-4" />
@@ -573,6 +590,7 @@ export default function Navbar() {
                   href="https://t.me"
                   target="_blank"
                   rel="noreferrer"
+                  onClick={closeMobileMenu}
                   className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
                 >
                   <img src={telegramImg} alt="Telegram" className="w-4 h-4" />
@@ -623,28 +641,22 @@ export default function Navbar() {
                   >
                     {t("nav.marketplace")}
                   </Link>
-                  <div className="flex justify-end mt-2">
-                    <div className="bg-[#002AA8] w-[40px] h-[40px] rounded-[10px] flex items-center justify-center">
-                      <button
-                        className="flex items-center justify-center w-full h-full"
-                        onClick={() => setShowModal(true)}
-                      >
-                        <img
-                          src={logoutImage}
-                          alt="Logout"
-                          className="w-[20px] h-[20px] brightness-0 invert"
-                          style={{ filter: "brightness(0) invert(1)" }}
-                        />
-                      </button>
-                    </div>
-                  </div>
+                  <button
+                    onClick={() => setShowModal(true)}
+                    className="flex items-center gap-3 w-full py-3 mt-2 pt-4 border-t border-white/20 text-red-400 font-semibold hover:text-red-300 transition-colors duration-200"
+                  >
+                    <img
+                      src={logoutImage}
+                      alt=""
+                      className="w-[18px] h-[18px]"
+                      style={{ filter: "brightness(0) invert(1)" }}
+                    />
+                    {t("nav.signOut")}
+                  </button>
                 </div>
               </>
             ) : (
               <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-white/20">
-                <div className="flex justify-center">
-                  <LanguageSwitcher />
-                </div>
                 <Link to="/waitlist" onClick={closeMobileMenu}
                   className="w-full text-center py-2.5 rounded-lg font-semibold text-sm text-white border border-white/30 hover:bg-white/10 transition-colors">
                   {t("nav.joinWaitlist")}
@@ -657,6 +669,7 @@ export default function Navbar() {
               </div>
             )}
           </div>
+          </>
         )}
 
 

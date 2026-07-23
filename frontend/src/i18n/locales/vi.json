@@ -599,5 +599,12 @@
         ]
       }
     ]
+  },
+  "dashboard": {
+    "mobileNotice": {
+      "title": "Xem tốt nhất trên màn hình lớn hơn",
+      "desc": "Bảng điều khiển được thiết kế cho máy tính bảng và máy tính để bàn. Vui lòng mở trên máy tính bảng hoặc máy tính để dùng mọi tính năng.",
+      "backHome": "Về trang chủ"
+    }
   }
 }

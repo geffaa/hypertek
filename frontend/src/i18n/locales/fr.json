@@ -599,5 +599,12 @@
         ]
       }
     ]
+  },
+  "dashboard": {
+    "mobileNotice": {
+      "title": "À afficher sur un écran plus grand",
+      "desc": "Le tableau de bord est conçu pour tablette et ordinateur. Ouvrez-le sur une tablette ou un ordinateur pour profiter de toutes ses fonctionnalités.",
+      "backHome": "Retour à l'accueil"
+    }
   }
 }

@@ -599,5 +599,12 @@
         ]
       }
     ]
+  },
+  "dashboard": {
+    "mobileNotice": {
+      "title": "Visas bäst på en större skärm",
+      "desc": "Instrumentpanelen är utformad för surfplatta och dator. Öppna den på en surfplatta eller dator för att använda alla funktioner.",
+      "backHome": "Tillbaka till startsidan"
+    }
   }
 }

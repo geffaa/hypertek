@@ -166,15 +166,15 @@ function MarketPlace() {
 
       {/* ── C: Marketplace Nav — fixed once banner scrolls past */}
       <div ref={navRef} style={navStyle}>
-        <div className="max-w-[1450px] mx-auto px-4 sm:px-6 md:px-8 py-2 flex items-center gap-3">
+        <div className="max-w-[1450px] mx-auto px-4 sm:px-6 md:px-8 py-2">
           <MarketNavBar
             activeTab={activeTab}
             onTabChange={(tab) => handleTabChange(tab)}
             search={search}
             onSearch={setSearch}
-            className="flex-1 min-w-0"
+            trailing={<MusicPlayer />}
+            className="min-w-0"
           />
-          <MusicPlayer />
         </div>
       </div>
 

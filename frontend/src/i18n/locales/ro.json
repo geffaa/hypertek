@@ -595,5 +595,12 @@
         ]
       }
     ]
+  },
+  "dashboard": {
+    "mobileNotice": {
+      "title": "Se vede cel mai bine pe un ecran mai mare",
+      "desc": "Panoul este conceput pentru tabletă și desktop. Deschide-l pe o tabletă sau un computer pentru a folosi toate funcțiile.",
+      "backHome": "Înapoi la pagina principală"
+    }
   }
 }

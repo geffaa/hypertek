@@ -599,5 +599,12 @@
         ]
       }
     ]
+  },
+  "dashboard": {
+    "mobileNotice": {
+      "title": "Najlepiej wygląda na większym ekranie",
+      "desc": "Panel jest zaprojektowany dla tabletów i komputerów. Otwórz go na tablecie lub komputerze, aby korzystać ze wszystkich funkcji.",
+      "backHome": "Powrót do strony głównej"
+    }
   }
 }

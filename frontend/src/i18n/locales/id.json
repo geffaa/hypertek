@@ -599,5 +599,12 @@
         ]
       }
     ]
+  },
+  "dashboard": {
+    "mobileNotice": {
+      "title": "Paling baik dilihat di layar yang lebih besar",
+      "desc": "Dasbor dirancang untuk tablet dan desktop. Silakan buka di tablet atau komputer untuk menggunakan semua fiturnya.",
+      "backHome": "Kembali ke Beranda"
+    }
   }
 }

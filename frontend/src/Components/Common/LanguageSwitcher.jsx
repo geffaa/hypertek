@@ -59,8 +59,8 @@ export default function LanguageSwitcher() {
     const handler = (e) => {
       if (ref.current && !ref.current.contains(e.target)) setOpen(false);
     };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
+    document.addEventListener("pointerdown", handler);
+    return () => document.removeEventListener("pointerdown", handler);
   }, []);
 
   const handleSelect = (code) => {
@@ -72,51 +72,40 @@ export default function LanguageSwitcher() {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1 h-10 px-3 rounded-xl text-white text-sm font-medium transition-all duration-200 hover:opacity-90"
+        className="flex items-center gap-1 h-10 px-2.5 md:px-3 rounded-xl text-white text-sm font-medium transition-all duration-200 hover:opacity-90"
         style={{
           background: "rgba(255,255,255,0.08)",
           border: "1px solid rgba(255,255,255,0.12)",
         }}
       >
         <FlagImg countryCode={current.countryCode} size={20} />
-        <span className="hidden sm:block">{current.label}</span>
+        <span className="hidden md:block">{current.label}</span>
         <ChevronDown
-          className={`w-3.5 h-3.5 text-white/50 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          className={`hidden md:block w-3.5 h-3.5 text-white/50 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
         />
       </button>
 
       {open && (
         <div
-          className="absolute top-full right-0 mt-2 w-48 rounded-xl shadow-2xl z-50"
+          className="absolute top-full right-0 mt-2 rounded-xl shadow-2xl z-50 overflow-y-auto border border-white/10"
           style={{
-            background: "rgba(0,15,60,0.97)",
-            border: "1px solid rgba(255,255,255,0.1)",
-            backdropFilter: "blur(16px)",
+            background: "#040d31",
             maxHeight: "min(420px, 70vh)",
-            overflowY: "auto",
+            // Explicit width: a global mobile rule (index.css `div { max-width: 100% }`)
+            // otherwise clamps this absolute panel to its 42px-wide parent.
+            width: "13rem",
+            maxWidth: "calc(100vw - 24px)",
           }}
         >
           {LANGUAGES.map((lang) => (
             <button
               key={lang.code}
               onClick={() => handleSelect(lang.code)}
-              className="w-full flex items-center gap-3 px-4 py-2.5 text-left transition-all duration-150 border-b border-white/5 last:border-0"
-              style={{
-                background:
-                  lang.code === current.code
-                    ? "rgba(0,42,168,0.4)"
-                    : "transparent",
-                color:
-                  lang.code === current.code ? "#fff" : "rgba(255,255,255,0.75)",
-              }}
-              onMouseEnter={(e) => {
-                if (lang.code !== current.code)
-                  e.currentTarget.style.background = "rgba(255,255,255,0.06)";
-              }}
-              onMouseLeave={(e) => {
-                if (lang.code !== current.code)
-                  e.currentTarget.style.background = "transparent";
-              }}
+              className={`w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors duration-150 border-b border-white/5 last:border-0 ${
+                lang.code === current.code
+                  ? "bg-[#002AA8]/50 text-white"
+                  : "text-white/75 hover:bg-white/10 hover:text-white"
+              }`}
             >
               <FlagImg countryCode={lang.countryCode} size={20} />
               <span className="text-sm font-medium">{lang.full}</span>

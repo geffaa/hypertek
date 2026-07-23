@@ -282,7 +282,7 @@ function CategoryMarketplace() {
 
       {/* ── Marketplace Nav — fixed once banner scrolls past */}
       <div ref={navRef} style={navStyle}>
-        <div className="max-w-[1450px] mx-auto px-4 sm:px-6 md:px-8 py-2 flex items-center gap-3">
+        <div className="max-w-[1450px] mx-auto px-4 sm:px-6 md:px-8 py-2 flex items-start md:items-center gap-3">
           {/* Back to Marketplace button */}
           <Link
             to="/market-place"

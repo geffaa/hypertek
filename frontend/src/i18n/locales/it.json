@@ -599,5 +599,12 @@
         ]
       }
     ]
+  },
+  "dashboard": {
+    "mobileNotice": {
+      "title": "Da visualizzare su uno schermo più grande",
+      "desc": "La dashboard è progettata per tablet e desktop. Aprila su un tablet o un computer per usare tutte le sue funzionalità.",
+      "backHome": "Torna alla home"
+    }
   }
 }

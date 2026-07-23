@@ -66,18 +66,21 @@ export default function HomeCrowdfundingTeaser() {
 
       </div>
 
-      {/* ── Don't Miss the Early-Access Window — full width breakout ── */}
+      {/* ── Don't Miss the Early-Access Window ──
+          Full-width breakout only from xl up, where the side images live. Below
+          xl the negative-margin breakout is skipped: the global mobile rule
+          `div { max-width: 100% }` clamps the widened width but keeps the
+          negative margins, which would shift the whole section left. */}
       <motion.div
-        className="relative pt-2 pb-10 md:pb-14 text-center"
-        style={{ marginLeft: "calc(-1.5rem)", marginRight: "calc(-1.5rem)", width: "calc(100% + 3rem)" }}
+        className="relative pt-2 pb-10 md:pb-14 text-center xl:-mx-6 xl:w-[calc(100%+3rem)]"
         initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
       >
-        {/* Decorative left — vehicle */}
+        {/* Decorative left — vehicle (hidden below xl: no room next to the text) */}
         <img
           src={VEHICLES[vehicleIdx]}
           alt=""
           aria-hidden="true"
-          className="absolute top-1/2 pointer-events-none select-none transition-opacity duration-700"
+          className="hidden xl:block absolute top-1/2 pointer-events-none select-none transition-opacity duration-700"
           style={{ width: "clamp(320px, 38vw, 540px)", opacity: 1, transform: "translateY(-50%)", left: "40px" }}
         />
         {/* Decorative right — avatar */}
@@ -85,42 +88,44 @@ export default function HomeCrowdfundingTeaser() {
           src={AVATARS[avatarIdx]}
           alt=""
           aria-hidden="true"
-          className="absolute pointer-events-none select-none transition-opacity duration-700"
+          className="hidden xl:block absolute pointer-events-none select-none transition-opacity duration-700"
           style={{ width: "clamp(240px, 28vw, 400px)", opacity: 1, right: "80px", bottom: "-120px" }}
         />
 
-        <div className="relative w-full" style={{ paddingLeft: "clamp(180px, 28vw, 420px)", paddingRight: "clamp(180px, 28vw, 420px)" }}>
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <div className="w-12 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
-            <span className="text-amber-300 text-[15px] font-bold uppercase tracking-[0.3em]" style={{ fontFamily: "Orbitron, sans-serif" }}>
+        <div className="relative w-full px-6 sm:px-10 xl:px-[clamp(180px,28vw,420px)]">
+          <div className="flex items-center justify-center gap-3 md:gap-4 mb-6">
+            <div className="w-8 md:w-12 h-px flex-shrink-0" style={{ background: "rgba(251,191,36,0.6)" }} />
+            <span className="text-amber-300 text-[12px] md:text-[15px] font-bold uppercase tracking-[0.2em] md:tracking-[0.3em] text-center pl-[0.2em] md:pl-[0.3em]" style={{ fontFamily: "Orbitron, sans-serif" }}>
               {EARLY_ACCESS.eyebrow}
             </span>
-            <div className="w-12 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
+            <div className="w-8 md:w-12 h-px flex-shrink-0" style={{ background: "rgba(251,191,36,0.6)" }} />
           </div>
 
-          <h3 className="font-[Goldman] font-bold text-white text-3xl md:text-[48px] leading-tight mb-5">
+          <h3 className="font-[Goldman] font-bold text-white text-2xl sm:text-3xl md:text-[48px] leading-tight mb-5">
             {EARLY_ACCESS.heading}
           </h3>
           <div className="w-20 h-[3px] rounded-full mx-auto mb-10" style={{ background: "linear-gradient(90deg,#fbbf24,#f59e0b)" }} />
 
-          <ul className="flex flex-col gap-5 mb-8 text-left">
+          <ul className="flex flex-col gap-4 md:gap-5 mb-8 text-left max-w-2xl mx-auto">
             {EARLY_ACCESS.bullets.map((b, i) => (
-              <li key={i} className="flex gap-4 items-start">
+              <li key={i} className="flex gap-3 md:gap-4 items-start">
                 <ArrowRight size={20} color="#fbbf24" strokeWidth={2} className="mt-[3px] flex-shrink-0" />
-                <span className="text-white text-[17px] md:text-[19px] leading-relaxed">{b}</span>
+                <span className="text-white text-[15px] md:text-[19px] leading-relaxed">{b}</span>
               </li>
             ))}
           </ul>
 
-          <Link
-            to="/crowdfunding"
-            onClick={() => window.scrollTo(0, 0)}
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-[12px] md:text-[13px] font-bold uppercase tracking-[0.12em] text-[#0b0b14] transition-all hover:brightness-110"
-            style={{ background: "linear-gradient(135deg,#fbbf24,#f59e0b)", fontFamily: "Orbitron, sans-serif", boxShadow: "0 0 32px rgba(251,191,36,0.35)" }}
-          >
-            Learn More
-            <ArrowRight size={16} strokeWidth={2.4} />
-          </Link>
+          <div className="flex justify-center">
+            <Link
+              to="/crowdfunding"
+              onClick={() => window.scrollTo(0, 0)}
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-[12px] md:text-[13px] font-bold uppercase tracking-[0.12em] text-[#0b0b14] transition-all hover:brightness-110"
+              style={{ background: "linear-gradient(135deg,#fbbf24,#f59e0b)", fontFamily: "Orbitron, sans-serif", boxShadow: "0 0 32px rgba(251,191,36,0.35)" }}
+            >
+              Learn More
+              <ArrowRight size={16} strokeWidth={2.4} />
+            </Link>
+          </div>
         </div>
       </motion.div>
 

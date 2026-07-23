@@ -599,5 +599,12 @@
         ]
       }
     ]
+  },
+  "dashboard": {
+    "mobileNotice": {
+      "title": "En iyi büyük ekranda görüntülenir",
+      "desc": "Kontrol paneli tablet ve masaüstü için tasarlanmıştır. Tüm özelliklerini kullanmak için lütfen bir tablet veya bilgisayarda açın.",
+      "backHome": "Ana Sayfaya Dön"
+    }
   }
 }

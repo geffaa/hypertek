@@ -599,5 +599,12 @@
         ]
       }
     ]
+  },
+  "dashboard": {
+    "mobileNotice": {
+      "title": "Se ve mejor en una pantalla más grande",
+      "desc": "El panel está diseñado para tablet y ordenador. Ábrelo en una tablet o un ordenador para usar todas sus funciones.",
+      "backHome": "Volver al inicio"
+    }
   }
 }

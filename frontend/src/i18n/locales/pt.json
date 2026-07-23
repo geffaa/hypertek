@@ -212,5 +212,12 @@
     "specialConditionTitle": "Condição Especial",
     "specialCondition": "Com o desenvolvimento e conclusão bem-sucedidos do(s) jogo(s), cada pessoa que doou receberá um valor mínimo maior do que seu investimento original em recompensas ou pacotes para uso no(s) jogo(s), e quaisquer bônus ou recompensas prometidos por doação serão entregues após o lançamento do(s) jogo(s).",
     "imageComing": "Imagem em breve"
+  },
+  "dashboard": {
+    "mobileNotice": {
+      "title": "Melhor visualizado em uma tela maior",
+      "desc": "O painel foi projetado para tablet e desktop. Abra-o em um tablet ou computador para usar todos os recursos.",
+      "backHome": "Voltar ao início"
+    }
   }
 }
