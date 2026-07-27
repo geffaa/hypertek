@@ -16,15 +16,24 @@ import { useDispatch } from "react-redux";
 
 /// logout icions
 import logoutImage from "../../assets/images/login/logout.webp";
-// Social dropdown images
-import DiscordImg from "../../assets/images/discard.webp";
-import xImg from "../../assets/images/skipe.webp";
-import telegramImg from "../../assets/images/telegram.webp";
+// Social dropdown icons — Discord and Telegram are hidden until those channels
+// are actually set up and staffed; re-add them here once ready.
+import { FaFacebook, FaInstagram, FaXTwitter, FaTiktok, FaLinkedinIn } from "react-icons/fa6";
 import { logout } from "../../Redux/AuthSlice";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import i18n from "../../i18n/index.js";
 import LanguageSwitcher from "./LanguageSwitcher";
+
+// Live social channels only — same URLs as the footer. Discord and Telegram
+// stay off this list until Don has those channels actually running.
+const SOCIALS = [
+  { icon: FaXTwitter,   href: "https://x.com/Hyper Tek100",                label: "X" },
+  { icon: FaInstagram,  href: "https://www.instagram.com/hypertekproject", label: "Instagram" },
+  { icon: FaFacebook,   href: "https://www.facebook.com/Hyper TekProject", label: "Facebook" },
+  { icon: FaTiktok,     href: "https://www.tiktok.com/@hypertek100",       label: "TikTok" },
+  { icon: FaLinkedinIn, href: "https://www.linkedin.com/company/81534707", label: "LinkedIn" },
+];
 
 export default function Navbar() {
   const { t } = useTranslation();
@@ -293,18 +302,14 @@ export default function Navbar() {
                     onMouseLeave={closeSocial}
                     className="absolute top-full left-0 mt-2 w-[160px] rounded-xl shadow-2xl border border-white/10 overflow-hidden"
                     style={{ background: "rgba(0, 15, 60, 0.97)", backdropFilter: "blur(24px)" }}>
-                    {[
-                      { href: "https://discord.gg/XGvE2nFe", img: DiscordImg, label: "Discord", size: "w-[18px] h-[15px]" },
-                      { href: "https://x.com/Hyper Tek100", img: xImg, label: "X (Twitter)", size: "w-[17px] h-[17px]" },
-                      { href: "https://t.me", img: telegramImg, label: "Telegram", size: "w-[15px] h-[15px]" },
-                    ].map(({ href, img, label, size }) => (
+                    {SOCIALS.map(({ href, icon: Icon, label }) => (
                       <a key={label} href={href} target="_blank" rel="noreferrer"
                         className="flex items-center gap-3 px-4 py-2.5 transition-all duration-150 border-b border-white/5 last:border-0"
                         style={{ background: "transparent" }}
                         onMouseEnter={e => e.currentTarget.style.background = "rgba(0,42,168,0.4)"}
                         onMouseLeave={e => e.currentTarget.style.background = "transparent"}
                       >
-                        <img src={img} alt={label} className={`${size} object-contain flex-shrink-0`} />
+                        <Icon size={16} className="text-white/85 flex-shrink-0" />
                         <span className="text-white/85 text-sm font-medium">{label}</span>
                       </a>
                     ))}
@@ -564,38 +569,19 @@ export default function Navbar() {
 
             {socialOpen && (
               <div className="pl-4 flex flex-col space-y-2 border-l-2 border-white/30 ml-2">
-                <a
-                  href="https://discord.gg/XGvE2nFe"
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={closeMobileMenu}
-                  className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
-                >
-                  <img src={DiscordImg} alt="Discord" className="w-4 h-4" />
-                  Discord
-                </a>
-
-                <a
-                  href="https://x.com/Hyper Tek100"
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={closeMobileMenu}
-                  className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
-                >
-                  <img src={xImg} alt="X.com" className="w-4 h-4" />
-                  X.com
-                </a>
-
-                <a
-                  href="https://t.me"
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={closeMobileMenu}
-                  className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
-                >
-                  <img src={telegramImg} alt="Telegram" className="w-4 h-4" />
-                  Telegram
-                </a>
+                {SOCIALS.map(({ href, icon: Icon, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={closeMobileMenu}
+                    className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
+                  >
+                    <Icon size={16} />
+                    {label}
+                  </a>
+                ))}
               </div>
             )}
 

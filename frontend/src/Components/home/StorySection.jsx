@@ -133,15 +133,6 @@ export default function StorySection() {
               >
                 {t("story.readMore")}
               </Link>
-              <span
-                className="text-[11px] tracking-[0.45em] uppercase font-bold"
-                style={{
-                  fontFamily: "Orbitron, sans-serif",
-                  color: "rgba(56,189,248,0.75)",
-                  textShadow: "0 0 10px rgba(56,189,248,0.4)",
-                  letterSpacing: "0.45em",
-                }}
-              >{t("story.brand")}</span>
             </motion.div>
           </motion.div>
 
