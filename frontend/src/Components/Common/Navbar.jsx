@@ -197,13 +197,13 @@ export default function Navbar() {
         {/* Top Section */}
         <div className="w-full py-3 flex items-center justify-between">
           {/* Left: Logo + Desktop Menu */}
-          <div className="flex items-center space-x-28">
+          <div className="flex items-center space-x-8 lg:space-x-28">
             <Link to="/">
               <img src={logo} alt="Logo" className="h-12 w-auto" />
             </Link>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-6 font-semibold text-white relative ml-4">
+            <div className="hidden md:flex items-center space-x-3 lg:space-x-6 font-semibold text-white relative ml-4 whitespace-nowrap">
               {/* Shop Dropdown */}
               <div
                 ref={shopRef}
@@ -356,7 +356,7 @@ export default function Navbar() {
                 <LanguageSwitcher />
                 {/* Waitlist */}
                 <Link to="/waitlist">
-                  <button className="px-5 py-2.5 bg-transparent hover:bg-white/10 text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/30">
+                  <button className="px-5 py-2.5 bg-transparent hover:bg-white/10 text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/30 whitespace-nowrap">
                     {t("nav.waitlist")}
                   </button>
                 </Link>
@@ -460,7 +460,7 @@ export default function Navbar() {
                     </button>
                   </Link>
                   <Link to="/signup">
-                    <button className="px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20">
+                    <button className="px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20 whitespace-nowrap">
                       {t("nav.signUp")}
                     </button>
                   </Link>
