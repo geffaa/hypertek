@@ -203,7 +203,7 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-3 lg:space-x-6 font-semibold text-white relative ml-4 whitespace-nowrap">
+            <div className="hidden md:flex items-center space-x-3 lg:space-x-6 font-semibold text-white relative ml-4">
               {/* Shop Dropdown */}
               <div
                 ref={shopRef}
@@ -213,7 +213,7 @@ export default function Navbar() {
               >
                 <button
                   onClick={() => { shopOpen ? setShopOpen(false) : openShop(); setSocialOpen(false); }}
-                  className={`flex items-center transition-colors duration-200 uppercase tracking-wide text-sm ${shopOpen ? "text-blue-300" : "hover:text-blue-300"}`}
+                  className={`flex items-center transition-colors duration-200 uppercase tracking-wide text-sm whitespace-nowrap ${shopOpen ? "text-blue-300" : "hover:text-blue-300"}`}
                 >
                   {t("nav.shops")} <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${shopOpen ? "rotate-180" : ""}`} />
                 </button>
@@ -239,13 +239,13 @@ export default function Navbar() {
                           key={label}
                           to={to}
                           onClick={() => setShopOpen(false)}
-                          className="group flex items-start gap-3 px-4 py-3 rounded-xl transition-all duration-200"
+                          className="group flex items-start gap-3 px-4 py-3 rounded-xl transition-all duration-200 min-w-0"
                           style={{ background: "rgba(255,255,255,0.03)" }}
                           onMouseEnter={e => e.currentTarget.style.background = "rgba(0,42,168,0.35)"}
                           onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.03)"}
                         >
                           <span className="mt-0.5 text-blue-400 group-hover:text-blue-300 transition-colors flex-shrink-0">{icon}</span>
-                          <div className="flex flex-col gap-1.5">
+                          <div className="flex flex-col gap-1.5 min-w-0">
                             <p className="text-white font-semibold text-sm leading-tight pb-1.5" style={{ borderBottom: "1px solid rgba(255,255,255,0.25)" }}>{label}</p>
                             <p className="text-white/45 text-xs leading-relaxed">{desc}</p>
                           </div>
@@ -259,22 +259,22 @@ export default function Navbar() {
 
               <Link
                 to="/about"
-                className="hover:text-blue-300 transition-colors duration-200 uppercase tracking-wide text-sm"
+                className="hover:text-blue-300 transition-colors duration-200 uppercase tracking-wide text-sm whitespace-nowrap"
               >
                 {t("nav.aboutUs")}
               </Link>
               <Link
                 to="/news"
-                className="hover:text-blue-300 transition-colors duration-200 uppercase tracking-wide text-sm"
+                className="hover:text-blue-300 transition-colors duration-200 uppercase tracking-wide text-sm whitespace-nowrap"
               >
                 {t("nav.news")}
               </Link>
               <Link
-                to="/crowdfunding"
+                to="/genesis"
                 onClick={() => window.scrollTo(0, 0)}
-                className="hover:text-blue-300 transition-colors duration-200 uppercase tracking-wide text-sm"
+                className="hover:text-blue-300 transition-colors duration-200 uppercase tracking-wide text-sm whitespace-nowrap"
               >
-                {t("nav.crowdfunding", "Crowdfunding")}
+                {t("nav.genesis", "Genesis")}
               </Link>
 
               {/* Social Dropdown */}
@@ -286,7 +286,7 @@ export default function Navbar() {
               >
                 <button
                   onClick={() => { socialOpen ? setSocialOpen(false) : openSocial(); setShopOpen(false); }}
-                  className={`flex items-center transition-colors duration-200 uppercase tracking-wide text-sm ${socialOpen ? "text-blue-300" : "hover:text-blue-300"}`}
+                  className={`flex items-center transition-colors duration-200 uppercase tracking-wide text-sm whitespace-nowrap ${socialOpen ? "text-blue-300" : "hover:text-blue-300"}`}
                 >
                   {t("nav.socials")} <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${socialOpen ? "rotate-180" : ""}`} />
                 </button>
@@ -544,11 +544,11 @@ export default function Navbar() {
               {t("nav.news")}
             </Link>
             <Link
-              to="/crowdfunding"
+              to="/genesis"
               onClick={() => { closeMobileMenu(); window.scrollTo(0, 0); }}
               className="block w-full py-3 hover:text-blue-300 transition-colors duration-200 font-semibold"
             >
-              {t("nav.crowdfunding", "Crowdfunding")}
+              {t("nav.genesis", "Genesis")}
             </Link>
 
             {/* Social */}

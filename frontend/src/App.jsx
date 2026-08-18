@@ -24,7 +24,7 @@ const MAINTENANCE_BYPASS_PATH = "/testing";
 
 // Public preview paths — bypass maintenance WITHOUT setting the bypass cookie.
 // Visitors can ONLY view these pages; navigating elsewhere shows "Coming Soon".
-const PUBLIC_PREVIEW_PATHS = ["/preview", "/waitlist", "/join-waitlist", "/crowdfunding"];
+const PUBLIC_PREVIEW_PATHS = ["/preview", "/waitlist", "/join-waitlist", "/genesis"];
 
 const SPLASH_COOLDOWN_MS = 60 * 60 * 1000; // 1 hour
 
@@ -167,7 +167,7 @@ function AppWrapper() {
                 with the site navbar/footer so visitors can get back to the rest
                 of the site. Original <Crowdfunding /> kept for the full site
                 relaunch. */}
-            <Route path="/crowdfunding" element={<CrowdfundingStandalone />} />
+            <Route path="/genesis" element={<CrowdfundingStandalone />} />
 
             {/* Auth */}
             <Route path="/signup" element={<Signup />} />

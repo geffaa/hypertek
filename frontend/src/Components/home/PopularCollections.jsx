@@ -744,7 +744,7 @@ function CrowdfundingPackages({ showPageLink = false, hideIntro = false }) {
             {/* ── Entry CTA → dedicated Crowdfunding page (home only) ── */}
             {showPageLink && (
               <Link
-                to="/crowdfunding"
+                to="/genesis"
                 onClick={() => window.scrollTo(0, 0)}
                 className="group mt-1 flex items-center justify-between gap-4 rounded-xl px-5 py-4 transition-all duration-200 hover:brightness-125"
                 style={{

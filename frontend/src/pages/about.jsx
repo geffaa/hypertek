@@ -564,7 +564,7 @@ function About({ isPreview = false }) {
               {!isPreview && (
                 <div className="text-center mb-8">
                   <Link
-                    to="/crowdfunding"
+                    to="/genesis"
                     onClick={() => window.scrollTo(0, 0)}
                     className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-[12px] md:text-[13px] font-bold uppercase tracking-[0.12em] text-[#0b0b14] transition-all hover:brightness-110"
                     style={{ background: "linear-gradient(135deg,#fbbf24,#f59e0b)", fontFamily: "Orbitron, sans-serif", boxShadow: "0 0 32px rgba(251,191,36,0.35)" }}
