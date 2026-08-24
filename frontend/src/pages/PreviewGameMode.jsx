@@ -3,6 +3,7 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import logo from "../assets/logo1.webp";
+import { VIDEO_BASE_URL } from "../Config";
 import LanguageSwitcher from "../Components/Common/LanguageSwitcher";
 import StarMapOverlay from "../Components/Gaming/StarMap";
 
@@ -49,7 +50,7 @@ const MODES_STATIC = {
     accentDim: "rgba(34,197,94,0.12)",
     glow: "rgba(34,197,94,0.3)",
     panelImg: "/racing3.webp",
-    videoSrc: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/racing_content.mp4",
+    videoSrc: `${VIDEO_BASE_URL}/racing_content.mp4`,
   },
   quest: {
     rich: true,
@@ -58,7 +59,7 @@ const MODES_STATIC = {
     accentDim: "rgba(56,189,248,0.12)",
     glow: "rgba(56,189,248,0.25)",
     panelImg: "/quest1.webp",
-    videoSrc: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/quest_video2.webm",
+    videoSrc: `${VIDEO_BASE_URL}/quest_video2.webm`,
   },
   overlord: {
     rich: true,
@@ -67,7 +68,7 @@ const MODES_STATIC = {
     accentDim: "rgba(248,113,113,0.12)",
     glow: "rgba(248,113,113,0.25)",
     panelImg: "/overlord4.webp",
-    videoSrc: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/overlord_content.mp4",
+    videoSrc: `${VIDEO_BASE_URL}/overlord_content.mp4`,
   },
 };
 

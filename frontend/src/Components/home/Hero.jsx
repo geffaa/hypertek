@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import heroImage from "../../assets/images/hero.webp";
+import { VIDEO_BASE_URL } from "../../Config";
 import Logo from "/logo-white.png";
 import "../../App.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -77,7 +78,7 @@ function VideoModal({ onClose }) {
         </button>
         <video
           ref={videoRef}
-          src="https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/download_page.mp4"
+          src={`${VIDEO_BASE_URL}/download_page.mp4`}
           autoPlay
           playsInline
           controls

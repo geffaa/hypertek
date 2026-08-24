@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import { Play, X, Calendar, Tag } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { VIDEO_BASE_URL } from "../../Config";
 
 // ── Add new articles here (text-only news cards) ────────────────────────────
 const ARTICLE_ITEMS = [
@@ -28,7 +29,7 @@ const ARTICLE_ITEMS = [
 const VIDEO_ITEMS = [
   {
     id: "news-001",
-    src: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/racing_content.mp4",
+    src: `${VIDEO_BASE_URL}/racing_content.mp4`,
     tag: "GAME FOOTAGE",
     tagColor: "#38bdf8",
     title: "Hyper Tek - Racing Content Preview",
@@ -37,7 +38,7 @@ const VIDEO_ITEMS = [
   },
   {
     id: "news-002",
-    src: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/overlord_content.mp4",
+    src: `${VIDEO_BASE_URL}/overlord_content.mp4`,
     tag: "GAME FOOTAGE",
     tagColor: "#38bdf8",
     title: "Hyper Tek — Overlord Content Preview",
@@ -46,7 +47,7 @@ const VIDEO_ITEMS = [
   },
   {
     id: "news-003",
-    src: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/quest_video2.webm",
+    src: `${VIDEO_BASE_URL}/quest_video2.webm`,
     tag: "GAME FOOTAGE",
     tagColor: "#38bdf8",
     title: "Hyper Tek — Quest Content Preview",

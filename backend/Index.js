@@ -54,6 +54,12 @@ dotenv.config({ path: path.join(__dirname, "Config", ".env") });
 dotenv.config({ path: path.join(__dirname, ".env.local"), override: true });
 const app = express();
 
+// Behind nginx, so req.ip and req.secure need the real client info from the
+// X-Forwarded-* headers nginx sets, not the proxy's own address. Without this,
+// every visitor resolves to the server's own IP — which is what was silently
+// happening in Stripe's tos_acceptance.ip and in Transak's fraud-check payload.
+app.set("trust proxy", 1);
+
 // ✨ Create HTTP server for Socket.IO
 const server = http.createServer(app);
 
@@ -146,6 +152,43 @@ app.get("/.well-known/jwks.json", async (req, res) => {
   } catch (e) {
     console.error("jwks endpoint error:", e.message);
     res.status(500).json({ error: "jwks unavailable" });
+  }
+});
+
+// Media proxy — serves the marketing/gameplay videos from our own domain
+// instead of the shared pub-*.r2.dev bucket subdomain. Some ISPs intercept
+// that shared dev subdomain with their own content-filtering TLS certificate
+// (confirmed via a Telkomsel "internetbaik" cert on that host), breaking
+// playback for affected users while our own domain's certificate stays
+// untouched. Streaming through here (Range-request passthrough, so seeking
+// still works) fixes that without needing to move DNS to Cloudflare.
+const MEDIA_ALLOWLIST = new Set([
+  "racing_content.mp4",
+  "quest_video2.webm",
+  "overlord_content.mp4",
+  "download_page.mp4",
+]);
+const MEDIA_ORIGIN = "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev";
+app.get("/media/:filename", async (req, res) => {
+  const { filename } = req.params;
+  if (!MEDIA_ALLOWLIST.has(filename)) return res.status(404).end();
+  try {
+    const axiosModule = await import("axios");
+    const axios = axiosModule.default;
+    const upstream = await axios.get(`${MEDIA_ORIGIN}/${filename}`, {
+      responseType: "stream",
+      headers: req.headers.range ? { Range: req.headers.range } : {},
+      validateStatus: () => true,
+    });
+    res.status(upstream.status);
+    for (const h of ["content-type", "content-length", "content-range", "accept-ranges"]) {
+      if (upstream.headers[h]) res.set(h, upstream.headers[h]);
+    }
+    res.set("Cache-Control", "public, max-age=86400");
+    upstream.data.pipe(res);
+  } catch (e) {
+    console.error("media proxy error:", e.message);
+    res.status(502).end();
   }
 });
 

@@ -3,12 +3,13 @@
 // DIV1 bottom x=260, DIV2 bottom x=695
 // Panel bottom centers: RACING (15+260)/2=137→13.7vw, QUEST (260+695)/2=477→47.8vw, OVERLORD (695+860)/2=777→77.7vw
 import { useTranslation } from "react-i18next";
+import { VIDEO_BASE_URL } from "../../Config";
 import useMobileLandscape from "../../hooks/useMobileLandscape";
 
 const VIDEO_SRCS = {
-  RACING:   "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/racing_content.mp4",
-  QUEST:    "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/quest_video2.webm",
-  OVERLORD: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/overlord_content.mp4",
+  RACING:   `${VIDEO_BASE_URL}/racing_content.mp4`,
+  QUEST:    `${VIDEO_BASE_URL}/quest_video2.webm`,
+  OVERLORD: `${VIDEO_BASE_URL}/overlord_content.mp4`,
 };
 const preloaded = new Set();
 function preloadVideo(label) {

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { VIDEO_BASE_URL } from "../Config";
 import { Play, X, Calendar, ChevronDown } from "lucide-react";
 import { BACKEND_BASE_URL, getImageUrl } from "../Config";
 import GlowingOrb from "../Components/Common/BgColoring";
@@ -11,7 +12,7 @@ import GlowingOrb from "../Components/Common/BgColoring";
 const VIDEO_ITEMS = [
   {
     id: "vid-001",
-    src: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/racing_content.mp4",
+    src: `${VIDEO_BASE_URL}/racing_content.mp4`,
     tag: "GAME FOOTAGE",
     tagColor: "#38bdf8",
     title: "Hyper Tek - Racing Content Preview",
@@ -20,7 +21,7 @@ const VIDEO_ITEMS = [
   },
   {
     id: "vid-002",
-    src: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/overlord_content.mp4",
+    src: `${VIDEO_BASE_URL}/overlord_content.mp4`,
     tag: "GAME FOOTAGE",
     tagColor: "#38bdf8",
     title: "Hyper Tek — Overlord Content Preview",
@@ -29,7 +30,7 @@ const VIDEO_ITEMS = [
   },
   {
     id: "vid-003",
-    src: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/quest_video2.webm",
+    src: `${VIDEO_BASE_URL}/quest_video2.webm`,
     tag: "GAME FOOTAGE",
     tagColor: "#38bdf8",
     title: "Hyper Tek — Quest Content Preview",

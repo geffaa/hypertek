@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { VIDEO_BASE_URL } from "../Config";
 
 const VIDEO_SRCS = {
-  RACING:   "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/racing_content.mp4",
-  QUEST:    "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/quest_video2.webm",
-  OVERLORD: "https://pub-5fc51c0e41674b1f884096d3a5a0ba19.r2.dev/overlord_content.mp4",
+  RACING:   `${VIDEO_BASE_URL}/racing_content.mp4`,
+  QUEST:    `${VIDEO_BASE_URL}/quest_video2.webm`,
+  OVERLORD: `${VIDEO_BASE_URL}/overlord_content.mp4`,
 };
 const preloaded = new Set();
 function preloadVideo(src) {

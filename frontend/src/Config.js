@@ -12,6 +12,13 @@ const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:4
 // official launch.
 const LAUNCH_LOCKED = true;
 
+// Card top-ups for HyperBucks. Hidden while the payment provider and the
+// company's tax position are being settled. The backend route and the checkout
+// form are both intact, so setting this to true brings the option straight back.
+// Users can still fund with a card through the USDC route, where Transak sells
+// them USDC into their own wallet.
+const CARD_TOPUP_ENABLED = false;
+
 // Coinbase CDP embedded wallets (non-custodial player wallets). The whole
 // integration is inert until VITE_CDP_PROJECT_ID is set in the build env,
 // so production keeps the legacy custodial flow until the cutover.
@@ -40,6 +47,13 @@ const User_Dashboard_Url = `${BACKEND_BASE_URL}/api/v1`;
 const MarketPlace_Url = `${BACKEND_BASE_URL}/api/v1`;
 const NewsImage_Url = BACKEND_BASE_URL;
 
+// Marketing/gameplay videos, proxied through our own backend instead of the
+// shared pub-*.r2.dev bucket subdomain. Some ISPs intercept that shared dev
+// domain with their own content-filtering TLS certificate, breaking playback;
+// our own domain's certificate isn't affected. See backend/Index.js's
+// /media/:filename route.
+const VIDEO_BASE_URL = `${BACKEND_BASE_URL}/media`;
+
 // Handles both Cloudinary full URLs and local /uploads/ paths
 function getImageUrl(imagePath) {
   if (!imagePath) return "";
@@ -47,4 +61,4 @@ function getImageUrl(imagePath) {
   return `${BACKEND_BASE_URL}${imagePath}`;
 }
 
-export { BACKEND_BASE_URL, LAUNCH_LOCKED, CDP_PROJECT_ID, CDP_WALLET_ENABLED, STRIPE_PUBLISHABLE_KEY, User_Dashboard_Url, NewsImage_Url, MarketPlace_Url, getImageUrl };
+export { BACKEND_BASE_URL, LAUNCH_LOCKED, CARD_TOPUP_ENABLED, CDP_PROJECT_ID, CDP_WALLET_ENABLED, STRIPE_PUBLISHABLE_KEY, User_Dashboard_Url, NewsImage_Url, MarketPlace_Url, VIDEO_BASE_URL, getImageUrl };
