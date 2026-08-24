@@ -50,7 +50,7 @@ const MILESTONES = [
     Icon: Store,
     bullets: [
       { text: "Collaborate with a team of talented 2D/3D artists for conceptual models and artwork" },
-      { text: "Engage Web3 specialists to design and build an innovative Web3 website and digital marketplace." },
+      { text: "Engage Web3 specialists to design and build an innovative Web3.5 website and digital marketplace." },
       { text: "Featuring cutting-edge NFA/NFC/NFT systems, a guaranteed buy-back framework, and smart contracts for secure transactions" },
     ],
   },
@@ -385,7 +385,7 @@ function Crowdfunding2() {
             })}
           </div>
 
-          {/* ── Web3 Gaming Solution — Key Advantages ── */}
+          {/* ── Web3.5 Gaming Solution — Key Advantages ── */}
           <div className="relative py-16 overflow-hidden">
             <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg,transparent,rgba(56,189,248,0.35) 35%,rgba(167,139,250,0.35) 65%,transparent)" }} />
             <div className="relative">
@@ -393,7 +393,7 @@ function Crowdfunding2() {
                 className="mb-10 text-center max-w-3xl mx-auto"
                 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.65 }} viewport={{ once: true }}
               >
-                <SectionLabel label={sec06.label || "Web3 Gaming & Competitive Edge"} align="center" />
+                <SectionLabel label={sec06.label || "Web3.5 Gaming & Competitive Edge"} align="center" />
                 <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[34px] text-white leading-tight mb-3">
                   {sec06.heading || "HYPER TEK, A WEB3 GAMING SOLUTION AND THE KEY ADVANTAGES"}
                 </h2>

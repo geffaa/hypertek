@@ -67,7 +67,7 @@
       "features": [
         {
           "label": "NFAs / NFCs / NFTs",
-          "tagline": "New to Web3 assets? Start here",
+          "tagline": "New to Web3.5 assets? Start here",
           "intro": "NFAs/NFCs/NFTs are digital artworks that ALL have Guaranteed Minimum buy-backs and in-game bonuses",
           "details": [
             "**NFAs** (Non-Fungible Assets) are Hyper Tek-issued items.",
@@ -184,7 +184,7 @@
     "nfa101": {
       "sectionLabel": "Education",
       "heading": "NFAs / NFCs / NFTs 101",
-      "subtitle": "New to NFTs and Web3? Explore our articles to understand blockchain assets, wallets, security, and the Hyper Tek ecosystem.",
+      "subtitle": "New to NFTs and Web3.5? Explore our articles to understand blockchain assets, wallets, security, and the Hyper Tek ecosystem.",
       "minRead": "min read",
       "filterAll": "All"
     },

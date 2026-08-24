@@ -61,7 +61,7 @@
       "features": [
         {
           "label": "NFA / NFC / NFT",
-          "tagline": "Baru dengan aset Web3? Mulai di sini",
+          "tagline": "Baru dengan aset Web3.5? Mulai di sini",
           "details": [
             "NFA (Aset Non-Fungible) adalah item yang diterbitkan Hypertek dengan harga buyback yang dijamin platform.",
             "NFC (Karakter Non-Fungible) adalah item pemain berlisensi dengan bonus dalam game dan buyback.",
@@ -177,7 +177,7 @@
     "nfa101": {
       "sectionLabel": "Edukasi",
       "heading": "NFA / NFC / NFT 101",
-      "subtitle": "Baru dengan NFT dan Web3? Jelajahi artikel kami untuk memahami aset blockchain, dompet, keamanan, dan ekosistem HyperTek.",
+      "subtitle": "Baru dengan NFT dan Web3.5? Jelajahi artikel kami untuk memahami aset blockchain, dompet, keamanan, dan ekosistem HyperTek.",
       "minRead": "menit membaca",
       "filterAll": "Semua"
     },

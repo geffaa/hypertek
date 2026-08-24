@@ -26,7 +26,11 @@
     "faq": [
       {
         "q": "What is Hyper Tek?",
-        "a": "Hyper Tek is an advanced Web3 play-to-earn gaming ecosystem featuring a dynamic marketplace, set in a distant future. It was developed to address major issues in current gaming and digital artworks, providing greater player ownership over the game experience. The ecosystem includes three interconnected games: Hyper Racing, Hyper Quest, and Overlord of the 7 Realms, all sharing a unified economy and progression system. Every action you take in these games contributes to real-world rewards."
+        "a": "Hyper Tek is an advanced Web3.5 play-to-earn gaming ecosystem featuring a dynamic marketplace, set in a distant future. It was developed to address major issues in current gaming and digital artworks, providing greater player ownership over the game experience. The ecosystem includes three interconnected games: Hyper Racing, Hyper Quest, and Overlord of the 7 Realms, all sharing a unified economy and progression system. Every action you take in these games contributes to real-world rewards."
+      },
+      {
+        "q": "What does “Web3.5” mean?",
+        "a": "Web3.5 is our name for a hybrid model: the ownership, transparency, and guarantees people expect from Web3, delivered through the accessibility of Web2.\n\nIn practice that means you never need a crypto wallet to sign up, browse, or start playing — you can create an account the same way you would for any other game. But every rare item you earn is still backed by real, verifiable ownership on-chain, and every item's Guaranteed Minimum Buy-Back Fund lives in a smart contract that Hyper Tek 100 itself has no ability to withdraw from — anyone can check that balance directly on Base at any time.\n\nWe call it Web3.5 rather than Web3 because it's deliberately non-custodial in the parts that matter (your assets, your guarantee) while staying as simple and familiar as any traditional game everywhere else — built for the gaming and NFT industries specifically, not for crypto speculation."
       },
       {
         "q": "What are NFAs, NFCs, and NFTs?",

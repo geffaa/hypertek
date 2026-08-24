@@ -61,7 +61,7 @@
       "features": [
         {
           "label": "NFAs / NFCs / NFTs",
-          "tagline": "Bago sa mga asset ng Web3? Magsimula dito",
+          "tagline": "Bago sa mga asset ng Web3.5? Magsimula dito",
           "details": [
             "Ang mga NFA ay mga item na inilabas ng Hypertek na may garantisadong presyo ng buyback.",
             "Ang mga NFC ay mga lisensyadong item ng manlalaro na may mga bonus sa laro.",
@@ -177,7 +177,7 @@
     "nfa101": {
       "sectionLabel": "Edukasyon",
       "heading": "NFAs / NFCs / NFTs 101",
-      "subtitle": "Bago sa NFT at Web3? I-explore ang aming mga artikulo.",
+      "subtitle": "Bago sa NFT at Web3.5? I-explore ang aming mga artikulo.",
       "minRead": "min basahin",
       "filterAll": "Lahat"
     },

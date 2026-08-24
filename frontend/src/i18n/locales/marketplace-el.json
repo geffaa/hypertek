@@ -61,7 +61,7 @@
       "features": [
         {
           "label": "NFAs / NFCs / NFTs",
-          "tagline": "Νέος στα περιουσιακά στοιχεία Web3; Ξεκίνα εδώ",
+          "tagline": "Νέος στα περιουσιακά στοιχεία Web3.5; Ξεκίνα εδώ",
           "details": [
             "Τα NFAs (Non-Fungible Assets) είναι αντικείμενα που εκδίδει η Hypertek με εγγυημένη τιμή επαναγοράς.",
             "Τα NFCs (Non-Fungible Characters) είναι αδειοδοτημένα αντικείμενα παικτών με εντός παιχνιδιού αμοιβές.",
@@ -177,7 +177,7 @@
     "nfa101": {
       "sectionLabel": "Εκπαίδευση",
       "heading": "NFAs / NFCs / NFTs 101",
-      "subtitle": "Νέος στα NFTs και Web3; Εξερεύνησε τα άρθρα μας.",
+      "subtitle": "Νέος στα NFTs και Web3.5; Εξερεύνησε τα άρθρα μας.",
       "minRead": "λεπτά ανάγνωσης",
       "filterAll": "Όλα"
     },

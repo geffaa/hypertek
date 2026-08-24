@@ -61,7 +61,7 @@
       "features": [
         {
           "label": "NFAs / NFCs / NFTs",
-          "tagline": "¿Nuevo en los activos Web3? Empieza aquí",
+          "tagline": "¿Nuevo en los activos Web3.5? Empieza aquí",
           "details": [
             "Los NFAs (Activos No Fungibles) son artículos emitidos por Hypertek con un precio de recompra garantizado por la plataforma.",
             "Los NFCs (Personajes No Fungibles) son artículos de jugadores licenciados con bonificaciones en el juego y recompra.",
@@ -177,7 +177,7 @@
     "nfa101": {
       "sectionLabel": "Educación",
       "heading": "NFAs / NFCs / NFTs 101",
-      "subtitle": "¿Nuevo en NFTs y Web3? Explora nuestros artículos para entender los activos blockchain, carteras, seguridad y el ecosistema HyperTek.",
+      "subtitle": "¿Nuevo en NFTs y Web3.5? Explora nuestros artículos para entender los activos blockchain, carteras, seguridad y el ecosistema HyperTek.",
       "minRead": "min de lectura",
       "filterAll": "Todo"
     },

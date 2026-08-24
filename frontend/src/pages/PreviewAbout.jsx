@@ -56,7 +56,7 @@ export default function PreviewAbout() {
                 </span>
                 <p className="text-white/80 text-[12px] md:text-[13px] leading-snug">
                   {t("gaming.preview.aboutPageSubtitle", "The team, mission, and vision.")}{" "}
-                  <span className="text-white/55">{t("gaming.preview.aboutPageSubtitleSpan", "Building the future of Web3 gaming.")}</span>
+                  <span className="text-white/55">{t("gaming.preview.aboutPageSubtitleSpan", "Building the future of Web3.5 gaming.")}</span>
                 </p>
               </div>
             </div>

@@ -1,4 +1,4 @@
-// Shared card accent palette (blue, yellow, green) — used by the Web3 Gaming
+// Shared card accent palette (blue, yellow, green) — used by the Web3.5 Gaming
 // section and the "How YOU Can Help" cards on both the home and crowdfunding
 // pages so the two always stay consistent.
 export const CARD_ACCENTS = [

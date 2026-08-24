@@ -61,7 +61,7 @@
       "features": [
         {
           "label": "NFA / NFC / NFT",
-          "tagline": "Mới với tài sản Web3? Bắt đầu tại đây",
+          "tagline": "Mới với tài sản Web3.5? Bắt đầu tại đây",
           "details": [
             "NFA (Tài Sản Không Thể Thay Thế) là các mục do Hypertek phát hành với giá mua lại được nền tảng đảm bảo.",
             "NFC (Nhân Vật Không Thể Thay Thế) là các mục người chơi được cấp phép với phần thưởng trong game và mua lại.",
@@ -177,7 +177,7 @@
     "nfa101": {
       "sectionLabel": "Giáo Dục",
       "heading": "NFA / NFC / NFT 101",
-      "subtitle": "Mới với NFT và Web3? Khám phá các bài viết của chúng tôi để hiểu tài sản blockchain, ví, bảo mật và hệ sinh thái HyperTek.",
+      "subtitle": "Mới với NFT và Web3.5? Khám phá các bài viết của chúng tôi để hiểu tài sản blockchain, ví, bảo mật và hệ sinh thái HyperTek.",
       "minRead": "phút đọc",
       "filterAll": "Tất Cả"
     },

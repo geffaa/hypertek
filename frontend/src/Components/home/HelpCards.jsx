@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { CARD_ACCENTS, CARD_ACCENTS_SOLID } from "./cardAccents";
 
 /* "How YOU Can Help Right Now" cards — numbered cards in the same visual
-   language as the Web3 Gaming section, shared by the home page teaser and
+   language as the Web3.5 Gaming section, shared by the home page teaser and
    the crowdfunding page so both always look identical. `solid` swaps to
    opaque card backgrounds for pages with busy artwork behind the section. */
 export default function HelpCards({ items, solid = false }) {

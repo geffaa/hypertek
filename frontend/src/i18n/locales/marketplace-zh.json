@@ -61,7 +61,7 @@
       "features": [
         {
           "label": "NFA / NFC / NFT",
-          "tagline": "Web3 资产新手？从这里开始",
+          "tagline": "Web3.5 资产新手？从这里开始",
           "details": [
             "NFA（非同质资产）是 Hypertek 发行的具有平台保底回购价格的物品。",
             "NFC（非同质角色）是具有游戏内奖励和回购保证的授权玩家物品。",
@@ -177,7 +177,7 @@
     "nfa101": {
       "sectionLabel": "教育",
       "heading": "NFA / NFC / NFT 101",
-      "subtitle": "NFT 和 Web3 新手？浏览我们的文章，了解区块链资产、钱包、安全性和 HyperTek 生态系统。",
+      "subtitle": "NFT 和 Web3.5 新手？浏览我们的文章，了解区块链资产、钱包、安全性和 HyperTek 生态系统。",
       "minRead": "分钟阅读",
       "filterAll": "全部"
     },

@@ -25,6 +25,10 @@
         "a": "HyperTek, 2117 yilinda gecen bir oynayarak-kazan oyun ekosistemidir. Tek bir ekonomi ve ilerleme sistemini paylasan 3 birbirine bagli oyun icermektedir: Hyper Racing, Hyper Quest ve Hyper Overlord. Yaptiginiz her eylem gercek dunya odullerine katki saglar."
       },
       {
+        "q": "\"Web3.5\" ne anlama gelir?",
+        "a": "Web3.5, hibrit bir model için verdiğimiz isimdir: insanların Web3'ten beklediği mülkiyet, şeffaflık ve garantiler, Web2'nin erişilebilirliği aracılığıyla sunulur.\n\nPratikte bu, kayıt olmak, göz atmak veya oynamaya başlamak için asla bir kripto cüzdana ihtiyacınız olmadığı anlamına gelir — herhangi bir başka oyunda olduğu gibi bir hesap oluşturabilirsiniz. Ancak kazandığınız her nadir eşya, on-chain üzerinde gerçek ve doğrulanabilir mülkiyet ile desteklenmeye devam eder ve her eşyanın Garantili Minimum Geri Alım Fonu, Hyper Tek 100'ün kendisinin bile para çekme yetkisi olmadığı bir akıllı sözleşmede tutulur — herkes bu bakiyeyi istediği zaman doğrudan Base üzerinde kontrol edebilir.\n\nBuna Web3 yerine Web3.5 diyoruz çünkü önemli olan kısımlarda (varlıklarınız, garantiniz) kasıtlı olarak non-custodial'dır, geri kalan her yerde ise herhangi bir geleneksel oyun kadar basit ve tanıdık kalır — kripto spekülasyonu için değil, özellikle oyun ve NFT endüstrileri için tasarlanmıştır."
+      },
+      {
         "q": "NFA'lar, NFC'ler ve NFT'ler nelerdir?",
         "a": "NFA'lar (Mantar Olmayan Varliklar), platform garantili minimum geri alim fiyatina sahip HyperTek tarafindan yayinlanan oyun ici urunlerdir. NFC'ler (Mantar Olmayan Karakterler), oyun ici bonuslara ve geri alim garantilerine sahip lisansli oyuncu karakterleridir. NFT'ler kullanici tarafindan olusturulan koleksiyonlardir: deri, silah ve kozmetikler."
       },

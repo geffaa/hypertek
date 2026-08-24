@@ -61,7 +61,7 @@
       "features": [
         {
           "label": "NFAs / NFCs / NFTs",
-          "tagline": "Baru dalam aset Web3? Mulakan di sini",
+          "tagline": "Baru dalam aset Web3.5? Mulakan di sini",
           "details": [
             "NFAs adalah item yang dikeluarkan Hypertek dengan harga buyback yang dijamin.",
             "NFCs adalah item pemain berlesen dengan bonus dalam permainan.",
@@ -177,7 +177,7 @@
     "nfa101": {
       "sectionLabel": "Pendidikan",
       "heading": "NFAs / NFCs / NFTs 101",
-      "subtitle": "Baru dalam NFT dan Web3? Terokai artikel kami.",
+      "subtitle": "Baru dalam NFT dan Web3.5? Terokai artikel kami.",
       "minRead": "min baca",
       "filterAll": "Semua"
     },

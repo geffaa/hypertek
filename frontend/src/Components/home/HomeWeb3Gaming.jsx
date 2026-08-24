@@ -27,7 +27,7 @@ export default function HomeWeb3Gaming() {
           className="mb-10 text-center max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }} viewport={{ once: true }}
         >
-          <SectionLabel label={sec06.label || "Web3 Gaming & Competitive Edge"} align="center" />
+          <SectionLabel label={sec06.label || "Web3.5 Gaming & Competitive Edge"} align="center" />
           <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[34px] text-white leading-tight mb-3">
             {sec06.heading || "HYPER TEK, A WEB3 GAMING SOLUTION AND THE KEY ADVANTAGES"}
           </h2>

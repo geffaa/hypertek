@@ -61,7 +61,7 @@
       "features": [
         {
           "label": "NFAs / NFCs / NFTs",
-          "tagline": "Nou în activele Web3? Începe aici",
+          "tagline": "Nou în activele Web3.5? Începe aici",
           "details": [
             "NFAs sunt articole emise de Hypertek cu preț garantat de răscumpărare.",
             "NFCs sunt articole de jucători licențiați cu bonusuri în joc.",
@@ -177,7 +177,7 @@
     "nfa101": {
       "sectionLabel": "Educație",
       "heading": "NFAs / NFCs / NFTs 101",
-      "subtitle": "Nou în NFT-uri și Web3? Explorați articolele noastre.",
+      "subtitle": "Nou în NFT-uri și Web3.5? Explorați articolele noastre.",
       "minRead": "min citire",
       "filterAll": "Toate"
     },

@@ -61,7 +61,7 @@
       "features": [
         {
           "label": "NFA'er / NFC'er / NFT'er",
-          "tagline": "Ny til Web3-aktiver? Start her",
+          "tagline": "Ny til Web3.5-aktiver? Start her",
           "details": [
             "NFA'er (Non-Fungible Assets) er Hypertek-udstedte genstande med en platform-garanteret tilbagekøbspris.",
             "NFC'er (Non-Fungible Characters) er licenserede spillergenstande med spilinterne bonusser og tilbagekøb.",
@@ -177,7 +177,7 @@
     "nfa101": {
       "sectionLabel": "Uddannelse",
       "heading": "NFA'er / NFC'er / NFT'er 101",
-      "subtitle": "Ny til NFT'er og Web3? Udforsk vores artikler for at forstaae blockchain-aktiver, punge, sikkerhed og HyperTek-økosystemet.",
+      "subtitle": "Ny til NFT'er og Web3.5? Udforsk vores artikler for at forstaae blockchain-aktiver, punge, sikkerhed og HyperTek-økosystemet.",
       "minRead": "min laesning",
       "filterAll": "Alle"
     },

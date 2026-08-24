@@ -61,7 +61,7 @@
       "features": [
         {
           "label": "NFA-er / NFC-er / NFT-er",
-          "tagline": "Ny pa Web3-eiendeler? Begynn her",
+          "tagline": "Ny pa Web3.5-eiendeler? Begynn her",
           "details": [
             "NFA-er (ikke-fungible eiendeler) er Hypertek-utstedte gjenstander med en plattformgarantert innkjopspris.",
             "NFC-er (ikke-fungible karakterer) er lisensierte spillergjenstander med spillbonuser og innkjop.",
@@ -177,7 +177,7 @@
     "nfa101": {
       "sectionLabel": "Opplaring",
       "heading": "NFA-er / NFC-er / NFT-er 101",
-      "subtitle": "Ny pa NFT-er og Web3? Utforsk artiklene vare for a forsta blokkjedeeiendeler, lommebokter, sikkerhet og HyperTek-okosystemet.",
+      "subtitle": "Ny pa NFT-er og Web3.5? Utforsk artiklene vare for a forsta blokkjedeeiendeler, lommebokter, sikkerhet og HyperTek-okosystemet.",
       "minRead": "min lesing",
       "filterAll": "Alle"
     },

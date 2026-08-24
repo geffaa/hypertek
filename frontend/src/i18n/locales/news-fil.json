@@ -25,6 +25,10 @@
         "a": "Ang HyperTek ay isang play-to-earn gaming ecosystem na nakatakda sa taong 2117. Nagtatampok ito ng 3 magkakaugnay na laro — Hyper Racing, Hyper Quest, at Hyper Overlord — na nagbabahagi ng iisang ekonomiya at sistema ng pag-unlad. Bawat aksyon na iyong gagawin ay nag-aambag sa mga gantimpala sa totoong mundo."
       },
       {
+        "q": "Ano ang ibig sabihin ng \"Web3.5\"?",
+        "a": "Ang Web3.5 ay ang tawag namin sa isang hybrid model: ang pagmamay-ari, transparency, at mga garantiyang inaasahan ng mga tao mula sa Web3, na inihahatid sa pamamagitan ng dali ng paggamit ng Web2.\n\nSa praktikal na paraan, ibig sabihin nito ay hindi mo kailangan ng crypto wallet para mag-sign up, mag-browse, o magsimulang maglaro — maaari kang gumawa ng account sa parehong paraan tulad sa ibang laro. Pero ang bawat rare item na makukuha mo ay sinusuportahan pa rin ng totoo at mabe-verify na pagmamay-ari on-chain, at ang Guaranteed Minimum Buy-Back Fund ng bawat item ay nasa isang smart contract na wala mismong kakayahan ang Hyper Tek 100 na kunin ang laman nito — kahit sino ay maaaring tingnan ang balanse na ito nang direkta sa Base anumang oras.\n\nTinatawag namin itong Web3.5 sa halip na Web3 dahil sinasadya itong maging non-custodial sa mga bahaging mahalaga (ang mga asset mo, ang garantiya mo) habang nananatiling kasimple at kasing-pamilyar ng anumang tradisyunal na laro sa lahat ng ibang bahagi — ginawa partikular para sa industriya ng gaming at NFT, hindi para sa crypto speculation."
+      },
+      {
         "q": "Ano ang NFA, NFC, at NFT?",
         "a": "Ang NFA (Non-Fungible Assets) ay mga in-game na item na inilabas ng HyperTek na may garantisadong minimum na buyback price mula sa platform. Ang NFC (Non-Fungible Characters) ay mga lisensyadong character ng manlalaro na may mga bonus sa laro at garantiya ng buyback. Ang NFT ay mga collectible na ginawa ng gumagamit — mga skin, sandata, at cosmetics."
       },

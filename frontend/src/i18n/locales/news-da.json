@@ -25,6 +25,10 @@
         "a": "HyperTek er et spil-for-at-tjene gaming-økosystem, der er sat i 2117. Det indeholder 3 sammenkoblede spil — Hyper Racing, Hyper Quest og Hyper Overlord — som deler en enkelt økonomi og et progressionssystem. Enhver handling du foretager bidrager til virkelige belønninger."
       },
       {
+        "q": "Hvad betyder \"Web3.5\"?",
+        "a": "Web3.5 er vores navn for en hybridmodel: det ejerskab, den gennemsigtighed og de garantier, folk forventer af Web3, leveret gennem Web2's tilgængelighed.\n\nI praksis betyder det, at du aldrig behøver en krypto-tegnebog for at tilmelde dig, browse eller begynde at spille — du kan oprette en konto på samme måde, som du ville gøre i ethvert andet spil. Men hver sjældne genstand, du optjener, er stadig understøttet af ægte, verificerbart ejerskab on-chain, og hver genstands Garanterede Minimums Tilbagekøbsfond ligger i en smart-kontrakt, som Hyper Tek 100 selv ikke har mulighed for at hæve fra — enhver kan tjekke denne saldo direkte på Base når som helst.\n\nVi kalder det Web3.5 i stedet for Web3, fordi det bevidst er non-custodial i de dele, der betyder noget (dine aktiver, din garanti), mens det forbliver lige så enkelt og velkendt som ethvert traditionelt spil alle andre steder — bygget specifikt til gaming- og NFT-branchen, ikke til kryptospekulation."
+      },
+      {
         "q": "Hvad er NFA'er, NFC'er og NFT'er?",
         "a": "NFA'er (Non-Fungible Assets) er HyperTek-udstedte spilinterne genstande med en platform-garanteret minimum tilbagekøbspris. NFC'er (Non-Fungible Characters) er licenserede spillerkarakterer med spilinterne bonusser og tilbagekøbsgarantier. NFT'er er brugerskabte samlerobjekter — skins, vaaben og kosmetik."
       },

@@ -61,7 +61,7 @@
       "features": [
         {
           "label": "NFAs / NFCs / NFTs",
-          "tagline": "Neu in Web3-Assets? Fang hier an",
+          "tagline": "Neu in Web3.5-Assets? Fang hier an",
           "details": [
             "NFAs (Non-Fungible Assets) sind von Hypertek ausgegebene Artikel mit einem plattformgarantierten Rückkaufpreis.",
             "NFCs (Non-Fungible Characters) sind lizenzierte Spielerartikel mit spielinternen Boni und Rückkauf.",
@@ -177,7 +177,7 @@
     "nfa101": {
       "sectionLabel": "Bildung",
       "heading": "NFAs / NFCs / NFTs 101",
-      "subtitle": "Neu bei NFTs und Web3? Erkunde unsere Artikel, um Blockchain-Assets, Wallets, Sicherheit und das HyperTek-Ökosystem zu verstehen.",
+      "subtitle": "Neu bei NFTs und Web3.5? Erkunde unsere Artikel, um Blockchain-Assets, Wallets, Sicherheit und das HyperTek-Ökosystem zu verstehen.",
       "minRead": "Min. Lesezeit",
       "filterAll": "Alle"
     },

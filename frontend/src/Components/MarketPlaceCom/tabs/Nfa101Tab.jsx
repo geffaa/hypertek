@@ -34,7 +34,7 @@ const STATIC_ARTICLES = [
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
   },
   {
-    _id: "s3", title: "How to Stay Protected in Web3", category: "Security", readTime: 10,
+    _id: "s3", title: "How to Stay Protected in Web3.5", category: "Security", readTime: 10,
     description: "Never share your seed phrase. Use hardware wallets for high-value assets.",
     image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80",
   },

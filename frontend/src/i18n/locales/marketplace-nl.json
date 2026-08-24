@@ -61,7 +61,7 @@
       "features": [
         {
           "label": "NFAs / NFCs / NFTs",
-          "tagline": "Nieuw in Web3-bezittingen? Begin hier",
+          "tagline": "Nieuw in Web3.5-bezittingen? Begin hier",
           "details": [
             "NFAs zijn door Hypertek uitgegeven items met een gegarandeerde terugkoopprijs.",
             "NFCs zijn gelicentieerde spelersitems met bonussen in het spel.",
@@ -177,7 +177,7 @@
     "nfa101": {
       "sectionLabel": "Onderwijs",
       "heading": "NFAs / NFCs / NFTs 101",
-      "subtitle": "Nieuw in NFTs en Web3? Verken onze artikelen.",
+      "subtitle": "Nieuw in NFTs en Web3.5? Verken onze artikelen.",
       "minRead": "min lezen",
       "filterAll": "Alles"
     },

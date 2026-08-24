@@ -61,7 +61,7 @@
       "features": [
         {
           "label": "NFA / NFC / NFT",
-          "tagline": "Web3 varlıklarında yeni misiniz? Buradan başlayın",
+          "tagline": "Web3.5 varlıklarında yeni misiniz? Buradan başlayın",
           "details": [
             "NFA (Değiştirilemez Varlıklar) platform garantili geri alım fiyatı olan Hypertek tarafından çıkarılan öğelerdir.",
             "NFC (Değiştirilemez Karakterler) oyun içi bonuslar ve geri alıma sahip lisanslı oyuncu öğeleridir.",
@@ -177,7 +177,7 @@
     "nfa101": {
       "sectionLabel": "Eğitim",
       "heading": "NFA / NFC / NFT 101",
-      "subtitle": "NFT ve Web3'te yeni misiniz? Blockchain varlıklarını, cüzdanları, güvenliği ve HyperTek ekosistemini anlamak için makalelerimizi keşfedin.",
+      "subtitle": "NFT ve Web3.5'te yeni misiniz? Blockchain varlıklarını, cüzdanları, güvenliği ve HyperTek ekosistemini anlamak için makalelerimizi keşfedin.",
       "minRead": "dk okuma",
       "filterAll": "Tümü"
     },
