@@ -463,27 +463,21 @@ export default function WhitepaperPage() {
               </div>
             </Card>
 
-            <div className="mb-6">
-              <h3 className="font-semibold text-white mb-4">Five Rarity Tiers</h3>
-              <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
-                <RarityBadge tier="Common"        color="#9ca3af" dropRate="~5%"    reserve="$50–$150"  bonuses="+10–15% in specific stats" />
-                <RarityBadge tier="Uncommon"      color="#22c55e" dropRate="~2%"    reserve="$100"      bonuses="+15–20% in specific stats" />
-                <RarityBadge tier="Semi-Rare"     color="#3b82f6" dropRate="~0.5%"  reserve="$400"      bonuses="+20–25% in specific stats" />
-                <RarityBadge tier="Rare"          color="#a855f7" dropRate="~0.1%"  reserve="$700"      bonuses="+25–35% in specific stats" />
-                <RarityBadge tier="Extremely Rare" color="#f59e0b" dropRate="~0.01%" reserve="$1,000+"  bonuses="Maximum bonuses, legendary status" />
-              </div>
-            </div>
-
             <Card className="mb-6">
-              <h3 className="font-semibold text-white mb-4">Platform Buyback Mechanism</h3>
+              <h3 className="font-semibold text-white mb-4">The Guaranteed Minimum Buy-Back (GMBB) Fund</h3>
               <p className="text-white/60 text-sm leading-relaxed mb-4">
-                Hyper Tek maintains a dedicated Reserve Fund. The platform guarantees sufficient reserves to buy back every NFA simultaneously at <strong className="text-white">80% of reserve value</strong>. Target solvency ratio: 110%.
+                Every item's minimum value is its own <strong className="text-white">GMBB Fund balance</strong> — funded as a percentage of its sale price, not a flat dollar figure. There is no separate reserve calculation; the fund itself is the guarantee.
               </p>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <p className="text-white/30 text-xs font-semibold tracking-widest uppercase mb-3">Reserve Fund Sources</p>
+                  <p className="text-white/30 text-xs font-semibold tracking-widest uppercase mb-3">How It's Funded</p>
                   <ul className="space-y-1.5">
-                    {["20% commission on all marketplace sales", "15% commission on Colony Trade Markets", "Percentage of HB → USD conversion fees", "Portion of subscription revenue"].map((s) => (
+                    {[
+                      "Up to 70% of sale price when a user lists their own item",
+                      "Up to 90% of sale price when Hyper Tek 100 lists an item",
+                      "A further 5% added to the balance on every later resale",
+                      "Held exclusively in USDC in a smart contract on Base",
+                    ].map((s) => (
                       <li key={s} className="text-sm text-white/50 flex items-center gap-2">
                         <span className="w-1 h-1 rounded-full bg-blue-500 shrink-0" />{s}
                       </li>
@@ -491,13 +485,13 @@ export default function WhitepaperPage() {
                   </ul>
                 </div>
                 <div>
-                  <p className="text-white/30 text-xs font-semibold tracking-widest uppercase mb-3">Reserve Value Growth</p>
+                  <p className="text-white/30 text-xs font-semibold tracking-widest uppercase mb-3">Vesting & Payout</p>
                   <ul className="space-y-1.5">
                     {[
-                      "If NFA sells for more than reserve, new reserve = 10% of sale price",
-                      "Example: Sells for $100,000 → new reserve = $10,000",
-                      "Annual CPI adjustment — reserve holds real-world value",
-                      "Quarterly transparency reports published publicly",
+                      "80% in year one, rising to 97% from year five onward",
+                      "Owner may withdraw up to 45% once, without giving up the item",
+                      "No withdrawal function exists for Hyper Tek 100, at all",
+                      "Balance is publicly verifiable on-chain at any time",
                     ].map((s) => (
                       <li key={s} className="text-sm text-white/50 flex items-center gap-2">
                         <span className="w-1 h-1 rounded-full bg-green-500 shrink-0" />{s}
@@ -657,12 +651,11 @@ export default function WhitepaperPage() {
 
             <div className="grid md:grid-cols-2 gap-5 mb-6">
               <Card>
-                <h3 className="font-semibold text-white mb-3">Three Marketplace Types</h3>
+                <h3 className="font-semibold text-white mb-3">First Sale</h3>
                 <ul className="space-y-3">
                   {[
-                    { name: "Pit Lane Marketplace", desc: "Racing items, vehicles, specialists, general goods — 20% commission" },
-                    { name: "Colony Trade Market", desc: "Colony members only, material exchanges — 10% commission" },
-                    { name: "Global Auction House", desc: "Cross-platform, all item types — standard rates apply" },
+                    { name: "User-listed item", desc: "92% minus the seller's chosen GMBB percentage (20–70%) to the seller, the GMBB share to the fund, 8% to Hyper Tek 100" },
+                    { name: "Hyper Tek 100-listed item", desc: "GMBB percentage (35–90%, platform-chosen) to the fund, the rest to Hyper Tek 100 as seller" },
                   ].map(({ name, desc }) => (
                     <li key={name}>
                       <p className="text-blue-300 text-sm font-semibold">{name}</p>
@@ -672,18 +665,16 @@ export default function WhitepaperPage() {
                 </ul>
               </Card>
               <Card>
-                <h3 className="font-semibold text-white mb-3">Commission Structure</h3>
+                <h3 className="font-semibold text-white mb-3">Resale (Second Sale Onward)</h3>
                 <div className="space-y-2">
                   {[
-                    { label: "Standard Player", rate: "20%", note: "Pit Lane / Global" },
-                    { label: "Premium Member ($9.99/mo)", rate: "15%", note: "25% reduction on non-NFA" },
-                    { label: "Colony Internal Trade", rate: "10%", note: "Members only" },
-                  ].map(({ label, rate, note }) => (
+                    { label: "Seller", rate: "86%" },
+                    { label: "GMBB Fund", rate: "5%" },
+                    { label: "Original Artist", rate: "2%" },
+                    { label: "Hyper Tek 100", rate: "7%" },
+                  ].map(({ label, rate }) => (
                     <div key={label} className="flex items-center justify-between py-2 border-b border-white/5">
-                      <div>
-                        <p className="text-white/70 text-sm">{label}</p>
-                        <p className="text-white/30 text-xs">{note}</p>
-                      </div>
+                      <p className="text-white/70 text-sm">{label}</p>
                       <span className="text-white font-bold text-lg">{rate}</span>
                     </div>
                   ))}
@@ -692,22 +683,10 @@ export default function WhitepaperPage() {
             </div>
 
             <Card>
-              <h3 className="font-semibold text-white mb-3">Commission Revenue Allocation</h3>
-              <div className="grid grid-cols-5 gap-2">
-                {[
-                  { pct: "50%", label: "Reserve Fund", color: "#3b82f6" },
-                  { pct: "20%", label: "Platform Ops", color: "#a855f7" },
-                  { pct: "15%", label: "Development",  color: "#10b981" },
-                  { pct: "10%", label: "Support",      color: "#f59e0b" },
-                  { pct: "5%",  label: "Marketing",    color: "#ef4444" },
-                ].map(({ pct, label, color }) => (
-                  <div key={label} className="text-center rounded-xl py-4" style={{ background: `${color}12`, border: `1px solid ${color}30` }}>
-                    <p className="font-bold text-xl" style={{ color }}>{pct}</p>
-                    <p className="text-white/40 text-xs mt-1">{label}</p>
-                  </div>
-                ))}
-              </div>
-              <p className="text-white/30 text-xs mt-4">Published in quarterly transparency reports.</p>
+              <h3 className="font-semibold text-white mb-3">Why This Split</h3>
+              <p className="text-white/50 text-xs leading-relaxed">
+                None of the GMBB share is ever taxed as commission — it's a contribution to the item's own fund, not platform revenue. The rest of every sale is split between the seller, the original artist, and Hyper Tek 100.
+              </p>
             </Card>
           </section>
 
@@ -728,7 +707,7 @@ export default function WhitepaperPage() {
                   "Multiple racing vehicles modelled",
                   "~30 specialist characters created",
                   "Technology stack selected (Unreal Engine 5, cloud infrastructure)",
-                  "Over $307,000 invested in development, prototypes & content",
+                  "Over $440,000 invested in development, prototypes & content",
                   "Website established and social media presence initiated",
                   "Kickstarter campaign preparation underway",
                 ].map((item) => (
@@ -742,10 +721,10 @@ export default function WhitepaperPage() {
             <div className="pl-2">
               <RoadmapPhase
                 phase="1"
-                title="Near-Term: Kickstarter & Core Development"
+                title="Near-Term: Early Backer Campaign & Core Development"
                 period="Next 6–12 months"
                 items={[
-                  "Launch Kickstarter campaign targeting $640K",
+                  "Launch early backer campaign targeting $440K",
                   "Secure seed funding and expand development team",
                   "Build functional versions of all three games",
                   "Implement multiplayer infrastructure",
@@ -806,7 +785,7 @@ export default function WhitepaperPage() {
               <div className="rounded-xl p-5 mt-4" style={{ background: "rgba(0,42,168,0.15)", border: "1px solid rgba(0,42,168,0.35)" }}>
                 <p className="text-blue-200 text-sm font-semibold mb-1">Where We Stand</p>
                 <p className="text-white/60 text-sm leading-relaxed">
-                  Over <strong className="text-white">$307,000</strong> has been invested personally to reach this stage. We have comprehensive game design documentation, 3D character and vehicle models, detailed economic systems, and complete technical planning. <strong className="text-white">The foundation is built. The vision is detailed. The commitment is proven.</strong>
+                  Over <strong className="text-white">$440,000</strong> has been invested personally to reach this stage. We have comprehensive game design documentation, 3D character and vehicle models, detailed economic systems, and complete technical planning. <strong className="text-white">The foundation is built. The vision is detailed. The commitment is proven.</strong>
                 </p>
               </div>
             </Card>
