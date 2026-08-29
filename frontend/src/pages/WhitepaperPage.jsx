@@ -238,7 +238,7 @@ export default function WhitepaperPage() {
                 { title: "Blockchain Gaming Failed", body: "After reaching a peak of $5B in NFT gaming sales in 2021, the sector experienced a decline of over 90%. Most blockchain games prioritised cryptocurrency mechanics at the expense of substantive gameplay." },
                 { title: "Pay-to-Win Problem", body: "More than 60% of gamers report frustration with pay-to-win models. Only 8% of players have ever earned tangible value through gameplay, and over 95% of in-game currencies remain non-exchangeable." },
                 { title: "Closed Ecosystems", body: "Established companies like Sony, Microsoft, and Nintendo maintain closed ecosystems, restricting asset transferability and confining player investments to individual game titles." },
-                { title: "The Solution: Hyper Tek", body: "A 3-in-1 interconnected gaming universe built on Unreal Engine 5 with cross-platform support, fair-play economics, and NFAs with guaranteed minimum buyback values." },
+                { title: "The Solution: Hyper Tek", body: "A 3-in-1 interconnected gaming universe built on Unreal Engine 5 with cross-platform support, fair-play economics, and NFA/NFC/NFTs with guaranteed minimum buyback values." },
               ].map(({ title, body }) => (
                 <Card key={title}>
                   <h4 className="font-semibold text-white text-sm mb-2">{title}</h4>

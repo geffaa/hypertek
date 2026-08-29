@@ -395,7 +395,7 @@ function Crowdfunding2() {
               >
                 <SectionLabel label={sec06.label || "Web3.5 Gaming & Competitive Edge"} align="center" />
                 <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[34px] text-white leading-tight mb-3">
-                  {sec06.heading || "HYPER TEK, A WEB3 GAMING SOLUTION AND THE KEY ADVANTAGES"}
+                  {sec06.heading || "HYPER TEK, A WEB3.5 GAMING SOLUTION AND THE KEY ADVANTAGES"}
                 </h2>
                 <p className="text-white/50 text-[13px] leading-relaxed whitespace-pre-line" style={{ fontFamily: "Orbitron, sans-serif" }}>
                   {sec06.subtitle}
