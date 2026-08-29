@@ -61,7 +61,7 @@
       "features": [
         {
           "label": "NFA / NFC / NFT",
-          "tagline": "Web3アセットは初めて？ここから始めましょう",
+          "tagline": "Web3.5アセットは初めて？ここから始めましょう",
           "details": [
             "NFA（Non-Fungible Asset）はプラットフォーム保証の買戻し価格を持つHypertek発行アイテムです。",
             "NFC（Non-Fungible Character）はゲーム内ボーナスと買戻し保証を持つライセンスプレイヤーアイテムです。",
@@ -177,7 +177,7 @@
     "nfa101": {
       "sectionLabel": "教育",
       "heading": "NFA / NFC / NFT 101",
-      "subtitle": "NFTやWeb3は初めてですか？ブロックチェーンアセット、ウォレット、セキュリティ、HyperTekエコシステムを理解するための記事を探索しましょう。",
+      "subtitle": "NFTやWeb3.5は初めてですか？ブロックチェーンアセット、ウォレット、セキュリティ、HyperTekエコシステムを理解するための記事を探索しましょう。",
       "minRead": "分で読める",
       "filterAll": "すべて"
     },
