@@ -69,9 +69,9 @@ const MILESTONES = [
   },
   {
     num: 5,
-    title: "Crowdfunding Campaign",
+    title: "Early Backer Campaign",
     Icon: HandCoins,
-    intro: "Pending the success of the Project Launch, the official crowdfunding campaign kicks off!",
+    intro: "Pending the success of the Project Launch, the official early backer campaign kicks off!",
     bullets: [
       { text: "All discount packages will end permanently!" },
       { text: "Additionally, our exclusive limited-edition NFAs will only be available for purchase until we reach our funding goal. Don't miss your chance to secure these unique items while you can.... Once they're gone, they're gone!" },
@@ -124,7 +124,7 @@ const EARLY_ACCESS = {
   heading: "Don't Miss the Early-Access Window",
   bullets: [
     "Limited-edition NFAs and discounted packages are available now – only while early access stays open.",
-    "Discounts close for good the moment we launch our envisioned crowdfunding campaign.",
+    "Discounts close for good the moment we launch our envisioned early backer campaign.",
     "Limited-edition items remain only until our funding target is reached – then they're gone for good.",
   ],
   cta: "Secure Your Place Today",

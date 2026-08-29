@@ -10,7 +10,7 @@ const EARLY_ACCESS = {
   heading: "Don't Miss the Early-Access Window",
   bullets: [
     "Limited-edition NFAs and discounted packages are available now – only while early access stays open.",
-    "Discounts close for good the moment we launch our envisioned crowdfunding campaign.",
+    "Discounts close for good the moment we launch our envisioned early backer campaign.",
     "Limited-edition items remain only until our funding target is reached – then they're gone for good.",
   ],
 };
