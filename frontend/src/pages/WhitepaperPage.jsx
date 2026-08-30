@@ -226,7 +226,7 @@ export default function WhitepaperPage() {
             <Card className="mb-6">
               <h3 className="font-semibold text-lg text-white mb-3">The Gaming Industry at a Crossroads</h3>
               <p className="text-white/60 text-sm leading-relaxed mb-3">
-                The global gaming industry has expanded considerably, now exceeding a market valuation of <strong className="text-white">$188 billion</strong> and encompassing more than <strong className="text-white">3.6 billion players</strong> worldwide as of 2025. Despite robust growth, the sector continues to confront persistent challenges — most notably, the loss of time, expertise, and financial investment by players when transitioning between games.
+                The global gaming industry has expanded considerably, now exceeding a market valuation of <strong className="text-white">$188 billion</strong> and encompassing more than <strong className="text-white">3.6 billion players</strong> worldwide as of 2025. Despite robust growth, the sector continues to confront persistent challenges, most notably the loss of time, expertise, and financial investment by players when transitioning between games.
               </p>
               <p className="text-white/60 text-sm leading-relaxed">
                 On average, gamers devote more than <strong className="text-white">8.5 hours per week</strong> to gameplay, frequently investing hundreds or thousands of hours in individual titles. Nevertheless, server closures or sequels often render accumulated characters, achievements, and purchased digital items obsolete.
@@ -254,9 +254,9 @@ export default function WhitepaperPage() {
               </p>
               <div className="grid sm:grid-cols-3 gap-3">
                 {[
-                  { name: "Overlord Realm", desc: "MMORTS — command alien civilisations, build colonies, wage strategic warfare" },
-                  { name: "Hyper Racing 100", desc: "Futuristic racing simulator — build anti-gravity vehicles, manage racing teams" },
-                  { name: "Hyper Quest 100", desc: "RPG exploration — pilot customisable ships, accept delivery contracts, explore alien worlds" },
+                  { name: "Overlord Realm", desc: "MMORTS: command alien civilisations, build colonies, wage strategic warfare" },
+                  { name: "Hyper Racing 100", desc: "Futuristic racing simulator: build anti-gravity vehicles, manage racing teams" },
+                  { name: "Hyper Quest 100", desc: "RPG exploration: pilot customisable ships, accept delivery contracts, explore alien worlds" },
                 ].map(({ name, desc }) => (
                   <div key={name} className="rounded-xl p-4" style={{ background: "rgba(0,42,168,0.15)", border: "1px solid rgba(0,42,168,0.3)" }}>
                     <p className="font-semibold text-blue-300 text-sm mb-1">{name}</p>
@@ -272,7 +272,7 @@ export default function WhitepaperPage() {
             <SectionHeading number="02" title="The Three Worlds" />
 
             <p className="text-white/50 text-sm leading-relaxed mb-8">
-              Hyper Tek isn't just one game — it's an interconnected universe where three distinct gaming experiences share a unified foundation. Each game offers unique gameplay while contributing to your overall progression and economic power.
+              Hyper Tek isn't just one game. It's an interconnected universe where three distinct gaming experiences share a unified foundation. Each game offers unique gameplay while contributing to your overall progression and economic power.
             </p>
 
             <div className="grid md:grid-cols-3 gap-5 mb-8">
@@ -322,7 +322,7 @@ export default function WhitepaperPage() {
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <p className="text-white/60 text-sm leading-relaxed mb-3">
-                    Hyper Tek's three games share a unified player profile and asset database. This isn't superficial — it's deep mechanical integration.
+                    Hyper Tek's three games share a unified player profile and asset database. This isn't superficial. It's deep mechanical integration.
                   </p>
                   <div className="space-y-3">
                     {[
@@ -364,10 +364,10 @@ export default function WhitepaperPage() {
               <Card>
                 <h3 className="font-semibold text-white mb-3">Game Lore & Setting</h3>
                 <p className="text-white/60 text-sm leading-relaxed">
-                  In the year 2117, humanity discovered that reality exists as parallel layers — digital matrices woven into the fabric of spacetime. The Hyper Tek Project opened portals to seven alien civilisations: the <em className="text-blue-300">Avian Defenders</em>, the <em className="text-blue-300">Crystalline Architects</em>, the <em className="text-blue-300">Nomadic Engineers</em>, the <em className="text-blue-300">Celestial Scholars</em>, the <em className="text-blue-300">Volcanic Forgers</em>, the <em className="text-blue-300">Aquatic Navigators</em>, and the <em className="text-blue-300">Ethereal Mystics</em>.
+                  In the year 2117, humanity discovered that reality exists as parallel layers: digital matrices woven into the fabric of spacetime. The Hyper Tek Project opened portals to seven alien civilisations: the <em className="text-blue-300">Avian Defenders</em>, the <em className="text-blue-300">Crystalline Architects</em>, the <em className="text-blue-300">Nomadic Engineers</em>, the <em className="text-blue-300">Celestial Scholars</em>, the <em className="text-blue-300">Volcanic Forgers</em>, the <em className="text-blue-300">Aquatic Navigators</em>, and the <em className="text-blue-300">Ethereal Mystics</em>.
                 </p>
                 <p className="text-white/60 text-sm leading-relaxed mt-3">
-                  You are an Overlord piloting an advanced spacecraft through a portal jump — but something went wrong. You are stranded. You are resourceful. <strong className="text-white">Build your empire. Master your vehicle. Explore the unknown. And perhaps, one day, find your way home.</strong>
+                  You are an Overlord piloting an advanced spacecraft through a portal jump, but something went wrong. You are stranded. You are resourceful. <strong className="text-white">Build your empire. Master your vehicle. Explore the unknown. And perhaps, one day, find your way home.</strong>
                 </p>
               </Card>
             </div>
@@ -392,11 +392,11 @@ export default function WhitepaperPage() {
               <Card>
                 <h3 className="font-semibold text-white mb-3">Cloud Infrastructure (AWS)</h3>
                 <ul className="space-y-2 text-sm text-white/60">
-                  <li><span className="text-white/80">EC2 Compute</span> — Auto-scaling instances by player demand</li>
-                  <li><span className="text-white/80">RDS PostgreSQL</span> — Multi-region replication</li>
-                  <li><span className="text-white/80">ElastiCache Redis</span> — Real-time leaderboards & listings</li>
-                  <li><span className="text-white/80">S3 + CloudFront</span> — Global asset delivery</li>
-                  <li><span className="text-white/80">Kubernetes</span> — Containerised service orchestration</li>
+                  <li><span className="text-white/80">EC2 Compute</span>: Auto-scaling instances by player demand</li>
+                  <li><span className="text-white/80">RDS PostgreSQL</span>: Multi-region replication</li>
+                  <li><span className="text-white/80">ElastiCache Redis</span>: Real-time leaderboards & listings</li>
+                  <li><span className="text-white/80">S3 + CloudFront</span>: Global asset delivery</li>
+                  <li><span className="text-white/80">Kubernetes</span>: Containerised service orchestration</li>
                 </ul>
                 <p className="text-white/40 text-xs mt-3">Validated at 100,000+ simultaneous players per region • &lt;50ms latency</p>
               </Card>
@@ -405,7 +405,7 @@ export default function WhitepaperPage() {
             <Card className="mb-6">
               <h3 className="font-semibold text-white mb-4">Blockchain Integration</h3>
               <p className="text-white/60 text-sm leading-relaxed mb-4">
-                Hyper Tek uses blockchain for a specific, valuable purpose: establishing demonstrable ownership of rare in-game assets. Players never need to understand blockchain to enjoy the game — standard email/password accounts work seamlessly.
+                Hyper Tek uses blockchain for a specific, valuable purpose: establishing demonstrable ownership of rare in-game assets. Players never need to understand blockchain to enjoy the game; standard email/password accounts work seamlessly.
               </p>
               <div className="grid sm:grid-cols-3 gap-4">
                 {[
@@ -426,9 +426,9 @@ export default function WhitepaperPage() {
               <h3 className="font-semibold text-white mb-4">Security & Anti-Cheat</h3>
               <div className="grid sm:grid-cols-2 gap-4">
                 {[
-                  { label: "Server-Side Validation", body: "All critical game actions calculated on servers — combat results, resource generation, marketplace transactions. Players cannot manipulate outcomes." },
+                  { label: "Server-Side Validation", body: "All critical game actions calculated on servers: combat results, resource generation, marketplace transactions. Players cannot manipulate outcomes." },
                   { label: "BattleEye Integration", body: "Industry-standard anti-cheat (Rainbow Six Siege, PUBG, Fortnite) detects memory injection and manipulation." },
-                  { label: "DDoS Protection", body: "Cloudflare enterprise infrastructure — automatic mitigation within seconds of detection ensuring 24/7 uptime." },
+                  { label: "DDoS Protection", body: "Cloudflare enterprise infrastructure: automatic mitigation within seconds of detection ensuring 24/7 uptime." },
                   { label: "Data Privacy", body: "GDPR & COPPA compliant. TLS 1.3 transmission, AES-256 storage, annual third-party security audits, bug bounty program." },
                 ].map(({ label, body }) => (
                   <div key={label}>
@@ -452,8 +452,8 @@ export default function WhitepaperPage() {
               <div className="grid sm:grid-cols-3 gap-4">
                 {[
                   { label: "Utility Value", body: "In-game bonuses and statistical advantages across all three worlds" },
-                  { label: "Market Value", body: "What other players will pay — freely tradeable on the marketplace" },
-                  { label: "Reserve Value", body: "Platform-guaranteed buyback minimum — the floor that can never drop to zero" },
+                  { label: "Market Value", body: "What other players will pay; freely tradeable on the marketplace" },
+                  { label: "Reserve Value", body: "Platform-guaranteed buyback minimum: the floor that can never drop to zero" },
                 ].map(({ label, body }) => (
                   <div key={label} className="rounded-xl p-4 text-center" style={{ background: "rgba(0,42,168,0.12)", border: "1px solid rgba(0,42,168,0.25)" }}>
                     <p className="text-blue-300 text-sm font-semibold mb-2">{label}</p>
@@ -466,7 +466,7 @@ export default function WhitepaperPage() {
             <Card className="mb-6">
               <h3 className="font-semibold text-white mb-4">The Guaranteed Minimum Buy-Back (GMBB) Fund</h3>
               <p className="text-white/60 text-sm leading-relaxed mb-4">
-                Every item's minimum value is its own <strong className="text-white">GMBB Fund balance</strong> — funded as a percentage of its sale price, not a flat dollar figure. There is no separate reserve calculation; the fund itself is the guarantee.
+                Every item's minimum value is its own <strong className="text-white">GMBB Fund balance</strong>, funded as a percentage of its sale price, not a flat dollar figure. There is no separate reserve calculation; the fund itself is the guarantee.
               </p>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
@@ -520,7 +520,7 @@ export default function WhitepaperPage() {
                       ["Liquidity", "Dependent on finding buyers", "Always liquid via platform buyback"],
                       ["Acquisition", "Usually direct purchase", "Earned through gameplay or random packages"],
                       ["Value Trajectory", "Typically depreciates 90%+", "Designed to appreciate with game growth"],
-                      ["Transaction Fees", "$10–100+ (ETH gas)", "$0 — platform covers fees"],
+                      ["Transaction Fees", "$10–100+ (ETH gas)", "$0: platform covers fees"],
                     ].map(([feature, nft, nfa]) => (
                       <tr key={feature}>
                         <td className="py-2.5 pr-4 text-white/50 font-medium">{feature}</td>
@@ -585,8 +585,8 @@ export default function WhitepaperPage() {
                 <p className="text-white/50 text-xs mb-4">Minimum top-up: <strong className="text-white">250 HB ($1)</strong>. All payments processed securely via Stripe.</p>
                 <div className="space-y-3">
                   {[
-                    { method: "Credit / Debit Card", detail: "Visa, Mastercard, Amex — instant credit via Stripe", color: "#3b82f6" },
-                    { method: "USDC (Crypto)", detail: "Send USDC on Base network to platform wallet — credited after on-chain confirmation", color: "#10b981" },
+                    { method: "Credit / Debit Card", detail: "Visa, Mastercard, Amex: instant credit via Stripe", color: "#3b82f6" },
+                    { method: "USDC (Crypto)", detail: "Send USDC on Base network to platform wallet, credited after on-chain confirmation", color: "#10b981" },
                   ].map(({ method, detail, color }) => (
                     <div key={method} className="rounded-xl p-3 flex items-start gap-3" style={{ background: "rgba(0,0,0,0.3)", border: `1px solid ${color}25` }}>
                       <span className="w-2 h-2 rounded-full mt-1.5 shrink-0" style={{ background: color }} />
@@ -685,7 +685,7 @@ export default function WhitepaperPage() {
             <Card>
               <h3 className="font-semibold text-white mb-3">Why This Split</h3>
               <p className="text-white/50 text-xs leading-relaxed">
-                None of the GMBB share is ever taxed as commission — it's a contribution to the item's own fund, not platform revenue. The rest of every sale is split between the seller, the original artist, and Hyper Tek 100.
+                None of the GMBB share is ever taxed as commission; it's a contribution to the item's own fund, not platform revenue. The rest of every sale is split between the seller, the original artist, and Hyper Tek 100.
               </p>
             </Card>
           </section>
@@ -765,7 +765,7 @@ export default function WhitepaperPage() {
 
             <Card>
               <p className="text-white/50 text-sm leading-relaxed italic">
-                "This roadmap represents our current vision. Timelines, priorities, and specific features are subject to change based on funding, community feedback, and technical discoveries. We are committed to the destination — the exact route may evolve. Quality over speed."
+                "This roadmap represents our current vision. Timelines, priorities, and specific features are subject to change based on funding, community feedback, and technical discoveries. We are committed to the destination. The exact route may evolve. Quality over speed."
               </p>
             </Card>
           </section>
@@ -777,7 +777,7 @@ export default function WhitepaperPage() {
             <Card className="mb-6">
               <h3 className="font-semibold text-white mb-4">The Hyper Tek Vision</h3>
               <p className="text-white/60 text-sm leading-relaxed mb-4">
-                Hyper Tek 100 is an ambitious vision to create an interconnected gaming ecosystem with a driven marketplace that addresses real problems in the industry. Three interconnected games — <strong className="text-white">Overlord Realm</strong> (MMORTS), <strong className="text-white">Hyper Racing 100</strong> (futuristic racing), and <strong className="text-white">Hyper Quest 100</strong> (RPG exploration) — where progress, assets, and identity persist across all experiences.
+                Hyper Tek 100 is an ambitious vision to create an interconnected gaming ecosystem with a driven marketplace that addresses real problems in the industry. Three interconnected games: <strong className="text-white">Overlord Realm</strong> (MMORTS), <strong className="text-white">Hyper Racing 100</strong> (futuristic racing), and <strong className="text-white">Hyper Quest 100</strong> (RPG exploration), where progress, assets, and identity persist across all experiences.
               </p>
               <p className="text-white/60 text-sm leading-relaxed mb-4">
                 Players enjoy fair-play economics, NFAs with <strong className="text-white">guaranteed minimum buyback values</strong>, real economic opportunities, and future-proofed market share.
