@@ -7,10 +7,16 @@ import axios from "axios";
 const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:4700";
 
 // Pre-launch lock: while true, the marketplace's transactional tabs and the
-// user dashboard show a lock overlay and all buy/list/bid actions are
-// disabled. Sign-up and wallet creation stay open. Flip to false at the
-// official launch.
-const LAUNCH_LOCKED = true;
+// user dashboard show a full lock overlay. Turned off so the site can run
+// live for demos and marketing, browsing/listing/bidding all work normally.
+// Purchases stay blocked separately (see PURCHASES_LOCKED below), enforced
+// server-side regardless of this flag.
+const LAUNCH_LOCKED = false;
+
+// Purchases specifically (buy now, card payment). The backend rejects these
+// independently of this flag, this only controls the button/UI state so it
+// shows a small note instead of letting the click round-trip to the server.
+const PURCHASES_LOCKED = true;
 
 // Card top-ups for HyperBucks. Hidden while the payment provider and the
 // company's tax position are being settled. The backend route and the checkout
@@ -61,4 +67,4 @@ function getImageUrl(imagePath) {
   return `${BACKEND_BASE_URL}${imagePath}`;
 }
 
-export { BACKEND_BASE_URL, LAUNCH_LOCKED, CARD_TOPUP_ENABLED, CDP_PROJECT_ID, CDP_WALLET_ENABLED, STRIPE_PUBLISHABLE_KEY, User_Dashboard_Url, NewsImage_Url, MarketPlace_Url, VIDEO_BASE_URL, getImageUrl };
+export { BACKEND_BASE_URL, LAUNCH_LOCKED, PURCHASES_LOCKED, CARD_TOPUP_ENABLED, CDP_PROJECT_ID, CDP_WALLET_ENABLED, STRIPE_PUBLISHABLE_KEY, User_Dashboard_Url, NewsImage_Url, MarketPlace_Url, VIDEO_BASE_URL, getImageUrl };
