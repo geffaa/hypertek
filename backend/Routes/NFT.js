@@ -54,6 +54,7 @@ import {
 
 import uploadTemp from "../Middleware/UploadMulter.js";
 import { authMiddleware } from "../Middleware/authMiddleware.js";
+import { purchasesLocked } from "../Middleware/purchasesLocked.js";
 
 const NFTRouter = express.Router();
 
@@ -208,7 +209,7 @@ NFTRouter.post("/mint", authMiddleware(), serverMint);
 
 NFTRouter.post("/listing/create", authMiddleware(), createListing);
 
-NFTRouter.post("/sale/record", authMiddleware(), recordOnchainSale);
+NFTRouter.post("/sale/record", authMiddleware(), purchasesLocked, recordOnchainSale);
 
 NFTRouter.post("/listing/cancel", authMiddleware(), cancelListing);
 NFTRouter.post(
@@ -217,7 +218,7 @@ NFTRouter.post(
   cancelSubCollectionListing
 );
 NFTRouter.post("/sub-collection/listing/create", authMiddleware(), createSubCollectionListing);
-NFTRouter.post("/sub-collection/sale/record", authMiddleware(), recordSubCollectionSale);
+NFTRouter.post("/sub-collection/sale/record", authMiddleware(), purchasesLocked, recordSubCollectionSale);
 NFTRouter.get(
   "/user/listed-subs/:walletAddress",
   authMiddleware(),
@@ -247,6 +248,6 @@ NFTRouter.get("/sub-collection/:subId", getSubCollectionById);
 
 // Finalize NFT purchase directly from frontend after Stripe confirmPayment succeeds
 // Backend re-verifies with Stripe before executing (safe even without webhook)
-NFTRouter.post("/finalize-by-payment-intent", finalizeByPaymentIntent);
+NFTRouter.post("/finalize-by-payment-intent", purchasesLocked, finalizeByPaymentIntent);
 
 export default NFTRouter;
