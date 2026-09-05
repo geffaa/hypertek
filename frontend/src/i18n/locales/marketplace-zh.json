@@ -43,7 +43,7 @@
         },
         {
           "label": "佣金",
-          "desc": "所有销售收取 20% 平台费。卖家获得 80%。二次销售艺术家版税 4%。"
+          "desc": "平台费依上架而异。转售时：卖家获得 86%，艺术家版税 2%，+5% 进入回购基金，平台 7%。"
         },
         {
           "label": "回购增长",
@@ -193,7 +193,7 @@
         "durations": "时长：1天 · 3天 · 7天",
         "minIncrement": "最低加价：5%",
         "freeToList": "免费上架",
-        "commission": "佣金：成交收取 20%"
+        "commission": "佣金依上架而异"
       },
       "preview": {
         "title": "游戏内功能预览",
@@ -226,7 +226,7 @@
         "yourBid": "您的出价 (USDC)",
         "minIncrement": "最低加价 5% · 您出价后的下一个最低价：{{next}} USDC",
         "reviewBid": "确认出价",
-        "disclaimer": "中标出价具有约束力 · 20% 平台佣金",
+        "disclaimer": "中标出价具有约束力 · 平台佣金依上架而异",
         "confirmTitle": "确认出价",
         "item": "物品",
         "yourBidLabel": "您的出价",
@@ -273,7 +273,7 @@
         "dur1Day": "1 天",
         "dur3Days": "3 天",
         "dur7Days": "7 天",
-        "freeToList": "免费上架 · 成交收取 20% 佣金",
+        "freeToList": "免费上架 · 佣金依上架而异",
         "creating": "创建中…",
         "submit": "创建拍卖"
       },
@@ -424,7 +424,7 @@
       "rules": {
         "durations": "8小时 · 1天 · 3天 · 1周 · 1月",
         "cooldown": "冷却时间：2倍租用时长",
-        "commission": "佣金：20%",
+        "commission": "佣金不固定",
         "payment": "以 Hyper Bucks 或材料支付"
       },
       "preview": {
@@ -442,7 +442,7 @@
         "howFulfill": "履行请求的流程",
         "proceedHire": "继续雇佣",
         "offerFulfill": "提供履行",
-        "commission": "20% 平台佣金 · 归还后冷却时间生效",
+        "commission": "平台佣金不固定 · 归还后冷却时间生效",
         "confirmHire": "确认雇佣",
         "confirmOffer": "确认报价",
         "specialist": "专家",
@@ -473,9 +473,9 @@
         "hyperBucks": "Hyper Bucks",
         "materials": "材料",
         "amountLabel": "金额 (Hyper Bucks)",
-        "afterCommission": "扣除 20% 佣金后您获得 {{amount}} HB",
+        "afterCommission": "扣除平台佣金后您获得 {{amount}} HB",
         "maxDuration": "最长时长",
-        "disclaimer": "20% 佣金 · 冷却时间 = 归还后 2 倍租用时长",
+        "disclaimer": "佣金不固定 · 冷却时间 = 归还后 2 倍租用时长",
         "listing": "上架中…",
         "submit": "创建上架"
       },
@@ -498,7 +498,7 @@
       },
       "rules": {
         "battle": "战斗在游戏内自动解决",
-        "commission": "奖励收取 20% 平台佣金",
+        "commission": "奖励的平台佣金不固定",
         "expiry": "合约 30 天后到期"
       },
       "table": {

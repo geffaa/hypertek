@@ -43,7 +43,7 @@
         },
         {
           "label": "Hoa Hồng",
-          "desc": "Phí nền tảng 20% trên tất cả các giao dịch. Người bán nhận 80%. Tiền bản quyền nghệ sĩ 4% khi bán lại."
+          "desc": "Phí nền tảng thay đổi tùy tin đăng. Bán lại: người bán 86%, tiền bản quyền nghệ sĩ 2%, +5% vào quỹ mua lại, nền tảng 7%."
         },
         {
           "label": "Tăng Trưởng Mua Lại",
@@ -193,7 +193,7 @@
         "durations": "Thời hạn: 1 ngày · 3 ngày · 7 ngày",
         "minIncrement": "Tăng tối thiểu: 5%",
         "freeToList": "Đăng miễn phí",
-        "commission": "Hoa hồng: 20% khi bán"
+        "commission": "Hoa hồng thay đổi tùy tin đăng"
       },
       "preview": {
         "title": "Xem Trước Tính Năng Trong Game",
@@ -226,7 +226,7 @@
         "yourBid": "Giá thầu của bạn (USDC)",
         "minIncrement": "Tăng tối thiểu 5% · Tối thiểu tiếp theo sau giá thầu của bạn: {{next}} USDC",
         "reviewBid": "Xem Lại Giá Thầu",
-        "disclaimer": "Giá thầu thắng có tính ràng buộc · Hoa hồng nền tảng 20%",
+        "disclaimer": "Giá thầu thắng có tính ràng buộc · hoa hồng nền tảng thay đổi tùy tin đăng",
         "confirmTitle": "Xác Nhận Giá Thầu",
         "item": "Mục",
         "yourBidLabel": "Giá thầu của bạn",
@@ -273,7 +273,7 @@
         "dur1Day": "1 Ngày",
         "dur3Days": "3 Ngày",
         "dur7Days": "7 Ngày",
-        "freeToList": "Đăng miễn phí · Hoa hồng 20% khi bán",
+        "freeToList": "Đăng miễn phí · hoa hồng thay đổi tùy tin đăng",
         "creating": "Đang Tạo…",
         "submit": "Tạo Đấu Giá"
       },
@@ -424,7 +424,7 @@
       "rules": {
         "durations": "8 giờ · 1 ngày · 3 ngày · 1 tuần · 1 tháng",
         "cooldown": "Thời gian hồi phục: gấp 2 lần thời hạn thuê",
-        "commission": "Hoa hồng: 20%",
+        "commission": "Hoa hồng thay đổi",
         "payment": "Thanh toán bằng Hyper Bucks hoặc Vật Liệu"
       },
       "preview": {
@@ -442,7 +442,7 @@
         "howFulfill": "Cách thực hiện yêu cầu hoạt động",
         "proceedHire": "Tiến Hành Thuê",
         "offerFulfill": "Đề Nghị Thực Hiện",
-        "commission": "Hoa hồng nền tảng 20% · Thời gian hồi phục áp dụng sau khi trả lại",
+        "commission": "Hoa hồng nền tảng thay đổi · Thời gian hồi phục áp dụng sau khi trả lại",
         "confirmHire": "Xác Nhận Thuê",
         "confirmOffer": "Xác Nhận Đề Nghị",
         "specialist": "Chuyên Gia",
@@ -473,9 +473,9 @@
         "hyperBucks": "Hyper Bucks",
         "materials": "Vật Liệu",
         "amountLabel": "Số Tiền (Hyper Bucks)",
-        "afterCommission": "Bạn nhận {{amount}} HB sau 20% hoa hồng",
+        "afterCommission": "Bạn nhận {{amount}} HB sau hoa hồng nền tảng",
         "maxDuration": "Thời Hạn Tối Đa",
-        "disclaimer": "Hoa hồng 20% · Thời gian hồi phục = 2 lần thời hạn thuê sau khi trả lại",
+        "disclaimer": "Hoa hồng thay đổi · Thời gian hồi phục = 2 lần thời hạn thuê sau khi trả lại",
         "listing": "Đang Đăng…",
         "submit": "Tạo Niêm Yết"
       },
@@ -498,7 +498,7 @@
       },
       "rules": {
         "battle": "Trận chiến được giải quyết tự động trong game",
-        "commission": "Hoa hồng nền tảng 20% trên phần thưởng",
+        "commission": "Hoa hồng nền tảng thay đổi trên phần thưởng",
         "expiry": "Hợp đồng hết hạn sau 30 ngày"
       },
       "table": {

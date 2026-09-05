@@ -43,7 +43,7 @@
         },
         {
           "label": "Comision",
-          "desc": "Taxă platformă 20% la toate vânzările. Vânzătorul primește 80%. Royalty artist 4% la revânzări."
+          "desc": "Taxa platformei variază în funcție de anunț. Revânzări: vânzător 86%, royalty artist 2%, +5% către buyback, platformă 7%."
         },
         {
           "label": "Creștere Răscumpărare",
@@ -193,7 +193,7 @@
         "durations": "Durate: 1z · 3z · 7z",
         "minIncrement": "Creștere minimă: 5%",
         "freeToList": "Listare gratuită",
-        "commission": "Comision: 20% la vânzare"
+        "commission": "Comisionul variază în funcție de anunț"
       },
       "preview": {
         "title": "Previzualizare Funcție În Joc",
@@ -226,7 +226,7 @@
         "yourBid": "Oferta dvs. (USDC)",
         "minIncrement": "Creștere minimă 5% · Minimul următor după oferta dvs.: {{next}} USDC",
         "reviewBid": "Revizuiți Oferta",
-        "disclaimer": "Oferta câștigătoare este obligatorie · 20% comision platformă",
+        "disclaimer": "Oferta câștigătoare este obligatorie · comisionul platformei variază în funcție de anunț",
         "confirmTitle": "Confirmați Oferta",
         "item": "Articol",
         "yourBidLabel": "Oferta dvs.",
@@ -273,7 +273,7 @@
         "dur1Day": "1 Zi",
         "dur3Days": "3 Zile",
         "dur7Days": "7 Zile",
-        "freeToList": "Listare gratuită · 20% comision la vânzare",
+        "freeToList": "Listare gratuită · comisionul variază în funcție de anunț",
         "creating": "Se creează…",
         "submit": "Creați Licitație"
       },
@@ -424,7 +424,7 @@
       "rules": {
         "durations": "8h · 1z · 3z · 1s · 1l",
         "cooldown": "Cooldown: 2× durata închirierii",
-        "commission": "Comision: 20%",
+        "commission": "Comisionul variază",
         "payment": "Plată în Hyper Bucks sau Materiale"
       },
       "preview": {
@@ -442,7 +442,7 @@
         "howFulfill": "Cum funcționează îndeplinirea unei cereri",
         "proceedHire": "Continuați la Angajare",
         "offerFulfill": "Oferiți să Îndepliniți",
-        "commission": "20% comision platformă · Cooldown se aplică după returnare",
+        "commission": "Comisionul platformei variază · Cooldown se aplică după returnare",
         "confirmHire": "Confirmați Angajarea",
         "confirmOffer": "Confirmați Oferta",
         "specialist": "Specialist",
@@ -473,9 +473,9 @@
         "hyperBucks": "Hyper Bucks",
         "materials": "Materiale",
         "amountLabel": "Sumă (Hyper Bucks)",
-        "afterCommission": "Primiți {{amount}} HB după 20% comision",
+        "afterCommission": "Primiți {{amount}} HB după comisionul platformei",
         "maxDuration": "Durată Maximă",
-        "disclaimer": "20% comision · Cooldown = 2× durata închirierii după returnare",
+        "disclaimer": "Comisionul variază · Cooldown = 2× durata închirierii după returnare",
         "listing": "Se listează…",
         "submit": "Creați Listare"
       },
@@ -498,7 +498,7 @@
       },
       "rules": {
         "battle": "Lupta este rezolvată automat în joc",
-        "commission": "20% comision platformă pe recompensă",
+        "commission": "Comisionul platformei variază pe recompensă",
         "expiry": "Contractele expiră în 30 de zile"
       },
       "table": {

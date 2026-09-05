@@ -49,7 +49,7 @@
         },
         {
           "label": "Commission",
-          "desc": "20% platform fee on all sales. Seller receives 80%. Artist royalty 4% on resales."
+          "desc": "Platform fee varies per listing. Resales split: seller 86%, artist royalty 2%, +5% to buyback, platform 7%."
         },
         {
           "label": "Buyback Growth",
@@ -200,7 +200,7 @@
         "durations": "Durations: 1d · 3d · 7d",
         "minIncrement": "Min increment: 5%",
         "freeToList": "Free to list",
-        "commission": "Commission: 20% on sale"
+        "commission": "Commission varies by listing"
       },
       "preview": {
         "title": "In-Game Feature Preview",
@@ -233,7 +233,7 @@
         "yourBid": "Your bid (USDC)",
         "minIncrement": "Min increment 5% · Next minimum after your bid: {{next}} USDC",
         "reviewBid": "Review Bid",
-        "disclaimer": "Winning bid is binding · 20% platform commission",
+        "disclaimer": "Winning bid is binding · platform commission varies by listing",
         "confirmTitle": "Confirm Bid",
         "item": "Item",
         "yourBidLabel": "Your bid",
@@ -280,7 +280,7 @@
         "dur1Day": "1 Day",
         "dur3Days": "3 Days",
         "dur7Days": "7 Days",
-        "freeToList": "Free to list · 20% commission on sale",
+        "freeToList": "Free to list · commission varies by listing",
         "creating": "Creating…",
         "submit": "Create Auction"
       },
@@ -431,7 +431,7 @@
       "rules": {
         "durations": "8h · 1d · 3d · 1w · 1mo",
         "cooldown": "Cooldown: 2× rental duration",
-        "commission": "Commission: 20%",
+        "commission": "Commission varies",
         "payment": "Pay in Hyper Bucks or Materials"
       },
       "preview": {
@@ -449,7 +449,7 @@
         "howFulfill": "How fulfilling a request works",
         "proceedHire": "Proceed to Hire",
         "offerFulfill": "Offer to Fulfill",
-        "commission": "20% platform commission · Cooldown applies after return",
+        "commission": "Platform commission varies · Cooldown applies after return",
         "confirmHire": "Confirm Hire",
         "confirmOffer": "Confirm Offer",
         "specialist": "Specialist",
@@ -480,9 +480,9 @@
         "hyperBucks": "Hyper Bucks",
         "materials": "Materials",
         "amountLabel": "Amount (Hyper Bucks)",
-        "afterCommission": "You receive {{amount}} HB after 20% commission",
+        "afterCommission": "You receive {{amount}} HB after platform commission",
         "maxDuration": "Max Duration",
-        "disclaimer": "20% commission · Cooldown = 2× rental duration after return",
+        "disclaimer": "Commission varies · Cooldown = 2× rental duration after return",
         "listing": "Listing…",
         "submit": "Create Listing"
       },
@@ -505,7 +505,7 @@
       },
       "rules": {
         "battle": "Battle resolved in-game automatically",
-        "commission": "20% platform commission on reward",
+        "commission": "Platform commission varies on reward",
         "expiry": "Contracts expire in 30 days"
       },
       "table": {

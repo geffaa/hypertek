@@ -43,7 +43,7 @@
         },
         {
           "label": "Komisyon",
-          "desc": "Tüm satışlarda %20 platform ücreti. Satıcı %80 alır. Satışlarda %4 sanatçı telif hakkı."
+          "desc": "Platform ücreti ilana göre değişir. Yeniden satışlarda: satıcı %86, sanatçı telif hakkı %2, geri alıma +%5, platform %7."
         },
         {
           "label": "Geri Alım Büyümesi",
@@ -193,7 +193,7 @@
         "durations": "Süreler: 1 gün · 3 gün · 7 gün",
         "minIncrement": "Min artış: %5",
         "freeToList": "Listelemek ücretsiz",
-        "commission": "Komisyon: Satışta %20"
+        "commission": "Komisyon: İlana göre değişir"
       },
       "preview": {
         "title": "Oyun İçi Özellik Önizlemesi",
@@ -226,7 +226,7 @@
         "yourBid": "Teklifiniz (USDC)",
         "minIncrement": "Min artış %5 · Teklifinizden sonraki sonraki minimum: {{next}} USDC",
         "reviewBid": "Teklifi İncele",
-        "disclaimer": "Kazanan teklif bağlayıcıdır · %20 platform komisyonu",
+        "disclaimer": "Kazanan teklif bağlayıcıdır · platform komisyonu ilana göre değişir",
         "confirmTitle": "Teklifi Onayla",
         "item": "Öğe",
         "yourBidLabel": "Teklifiniz",
@@ -273,7 +273,7 @@
         "dur1Day": "1 Gün",
         "dur3Days": "3 Gün",
         "dur7Days": "7 Gün",
-        "freeToList": "Listelemek ücretsiz · Satışta %20 komisyon",
+        "freeToList": "Listelemek ücretsiz · komisyon ilana göre değişir",
         "creating": "Oluşturuluyor…",
         "submit": "Müzayede Oluştur"
       },
@@ -424,7 +424,7 @@
       "rules": {
         "durations": "8s · 1 gün · 3 gün · 1 hafta · 1 ay",
         "cooldown": "Bekleme: 2× kiralama süresi",
-        "commission": "Komisyon: %20",
+        "commission": "Komisyon değişir",
         "payment": "Hyper Bucks veya Malzeme ile öde"
       },
       "preview": {
@@ -442,7 +442,7 @@
         "howFulfill": "Talep karşılama nasıl çalışır",
         "proceedHire": "Kiralamaya Devam Et",
         "offerFulfill": "Karşılamayı Teklif Et",
-        "commission": "%20 platform komisyonu · İadeden sonra bekleme süresi uygulanır",
+        "commission": "Platform komisyonu değişir · İadeden sonra bekleme süresi uygulanır",
         "confirmHire": "Kiralama Onayla",
         "confirmOffer": "Teklifi Onayla",
         "specialist": "Uzman",
@@ -473,9 +473,9 @@
         "hyperBucks": "Hyper Bucks",
         "materials": "Malzemeler",
         "amountLabel": "Tutar (Hyper Bucks)",
-        "afterCommission": "%20 komisyon sonrası {{amount}} HB alırsınız",
+        "afterCommission": "Platform komisyonu sonrası {{amount}} HB alırsınız",
         "maxDuration": "Maks Süre",
-        "disclaimer": "%20 komisyon · Bekleme = iadeden sonra 2× kiralama süresi",
+        "disclaimer": "Komisyon değişir · Bekleme = iadeden sonra 2× kiralama süresi",
         "listing": "Listeleniyor…",
         "submit": "Liste Oluştur"
       },
@@ -498,7 +498,7 @@
       },
       "rules": {
         "battle": "Savaş oyun içinde otomatik olarak çözülür",
-        "commission": "Ödül üzerinde %20 platform komisyonu",
+        "commission": "Ödül üzerinde platform komisyonu değişir",
         "expiry": "Sözleşmeler 30 gün içinde sona erer"
       },
       "table": {

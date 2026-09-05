@@ -43,7 +43,7 @@
         },
         {
           "label": "Komisi",
-          "desc": "Biaya platform 20% untuk semua penjualan. Penjual menerima 80%. Royalti artis 4% pada penjualan kembali."
+          "desc": "Biaya platform bervariasi tergantung listing. Penjualan kembali: penjual 86%, royalti artis 2%, +5% ke buyback, platform 7%."
         },
         {
           "label": "Pertumbuhan Buyback",
@@ -193,7 +193,7 @@
         "durations": "Durasi: 1h · 3h · 7h",
         "minIncrement": "Kenaikan minimum: 5%",
         "freeToList": "Gratis untuk didaftarkan",
-        "commission": "Komisi: 20% saat penjualan"
+        "commission": "Komisi bervariasi tergantung listing"
       },
       "preview": {
         "title": "Pratinjau Fitur Dalam Game",
@@ -226,7 +226,7 @@
         "yourBid": "Tawaran Anda (USDC)",
         "minIncrement": "Kenaikan minimum 5% · Minimum berikutnya setelah tawaran Anda: {{next}} USDC",
         "reviewBid": "Tinjau Tawaran",
-        "disclaimer": "Tawaran menang bersifat mengikat · Komisi platform 20%",
+        "disclaimer": "Tawaran menang bersifat mengikat · Komisi platform bervariasi tergantung listing",
         "confirmTitle": "Konfirmasi Tawaran",
         "item": "Item",
         "yourBidLabel": "Tawaran Anda",
@@ -273,7 +273,7 @@
         "dur1Day": "1 Hari",
         "dur3Days": "3 Hari",
         "dur7Days": "7 Hari",
-        "freeToList": "Gratis didaftarkan · Komisi 20% saat penjualan",
+        "freeToList": "Gratis didaftarkan · Komisi bervariasi tergantung listing",
         "creating": "Membuat…",
         "submit": "Buat Lelang"
       },
@@ -424,7 +424,7 @@
       "rules": {
         "durations": "8j · 1h · 3h · 1mg · 1bl",
         "cooldown": "Cooldown: 2× durasi sewa",
-        "commission": "Komisi: 20%",
+        "commission": "Komisi bervariasi",
         "payment": "Bayar dengan Hyper Bucks atau Material"
       },
       "preview": {
@@ -442,7 +442,7 @@
         "howFulfill": "Cara kerja memenuhi permintaan",
         "proceedHire": "Lanjutkan Penyewaan",
         "offerFulfill": "Tawarkan untuk Memenuhi",
-        "commission": "Komisi platform 20% · Cooldown berlaku setelah pengembalian",
+        "commission": "Komisi platform bervariasi · Cooldown berlaku setelah pengembalian",
         "confirmHire": "Konfirmasi Penyewaan",
         "confirmOffer": "Konfirmasi Penawaran",
         "specialist": "Spesialis",
@@ -473,9 +473,9 @@
         "hyperBucks": "Hyper Bucks",
         "materials": "Material",
         "amountLabel": "Jumlah (Hyper Bucks)",
-        "afterCommission": "Anda menerima {{amount}} HB setelah komisi 20%",
+        "afterCommission": "Anda menerima {{amount}} HB setelah komisi platform",
         "maxDuration": "Durasi Maksimum",
-        "disclaimer": "Komisi 20% · Cooldown = 2× durasi sewa setelah pengembalian",
+        "disclaimer": "Komisi bervariasi · Cooldown = 2× durasi sewa setelah pengembalian",
         "listing": "Mendaftarkan…",
         "submit": "Buat Listing"
       },
@@ -498,7 +498,7 @@
       },
       "rules": {
         "battle": "Pertempuran diselesaikan secara otomatis dalam game",
-        "commission": "Komisi platform 20% atas hadiah",
+        "commission": "Komisi platform bervariasi atas hadiah",
         "expiry": "Kontrak berakhir dalam 30 hari"
       },
       "table": {

@@ -130,7 +130,7 @@ const NEWS_DATA = [
   },
   {
     heading: "Understanding the HyperTek Buy-Back Guarantee",
-    description: "Every NFA (Non-Fungible Asset) on HyperTek comes with a guaranteed minimum buy-back value. This means if you can't sell your asset at or above its reserve price, HyperTek will buy it back at the guaranteed minimum, adjusted for CPI each year.",
+    description: "Every NFA (Non-Fungible Asset) on HyperTek comes with a guaranteed minimum buy-back value. This means if you can't sell your asset at or above its reserve price, HyperTek will buy it back at the guaranteed minimum. That minimum only ever grows: a portion of every resale is added to it automatically.",
     image: "https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?w=800&q=80",
     status: "active",
   },
@@ -153,8 +153,8 @@ const NEWS_DATA = [
     status: "active",
   },
   {
-    heading: "Annual CPI Adjustment: Protecting Your Asset Value",
-    description: "HyperTek announces its commitment to annual CPI-based adjustments on all NFA minimum buy-back values. This ensures your assets retain real purchasing power over time, making HyperTek NFAs a store of value as well as a gaming asset.",
+    heading: "The GMBB Fund: How Your Buy-Back Value Grows",
+    description: "Every eligible sale on the HyperTek Marketplace feeds the Guaranteed Minimum Buy-Back Fund for that item, held in USDC and non-custodial by design. It only ever grows: a percentage of every resale is added automatically, on top of the contribution made at first sale.",
     image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80",
     status: "active",
   },

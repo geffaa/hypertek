@@ -43,7 +43,7 @@
         },
         {
           "label": "Kommission",
-          "desc": "20% platformgebyr paa alle salg. Saelger modtager 80%. Kunstnerroyalty 4% ved videresalg."
+          "desc": "Platformgebyr varierer efter opslag. Videresalg: saelger 86%, kunstnerroyalty 2%, +5% til buyback, platform 7%."
         },
         {
           "label": "Tilbagekøbsvækst",
@@ -193,7 +193,7 @@
         "durations": "Varighed: 1d · 3d · 7d",
         "minIncrement": "Min. stigning: 5%",
         "freeToList": "Gratis at liste",
-        "commission": "Kommission: 20% ved salg"
+        "commission": "Kommission varierer efter opslag"
       },
       "preview": {
         "title": "Spilfunktionsforhåndsvisning",
@@ -226,7 +226,7 @@
         "yourBid": "Dit bud (USDC)",
         "minIncrement": "Min. stigning 5% · Naeste minimum efter dit bud: {{next}} USDC",
         "reviewBid": "Gennemse Bud",
-        "disclaimer": "Vindende bud er bindende · 20% platformkommission",
+        "disclaimer": "Vindende bud er bindende · platformkommission varierer efter opslag",
         "confirmTitle": "Bekraeft Bud",
         "item": "Genstand",
         "yourBidLabel": "Dit bud",
@@ -273,7 +273,7 @@
         "dur1Day": "1 Dag",
         "dur3Days": "3 Dage",
         "dur7Days": "7 Dage",
-        "freeToList": "Gratis at liste · 20% kommission ved salg",
+        "freeToList": "Gratis at liste · kommission varierer efter opslag",
         "creating": "Opretter...",
         "submit": "Opret Auktion"
       },
@@ -424,7 +424,7 @@
       "rules": {
         "durations": "8t · 1d · 3d · 1u · 1mn",
         "cooldown": "Afkøling: 2× lejevarighed",
-        "commission": "Kommission: 20%",
+        "commission": "Kommission varierer",
         "payment": "Betal i Hyper Bucks eller Materialer"
       },
       "preview": {
@@ -442,7 +442,7 @@
         "howFulfill": "Saaledes fungerer opfyldelse af en anmodning",
         "proceedHire": "Fortsaet til Leje",
         "offerFulfill": "Tilbyd at Opfylde",
-        "commission": "20% platformkommission · Afkøling gaelder efter returnering",
+        "commission": "Platformkommission varierer · Afkøling gaelder efter returnering",
         "confirmHire": "Bekraeft Leje",
         "confirmOffer": "Bekraeft Tilbud",
         "specialist": "Specialist",
@@ -473,9 +473,9 @@
         "hyperBucks": "Hyper Bucks",
         "materials": "Materialer",
         "amountLabel": "Beløb (Hyper Bucks)",
-        "afterCommission": "Du modtager {{amount}} HB efter 20% kommission",
+        "afterCommission": "Du modtager {{amount}} HB efter platformkommission",
         "maxDuration": "Maks. Varighed",
-        "disclaimer": "20% kommission · Afkøling = 2× lejevarighed efter returnering",
+        "disclaimer": "Kommission varierer · Afkøling = 2× lejevarighed efter returnering",
         "listing": "Lister...",
         "submit": "Opret Listning"
       },
@@ -498,7 +498,7 @@
       },
       "rules": {
         "battle": "Kamp løses automatisk i spillet",
-        "commission": "20% platformkommission paa belønning",
+        "commission": "Platformkommission varierer paa belønning",
         "expiry": "Kontrakter udloeber om 30 dage"
       },
       "table": {

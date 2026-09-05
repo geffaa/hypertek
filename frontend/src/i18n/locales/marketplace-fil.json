@@ -43,7 +43,7 @@
         },
         {
           "label": "Komisyon",
-          "desc": "20% bayad sa platform sa lahat ng benta. Ang nagbebenta ay nakatanggap ng 80%. Royalty ng artista 4% sa mga muling benta."
+          "desc": "Nag-iiba ang bayad sa platform depende sa listing. Muling benta: nagbebenta 86%, royalty ng artista 2%, +5% sa buyback, platform 7%."
         },
         {
           "label": "Paglago ng Buyback",
@@ -193,7 +193,7 @@
         "durations": "Tagal: 1d · 3d · 7d",
         "minIncrement": "Min na pagtaas: 5%",
         "freeToList": "Libre ang paglista",
-        "commission": "Komisyon: 20% sa benta"
+        "commission": "Nag-iiba ang komisyon depende sa listing"
       },
       "preview": {
         "title": "Preview ng Feature sa Laro",
@@ -226,7 +226,7 @@
         "yourBid": "Iyong bid (USDC)",
         "minIncrement": "Min na pagtaas 5% · Susunod na minimum pagkatapos ng iyong bid: {{next}} USDC",
         "reviewBid": "Suriin ang Bid",
-        "disclaimer": "Ang nanalong bid ay nakatali · 20% komisyon ng platform",
+        "disclaimer": "Ang nanalong bid ay nakatali · nag-iiba ang komisyon ng platform depende sa listing",
         "confirmTitle": "Kumpirmahin ang Bid",
         "item": "Item",
         "yourBidLabel": "Iyong bid",
@@ -273,7 +273,7 @@
         "dur1Day": "1 Araw",
         "dur3Days": "3 Araw",
         "dur7Days": "7 Araw",
-        "freeToList": "Libre ang paglista · 20% komisyon sa benta",
+        "freeToList": "Libre ang paglista · nag-iiba ang komisyon depende sa listing",
         "creating": "Ginagawa…",
         "submit": "Lumikha ng Auction"
       },
@@ -424,7 +424,7 @@
       "rules": {
         "durations": "8h · 1d · 3d · 1l · 1b",
         "cooldown": "Cooldown: 2× tagal ng renta",
-        "commission": "Komisyon: 20%",
+        "commission": "Nag-iiba ang komisyon",
         "payment": "Magbayad sa Hyper Bucks o Materyales"
       },
       "preview": {
@@ -442,7 +442,7 @@
         "howFulfill": "Paano gumagana ang pagtutpad ng kahilingan",
         "proceedHire": "Magpatuloy sa Pagkuha",
         "offerFulfill": "Mag-alok na Tuparin",
-        "commission": "20% komisyon ng platform · Nalalapat ang cooldown pagkatapos ibalik",
+        "commission": "Nag-iiba ang komisyon ng platform · Nalalapat ang cooldown pagkatapos ibalik",
         "confirmHire": "Kumpirmahin ang Pagkuha",
         "confirmOffer": "Kumpirmahin ang Alok",
         "specialist": "Espesyalista",
@@ -473,9 +473,9 @@
         "hyperBucks": "Hyper Bucks",
         "materials": "Materyales",
         "amountLabel": "Halaga (Hyper Bucks)",
-        "afterCommission": "Matatanggap mo ang {{amount}} HB pagkatapos ng 20% komisyon",
+        "afterCommission": "Matatanggap mo ang {{amount}} HB pagkatapos ng komisyon ng platform",
         "maxDuration": "Pinakamataas na Tagal",
-        "disclaimer": "20% komisyon · Cooldown = 2× tagal ng renta pagkatapos ibalik",
+        "disclaimer": "Nag-iiba ang komisyon · Cooldown = 2× tagal ng renta pagkatapos ibalik",
         "listing": "Naglilista…",
         "submit": "Lumikha ng Listahan"
       },
@@ -498,7 +498,7 @@
       },
       "rules": {
         "battle": "Ang labanan ay awtomatikong nareresolba sa laro",
-        "commission": "20% komisyon ng platform sa gantimpala",
+        "commission": "Nag-iiba ang komisyon ng platform sa gantimpala",
         "expiry": "Ang mga kontrata ay nag-eexpire sa 30 araw"
       },
       "table": {

@@ -213,7 +213,7 @@ const NEWS_DATA = [
     },
     {
         heading: "Understanding the Hyper Tek Buy-Back Guarantee",
-        description: "Every Non-Fungible Digital Artwork sold on the Hyper Tek Marketplace comes with a reserved guaranteed minimum buy-back value. This means that if you can't sell your asset at or above its reserve price, Hyper Tek will buy the Non-Fungible Digital Artwork back at the guaranteed minimum price, which is also adjusted for CPI twice per year!",
+        description: "Every Non-Fungible Digital Artwork sold on the Hyper Tek Marketplace comes with a reserved guaranteed minimum buy-back value. This means that if you can't sell your asset at or above its reserve price, Hyper Tek will buy the Non-Fungible Digital Artwork back at the guaranteed minimum price. That minimum only ever grows: a portion of every resale is added to it automatically.",
         image: "https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?w=800&q=80",
         status: "active",
     },
@@ -236,8 +236,8 @@ const NEWS_DATA = [
         status: "active",
     },
     {
-        heading: "Annual CPI Adjustment: Protecting Your Asset Value",
-        description: "Hyper Tek announces its commitment to annual CPI-based adjustments on all NFA minimum buy-back values. This ensures your assets retain real purchasing power over time, making Hyper Tek NFAs a store of value as well as a gaming asset.",
+        heading: "The GMBB Fund: How Your Buy-Back Value Grows",
+        description: "Every eligible sale on the Hyper Tek Marketplace feeds the Guaranteed Minimum Buy-Back Fund for that item, held in USDC and non-custodial by design. It only ever grows: a percentage of every resale is added automatically, on top of the contribution made at first sale.",
         image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80",
         status: "active",
     },

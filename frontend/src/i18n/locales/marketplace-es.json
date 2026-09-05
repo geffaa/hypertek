@@ -43,7 +43,7 @@
         },
         {
           "label": "Comisión",
-          "desc": "20% de tarifa de plataforma en todas las ventas. El vendedor recibe el 80%. Regalía del artista 4% en reventas."
+          "desc": "La tarifa de plataforma varía según la publicación. Reventas: vendedor 86%, regalía del artista 2%, +5% recompra, plataforma 7%."
         },
         {
           "label": "Crecimiento de Recompra",
@@ -193,7 +193,7 @@
         "durations": "Duraciones: 1d · 3d · 7d",
         "minIncrement": "Incremento mínimo: 5%",
         "freeToList": "Listar es gratis",
-        "commission": "Comisión: 20% en venta"
+        "commission": "La comisión varía según la publicación"
       },
       "preview": {
         "title": "Vista Previa de Función en el Juego",
@@ -226,7 +226,7 @@
         "yourBid": "Tu oferta (USDC)",
         "minIncrement": "Incremento mínimo 5% · Próximo mínimo después de tu oferta: {{next}} USDC",
         "reviewBid": "Revisar Oferta",
-        "disclaimer": "La oferta ganadora es vinculante · 20% de comisión de plataforma",
+        "disclaimer": "La oferta ganadora es vinculante · la comisión de plataforma varía según la publicación",
         "confirmTitle": "Confirmar Oferta",
         "item": "Artículo",
         "yourBidLabel": "Tu oferta",
@@ -273,7 +273,7 @@
         "dur1Day": "1 Día",
         "dur3Days": "3 Días",
         "dur7Days": "7 Días",
-        "freeToList": "Listar es gratis · 20% de comisión en venta",
+        "freeToList": "Listar es gratis · la comisión varía según la publicación",
         "creating": "Creando…",
         "submit": "Crear Subasta"
       },
@@ -424,7 +424,7 @@
       "rules": {
         "durations": "8h · 1d · 3d · 1s · 1mes",
         "cooldown": "Enfriamiento: 2× duración del alquiler",
-        "commission": "Comisión: 20%",
+        "commission": "La comisión varía",
         "payment": "Pago en Hyper Bucks o Materiales"
       },
       "preview": {
@@ -442,7 +442,7 @@
         "howFulfill": "Cómo funciona cumplir una solicitud",
         "proceedHire": "Proceder a Contratar",
         "offerFulfill": "Ofrecer Cumplir",
-        "commission": "20% de comisión de plataforma · Se aplica enfriamiento después de la devolución",
+        "commission": "La comisión de plataforma varía · Se aplica enfriamiento después de la devolución",
         "confirmHire": "Confirmar Contratación",
         "confirmOffer": "Confirmar Oferta",
         "specialist": "Especialista",
@@ -473,9 +473,9 @@
         "hyperBucks": "Hyper Bucks",
         "materials": "Materiales",
         "amountLabel": "Cantidad (Hyper Bucks)",
-        "afterCommission": "Recibes {{amount}} HB después del 20% de comisión",
+        "afterCommission": "Recibes {{amount}} HB después de la comisión de plataforma",
         "maxDuration": "Duración Máxima",
-        "disclaimer": "20% de comisión · Enfriamiento = 2× duración del alquiler después de la devolución",
+        "disclaimer": "La comisión varía · Enfriamiento = 2× duración del alquiler después de la devolución",
         "listing": "Listando…",
         "submit": "Crear Listado"
       },
@@ -498,7 +498,7 @@
       },
       "rules": {
         "battle": "Batalla resuelta en el juego automáticamente",
-        "commission": "20% de comisión de plataforma en recompensa",
+        "commission": "La comisión de plataforma varía en la recompensa",
         "expiry": "Los contratos vencen en 30 días"
       },
       "table": {

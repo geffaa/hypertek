@@ -43,7 +43,7 @@
         },
         {
           "label": "Provisjon",
-          "desc": "20% plattformgebyr pa alle salg. Selger mottar 80%. Artistroyalty 4% pa videresalg."
+          "desc": "Plattformgebyr varierer etter oppføring. Videresalg: selger 86%, artistroyalty 2%, +5% til buyback, plattform 7%."
         },
         {
           "label": "Innkjopsvekst",
@@ -193,7 +193,7 @@
         "durations": "Varigheter: 1d · 3d · 7d",
         "minIncrement": "Min okning: 5%",
         "freeToList": "Gratis a liste",
-        "commission": "Provisjon: 20% ved salg"
+        "commission": "Provisjon varierer etter oppføring"
       },
       "preview": {
         "title": "Forhansvisning av spillfunksjon",
@@ -226,7 +226,7 @@
         "yourBid": "Budet ditt (USDC)",
         "minIncrement": "Min okning 5% · Neste minimum etter budet ditt: {{next}} USDC",
         "reviewBid": "Gjennomg bud",
-        "disclaimer": "Vinnende bud er bindende · 20% plattformprovisjon",
+        "disclaimer": "Vinnende bud er bindende · plattformprovisjon varierer etter oppføring",
         "confirmTitle": "Bekreft bud",
         "item": "Gjenstand",
         "yourBidLabel": "Budet ditt",
@@ -273,7 +273,7 @@
         "dur1Day": "1 dag",
         "dur3Days": "3 dager",
         "dur7Days": "7 dager",
-        "freeToList": "Gratis a liste · 20% provisjon ved salg",
+        "freeToList": "Gratis a liste · provisjon varierer etter oppføring",
         "creating": "Oppretter...",
         "submit": "Opprett auksjon"
       },
@@ -424,7 +424,7 @@
       "rules": {
         "durations": "8t · 1d · 3d · 1u · 1mn",
         "cooldown": "Nedkjoling: 2x leievarighet",
-        "commission": "Provisjon: 20%",
+        "commission": "Provisjon varierer",
         "payment": "Betal med Hyper Bucks eller materialer"
       },
       "preview": {
@@ -442,7 +442,7 @@
         "howFulfill": "Slik fungerer innfriing av en foresporsel",
         "proceedHire": "Gje videre til ansettelse",
         "offerFulfill": "Tilby a innfri",
-        "commission": "20% plattformprovisjon · Nedkjoling gjelder etter retur",
+        "commission": "Plattformprovisjon varierer · Nedkjoling gjelder etter retur",
         "confirmHire": "Bekreft ansettelse",
         "confirmOffer": "Bekreft tilbud",
         "specialist": "Spesialist",
@@ -473,9 +473,9 @@
         "hyperBucks": "Hyper Bucks",
         "materials": "Materialer",
         "amountLabel": "Belop (Hyper Bucks)",
-        "afterCommission": "Du mottar {{amount}} HB etter 20% provisjon",
+        "afterCommission": "Du mottar {{amount}} HB etter plattformprovisjon",
         "maxDuration": "Maks varighet",
-        "disclaimer": "20% provisjon · Nedkjoling = 2x leievarighet etter retur",
+        "disclaimer": "Provisjon varierer · Nedkjoling = 2x leievarighet etter retur",
         "listing": "Lister...",
         "submit": "Opprett listing"
       },
@@ -498,7 +498,7 @@
       },
       "rules": {
         "battle": "Slag lost i spillet automatisk",
-        "commission": "20% plattformprovisjon pa belonning",
+        "commission": "Plattformprovisjon varierer pa belonning",
         "expiry": "Kontrakter utloper etter 30 dager"
       },
       "table": {

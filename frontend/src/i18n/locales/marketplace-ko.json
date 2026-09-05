@@ -43,7 +43,7 @@
         },
         {
           "label": "수수료",
-          "desc": "모든 판매에 20% 플랫폼 수수료. 판매자는 80% 수령. 재판매 시 작가 로열티 4%."
+          "desc": "플랫폼 수수료는 등록 건마다 다릅니다. 재판매 시: 판매자 86%, 작가 로열티 2%, 바이백에 +5%, 플랫폼 7%."
         },
         {
           "label": "환매 성장",
@@ -193,7 +193,7 @@
         "durations": "기간: 1일 · 3일 · 7일",
         "minIncrement": "최소 증가액: 5%",
         "freeToList": "무료 등록",
-        "commission": "수수료: 판매 시 20%"
+        "commission": "수수료는 등록 건마다 다릅니다"
       },
       "preview": {
         "title": "게임 내 기능 미리보기",
@@ -226,7 +226,7 @@
         "yourBid": "내 입찰가 (USDC)",
         "minIncrement": "최소 증가액 5% · 내 입찰 후 다음 최소가: {{next}} USDC",
         "reviewBid": "입찰 확인",
-        "disclaimer": "낙찰 입찰은 구속력 있음 · 20% 플랫폼 수수료",
+        "disclaimer": "낙찰 입찰은 구속력 있음 · 플랫폼 수수료는 등록 건마다 다릅니다",
         "confirmTitle": "입찰 확인",
         "item": "아이템",
         "yourBidLabel": "내 입찰가",
@@ -273,7 +273,7 @@
         "dur1Day": "1일",
         "dur3Days": "3일",
         "dur7Days": "7일",
-        "freeToList": "무료 등록 · 판매 시 20% 수수료",
+        "freeToList": "무료 등록 · 수수료는 등록 건마다 다릅니다",
         "creating": "생성 중…",
         "submit": "경매 만들기"
       },
@@ -424,7 +424,7 @@
       "rules": {
         "durations": "8시간 · 1일 · 3일 · 1주 · 1개월",
         "cooldown": "쿨다운: 대여 기간의 2배",
-        "commission": "수수료: 20%",
+        "commission": "수수료는 다릅니다",
         "payment": "Hyper Bucks 또는 재료로 지불"
       },
       "preview": {
@@ -442,7 +442,7 @@
         "howFulfill": "요청 이행 방법",
         "proceedHire": "고용 진행",
         "offerFulfill": "이행 제안",
-        "commission": "20% 플랫폼 수수료 · 반납 후 쿨다운 적용",
+        "commission": "플랫폼 수수료는 다릅니다 · 반납 후 쿨다운 적용",
         "confirmHire": "고용 확인",
         "confirmOffer": "제안 확인",
         "specialist": "전문가",
@@ -473,9 +473,9 @@
         "hyperBucks": "Hyper Bucks",
         "materials": "재료",
         "amountLabel": "금액 (Hyper Bucks)",
-        "afterCommission": "20% 수수료 후 {{amount}} HB 수령",
+        "afterCommission": "플랫폼 수수료 차감 후 {{amount}} HB 수령",
         "maxDuration": "최대 기간",
-        "disclaimer": "20% 수수료 · 쿨다운 = 반납 후 대여 기간의 2배",
+        "disclaimer": "수수료는 다릅니다 · 쿨다운 = 반납 후 대여 기간의 2배",
         "listing": "등록 중…",
         "submit": "등록 만들기"
       },
@@ -498,7 +498,7 @@
       },
       "rules": {
         "battle": "전투는 게임 내에서 자동으로 해결됨",
-        "commission": "보상에 20% 플랫폼 수수료",
+        "commission": "보상에 대한 플랫폼 수수료는 다릅니다",
         "expiry": "계약은 30일 후 만료"
       },
       "table": {

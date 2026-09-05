@@ -43,7 +43,7 @@
         },
         {
           "label": "Comissão",
-          "desc": "Taxa de 20% da plataforma em todas as vendas. O vendedor recebe 80%. Royalty do artista de 4% em revendas."
+          "desc": "A taxa da plataforma varia conforme o anúncio. Revendas: vendedor 86%, royalty do artista 2%, +5% para buyback, plataforma 7%."
         },
         {
           "label": "Crescimento da Recompra",
@@ -193,7 +193,7 @@
         "durations": "Durações: 1d · 3d · 7d",
         "minIncrement": "Incremento mínimo: 5%",
         "freeToList": "Listagem gratuita",
-        "commission": "Comissão: 20% na venda"
+        "commission": "A comissão varia conforme o anúncio"
       },
       "preview": {
         "title": "Prévia de Recurso do Jogo",
@@ -226,7 +226,7 @@
         "yourBid": "Seu lance (USDC)",
         "minIncrement": "Incremento mínimo de 5% · Próximo mínimo após seu lance: {{next}} USDC",
         "reviewBid": "Revisar Lance",
-        "disclaimer": "Lance vencedor é vinculante · Comissão de 20% da plataforma",
+        "disclaimer": "Lance vencedor é vinculante · a comissão da plataforma varia conforme o anúncio",
         "confirmTitle": "Confirmar Lance",
         "item": "Item",
         "yourBidLabel": "Seu lance",
@@ -273,7 +273,7 @@
         "dur1Day": "1 Dia",
         "dur3Days": "3 Dias",
         "dur7Days": "7 Dias",
-        "freeToList": "Listagem gratuita · Comissão de 20% na venda",
+        "freeToList": "Listagem gratuita · a comissão varia conforme o anúncio",
         "creating": "Criando…",
         "submit": "Criar Leilão"
       },
@@ -424,7 +424,7 @@
       "rules": {
         "durations": "8h · 1d · 3d · 1sem · 1mês",
         "cooldown": "Recarga: 2× duração do aluguel",
-        "commission": "Comissão: 20%",
+        "commission": "A comissão varia",
         "payment": "Pague em Hyper Bucks ou Materiais"
       },
       "preview": {
@@ -442,7 +442,7 @@
         "howFulfill": "Como cumprir uma solicitação",
         "proceedHire": "Prosseguir com a Contratação",
         "offerFulfill": "Oferecer para Cumprir",
-        "commission": "Comissão de 20% da plataforma · Recarga aplica-se após devolução",
+        "commission": "A comissão da plataforma varia · Recarga aplica-se após devolução",
         "confirmHire": "Confirmar Contratação",
         "confirmOffer": "Confirmar Oferta",
         "specialist": "Especialista",
@@ -473,9 +473,9 @@
         "hyperBucks": "Hyper Bucks",
         "materials": "Materiais",
         "amountLabel": "Valor (Hyper Bucks)",
-        "afterCommission": "Você recebe {{amount}} HB após comissão de 20%",
+        "afterCommission": "Você recebe {{amount}} HB após a comissão da plataforma",
         "maxDuration": "Duração Máxima",
-        "disclaimer": "Comissão de 20% · Recarga = 2× duração do aluguel após devolução",
+        "disclaimer": "A comissão varia · Recarga = 2× duração do aluguel após devolução",
         "listing": "Listando…",
         "submit": "Criar Listagem"
       },
@@ -498,7 +498,7 @@
       },
       "rules": {
         "battle": "Batalha resolvida automaticamente no jogo",
-        "commission": "Comissão de 20% da plataforma sobre a recompensa",
+        "commission": "A comissão da plataforma varia sobre a recompensa",
         "expiry": "Contratos expiram em 30 dias"
       },
       "table": {

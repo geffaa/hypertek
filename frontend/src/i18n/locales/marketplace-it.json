@@ -43,7 +43,7 @@
         },
         {
           "label": "Commissione",
-          "desc": "Commissione di piattaforma del 20% su tutte le vendite. Il venditore riceve l'80%. Royalty artista del 4% sulle rivendite."
+          "desc": "La commissione di piattaforma varia in base all'inserzione. Rivendite: venditore 86%, royalty artista 2%, +5% riacquisto, piattaforma 7%."
         },
         {
           "label": "Crescita del riacquisto",
@@ -193,7 +193,7 @@
         "durations": "Durate: 1g · 3g · 7g",
         "minIncrement": "Incremento minimo: 5%",
         "freeToList": "Gratis da elencare",
-        "commission": "Commissione: 20% sulla vendita"
+        "commission": "La commissione varia in base all'inserzione"
       },
       "preview": {
         "title": "Anteprima della funzione in gioco",
@@ -226,7 +226,7 @@
         "yourBid": "La tua offerta (USDC)",
         "minIncrement": "Incremento minimo 5% · Prossimo minimo dopo la tua offerta: {{next}} USDC",
         "reviewBid": "Rivedi offerta",
-        "disclaimer": "L'offerta vincente è vincolante · Commissione di piattaforma del 20%",
+        "disclaimer": "L'offerta vincente è vincolante · la commissione di piattaforma varia in base all'inserzione",
         "confirmTitle": "Conferma offerta",
         "item": "Articolo",
         "yourBidLabel": "La tua offerta",
@@ -273,7 +273,7 @@
         "dur1Day": "1 giorno",
         "dur3Days": "3 giorni",
         "dur7Days": "7 giorni",
-        "freeToList": "Gratis da elencare · Commissione del 20% sulla vendita",
+        "freeToList": "Gratis da elencare · la commissione varia in base all'inserzione",
         "creating": "Creazione in corso…",
         "submit": "Crea asta"
       },
@@ -424,7 +424,7 @@
       "rules": {
         "durations": "8h · 1g · 3g · 1sett · 1mese",
         "cooldown": "Tempo di recupero: 2× durata noleggio",
-        "commission": "Commissione: 20%",
+        "commission": "La commissione varia",
         "payment": "Paga in Hyper Bucks o Materiali"
       },
       "preview": {
@@ -442,7 +442,7 @@
         "howFulfill": "Come funziona il soddisfacimento di una richiesta",
         "proceedHire": "Procedi all'assunzione",
         "offerFulfill": "Offri di soddisfare",
-        "commission": "Commissione di piattaforma del 20% · Tempo di recupero applicato dopo il ritorno",
+        "commission": "La commissione di piattaforma varia · Tempo di recupero applicato dopo il ritorno",
         "confirmHire": "Conferma assunzione",
         "confirmOffer": "Conferma offerta",
         "specialist": "Specialista",
@@ -473,9 +473,9 @@
         "hyperBucks": "Hyper Bucks",
         "materials": "Materiali",
         "amountLabel": "Importo (Hyper Bucks)",
-        "afterCommission": "Ricevi {{amount}} HB dopo il 20% di commissione",
+        "afterCommission": "Ricevi {{amount}} HB dopo la commissione di piattaforma",
         "maxDuration": "Durata massima",
-        "disclaimer": "Commissione del 20% · Tempo di recupero = 2× durata noleggio dopo il ritorno",
+        "disclaimer": "La commissione varia · Tempo di recupero = 2× durata noleggio dopo il ritorno",
         "listing": "Pubblicazione in corso…",
         "submit": "Crea annuncio"
       },
@@ -498,7 +498,7 @@
       },
       "rules": {
         "battle": "Battaglia risolta automaticamente in gioco",
-        "commission": "Commissione di piattaforma del 20% sulla ricompensa",
+        "commission": "La commissione di piattaforma varia sulla ricompensa",
         "expiry": "I contratti scadono in 30 giorni"
       },
       "table": {

@@ -43,7 +43,7 @@
         },
         {
           "label": "Provision",
-          "desc": "20% Plattformgebühr auf alle Verkäufe. Der Verkäufer erhält 80%. Künstlerhonorar 4% bei Wiederverkäufen."
+          "desc": "Plattformgebühr variiert je nach Angebot. Wiederverkauf: Verkäufer 86%, Künstlerhonorar 2%, +5% Rückkauf, Plattform 7%."
         },
         {
           "label": "Rückkaufwachstum",
@@ -193,7 +193,7 @@
         "durations": "Laufzeiten: 1T · 3T · 7T",
         "minIncrement": "Mindesterhöhung: 5%",
         "freeToList": "Kostenlos listen",
-        "commission": "Provision: 20% beim Verkauf"
+        "commission": "Provision variiert je nach Angebot"
       },
       "preview": {
         "title": "Vorschau der spielinternen Funktion",
@@ -226,7 +226,7 @@
         "yourBid": "Dein Gebot (USDC)",
         "minIncrement": "Mindesterhöhung 5% · Nächstes Minimum nach deinem Gebot: {{next}} USDC",
         "reviewBid": "Gebot prüfen",
-        "disclaimer": "Gewinnendes Gebot ist bindend · 20% Plattformprovision",
+        "disclaimer": "Gewinnendes Gebot ist bindend · Plattformprovision variiert je nach Angebot",
         "confirmTitle": "Gebot bestätigen",
         "item": "Artikel",
         "yourBidLabel": "Dein Gebot",
@@ -273,7 +273,7 @@
         "dur1Day": "1 Tag",
         "dur3Days": "3 Tage",
         "dur7Days": "7 Tage",
-        "freeToList": "Kostenlos listen · 20% Provision beim Verkauf",
+        "freeToList": "Kostenlos listen · Provision variiert je nach Angebot",
         "creating": "Wird erstellt…",
         "submit": "Auktion erstellen"
       },
@@ -424,7 +424,7 @@
       "rules": {
         "durations": "8h · 1T · 3T · 1W · 1Mo",
         "cooldown": "Abklingzeit: 2× Mietdauer",
-        "commission": "Provision: 20%",
+        "commission": "Provision variiert",
         "payment": "Zahle in Hyper Bucks oder Materialien"
       },
       "preview": {
@@ -442,7 +442,7 @@
         "howFulfill": "Wie das Erfüllen einer Anfrage funktioniert",
         "proceedHire": "Zur Miete fortfahren",
         "offerFulfill": "Anbieten zu erfüllen",
-        "commission": "20% Plattformprovision · Abklingzeit gilt nach Rückgabe",
+        "commission": "Plattformprovision variiert · Abklingzeit gilt nach Rückgabe",
         "confirmHire": "Miete bestätigen",
         "confirmOffer": "Angebot bestätigen",
         "specialist": "Spezialist",
@@ -473,9 +473,9 @@
         "hyperBucks": "Hyper Bucks",
         "materials": "Materialien",
         "amountLabel": "Betrag (Hyper Bucks)",
-        "afterCommission": "Du erhältst {{amount}} HB nach 20% Provision",
+        "afterCommission": "Du erhältst {{amount}} HB nach Plattformprovision",
         "maxDuration": "Max. Laufzeit",
-        "disclaimer": "20% Provision · Abklingzeit = 2× Mietdauer nach Rückgabe",
+        "disclaimer": "Provision variiert · Abklingzeit = 2× Mietdauer nach Rückgabe",
         "listing": "Wird gelistet…",
         "submit": "Angebot erstellen"
       },
@@ -498,7 +498,7 @@
       },
       "rules": {
         "battle": "Kampf wird automatisch im Spiel gelöst",
-        "commission": "20% Plattformprovision auf die Belohnung",
+        "commission": "Plattformprovision variiert auf die Belohnung",
         "expiry": "Verträge laufen in 30 Tagen ab"
       },
       "table": {

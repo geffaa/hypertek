@@ -43,7 +43,7 @@
         },
         {
           "label": "Provision",
-          "desc": "20% plattformsavgift på alla försäljningar. Säljaren får 80%. Konstnärsroyalty 4% på återförsäljning."
+          "desc": "Plattformsavgiften varierar beroende på annons. Återförsäljning: säljare 86%, konstnärsroyalty 2%, +5% till återköp, plattform 7%."
         },
         {
           "label": "Återköpstillväxt",
@@ -193,7 +193,7 @@
         "durations": "Varaktigheter: 1d · 3d · 7d",
         "minIncrement": "Min ökning: 5%",
         "freeToList": "Gratis att lista",
-        "commission": "Provision: 20% vid försäljning"
+        "commission": "Provision varierar beroende på annons"
       },
       "preview": {
         "title": "Förhandsgranskning av spelfunktion",
@@ -226,7 +226,7 @@
         "yourBid": "Ditt bud (USDC)",
         "minIncrement": "Min ökning 5% · Nästa minimum efter ditt bud: {{next}} USDC",
         "reviewBid": "Granska bud",
-        "disclaimer": "Vinnande bud är bindande · 20% plattformsprovision",
+        "disclaimer": "Vinnande bud är bindande · plattformsprovision varierar beroende på annons",
         "confirmTitle": "Bekräfta bud",
         "item": "Föremål",
         "yourBidLabel": "Ditt bud",
@@ -273,7 +273,7 @@
         "dur1Day": "1 dag",
         "dur3Days": "3 dagar",
         "dur7Days": "7 dagar",
-        "freeToList": "Gratis att lista · 20% provision vid försäljning",
+        "freeToList": "Gratis att lista · provision varierar beroende på annons",
         "creating": "Skapar…",
         "submit": "Skapa auktion"
       },
@@ -424,7 +424,7 @@
       "rules": {
         "durations": "8h · 1d · 3d · 1v · 1mån",
         "cooldown": "Nedkylning: 2× hyresvaraktighet",
-        "commission": "Provision: 20%",
+        "commission": "Provision varierar",
         "payment": "Betala med HyperBucks eller material"
       },
       "preview": {
@@ -442,7 +442,7 @@
         "howFulfill": "Hur uppfyllande av förfrågningar fungerar",
         "proceedHire": "Fortsätt till uthyrning",
         "offerFulfill": "Erbjud att uppfylla",
-        "commission": "20% plattformsprovision · Nedkylning gäller efter återlämnande",
+        "commission": "Plattformsprovision varierar · Nedkylning gäller efter återlämnande",
         "confirmHire": "Bekräfta uthyrning",
         "confirmOffer": "Bekräfta erbjudande",
         "specialist": "Specialist",
@@ -473,9 +473,9 @@
         "hyperBucks": "HyperBucks",
         "materials": "Material",
         "amountLabel": "Belopp (HyperBucks)",
-        "afterCommission": "Du får {{amount}} HB efter 20% provision",
+        "afterCommission": "Du får {{amount}} HB efter plattformsprovision",
         "maxDuration": "Max varaktighet",
-        "disclaimer": "20% provision · Nedkylning = 2× hyresvaraktighet efter återlämnande",
+        "disclaimer": "Provision varierar · Nedkylning = 2× hyresvaraktighet efter återlämnande",
         "listing": "Listar…",
         "submit": "Skapa lista"
       },
@@ -498,7 +498,7 @@
       },
       "rules": {
         "battle": "Strid löses automatiskt i spelet",
-        "commission": "20% plattformsprovision på belöning",
+        "commission": "Plattformsprovision varierar på belöning",
         "expiry": "Kontrakt löper ut om 30 dagar"
       },
       "table": {

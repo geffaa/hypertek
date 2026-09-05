@@ -43,7 +43,7 @@
         },
         {
           "label": "手数料",
-          "desc": "全販売に20%のプラットフォーム手数料。売り手は80%を受け取る。再販売時のアーティストロイヤルティ4%。"
+          "desc": "プラットフォーム手数料は出品ごとに異なります。再販売時：出品者86%、アーティストロイヤルティ2%、買い戻しに+5%、プラットフォーム7%。"
         },
         {
           "label": "買戻し成長",
@@ -193,7 +193,7 @@
         "durations": "期間：1日 · 3日 · 7日",
         "minIncrement": "最低増額：5%",
         "freeToList": "無料出品",
-        "commission": "手数料：販売時20%"
+        "commission": "手数料は出品ごとに異なります"
       },
       "preview": {
         "title": "ゲーム内機能プレビュー",
@@ -226,7 +226,7 @@
         "yourBid": "あなたの入札額 (USDC)",
         "minIncrement": "最低増額5% · あなたの入札後の次の最低額：{{next}} USDC",
         "reviewBid": "入札を確認",
-        "disclaimer": "落札入札は拘束力あり · 20%プラットフォーム手数料",
+        "disclaimer": "落札入札は拘束力あり · プラットフォーム手数料は出品ごとに異なります",
         "confirmTitle": "入札を確認",
         "item": "アイテム",
         "yourBidLabel": "あなたの入札額",
@@ -273,7 +273,7 @@
         "dur1Day": "1日",
         "dur3Days": "3日",
         "dur7Days": "7日",
-        "freeToList": "無料出品 · 販売時20%手数料",
+        "freeToList": "無料出品 · 手数料は出品ごとに異なります",
         "creating": "作成中…",
         "submit": "オークションを作成"
       },
@@ -424,7 +424,7 @@
       "rules": {
         "durations": "8時間 · 1日 · 3日 · 1週間 · 1ヶ月",
         "cooldown": "クールダウン：レンタル期間の2倍",
-        "commission": "手数料：20%",
+        "commission": "手数料は異なります",
         "payment": "Hyper Bucksまたはマテリアルで支払い"
       },
       "preview": {
@@ -442,7 +442,7 @@
         "howFulfill": "リクエスト履行の仕組み",
         "proceedHire": "雇用を続ける",
         "offerFulfill": "履行を提案",
-        "commission": "20%プラットフォーム手数料 · 返却後クールダウン適用",
+        "commission": "プラットフォーム手数料は異なります · 返却後クールダウン適用",
         "confirmHire": "雇用を確認",
         "confirmOffer": "オファーを確認",
         "specialist": "スペシャリスト",
@@ -473,9 +473,9 @@
         "hyperBucks": "Hyper Bucks",
         "materials": "マテリアル",
         "amountLabel": "金額 (Hyper Bucks)",
-        "afterCommission": "20%手数料後に{{amount}} HBを受け取り",
+        "afterCommission": "プラットフォーム手数料差引後に{{amount}} HBを受け取り",
         "maxDuration": "最大期間",
-        "disclaimer": "20%手数料 · クールダウン = 返却後レンタル期間の2倍",
+        "disclaimer": "手数料は異なります · クールダウン = 返却後レンタル期間の2倍",
         "listing": "出品中…",
         "submit": "出品を作成"
       },
@@ -498,7 +498,7 @@
       },
       "rules": {
         "battle": "戦闘はゲーム内で自動的に解決",
-        "commission": "報酬に20%のプラットフォーム手数料",
+        "commission": "報酬へのプラットフォーム手数料は異なります",
         "expiry": "契約は30日後に期限切れ"
       },
       "table": {

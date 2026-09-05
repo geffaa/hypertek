@@ -43,7 +43,7 @@
         },
         {
           "label": "Prowizja",
-          "desc": "20% opłata platformy od wszystkich sprzedaży. Sprzedawca otrzymuje 80%. Honorarium artysty 4% przy odsprzedaży."
+          "desc": "Opłata platformy różni się w zależności od ogłoszenia. Odsprzedaż: sprzedawca 86%, honorarium artysty 2%, +5% na buyback, platforma 7%."
         },
         {
           "label": "Wzrost odkupu",
@@ -193,7 +193,7 @@
         "durations": "Czas trwania: 1d · 3d · 7d",
         "minIncrement": "Minimalne podbicie: 5%",
         "freeToList": "Bezpłatne wystawienie",
-        "commission": "Prowizja: 20% przy sprzedaży"
+        "commission": "Prowizja różni się w zależności od ogłoszenia"
       },
       "preview": {
         "title": "Podgląd funkcji w grze",
@@ -226,7 +226,7 @@
         "yourBid": "Twoja oferta (USDC)",
         "minIncrement": "Minimalne podbicie 5% · Następne minimum po Twojej ofercie: {{next}} USDC",
         "reviewBid": "Sprawdź ofertę",
-        "disclaimer": "Wygrywająca oferta jest wiążąca · Prowizja platformy 20%",
+        "disclaimer": "Wygrywająca oferta jest wiążąca · prowizja platformy różni się w zależności od ogłoszenia",
         "confirmTitle": "Potwierdź ofertę",
         "item": "Przedmiot",
         "yourBidLabel": "Twoja oferta",
@@ -273,7 +273,7 @@
         "dur1Day": "1 dzień",
         "dur3Days": "3 dni",
         "dur7Days": "7 dni",
-        "freeToList": "Bezpłatne wystawienie · Prowizja 20% przy sprzedaży",
+        "freeToList": "Bezpłatne wystawienie · prowizja różni się w zależności od ogłoszenia",
         "creating": "Tworzenie…",
         "submit": "Utwórz aukcję"
       },
@@ -424,7 +424,7 @@
       "rules": {
         "durations": "8h · 1d · 3d · 1t · 1m",
         "cooldown": "Przerwa: 2× czas wynajmu",
-        "commission": "Prowizja: 20%",
+        "commission": "Prowizja różni się",
         "payment": "Płatność w Hyper Bucks lub materiałach"
       },
       "preview": {
@@ -442,7 +442,7 @@
         "howFulfill": "Jak działa realizacja zapytania",
         "proceedHire": "Przejdź do wynajmu",
         "offerFulfill": "Zaoferuj realizację",
-        "commission": "Prowizja platformy 20% · Przerwa obowiązuje po zwrocie",
+        "commission": "Prowizja platformy różni się · Przerwa obowiązuje po zwrocie",
         "confirmHire": "Potwierdź wynajem",
         "confirmOffer": "Potwierdź ofertę",
         "specialist": "Specjalista",
@@ -473,9 +473,9 @@
         "hyperBucks": "Hyper Bucks",
         "materials": "Materiały",
         "amountLabel": "Kwota (Hyper Bucks)",
-        "afterCommission": "Otrzymujesz {{amount}} HB po prowizji 20%",
+        "afterCommission": "Otrzymujesz {{amount}} HB po prowizji platformy",
         "maxDuration": "Maks. czas trwania",
-        "disclaimer": "Prowizja 20% · Przerwa = 2× czas wynajmu po zwrocie",
+        "disclaimer": "Prowizja różni się · Przerwa = 2× czas wynajmu po zwrocie",
         "listing": "Wystawianie…",
         "submit": "Utwórz ogłoszenie"
       },
@@ -498,7 +498,7 @@
       },
       "rules": {
         "battle": "Bitwa rozwiązywana automatycznie w grze",
-        "commission": "Prowizja platformy 20% od nagrody",
+        "commission": "Prowizja platformy różni się od nagrody",
         "expiry": "Kontrakty wygasają po 30 dniach"
       },
       "table": {

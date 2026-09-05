@@ -43,7 +43,7 @@
         },
         {
           "label": "Commission",
-          "desc": "Frais de plateforme de 20% sur toutes les ventes. Le vendeur reçoit 80%. Redevance artiste de 4% sur les reventes."
+          "desc": "Les frais de plateforme varient selon l'annonce. Reventes : vendeur 86%, redevance artiste 2%, +5% rachat, plateforme 7%."
         },
         {
           "label": "Croissance du rachat",
@@ -193,7 +193,7 @@
         "durations": "Durées : 1j · 3j · 7j",
         "minIncrement": "Incrément min : 5%",
         "freeToList": "Gratuit à lister",
-        "commission": "Commission : 20% à la vente"
+        "commission": "La commission varie selon l'annonce"
       },
       "preview": {
         "title": "Aperçu de la fonctionnalité en jeu",
@@ -226,7 +226,7 @@
         "yourBid": "Votre offre (USDC)",
         "minIncrement": "Incrément min 5% · Prochain minimum après votre offre : {{next}} USDC",
         "reviewBid": "Vérifier l'offre",
-        "disclaimer": "L'offre gagnante est contraignante · Commission de plateforme de 20%",
+        "disclaimer": "L'offre gagnante est contraignante · la commission de plateforme varie selon l'annonce",
         "confirmTitle": "Confirmer l'offre",
         "item": "Objet",
         "yourBidLabel": "Votre offre",
@@ -273,7 +273,7 @@
         "dur1Day": "1 jour",
         "dur3Days": "3 jours",
         "dur7Days": "7 jours",
-        "freeToList": "Gratuit à lister · Commission de 20% à la vente",
+        "freeToList": "Gratuit à lister · la commission varie selon l'annonce",
         "creating": "Création en cours…",
         "submit": "Créer l'enchère"
       },
@@ -424,7 +424,7 @@
       "rules": {
         "durations": "8h · 1j · 3j · 1sem · 1mois",
         "cooldown": "Délai de récupération : 2× la durée de location",
-        "commission": "Commission : 20%",
+        "commission": "La commission varie",
         "payment": "Payer en Hyper Bucks ou matériaux"
       },
       "preview": {
@@ -442,7 +442,7 @@
         "howFulfill": "Comment fonctionne le remplissage d'une demande",
         "proceedHire": "Procéder à la location",
         "offerFulfill": "Proposer de remplir",
-        "commission": "Commission de plateforme de 20% · Délai de récupération après retour",
+        "commission": "La commission de plateforme varie · Délai de récupération après retour",
         "confirmHire": "Confirmer la location",
         "confirmOffer": "Confirmer l'offre",
         "specialist": "Spécialiste",
@@ -473,9 +473,9 @@
         "hyperBucks": "Hyper Bucks",
         "materials": "Matériaux",
         "amountLabel": "Montant (Hyper Bucks)",
-        "afterCommission": "Vous recevez {{amount}} HB après 20% de commission",
+        "afterCommission": "Vous recevez {{amount}} HB après la commission de plateforme",
         "maxDuration": "Durée max",
-        "disclaimer": "Commission de 20% · Délai de récupération = 2× la durée de location après retour",
+        "disclaimer": "La commission varie · Délai de récupération = 2× la durée de location après retour",
         "listing": "Publication en cours…",
         "submit": "Créer l'annonce"
       },
@@ -498,7 +498,7 @@
       },
       "rules": {
         "battle": "Bataille résolue en jeu automatiquement",
-        "commission": "Commission de plateforme de 20% sur la récompense",
+        "commission": "La commission de plateforme varie sur la récompense",
         "expiry": "Les contrats expirent dans 30 jours"
       },
       "table": {

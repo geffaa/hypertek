@@ -43,7 +43,7 @@
         },
         {
           "label": "佣金",
-          "desc": "所有銷售收取 20% 平台費用。賣方獲得 80%。藝術家在二手銷售中獲得 4% 版稅。"
+          "desc": "平台費用依刊登而異。轉售時：賣方獲得 86%，藝術家版稅 2%，+5% 進入回購基金，平台 7%。"
         },
         {
           "label": "回購增長",
@@ -193,7 +193,7 @@
         "durations": "時間：1天 · 3天 · 7天",
         "minIncrement": "最低加價：5%",
         "freeToList": "免費上架",
-        "commission": "佣金：成交時收取 20%"
+        "commission": "佣金依刊登而異"
       },
       "preview": {
         "title": "遊戲內功能預覽",
@@ -226,7 +226,7 @@
         "yourBid": "您的出價（USDC）",
         "minIncrement": "最低加價 5% · 您出價後的下一個最低出價：{{next}} USDC",
         "reviewBid": "審查出價",
-        "disclaimer": "得標出價具有約束力 · 20% 平台佣金",
+        "disclaimer": "得標出價具有約束力 · 平台佣金依刊登而異",
         "confirmTitle": "確認出價",
         "item": "物品",
         "yourBidLabel": "您的出價",
@@ -273,7 +273,7 @@
         "dur1Day": "1 天",
         "dur3Days": "3 天",
         "dur7Days": "7 天",
-        "freeToList": "免費上架 · 成交時收取 20% 佣金",
+        "freeToList": "免費上架 · 佣金依刊登而異",
         "creating": "創建中…",
         "submit": "創建拍賣"
       },
@@ -424,7 +424,7 @@
       "rules": {
         "durations": "8小時 · 1天 · 3天 · 1週 · 1個月",
         "cooldown": "冷卻時間：租用時間的 2 倍",
-        "commission": "佣金：20%",
+        "commission": "佣金不固定",
         "payment": "使用 Hyper Bucks 或材料支付"
       },
       "preview": {
@@ -442,7 +442,7 @@
         "howFulfill": "履行請求運作方式",
         "proceedHire": "繼續招募",
         "offerFulfill": "提出履行報價",
-        "commission": "20% 平台佣金 · 歸還後適用冷卻時間",
+        "commission": "平台佣金不固定 · 歸還後適用冷卻時間",
         "confirmHire": "確認招募",
         "confirmOffer": "確認報價",
         "specialist": "專家",
@@ -473,9 +473,9 @@
         "hyperBucks": "Hyper Bucks",
         "materials": "材料",
         "amountLabel": "金額（Hyper Bucks）",
-        "afterCommission": "扣除 20% 佣金後，您獲得 {{amount}} HB",
+        "afterCommission": "扣除平台佣金後，您獲得 {{amount}} HB",
         "maxDuration": "最長時間",
-        "disclaimer": "20% 佣金 · 冷卻時間 = 歸還後租用時間的 2 倍",
+        "disclaimer": "佣金不固定 · 冷卻時間 = 歸還後租用時間的 2 倍",
         "listing": "上架中…",
         "submit": "創建上架"
       },
@@ -498,7 +498,7 @@
       },
       "rules": {
         "battle": "戰鬥在遊戲內自動解決",
-        "commission": "獎勵收取 20% 平台佣金",
+        "commission": "獎勵的平台佣金不固定",
         "expiry": "合約 30 天後過期"
       },
       "table": {

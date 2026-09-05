@@ -43,7 +43,7 @@
         },
         {
           "label": "Komisen",
-          "desc": "Yuran platform 20% pada semua jualan. Penjual menerima 80%. Royalti artis 4% pada jualan semula."
+          "desc": "Yuran platform berbeza-beza mengikut penyenaraian. Jualan semula: penjual 86%, royalti artis 2%, +5% kepada buyback, platform 7%."
         },
         {
           "label": "Pertumbuhan Buyback",
@@ -193,7 +193,7 @@
         "durations": "Tempoh: 1h · 3h · 7h",
         "minIncrement": "Kenaikan min: 5%",
         "freeToList": "Percuma untuk senarai",
-        "commission": "Komisen: 20% semasa jualan"
+        "commission": "Komisen berbeza-beza mengikut penyenaraian"
       },
       "preview": {
         "title": "Pratonton Ciri Dalam Permainan",
@@ -226,7 +226,7 @@
         "yourBid": "Bida anda (USDC)",
         "minIncrement": "Kenaikan min 5% · Minimum seterusnya selepas bida anda: {{next}} USDC",
         "reviewBid": "Semak Bida",
-        "disclaimer": "Bida pemenang adalah mengikat · 20% komisen platform",
+        "disclaimer": "Bida pemenang adalah mengikat · komisen platform berbeza-beza mengikut penyenaraian",
         "confirmTitle": "Sahkan Bida",
         "item": "Item",
         "yourBidLabel": "Bida anda",
@@ -273,7 +273,7 @@
         "dur1Day": "1 Hari",
         "dur3Days": "3 Hari",
         "dur7Days": "7 Hari",
-        "freeToList": "Percuma untuk senarai · 20% komisen semasa jualan",
+        "freeToList": "Percuma untuk senarai · komisen berbeza-beza mengikut penyenaraian",
         "creating": "Mencipta…",
         "submit": "Cipta Lelongan"
       },
@@ -424,7 +424,7 @@
       "rules": {
         "durations": "8j · 1h · 3h · 1m · 1b",
         "cooldown": "Rehat: 2× tempoh sewaan",
-        "commission": "Komisen: 20%",
+        "commission": "Komisen berbeza-beza",
         "payment": "Bayar dalam Hyper Bucks atau Bahan"
       },
       "preview": {
@@ -442,7 +442,7 @@
         "howFulfill": "Bagaimana menunaikan permintaan berfungsi",
         "proceedHire": "Teruskan untuk Menyewa",
         "offerFulfill": "Tawarkan untuk Menunaikan",
-        "commission": "20% komisen platform · Rehat dikenakan selepas pemulangan",
+        "commission": "Komisen platform berbeza-beza · Rehat dikenakan selepas pemulangan",
         "confirmHire": "Sahkan Sewaan",
         "confirmOffer": "Sahkan Tawaran",
         "specialist": "Pakar",
@@ -473,9 +473,9 @@
         "hyperBucks": "Hyper Bucks",
         "materials": "Bahan",
         "amountLabel": "Jumlah (Hyper Bucks)",
-        "afterCommission": "Anda terima {{amount}} HB selepas 20% komisen",
+        "afterCommission": "Anda terima {{amount}} HB selepas komisen platform",
         "maxDuration": "Tempoh Maksimum",
-        "disclaimer": "20% komisen · Rehat = 2× tempoh sewaan selepas pemulangan",
+        "disclaimer": "Komisen berbeza-beza · Rehat = 2× tempoh sewaan selepas pemulangan",
         "listing": "Menyenaraikan…",
         "submit": "Cipta Penyenaraian"
       },
@@ -498,7 +498,7 @@
       },
       "rules": {
         "battle": "Pertempuran diselesaikan secara automatik dalam permainan",
-        "commission": "20% komisen platform pada ganjaran",
+        "commission": "Komisen platform berbeza-beza pada ganjaran",
         "expiry": "Kontrak tamat dalam 30 hari"
       },
       "table": {

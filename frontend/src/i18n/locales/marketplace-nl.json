@@ -43,7 +43,7 @@
         },
         {
           "label": "Commissie",
-          "desc": "20% platformkosten op alle verkopen. Verkoper ontvangt 80%. Kunstenaarsroyalty 4% op doorverkopen."
+          "desc": "Platformkosten variëren per vermelding. Doorverkoop: verkoper 86%, kunstenaarsroyalty 2%, +5% naar buyback, platform 7%."
         },
         {
           "label": "Terugkoopgroei",
@@ -193,7 +193,7 @@
         "durations": "Duur: 1d · 3d · 7d",
         "minIncrement": "Min. verhoging: 5%",
         "freeToList": "Gratis noteren",
-        "commission": "Commissie: 20% bij verkoop"
+        "commission": "Commissie varieert per vermelding"
       },
       "preview": {
         "title": "In-game Functiepreview",
@@ -226,7 +226,7 @@
         "yourBid": "Jouw bod (USDC)",
         "minIncrement": "Min. verhoging 5% · Volgend minimum na jouw bod: {{next}} USDC",
         "reviewBid": "Bod Bekijken",
-        "disclaimer": "Winnend bod is bindend · 20% platformcommissie",
+        "disclaimer": "Winnend bod is bindend · platformcommissie varieert per vermelding",
         "confirmTitle": "Bod Bevestigen",
         "item": "Item",
         "yourBidLabel": "Jouw bod",
@@ -273,7 +273,7 @@
         "dur1Day": "1 Dag",
         "dur3Days": "3 Dagen",
         "dur7Days": "7 Dagen",
-        "freeToList": "Gratis noteren · 20% commissie bij verkoop",
+        "freeToList": "Gratis noteren · commissie varieert per vermelding",
         "creating": "Aanmaken…",
         "submit": "Veiling Aanmaken"
       },
@@ -424,7 +424,7 @@
       "rules": {
         "durations": "8u · 1d · 3d · 1w · 1m",
         "cooldown": "Cooldown: 2× huurduur",
-        "commission": "Commissie: 20%",
+        "commission": "Commissie varieert",
         "payment": "Betalen in Hyper Bucks of Materialen"
       },
       "preview": {
@@ -442,7 +442,7 @@
         "howFulfill": "Hoe een verzoek vervullen werkt",
         "proceedHire": "Doorgaan met Huren",
         "offerFulfill": "Aanbieden te Vervullen",
-        "commission": "20% platformcommissie · Cooldown geldt na terugkeer",
+        "commission": "Platformcommissie varieert · Cooldown geldt na terugkeer",
         "confirmHire": "Huur Bevestigen",
         "confirmOffer": "Aanbod Bevestigen",
         "specialist": "Specialist",
@@ -473,9 +473,9 @@
         "hyperBucks": "Hyper Bucks",
         "materials": "Materialen",
         "amountLabel": "Bedrag (Hyper Bucks)",
-        "afterCommission": "Je ontvangt {{amount}} HB na 20% commissie",
+        "afterCommission": "Je ontvangt {{amount}} HB na platformcommissie",
         "maxDuration": "Max. Duur",
-        "disclaimer": "20% commissie · Cooldown = 2× huurduur na terugkeer",
+        "disclaimer": "Commissie varieert · Cooldown = 2× huurduur na terugkeer",
         "listing": "Noteren…",
         "submit": "Aanbieding Aanmaken"
       },
@@ -498,7 +498,7 @@
       },
       "rules": {
         "battle": "Gevecht wordt automatisch in het spel opgelost",
-        "commission": "20% platformcommissie op beloning",
+        "commission": "Platformcommissie varieert op beloning",
         "expiry": "Contracten verlopen na 30 dagen"
       },
       "table": {
