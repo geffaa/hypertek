@@ -305,7 +305,13 @@ export async function createTrade(req, res) {
 export async function acceptTrade(req, res) {
   try {
     const userId = req.user?._id || req.user?.id;
-    const { acceptedByWallet } = req.body;
+    const {
+      acceptedByWallet,
+      // Only used for open item requests (poster didn't lock a specific
+      // target item) — the item the accepter is offering in return.
+      offeredSubCollectionId,
+      offeredTokenId,
+    } = req.body;
     if (!acceptedByWallet) return res.status(400).json({ error: "acceptedByWallet required" });
 
     const trade = await Trade.findById(req.params.id);
@@ -313,6 +319,19 @@ export async function acceptTrade(req, res) {
     if (trade.status !== "open") return res.status(400).json({ error: "This listing is no longer open" });
     if (String(trade.poster) === String(userId)) {
       return res.status(400).json({ error: "Cannot accept your own listing" });
+    }
+
+    // ── Open item request: poster didn't lock a specific target item, the
+    // accepter is now committing one of their own. Locked requests (already
+    // has requestingTokenId) ignore this — the target was fixed at creation.
+    if (trade.type === "trade" && trade.requestingTokenId == null && offeredSubCollectionId && offeredTokenId != null) {
+      const parent = await NFTSystem.findOne({ "subCollections._id": offeredSubCollectionId });
+      const sub = parent?.subCollections?.id(offeredSubCollectionId);
+      if (!sub || (sub.owner || "").toLowerCase() !== acceptedByWallet.toLowerCase()) {
+        return res.status(400).json({ error: "You don't own the item you're offering" });
+      }
+      trade.requestingSubCollectionId = offeredSubCollectionId;
+      trade.requestingTokenId = Number(offeredTokenId);
     }
 
     // ── Daily quest accept limit (quests only) ──────────────────────────────
