@@ -4,6 +4,42 @@ import Trade from "../Models/TradeModel.js";
 import User from "../Models/User.js";
 import HBLedger from "../Models/HBLedger.js";
 import MarketListing from "../Models/MarketListingModel.js";
+import NFTSystem from "../Models/NFTSystem.js";
+import { getBlockchain } from "../Service/blockchain.js";
+
+const ACTIVE_CHAIN_ID = parseInt(process.env.BASE_CHAIN_ID) || 84532;
+
+// Transfers one on-chain item between two wallets, gas paid by the platform
+// wallet (same pattern as marketplace sales). Requires the current owner to
+// have approved the backend wallet to move that token — mints/sales already
+// require this same one-time approval when an item is first listed.
+async function transferTradeItem(subCollectionId, tokenId, fromWallet, toWallet) {
+  const { nftContract } = getBlockchain(ACTIVE_CHAIN_ID);
+
+  const onChainOwner = await nftContract.ownerOf(tokenId);
+  if (onChainOwner.toLowerCase() !== fromWallet.toLowerCase()) {
+    throw new Error(`Token ${tokenId} is not currently owned by ${fromWallet} on-chain`);
+  }
+
+  const backendWallet = await getBlockchain(ACTIVE_CHAIN_ID).wallet.getAddress();
+  const approved = await nftContract.isApprovedForAll(fromWallet, backendWallet);
+  const singleApproved = await nftContract.getApproved(tokenId);
+  if (!approved && singleApproved.toLowerCase() !== backendWallet.toLowerCase()) {
+    throw new Error(`${fromWallet} has not approved the marketplace to move token ${tokenId} yet`);
+  }
+
+  const tx = await nftContract.transferFrom(fromWallet, toWallet, tokenId);
+  await tx.wait();
+
+  const parent = await NFTSystem.findOne({ "subCollections._id": subCollectionId });
+  const sub = parent?.subCollections?.id(subCollectionId);
+  if (sub) {
+    sub.owner = toWallet.toLowerCase();
+    await parent.save();
+  }
+
+  return tx.hash;
+}
 
 const CAT_ALIAS_TRADE = {
   "military badges and collectables": "military badges",
@@ -138,6 +174,13 @@ export async function createTrade(req, res) {
       pickupPlanet,   // in-game planet (optional, synced later)
       dropOffPlanet,  // in-game planet (optional, synced later)
       linkedListingId,// MarketListing that triggered this quest
+
+      // Structured item references — set these to make the trade an actual
+      // on-chain item swap instead of a plain text/HB listing.
+      offeringSubCollectionId,
+      offeringTokenId,
+      requestingSubCollectionId,
+      requestingTokenId,
     } = req.body;
 
     if (!type || !["trade", "quest"].includes(type)) {
@@ -198,6 +241,15 @@ export async function createTrade(req, res) {
       image: resolvedImage,
       category,
     };
+
+    if (offeringSubCollectionId && offeringTokenId != null) {
+      tradeDoc.offeringSubCollectionId = offeringSubCollectionId;
+      tradeDoc.offeringTokenId = Number(offeringTokenId);
+    }
+    if (requestingSubCollectionId && requestingTokenId != null) {
+      tradeDoc.requestingSubCollectionId = requestingSubCollectionId;
+      tradeDoc.requestingTokenId = Number(requestingTokenId);
+    }
 
     // Attach quest-specific fields if present
     if (type === "quest") {
@@ -311,6 +363,31 @@ export async function completeTrade(req, res) {
     }
 
     const hbErrors = [];
+
+    // ── Item transfer (regular trades only) — do this first and fail loudly
+    // if it doesn't work, before any HB changes hands. Not run for quests:
+    // quests never carry item references.
+    const itemTransfers = [];
+    if (trade.type === "trade") {
+      if (trade.offeringTokenId != null && trade.offeringSubCollectionId) {
+        const hash = await transferTradeItem(
+          trade.offeringSubCollectionId,
+          trade.offeringTokenId,
+          trade.posterWallet,
+          trade.acceptedByWallet
+        );
+        itemTransfers.push({ tokenId: trade.offeringTokenId, from: "poster", txHash: hash });
+      }
+      if (trade.requestingTokenId != null && trade.requestingSubCollectionId) {
+        const hash = await transferTradeItem(
+          trade.requestingSubCollectionId,
+          trade.requestingTokenId,
+          trade.acceptedByWallet,
+          trade.posterWallet
+        );
+        itemTransfers.push({ tokenId: trade.requestingTokenId, from: "accepter", txHash: hash });
+      }
+    }
 
     // ── Quest completion: distribute via commission split ───────────────────
     if (trade.type === "quest" && trade.questType && trade.waitHours) {
@@ -436,6 +513,7 @@ export async function completeTrade(req, res) {
     res.json({
       message: "Trade completed",
       trade,
+      ...(itemTransfers.length > 0 ? { itemTransfers } : {}),
       ...(isQuest
         ? {
             questSettlement: hbErrors.length > 0

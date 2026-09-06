@@ -25,6 +25,14 @@ const tradeSchema = new mongoose.Schema(
     offeringHB:   { type: Number, default: 0, min: 0 },  // HB poster offers
     requestingHB: { type: Number, default: 0, min: 0 },  // HB poster wants in return
 
+    // Structured item references, only set when the offer/request is an actual
+    // on-chain item (not just a text description). Required for completeTrade
+    // to execute a real ownership transfer instead of just settling HB.
+    offeringSubCollectionId:   { type: mongoose.Schema.Types.ObjectId, default: null },
+    offeringTokenId:           { type: Number, default: null },
+    requestingSubCollectionId: { type: mongoose.Schema.Types.ObjectId, default: null },
+    requestingTokenId:         { type: Number, default: null },
+
     // Quest: reward amount in USDC
     reward:       { type: Number, default: 0 },
 
