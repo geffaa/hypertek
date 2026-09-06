@@ -73,14 +73,49 @@ function AcceptTradeModal({ trade, onClose, wallet, token, onSuccess }) {
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
 
+  // Needs the accepter to commit a real item: poster's side is a real on-chain
+  // item, but they left the requested item unlocked (open request).
+  const needsItemChoice = trade.offeringTokenId != null && trade.requestingTokenId == null;
+  const [myItems, setMyItems] = useState([]);
+  const [itemsLoading, setItemsLoading] = useState(false);
+  const [offeredItem, setOfferedItem] = useState(null);
+
+  useEffect(() => {
+    if (!needsItemChoice || !wallet) return;
+    setItemsLoading(true);
+    fetch(`${BACKEND_BASE_URL}/api/v1/nft/user/owned-with-subs/${wallet}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data?.success && data.nfts) {
+          const items = [];
+          data.nfts.forEach((col) => {
+            (col.subCollections || []).forEach((sub) => {
+              if (sub.owner?.toLowerCase() === wallet.toLowerCase() && sub.tokenId != null) {
+                items.push({ _id: sub._id, tokenId: sub.tokenId, name: sub.name || col.name, image: sub.image || col.image || "" });
+              }
+            });
+          });
+          setMyItems(items);
+        }
+      })
+      .catch(() => {})
+      .finally(() => setItemsLoading(false));
+  }, [needsItemChoice, wallet]);
+
   async function handleAccept() {
     if (!wallet) return setErr(t("marketplace.common.connectWallet"));
+    if (needsItemChoice && !offeredItem) return setErr("Pick one of your items to offer");
     setLoading(true); setErr("");
     try {
+      const body = { acceptedByWallet: wallet };
+      if (needsItemChoice && offeredItem) {
+        body.offeredSubCollectionId = offeredItem._id;
+        body.offeredTokenId = offeredItem.tokenId;
+      }
       const r = await fetch(`${BACKEND_BASE_URL}/api/v1/trade/${trade._id}/accept`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ acceptedByWallet: wallet }),
+        body: JSON.stringify(body),
       });
       const data = await r.json();
       if (!r.ok) throw new Error(data.error || "Failed to accept trade");
@@ -132,11 +167,46 @@ function AcceptTradeModal({ trade, onClose, wallet, token, onSuccess }) {
               </div>
             </div>
 
+            {needsItemChoice && (
+              <div className="rounded-xl p-3 flex flex-col gap-2"
+                style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                <span className="text-white/60 text-[11px] font-semibold">Pick the item you're offering</span>
+                {itemsLoading && <span className="text-white/25 text-[10px] italic">Loading your items…</span>}
+                {!itemsLoading && myItems.length === 0 && (
+                  <span className="text-white/25 text-[10px] italic">You don't own any tradeable items yet</span>
+                )}
+                {!itemsLoading && myItems.length > 0 && (
+                  <div className="grid grid-cols-4 gap-1.5">
+                    {myItems.map((item) => {
+                      const active = offeredItem?._id === item._id;
+                      return (
+                        <button key={item._id} type="button"
+                          onClick={() => setOfferedItem(active ? null : item)}
+                          className="flex flex-col items-center gap-0.5 p-1 rounded-lg"
+                          style={{
+                            background: active ? "rgba(0,80,255,0.18)" : "rgba(255,255,255,0.04)",
+                            border: active ? "1px solid rgba(0,120,255,0.5)" : "1px solid rgba(255,255,255,0.07)",
+                          }}>
+                          <div className="w-full aspect-square rounded-md overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
+                            {item.image
+                              ? <img src={getImageUrl(item.image)} alt={item.name} className="w-full h-full object-cover" />
+                              : <div className="w-full h-full flex items-center justify-center"><Package className="w-3 h-3 text-white/20" /></div>}
+                          </div>
+                          <span className="text-white/70 text-[8px] leading-tight line-clamp-1 w-full">{item.name}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            )}
+
             {err && <p className="text-red-400 text-xs">{err}</p>}
 
             <button onClick={() => setPhase("confirm")}
+              disabled={needsItemChoice && !offeredItem}
               className="w-full py-2.5 rounded-xl text-sm font-semibold text-white"
-              style={{ background: "rgba(0,42,168,0.8)", border: "1px solid rgba(0,80,255,0.4)" }}>
+              style={{ background: "rgba(0,42,168,0.8)", border: "1px solid rgba(0,80,255,0.4)", opacity: (needsItemChoice && !offeredItem) ? 0.5 : 1 }}>
               {t("marketplace.trades.acceptModal.acceptBtn")}
             </button>
             <p className="text-white/20 text-[10px] text-center">{t("marketplace.trades.acceptModal.feeNotice")}</p>
@@ -384,9 +454,10 @@ function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
           const items = [];
           data.nfts.forEach((col) => {
             (col.subCollections || []).forEach((sub) => {
-              if (sub.owner?.toLowerCase() === wallet.toLowerCase()) {
+              if (sub.owner?.toLowerCase() === wallet.toLowerCase() && sub.tokenId != null) {
                 items.push({
                   _id:      sub._id,
+                  tokenId:  sub.tokenId,
                   name:     sub.name || col.name,
                   image:    sub.image || col.image || "",
                   category: sub.category || col.category || "",
@@ -447,6 +518,10 @@ function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
       fd.append("offering", offeringName || "");
       fd.append("requesting", requesting);
       fd.append("category", offeringCategory || reqCategory || "general");
+      if (selectedItem?._id && selectedItem?.tokenId != null) {
+        fd.append("offeringSubCollectionId", selectedItem._id);
+        fd.append("offeringTokenId", selectedItem.tokenId);
+      }
       if (!selectedItem && imageFile) {
         fd.append("image", imageFile);
       } else if (selectedItem?.image) {
