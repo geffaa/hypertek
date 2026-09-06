@@ -1,14 +1,36 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useSelector } from "react-redux";
-import { useAccount } from "wagmi";
+import { useAccount, useWalletClient, usePublicClient } from "wagmi";
 import {
   ArrowRightLeft, Plus, X, Clock, CheckCircle2, Info, Package, ChevronDown,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
+import { BASE_NFT_ADDRESS, NFT_ABI, PLATFORM_WALLET_ADDRESS } from "../../../Web3/Config";
 import LazyImage from "../../Common/LazyImage";
 import popularFallback from "../../../assets/images/popular/popolar.webp";
 import toast from "react-hot-toast";
+
+// Trades move items via the same backend-signed wallet marketplace sales
+// use, so trading an owned item needs that wallet approved on the NFT
+// contract first, same one-time step as listing an item for sale.
+async function ensureTradingApproved(publicClient, walletClient, wallet) {
+  const nftContract = { address: BASE_NFT_ADDRESS, abi: NFT_ABI };
+  const approved = await publicClient.readContract({
+    ...nftContract,
+    functionName: "isApprovedForAll",
+    args: [wallet, PLATFORM_WALLET_ADDRESS],
+  });
+  if (approved) return;
+
+  const tx = await walletClient.writeContract({
+    ...nftContract,
+    functionName: "setApprovalForAll",
+    args: [PLATFORM_WALLET_ADDRESS, true],
+    account: walletClient.account || wallet,
+  });
+  await publicClient.waitForTransactionReceipt({ hash: tx });
+}
 
 // ── Item Detail Popup ─────────────────────────────────────────────────────────
 function ItemDetailPopup({ imgSrc, title, category, description, offering, requesting, onClose }) {
@@ -69,6 +91,8 @@ const STATUS_COLOR = {
 // ── Accept Trade Modal ────────────────────────────────────────────────────────
 function AcceptTradeModal({ trade, onClose, wallet, token, onSuccess }) {
   const { t } = useTranslation();
+  const { data: walletClient } = useWalletClient();
+  const publicClient = usePublicClient();
   const [phase, setPhase] = useState("review"); // review | confirm | sent
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
@@ -107,6 +131,12 @@ function AcceptTradeModal({ trade, onClose, wallet, token, onSuccess }) {
     if (needsItemChoice && !offeredItem) return setErr("Pick one of your items to offer");
     setLoading(true); setErr("");
     try {
+      // If this side is giving up an item (locked target or picked here),
+      // the backend wallet needs approval to move it on completion.
+      if (needsItemChoice || trade.requestingTokenId != null) {
+        if (!walletClient || !publicClient) throw new Error("Wallet not ready, try reconnecting");
+        await ensureTradingApproved(publicClient, walletClient, wallet);
+      }
       const body = { acceptedByWallet: wallet };
       if (needsItemChoice && offeredItem) {
         body.offeredSubCollectionId = offeredItem._id;
@@ -421,6 +451,8 @@ const TRADE_CATEGORIES = [
 // ── Create Trade Modal ────────────────────────────────────────────────────────
 function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
   const { t } = useTranslation();
+  const { data: walletClient } = useWalletClient();
+  const publicClient = usePublicClient();
   // Owned items
   const [myItems, setMyItems]   = useState([]);
   const [itemsLoading, setItemsLoading] = useState(false);
@@ -504,6 +536,11 @@ function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
         setErr("Specify what you want in return, or enable open offer");
         setLoading(false);
         return;
+      }
+
+      if (selectedItem?._id && selectedItem?.tokenId != null) {
+        if (!walletClient || !publicClient) throw new Error("Wallet not ready, try reconnecting");
+        await ensureTradingApproved(publicClient, walletClient, wallet);
       }
 
       const fd = new FormData();
