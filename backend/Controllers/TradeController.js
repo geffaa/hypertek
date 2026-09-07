@@ -9,36 +9,26 @@ import { getBlockchain } from "../Service/blockchain.js";
 
 const ACTIVE_CHAIN_ID = parseInt(process.env.BASE_CHAIN_ID) || 84532;
 
-// Transfers one on-chain item between two wallets, gas paid by the platform
-// wallet (same pattern as marketplace sales). Requires the current owner to
-// have approved the backend wallet to move that token — mints/sales already
-// require this same one-time approval when an item is first listed.
-async function transferTradeItem(subCollectionId, tokenId, fromWallet, toWallet) {
+// Trades cost the platform nothing: each player transfers their own item
+// from their own wallet and pays their own gas (no approval needed either —
+// an ERC-721 owner can always call transferFrom on their own token). The
+// backend's job here is just to confirm, read-only, that the transfer the
+// frontend claims happened actually landed on-chain before updating our
+// records, so a trade can't be marked accepted/completed on a false claim.
+async function verifyItemTransferred(subCollectionId, tokenId, expectedNewOwner) {
   const { nftContract } = getBlockchain(ACTIVE_CHAIN_ID);
 
   const onChainOwner = await nftContract.ownerOf(tokenId);
-  if (onChainOwner.toLowerCase() !== fromWallet.toLowerCase()) {
-    throw new Error(`Token ${tokenId} is not currently owned by ${fromWallet} on-chain`);
+  if (onChainOwner.toLowerCase() !== expectedNewOwner.toLowerCase()) {
+    throw new Error(`Token ${tokenId} is not owned by ${expectedNewOwner} on-chain yet — transfer it first`);
   }
-
-  const backendWallet = await getBlockchain(ACTIVE_CHAIN_ID).wallet.getAddress();
-  const approved = await nftContract.isApprovedForAll(fromWallet, backendWallet);
-  const singleApproved = await nftContract.getApproved(tokenId);
-  if (!approved && singleApproved.toLowerCase() !== backendWallet.toLowerCase()) {
-    throw new Error(`${fromWallet} has not approved the marketplace to move token ${tokenId} yet`);
-  }
-
-  const tx = await nftContract.transferFrom(fromWallet, toWallet, tokenId);
-  await tx.wait();
 
   const parent = await NFTSystem.findOne({ "subCollections._id": subCollectionId });
   const sub = parent?.subCollections?.id(subCollectionId);
   if (sub) {
-    sub.owner = toWallet.toLowerCase();
+    sub.owner = expectedNewOwner.toLowerCase();
     await parent.save();
   }
-
-  return tx.hash;
 }
 
 const CAT_ALIAS_TRADE = {
@@ -334,6 +324,15 @@ export async function acceptTrade(req, res) {
       trade.requestingTokenId = Number(offeredTokenId);
     }
 
+    // ── Real item swap: the accepter must have already sent their item to
+    // the poster's wallet on-chain (their own transaction, their own gas)
+    // before calling this endpoint. Verify it actually landed before we
+    // accept the trade — this applies whether the target was locked at
+    // creation or just set above.
+    if (trade.type === "trade" && trade.requestingTokenId != null && trade.requestingSubCollectionId) {
+      await verifyItemTransferred(trade.requestingSubCollectionId, trade.requestingTokenId, trade.posterWallet);
+    }
+
     // ── Daily quest accept limit (quests only) ──────────────────────────────
     if (trade.type === "quest") {
       const acceptedToday = await countTodayAccepts(acceptedByWallet);
@@ -383,29 +382,20 @@ export async function completeTrade(req, res) {
 
     const hbErrors = [];
 
-    // ── Item transfer (regular trades only) — do this first and fail loudly
-    // if it doesn't work, before any HB changes hands. Not run for quests:
-    // quests never carry item references.
+    // ── Item transfer (regular trades only) — the accepter's item was
+    // already verified at accept time. Here we only need the poster's item:
+    // they must have already sent it to the accepter's wallet themselves
+    // (their own transaction, their own gas) before calling this. Fail
+    // loudly if it hasn't landed, before any HB changes hands. Not run for
+    // quests: quests never carry item references.
     const itemTransfers = [];
     if (trade.type === "trade") {
       if (trade.offeringTokenId != null && trade.offeringSubCollectionId) {
-        const hash = await transferTradeItem(
-          trade.offeringSubCollectionId,
-          trade.offeringTokenId,
-          trade.posterWallet,
-          trade.acceptedByWallet
-        );
-        itemTransfers.push({ tokenId: trade.offeringTokenId, from: "poster", txHash: hash });
+        await verifyItemTransferred(trade.offeringSubCollectionId, trade.offeringTokenId, trade.acceptedByWallet);
+        itemTransfers.push({ tokenId: trade.offeringTokenId, from: "poster" });
       }
-      if (trade.requestingTokenId != null && trade.requestingSubCollectionId) {
-        const hash = await transferTradeItem(
-          trade.requestingSubCollectionId,
-          trade.requestingTokenId,
-          trade.acceptedByWallet,
-          trade.posterWallet
-        );
-        itemTransfers.push({ tokenId: trade.requestingTokenId, from: "accepter", txHash: hash });
-      }
+      // The accepter's item (requestingTokenId) already moved and was
+      // verified during acceptTrade — nothing left to do for it here.
     }
 
     // ── Quest completion: distribute via commission split ───────────────────

@@ -6,28 +6,22 @@ import {
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
-import { BASE_NFT_ADDRESS, NFT_ABI, PLATFORM_WALLET_ADDRESS } from "../../../Web3/Config";
+import { BASE_NFT_ADDRESS, NFT_ABI } from "../../../Web3/Config";
 import LazyImage from "../../Common/LazyImage";
 import popularFallback from "../../../assets/images/popular/popolar.webp";
 import toast from "react-hot-toast";
 
-// Trades move items via the same backend-signed wallet marketplace sales
-// use, so trading an owned item needs that wallet approved on the NFT
-// contract first, same one-time step as listing an item for sale.
-async function ensureTradingApproved(publicClient, walletClient, wallet) {
+// Trading costs the platform nothing: each player sends their own item
+// straight from their own wallet and pays their own gas (unlike minting,
+// which the platform still covers). No approval step needed either — the
+// token owner can always call transferFrom on their own token directly.
+async function sendItemDirectly(publicClient, walletClient, fromWallet, toWallet, tokenId) {
   const nftContract = { address: BASE_NFT_ADDRESS, abi: NFT_ABI };
-  const approved = await publicClient.readContract({
-    ...nftContract,
-    functionName: "isApprovedForAll",
-    args: [wallet, PLATFORM_WALLET_ADDRESS],
-  });
-  if (approved) return;
-
   const tx = await walletClient.writeContract({
     ...nftContract,
-    functionName: "setApprovalForAll",
-    args: [PLATFORM_WALLET_ADDRESS, true],
-    account: walletClient.account || wallet,
+    functionName: "transferFrom",
+    args: [fromWallet, toWallet, tokenId],
+    account: walletClient.account || fromWallet,
   });
   await publicClient.waitForTransactionReceipt({ hash: tx });
 }
@@ -131,11 +125,13 @@ function AcceptTradeModal({ trade, onClose, wallet, token, onSuccess }) {
     if (needsItemChoice && !offeredItem) return setErr("Pick one of your items to offer");
     setLoading(true); setErr("");
     try {
-      // If this side is giving up an item (locked target or picked here),
-      // the backend wallet needs approval to move it on completion.
-      if (needsItemChoice || trade.requestingTokenId != null) {
+      // If this side is giving up a real item (locked target or picked
+      // here), send it straight to the poster now, gas paid by us — the
+      // backend only verifies it landed, it never touches this transfer.
+      const givingTokenId = offeredItem?.tokenId ?? trade.requestingTokenId;
+      if (givingTokenId != null) {
         if (!walletClient || !publicClient) throw new Error("Wallet not ready, try reconnecting");
-        await ensureTradingApproved(publicClient, walletClient, wallet);
+        await sendItemDirectly(publicClient, walletClient, wallet, trade.posterWallet, givingTokenId);
       }
       const body = { acceptedByWallet: wallet };
       if (needsItemChoice && offeredItem) {
@@ -312,8 +308,61 @@ function AcceptTradeModal({ trade, onClose, wallet, token, onSuccess }) {
   );
 }
 
+// ── Complete Trade Modal (poster sends their item, wraps it up) ──────────────
+function CompleteTradeModal({ trade, onClose, wallet, token, onSuccess }) {
+  const { data: walletClient } = useWalletClient();
+  const publicClient = usePublicClient();
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState("");
+
+  async function handleComplete() {
+    if (!wallet) return setErr("Connect your wallet first");
+    setLoading(true); setErr("");
+    try {
+      if (trade.offeringTokenId != null) {
+        if (!walletClient || !publicClient) throw new Error("Wallet not ready, try reconnecting");
+        await sendItemDirectly(publicClient, walletClient, wallet, trade.acceptedByWallet, trade.offeringTokenId);
+      }
+      const r = await fetch(`${BACKEND_BASE_URL}/api/v1/trade/${trade._id}/complete`, {
+        method: "PUT",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.error || "Failed to complete trade");
+      toast.success("Trade completed!");
+      onSuccess?.();
+    } catch (e) { setErr(e.message); }
+    finally { setLoading(false); }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ background: "rgba(0,0,0,0.82)", backdropFilter: "blur(6px)" }}>
+      <div className="w-full max-w-sm rounded-2xl overflow-hidden relative p-6 flex flex-col gap-4"
+        style={{ background: "#080916", border: "1px solid rgba(0,80,255,0.25)" }}>
+        <button onClick={onClose} className="absolute top-3 right-3 text-white/30 hover:text-white">
+          <X className="w-4 h-4" />
+        </button>
+        <div className="flex items-center gap-2">
+          <ArrowRightLeft className="w-4 h-4 text-blue-400" />
+          <span className="text-white font-bold text-sm">Complete Trade</span>
+        </div>
+        <p className="text-white/50 text-xs leading-relaxed">
+          {trade.acceptedByWallet ? "This sends your item to the other player and finishes the trade. You pay the gas for this transfer." : ""}
+        </p>
+        {err && <p className="text-red-400 text-xs">{err}</p>}
+        <button onClick={handleComplete} disabled={loading}
+          className="w-full py-2.5 rounded-xl text-sm font-semibold text-white"
+          style={{ background: "rgba(0,42,168,0.8)", border: "1px solid rgba(0,80,255,0.4)", opacity: loading ? 0.6 : 1 }}>
+          {loading ? "Sending…" : "Send item & complete"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 // ── Trade Card ────────────────────────────────────────────────────────────────
-function TradeCard({ trade, onAccept, onCancel, currentWallet }) {
+function TradeCard({ trade, onAccept, onCancel, onComplete, currentWallet }) {
   const { t } = useTranslation();
   const [showDetail, setShowDetail] = useState(false);
   const isPoster = trade.posterWallet === currentWallet;
@@ -394,6 +443,15 @@ function TradeCard({ trade, onAccept, onCancel, currentWallet }) {
             {t("marketplace.trades.cancelTrade")}
           </button>
         )}
+        {trade.status === "accepted" && isPoster && (
+          <button
+            onClick={() => onComplete(trade)}
+            className="mt-auto w-full py-1.5 rounded-lg text-xs font-semibold transition-all hover:brightness-110"
+            style={{ background: "rgba(0,42,168,0.7)", border: "1px solid rgba(0,80,255,0.4)", color: "#fff" }}
+          >
+            Send item & complete
+          </button>
+        )}
       </div>
     </div>
 
@@ -451,8 +509,6 @@ const TRADE_CATEGORIES = [
 // ── Create Trade Modal ────────────────────────────────────────────────────────
 function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
   const { t } = useTranslation();
-  const { data: walletClient } = useWalletClient();
-  const publicClient = usePublicClient();
   // Owned items
   const [myItems, setMyItems]   = useState([]);
   const [itemsLoading, setItemsLoading] = useState(false);
@@ -538,10 +594,6 @@ function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
         return;
       }
 
-      if (selectedItem?._id && selectedItem?.tokenId != null) {
-        if (!walletClient || !publicClient) throw new Error("Wallet not ready, try reconnecting");
-        await ensureTradingApproved(publicClient, walletClient, wallet);
-      }
 
       const fd = new FormData();
       fd.append("type", "trade");
@@ -800,6 +852,7 @@ export default function TradesTab() {
   const [statusFilter, setStatusFilter] = useState("open");
   const [showCreate, setShowCreate] = useState(false);
   const [acceptTrade, setAcceptTrade] = useState(null);
+  const [completeTrade, setCompleteTrade] = useState(null);
   const [cancelling, setCancelling] = useState(null);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
@@ -918,6 +971,7 @@ export default function TradesTab() {
               currentWallet={wallet}
               onAccept={(tr) => isLoggedInUser ? setAcceptTrade(tr) : toast.error(t("marketplace.common.loginFirst"))}
               onCancel={handleCancel}
+              onComplete={(tr) => setCompleteTrade(tr)}
             />
           ))}
         </div>
@@ -950,6 +1004,15 @@ export default function TradesTab() {
           token={token}
           onClose={() => setAcceptTrade(null)}
           onSuccess={() => { setAcceptTrade(null); fetchTrades(); }}
+        />
+      )}
+      {completeTrade && (
+        <CompleteTradeModal
+          trade={completeTrade}
+          wallet={wallet}
+          token={token}
+          onClose={() => setCompleteTrade(null)}
+          onSuccess={() => { setCompleteTrade(null); fetchTrades(); }}
         />
       )}
       {showCreate && (
