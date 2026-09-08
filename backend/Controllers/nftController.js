@@ -21,6 +21,8 @@ import { finalizeNFAPurchase } from "../Service/nftPurchaseService.js";
 import License from "../Models/License.js";
 import { verifySaleOnChain } from "../services/marketplaceSyncService.js";
 import UserModel from "../Models/User.js";
+import { computeSaleSplit } from "../services/gmbb/computeSaleSplit.js";
+import { PLATFORM_GMBB_MAX_BPS } from "../services/gmbb/gmbbConstants.js";
 
 // ── Linked-wallet support ────────────────────────────────────────────────────
 // Ownership records store a single lowercase address, but one account can own
@@ -55,7 +57,7 @@ export async function resolveAddressSet(address) {
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Helper: save uploaded image permanently (Cloudinary or local /uploads/nft/)
-async function saveImagePermanently(filePath, filename) {
+export async function saveImagePermanently(filePath, filename) {
   if (getIsCloudinaryEnabled()) {
     try {
       const result = await getCloudinary().uploader.upload(filePath, {
@@ -225,10 +227,11 @@ export async function createItemDirect(req, res) {
       }
       const minBB = parseFloat(minimumBuybackUSD);
       const reserve = parseFloat(reservePriceUSD);
-      const maxAllowed = parseFloat((reserve * 0.35).toFixed(2));
+      const capPct = PLATFORM_GMBB_MAX_BPS / 10000;
+      const maxAllowed = parseFloat((reserve * capPct).toFixed(2));
       if (minBB > maxAllowed) {
         return res.status(400).json({
-          error: `Minimum Buyback ($${minBB}) exceeds the 35% cap of Reserve Price ($${reserve}). Maximum allowed: $${maxAllowed}.`,
+          error: `Minimum Buyback ($${minBB}) exceeds the ${capPct * 100}% cap of Reserve Price ($${reserve}). Maximum allowed: $${maxAllowed}.`,
         });
       }
     }
@@ -524,14 +527,15 @@ export async function updateSubCollection(req, res) {
 
     if (nfaFrame !== undefined) subCollection.nfaFrame = nfaFrame || null;
 
-    // Min BB — enforce max 35% of listing price
+    // Min BB — enforce max GMBB ceiling (per gmbbConstants.js) of listing price
     if (minimumBuybackUSD !== undefined && minimumBuybackUSD !== "") {
       const minBB = parseFloat(minimumBuybackUSD);
       const listPrice = parseFloat(priceETH ?? subCollection.priceETH ?? 0);
-      const maxAllowed = parseFloat((listPrice * 0.35).toFixed(2));
+      const capPct = PLATFORM_GMBB_MAX_BPS / 10000;
+      const maxAllowed = parseFloat((listPrice * capPct).toFixed(2));
       if (listPrice > 0 && minBB > maxAllowed) {
         return res.status(400).json({
-          error: `Minimum buyback ($${minBB}) exceeds the 35% cap of listing price ($${listPrice}). Maximum allowed: $${maxAllowed}.`,
+          error: `Minimum buyback ($${minBB}) exceeds the ${capPct * 100}% cap of listing price ($${listPrice}). Maximum allowed: $${maxAllowed}.`,
           maxAllowed,
         });
       }
@@ -1356,6 +1360,7 @@ export async function recordOnchainSale(req, res) {
       sellerReceived: parseFloat(distribution.sellerAmount.toFixed(6)),
       txHash: txHash,
       isFirstSale: nft.isFirstSale,
+      country: req.body.country || null,
       createdAt: new Date(),
     };
 
@@ -1417,7 +1422,8 @@ function calculatePaymentDistribution(
   sellerWallet,
   assetType = "NFT",       // "NFA" | "NFC" | "NFT"
   creatorIsAdmin = false,  // true when Hypertek created the item
-  presetMinBB = 0,         // admin-set minimumBuybackUSD (used in first-sale scenarios)
+  presetMinBB = 0,         // admin-set minimumBuybackUSD (Scenario A only, see below)
+  gmbbBps = null,          // GMBB percentage chosen at listing (Scenarios B/C — see gmbbConstants.js)
 ) {
   const platformWallet = process.env.PLATFORM_WALLET_ADDRESS;
   const fmt = (n) => parseFloat(n.toFixed(6));
@@ -1426,36 +1432,30 @@ function calculatePaymentDistribution(
 
   if (isFirstSale && creatorIsAdmin && assetType === "NFA") {
     // ── Scenario A: NFA — Hypertek first sale ─────────────────────────────────
+    // Kept as its own rule, not migrated to computeSaleSplit: this is the one
+    // scenario where minBB is a preset dollar figure banked from the seller's
+    // share, not a percentage of sale price — a genuinely different mechanism
+    // from the GMBB-percentage model the T&C describes for every other scenario.
     creatorAmount = fmt(priceETH * 0.04);
     buybackAmount = fmt(Math.max(0, Math.min(presetMinBB, priceETH - creatorAmount)));
     sellerAmount = fmt(priceETH - creatorAmount - buybackAmount);
     companyAmount = 0;
     platformAmount = fmt(creatorAmount + buybackAmount);
 
-  } else if (isFirstSale && creatorIsAdmin) {
-    // ── Scenario B: NFC/NFT — Hypertek first sale ─────────────────────────────
-    const sellerGross = fmt(priceETH * 0.80);
-    creatorAmount = fmt(priceETH * 0.04);
-    companyAmount = fmt(priceETH * 0.16);
-    buybackAmount = fmt(Math.min(presetMinBB, sellerGross));
-    sellerAmount = fmt(sellerGross - buybackAmount);
-    platformAmount = fmt(creatorAmount + companyAmount + buybackAmount);
-
-  } else if (isFirstSale && !creatorIsAdmin) {
-    // ── Scenario C: NFC/NFT — Player first sale ───────────────────────────────
-    sellerAmount = fmt(priceETH * 0.80);
-    creatorAmount = 0;  // creator IS the seller
-    buybackAmount = fmt(priceETH * 0.10);
-    companyAmount = fmt(priceETH * 0.10);
-    platformAmount = fmt(priceETH * 0.20);
-
   } else {
-    // ── Scenario D: Resale — all asset types ──────────────────────────────────
-    sellerAmount = fmt(priceETH * 0.80);
-    creatorAmount = fmt(priceETH * 0.04);
-    buybackAmount = fmt(priceETH * 0.05);
-    companyAmount = fmt(priceETH * 0.11);
-    platformAmount = fmt(priceETH * 0.20);
+    // ── Scenarios B/C/D — single source of truth in services/gmbb/computeSaleSplit.js ──
+    const saleType = isFirstSale && creatorIsAdmin
+      ? "platform-first-sale"   // Scenario B: NFC/NFT — Hypertek first sale
+      : isFirstSale
+      ? "creator-first-sale"    // Scenario C: NFC/NFT — Player first sale
+      : "resale";                // Scenario D: Resale — all asset types
+
+    const split = computeSaleSplit({ saleType, salePrice: priceETH, gmbbBps });
+    sellerAmount = split.sellerReceived;
+    creatorAmount = split.royaltyPaid;
+    buybackAmount = split.buybackAmount;
+    companyAmount = split.platformFee;
+    platformAmount = fmt(creatorAmount + companyAmount + buybackAmount);
   }
 
   const payments = [
@@ -2383,6 +2383,7 @@ export async function recordSubCollectionSale(req, res) {
       itemAssetType,
       creatorIsAdmin,
       presetMinBB,
+      subCollection.gmbbBps,
     );
 
     // Create sale record
@@ -2395,6 +2396,7 @@ export async function recordSubCollectionSale(req, res) {
       sellerReceived: parseFloat(distribution.sellerAmount.toFixed(6)),
       txHash: txHash,
       isFirstSale: wasFirstSale,
+      country: req.body.country || null,
       createdAt: new Date(),
     };
 
@@ -2446,15 +2448,18 @@ export async function recordSubCollectionSale(req, res) {
     }
 
     // ── Fix 4+2: MinBB update (all types) + buyback auto-trigger ─────────────
+    // Uses distribution.buybackAmount (already computed by computeSaleSplit above)
+    // instead of recomputing the percentage here, so this can't drift from the
+    // amount actually dispatched to the buyback wallet below.
     if (priceUSDC > 0) {
       if (wasFirstSale && !creatorIsAdmin) {
-        // Player first sale — set initial minBB = 10% of sale price
-        subCollection.minimumBuybackUSD = parseFloat((priceUSDC * 0.10).toFixed(2));
+        // Player first sale — set initial minBB from the computed GMBB contribution
+        subCollection.minimumBuybackUSD = parseFloat(distribution.buybackAmount.toFixed(2));
         console.log(`🏦 [Buyback] ${itemAssetType} player first sale — minBB set to $${subCollection.minimumBuybackUSD}`);
       } else if (!wasFirstSale) {
-        // Resale (NFA, NFC, NFT) — add 5% of sale price to existing minBB
+        // Resale (NFA, NFC, NFT) — add the computed GMBB contribution to existing minBB
         subCollection.minimumBuybackUSD = parseFloat(
-          ((subCollection.minimumBuybackUSD || 0) + priceUSDC * 0.05).toFixed(2)
+          ((subCollection.minimumBuybackUSD || 0) + distribution.buybackAmount).toFixed(2)
         );
         console.log(`🏦 [Buyback] ${itemAssetType} resale — minBB updated to $${subCollection.minimumBuybackUSD}`);
       }
@@ -3283,6 +3288,7 @@ export async function finalizeByPaymentIntent(req, res) {
       priceETH: parseFloat(priceETH || 0),
       paymentProvider: "stripe",
       paymentIntentId,
+      country: intent.metadata?.country || req.body.country || null,
     });
 
     // 5. Mark offer completed if applicable
