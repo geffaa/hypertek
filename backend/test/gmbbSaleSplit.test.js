@@ -12,7 +12,7 @@ import {
   CREATOR_GMBB_MAX_BPS,
   PLATFORM_GMBB_MIN_BPS,
   PLATFORM_GMBB_MAX_BPS,
-  clampGmbbBps,
+  resolveGmbbBps,
 } from "../services/gmbb/gmbbConstants.js";
 
 function expectExactSum(split, salePrice) {
@@ -78,12 +78,15 @@ describe("computeSaleSplit — creator first sale", () => {
     }
   });
 
-  it("clamps an out-of-range GMBB percentage rather than producing a nonsense split", () => {
-    const tooLow = computeSaleSplit({ saleType: "creator-first-sale", salePrice: 1000, gmbbBps: 500 }); // 5%, below the 20% floor
-    expect(tooLow.buybackAmount).toBe(200); // clamped to 20%
-
-    const tooHigh = computeSaleSplit({ saleType: "creator-first-sale", salePrice: 1000, gmbbBps: 9999 }); // above 70% ceiling
-    expect(tooHigh.buybackAmount).toBe(700); // clamped to 70%
+  it("refuses an out-of-range GMBB percentage instead of settling at a different one", () => {
+    // This used to clamp: 5% quietly became 20%, and anything above the ceiling
+    // quietly became 70%. Either way the item settled under terms nobody chose.
+    expect(() =>
+      computeSaleSplit({ saleType: "creator-first-sale", salePrice: 1000, gmbbBps: 500 }),
+    ).toThrow(/range/i);
+    expect(() =>
+      computeSaleSplit({ saleType: "creator-first-sale", salePrice: 1000, gmbbBps: 9999 }),
+    ).toThrow(/range/i);
   });
 });
 
@@ -122,22 +125,57 @@ describe("computeSaleSplit — input validation", () => {
   });
 });
 
-describe("clampGmbbBps", () => {
-  it("clamps to the creator range by default", () => {
-    expect(clampGmbbBps(1000, { isPlatformListing: false })).toBe(CREATOR_GMBB_MIN_BPS);
-    expect(clampGmbbBps(8000, { isPlatformListing: false })).toBe(CREATOR_GMBB_MAX_BPS);
-    expect(clampGmbbBps(3500, { isPlatformListing: false })).toBe(3500);
+// Settlement must not quietly substitute a percentage the item was not listed
+// under. It used to clamp instead, which turned a percentage passed in place of
+// basis points into a silently underfunded guarantee, and let NaN through into
+// the money arithmetic. Audit finding 8.
+describe("resolveGmbbBps", () => {
+  it("accepts a valid value inside the creator range and returns it untouched", () => {
+    expect(resolveGmbbBps(CREATOR_GMBB_MIN_BPS, { isPlatformListing: false })).toBe(CREATOR_GMBB_MIN_BPS);
+    expect(resolveGmbbBps(CREATOR_GMBB_MAX_BPS, { isPlatformListing: false })).toBe(CREATOR_GMBB_MAX_BPS);
+    expect(resolveGmbbBps(3500, { isPlatformListing: false })).toBe(3500);
   });
 
-  it("clamps to the platform range when isPlatformListing is true", () => {
-    expect(clampGmbbBps(1000, { isPlatformListing: true })).toBe(PLATFORM_GMBB_MIN_BPS);
-    expect(clampGmbbBps(9999, { isPlatformListing: true })).toBe(PLATFORM_GMBB_MAX_BPS);
+  it("accepts a valid value inside the wider platform range", () => {
+    expect(resolveGmbbBps(PLATFORM_GMBB_MIN_BPS, { isPlatformListing: true })).toBe(PLATFORM_GMBB_MIN_BPS);
+    expect(resolveGmbbBps(PLATFORM_GMBB_MAX_BPS, { isPlatformListing: true })).toBe(PLATFORM_GMBB_MAX_BPS);
   });
 
-  it("falls back to the documented default instead of NaN when bps is null/undefined", () => {
-    expect(clampGmbbBps(null, { isPlatformListing: false })).toBe(3500);
-    expect(clampGmbbBps(undefined, { isPlatformListing: false })).toBe(3500);
-    expect(clampGmbbBps(null, { isPlatformListing: true })).toBe(3500);
+  it("falls back to the documented default when nothing was chosen", () => {
+    expect(resolveGmbbBps(null, { isPlatformListing: false })).toBe(3500);
+    expect(resolveGmbbBps(undefined, { isPlatformListing: false })).toBe(3500);
+    expect(resolveGmbbBps(null, { isPlatformListing: true })).toBe(3500);
+  });
+
+  it("rejects a percentage passed where basis points belong", () => {
+    // 35 meaning 35% used to be read as 0.35% and lifted to the 20% floor.
+    expect(() => resolveGmbbBps(35, { isPlatformListing: false })).toThrow(/percentage/i);
+    expect(() => resolveGmbbBps(70, { isPlatformListing: false })).toThrow(/percentage/i);
+    expect(() => resolveGmbbBps(100, { isPlatformListing: true })).toThrow(/percentage/i);
+  });
+
+  it("rejects NaN rather than letting it become NaN dollars", () => {
+    expect(() => resolveGmbbBps(NaN, { isPlatformListing: false })).toThrow();
+    expect(() => resolveGmbbBps(Infinity, { isPlatformListing: false })).toThrow();
+    expect(() => resolveGmbbBps("3500", { isPlatformListing: false })).toThrow();
+    expect(() => resolveGmbbBps(3500.5, { isPlatformListing: false })).toThrow();
+  });
+
+  it("rejects a value outside the range allowed for that lister", () => {
+    expect(() => resolveGmbbBps(1000, { isPlatformListing: false })).toThrow(/range/i);
+    expect(() => resolveGmbbBps(8000, { isPlatformListing: false })).toThrow(/range/i);
+    expect(() => resolveGmbbBps(9999, { isPlatformListing: true })).toThrow(/range/i);
+    // 2000 is valid for a creator but below the platform floor of 3500.
+    expect(() => resolveGmbbBps(2000, { isPlatformListing: true })).toThrow(/range/i);
+  });
+
+  it("stops the sale rather than settling it wrong, all the way through computeSaleSplit", () => {
+    expect(() =>
+      computeSaleSplit({ saleType: "creator-first-sale", salePrice: 1000, gmbbBps: 35 }),
+    ).toThrow(/percentage/i);
+    expect(() =>
+      computeSaleSplit({ saleType: "creator-first-sale", salePrice: 1000, gmbbBps: NaN }),
+    ).toThrow();
   });
 });
 

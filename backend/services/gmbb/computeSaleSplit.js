@@ -11,7 +11,7 @@
  */
 
 import {
-  clampGmbbBps,
+  resolveGmbbBps,
   CREATOR_FIRST_SALE_PLATFORM_FEE_BPS,
   RESALE_SELLER_BPS,
   RESALE_ARTIST_ROYALTY_BPS,
@@ -44,7 +44,7 @@ export function computeSaleSplit({ saleType, salePrice, gmbbBps }) {
       // Hyper Tek 100 is both seller and platform on its own first sales.
       // No separate commission line and no artist royalty — per Don:
       // "On the first sale from us, there is no royalty."
-      const bps = clampGmbbBps(gmbbBps, { isPlatformListing: true });
+      const bps = resolveGmbbBps(gmbbBps, { isPlatformListing: true });
       const buybackAmount = bpsShare(price, bps);
       const sellerReceived = round2(price - buybackAmount);
       return { sellerReceived, royaltyPaid: 0, buybackAmount, platformFee: 0 };
@@ -53,7 +53,7 @@ export function computeSaleSplit({ saleType, salePrice, gmbbBps }) {
     case "creator-first-sale": {
       // Flat 8% platform commission no matter what GMBB percentage the
       // creator chose. Creator is the seller, so no separate artist royalty.
-      const bps = clampGmbbBps(gmbbBps, { isPlatformListing: false });
+      const bps = resolveGmbbBps(gmbbBps, { isPlatformListing: false });
       const platformFee = bpsShare(price, CREATOR_FIRST_SALE_PLATFORM_FEE_BPS);
       const buybackAmount = bpsShare(price, bps);
       const sellerReceived = round2(price - platformFee - buybackAmount);

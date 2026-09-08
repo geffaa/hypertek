@@ -38,19 +38,48 @@ export const RESALE_GMBB_BPS = 500; // 5%
 export const RESALE_PLATFORM_FEE_BPS = 700; // 7%
 
 /**
- * Clamp a lister-chosen GMBB bps value into the allowed range for who is
- * listing. Out-of-range input is corrected, not rejected, since the UI should
- * already be preventing it — this is the backend's own floor, not a duplicate
- * of client-side validation.
+ * Resolve a lister-chosen GMBB value, in basis points, for whoever is listing.
  *
- * `bps` is null/undefined for essentially every existing item today (the
- * schema field was only just added and no picker UI sets it yet) — that case
- * falls back to the documented default rather than clamping NaN.
+ * Unset (null/undefined) is the normal case today — the schema field was only
+ * recently added and no picker UI writes it yet — and falls back to the
+ * documented default. Anything else must be a valid bps figure, and is
+ * rejected rather than corrected if it is not.
+ *
+ * Rejecting instead of clamping is the whole point. This runs inside
+ * settlement, where quietly substituting a different percentage than the one
+ * an item was listed under means paying the wrong amount into that item's
+ * guarantee, and doing it invisibly. The most likely mistake is a percentage
+ * reaching this in place of basis points: `35` meaning 35% would previously
+ * have been read as 0.35% and lifted to the 20% floor, silently underfunding
+ * the guarantee by more than half. A UI is free to clamp before it saves; by
+ * the time money is being divided, an unrecognisable value has to stop the
+ * sale rather than be guessed at.
  */
-export function clampGmbbBps(bps, { isPlatformListing }) {
+export function resolveGmbbBps(bps, { isPlatformListing }) {
   const [min, max, fallback] = isPlatformListing
     ? [PLATFORM_GMBB_MIN_BPS, PLATFORM_GMBB_MAX_BPS, PLATFORM_GMBB_DEFAULT_BPS]
     : [CREATOR_GMBB_MIN_BPS, CREATOR_GMBB_MAX_BPS, CREATOR_GMBB_DEFAULT_BPS];
-  const value = bps == null ? fallback : Math.trunc(bps);
-  return Math.min(Math.max(value, min), max);
+
+  if (bps == null) return fallback;
+
+  // NaN is the case worth spelling out: it is not null, so it used to pass
+  // straight through and turn every share of the sale into NaN.
+  if (typeof bps !== "number" || !Number.isFinite(bps) || !Number.isInteger(bps)) {
+    throw new Error(`gmbbBps must be a whole number of basis points, got ${bps}`);
+  }
+
+  if (bps > 0 && bps <= 100) {
+    throw new Error(
+      `gmbbBps ${bps} looks like a percentage. Basis points are expected here: ` +
+      `store 2000 for 20%, 3500 for 35%.`
+    );
+  }
+
+  if (bps < min || bps > max) {
+    throw new Error(
+      `gmbbBps ${bps} is outside the allowed range for this listing (${min}-${max})`
+    );
+  }
+
+  return bps;
 }
