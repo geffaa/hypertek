@@ -1436,7 +1436,14 @@ function calculatePaymentDistribution(
     // scenario where minBB is a preset dollar figure banked from the seller's
     // share, not a percentage of sale price — a genuinely different mechanism
     // from the GMBB-percentage model the T&C describes for every other scenario.
-    creatorAmount = fmt(priceETH * 0.04);
+    //
+    // No artist/creator royalty here (Don, 9 Sep 2026): Hyper Tek already paid
+    // for and owns these items outright, so there is nothing to pay a royalty
+    // on at first sale. Zero by default. If a specific item is ever meant to
+    // carry an incentive royalty for the artist who made it, that would need
+    // to be set per item rather than applied blanket here — not built yet,
+    // deliberately, since nothing has asked for it.
+    creatorAmount = 0;
     buybackAmount = fmt(Math.max(0, Math.min(presetMinBB, priceETH - creatorAmount)));
     sellerAmount = fmt(priceETH - creatorAmount - buybackAmount);
     companyAmount = 0;
