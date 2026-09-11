@@ -22,6 +22,14 @@ import { dispatchRoyalty } from "./RoyaltyService.js";
  * @returns {object} updated NFA document, the amount paid, and who was paid
  */
 export async function executeBuyback(nftId) {
+  // Don's own sequence for this transition (9 Sep 2026): switch GMBB payouts
+  // off, fix the rest, stage assets, switch it back on, then test. Same
+  // fail-safe pattern as PURCHASES_LOCKED — defaults to locked/off when the
+  // env var is unset, since the point of this switch is that flipping it on
+  // is a deliberate act, not an accident of a missing config.
+  const locked = process.env.GMBB_BUYBACK_LOCKED !== "false";
+  if (locked) throw new Error("GMBB buyback payouts are switched off while the fund is being reworked");
+
   const nft = await NFTSystem.findById(nftId);
   if (!nft) throw new Error("NFA not found");
   if (nft.zeroed) throw new Error("This item has already been bought back");

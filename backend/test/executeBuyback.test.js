@@ -60,7 +60,23 @@ function seed(overrides = {}) {
 beforeEach(() => {
   jest.clearAllMocks();
   dispatchRoyalty.mockResolvedValue({ ok: true });
+  // Payout mechanics tests below exercise executeBuyback with the freeze
+  // switch off. The switch itself is tested separately.
+  process.env.GMBB_BUYBACK_LOCKED = "false";
   seed();
+});
+
+describe("the freeze switch", () => {
+  it("defaults to locked when the env var is unset", async () => {
+    delete process.env.GMBB_BUYBACK_LOCKED;
+    await expect(executeBuyback("item1")).rejects.toThrow(/switched off/i);
+    expect(dispatchRoyalty).not.toHaveBeenCalled();
+  });
+
+  it("refuses even a valid payout while locked", async () => {
+    process.env.GMBB_BUYBACK_LOCKED = "true";
+    await expect(executeBuyback("item1")).rejects.toThrow(/switched off/i);
+  });
 });
 
 describe("the happy path", () => {

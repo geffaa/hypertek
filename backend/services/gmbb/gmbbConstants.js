@@ -13,19 +13,17 @@
 // Service (Section 10, "GMBB Contributions").
 export const CREATOR_GMBB_MIN_BPS = 2000; // 20%
 export const CREATOR_GMBB_MAX_BPS = 7000; // 70%
-// The only default value Don explicitly confirmed ("automatic 35% will be applied"
-// if the lister sets nothing) was agreed before the ceiling was later widened from
-// 35% to 70%. Using it here as the safest documented value, but this specific
-// number is worth re-confirming with Don now that the range has moved — flagging
-// rather than silently carrying it forward.
-export const CREATOR_GMBB_DEFAULT_BPS = 3500; // 35% — CONFIRM this is still current
+// Don, 9 Sep 2026: "I think we changed the amount to 50%... most of the things
+// we will be doing will be at 50%." Re-confirmed after the ceiling moved from
+// 35% to 70% — this replaces the old 35% default, which was only ever agreed
+// back when 35% was also the maximum.
+export const CREATOR_GMBB_DEFAULT_BPS = 5000; // 50%
 
 export const PLATFORM_GMBB_MIN_BPS = 3500; // 35%
 export const PLATFORM_GMBB_MAX_BPS = 9000; // 90%
-// No platform-listing default was ever confirmed by Don separately from the
-// 35% creator default — using the range floor until a listing-time picker
-// UI exists for admin listings too.
-export const PLATFORM_GMBB_DEFAULT_BPS = 3500; // 35%
+// Same 50% default as the creator side (Don, 9 Sep 2026) — sits inside this
+// range too (35-90%), so no separate platform-listing default was needed.
+export const PLATFORM_GMBB_DEFAULT_BPS = 5000; // 50%
 
 // Flat platform commission on a creator's first sale of their own item. Not
 // affected by whatever GMBB percentage they chose.

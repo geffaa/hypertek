@@ -142,9 +142,9 @@ describe("resolveGmbbBps", () => {
   });
 
   it("falls back to the documented default when nothing was chosen", () => {
-    expect(resolveGmbbBps(null, { isPlatformListing: false })).toBe(3500);
-    expect(resolveGmbbBps(undefined, { isPlatformListing: false })).toBe(3500);
-    expect(resolveGmbbBps(null, { isPlatformListing: true })).toBe(3500);
+    expect(resolveGmbbBps(null, { isPlatformListing: false })).toBe(5000);
+    expect(resolveGmbbBps(undefined, { isPlatformListing: false })).toBe(5000);
+    expect(resolveGmbbBps(null, { isPlatformListing: true })).toBe(5000);
   });
 
   it("rejects a percentage passed where basis points belong", () => {
@@ -182,7 +182,7 @@ describe("resolveGmbbBps", () => {
 describe("computeSaleSplit — unset gmbbBps (the real-world case today)", () => {
   it("falls back cleanly instead of producing NaN shares", () => {
     const split = computeSaleSplit({ saleType: "creator-first-sale", salePrice: 1000, gmbbBps: null });
-    expect(split.buybackAmount).toBe(350); // 35% default
+    expect(split.buybackAmount).toBe(500); // 50% default
     expectExactSum(split, 1000);
   });
 });
