@@ -12,23 +12,31 @@ const VALID_CATS_AUCTION = ["skins", "military badges", "specialists", "weapons"
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
-// Sync NFTSystem subCollection after auction sale — transfer ownership + record sale
-async function syncNFTAfterAuctionSale(auction, winningPrice, buyerWallet) {
-  // Cancel sibling marketplace/auction/trade listings for this item (skip the selling auction itself)
-  cancelSiblingListings(auction.subCollectionId, {
-    skipAuctionId: auction._id,
-    itemName: auction.title || auction.itemName,
-    ownerWallet: auction.sellerWallet,
-  }).catch(() => { });
-
-  if (!auction.nftSystemId || !auction.subCollectionId) return;
+// Sync NFTSystem subCollection after auction sale — transfer ownership + record sale.
+// Returns false (no changes made) if the item no longer belongs to whoever
+// listed it — e.g. they claimed its GMBB buy-back, or moved it off-platform,
+// while the auction was still running. Both callers must check this and stop
+// short of declaring the auction "sold" when it comes back false.
+async function syncNFTAfterAuctionSale(auction, winningPrice, buyerWallet, country = null) {
+  if (!auction.nftSystemId || !auction.subCollectionId) return false;
   try {
     const parent = await NFTSystem.findById(auction.nftSystemId);
-    if (!parent) return;
+    if (!parent) return false;
     const sub = parent.subCollections.id(auction.subCollectionId);
-    if (!sub) return;
+    if (!sub) return false;
 
     const sellerWallet = sub.owner;
+    if ((sellerWallet || "").toLowerCase() !== (auction.sellerWallet || "").toLowerCase()) {
+      console.warn(`Auction ${auction._id}: item no longer owned by the seller (now ${sellerWallet}), cannot deliver`);
+      return false;
+    }
+
+    // Cancel sibling marketplace/auction/trade listings for this item (skip the selling auction itself)
+    cancelSiblingListings(auction.subCollectionId, {
+      skipAuctionId: auction._id,
+      itemName: auction.title || auction.itemName,
+      ownerWallet: auction.sellerWallet,
+    }).catch(() => { });
 
     sub.listed = false;
     sub.priceETH = winningPrice;
@@ -39,14 +47,17 @@ async function syncNFTAfterAuctionSale(auction, winningPrice, buyerWallet) {
       seller: sellerWallet,
       priceETH: winningPrice,
       isFirstSale: sub.isFirstSale,
+      country: country || null,
       createdAt: new Date(),
     });
 
     parent.collection.salesCount = (parent.collection.salesCount || 0) + 1;
     parent.markModified("subCollections");
     await parent.save();
+    return true;
   } catch (err) {
     console.error(" syncNFTAfterAuctionSale error:", err.message);
+    return false;
   }
 }
 
@@ -190,7 +201,7 @@ export async function createAuction(req, res) {
 export async function placeBid(req, res) {
   try {
     const userId = req.user?._id || req.user?.id;
-    const { amount, bidderWallet, bidderName } = req.body;
+    const { amount, bidderWallet, bidderName, country } = req.body;
 
     if (!amount || !bidderWallet) {
       return res.status(400).json({ error: "amount and bidderWallet required" });
@@ -221,10 +232,12 @@ export async function placeBid(req, res) {
       bidderWallet,
       bidderName: bidderName || "Anonymous",
       amount: Number(amount),
+      country: country || null,
     });
     auction.currentBid = Number(amount);
     auction.currentBidder = userId;
     auction.currentBidderWallet = bidderWallet;
+    auction.currentBidderCountry = country || null;
 
     await auction.save();
 
@@ -244,7 +257,7 @@ export async function placeBid(req, res) {
 export async function instantBuy(req, res) {
   try {
     const userId = req.user?._id || req.user?.id;
-    const { buyerWallet, txHash } = req.body;
+    const { buyerWallet, txHash, country } = req.body;
     if (!buyerWallet) return res.status(400).json({ error: "buyerWallet required" });
 
     const auction = await Auction.findById(req.params.id);
@@ -255,14 +268,21 @@ export async function instantBuy(req, res) {
       return res.status(400).json({ error: "Seller cannot buy own auction" });
     }
 
+    const delivered = await syncNFTAfterAuctionSale(auction, auction.instantBuyPrice, buyerWallet, country || null);
+    if (!delivered) {
+      auction.status = "cancelled";
+      await auction.save();
+      return res.status(409).json({ error: "This item is no longer available — the seller no longer owns it", auction });
+    }
+
     auction.status = "sold";
     auction.currentBidder = userId;
     auction.currentBidderWallet = buyerWallet;
+    auction.currentBidderCountry = country || null;
     auction.currentBid = auction.instantBuyPrice;
     auction.txHash = txHash || null;
 
     await auction.save();
-    await syncNFTAfterAuctionSale(auction, auction.instantBuyPrice, buyerWallet);
     res.json({ message: "Instant buy successful", auction });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -335,9 +355,15 @@ export async function finalizeAuction(req, res) {
       return res.json({ message: "Auction ended with no winner — reserve not met or no bids", auction });
     }
 
+    const delivered = await syncNFTAfterAuctionSale(auction, auction.currentBid, auction.currentBidderWallet, auction.currentBidderCountry);
+    if (!delivered) {
+      auction.status = "cancelled";
+      await auction.save();
+      return res.status(409).json({ error: "This item is no longer available — the seller no longer owns it", auction });
+    }
+
     auction.status = "sold";
     await auction.save();
-    await syncNFTAfterAuctionSale(auction, auction.currentBid, auction.currentBidderWallet);
 
     res.json({ message: "Auction finalized — item transferred to winner", auction });
   } catch (err) {
