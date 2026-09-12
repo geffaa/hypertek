@@ -45,6 +45,7 @@ import TransakRouter from "./Routes/transak.js";
 import AdminPackageRouter from "./Routes/AdminPackage.js";
 import PackagePurchaseRouter from "./Routes/PackagePurchaseRoute.js";
 import PackageRouter from "./Routes/PackageRoute.js";
+import GmbbClaimRouter from "./Routes/GmbbClaimRoute.js";
 import { socketHandler } from "./socket.js";
 import { Server } from "socket.io";
 import http from "http";
@@ -234,6 +235,7 @@ app.use("/api/v1/notifications", NotificationRouter);
 app.use("/api/v1/admin/packages", AdminPackageRouter);
 app.use("/api/v1/packages/purchase", PackagePurchaseRouter);
 app.use("/api/v1/packages", PackageRouter);
+app.use("/api/v1/gmbb-claim", GmbbClaimRouter);
 
 // Health check
 app.get("/health", (req, res) => {
