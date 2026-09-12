@@ -42,6 +42,8 @@ import MarketListingRouter from "./Routes/MarketListingRoute.js";
 import chatbotRouter from "./Routes/chatbot.js";
 import NotificationRouter from "./Routes/NotificationRoute.js";
 import TransakRouter from "./Routes/transak.js";
+import AdminPackageRouter from "./Routes/AdminPackage.js";
+import PackagePurchaseRouter from "./Routes/PackagePurchaseRoute.js";
 import { socketHandler } from "./socket.js";
 import { Server } from "socket.io";
 import http from "http";
@@ -228,6 +230,8 @@ app.use("/api/v1/buyback", BuybackRouter);
 app.use("/api/v1/listings", MarketListingRouter);
 app.use("/api/v1/chatbot", chatbotRouter);
 app.use("/api/v1/notifications", NotificationRouter);
+app.use("/api/v1/admin/packages", AdminPackageRouter);
+app.use("/api/v1/packages/purchase", PackagePurchaseRouter);
 
 // Health check
 app.get("/health", (req, res) => {

@@ -78,3 +78,34 @@ export function computeSaleSplit({ saleType, salePrice, gmbbBps }) {
 function round2(n) {
   return Math.round(n * 100) / 100;
 }
+
+/**
+ * computeRewardPackSplit — GMBB funding for a package-reward item.
+ *
+ * Not a percentage-of-price scenario like the ones above: a reward item was
+ * never individually priced (it arrives bundled with HB, resources, whatever
+ * else is in the pack), so there is no "sale price" to take a cut of. Instead
+ * the admin sets a fixed dollar target for that item when the package is
+ * built — Don, 12 Sep 2026: "a portion goes to the GMBB fund first and
+ * foremost, and then the rest of the funds that are left are ours." Same
+ * shape as the old Scenario A preset-dollar mechanism, and the same rule: no
+ * artist royalty on an item Hyper Tek minted and is giving away itself.
+ *
+ * @param {Object} input
+ * @param {number} input.packagePriceUSD  What the buyer paid for the whole package.
+ * @param {number} input.gmbbTargetUSD    Fixed dollar figure the admin set for this item.
+ * @returns {{ buybackAmount: number, companyAmount: number }}
+ *          The two shares always sum exactly to packagePriceUSD.
+ */
+export function computeRewardPackSplit({ packagePriceUSD, gmbbTargetUSD }) {
+  const price = Number(packagePriceUSD);
+  if (!Number.isFinite(price) || price < 0) {
+    throw new Error(`computeRewardPackSplit: invalid packagePriceUSD ${packagePriceUSD}`);
+  }
+  const target = Number(gmbbTargetUSD) || 0;
+  if (target < 0) throw new Error(`computeRewardPackSplit: invalid gmbbTargetUSD ${gmbbTargetUSD}`);
+
+  const buybackAmount = round2(Math.min(target, price));
+  const companyAmount = round2(price - buybackAmount);
+  return { buybackAmount, companyAmount };
+}

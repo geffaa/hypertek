@@ -6,7 +6,7 @@
 // sale price. A cent lost or invented here either shorts a seller or breaks
 // the sales-history reconciliation an accountant will eventually check.
 
-import { computeSaleSplit } from "../services/gmbb/computeSaleSplit.js";
+import { computeSaleSplit, computeRewardPackSplit } from "../services/gmbb/computeSaleSplit.js";
 import {
   CREATOR_GMBB_MIN_BPS,
   CREATOR_GMBB_MAX_BPS,
@@ -184,5 +184,31 @@ describe("computeSaleSplit — unset gmbbBps (the real-world case today)", () =>
     const split = computeSaleSplit({ saleType: "creator-first-sale", salePrice: 1000, gmbbBps: null });
     expect(split.buybackAmount).toBe(500); // 50% default
     expectExactSum(split, 1000);
+  });
+});
+
+describe("computeRewardPackSplit", () => {
+  it("funds the target in full when the package price covers it", () => {
+    expect(computeRewardPackSplit({ packagePriceUSD: 100, gmbbTargetUSD: 40 }))
+      .toEqual({ buybackAmount: 40, companyAmount: 60 });
+  });
+
+  it("caps the buyback at the package price when the target exceeds it", () => {
+    expect(computeRewardPackSplit({ packagePriceUSD: 30, gmbbTargetUSD: 40 }))
+      .toEqual({ buybackAmount: 30, companyAmount: 0 });
+  });
+
+  it("treats a missing target as zero", () => {
+    expect(computeRewardPackSplit({ packagePriceUSD: 50, gmbbTargetUSD: undefined }))
+      .toEqual({ buybackAmount: 0, companyAmount: 50 });
+  });
+
+  it("always sums exactly to the package price", () => {
+    const split = computeRewardPackSplit({ packagePriceUSD: 33.33, gmbbTargetUSD: 12.5 });
+    expect(Math.round((split.buybackAmount + split.companyAmount) * 100)).toBe(3333);
+  });
+
+  it("rejects a negative package price", () => {
+    expect(() => computeRewardPackSplit({ packagePriceUSD: -5, gmbbTargetUSD: 10 })).toThrow();
   });
 });

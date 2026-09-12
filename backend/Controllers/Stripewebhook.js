@@ -5,6 +5,8 @@ import { finalizeNFAPurchase } from "../Service/nftPurchaseService.js";
 import { markOfferCompleted } from "./Offer.js";
 import User from "../Models/User.js";
 import HBLedger from "../Models/HBLedger.js";
+import PackagePurchase from "../Models/PackagePurchaseModel.js";
+import { fulfillPackagePurchase } from "../services/packagePurchaseService.js";
 import dotenv from "dotenv";
 
 dotenv.config({ path: "./Config/.env" });
@@ -170,8 +172,28 @@ export const StripeWebhook = async (req, res) => {
             break;
           }
 
+          // Handle package purchase (bundle or reward pack)
+          const packagePurchaseId = dataObject.metadata?.packagePurchaseId;
+          if (packagePurchaseId && packagePurchaseId !== "") {
+            try {
+              await PackagePurchase.findByIdAndUpdate(packagePurchaseId, {
+                status: "payment_verified",
+                paymentIntentId: paymentData.paymentIntentId,
+                paidAmountUSDC: dataObject.amount / 100,
+                paidAt: new Date(),
+              });
+              await fulfillPackagePurchase(packagePurchaseId);
+              console.log("[StripeWebhook] Package purchase fulfilled:", packagePurchaseId);
+            } catch (pkgErr) {
+              // Same non-500 rule as the NFT path below — payment already succeeded,
+              // fulfillment can be retried without re-charging the buyer.
+              console.error("[StripeWebhook] Package fulfillment failed:", pkgErr.message);
+            }
+            break;
+          }
+
           // Handle NFT Purchase if metadata exists
-          const { parentId, subCollectionId, buyerWallet, priceETH } = dataObject.metadata || {};
+          const { parentId, subCollectionId, buyerWallet, priceETH, country } = dataObject.metadata || {};
 
           if (subCollectionId && subCollectionId !== "undefined") {
             console.log("🚀 [StripeWebhook] SubCollection metadata found, finalising purchase...");
@@ -183,7 +205,8 @@ export const StripeWebhook = async (req, res) => {
                 priceETH: parseFloat(priceETH || 0),
                 productId: String(paymentData.productId),
                 paymentProvider: "stripe",
-                paymentIntentId: paymentData.paymentIntentId
+                paymentIntentId: paymentData.paymentIntentId,
+                country: country || null,
               });
               console.log("[StripeWebhook] NFT Purchase finalized:", JSON.stringify(result, null, 2));
 
