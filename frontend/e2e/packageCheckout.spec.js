@@ -32,11 +32,6 @@ async function mockPackageApis(page) {
       json: { success: true, purchase: { _id: "purchase_1", status: "pending_payment" } },
     }),
   );
-  await page.route("**/api/v1/payment/create-payment-intent", (route) =>
-    route.fulfill({
-      json: { clientSecret: "pi_test_mock_secret_123_secret_abc" },
-    }),
-  );
 }
 
 // Navbar.jsx decodes the token client-side (jwtDecode) to check expiry and
@@ -78,14 +73,9 @@ test("clicking a package starts a purchase intent and reaches checkout", async (
   await loginAs(page);
 
   let purchaseCalled = false;
-  let intentCalled = false;
   await page.route("**/api/v1/packages/purchase", (route) => {
     purchaseCalled = true;
     route.fulfill({ json: { success: true, purchase: { _id: "purchase_1", status: "pending_payment" } } });
-  });
-  await page.route("**/api/v1/payment/create-payment-intent", (route) => {
-    intentCalled = true;
-    route.fulfill({ json: { clientSecret: "pi_test_mock_secret_123_secret_abc" } });
   });
 
   await page.goto("/packages");
@@ -94,5 +84,8 @@ test("clicking a package starts a purchase intent and reaches checkout", async (
   await expect(page).toHaveURL(/\/packages\/starter-pack/);
   await expect(page.getByText("Starter Pack")).toBeVisible();
   await expect.poll(() => purchaseCalled).toBe(true);
-  await expect.poll(() => intentCalled).toBe(true);
+  // No wallet connected in this mocked run, so checkout falls back to the
+  // "connect a wallet" prompt rather than the pay button — actually signing
+  // and sending USDC needs a real wallet and belongs in a manual test.
+  await expect(page.getByText(/connect your wallet/i)).toBeVisible();
 });

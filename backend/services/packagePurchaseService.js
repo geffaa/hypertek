@@ -18,13 +18,93 @@ import NFTSystem from "../Models/NFTSystem.js";
 import User from "../Models/User.js";
 import HBLedger from "../Models/HBLedger.js";
 import { finalizeNFAPurchase } from "../Service/nftPurchaseService.js";
-import { getBlockchain } from "../Service/blockchain.js";
+import { getBlockchain, ethers } from "../Service/blockchain.js";
 import { computeRewardPackSplit } from "./gmbb/computeSaleSplit.js";
 import { dispatchRoyalty } from "./RoyaltyService.js";
 
 const ACTIVE_CHAIN_ID = Number(process.env.BASE_CHAIN_ID) || 84532;
 const LOCK_TTL_MS = 5 * 60 * 1000;
 const RESERVATION_TTL_MS = 15 * 60 * 1000;
+
+/**
+ * Verify a buyer's on-chain USDC transfer, exactly the same way
+ * HBController.topupViaUSDC verifies a top-up: read the transaction receipt,
+ * find the USDC contract's own Transfer log, confirm it actually paid the
+ * platform wallet the claimed amount. Never trust the client's txHash/amount
+ * pairing without checking the chain — a client could submit any hash.
+ */
+export async function verifyPackageUsdcPayment({ txHash, expectedUsdAmount }) {
+  const rpcUrl = process.env.BASE_RPC_URL || "https://mainnet.base.org";
+  const usdcAddr = process.env.BASE_USDC_ADDRESS;
+  const platformWallet = process.env.PLATFORM_WALLET_ADDRESS;
+  if (!usdcAddr || !platformWallet) {
+    throw new Error("Platform wallet not configured");
+  }
+
+  const provider = new ethers.JsonRpcProvider(rpcUrl);
+  const receipt = await provider.getTransactionReceipt(txHash);
+  if (!receipt || receipt.status !== 1) {
+    throw new Error("Transaction not found or failed on-chain");
+  }
+
+  const usdcInterface = new ethers.Interface([
+    "event Transfer(address indexed from, address indexed to, uint256 value)",
+  ]);
+
+  let verifiedAmount = 0;
+  let fromAddress = null;
+  for (const log of receipt.logs) {
+    if (log.address.toLowerCase() !== usdcAddr.toLowerCase()) continue;
+    try {
+      const parsed = usdcInterface.parseLog(log);
+      if (parsed.name === "Transfer" && parsed.args.to.toLowerCase() === platformWallet.toLowerCase()) {
+        verifiedAmount = parseFloat(ethers.formatUnits(parsed.args.value, 6));
+        fromAddress = parsed.args.from;
+        break;
+      }
+    } catch { /* not this contract's log */ }
+  }
+
+  if (verifiedAmount <= 0) {
+    throw new Error("No USDC transfer to the platform wallet found in this transaction");
+  }
+  if (Math.abs(verifiedAmount - expectedUsdAmount) > 0.01) {
+    throw new Error(`Amount mismatch. On-chain: $${verifiedAmount} USDC, expected: $${expectedUsdAmount} USDC`);
+  }
+
+  return { verifiedAmount, fromAddress };
+}
+
+/**
+ * Buyer has sent USDC and submitted the tx hash. Verify it on-chain, mark the
+ * purchase paid, and run fulfillment — mirrors the Stripe webhook's
+ * succeeded-payment handling, just triggered by the buyer's own confirm call
+ * instead of a webhook.
+ */
+export async function confirmPackageUsdcPayment({ purchaseId, txHash }) {
+  const purchase = await PackagePurchase.findById(purchaseId);
+  if (!purchase) throw new Error("Purchase not found");
+  if (purchase.status !== "pending_payment") {
+    if (purchase.status === "fulfilled" || purchase.status === "payment_verified") return purchase;
+    throw new Error(`Purchase is not awaiting payment (status: ${purchase.status})`);
+  }
+
+  const already = await PackagePurchase.findOne({ paymentTxHash: txHash });
+  if (already) throw new Error("This transaction has already been used for a purchase");
+
+  const { verifiedAmount } = await verifyPackageUsdcPayment({
+    txHash,
+    expectedUsdAmount: purchase.priceUSD,
+  });
+
+  purchase.paymentTxHash = txHash;
+  purchase.paidAmountUSDC = verifiedAmount;
+  purchase.paidAt = new Date();
+  purchase.status = "payment_verified";
+  await purchase.save();
+
+  return fulfillPackagePurchase(purchase._id);
+}
 
 /**
  * Validate a package is actually purchasable and create a purchase intent
