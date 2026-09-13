@@ -1295,6 +1295,34 @@ export const ExportWallet = async (req, res) => {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
+
+// ------------------ VERIFY PASSWORD (step-up auth, no wallet data involved) ------------------
+// Used to gate the CDP private-key export button the same way ExportWallet gates the
+// legacy custodial reveal — but CDP accounts have no EncryptedPrivateKey to check for,
+// so this only confirms the password and returns nothing sensitive.
+export const VerifyPassword = async (req, res) => {
+  try {
+    const userId = String(req.user._id);
+    const { password } = req.body;
+
+    if (!password) {
+      return res.status(400).json({ message: "Password is required." });
+    }
+
+    const user = await UserModel.findById(userId);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const isMatch = await bcrypt.compare(password, user.Password);
+    if (!isMatch) {
+      return res.status(401).json({ message: "Incorrect password." });
+    }
+
+    res.status(200).json({ success: true });
+  } catch (err) {
+    console.error("VerifyPassword error:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
 // ------------------ FUND GAS (auto-drip ETH to email wallet) ------------------
 // Sends a small amount of ETH from the backend wallet to the user's email wallet
 // so they can pay gas for on-chain transactions. Rate-limited: only drips if

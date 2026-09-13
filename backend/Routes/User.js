@@ -16,6 +16,7 @@ import {
   DeleteUser,
   GetAdminByAdminId,
   ExportWallet,
+  VerifyPassword,
   GetWalletAddress,
   FundGasWallet,
   GetPrivyToken,
@@ -55,6 +56,8 @@ Route.put("/profile", auth, upload.single("Avatar"), EditProfile);
 Route.get("/user/wallet-address", auth, GetWalletAddress);
 // Export private key — requires password in body
 Route.post("/user/export-wallet", auth, ExportWallet);
+// Step-up auth: confirm the account password, no wallet data involved (used to gate the CDP export button)
+Route.post("/user/verify-password", auth, VerifyPassword);
 // Auto-drip ETH for gas to email wallet (JWT only, rate-limited by balance threshold)
 Route.post("/user/fund-gas", auth, FundGasWallet);
 // Short-lived RS256 token for the embedded-wallet custom-auth handshake
