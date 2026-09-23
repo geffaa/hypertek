@@ -429,7 +429,7 @@ function InstantBuyModal({ auction, onClose, onSuccess, wallet }) {
                 {auction.isNFA && (
                   <span className="self-start px-2 py-0.5 rounded text-[9px] font-bold text-white"
                     style={{ background: "rgba(0,42,168,0.7)", border: "1px solid rgba(0,80,255,0.4)" }}>
-                    NFA · Buyback Guaranteed
+                    NFA · Salvage Graded
                   </span>
                 )}
               </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { FaFacebook, FaInstagram, FaTiktok, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
+import { FaFacebook, FaInstagram, FaTiktok, FaLinkedinIn, FaXTwitter, FaDiscord, FaYoutube } from "react-icons/fa6";
 
 const Logo = "/logo-white.png";
 const currentYear = new Date().getFullYear();
@@ -16,11 +16,13 @@ const MENU_KEYS = [
 ];
 
 const socials = [
-  { icon: FaFacebook,   href: "https://www.facebook.com/Hyper TekProject",           label: "Facebook"  },
+  { icon: FaFacebook,   href: "https://www.facebook.com/HyperTekProject",            label: "Facebook"  },
   { icon: FaInstagram,  href: "https://www.instagram.com/hypertekproject",           label: "Instagram" },
-  { icon: FaXTwitter,   href: "https://x.com/Hyper Tek100",                          label: "X"         },
+  { icon: FaXTwitter,   href: "https://x.com/HyperTek100",                           label: "X"         },
   { icon: FaTiktok,     href: "https://www.tiktok.com/@hypertek100",                 label: "TikTok"    },
   { icon: FaLinkedinIn, href: "https://www.linkedin.com/company/81534707",           label: "LinkedIn"  },
+  { icon: FaDiscord,    href: "https://discord.gg/Nh4z3ZMbJH",                       label: "Discord"   },
+  { icon: FaYoutube,    href: "https://www.youtube.com/channel/UCAEwI8w1-f-O5olxrF9G5cw", label: "YouTube" },
 ];
 
 function Footer() {

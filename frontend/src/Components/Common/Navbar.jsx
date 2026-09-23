@@ -18,21 +18,23 @@ import { useDispatch } from "react-redux";
 import logoutImage from "../../assets/images/login/logout.webp";
 // Social dropdown icons — Discord and Telegram are hidden until those channels
 // are actually set up and staffed; re-add them here once ready.
-import { FaFacebook, FaInstagram, FaXTwitter, FaTiktok, FaLinkedinIn } from "react-icons/fa6";
+import { FaFacebook, FaInstagram, FaXTwitter, FaTiktok, FaLinkedinIn, FaDiscord, FaYoutube } from "react-icons/fa6";
 import { logout } from "../../Redux/AuthSlice";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import i18n from "../../i18n/index.js";
 import LanguageSwitcher from "./LanguageSwitcher";
 
-// Live social channels only — same URLs as the footer. Discord and Telegram
-// stay off this list until Don has those channels actually running.
+// Live social channels only — same URLs as the footer. Telegram stays off
+// this list until Don has an actual joinable channel/group link, not just a handle.
 const SOCIALS = [
-  { icon: FaXTwitter,   href: "https://x.com/Hyper Tek100",                label: "X" },
-  { icon: FaInstagram,  href: "https://www.instagram.com/hypertekproject", label: "Instagram" },
-  { icon: FaFacebook,   href: "https://www.facebook.com/Hyper TekProject", label: "Facebook" },
-  { icon: FaTiktok,     href: "https://www.tiktok.com/@hypertek100",       label: "TikTok" },
-  { icon: FaLinkedinIn, href: "https://www.linkedin.com/company/81534707", label: "LinkedIn" },
+  { icon: FaXTwitter,   href: "https://x.com/HyperTek100",                  label: "X" },
+  { icon: FaInstagram,  href: "https://www.instagram.com/hypertekproject",  label: "Instagram" },
+  { icon: FaFacebook,   href: "https://www.facebook.com/HyperTekProject",   label: "Facebook" },
+  { icon: FaTiktok,     href: "https://www.tiktok.com/@hypertek100",        label: "TikTok" },
+  { icon: FaLinkedinIn, href: "https://www.linkedin.com/company/81534707",  label: "LinkedIn" },
+  { icon: FaDiscord,    href: "https://discord.gg/Nh4z3ZMbJH",              label: "Discord" },
+  { icon: FaYoutube,    href: "https://www.youtube.com/channel/UCAEwI8w1-f-O5olxrF9G5cw", label: "YouTube" },
 ];
 
 export default function Navbar() {

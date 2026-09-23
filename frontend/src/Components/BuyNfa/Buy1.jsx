@@ -1647,7 +1647,7 @@ function Buy1() {
                       style={{ background: "rgba(0,42,168,0.12)", border: "1px solid rgba(0,80,255,0.2)" }}>
                       {minBB > 0 && (
                         <div className="flex justify-between text-xs">
-                          <span className="text-white/50">{t("buyNfa.marketplace.minBuyback", "Min Buyback Guarantee")}</span>
+                          <span className="text-white/50">{t("buyNfa.marketplace.minBuyback", "Min Salvage Grade")}</span>
                           <span className="text-green-400 font-semibold">${minBB} USD</span>
                         </div>
                       )}

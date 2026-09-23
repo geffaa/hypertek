@@ -238,7 +238,7 @@ export default function WhitepaperPage() {
                 { title: "Blockchain Gaming Failed", body: "After reaching a peak of $5B in NFT gaming sales in 2021, the sector experienced a decline of over 90%. Most blockchain games prioritised cryptocurrency mechanics at the expense of substantive gameplay." },
                 { title: "Pay-to-Win Problem", body: "More than 60% of gamers report frustration with pay-to-win models. Only 8% of players have ever earned tangible value through gameplay, and over 95% of in-game currencies remain non-exchangeable." },
                 { title: "Closed Ecosystems", body: "Established companies like Sony, Microsoft, and Nintendo maintain closed ecosystems, restricting asset transferability and confining player investments to individual game titles." },
-                { title: "The Solution: Hyper Tek", body: "A 3-in-1 interconnected gaming universe built on Unreal Engine 5 with cross-platform support, fair-play economics, and NFA/NFC/NFTs with guaranteed minimum buyback values." },
+                { title: "The Solution: Hyper Tek", body: "A 3-in-1 interconnected gaming universe built on Unreal Engine 5 with cross-platform support, fair-play economics, and NFA/NFC/NFTs with an immutable on-chain Programmed Salvage Grade." },
               ].map(({ title, body }) => (
                 <Card key={title}>
                   <h4 className="font-semibold text-white text-sm mb-2">{title}</h4>
@@ -411,7 +411,7 @@ export default function WhitepaperPage() {
                 {[
                   { name: "NFA Contract", desc: "ERC-721 standard defining each NFA's unique properties, ownership, and transfer rules" },
                   { name: "Marketplace Contract", desc: "Handles auction listings, bids, purchases, and commission payments" },
-                  { name: "Buyback Reserve Contract", desc: "Holds platform reserve funds and executes guaranteed buyback transactions" },
+                  { name: "Automated Deconstruction Loop Contract", desc: "Governs the IPS Protocol Pool and executes automated item-recycling scripts" },
                 ].map(({ name, desc }) => (
                   <div key={name} className="rounded-xl p-4" style={{ background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.06)" }}>
                     <p className="text-blue-300 text-xs font-semibold mb-2">{name}</p>
@@ -445,15 +445,15 @@ export default function WhitepaperPage() {
             <SectionHeading number="04" title="Non-Fungible Assets (NFAs)" />
 
             <Card className="mb-6">
-              <h3 className="font-semibold text-white mb-3">True Ownership with Guaranteed Value</h3>
+              <h3 className="font-semibold text-white mb-3">True Ownership with a Programmed Salvage Grade</h3>
               <p className="text-white/60 text-sm leading-relaxed mb-4">
-                NFAs represent Hyper Tek's solution to blockchain gaming's fundamental problem: worthless NFTs. Unlike traditional NFTs that can collapse to zero value, <strong className="text-white">every Hyper Tek NFA carries a platform-guaranteed minimum buyback price.</strong>
+                NFAs represent Hyper Tek's solution to blockchain gaming's fundamental problem: worthless NFTs. Unlike standard non-functional digital images that lack systemic feedback mechanisms, <strong className="text-white">every Hyper Tek NFA is engineered with an immutable on-chain Programmed Salvage Grade.</strong>
               </p>
               <div className="grid sm:grid-cols-3 gap-4">
                 {[
                   { label: "Utility Value", body: "In-game bonuses and statistical advantages across all three worlds" },
                   { label: "Market Value", body: "What other players will pay; freely tradeable on the marketplace" },
-                  { label: "Reserve Value", body: "Platform-guaranteed buyback minimum: the floor that can never drop to zero" },
+                  { label: "Graded Salvage", body: "Code-enforced automated baseline deconstruction value: encoded directly into the item and cannot fall to zero" },
                 ].map(({ label, body }) => (
                   <div key={label} className="rounded-xl p-4 text-center" style={{ background: "rgba(0,42,168,0.12)", border: "1px solid rgba(0,42,168,0.25)" }}>
                     <p className="text-blue-300 text-sm font-semibold mb-2">{label}</p>
@@ -464,9 +464,9 @@ export default function WhitepaperPage() {
             </Card>
 
             <Card className="mb-6">
-              <h3 className="font-semibold text-white mb-4">The Guaranteed Minimum Buy-Back (GMBB) Fund</h3>
+              <h3 className="font-semibold text-white mb-4">The Item Programmable Salvage (IPS) Protocol Pool</h3>
               <p className="text-white/60 text-sm leading-relaxed mb-4">
-                Every item's minimum value is its own <strong className="text-white">GMBB Fund balance</strong>, funded as a percentage of its sale price, not a flat dollar figure. There is no separate reserve calculation; the fund itself is the guarantee.
+                Every item's minimum value is its own <strong className="text-white">IPS Protocol Pool balance</strong>, funded as a percentage of its sale price, not a flat dollar figure. There is no separate reserve calculation; the pool itself sets the Graded Salvage.
               </p>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
@@ -515,9 +515,9 @@ export default function WhitepaperPage() {
                   </thead>
                   <tbody className="divide-y divide-white/5">
                     {[
-                      ["Value Floor", "None (can drop to $0)", "Guaranteed 80% reserve buyback"],
+                      ["Ecosystem Baseline", "None (unbacked codebase)", "Automated 80% Graded Salvage up to 97%"],
                       ["Utility", "Often purely speculative", "Tangible in-game bonuses"],
-                      ["Liquidity", "Dependent on finding buyers", "Always liquid via platform buyback"],
+                      ["Liquidity", "Dependent on finding buyers", "Always liquid via the IPS Protocol Pool"],
                       ["Acquisition", "Usually direct purchase", "Earned through gameplay or random packages"],
                       ["Value Trajectory", "Typically depreciates 90%+", "Designed to appreciate with game growth"],
                       ["Transaction Fees", "$10–100+ (ETH gas)", "$0: platform covers fees"],
@@ -561,17 +561,17 @@ export default function WhitepaperPage() {
                   </ul>
                 </div>
                 <div>
-                  <p className="text-white/30 text-xs font-semibold tracking-widest uppercase mb-3">Real Earning Potential</p>
+                  <p className="text-white/30 text-xs font-semibold tracking-widest uppercase mb-3">Ecosystem Resource Circulation</p>
                   <div className="space-y-3">
                     <div className="rounded-xl p-3" style={{ background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                      <p className="text-white/80 text-sm font-semibold">Dedicated Players</p>
-                      <p className="text-green-400 text-lg font-bold">$200–$500/month</p>
-                      <p className="text-white/40 text-xs">Consistent tournament + courier + crafting</p>
+                      <p className="text-white/80 text-sm font-semibold">Active Participants</p>
+                      <p className="text-green-400 text-lg font-bold">50,000–125,000 HB/week</p>
+                      <p className="text-white/40 text-xs">Inside system turnover velocity</p>
                     </div>
                     <div className="rounded-xl p-3" style={{ background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                      <p className="text-white/80 text-sm font-semibold">Esports / Virtual Business</p>
-                      <p className="text-green-400 text-lg font-bold">$1,000–$5,000+/month</p>
-                      <p className="text-white/40 text-xs">Top-tier play, business operations</p>
+                      <p className="text-white/80 text-sm font-semibold">Esports / Guild Enterprises</p>
+                      <p className="text-green-400 text-lg font-bold">1,250,000+ HB/week</p>
+                      <p className="text-white/40 text-xs">Elite operations, guild-scale protocol capacity</p>
                     </div>
                   </div>
                 </div>
@@ -654,8 +654,8 @@ export default function WhitepaperPage() {
                 <h3 className="font-semibold text-white mb-3">First Sale</h3>
                 <ul className="space-y-3">
                   {[
-                    { name: "User-listed item", desc: "92% minus the seller's chosen GMBB percentage (20–70%) to the seller, the GMBB share to the fund, 8% to Hyper Tek 100" },
-                    { name: "Hyper Tek 100-listed item", desc: "GMBB percentage (35–90%, platform-chosen) to the fund, the rest to Hyper Tek 100 as seller" },
+                    { name: "User-listed item", desc: "92% minus the seller's chosen IPS percentage (20–70%) to the seller, the IPS share to the pool, 8% to Hyper Tek 100" },
+                    { name: "Hyper Tek 100-listed item", desc: "IPS percentage (35–90%, platform-chosen) to the pool, the rest to Hyper Tek 100 as seller" },
                   ].map(({ name, desc }) => (
                     <li key={name}>
                       <p className="text-blue-300 text-sm font-semibold">{name}</p>
@@ -669,7 +669,7 @@ export default function WhitepaperPage() {
                 <div className="space-y-2">
                   {[
                     { label: "Seller", rate: "86%" },
-                    { label: "GMBB Fund", rate: "5%" },
+                    { label: "IPS Protocol Pool", rate: "5%" },
                     { label: "Original Artist", rate: "2%" },
                     { label: "Hyper Tek 100", rate: "7%" },
                   ].map(({ label, rate }) => (
@@ -685,7 +685,7 @@ export default function WhitepaperPage() {
             <Card>
               <h3 className="font-semibold text-white mb-3">Why This Split</h3>
               <p className="text-white/50 text-xs leading-relaxed">
-                None of the GMBB share is ever taxed as commission; it's a contribution to the item's own fund, not platform revenue. The rest of every sale is split between the seller, the original artist, and Hyper Tek 100.
+                None of the IPS share is ever taxed as commission; it's a contribution to the item's own salvage pool, not platform revenue. The rest of every sale is split between the seller, the original artist, and Hyper Tek 100.
               </p>
             </Card>
           </section>
@@ -700,7 +700,7 @@ export default function WhitepaperPage() {
                 {[
                   "Core three-game interconnected universe concept finalised",
                   "Fair-play economics framework established",
-                  "NFA buyback system designed",
+                  "NFA IPS (salvage) system designed",
                   "Comprehensive game design documentation created",
                   "14 playable characters designed (7 species, male & female)",
                   "Main spaceship 3D models created",
@@ -721,11 +721,11 @@ export default function WhitepaperPage() {
             <div className="pl-2">
               <RoadmapPhase
                 phase="1"
-                title="Near-Term: Early Backer Campaign & Core Development"
+                title="Near-Term: Early-Access Deployment & Core Development"
                 period="Next 6–12 months"
                 items={[
-                  "Launch early backer campaign targeting $440K",
-                  "Secure seed funding and expand development team",
+                  "Launch early-access deployment campaign targeting $440K",
+                  "Secure programmatic product development funding and expand development team",
                   "Build functional versions of all three games",
                   "Implement multiplayer infrastructure",
                   "Develop marketplace and economic systems",
@@ -780,7 +780,7 @@ export default function WhitepaperPage() {
                 Hyper Tek 100 is an ambitious vision to create an interconnected gaming ecosystem with a driven marketplace that addresses real problems in the industry. Three interconnected games: <strong className="text-white">Overlord Realm</strong> (MMORTS), <strong className="text-white">Hyper Racing 100</strong> (futuristic racing), and <strong className="text-white">Hyper Quest 100</strong> (RPG exploration), where progress, assets, and identity persist across all experiences.
               </p>
               <p className="text-white/60 text-sm leading-relaxed mb-4">
-                Players enjoy fair-play economics, NFAs with <strong className="text-white">guaranteed minimum buyback values</strong>, real economic opportunities, and future-proofed market share.
+                Players enjoy fair-play economics, NFAs with an <strong className="text-white">immutable on-chain Programmed Salvage Grade</strong>, real economic opportunities, and future-proofed market share.
               </p>
               <div className="rounded-xl p-5 mt-4" style={{ background: "rgba(0,42,168,0.15)", border: "1px solid rgba(0,42,168,0.35)" }}>
                 <p className="text-blue-200 text-sm font-semibold mb-1">Where We Stand</p>
