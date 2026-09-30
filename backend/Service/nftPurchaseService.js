@@ -4,6 +4,7 @@ import Activity from "../Models/ActivityModel.js";
 import MarketListing from "../Models/MarketListingModel.js";
 import { getBlockchain, ethers } from "./blockchain.js";
 import { dispatchRoyalty } from "../services/RoyaltyService.js";
+import { depositToEscrow } from "../services/tradeInEscrow.js";
 import { cancelSiblingListings } from "../services/cancelSiblingListings.js";
 import { computeSaleSplit } from "../services/gmbb/computeSaleSplit.js";
 import dotenv from "dotenv";
@@ -370,24 +371,17 @@ export async function finalizeNFAPurchase({
     }).catch(err => console.warn("⚠️ [RoyaltyService] royalty dispatch error:", err.message));
   }
 
-  // Dispatch buyback fund → BUYBACK_WALLET_ADDRESS — async, non-blocking
+  // Trade-in share → on-chain escrow, credited to this exact token — async, non-blocking
   if (buybackAmount > 0) {
-    const buybackWallet = process.env.BUYBACK_WALLET_ADDRESS;
-    if (buybackWallet) {
-      const bbPct = cleanPrice > 0 ? `${((buybackAmount / cleanPrice) * 100).toFixed(1)}%` : '0%';
-      dispatchRoyalty({
-        subCollectionId: cleanSubId,
-        parentId: cleanParentId,
-        creatorWallet: buybackWallet,
-        amount: buybackAmount,
-        saleRecordId: receiptHash || paymentIntentId,
-        payoutType: "buyback_fund",
-        note: `${assetType} buyback fund ${bbPct}`,
-      }).catch(err => console.warn("⚠️ [BuybackService] dispatch error:", err.message));
-      console.log(`🏦 [Buyback] Dispatching $${buybackAmount} USDC → ${buybackWallet}`);
-    } else {
-      console.warn("⚠️ [Buyback] BUYBACK_WALLET_ADDRESS not set — skipping dispatch");
-    }
+    const pct = cleanPrice > 0 ? `${((buybackAmount / cleanPrice) * 100).toFixed(1)}%` : "0%";
+    depositToEscrow({
+      subCollectionId: cleanSubId,
+      parentId: cleanParentId,
+      saleRecordId: receiptHash || paymentIntentId,
+      tokenId,
+      amount: buybackAmount,
+      note: `${assetType} trade-in share ${pct}`,
+    }).catch(err => console.warn("⚠️ [TradeInEscrow] deposit error:", err.message));
   }
 
   // Dispatch company/platform fee → PLATFORM_WALLET_ADDRESS — async, non-blocking

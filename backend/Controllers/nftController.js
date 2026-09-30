@@ -9,14 +9,13 @@ import {
 } from "../Service/blockchain.js";
 import { cloudinary as getCloudinary, isCloudinaryEnabled as getIsCloudinaryEnabled } from "../Config/cloudinary.js";
 import { dispatchRoyalty } from "../services/RoyaltyService.js";
+import { depositToEscrow } from "../services/tradeInEscrow.js";
 import { cancelSiblingListings } from "../services/cancelSiblingListings.js";
 import { markOfferCompleted } from "./Offer.js";
 import Activity from "../Models/ActivityModel.js";
 import MarketListing from "../Models/MarketListingModel.js";
 import Trade from "../Models/TradeModel.js";
 import Auction from "../Models/AuctionModel.js";
-import Stripe from "stripe";
-import { Payment } from "../Models/Payment.js";
 import { finalizeNFAPurchase } from "../Service/nftPurchaseService.js";
 import License from "../Models/License.js";
 import { verifySaleOnChain } from "../services/marketplaceSyncService.js";
@@ -54,7 +53,6 @@ export async function resolveAddressSet(address) {
     return [addr];
   }
 }
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Helper: save uploaded image permanently (Cloudinary or local /uploads/nft/)
 export async function saveImagePermanently(filePath, filename) {
@@ -2511,19 +2509,16 @@ export async function recordSubCollectionSale(req, res) {
       }).catch(err => console.warn("⚠️ [RoyaltyService] dispatch error:", err.message));
     }
 
-    // Dispatch buyback fund (5%) — non-blocking
+    // Trade-in share → on-chain escrow, credited to this exact token — non-blocking
     if (distribution.buybackAmount > 0) {
-      const buybackWallet = process.env.BUYBACK_WALLET_ADDRESS;
-      if (buybackWallet) {
-        dispatchRoyalty({
-          subCollectionId: subCollection._id.toString(),
-          parentId: parent._id.toString(),
-          creatorWallet: buybackWallet,
-          amount: distribution.buybackAmount,
-          payoutType: "buyback_fund",
-          note: `${itemAssetType} buyback fund 5%`,
-        }).catch(err => console.warn("⚠️ [BuybackService] dispatch error:", err.message));
-      }
+      depositToEscrow({
+        subCollectionId: subCollection._id.toString(),
+        parentId: parent._id.toString(),
+        saleRecordId: txHash,
+        tokenId,
+        amount: distribution.buybackAmount,
+        note: `${itemAssetType} trade-in share`,
+      }).catch(err => console.warn("⚠️ [TradeInEscrow] deposit error:", err.message));
     }
 
     // Dispatch company fee (11%) — non-blocking
@@ -3243,74 +3238,11 @@ export async function getSubCollectionPriceHistory(req, res) {
 
 /**
  * POST /api/v1/nft/finalize-by-payment-intent
- * Called directly by frontend after stripe.confirmPayment() succeeds.
- * Re-verifies payment with Stripe before executing — safe without webhook.
- * Webhook (if it fires in production) is deduplicated by paymentIntentId check.
+ * Retired: marketplace items settle in USDC only, so each sale can fund the
+ * item's trade-in escrow on-chain. Cards stay for packages.
  */
 export async function finalizeByPaymentIntent(req, res) {
-  const { paymentIntentId, parentId, subCollectionId, buyerWallet, priceETH, offerId } = req.body;
-
-  if (!paymentIntentId || !subCollectionId || !buyerWallet) {
-    return res.status(400).json({ success: false, error: "Missing required fields" });
-  }
-
-  try {
-    // 1. Verify payment with Stripe
-    const intent = await stripe.paymentIntents.retrieve(paymentIntentId);
-    if (intent.status !== "succeeded") {
-      return res.status(400).json({ success: false, error: `Payment not succeeded (status: ${intent.status})` });
-    }
-
-    // 2. Dedup — if webhook already processed this, return success without re-running
-    const existing = await Payment.findOne({ paymentIntentId });
-    if (existing && !existing.nftTransferFailed) {
-      console.log("ℹ️ [finalizeByPaymentIntent] Already processed by webhook:", paymentIntentId);
-      return res.json({ success: true, alreadyProcessed: true });
-    }
-
-    // 3. Record payment (if not already recorded by webhook)
-    if (!existing) {
-      await Payment.create({
-        userId: intent.metadata?.userId || "unknown",
-        gameTitle: intent.metadata?.gameTitle || "NFT Purchase",
-        amount: intent.amount,
-        currency: intent.currency,
-        provider: "stripe",
-        transactionId: paymentIntentId,
-        paymentIntentId,
-        status: "succeeded",
-        itemType: "nft",
-        parentId: parentId || null,
-        subCollectionId,
-        buyerWallet,
-        productId: intent.metadata?.productId || subCollectionId,
-      }).catch(() => { });
-    }
-
-    // 4. Finalize NFT transfer
-    const result = await finalizeNFAPurchase({
-      parentId: parentId || null,
-      subCollectionId,
-      buyerWallet,
-      priceETH: parseFloat(priceETH || 0),
-      paymentProvider: "stripe",
-      paymentIntentId,
-      country: intent.metadata?.country || req.body.country || null,
-    });
-
-    // 5. Mark offer completed if applicable
-    if (offerId) {
-      markOfferCompleted(offerId).catch(err =>
-        console.warn("⚠️ [Offer] markOfferCompleted error:", err.message)
-      );
-    }
-
-    console.log("[finalizeByPaymentIntent] Done:", result);
-    return res.json({ success: true, result });
-  } catch (err) {
-    console.error(" [finalizeByPaymentIntent] Error:", err.message);
-    return res.status(500).json({ success: false, error: err.message });
-  }
+  return res.status(410).json({ success: false, error: "Card payment is not available for marketplace items. Please pay with USDC." });
 }
 
 /**

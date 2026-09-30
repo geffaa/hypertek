@@ -7,6 +7,7 @@
 import express from "express";
 import { applyCPI, getPendingBuybacks, executeBuyback } from "../services/NFAService.js";
 import { RoyaltyPayout, dispatchRoyaltyOnChain, dispatchRoyaltyViaStripe } from "../services/RoyaltyService.js";
+import { sendDeposit } from "../services/tradeInEscrow.js";
 import { authMiddleware } from "../Middleware/authMiddleware.js";
 import NFTSystem from "../Models/NFTSystem.js";
 import MarketListing from "../Models/MarketListingModel.js";
@@ -131,6 +132,11 @@ AdminNFARouter.post("/royalty-payouts/:id/retry", async (req, res) => {
     if (!payout) return res.status(404).json({ success: false, message: "Payout not found" });
     if (payout.status === "dispatched")
       return res.status(400).json({ success: false, message: "Payout already dispatched" });
+
+    if (payout.payoutType === "trade_in_escrow") {
+      await RoyaltyPayout.findByIdAndUpdate(payout._id, { status: "pending", note: "Retry initiated by admin" });
+      return res.json({ success: true, data: await sendDeposit(payout) });
+    }
 
     if (payout.paymentType === "bank") {
       if (!payout.artistId)

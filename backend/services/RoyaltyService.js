@@ -48,8 +48,11 @@ const royaltyPayoutSchema = new mongoose.Schema(
     currency: { type: String, default: "USDC" },
     // "crypto" = send USDC to wallet | "bank" = automatic payout via Stripe Connect
     paymentType: { type: String, enum: ["crypto", "bank"], default: "crypto" },
-    // "artist_royalty" = 4% to creator | "buyback_fund" = 5% to buyback wallet | "company_fee" = platform's share
-    payoutType: { type: String, enum: ["artist_royalty", "buyback_fund", "company_fee"], default: "artist_royalty" },
+    // "trade_in_escrow" = item's trade-in share deposited into the on-chain escrow.
+    // "buyback_fund" is legacy (paid to a wallet before the escrow existed).
+    payoutType: { type: String, enum: ["artist_royalty", "buyback_fund", "company_fee", "trade_in_escrow"], default: "artist_royalty" },
+    nftAddress: String, // trade_in_escrow only: the NFT contract the deposit is credited to
+    tokenId: String,    // trade_in_escrow only
     status: { type: String, enum: ["pending", "dispatched", "failed"], default: "pending" },
     txHash: String,
     note: String,

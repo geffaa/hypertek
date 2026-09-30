@@ -22,6 +22,12 @@ export const CreatePaymentIntent = async (req, res) => {
       return res.status(400).json({ error: "Amount is required" });
     }
 
+    // Marketplace items settle in USDC only, so each sale can fund the item's
+    // trade-in escrow on-chain. Cards stay for packages.
+    if (subCollectionId && !packagePurchaseId) {
+      return res.status(410).json({ error: "Card payment is not available for marketplace items. Please pay with USDC." });
+    }
+
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
       currency: "usd",
