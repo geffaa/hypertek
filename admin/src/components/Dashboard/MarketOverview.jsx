@@ -92,28 +92,6 @@ const QUICK_ACTIONS = [
     ),
   },
   {
-    id: "buyback",
-    label: "Buyback Approval",
-    description: "Review buyback requests",
-    path: "/buyback-approval",
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-  },
-  {
-    id: "cpi",
-    label: "CPI Adjustment",
-    description: "Adjust in-game price index",
-    path: "/cpi-adjustment",
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-      </svg>
-    ),
-  },
-  {
     id: "earnings",
     label: "Platform Earnings",
     description: "Platform revenue overview",

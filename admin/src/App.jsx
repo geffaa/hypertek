@@ -21,8 +21,6 @@ import WaitlistPage from "./pages/WaitlistPage";
 import Artists from "./pages/Artists";
 import ArtistForm from "./pages/ArtistForm";
 import RoyaltyPayouts from "./pages/RoyaltyPayouts";
-import BuybackApproval from "./pages/BuybackApproval";
-import CPIAdjustment from "./pages/CPIAdjustment";
 import Items from "./pages/Items";
 import HyperBucksAdmin from "./pages/HyperBucksAdmin";
 
@@ -60,8 +58,6 @@ function App() {
             <Route path="artists" element={<Artists />} />
             <Route path="artist-form" element={<ArtistForm />} />
             <Route path="royalty-payouts" element={<RoyaltyPayouts />} />
-            <Route path="buyback-approval" element={<BuybackApproval />} />
-            <Route path="cpi-adjustment" element={<CPIAdjustment />} />
             <Route path="items" element={<Items />} />
             <Route path="hyperbucks" element={<HyperBucksAdmin />} />
           </Route>

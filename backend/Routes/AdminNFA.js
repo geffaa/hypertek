@@ -5,14 +5,12 @@
  * POST /api/v1/admin/nfa/:id/buyback    — Admin approves and executes a buyback
  */
 import express from "express";
-import { applyCPI, getPendingBuybacks, executeBuyback } from "../services/NFAService.js";
 import { RoyaltyPayout, dispatchRoyaltyOnChain, dispatchRoyaltyViaStripe } from "../services/RoyaltyService.js";
 import { sendDeposit } from "../services/tradeInEscrow.js";
 import { authMiddleware } from "../Middleware/authMiddleware.js";
 import NFTSystem from "../Models/NFTSystem.js";
 import MarketListing from "../Models/MarketListingModel.js";
 import Artist from "../Models/Artist.js";
-import BuybackRequest from "../Models/BuybackRequest.js";
 import User from "../Models/User.js";
 import { retryBankPayout } from "../Controllers/HBController.js";
 import HBLedger from "../Models/HBLedger.js";
@@ -25,60 +23,6 @@ const AdminNFARouter = express.Router();
 
 // All routes require admin auth
 AdminNFARouter.use(authMiddleware("admin"));
-
-/**
- * POST /api/v1/admin/nfa/apply-cpi
- * Body: { cpiPercent: 2.0, year: 2026 }
- */
-AdminNFARouter.post("/apply-cpi", async (req, res) => {
-  try {
-    const { cpiPercent, year } = req.body;
-    if (!cpiPercent || !year) {
-      return res.status(400).json({ success: false, message: "cpiPercent and year are required" });
-    }
-    const result = await applyCPI(Number(cpiPercent), Number(year));
-    res.json({
-      success:    true,
-      year:       Number(year),
-      cpiPercent: Number(cpiPercent),
-      updated:    result.updatedCount,
-      skipped:    result.skippedCount,
-    });
-  } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
-  }
-});
-
-/**
- * GET /api/v1/admin/nfa/buybacks
- * Returns all NFAs with buybackPending: true
- */
-AdminNFARouter.get("/buybacks", async (req, res) => {
-  try {
-    const pending = await getPendingBuybacks();
-    res.json({ success: true, count: pending.length, data: pending });
-  } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
-  }
-});
-
-/**
- * POST /api/v1/admin/nfa/:id/buyback
- * Admin approves buyback — zeros out the NFA
- */
-AdminNFARouter.post("/:id/buyback", async (req, res) => {
-  try {
-    const { nft, payoutAmount, ownerWallet } = await executeBuyback(req.params.id);
-    res.json({
-      success: true,
-      message: `Buyback executed. NFA removed from circulation. $${(payoutAmount || 0).toFixed(2)} USDC dispatched to ${ownerWallet || "unknown"}.`,
-      data: nft,
-      payout: { amount: payoutAmount, recipient: ownerWallet },
-    });
-  } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
-  }
-});
 
 /**
  * GET /api/v1/admin/nfa/royalty-payouts?status=pending&payoutType=company_fee
@@ -506,7 +450,7 @@ AdminNFARouter.put("/market-listings/:id/cancel", async (req, res) => {
 /**
  * GET /api/v1/admin/nfa/notifications
  * Aggregates platform events into admin notification feed.
- * Sources: pending buybacks, pending royalty payouts, expiring listings, recent new users.
+ * Sources: pending royalty payouts, expiring listings, recent new users.
  */
 AdminNFARouter.get("/notifications", async (req, res) => {
   try {
@@ -514,26 +458,13 @@ AdminNFARouter.get("/notifications", async (req, res) => {
     const in24h = new Date(now.getTime() + 24 * 60 * 60 * 1000);
     const last7d = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
 
-    const [pendingBuybacks, pendingPayouts, expiringListings, newUsers] = await Promise.all([
-      BuybackRequest.find({ status: "pending" }).sort({ createdAt: -1 }).limit(20).lean(),
+    const [pendingPayouts, expiringListings, newUsers] = await Promise.all([
       RoyaltyPayout.find({ status: "pending" }).sort({ createdAt: -1 }).limit(20).lean(),
       MarketListing.find({ status: "active", expiresAt: { $lte: in24h } }).sort({ expiresAt: 1 }).limit(20).lean(),
       User.find({ createdAt: { $gte: last7d } }).sort({ createdAt: -1 }).limit(20).lean(),
     ]);
 
     const notifications = [];
-
-    for (const r of pendingBuybacks) {
-      notifications.push({
-        _id: `buyback-${r._id}`,
-        type: "warning",
-        title: "Buyback Request Pending",
-        message: `"${r.itemName || "Item"}" — min. $${(r.minimumBuybackUSD || 0).toFixed(2)} USDC`,
-        link: "buyback-approval",
-        read: false,
-        createdAt: r.createdAt,
-      });
-    }
 
     for (const p of pendingPayouts) {
       notifications.push({
