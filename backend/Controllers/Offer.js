@@ -89,6 +89,7 @@ const createOffer = async (req, res) => {
     }
 
     const offer = new Offer({
+      acknowledgement: req.acknowledgement,
       serialNumber,
       gameId: String(gameId),
       gameTitle,

@@ -13,6 +13,7 @@ export async function CreatePackagePurchase(req, res) {
       packageId: req.body?.packageId,
       userId,
       buyerWallet,
+      acknowledgement: req.acknowledgement,
     });
 
     res.json({ success: true, purchase });

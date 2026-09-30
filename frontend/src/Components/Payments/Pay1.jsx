@@ -6,6 +6,8 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { getImageUrl, BACKEND_BASE_URL, PURCHASES_LOCKED } from "../../Config";
+import PurchaseAcknowledgement from "../Common/PurchaseAcknowledgement";
+import { ackPayload } from "../../data/purchaseAcknowledgement";
 
 function Pay1({ item }) {
   const { t } = useTranslation();
@@ -26,6 +28,7 @@ function Pay1({ item }) {
   const [open, setOpen]         = useState(false);
   const [loading, setLoading]   = useState(false);
   const [success, setSuccess]   = useState(false);
+  const [ack, setAck]           = useState(false);
 
   const dropdownRef = useRef(null);
 
@@ -72,6 +75,7 @@ function Pay1({ item }) {
       ownerId:         item?.owner || "platform",
       ownerName:       "Platform",
       ownerEmail:      "",
+      acknowledgement: ackPayload(),
     };
 
     console.log("[Offer] payload:", payload);
@@ -200,9 +204,11 @@ function Pay1({ item }) {
           </span>
         </div>
 
+        <PurchaseAcknowledgement checked={ack} onChange={setAck} />
+
         {/* Submit */}
         <button
-          disabled={!totalPay || loading}
+          disabled={!totalPay || loading || !ack}
           onClick={handleSubmit}
           className="w-full h-12 rounded-xl text-white font-semibold text-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed"
           style={{

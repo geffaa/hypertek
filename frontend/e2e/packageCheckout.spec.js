@@ -68,7 +68,7 @@ test("packages page lists active packages from the API", async ({ page }) => {
   await expect(card).toContainText("$49");
 });
 
-test("clicking a package starts a purchase intent and reaches checkout", async ({ page }) => {
+test("clicking a package reaches checkout without opening a purchase before the acknowledgement", async ({ page }) => {
   await mockPackageApis(page);
   await loginAs(page);
 
@@ -83,7 +83,9 @@ test("clicking a package starts a purchase intent and reaches checkout", async (
 
   await expect(page).toHaveURL(/\/packages\/starter-pack/);
   await expect(page.getByText("Starter Pack")).toBeVisible();
-  await expect.poll(() => purchaseCalled).toBe(true);
+  // The purchase is only opened after the buyer ticks the checkout
+  // acknowledgement and presses pay, never just by landing on the page.
+  expect(purchaseCalled).toBe(false);
   // No wallet connected in this mocked run, so checkout falls back to the
   // "connect a wallet" prompt rather than the pay button — actually signing
   // and sending USDC needs a real wallet and belongs in a manual test.

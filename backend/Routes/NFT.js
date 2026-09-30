@@ -55,6 +55,7 @@ import {
 import uploadTemp from "../Middleware/UploadMulter.js";
 import { authMiddleware } from "../Middleware/authMiddleware.js";
 import { purchasesLocked } from "../Middleware/purchasesLocked.js";
+import { captureAcknowledgement } from "../Middleware/requireAcknowledgement.js";
 
 const NFTRouter = express.Router();
 
@@ -209,7 +210,7 @@ NFTRouter.post("/mint", authMiddleware(), serverMint);
 
 NFTRouter.post("/listing/create", authMiddleware(), createListing);
 
-NFTRouter.post("/sale/record", authMiddleware(), purchasesLocked, recordOnchainSale);
+NFTRouter.post("/sale/record", authMiddleware(), purchasesLocked, captureAcknowledgement, recordOnchainSale);
 
 NFTRouter.post("/listing/cancel", authMiddleware(), cancelListing);
 NFTRouter.post(
@@ -218,7 +219,7 @@ NFTRouter.post(
   cancelSubCollectionListing
 );
 NFTRouter.post("/sub-collection/listing/create", authMiddleware(), createSubCollectionListing);
-NFTRouter.post("/sub-collection/sale/record", authMiddleware(), purchasesLocked, recordSubCollectionSale);
+NFTRouter.post("/sub-collection/sale/record", authMiddleware(), purchasesLocked, captureAcknowledgement, recordSubCollectionSale);
 NFTRouter.get(
   "/user/listed-subs/:walletAddress",
   authMiddleware(),

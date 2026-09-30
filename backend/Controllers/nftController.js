@@ -1360,6 +1360,7 @@ export async function recordOnchainSale(req, res) {
       isFirstSale: nft.isFirstSale,
       country: req.body.country || null,
       createdAt: new Date(),
+      acknowledgement: req.acknowledgement || undefined,
     };
 
     nft.salesHistory.push(saleRecord);
@@ -2403,6 +2404,7 @@ export async function recordSubCollectionSale(req, res) {
       isFirstSale: wasFirstSale,
       country: req.body.country || null,
       createdAt: new Date(),
+      acknowledgement: req.acknowledgement || undefined,
     };
 
     console.log("📝 Adding Sale Record:", saleRecord);

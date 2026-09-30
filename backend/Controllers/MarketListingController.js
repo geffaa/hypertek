@@ -375,6 +375,7 @@ export const submitOffer = async (req, res) => {
       offererWallet: req.user.WalletAddress || "",
       amount,
       currency:  currency || "USDC",
+      acknowledgement: req.acknowledgement,
     };
 
     listing.offerHistory.push(entry);
@@ -425,6 +426,7 @@ export const submitBid = async (req, res) => {
       bidderName:   req.user.Nickname || req.user.UserName || req.user.FullName || "Anonymous",
       bidderWallet: req.user.WalletAddress || "",
       amount,
+      acknowledgement: req.acknowledgement,
     });
     listing.currentBid = amount;
 

@@ -5,6 +5,8 @@ import { useAccount, useWalletClient, usePublicClient } from "wagmi";
 import { useEmailWallet } from "../hooks/useEmailWallet";
 import { BACKEND_BASE_URL } from "../Config";
 import { toast } from "react-hot-toast";
+import PurchaseAcknowledgement from "../Components/Common/PurchaseAcknowledgement";
+import { ackPayload } from "../data/purchaseAcknowledgement";
 
 const USDC_ADDRESS = import.meta.env.VITE_USDC_ADDRESS;
 const PLATFORM_WALLET = import.meta.env.VITE_PLATFORM_WALLET;
@@ -26,6 +28,7 @@ export default function PackageCheckoutPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [step, setStep] = useState("idle"); // idle | sending | verifying | done
+  const [ack, setAck] = useState(false);
 
   useEffect(() => {
     if (!isLoggedInUser) {
@@ -40,15 +43,6 @@ export default function PackageCheckoutPage() {
         const pkgData = await pkgRes.json();
         if (!pkgData.success) throw new Error(pkgData.error || "Package not found");
         setPkg(pkgData.package);
-
-        const purchaseRes = await fetch(`${BACKEND_BASE_URL}/api/v1/packages/purchase`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Authorization: `Bearer ${authToken}` },
-          body: JSON.stringify({ packageId: pkgData.package._id, buyerWallet: activeAddress || user?.WalletAddress || user?.MetaMaskAddress }),
-        });
-        const purchaseData = await purchaseRes.json();
-        if (!purchaseData.success) throw new Error(purchaseData.error || "Could not start purchase");
-        setPurchase(purchaseData.purchase);
       } catch (err) {
         setError(err.message);
         toast.error(err.message);
@@ -71,6 +65,20 @@ export default function PackageCheckoutPage() {
 
     try {
       setStep("sending");
+      // The purchase is only opened once the buyer has ticked the acknowledgement.
+      let current = purchase;
+      if (!current) {
+        const purchaseRes = await fetch(`${BACKEND_BASE_URL}/api/v1/packages/purchase`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${authToken}` },
+          body: JSON.stringify({ packageId: pkg._id, buyerWallet: activeAddress || user?.WalletAddress || user?.MetaMaskAddress, acknowledgement: ackPayload() }),
+        });
+        const purchaseData = await purchaseRes.json();
+        if (!purchaseData.success) throw new Error(purchaseData.error || "Could not start purchase");
+        current = purchaseData.purchase;
+        setPurchase(current);
+      }
+
       const amountUnits = BigInt(Math.round(pkg.priceUSD * 1_000_000)); // USDC = 6 decimals
 
       const txHash = await activeWalletClient.writeContract({
@@ -85,7 +93,7 @@ export default function PackageCheckoutPage() {
       setStep("verifying");
       await publicClient.waitForTransactionReceipt({ hash: txHash });
 
-      const res = await fetch(`${BACKEND_BASE_URL}/api/v1/packages/purchase/${purchase._id}/confirm-usdc`, {
+      const res = await fetch(`${BACKEND_BASE_URL}/api/v1/packages/purchase/${current._id}/confirm-usdc`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${authToken}` },
         body: JSON.stringify({ txHash }),
@@ -133,19 +141,22 @@ export default function PackageCheckoutPage() {
         ) : !activeAddress ? (
           <p className="text-center text-gray-600">Connect your wallet to pay with USDC.</p>
         ) : (
+          <>
+          <div className="mb-4"><PurchaseAcknowledgement checked={ack} onChange={setAck} light /></div>
           <button
             type="button"
             onClick={handlePayWithUSDC}
-            disabled={step === "sending" || step === "verifying"}
+            disabled={!ack || step === "sending" || step === "verifying"}
             data-testid="pay-usdc-button"
             className={`w-full py-3 rounded-xl font-semibold text-white text-lg transition-all duration-200 ${
-              step === "sending" || step === "verifying"
+              !ack || step === "sending" || step === "verifying"
                 ? "bg-gray-400 cursor-not-allowed"
                 : "bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700"
             }`}
           >
             {step === "sending" ? "Sending..." : step === "verifying" ? "Verifying..." : `Pay $${pkg.priceUSD} USDC`}
           </button>
+          </>
         )}
       </div>
     </div>

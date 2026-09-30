@@ -233,6 +233,7 @@ export async function placeBid(req, res) {
       bidderName: bidderName || "Anonymous",
       amount: Number(amount),
       country: country || null,
+      acknowledgement: req.acknowledgement,
     });
     auction.currentBid = Number(amount);
     auction.currentBidder = userId;
@@ -281,6 +282,7 @@ export async function instantBuy(req, res) {
     auction.currentBidderCountry = country || null;
     auction.currentBid = auction.instantBuyPrice;
     auction.txHash = txHash || null;
+    auction.buyerAcknowledgement = req.acknowledgement;
 
     await auction.save();
     res.json({ message: "Instant buy successful", auction });

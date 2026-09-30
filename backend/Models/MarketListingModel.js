@@ -7,6 +7,8 @@ const offerEntrySchema = new mongoose.Schema({
   currency:      { type: String, default: "USDC" },
   offeredAt:     { type: Date, default: Date.now },
   status:        { type: String, enum: ["pending", "accepted", "rejected"], default: "pending" },
+  // Checkout acknowledgement the buyer ticked (see Config/purchaseAcknowledgement.js).
+  acknowledgement: { version: String, acceptedAt: Date },
 }, { _id: false });
 
 const bidEntrySchema = new mongoose.Schema({
@@ -14,6 +16,8 @@ const bidEntrySchema = new mongoose.Schema({
   bidderWallet: { type: String, default: "" },
   amount:       { type: Number, required: true },
   placedAt:     { type: Date, default: Date.now },
+  // Checkout acknowledgement the buyer ticked (see Config/purchaseAcknowledgement.js).
+  acknowledgement: { version: String, acceptedAt: Date },
 }, { _id: false });
 
 const marketListingSchema = new mongoose.Schema(

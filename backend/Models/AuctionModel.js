@@ -6,6 +6,8 @@ const bidSchema = new mongoose.Schema({
   bidderName:    { type: String, default: "Anonymous" },
   amount:        { type: Number, required: true },
   placedAt:      { type: Date, default: Date.now },
+  // Checkout acknowledgement the buyer ticked (see Config/purchaseAcknowledgement.js).
+  acknowledgement: { version: String, acceptedAt: Date },
 });
 
 const auctionSchema = new mongoose.Schema(
@@ -18,6 +20,8 @@ const auctionSchema = new mongoose.Schema(
     image:            { type: String, default: "" },
     category:         { type: String, default: "" },
     isNFA:            { type: Boolean, default: false },
+    // Instant-buy buyer's checkout acknowledgement.
+    buyerAcknowledgement: { version: String, acceptedAt: Date },
 
     // Seller
     seller:           { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },

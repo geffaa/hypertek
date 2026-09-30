@@ -8,6 +8,7 @@
 import express from "express";
 import { authMiddleware } from "../Middleware/authMiddleware.js";
 import { purchasesLocked } from "../Middleware/purchasesLocked.js";
+import { requireAcknowledgement } from "../Middleware/requireAcknowledgement.js";
 import {
   CreatePackagePurchase,
   ConfirmPackageUsdcPurchase,
@@ -16,7 +17,7 @@ import {
 
 const PackagePurchaseRouter = express.Router();
 
-PackagePurchaseRouter.post("/", authMiddleware(), purchasesLocked, CreatePackagePurchase);
+PackagePurchaseRouter.post("/", authMiddleware(), purchasesLocked, requireAcknowledgement, CreatePackagePurchase);
 PackagePurchaseRouter.post("/:id/confirm-usdc", authMiddleware(), purchasesLocked, ConfirmPackageUsdcPurchase);
 PackagePurchaseRouter.get("/:id", authMiddleware(), GetPackagePurchase);
 

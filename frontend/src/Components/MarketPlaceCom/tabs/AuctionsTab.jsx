@@ -7,6 +7,8 @@ import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
 import LazyImage from "../../Common/LazyImage";
 import popularFallback from "../../../assets/images/popular/popolar.webp";
 import toast from "react-hot-toast";
+import PurchaseAcknowledgement from "../../Common/PurchaseAcknowledgement";
+import { ackPayload } from "../../../data/purchaseAcknowledgement";
 
 // ── Auction Detail Popup ──────────────────────────────────────────────────────
 function AuctionDetailPopup({ auction, imgSrc, onClose, onBid, onInstantBuy }) {
@@ -190,6 +192,7 @@ function BidModal({ auction, onClose, onSuccess, wallet }) {
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
   const [err, setErr]       = useState("");
+  const [ack, setAck]       = useState(false);
   const minBid = auction.currentBid > 0
     ? Math.ceil(auction.currentBid * 1.05)
     : auction.startPrice;
@@ -203,7 +206,7 @@ function BidModal({ auction, onClose, onSuccess, wallet }) {
       const r = await fetch(`${BACKEND_BASE_URL}/api/v1/auction/${auction._id}/bid`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ amount: Number(amount), bidderWallet: wallet }),
+        body: JSON.stringify({ amount: Number(amount), bidderWallet: wallet, acknowledgement: ackPayload() }),
       });
       const data = await r.json();
       if (!r.ok) throw new Error(data.error);
@@ -329,12 +332,13 @@ function BidModal({ auction, onClose, onSuccess, wallet }) {
               </p>
             </div>
             {err && <p className="text-red-400 text-xs">{err}</p>}
+            <PurchaseAcknowledgement checked={ack} onChange={setAck} />
             <div className="flex gap-2">
               <button onClick={() => setPhase("enter")} className="flex-1 py-2 rounded-xl text-sm text-white/50"
                 style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
                 {t("marketplace.auctions.bidModal.back")}
               </button>
-              <button onClick={placeBid} disabled={loading}
+              <button onClick={placeBid} disabled={loading || !ack}
                 className="flex-2 flex-grow py-2 rounded-xl text-sm font-bold text-white"
                 style={{ background: "rgba(0,42,168,0.85)", border: "1px solid rgba(0,80,255,0.4)" }}>
                 {loading ? t("marketplace.auctions.bidModal.placing") : t("marketplace.auctions.bidModal.confirm", { amount })}
@@ -386,6 +390,7 @@ function InstantBuyModal({ auction, onClose, onSuccess, wallet }) {
   const { t } = useTranslation();
   const [phase, setPhase]   = useState("confirm");
   const [loading, setLoading] = useState(false);
+  const [ack, setAck] = useState(false);
 
   async function confirmBuy() {
     setLoading(true);
@@ -394,7 +399,7 @@ function InstantBuyModal({ auction, onClose, onSuccess, wallet }) {
       const r = await fetch(`${BACKEND_BASE_URL}/api/v1/auction/${auction._id}/instant-buy`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ buyerWallet: wallet }),
+        body: JSON.stringify({ buyerWallet: wallet, acknowledgement: ackPayload() }),
       });
       const data = await r.json();
       if (!r.ok) throw new Error(data.error);
@@ -452,12 +457,13 @@ function InstantBuyModal({ auction, onClose, onSuccess, wallet }) {
                 {t("marketplace.auctions.instantBuyModal.notice")}
               </p>
             </div>
+            <PurchaseAcknowledgement checked={ack} onChange={setAck} />
             <div className="flex gap-2">
               <button onClick={onClose} className="flex-1 py-2 rounded-xl text-sm text-white/50"
                 style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
                 {t("marketplace.auctions.instantBuyModal.cancel")}
               </button>
-              <button onClick={confirmBuy} disabled={loading}
+              <button onClick={confirmBuy} disabled={loading || !ack}
                 className="flex-2 flex-grow py-2 rounded-xl text-sm font-bold text-amber-200"
                 style={{ background: "rgba(160,100,0,0.7)", border: "1px solid rgba(200,140,0,0.4)" }}>
                 {loading ? t("marketplace.auctions.instantBuyModal.processing") : `Buy — ${auction.instantBuyPrice} USDC`}

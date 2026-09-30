@@ -68,6 +68,8 @@ const packagePurchaseSchema = new mongoose.Schema(
     packageType: { type: String, enum: ["bundle", "reward"], default: "bundle" },
 
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    // Checkout acknowledgement the buyer ticked (see Config/purchaseAcknowledgement.js).
+    acknowledgement: { version: String, acceptedAt: Date },
     buyerWallet: { type: String, required: true, lowercase: true, trim: true },
 
     items: { type: [purchaseItemSchema], default: [] }, // bundle packages

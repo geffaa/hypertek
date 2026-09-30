@@ -14,6 +14,8 @@ const saleSchema = new mongoose.Schema({
   // billing-address collection exists yet to fill this in automatically, so it
   // is null until either is wired up on the frontend/Stripe side.
   country: { type: String, default: null },
+  // Checkout acknowledgement the buyer ticked (see Config/purchaseAcknowledgement.js).
+  acknowledgement: { version: String, acceptedAt: Date },
   createdAt: { type: Date, default: Date.now },
 });
 

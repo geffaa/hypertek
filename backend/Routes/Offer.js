@@ -1,4 +1,5 @@
 import express from "express";
+import { requireAcknowledgement } from "../Middleware/requireAcknowledgement.js";
 import {
   createOffer,
   getAllOffers,
@@ -17,7 +18,7 @@ const OfferRoute = express.Router();
  */
 
 // Create a new offer
-OfferRoute.post("/create", createOffer);
+OfferRoute.post("/create", requireAcknowledgement, createOffer);
 
 // Get all offers (for admin or debugging)
 OfferRoute.get("/all", getAllOffers);

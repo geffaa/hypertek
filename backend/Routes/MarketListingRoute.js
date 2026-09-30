@@ -11,6 +11,7 @@ import {
   getPublicMarketplaceListings,
 } from "../Controllers/MarketListingController.js";
 import { authMiddleware } from "../Middleware/authMiddleware.js";
+import { requireAcknowledgement } from "../Middleware/requireAcknowledgement.js";
 
 const MarketListingRouter = express.Router();
 
@@ -21,7 +22,7 @@ MarketListingRouter.post("/",             authMiddleware(), createListing);
 MarketListingRouter.put("/:id",           authMiddleware(), updateListing);
 MarketListingRouter.put("/:id/renew",     authMiddleware(), renewListing);
 MarketListingRouter.delete("/:id",        authMiddleware(), deleteListing);
-MarketListingRouter.post("/:id/offer",    authMiddleware(), submitOffer);
-MarketListingRouter.post("/:id/bid",      authMiddleware(), submitBid);
+MarketListingRouter.post("/:id/offer",    authMiddleware(), requireAcknowledgement, submitOffer);
+MarketListingRouter.post("/:id/bid",      authMiddleware(), requireAcknowledgement, submitBid);
 
 export default MarketListingRouter;

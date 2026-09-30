@@ -112,7 +112,7 @@ export async function confirmPackageUsdcPayment({ purchaseId, txHash }) {
  * reads to know the amount and productId/packageId to put in Stripe metadata,
  * or what a crypto checkout page polls for its USDC amount).
  */
-export async function createPackagePurchaseIntent({ packageId, userId, buyerWallet }) {
+export async function createPackagePurchaseIntent({ packageId, userId, buyerWallet, acknowledgement }) {
   if (!buyerWallet) throw new Error("buyerWallet required");
 
   const pkg = await Package.findById(packageId);
@@ -127,6 +127,7 @@ export async function createPackagePurchaseIntent({ packageId, userId, buyerWall
     packageName: pkg.name,
     packageType: pkg.type,
     userId,
+    acknowledgement,
     buyerWallet: String(buyerWallet).toLowerCase(),
     priceUSD: pkg.priceUSD,
     items: pkg.type === "bundle"

@@ -31,6 +31,8 @@ import { useTokenBalance } from "../../hooks/useTokenBalance";
 import { Wallet, Copy, CreditCard, ZoomIn, X as XIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import PriceHistory from "./BuyNfa2";
+import PurchaseAcknowledgement from "../Common/PurchaseAcknowledgement";
+import { ackPayload } from "../../data/purchaseAcknowledgement";
 
 const stripePromise = STRIPE_PUBLISHABLE_KEY ? loadStripe(STRIPE_PUBLISHABLE_KEY) : null;
 
@@ -189,6 +191,15 @@ function Buy1() {
   const [bidAmount, setBidAmount] = useState("");
   const [bidLoading, setBidLoading] = useState(false);
 
+  // Checkout acknowledgement: asked once per page before any buy, bid or instant-buy.
+  const [ackAccepted, setAckAccepted] = useState(false);
+  const [ackTicked, setAckTicked] = useState(false);
+  const [ackPending, setAckPending] = useState(null);
+  const withAck = (fn) => (...args) => {
+    if (ackAccepted) return fn(...args);
+    setAckTicked(false);
+    setAckPending(() => () => fn(...args));
+  };
   const [tradeListings, setTradeListings] = useState([]);
   const [tradeListingsLoading, setTradeListingsLoading] = useState(false);
   const [tradeFetched, setTradeFetched] = useState(false);
@@ -751,7 +762,7 @@ function Buy1() {
     });
   };
 
-  const handleBuyNFT = async () => {
+  const executeBuyNFT = async () => {
     if (PURCHASES_LOCKED) {
       toast.error(t("marketplace.launchLock.purchasesNote", "Purchases open at official launch"));
       return;
@@ -1060,6 +1071,7 @@ function Buy1() {
           parentId: resolvedParentId,
           subCollectionId: collection._id,
           ...(myAcceptedOffer ? { offerId: myAcceptedOffer._id } : {}),
+          acknowledgement: ackPayload(),
         };
 
         await axios.post(
@@ -1105,6 +1117,8 @@ function Buy1() {
       setLoading(false);
     }
   };
+
+  const handleBuyNFT = withAck(executeBuyNFT);
 
   const handlePaymentCard = async () => {
     if (!user?.id) { toast.error(" Please login first"); return; }
@@ -1200,7 +1214,7 @@ function Buy1() {
 
   const buttonConfig = getButtonAction();
 
-  const handlePlaceBid = async () => {
+  const placeBid = async () => {
     if (!isAnyConnected || !activeAddress) return toast.error("Connect your wallet first");
     if (!user?.id) return toast.error("Login required to bid");
     if (!bidAmount || parseFloat(bidAmount) <= 0) return toast.error("Enter a valid bid amount");
@@ -1214,7 +1228,7 @@ function Buy1() {
       setBidLoading(true);
       await axios.post(
         `${BACKEND_BASE_URL}/api/v1/auction/${auctionInfo._id}/bid`,
-        { amount: parseFloat(bidAmount), bidderWallet: activeAddress.toLowerCase() },
+        { amount: parseFloat(bidAmount), bidderWallet: activeAddress.toLowerCase(), acknowledgement: ackPayload() },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       toast.success("Bid placed!");
@@ -1225,6 +1239,27 @@ function Buy1() {
       toast.error(err.response?.data?.error || "Failed to place bid");
     } finally { setBidLoading(false); }
   };
+
+  const handlePlaceBid = withAck(placeBid);
+
+  const instantBuy = async () => {
+    if (!isAnyConnected) return toast.error("Connect your wallet first");
+    if (!user?.id) return toast.error("Login required");
+    try {
+      setBidLoading(true);
+      await axios.post(
+        `${BACKEND_BASE_URL}/api/v1/auction/${auctionInfo._id}/instant-buy`,
+        { buyerWallet: activeAddress.toLowerCase(), acknowledgement: ackPayload() },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      toast.success("Item purchased instantly!");
+      setAuctionFetched(false);
+      fetchAuctionInfo();
+    } catch (err) {
+      toast.error(err.response?.data?.error || "Instant buy failed");
+    } finally { setBidLoading(false); }
+  };
+  const handleInstantBuy = withAck(instantBuy);
 
   const timeRemaining = (endTime) => {
     const diff = new Date(endTime) - Date.now();
@@ -1239,6 +1274,25 @@ function Buy1() {
 
   return (
     <div className="text-white px-4 sm:px-6 lg:px-12 xl:px-16 pb-8 max-w-6xl mx-auto pt-6 w-full">
+
+      {ackPending && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/70 backdrop-blur-sm px-4" onClick={() => setAckPending(null)}>
+          <div className="bg-[#0f0f2a] border border-white/10 rounded-2xl p-5 w-full max-w-md shadow-2xl max-h-[85vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <h3 className="text-sm font-bold text-white mb-3">Purchase acknowledgement</h3>
+            <PurchaseAcknowledgement checked={ackTicked} onChange={setAckTicked} />
+            <div className="flex gap-2 mt-4">
+              <button onClick={() => setAckPending(null)} className="flex-1 py-2.5 rounded-lg text-sm text-white/60 bg-white/5 hover:bg-white/10">Cancel</button>
+              <button
+                disabled={!ackTicked}
+                onClick={() => { const run = ackPending; setAckAccepted(true); setAckPending(null); run(); }}
+                className="flex-1 py-2.5 rounded-lg text-sm font-semibold text-white bg-[#002AA8] hover:bg-[#0033cc] disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                Continue
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {showPayModal && (
         <div
@@ -1876,23 +1930,7 @@ function Buy1() {
 
                       {auctionInfo.instantBuyPrice > 0 && (
                         <button
-                          onClick={async () => {
-                            if (!isAnyConnected) return toast.error("Connect your wallet first");
-                            if (!user?.id) return toast.error("Login required");
-                            try {
-                              setBidLoading(true);
-                              await axios.post(
-                                `${BACKEND_BASE_URL}/api/v1/auction/${auctionInfo._id}/instant-buy`,
-                                { buyerWallet: activeAddress.toLowerCase() },
-                                { headers: { Authorization: `Bearer ${token}` } }
-                              );
-                              toast.success("Item purchased instantly!");
-                              setAuctionFetched(false);
-                              fetchAuctionInfo();
-                            } catch (err) {
-                              toast.error(err.response?.data?.error || "Instant buy failed");
-                            } finally { setBidLoading(false); }
-                          }}
+                          onClick={handleInstantBuy}
                           disabled={bidLoading}
                           className="w-full py-2.5 rounded-lg text-sm font-semibold text-amber-200 disabled:opacity-50 transition-all"
                           style={{ background: "rgba(251,191,36,0.15)", border: "1px solid rgba(251,191,36,0.3)" }}

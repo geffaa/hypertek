@@ -20,6 +20,7 @@ const offerSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    acknowledgement: { version: String, acceptedAt: Date },
     offerPrice: {
       type: Number,
       required: true,
