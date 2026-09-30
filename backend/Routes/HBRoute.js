@@ -1,35 +1,34 @@
 import express from "express";
 import {
-  earnHB,
   spendHB,
-  cashoutHB,
-  requestCashoutOTP,
   getHBBalance,
   getHBHistory,
-  saveBankDetails,
-  getBankDetails,
-  saveDebitCard,
-  getDebitCard,
   createHBTopupIntent,
   topupViaUSDC,
   getHBPlatformStats,
-  getFxRate,
 } from "../Controllers/HBController.js";
 import { authMiddleware } from "../Middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/earn", authMiddleware(), earnHB);
+// Gems (stored as hyperBucks) are bought and spent in-game only. Earning them
+// as a reward and cashing them out are both retired: either would make them a
+// payment rather than a consumable.
+const retired = (_req, res) =>
+  res.status(410).json({ success: false, error: "Gems can only be bought and used in-game. Cash-out is not available." });
+
+router.post("/earn", retired);
+router.post("/cashout/otp", retired);
+router.post("/cashout", retired);
+router.get("/fx-rate", retired);
+router.get("/bank-details", retired);
+router.put("/bank-details", retired);
+router.get("/debit-card", retired);
+router.put("/debit-card", retired);
+
 router.post("/spend", authMiddleware(), spendHB);
-router.post("/cashout/otp", authMiddleware(), requestCashoutOTP);
-router.post("/cashout", authMiddleware(), cashoutHB);
 router.get("/balance", authMiddleware(), getHBBalance);
-router.get("/fx-rate", authMiddleware(), getFxRate);
 router.get("/history", authMiddleware(), getHBHistory);
-router.get("/bank-details", authMiddleware(), getBankDetails);
-router.put("/bank-details", authMiddleware(), saveBankDetails);
-router.get("/debit-card", authMiddleware(), getDebitCard);
-router.put("/debit-card", authMiddleware(), saveDebitCard);
 router.post("/topup/intent", authMiddleware(), createHBTopupIntent);
 router.post("/topup/usdc", authMiddleware(), topupViaUSDC);
 router.get("/admin/stats", authMiddleware("admin"), getHBPlatformStats);

@@ -1,6 +1,5 @@
 import express from "express";
 import {
-  createCashoutSession,
   createFundSession,
   getOrderStatus,
   handleWebhook,
@@ -15,7 +14,9 @@ router.post("/webhook", handleWebhook);
 
 // Authenticated session + status endpoints.
 router.post("/fund/session", authMiddleware(), createFundSession); // buy USDC to user wallet (marketplace + top-up)
-router.post("/cashout/session", authMiddleware(), createCashoutSession);
+// Gems cash-out via Transak is retired (Gems are in-game only).
+router.post("/cashout/session", (_req, res) =>
+  res.status(410).json({ success: false, error: "Cash-out is not available." }));
 router.get("/order/:partnerOrderId", authMiddleware(), getOrderStatus);
 
 export default router;
