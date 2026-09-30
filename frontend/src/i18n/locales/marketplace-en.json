@@ -37,23 +37,23 @@
       "facts": [
         {
           "label": "NFA",
-          "desc": "Hyper Tek-only asset. Highest in-game bonuses. Guaranteed minimum buyback value that grows with every sale."
+          "desc": "Hyper Tek-only item. Highest in-game bonuses. Programmatic Trade-In Value that each resale adds to."
         },
         {
           "label": "NFC",
-          "desc": "Created by Hyper Tek or licensed players. In-game bonuses included. Minimum buyback guaranteed."
+          "desc": "Created by Hyper Tek or licensed players. In-game bonuses included. Programmatic Trade-In Value included."
         },
         {
           "label": "NFT",
-          "desc": "Player-created collectible. No in-game bonuses. No buyback guarantee. Tradeable on the marketplace."
+          "desc": "Player-created collectible. No in-game bonuses. No trade-in value. Tradeable on the marketplace."
         },
         {
           "label": "Commission",
-          "desc": "Platform fee varies per listing. Resales split: seller 86%, artist royalty 2%, +5% to buyback, platform 7%."
+          "desc": "Platform fee varies per listing. Resales split: seller 86%, artist royalty 2%, 5% to the item's trade-in allocation, platform 7%."
         },
         {
-          "label": "Buyback Growth",
-          "desc": "+5% of each resale price is added to the asset's minimum buyback value. It only ever grows."
+          "label": "Trade-In Allocation",
+          "desc": "5% of each resale price is added to the item's trade-in allocation. The amount returned on a trade-in follows the Tiered Loyalty Return Schedule and is always less than the amount allocated."
         },
         {
           "label": "Custodial Wallet",
@@ -68,7 +68,7 @@
         {
           "label": "NFAs / NFCs / NFTs",
           "tagline": "New to Web3.5 assets? Start here",
-          "intro": "NFAs/NFCs/NFTs are digital artworks that ALL have Guaranteed Minimum buy-backs and in-game bonuses",
+          "intro": "NFAs/NFCs/NFTs are digital artworks. NFAs and NFCs carry in-game bonuses and a Programmatic Trade-In Value.",
           "details": [
             "**NFAs** (Non-Fungible Assets) are Hyper Tek-issued items.",
             "**NFCs** (Non-Fungible Collectables) are licensed player and Hyper Tek-issued items.",
@@ -117,21 +117,21 @@
           "cta": "Explore Quests"
         },
         {
-          "label": "For Hire",
-          "tagline": "Borrow assets or earn from yours",
+          "label": "To Let",
+          "tagline": "Let out your items for in-game rewards",
           "details": [
             "Rent powerful specialists or gear for a single mission without buying outright.",
-            "List your own idle assets for rent and earn passive income while you're away.",
+            "Players may be able to let out idle items to other players for in-game rewards they negotiate between themselves.",
             "Flexible durations: hourly, daily, or per-mission agreements."
           ],
-          "cta": "Browse For Hire"
+          "cta": "Browse To Let"
         },
         {
           "label": "Bounty",
           "tagline": "Hunt targets, claim rewards, top the leaderboard",
           "details": [
             "Accept bounties posted by other players or the system to earn crypto rewards.",
-            "Climb the bounty leaderboard to unlock exclusive titles and bonus payouts.",
+            "Climb the bounty leaderboard to unlock exclusive titles and in-game rewards.",
             "Post your own bounties to recruit skilled players for your objectives."
           ],
           "cta": "View Bounties"
@@ -143,7 +143,7 @@
       "subtitle": "Browse NFAs, NFCs, and NFTs available for immediate purchase — skins, weapons, specialists, spaceships, and more.",
       "filterAll": "All",
       "samplePreviewTitle": "Sample Marketplace Preview",
-      "samplePreviewDesc": "The items below are sample previews showcasing the types of digital assets that will be available on the Hyper Tek marketplace. Actual items with unique artwork and blockchain-verified ownership will be available at launch.",
+      "samplePreviewDesc": "The items below are sample previews of the kinds of digital items that may be available on the Hyper Tek marketplace. Actual items with unique artwork and blockchain-verified ownership may be available at launch.",
       "noItems": "No items available yet. Check back soon.",
       "search": "Search...",
       "filter": "Filter",
@@ -204,7 +204,7 @@
       },
       "preview": {
         "title": "In-Game Feature Preview",
-        "desc": "The Auction system will be fully live in-game at launch. Items shown here are seeded samples for investor/user showcase."
+        "desc": "The Auction system may go live in-game at launch. Items shown here are seeded samples for preview only."
       },
       "card": {
         "currentBid": "Current bid",
@@ -376,7 +376,7 @@
       "earnFromQuests": "Want to earn from quests? Play the game →",
       "moneyQuests": "Money Quests (11% pool)",
       "resourceQuests": "Resource Quests (20% pool)",
-      "footerNote1": "# Quests with combined payloads will be paid out using the separate table amounts.",
+      "footerNote1": "# Quests with combined payloads use the separate table rewards.",
       "footerNote2": "# Planet data will sync when the games go live.",
       "inGame": "In-game",
       "open": "Open",
@@ -414,43 +414,43 @@
       }
     },
     "hire": {
-      "heading": "For Hire",
+      "heading": "To Let",
       "listings": "listings",
       "listBtn": "List",
-      "forHireLabel": "For Hire",
-      "wantingToHire": "Wanting to Hire",
+      "forHireLabel": "To Let",
+      "wantingToHire": "Wanting to Let",
       "noListings": "No {{filter}} listings",
       "lockedTitle": "Letting may become available if the games are released.",
       "lockedDesc": "Players may be able to let out items to other players and receive in-game rewards they negotiate between themselves, subject to the final game rules.",
-      "forHireBadge": "FOR HIRE",
-      "wantedBadge": "WANTING TO HIRE",
+      "forHireBadge": "TO LET",
+      "wantedBadge": "WANTED TO LET",
       "price": "Price",
       "maxDuration": "Max Duration",
-      "hireBtn": "Hire",
+      "hireBtn": "Let",
       "fulfillBtn": "Fulfill Request",
       "rules": {
         "durations": "8h · 1d · 3d · 1w · 1mo",
         "cooldown": "Cooldown: 2× rental duration",
         "commission": "Commission varies",
-        "payment": "Pay in Hyper Bucks or Materials"
+        "payment": "In-game rewards negotiated between players"
       },
       "preview": {
         "title": "In-Game Feature Preview",
-        "desc": "The For Hire system will be fully live in-game at launch. Items shown here are seeded samples for investor/user showcase."
+        "desc": "Letting may go live in-game at launch. Items shown here are seeded samples for preview only."
       },
       "hireModal": {
-        "hireTitle": "Hire Specialist",
-        "fulfillTitle": "Fulfill Hire Request",
-        "forHireBadge": "FOR HIRE",
+        "hireTitle": "Let Specialist",
+        "fulfillTitle": "Fulfil Letting Request",
+        "forHireBadge": "TO LET",
         "wantedBadge": "WANTED",
         "price": "Price",
         "duration": "Duration",
-        "howHire": "How hiring works",
+        "howHire": "How letting works",
         "howFulfill": "How fulfilling a request works",
-        "proceedHire": "Proceed to Hire",
+        "proceedHire": "Proceed to Let",
         "offerFulfill": "Offer to Fulfill",
         "commission": "Platform commission varies · Cooldown applies after return",
-        "confirmHire": "Confirm Hire",
+        "confirmHire": "Confirm Letting",
         "confirmOffer": "Confirm Offer",
         "specialist": "Specialist",
         "payment": "Payment",
@@ -468,19 +468,19 @@
         "close": "Close"
       },
       "createModal": {
-        "listTitle": "List For Hire",
-        "postTitle": "Post Wanting to Hire",
-        "forHireBtn": "For Hire",
-        "wantingBtn": "Wanting to Hire",
+        "listTitle": "List To Let",
+        "postTitle": "Post Wanting to Let",
+        "forHireBtn": "To Let",
+        "wantingBtn": "Wanting to Let",
         "itemNameHire": "Specialist / item name *",
-        "itemNameWant": "What you want to hire *",
+        "itemNameWant": "What you want to let *",
         "descPlaceholder": "Description",
         "categoryPlaceholder": "Category (optional)",
         "paymentType": "Payment Type",
-        "hyperBucks": "Hyper Bucks",
+        "hyperBucks": "In-game reward",
         "materials": "Materials",
-        "amountLabel": "Amount (Hyper Bucks)",
-        "afterCommission": "You receive {{amount}} HB after platform commission",
+        "amountLabel": "In-game reward",
+        "afterCommission": "You receive {{amount}} in-game after platform commission",
         "maxDuration": "Max Duration",
         "disclaimer": "Commission varies · Cooldown = 2× rental duration after return",
         "listing": "Listing…",
@@ -515,7 +515,7 @@
         "postedBy": "Posted By",
         "claimedBy": "Claimed By",
         "status": "Status",
-        "netHB": "{{amount}} HB net"
+        "netHB": "{{amount}} net"
       },
       "pagination": {
         "prev": "Prev",
@@ -630,9 +630,9 @@
       "platform": "Platform",
       "noDesc": "No description provided for this item.",
       "price": "Price",
-      "minBuyback": "Min Buyback Guarantee",
+      "minBuyback": "Programmatic Trade-In Value",
       "reservePrice": "Reserve Price",
-      "buybackNote": "This asset cannot be sold below its minimum buyback value.",
+      "buybackNote": "The reserve price cannot be set below this item's trade-in allocation.",
       "networkNote": "USDC on Base · Base ETH required for gas (wallet payments only)",
       "buyWithCard": "Buy With Card",
       "makeOffer": "Make Offer",

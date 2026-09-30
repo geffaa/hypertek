@@ -368,9 +368,9 @@ export default function Navbar() {
                   <Link to="/dashboard/topup"
                     className="flex items-center gap-1.5 px-3 h-10 rounded-xl text-sm font-semibold text-white hover:opacity-90 transition-opacity"
                     style={{ background: "rgba(0,42,168,0.6)", border: "1px solid rgba(0,80,255,0.35)" }}
-                    data-tooltip="Hyper Bucks — click to withdraw">
+                    data-tooltip="Gems — click to top up">
                     <HBCoinIcon size={22} />
-                    <span>{Number(hbBalance).toLocaleString()} HB</span>
+                    <span>{Number(hbBalance).toLocaleString()} Gems</span>
                   </Link>
                 )}
 

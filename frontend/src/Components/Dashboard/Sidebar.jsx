@@ -166,7 +166,7 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
               >
                 <FiZap className="text-white w-[20px] h-[20px] flex-shrink-0" />
                 <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px" }}>
-                  {t("dashboard.sidebar.hyperBucks","Hyper Bucks")}
+                  {t("dashboard.sidebar.hyperBucks","Gems")}
                 </h1>
               </li>
             </Link>

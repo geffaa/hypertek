@@ -16,7 +16,7 @@ const ACTIVITY_LABELS = {
   buying_general:  "Buying General",
   buying_auction:  "Buying Auction",
   trading:         "Trading",
-  hiring:          "Hiring",
+  hiring:          "Letting",
 };
 
 const STATUS_COLORS = {

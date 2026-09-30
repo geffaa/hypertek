@@ -358,7 +358,7 @@ function About({ isPreview = false }) {
               <span className="text-white/70 text-[12px] font-bold tracking-[0.3em] uppercase">{sec03.label || "The Universe"}</span>
             </div>
             <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[36px] text-white">
-              {sec03.heading || "Three Worlds. One Economy."}
+              {sec03.heading || "Three Worlds. One Universe."}
             </h2>
             <p className="text-white/38 text-sm mt-2 max-w-lg mx-auto">
               {sec03.subtitle}
@@ -425,7 +425,7 @@ function About({ isPreview = false }) {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-10">
             <SectionLabel number="04" label={sec04.label || "Non-Fungible Digital Artworks"} />
             <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[36px] text-white leading-tight">
-              {sec04.heading || "Digital Art With Guaranteed Value"}
+              {sec04.heading || "Digital Art With In-Game Utility"}
             </h2>
             <p className="text-white/45 text-[12px] mt-2 tracking-[0.2em] uppercase" style={{ fontFamily: "Orbitron, sans-serif" }}>
               {sec04.subtitle}
@@ -551,7 +551,7 @@ function About({ isPreview = false }) {
               <ul className="flex flex-col gap-5 mb-9 text-left">
                 {[
                   "Limited-edition NFAs and discounted packages are available now – only while early access stays open.",
-                  "Discounts close for good the moment we launch our envisioned early backer campaign.",
+                  "This discounted price is available for a limited time only.",
                   "Limited-edition items remain only until our funding target is reached – then they're gone for good.",
                 ].map((b, i) => (
                   <li key={i} className="flex gap-4 items-start">

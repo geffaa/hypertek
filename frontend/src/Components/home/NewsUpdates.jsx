@@ -11,16 +11,16 @@ const ARTICLE_ITEMS = [
     id: "article-001",
     tag: "PLATFORM UPDATE",
     tagColor: "#22c55e",
-    title: "Hyper Bucks — Top-Up & Cashout Now Live",
+    title: "Gems — Top-Up Now Live",
     date: "June 2025",
     points: [
       "Top up with credit/debit card or USDC crypto",
       "Cash out via bank transfer (1–3 business days) or USDC",
-      "Minimum $1 USD (250 HB) for top-up and cashout",
-      "OTP email verification protects every cashout",
+      "Minimum $1 USD for a Gems top-up",
+      "Gems are for in-game purchases only",
       "KYC identity check required before first withdrawal",
     ],
-    note: "250 HB = $1 USD · All transactions secured by Stripe",
+    note: "All payments secured by Stripe",
   },
 ];
 // ────────────────────────────────────────────────────────────────────────────

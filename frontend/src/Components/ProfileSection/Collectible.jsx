@@ -5,8 +5,6 @@ import ProfileBanner from "./ProfileBanner";
 import { Link, useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import NavLinks from "../ProfileSection/Navlinks";
 import ProfileListingsTab from "./ProfileListingsTab";
-import ProfileQuestingTab from "./ProfileQuestingTab";
-import ProfileBountyTab from "./ProfileBountyTab";
 import StickyAvatarSidebar from "./StickyAvatarSidebar";
 
 import FaceOne from "../../assets/images/noActivity1.webp";
@@ -1018,70 +1016,20 @@ function MarketPlace() {
               );
             })()}
 
-            {/* ---- FOR HIRE VIEW ---- */}
-            {activeTab === "For Hire" && (() => {
-              const FOR_HIRE_COLS = ["Hire No", "Item", "Hired To", "Duration", "Payment", "Return Date", "Status"];
-              const colTemplate = "0.8fr 1.5fr 1.2fr 0.8fr 1fr 1fr 0.8fr";
+            {/* ---- GAME TABS (To Let / Quests / Bounty) ----
+                Kept as lock cards until the games exist: nothing is fetched,
+                so no listings, amounts or reward figures are shown. */}
+            {["For Hire", "Quests", "Bounty"].includes(activeTab) && (() => {
+              const key = { "For Hire": "hire", Quests: "quests", Bounty: "bounty" }[activeTab];
               return (
                 <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
-                  <div className="flex-1 min-w-0">
-                    {/* CSS Grid overlap — skeleton behind, lock card on top via sticky */}
-                    <div style={{ display: "grid" }}>
-                      {/* Table skeleton */}
-                      <div className="pointer-events-none select-none" style={{ gridRow: "1/1", gridColumn: "1/1", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, overflow: "clip" }}>
-                        {/* Header */}
-                        <div className="overflow-x-auto" style={{ background: "rgba(4,8,28,0.98)" }}>
-                          <div className="grid min-w-[720px] px-4 py-5 text-[10px] font-semibold uppercase tracking-widest text-white/30"
-                            style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: colTemplate }}>
-                            {FOR_HIRE_COLS.map((col) => <span key={col}>{col}</span>)}
-                          </div>
-                        </div>
-                        {/* Empty rows placeholder */}
-                        <div className="overflow-x-auto">
-                          {Array.from({ length: 8 }).map((_, i) => (
-                            <div key={i} className="grid min-w-[720px] px-4 py-4 items-center"
-                              style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)", gridTemplateColumns: colTemplate }}>
-                              {FOR_HIRE_COLS.map((col) => (
-                                <div key={col} className="h-3 rounded" style={{ background: "rgba(255,255,255,0.05)", width: "60%" }} />
-                              ))}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Sticky lock card — overlaps skeleton, centres in viewport */}
-                      <LockCard
-                        title="Hyper Tek Gaming content for display purposes only."
-                        desc="This is part of Hyper Tek's genuine 'Play to Earn' system, where players can earn real cash rewards, and or Materials/Resources."
-                      />
-                    </div>
+                  <div className="flex-1 min-w-0 grid min-h-[50vh] place-items-center">
+                    <LockCard title={t(`marketplace.gameLock.${key}.title`)} desc={t(`marketplace.gameLock.${key}.desc`)} />
                   </div>
                   <div className="hidden xl:block"><StickyAvatarSidebar /></div>
                 </div>
               );
             })()}
-
-            {/* ---- QUESTING VIEW ---- */}
-            {activeTab === "Quests" && (
-              <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
-                <div className="flex-1 min-w-0">
-                  <div className="pointer-events-none select-none">
-                    <ProfileQuestingTab wallet={connectedWallet} token={token} />
-                  </div>
-                </div>
-                <div className="hidden xl:block"><StickyAvatarSidebar /></div>
-              </div>
-            )}
-
-            {/* ---- BOUNTY VIEW ---- */}
-            {activeTab === "Bounty" && (
-              <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
-                <div className="flex-1 min-w-0">
-                  <ProfileBountyTab wallet={connectedWallet} token={token} />
-                </div>
-                <div className="hidden xl:block"><StickyAvatarSidebar /></div>
-              </div>
-            )}
           </section>
         </div>
       </div >

@@ -14,12 +14,12 @@ const fadeUp = {
 
 // TODO: Replace with admin-curated API endpoint (e.g. GET /api/v1/admin/featured-nfa)
 export const DUMMY_FEATURED_NFA = [
-  { id: 1, name: "Shadow Blade NFA",     category: "Weapons",       price: 2500, image: null, hasBuyback: true,  minBuyback: 875 },
-  { id: 2, name: "Storm Sentinel NFA",   category: "Skins",         price: 1800, image: null, hasBuyback: true,  minBuyback: 630 },
-  { id: 3, name: "Void Crystal NFA",     category: "General",       price: 950,  image: null, hasBuyback: false, minBuyback: 0   },
-  { id: 4, name: "Iron Titan NFA",       category: "Skins",         price: 3200, image: null, hasBuyback: true,  minBuyback: 1120 },
-  { id: 5, name: "Aurora Station NFA",   category: "Land And Bases", price: 4500, image: null, hasBuyback: true,  minBuyback: 1575 },
-  { id: 6, name: "Cyber District NFA",   category: "Land And Bases", price: 2100, image: null, hasBuyback: false, minBuyback: 0   },
+  { id: 1, name: "Shadow Blade NFA",     category: "Weapons",       price: 2500, image: null },
+  { id: 2, name: "Storm Sentinel NFA",   category: "Skins",         price: 1800, image: null },
+  { id: 3, name: "Void Crystal NFA",     category: "General",       price: 950,  image: null },
+  { id: 4, name: "Iron Titan NFA",       category: "Skins",         price: 3200, image: null },
+  { id: 5, name: "Aurora Station NFA",   category: "Land And Bases", price: 4500, image: null },
+  { id: 6, name: "Cyber District NFA",   category: "Land And Bases", price: 2100, image: null },
 ];
 
 // Standalone NFA items grid — rendered inside PopularCollections card
@@ -95,11 +95,6 @@ export function NFAItemsSection() {
                 style={{ background: "#FF6B3580", border: "1px solid #FF6B35" }}>
                 NFA
               </span>
-              {item.hasBuyback && (
-                <span className="absolute top-2 right-2 text-[9px] font-bold px-1.5 py-0.5 rounded bg-[#50C87880] border border-[#50C878]">
-                  BB ✦
-                </span>
-              )}
             </div>
             <div className="flex flex-col gap-1.5 p-2.5 sm:p-3 flex-1">
               <h3 className="text-white font-semibold text-xs sm:text-sm truncate">{item.name || "Unnamed Item"}</h3>
@@ -110,12 +105,6 @@ export function NFAItemsSection() {
                 <span className="text-white/50 text-[10px]">{t("homeMarket.price")}</span>
                 <span className="text-white font-semibold text-[10px] sm:text-xs">{item.price} USDC</span>
               </div>
-              {item.hasBuyback && item.minBuyback > 0 && (
-                <div className="flex items-center justify-between">
-                  <span className="text-[#50C878]/70 text-[9px]">{t("homeMarket.minBuyback")}</span>
-                  <span className="text-[#50C878] font-semibold text-[9px]">${item.minBuyback} USD</span>
-                </div>
-              )}
               <div className="mt-auto pt-2">
                 <button
                   disabled

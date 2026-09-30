@@ -10,7 +10,7 @@ const teamData = [
     role: "Chief Executive Officer",
     img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
     bio: "Visionary leader with 12+ years in tech entrepreneurship and business strategy. Driving innovation and growth across multiple successful ventures.",
-    expertise: ["Business Strategy", "Tech Innovation", "Team Leadership", "Investment"],
+    expertise: ["Business Strategy", "Tech Innovation", "Team Leadership", "Business Development"],
     socials: [
       { platform: "linkedin", url: "#" },
       { platform: "github", url: "#" },

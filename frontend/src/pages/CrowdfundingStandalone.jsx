@@ -52,7 +52,7 @@ const MILESTONES = [
     bullets: [
       { text: "Collaborate with a team of talented 2D/3D artists for conceptual models and artwork" },
       { text: "Engage Web3 specialists to design and build an innovative Web3.5 website and digital marketplace." },
-      { text: "Featuring cutting-edge NFA/NFC/NFT systems, a guaranteed buy-back framework, and smart contracts for secure transactions" },
+      { text: "Featuring NFA/NFC/NFT systems, a Programmatic Trade-In Value framework, and smart contracts for secure transactions" },
     ],
   },
   {
@@ -64,17 +64,17 @@ const MILESTONES = [
     bullets: [
       { text: "Gaming and Marketplace Overview" },
       { text: "Player creatable NFTs are now available" },
-      { text: "Limited-edition items and discounted packages that help fund development before the crowd arrives" },
+      { text: "Limited-edition items and discounted packages available for a limited time" },
     ],
   },
   {
     num: 5,
-    title: "Early Backer Campaign",
+    title: "Early Access Closes",
     Icon: HandCoins,
-    intro: "Pending the success of the Project Launch, the official early backer campaign kicks off!",
+    intro: "After the Project Launch, the early-access release of limited-edition items is planned to close.",
     bullets: [
-      { text: "All discount packages will end permanently!" },
-      { text: "Additionally, our exclusive limited-edition NFAs will only be available for purchase until we reach our funding goal. Don't miss your chance to secure these unique items while you can.... Once they're gone, they're gone!" },
+      { text: "Discounted packages may end permanently." },
+      { text: "Our limited-edition NFAs are hard-capped in supply. Once they're gone, they will not be minted again." },
     ],
   },
   {
@@ -82,40 +82,40 @@ const MILESTONES = [
     title: "Game Development Accelerates",
     Icon: Gauge,
     bullets: [
-      { text: "Game development starts by turning documents into games and builds upon the previously developed 2D and 3D assets" },
-      { text: "New NFAs to be released to the marketplace" },
-      { text: "Regular updates will be shared with our growing community, ensuring everyone stays informed and engaged with the latest developments." },
+      { text: "Game development is planned to turn the design documents into games, building on the previously developed 2D and 3D assets" },
+      { text: "New NFAs may be released to the marketplace" },
+      { text: "Regular updates are planned for our growing community, so everyone stays informed about the latest developments." },
     ],
   },
   {
     num: 7,
     title: "Alpha Deployment",
     Icon: ScanSearch,
-    intro: "Alpha testing will focus on enhancing the game mechanics and the core gameplay loop. This process will carefully examine various elements of the game to ensure they function smoothly and engage players effectively. Additionally, developers share official content with the team for constructive feedback, allowing for adjustments and improvements before moving closer to the final release.",
+    intro: "Alpha testing is planned to focus on the game mechanics and the core gameplay loop, examining each element so it functions smoothly and engages players. Developers may share content with the team for feedback, allowing adjustments before moving closer to a final release.",
   },
   {
     num: 8,
     title: "Beta Deployment",
     Icon: Users,
-    intro: "Announce the upcoming Closed and Open Beta phases, which will include a carefully chosen group of users who have signed up to participate. These participants will have the unique opportunity to experience exclusive in-game content specially designed for this testing phase. Join us now and become one of the future selected players invited to explore new features and provide valuable feedback!",
+    intro: "Closed and Open Beta phases are planned, which may include a selected group of users who have signed up to participate. Participants may be able to try in-game content designed for this testing phase and give feedback on new features.",
   },
   {
     num: 9,
     title: "Systems Live – Official Launch",
     Icon: Rocket,
-    intro: "The official launch of Hyper Tek Games will take place through an engaging media countdown, strategically designed to build excitement and anticipation. This initiative has been shaped by valuable player feedback and aims to enhance the game's visibility in the mainstream market.",
+    intro: "If the games reach launch, an official launch is planned through a media countdown, shaped by player feedback and aimed at the mainstream market.",
   },
   {
     num: 10,
     title: "VR Integration Release",
     Icon: Glasses,
-    intro: "The official launch of the VR Integration, designed with active input and suggestions from our players at every stage of development. This collaborative effort will ensure an engaging and immersive experience that reflects the desires and needs of our gaming community, as well as the vision that we had for the Project",
+    intro: "A planned VR Integration release, designed with input and suggestions from our players at each stage of development, aiming for an immersive experience that reflects our gaming community and the vision for the Project.",
   },
   {
     num: 11,
     title: "GETs System Manufacture & Release",
     Icon: Cpu,
-    intro: "The GETs system will progress toward manufacturing and release phases. For a deeper understanding, be sure to read our White Paper. If you're interested in being part of this innovative journey, please reach out to us to secure your place in the process.",
+    intro: "The GETs system is planned to progress toward manufacturing and release phases. For more detail, read our White Paper.",
   },
 ];
 
@@ -123,12 +123,12 @@ const EARLY_ACCESS = {
   eyebrow: "LIMITED-TIME OPPORTUNITY",
   heading: "Don't Miss the Early-Access Window",
   bullets: [
-    "Limited-edition NFAs and discounted packages are available now – only while early access stays open.",
-    "Discounts close for good the moment we launch our envisioned early backer campaign.",
-    "Limited-edition items remain only until our funding target is reached – then they're gone for good.",
+    "Limited-edition NFAs and discounted packages are available now, only while early access stays open.",
+    "This discounted price is available for a limited time only.",
+    "Limited-edition items are hard-capped in supply. Once they're gone, they will not be minted again.",
   ],
   cta: "Secure Your Place Today",
-  note: "Watch for updates, read the White Paper, and lock in early pricing before the crowd arrives.",
+  note: "Watch for updates and read the White Paper. Items are sold as is; in-game bonuses may apply only if the games are released.",
 };
 
 const WEB3_CARD_ACCENTS = CARD_ACCENTS_SOLID;

@@ -9,18 +9,18 @@
       },
       {
         "v": "NFA",
-        "l": "Guaranteed Min Buy-back"
+        "l": "Programmatic Trade-In Value"
       },
       {
         "v": "P2E",
-        "l": "Play-to-Earn"
+        "l": "Play-to-Own"
       }
     ],
     "subtitle": [
       "The Hyper Tek mission was to address multiple issues within the gaming industry and to redefine how gaming ecosystems operate by creating an interconnected universe where players are not limited to a single gameplay style. By combining multiple genres into one progression system, the Hyper Tek project provides a dynamic environment where players can explore, compete, and grow within a unified world.",
-      "It sets out to give true ownership to digital assets that have real value, which increases over time with a guaranteed minimum buy-back on all Non-Fungible Artworks, and true play-to-earn designed infrastructure within the ecosystem, which players contribute to.",
+      "It sets out to give players true ownership of their digital items, each with in-game utility and a Programmatic Trade-In Value, within an ecosystem that players help shape.",
       "The project aims to empower players by giving them meaningful ownership over their progress and rewards while encouraging creativity, collaboration, and competition.",
-      "Hyper Tek's long-term goal is to build a living digital universe where multiple games, economies, and communities coexist on a single interconnected platform."
+      "Hyper Tek's long-term goal is to build a digital universe where multiple games and communities may coexist on a single interconnected platform."
     ],
     "section01": {
       "label": "The Beginning",
@@ -28,7 +28,7 @@
       "heading2": "Gaming Can Be",
       "paras": [
         "The Hyper Tek Project was founded by Don Bennett, an ex-aerospace technician, who envisioned a gaming environment where multiple genres could coexist within a single progression system. Rather than forcing players to remain in one gameplay loop, Hyper Tek allows them to explore different activities while building their character, resources, and reputation across the entire ecosystem, with progression, materials, rewards, and achievements flowing seamlessly across all the games.",
-        "The project combines three major game environments: Hyper Racing, Hyper Quest, and Overlord of the Seven Realms. Each game represents a different style of gameplay, yet all operate within the same universe and share the same player economy. This design allows players to engage in the type of gameplay they enjoy most while still contributing to a larger ecosystem to create a new generation of gaming environments that are deeper, more immersive, and more rewarding than traditional standalone games."
+        "The project plans three game environments: Hyper Racing, Hyper Quest, and Overlord of the Seven Realms. Each game offers a different style of gameplay, yet all are designed to exist in the same universe and share the same player progression. This design is intended to let players engage in the gameplay they enjoy most while still being part of a larger ecosystem, aiming for gaming environments that are deeper and more immersive than traditional standalone games."
       ]
     },
     "section02": {
@@ -37,8 +37,8 @@
         "label": "Vision",
         "quote": "Across gaming and digital artworks, define the standard that the rest of the industry will look to.",
         "paras": [
-          "The Hyper Tek Vision is to create structures that address multiple issues within the gaming and digital artwork industries, redefining how they operate. Systems where players are not limited to a style of gameplay, Play to Earn means more than just collecting Tokens, and digital artwork is truly worth collecting for its in-game bonuses and tangible value. A structure where users can convert in-game rewards to cash-out payments in real time.",
-          "Envisioned is a living digital universe in which several games, economies, and communities share a single interconnected platform. Rather than keeping online and virtual reality experiences siloed, Hyper Tek works toward a common ecosystem where every player action and interaction shapes the surrounding world."
+          "The Hyper Tek Vision is to create structures that address issues within the gaming and digital artwork industries. Systems where players are not limited to one style of gameplay, where owning an item means more than holding a token, and where digital artwork is worth collecting for its in-game bonuses.",
+          "Envisioned is a digital universe in which several games and communities share a single interconnected platform. Rather than keeping online and virtual reality experiences siloed, Hyper Tek works toward a common ecosystem where player actions and interactions may shape the surrounding world."
         ]
       },
       "mission": {
@@ -46,16 +46,16 @@
         "quote": "Create systems and tools across the gaming and digital artwork industries that resolve their toughest challenges and set the bar against which others measure themselves.",
         "paras": [
           "The mission is to address multiple issues within the gaming industry and to redefine how the gaming ecosystems operate by creating an interconnected universe where players are not limited to a single gameplay style.",
-          "By combining multiple genres into one progression system, to provide a dynamic environment where players can explore, compete, and grow within a unified world. It sets out to give true ownership to digital assets that have real value, which increases over time with a guaranteed minimum buy-back on all NFAs.",
-          "A living digital universe where multiple games, economies and communities coexist within one interconnected platform. Instead of isolating online and virtual reality gaming experiences, Hyper Tek aims to establish a shared ecosystem where players' actions and interactions influence the world around them.",
+          "By combining multiple genres into one progression system, the aim is a dynamic environment where players can explore, compete, and grow within a unified world, with true ownership of their digital items and a Programmatic Trade-In Value on eligible NFAs.",
+          "A digital universe where multiple games and communities coexist within one interconnected platform. Instead of isolating online and virtual reality gaming experiences, Hyper Tek aims to establish a shared ecosystem where players' actions and interactions may influence the world around them.",
           "By merging strategy, racing and adventure into one cohesive system, Hyper Tek seeks to create a new generation of gaming environments that are deeper, more immersive, and more rewarding than traditional standalone games."
         ]
       }
     },
     "section03": {
       "label": "The Universe",
-      "heading": "Three Worlds. One Economy.",
-      "subtitle": "Each game is a gateway, distinct in gameplay, unified in economy and progression.",
+      "heading": "Three Worlds. One Universe.",
+      "subtitle": "Each game is a gateway, distinct in gameplay, unified in progression.",
       "discover": "Discover",
       "tryUI": "Try the UI",
       "games": [
@@ -67,7 +67,7 @@
         {
           "name": "Hyper Quest",
           "tag": "Explore · Trade",
-          "desc": "Navigate planets, complete quests, and trade resources across an ever-expanding star map. Every delivery shapes the economy."
+          "desc": "Navigate planets, complete quests, and trade resources across an ever-expanding star map. Every delivery shapes the galaxy."
         },
         {
           "name": "Overlord of the Seven Realms",
@@ -78,9 +78,9 @@
     },
     "section04": {
       "label": "Non-Fungible Digital Artworks",
-      "heading": "Digital Art With Guaranteed Value",
+      "heading": "Digital Art With In-Game Utility",
       "subtitle": "The 60-Second Summary",
-      "quote": "One Universe. Three Games. Guaranteed Value. The Future of Digital Ownership Starts with Hyper Tek.",
+      "quote": "One Universe. Three Games. True Ownership. The Future of Digital Ownership Starts with Hyper Tek.",
       "cards": [
         {
           "title": "What Are They?",
@@ -103,48 +103,48 @@
         {
           "title": "Why They Hold Value",
           "bullets": [
-            "Guaranteed minimum buy-back on every artwork",
-            "Buy-back increases with every resale",
+            "Programmatic Trade-In Value on every eligible artwork",
+            "Each resale adds to the item's trade-in allocation",
             "Your value is always growing, never shrinking"
           ]
         },
         {
           "title": "Fair by Design",
-          "body": "Most of every sale's commission doesn't stay with Hyper Tek 100, it goes back into the ecosystem: funding that item's own guaranteed buy-back value, paying artist royalties, and rewarding genuine play-to-earn activity. Players can reduce fees by creating quests that pay others to participate, driving social interaction at every level. This is unique to Hyper Tek."
+          "body": "Most of every sale's commission doesn't stay with Hyper Tek 100. It goes back into the ecosystem: into that item's own trade-in allocation, held in escrow, and into artist royalties. Buyers who post quests may lower their commission as a discount, while players who complete quests receive in-game rewards."
         },
         {
           "title": "Get Involved Now",
-          "body": "Every artwork is a limited edition, once its supply is gone, it's gone for good. How can you help? Every limited-edition artwork you buy or create directly funds development of the Hyper Tek Project, and because supply is capped, your piece only grows scarcer over time. Own art that is guaranteed to hold and grow in value while helping build the future of gaming.",
+          "body": "Every artwork is a limited edition: once its supply is gone, it's gone for good. Because supply is capped, each piece stays scarce. Own collectible art with in-game utility that may apply if the games are released.",
           "link": "[www.hypertek.com] — Browse. Buy. Create. Own the Future."
         }
       ]
     },
     "section05": {
-      "label": "Crowdfunding — Help Build the Future",
+      "label": "Early Access — Limited Edition Items",
       "heading": "Your Support Powers\nthe Hyper Tek Universe",
       "subtitle": "Every artwork purchased from the Hyper Tek Marketplace directly supports the Hyper Tek Gaming development.\nThis is your chance to invest in a project with incredible potential for financial returns.\nHere's where we are at and what we are building together.",
       "phaseLabel": "Phase",
-      "crowdfundingNow": "Crowdfunding Now",
+      "crowdfundingNow": "Early Access Now",
       "phases": [
         {
           "name": "Foundation",
-          "desc": "Website live • User Interface built • Marketplace operational • NFA/NFC/NFT system designed • Guaranteed buy-back framework in place"
+          "desc": "Website live • User Interface built • Marketplace built • NFA/NFC/NFT system designed • Programmatic Trade-In Value framework in place"
         },
         {
-          "name": "Crowdfunding Now",
+          "name": "Early Access Now",
           "desc": "NFA/NFC/NFT artwork sales live • Player-created NFTs enabled • Commission-sharing active • Community building • Funds flowing into game development"
         },
         {
           "name": "Alpha Launch",
-          "desc": "Hyper Racing alpha • First playable game environment • In-game NFA integration • Early backer exclusive rewards • Live marketplace trading"
+          "desc": "Planned: Hyper Racing alpha • First playable game environment • In-game NFA integration • Early-access item bonuses • Live marketplace trading"
         },
         {
           "name": "Ecosystem Expansion",
-          "desc": "Hyper Quest alpha • Cross-game progression live • Hyper Bucks currency integration • Expanded NFA collections • Real cash prize events"
+          "desc": "Planned: Hyper Quest alpha • Cross-game progression • Gems integration • Expanded NFA collections • In-game reward events"
         },
         {
           "name": "Overlord Launch",
-          "desc": "Overlord of the 7 Realms alpha • Tri-level battle system • Battle Ring access • VR integration • Full three-game unified economy"
+          "desc": "Planned: Overlord of the 7 Realms alpha • Tri-level battle system • Battle Ring access • VR integration • Full three-game shared progression"
         },
         {
           "name": "Full Release",
@@ -155,7 +155,7 @@
       "helpItems": [
         {
           "bold": "PURCHASE DIGITAL ARTWORK",
-          "text": "Unlock the potential of digital artwork! Enjoy guaranteed value alongside impressive in-game bonuses that directly contribute to game development. Get yours today!"
+          "text": "Discover digital artwork with in-game bonuses that may apply if the games are released, plus a Programmatic Trade-In Value. Available while supply lasts."
         },
         {
           "bold": "Create your own NFT",
@@ -171,19 +171,19 @@
     "section06": {
       "label": "Web3.5 Gaming & Competitive Edge",
       "heading": "HYPER TEK, A WEB3.5 GAMING SOLUTION AND THE KEY ADVANTAGES",
-      "subtitle": "Bridging gaps between immersive gaming, a driven digital marketplace, rewarding\nplayers, and investors alike.",
+      "subtitle": "Bridging gaps between immersive gaming, a player-driven digital marketplace, and the players who collect.",
       "cards": [
         {
           "label": "Tangible Rewards & Entrepreneurship",
           "bullets": [
-            "True NFA/NFC/NFT ownership with guaranteed minimum buy-back",
-            "Revenue sharing through player-controlled digital economy",
-            "Real-world value with evolving in-game asset prices",
-            "True play-to-earn mechanics"
+            "True NFA/NFC/NFT ownership with a Programmatic Trade-In Value",
+            "Player-to-player trading on the marketplace",
+            "In-game utility that may apply across the planned games",
+            "Play-to-Own item design"
           ]
         },
         {
-          "label": "Cash-Out Ecosystem",
+          "label": "Item Loyalty Program",
           "body": "Transform your in-game rewards into real-world currency with ease; your digital labour holds genuine, withdrawable value. The time you invest in Hyper Tek gaming could help cover your groceries, fuel, and utility bills."
         },
         {
@@ -198,7 +198,7 @@
       ]
     },
     "closing": {
-      "body": "Investors, partners, and innovators who believe in the future of interconnected gaming ecosystems are invited to explore the project and join the journey as Hyper Tek continues to build the next generation of digital worlds.",
+      "body": "Partners, players, and creators who believe in interconnected gaming ecosystems are invited to explore the project and follow along as Hyper Tek continues to build.",
       "exploreMarketplace": "Explore Marketplace",
       "viewGames": "View Games"
     }

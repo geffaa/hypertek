@@ -40,7 +40,7 @@ const STATIC_ARTICLES = [
   },
   {
     _id: "s4", title: "What is Hyper Tek?", category: "Hyper Tek", readTime: 10,
-    description: "Hyper Tek is a play-to-earn NFT gaming universe where soldiers, land, weapons and vehicles are real digital assets you own.",
+    description: "Hyper Tek is a Play-to-Own NFT gaming universe where soldiers, weapons and vehicles are digital items you own.",
     image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80",
   },
 ];

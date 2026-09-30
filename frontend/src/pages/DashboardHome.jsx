@@ -53,7 +53,7 @@ function DashboardHome() {
     {
       icon: <FiZap size={22} />,
       label: t("dashboard.home.withdraw","Withdraw"),
-      sub: t("dashboard.home.withdrawDesc","Withdraw your HB balance"),
+      sub: t("dashboard.home.withdrawDesc","Withdraw your marketplace sale proceeds"),
       to: "/dashboard/withdraw",
       color: "rgba(255,255,255,0.06)",
       border: "rgba(255,255,255,0.12)",

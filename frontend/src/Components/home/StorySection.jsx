@@ -19,10 +19,10 @@ import lineRight from "../../assets/images/herostory/line_right.webp";
 import lineLeft  from "../../assets/images/herostory/line_left.webp";
 
 const KEY_HIGHLIGHTS = [
-  { Icon: Network,        label: "Interconnected Universe",  desc: "3 games — 1 shared economy and progression system",          color: "#38bdf8" },
-  { Icon: Gem,            label: "True Ownership",           desc: "NFA/NFC/NFTs with a Programmed Salvage Grade",                      color: "#a78bfa" },
-  { Icon: Zap,            label: "Play-to-Earn",             desc: "Every action contributes to your real-world rewards",        color: "#fbbf24" },
-  { Icon: ArrowLeftRight, label: "Cash-Out Payments",        desc: "Converting in-game currency/rewards to cash-out payments",   color: "#22c55e" },
+  { Icon: Network,        label: "Interconnected Universe",  desc: "3 games, one shared progression system",          color: "#38bdf8" },
+  { Icon: Gem,            label: "True Ownership",           desc: "NFA/NFC/NFTs with a Programmatic Trade-In Value",                      color: "#a78bfa" },
+  { Icon: Zap,            label: "Play-to-Own",              desc: "Every item you collect is yours, recorded on-chain",        color: "#fbbf24" },
+  { Icon: ArrowLeftRight, label: "Item Loyalty Program",     desc: "The longer you keep an item, the higher its trade-in tier",   color: "#22c55e" },
   { Icon: Layers,         label: "Linked Progression",       desc: "Player progression is linked across all suites of games",   color: "#fb7185" },
   { Icon: Glasses,        label: "VR/AR Integration",        desc: "VR/AR players can join missions and epic battles in real-time", color: "#facc15" },
 ];

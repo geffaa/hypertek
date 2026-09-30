@@ -462,7 +462,7 @@ function CardSkeleton() {
 const FAQ_RELATED_KEYWORDS = [
   ["base mainnet"],                       // What is Hyper Tek?
   ["non-fungible"],                       // What are NFAs, NFCs, and NFTs?
-  ["buy-back"],                           // How does the buy-back guarantee work?
+  ["trade-in"],                           // How does the Programmatic Trade-In Value work?
   ["cash out"],                           // How Do I Unlock Real-World Rewards Today!
   ["overlord", "velocity", "awakening"],  // What games are available?
   ["user interface"],                     // Is VR/AR supported?

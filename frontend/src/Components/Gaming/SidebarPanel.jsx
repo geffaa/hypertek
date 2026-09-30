@@ -891,7 +891,7 @@ const ALLIANCE_MEMBERS = [
 const ALLIANCE_MAILS = [
   { key: "warResults",      from: "SYSTEM",         subject: "Alliance War Results",     time: "2h ago", unread: true  },
   { key: "strategyPlan",    from: "Commander Rex",  subject: "New Strategy Plan",        time: "5h ago", unread: true  },
-  { key: "donationSummary", from: "SYSTEM",         subject: "Weekly Donation Summary",  time: "1d ago", unread: false },
+  { key: "donationSummary", from: "SYSTEM",         subject: "Weekly Contribution Summary",  time: "1d ago", unread: false },
   { key: "meeting1800",     from: "Warden-7",       subject: "Meeting at 18:00",         time: "2d ago", unread: false },
   { key: "levelUp",         from: "SYSTEM",         subject: "Alliance Level Up!",       time: "3d ago", unread: false },
 ];
@@ -899,7 +899,7 @@ const ALLIANCE_MAILS = [
 const ALLIANCE_MANAGE = [
   { key: "editInfo",      action: "Edit Alliance Info",     desc: "Change name, tag & description"           },
   { key: "joinRequests",  action: "Manage Join Requests",   desc: "Review and accept new members"            },
-  { key: "donationGoals", action: "Set Donation Goals",     desc: "Configure weekly donation targets"         },
+  { key: "donationGoals", action: "Set Contribution Goals",     desc: "Configure weekly contribution targets"         },
   { key: "warSettings",   action: "Alliance War Settings",  desc: "Configure war participation rules"         },
   { key: "kickMembers",   action: "Kick Members",           desc: "Remove inactive or rule-breaking members"  },
 ];
@@ -1144,7 +1144,7 @@ const CHAT_MESSAGES = [
   { key:"tradingPlasma",        tab:"WORLD",    user:"Dr. Nova",       msg:"Trading plasma rods for tech books",    time:"14:15", color:"#a78bfa" },
   { key:"needHelpAsteroid",     tab:"WORLD",    user:"Iron Mace",      msg:"Need help with the asteroid mission",   time:"13:58", color:"#fb923c" },
   { key:"allianceRecruiting",   tab:"WORLD",    user:"Warden-7",       msg:"Our alliance is recruiting, DM me",     time:"13:44", color:"#94a3b8" },
-  { key:"donationGoalsPlasma",  tab:"ALLIANCE", user:"Commander Rex",  msg:"Donation goals: plasma rods needed!",   time:"14:40", color:"#f87171" },
+  { key:"donationGoalsPlasma",  tab:"ALLIANCE", user:"Commander Rex",  msg:"Contribution goals: plasma rods needed!",   time:"14:40", color:"#f87171" },
   { key:"warStarts2Hours",      tab:"ALLIANCE", user:"Warden-7",       msg:"War starts in 2 hours, prepare",        time:"14:35", color:"#94a3b8" },
   { key:"handleMedicalSupport", tab:"ALLIANCE", user:"Medic Ryn",      msg:"I will handle the medical support",     time:"14:30", color:"#f0abfc" },
   { key:"wts50Engines",         tab:"TRADE",    user:"Mechanic Kole",  msg:"WTS: 50 engines, PM me",                time:"14:20", color:"#fcd34d" },

@@ -30,7 +30,7 @@ export default function HomeNfaSection() {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-10">
           <SectionLabel label={sec04.label || "Non-Fungible Digital Artworks"} />
           <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[36px] text-white leading-tight">
-            {sec04.heading || "Digital Art With Guaranteed Value"}
+            {sec04.heading || "Digital Art With In-Game Utility"}
           </h2>
           <p className="text-white/45 text-[12px] mt-2 tracking-[0.2em] uppercase" style={{ fontFamily: "Orbitron, sans-serif" }}>
             {sec04.subtitle}

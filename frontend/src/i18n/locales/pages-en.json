@@ -12,7 +12,7 @@
       "three-worlds": "02  The Three Worlds",
       "technology": "03  Technology",
       "nfa": "04  Non-Fungible Assets",
-      "hyperbucks": "05  HyperBucks Economy",
+      "hyperbucks": "05  Gems",
       "marketplace": "06  Marketplace",
       "roadmap": "07  Roadmap",
       "conclusion": "08  Conclusion"
@@ -127,7 +127,7 @@
       "2": "How excited are you about a universe where three full games are connected into one experience?",
       "3": "Which part of HyperTek 100 interests you the most?",
       "4": "What would make HyperTek 100 a 'must-play' game for you?",
-      "5": "Would you consider supporting this project when we open our crowdfunding campaign?",
+      "5": "Would you be interested in the early-access release of limited edition items?",
       "6": "Follow us on X"
     },
     "nameLabel": "Your Name",
@@ -158,7 +158,7 @@
     "unlisted": "Unlisted",
     "backToMarketplace": "Marketplace",
     "samplePreviewTitle": "Sample Marketplace Preview",
-    "samplePreviewDesc": "The items below are sample previews showcasing the types of digital assets that will be available. Actual items with unique artwork and blockchain-verified ownership will be available at launch.",
+    "samplePreviewDesc": "The items below are sample previews of the kinds of digital items that may be available. Actual items with unique artwork and blockchain-verified ownership may be available at launch.",
     "noItemsFound": "No items found in this category",
     "preview": "Preview",
     "buyNow": "Buy Now",
@@ -182,14 +182,14 @@
     "error": "Sorry, I could not get a response right now. Please try again or contact our support team.",
     "peek": {
       "0": "Need help? Ask me anything!",
-      "1": "Questions about HyperBucks?",
+      "1": "Questions about Gems?",
       "2": "Curious how auctions work?"
     },
     "shortcuts": {
-      "earnLabel": "Earn HyperBucks",
-      "earnText": "How do I earn HyperBucks?",
-      "cashOutLabel": "Cash Out HB",
-      "cashOutText": "How do I cash out my HyperBucks?",
+      "earnLabel": "Get Gems",
+      "earnText": "How do I get Gems?",
+      "cashOutLabel": "Trade-In Value",
+      "cashOutText": "How does the Programmatic Trade-In Value work?",
       "auctionsLabel": "How Auctions Work",
       "auctionsText": "How do auctions work?",
       "gamesLabel": "Available Games",
@@ -267,7 +267,7 @@
       "auction": "Auctions",
       "questing": "Quests",
       "bounty": "Bounty",
-      "forHire": "For Hire"
+      "forHire": "To Let"
     },
     "categories": {
       "all": "All",
@@ -337,7 +337,7 @@
       "playerLabel": "Player",
       "platformLabel": "Platform",
       "platLabel": "Plat",
-      "notePayouts": "Quests with combined payloads will be paid out using the separate table amounts.",
+      "notePayouts": "Quests with combined payloads use the separate table rewards.",
       "notePlanet": "Planet data will sync when the games go live.",
       "dailySlots": "Daily Quest Slots",
       "used": "used",
@@ -371,8 +371,8 @@
       "colSelling": "Selling",
       "colBuying": "Buying",
       "colTrading": "Trading",
-      "colOnHire": "On Hire",
-      "colHiring": "Hiring",
+      "colOnHire": "Let Out",
+      "colHiring": "Letting",
       "groupMarketplace": "MARKETPLACE",
       "groupAuction": "AUCTION"
     },
@@ -401,7 +401,7 @@
       "myCollections": "My Collections",
       "transactions": "Transactions",
       "offers": "Offers",
-      "hyperBucks": "HyperBucks",
+      "hyperBucks": "Gems",
       "earnings": "Earnings",
       "support": "Support",
       "signOut": "Sign Out"
@@ -440,7 +440,7 @@
       "transactions": "Transactions",
       "transactionsDesc": "Payment history",
       "withdraw": "Withdraw",
-      "withdrawDesc": "Withdraw your HB balance"
+      "withdrawDesc": "Withdraw your marketplace sale proceeds"
     },
     "transactions": {
       "title": "Transaction History",
@@ -471,7 +471,7 @@
       "noSentOffersHint": "Make an offer on any item in the Marketplace",
       "colItem": "Item",
       "colYourOffer": "Your Offer",
-      "colFloorPrice": "Floor Price",
+      "colFloorPrice": "Lowest Price",
       "colOfferDuration": "Offer Duration",
       "colStatus": "Status",
       "colAction": "Action",
@@ -642,11 +642,10 @@
       }
     },
     "hyperbucks": {
-      "title": "HyperBucks",
-      "subtitle": "250 HB = $1 USD · fixed rate",
+      "title": "Gems",
+      "subtitle": "Buy Gems for in-game purchases",
       "currentBalance": "Current Balance",
       "tabTopUp": "Top Up",
-      "tabCashout": "Cashout",
       "success": {
         "title": "Top-Up Successful!",
         "added": "added to your account.",
@@ -656,30 +655,23 @@
       },
       "topup": {
         "amountLabel": "Amount (USD)",
-        "hyperBucks": "HyperBucks",
+        "hyperBucks": "Gems",
         "preparing": "Preparing...",
         "proceed": "Proceed to Payment",
         "enterAmount": "Enter an amount to continue",
-        "secured": "Secured by Stripe · 250 HB = $1 USD · min $1",
+        "secured": "Secured by Stripe · min $1",
         "quickSelect": "Quick Select",
         "paying": "Paying",
         "processing": "Processing...",
         "pay": "Pay"
       },
       "cashout": {
-        "amountLabel": "Amount (HB)",
-        "minUsdc": "Min 250 HB",
-        "minBank": "Min 2500 HB",
         "receiveVia": "Receive via",
         "usdcWallet": "USDC Wallet",
-        "usdcMin": "Min 250 HB · ~$0.01 gas",
         "bankAccount": "Bank Account",
-        "bankMin": "Min 2500 HB ($10) · bank details required",
         "addBank": "Add bank details in Profile →",
         "noWallet": "No wallet connected",
         "sendingOtp": "Sending OTP...",
-        "toUsdc": "Cashout to USDC Wallet",
-        "toBank": "Cashout to Bank Account",
         "kycNote": "Complete identity verification to continue"
       },
       "otp": {
@@ -690,7 +682,6 @@
         "bankAccount": "Bank Account",
         "label": "OTP Code",
         "processing": "Processing...",
-        "confirm": "Confirm Cashout",
         "sending": "Sending...",
         "resend": "Resend code"
       },
