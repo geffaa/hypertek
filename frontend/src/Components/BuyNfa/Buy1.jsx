@@ -32,6 +32,7 @@ import { Wallet, Copy, CreditCard, ZoomIn, X as XIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import PriceHistory from "./BuyNfa2";
 import PurchaseAcknowledgement from "../Common/PurchaseAcknowledgement";
+import TradeInStat from "../Common/TradeInStat";
 import { ackPayload } from "../../data/purchaseAcknowledgement";
 
 const stripePromise = STRIPE_PUBLISHABLE_KEY ? loadStripe(STRIPE_PUBLISHABLE_KEY) : null;
@@ -1691,34 +1692,15 @@ function Buy1() {
                 )}
               </div>
 
-              {(() => {
-                const aType = collection.assetType || (collection.isNFA ? "NFA" : "NFT"); // NFC always has assetType set
-                const minBB = collection.minimumBuybackUSD;
-                const reserve = collection.reservePriceUSD;
-                if ((aType === "NFA" || aType === "NFC") && (minBB > 0 || reserve > 0)) {
-                  return (
-                    <div className="rounded-xl p-3 flex flex-col gap-1.5"
-                      style={{ background: "rgba(0,42,168,0.12)", border: "1px solid rgba(0,80,255,0.2)" }}>
-                      {minBB > 0 && (
-                        <div className="flex justify-between text-xs">
-                          <span className="text-white/50">{t("buyNfa.marketplace.minBuyback", "Min Salvage Grade")}</span>
-                          <span className="text-green-400 font-semibold">${minBB} USD</span>
-                        </div>
-                      )}
-                      {reserve > 0 && (
-                        <div className="flex justify-between text-xs">
-                          <span className="text-white/50">{t("buyNfa.marketplace.reservePrice", "Reserve Price")}</span>
-                          <span className="text-blue-300 font-semibold">${reserve} USD</span>
-                        </div>
-                      )}
-                      <p className="text-[10px] text-white/30 mt-0.5">
-                        {t("buyNfa.marketplace.buybackNote", "This asset cannot be sold below its minimum buyback value.")}
-                      </p>
-                    </div>
-                  );
-                }
-                return null;
-              })()}
+              {collection.tokenId != null && <TradeInStat tokenId={collection.tokenId} />}
+
+              {collection.reservePriceUSD > 0 && (
+                <div className="rounded-xl p-3 flex justify-between text-xs"
+                  style={{ background: "rgba(0,42,168,0.12)", border: "1px solid rgba(0,80,255,0.2)" }}>
+                  <span className="text-white/50">{t("buyNfa.marketplace.reservePrice", "Reserve Price")}</span>
+                  <span className="text-blue-300 font-semibold">{collection.reservePriceUSD} USDC</span>
+                </div>
+              )}
 
               {isEmailWalletConnected && emailWalletAddress && (
                 <div

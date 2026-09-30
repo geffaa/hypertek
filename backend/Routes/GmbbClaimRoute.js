@@ -1,4 +1,4 @@
-/** Mounted at /api/v1/gmbb-claim — read-only until the escrow contract is deployed. */
+/** Mounted at /api/v1/gmbb-claim — escrow config and the caller's own items, read-only. */
 import express from "express";
 import { authMiddleware } from "../Middleware/authMiddleware.js";
 import { GetClaimConfig, GetClaimableItems } from "../Controllers/GmbbClaimController.js";

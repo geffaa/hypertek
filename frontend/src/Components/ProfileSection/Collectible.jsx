@@ -174,7 +174,6 @@ function MarketPlace() {
             isSubCollection: true,
             userOwns: true,
             isNFA: subNft.isNFA || false,
-            minimumBuybackUSD: subNft.minimumBuybackUSD || 0,
             maxSupply: subNft.maxSupply || item.maxSupply || 0,
             currentSupply: subNft.currentSupply ?? item.currentSupply ?? 0,
           });
