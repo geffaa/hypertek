@@ -9,6 +9,11 @@ const saleSchema = new mongoose.Schema({
   sellerReceived: { type: Number, default: 0 },
   txHash: String,
   isFirstSale: { type: Boolean, default: false },
+  // Buyer's country at time of purchase — VAT/tax evidence. Self-declared today
+  // (client-supplied ISO-3166 alpha-2, e.g. "US"); no IP-geolocation or Stripe
+  // billing-address collection exists yet to fill this in automatically, so it
+  // is null until either is wired up on the frontend/Stripe side.
+  country: { type: String, default: null },
   createdAt: { type: Date, default: Date.now },
 });
 
@@ -34,6 +39,12 @@ const subCollectionSchema = new mongoose.Schema({
   minimumBuybackUSD:  { type: Number, default: 0 },
   reservePriceUSD:    { type: Number, default: 0 },
   buybackPending:     { type: Boolean, default: false },
+  // GMBB percentage chosen at first listing (basis points, e.g. 3500 = 35%),
+  // per the Terms of Service — the lister picks this before the item ever
+  // sells, and it applies to the eventual first-sale price. null until the
+  // item has actually been through a first-sale listing flow that sets it;
+  // computeSaleSplit falls back to the documented default when unset.
+  gmbbBps: { type: Number, default: null },
   // Artist linked to this item — admin selects from Artist model
   // Royalty (4%) on every sale is dispatched using the artist's payment method
   artistId: { type: mongoose.Schema.Types.ObjectId, ref: "Artist", default: null },
@@ -141,6 +152,10 @@ const nftSystemSchema = new mongoose.Schema(
     buybackPending: { type: Boolean, default: false },
     zeroed: { type: Boolean, default: false },
     removedFromCirculation: { type: Boolean, default: false },
+    // Set together with `zeroed` when a buyback is actually paid, so a payout
+    // can be traced to its ledger entry and a repeat attempt is recognisable.
+    buybackPaidAt: { type: Date, default: null },
+    buybackPayoutId: { type: String, default: null },
 
     // CPI history for audit trail
     cpiHistory: [

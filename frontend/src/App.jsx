@@ -77,6 +77,9 @@ const Wellcome = lazy(() => import("./pages/Wellcome"));
 const SigninWallet = lazy(() => import("./pages/SigninWallet"));
 const NoItem = lazy(() => import("./pages/NoItem"));
 const Stripe = lazy(() => import("./pages/Stripe"));
+const PackagesPage = lazy(() => import("./pages/Packages"));
+const PackageCheckoutPage = lazy(() => import("./pages/PackageCheckout"));
+const ClaimNowPage = lazy(() => import("./pages/ClaimNow"));
 const Funnel = lazy(() => import("./pages/Funnel"));
 const Gaming = lazy(() => import("./pages/Gaming"));
 const WalletTest = lazy(() => import("./pages/WalletTest"));
@@ -239,6 +242,9 @@ function AppWrapper() {
             {/* for payment options  */}
 
             <Route path="/stripe-payment" element={<Stripe />} />
+            <Route path="/packages" element={<PackagesPage />} />
+            <Route path="/packages/:idOrSlug" element={<PackageCheckoutPage />} />
+            <Route path="/claim" element={<ClaimNowPage />} />
             <Route path="/funnel-page" element={<Funnel />} />
 
             <Route

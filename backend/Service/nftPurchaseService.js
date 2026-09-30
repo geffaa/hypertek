@@ -5,6 +5,7 @@ import MarketListing from "../Models/MarketListingModel.js";
 import { getBlockchain, ethers } from "./blockchain.js";
 import { dispatchRoyalty } from "../services/RoyaltyService.js";
 import { cancelSiblingListings } from "../services/cancelSiblingListings.js";
+import { computeSaleSplit } from "../services/gmbb/computeSaleSplit.js";
 import dotenv from "dotenv";
 
 dotenv.config({ path: "./Config/.env" });
@@ -24,7 +25,8 @@ export async function finalizeNFAPurchase({
   txHash,   // Frontend provides this for USDC, backend provides this for Stripe? 
   // Actually Stripe doesn't have a blockchain tx hash yet if we mint here.
   paymentProvider, // 'crypto' or 'stripe'
-  paymentIntentId // For stripe tracking
+  paymentIntentId, // For stripe tracking
+  country = null, // buyer's country at purchase, for VAT/tax evidence — self-declared, see NFTSystem.js saleSchema
 }) {
   console.log("🚀 [finalizeNFAPurchase] STARTING finalization...");
   console.log("📍 Metadata:", {
@@ -227,57 +229,39 @@ export async function finalizeNFAPurchase({
     );
   }
 
-  /**
-   * Commission distribution per Don's rules:
-   *
-   * NFA — Hypertek first sale:   bank preset minBB (from seller portion) | 4% artist | 16% Hypertek | rest to Hypertek as seller
-   * NFA — owner resell (2nd+):   80% seller | 4% artist | 5% → +minBB | 11% Hypertek
-   *
-   * NFC — Hypertek first sale:   bank preset minBB (from seller portion) | 4% artist | 16% Hypertek | rest to Hypertek as seller
-   * NFC — player first sale:     80% creator | 10% banked as initial minBB | 10% Hypertek
-   * NFC — owner resell (2nd+):   80% seller | 4% artist | 5% → +minBB | 11% Hypertek
-   *
-   * NFT — player first sale:     80% creator | 10% banked as initial minBB | 10% Hypertek
-   * NFT — owner resell (2nd+):   80% seller | 4% artist | 5% → +minBB | 11% Hypertek
-   */
+  // Commission split — single source of truth in services/gmbb/computeSaleSplit.js,
+  // matching the live Terms of Service Section 10. `gmbbBps` is the percentage the
+  // lister chose at listing time (null today for every item, since no picker UI
+  // exists yet — computeSaleSplit falls back to the documented default in that case).
+  //
+  // Note this changes prior runtime behavior for Hypertek-first-sale items: the old
+  // code let admin pre-set minBB as a static dollar figure, uninfluenced by what the
+  // item actually sold for. The T&C describes the GMBB contribution as a percentage
+  // of the actual sale price, computed at time of sale — same as every other sale
+  // type — so that's what this now does instead.
+  const saleType = isHypertekFirstSale
+    ? "platform-first-sale"
+    : isPlayerFirstSale
+    ? "creator-first-sale"
+    : "resale";
 
-  let royaltyPaid = 0;
-  let platformFee = 0;
-  let buybackAmount = 0;  // amount added to minBB or banked
-  let companyAmount = 0;
-  let sellerReceived = 0;
+  const split = computeSaleSplit({
+    saleType,
+    salePrice: cleanPrice,
+    gmbbBps: subCollection.gmbbBps,
+  });
 
-  if (isHypertekFirstSale) {
-    // Hypertek is both seller and platform — bank preset minBB from seller portion
-    // Commission: 4% artist + 16% Hypertek = 20%
-    royaltyPaid = parseFloat((cleanPrice * 0.04).toFixed(6));
-    companyAmount = parseFloat((cleanPrice * 0.16).toFixed(6));
-    platformFee = parseFloat((cleanPrice * 0.20).toFixed(6));
-    // Hypertek as seller gets the remaining 80%; minBB is already preset/banked by admin
-    sellerReceived = parseFloat((cleanPrice * 0.80).toFixed(6));
-    buybackAmount = 0; // preset minBB — no auto-increment on first sale
-    console.log(`💼 [Commission] Hypertek first sale (${assetType}): 4% artist + 16% company. MinBB preset.`);
+  const royaltyPaid = split.royaltyPaid;
+  const buybackAmount = split.buybackAmount; // amount added to minBB
+  const companyAmount = split.platformFee;   // actually dispatched to PLATFORM_WALLET_ADDRESS
+  const platformFee = split.platformFee;     // reported on the sale record
+  const sellerReceived = split.sellerReceived;
 
-  } else if (isPlayerFirstSale) {
-    // Player first sale: 80% to creator, 10% banked as initial minBB, 10% Hypertek
-    sellerReceived = parseFloat((cleanPrice * 0.80).toFixed(6));
-    royaltyPaid = 0; // Creator IS the seller — no separate artist fee
-    buybackAmount = parseFloat((cleanPrice * 0.10).toFixed(6)); // initial minBB seed
-    companyAmount = parseFloat((cleanPrice * 0.10).toFixed(6));
-    platformFee = parseFloat((cleanPrice * 0.20).toFixed(6));
-    console.log(`🎮 [Commission] Player first sale (${assetType}): 80% creator + 10% minBB + 10% company.`);
+  console.log(`💼 [Commission] ${saleType} (${assetType}): seller $${sellerReceived}, royalty $${royaltyPaid}, buyback $${buybackAmount}, company $${companyAmount}.`);
 
-  } else {
-    // Owner resell (2nd+ sale) — applies to NFA, NFC, NFT equally
-    sellerReceived = parseFloat((cleanPrice * 0.80).toFixed(6));
-    royaltyPaid = parseFloat((cleanPrice * 0.04).toFixed(6));
-    buybackAmount = parseFloat((cleanPrice * 0.05).toFixed(6)); // added to minBB
-    companyAmount = parseFloat((cleanPrice * 0.11).toFixed(6));
-    platformFee = parseFloat((cleanPrice * 0.20).toFixed(6));
-    console.log(`🔄 [Commission] Owner resell (${assetType}): 80% seller + 4% artist + 5% minBB + 11% company.`);
-  }
-
-  // MinBB auto-increment — grows on resales and player first sales (not on Hypertek first sale)
+  // MinBB auto-increment — grows by whatever computeSaleSplit assigned to buybackAmount
+  // for this sale type (now includes Hypertek-first-sale too, since that scenario is a
+  // percentage-of-price GMBB contribution just like the others — see the note above).
   if (buybackAmount > 0 && cleanPrice > 0) {
     subCollection.minimumBuybackUSD = parseFloat(
       ((subCollection.minimumBuybackUSD || 0) + buybackAmount).toFixed(2)
@@ -294,6 +278,7 @@ export async function finalizeNFAPurchase({
     sellerReceived: parseFloat(sellerReceived.toFixed(6)),
     txHash: receiptHash || paymentIntentId || "stripe_payment",
     isFirstSale: subCollection.isFirstSale,
+    country: country || null,
     createdAt: new Date(),
   };
 
@@ -389,7 +374,7 @@ export async function finalizeNFAPurchase({
   if (buybackAmount > 0) {
     const buybackWallet = process.env.BUYBACK_WALLET_ADDRESS;
     if (buybackWallet) {
-      const bbPct = isPlayerFirstSale ? '10%' : '5%';
+      const bbPct = cleanPrice > 0 ? `${((buybackAmount / cleanPrice) * 100).toFixed(1)}%` : '0%';
       dispatchRoyalty({
         subCollectionId: cleanSubId,
         parentId: cleanParentId,
@@ -409,7 +394,7 @@ export async function finalizeNFAPurchase({
   if (companyAmount > 0) {
     const platformWallet = process.env.PLATFORM_WALLET_ADDRESS;
     if (platformWallet) {
-      const feeLabel = isHypertekFirstSale ? '16%' : isPlayerFirstSale ? '10%' : '11%';
+      const feeLabel = cleanPrice > 0 ? `${((companyAmount / cleanPrice) * 100).toFixed(1)}%` : '0%';
       dispatchRoyalty({
         subCollectionId: cleanSubId,
         parentId: cleanParentId,
