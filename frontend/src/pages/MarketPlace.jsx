@@ -9,12 +9,9 @@ import OverviewTab       from "../Components/MarketPlaceCom/OverviewTab";
 import GeneralTab        from "../Components/MarketPlaceCom/tabs/GeneralTab";
 import Nfa101Tab         from "../Components/MarketPlaceCom/tabs/Nfa101Tab";
 import AuctionsTab       from "../Components/MarketPlaceCom/tabs/AuctionsTab";
-import QuestsTab         from "../Components/MarketPlaceCom/tabs/QuestsTab";
 import TradesTab         from "../Components/MarketPlaceCom/tabs/TradesTab";
-import HireRentTab       from "../Components/MarketPlaceCom/tabs/HireRentTab";
-import BountyTab         from "../Components/MarketPlaceCom/tabs/BountyTab";
 import MusicPlayer        from "../Components/MarketPlaceCom/MusicPlayer";
-import LockOverlay        from "../Components/Common/LockOverlay";
+import LockOverlay, { LockCard } from "../Components/Common/LockOverlay";
 import { BACKEND_BASE_URL, LAUNCH_LOCKED } from "../Config";
 
 // Navbar height = py-3 (24px) + h-12 logo (48px) = 72px
@@ -109,8 +106,7 @@ function MarketPlace() {
 
   // ── Tab content ────────────────────────────────────────────────────────────
   // Pre-launch: Overview and NFAs/NFCs/NFTs stay readable (educational);
-  // the transactional tabs are locked. Quests/For Hire/Bounty keep their
-  // own game-content locks.
+  // the transactional tabs are locked; the game tabs render a lock card only.
   const launchLock = (tab) => (
     <LockOverlay
       locked={LAUNCH_LOCKED}
@@ -128,9 +124,16 @@ function MarketPlace() {
       case "nfa101":    return <Nfa101Tab />;
       case "auctions":  return launchLock(<AuctionsTab />);
       case "trades":    return launchLock(<TradesTab />);
-      case "quests":    return <QuestsTab />;
-      case "hire":      return <HireRentTab />;
-      case "bounty":    return <BountyTab />;
+      // Game tabs stay unmounted until the games exist, so none of their
+      // listings, amounts or reward figures are fetched or shown.
+      case "quests":
+      case "hire":
+      case "bounty":
+        return (
+          <div className="grid min-h-[50vh] place-items-center">
+            <LockCard title={t(`marketplace.gameLock.${activeTab}.title`)} desc={t(`marketplace.gameLock.${activeTab}.desc`)} />
+          </div>
+        );
       default:          return launchLock(<GeneralTab />);
     }
   };

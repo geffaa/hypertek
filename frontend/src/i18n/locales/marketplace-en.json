@@ -9,7 +9,7 @@
       "auctions": "Auctions",
       "trades": "Trades",
       "quests": "Quests",
-      "hire": "For Hire",
+      "hire": "To Let",
       "bounty": "Bounty"
     },
     "launchLock": {
@@ -420,8 +420,8 @@
       "forHireLabel": "For Hire",
       "wantingToHire": "Wanting to Hire",
       "noListings": "No {{filter}} listings",
-      "lockedTitle": "Hyper Tek Gaming content for display purposes only.",
-      "lockedDesc": "This is part of Hyper Tek's genuine 'Play to Earn' system, where players can earn real cash rewards, and or Materials/Resources.",
+      "lockedTitle": "Letting may become available if the games are released.",
+      "lockedDesc": "Players may be able to let out items to other players and receive in-game rewards they negotiate between themselves, subject to the final game rules.",
       "forHireBadge": "FOR HIRE",
       "wantedBadge": "WANTING TO HIRE",
       "price": "Price",
@@ -541,6 +541,20 @@
       "connectWallet": "Connect your wallet first",
       "loginFirst": "Log in first",
       "cancelFailed": "Could not cancel trade. Please try again."
+    },
+    "gameLock": {
+      "quests": {
+        "title": "Quests may become available if the games are released.",
+        "desc": "Players may be able to deliver items to other players for in-game rewards, subject to the final game rules."
+      },
+      "hire": {
+        "title": "Letting may become available if the games are released.",
+        "desc": "Players may be able to let out items to other players and receive in-game rewards they negotiate between themselves, subject to the final game rules."
+      },
+      "bounty": {
+        "title": "Bounties may become available if the games are released.",
+        "desc": "Bounties may offer in-game rewards only, subject to the final game rules."
+      }
     }
   },
   "musicPlayer": {
