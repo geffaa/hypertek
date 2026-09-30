@@ -26,6 +26,12 @@ const KNOWN_USDC = {
   84532: "0x036CbD53842c5426634e7929541eC2318f3dCF7e", // Base Sepolia
 };
 
+// Testnet only: the existing Base Sepolia Marketplace settles in this MockUSDC,
+// so the escrow has to take the same token for sales to fund it end to end.
+const TESTNET_EXTRA_TOKENS = {
+  84532: ["0x59b47ddcbfd04bd5796332B38E1A62445Eb3985B"],
+};
+
 async function main() {
   const chainId = Number((await ethers.provider.getNetwork()).chainId);
   const [deployer] = await ethers.getSigners();
@@ -51,7 +57,8 @@ async function main() {
     throw new Error("Malformed address.");
   }
 
-  if (KNOWN_USDC[chainId] && usdc.toLowerCase() !== KNOWN_USDC[chainId].toLowerCase()) {
+  const allowed = [KNOWN_USDC[chainId], ...(TESTNET_EXTRA_TOKENS[chainId] || [])].filter(Boolean);
+  if (allowed.length && !allowed.some((a) => a.toLowerCase() === usdc.toLowerCase())) {
     throw new Error(`USDC mismatch. Expected ${KNOWN_USDC[chainId]} on chain ${chainId}.`);
   }
   if (vault.toLowerCase() === deployer.address.toLowerCase()) {
@@ -101,15 +108,11 @@ async function main() {
     }
   }
 
-  // The wind-down key is permanent. Its worst case is mild (everyone gets paid
-  // the maximum sooner), but it is still the one privileged address in the
-  // contract, and a single private key on one machine is not where it belongs.
+  // A single-signer wind-down key is the accepted decision (11 Sep 2026): the
+  // multisig option was dropped because the Safe app would not connect to the
+  // owner's MetaMask. Its worst case is everyone being paid the maximum sooner.
   if ((await ethers.provider.getCode(windDownTrigger)) === "0x") {
-    throw new Error(
-      "Wind-down trigger is a plain wallet, not a multisig. This address is fixed forever " +
-      "once deployed. Set BUYBACK_WIND_DOWN_TRIGGER to the team multisig, or remove this " +
-      "check deliberately if a single signer is genuinely the accepted decision."
-    );
+    console.log("note           wind-down trigger is a single-signer wallet (accepted decision)\n");
   }
 
   const Escrow = await ethers.getContractFactory("BuybackEscrow");

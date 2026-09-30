@@ -1,0 +1,12 @@
+{
+  "network": "baseSepolia",
+  "chainId": 84532,
+  "buybackEscrow": "0x6d1d5140Fa9C8bBC706aCcc477D3E187c9965E0F",
+  "paymentToken": "0x59b47ddcbfd04bd5796332B38E1A62445Eb3985B",
+  "itemVault": "0xcD07CBDf7A99A8376f2442238d61e67301FC581E",
+  "windDownTrigger": "0x2826Fa69fc7bcBeae870Afa712fA73354173A2F7",
+  "partialWithdrawalThreshold": "25000000000",
+  "deployer": "0x89eD8201B0448B2C94ae0e4D380f08b7aD558Ce6",
+  "deployedAt": "2026-09-30T17:54:40.478Z",
+  "note": "No admin, no withdrawal function for the company. The only privileged call, triggerWindDown, can accelerate payouts but never redirect or reduce them."
+}
