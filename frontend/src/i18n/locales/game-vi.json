@@ -8,8 +8,8 @@
       "subtitle": "Trải nghiệm đua xe bay khốc liệt nhất thiên hà,\nnơi kỹ năng được trả giá và các nhà vô địch được tạo ra.",
       "intro": [
         "Hyper Racing là một trò chơi đua xe cạnh tranh có chỉ số octan cao lấy bối cảnh trên các thế giới xa lạ, nơi người chơi chế tạo, nâng cấp và điều khiển các phương tiện đua bay có thể tùy chỉnh hoàn toàn thông qua một số vòng đua nguy hiểm nhất trong thiên hà. Từ các khối đá nổi và ống dung nham núi lửa đến vùng đất hoang sa mạc và đường đèo, mỗi cuộc đua là một bài kiểm tra về sự chuẩn bị, phản xạ và chiến lược.",
-        "Nhưng Hyper Racing không chỉ là một trò chơi; đó là một nền tảng cạnh tranh nơi có những phần thưởng thực sự. Những người biểu diễn hàng đầu có thể tham gia các sự kiện và giải đấu được xếp hạng với tổng giải thưởng tiền mặt thực sự. Bạn càng đua tốt, bạn càng kiếm được nhiều tiền. Cho dù bạn đang theo đuổi vinh quang trên bảng xếp hạng hay xây dựng một đế chế đua xe, mọi thứ bạn làm trong Hyper Racing đều giúp bạn tiến về phía trước.",
-        "Nâng cấp xe đua của bạn từ mũi đến đuôi. Tuyển dụng và nâng cấp đội ngũ hầm hố của bạn. Thuê một người quản lý đường đua phù hợp với triết lý đua xe của bạn. Sau đó, hãy đưa các kỹ năng của bạn ra ngoài đường đua, nhà để xe đua của bạn sẽ đóng vai trò là nhà chứa tàu vũ trụ cá nhân của bạn và mọi khả năng bạn phát triển sẽ được đưa vào cuộc chiến ngoài không gian trên Hyper Quest và Overlord of the 7 Realms."
+        "Hyper Racing được lên kế hoạch là một nền tảng thi đấu. Những người chơi hàng đầu có thể tham gia các sự kiện xếp hạng và giải đấu với phần thưởng trong game. Dù bạn theo đuổi vinh quang trên bảng xếp hạng hay xây dựng một đế chế đua xe, mọi việc bạn làm trong Hyper Racing đều được thiết kế để đưa bạn tiến lên.",
+        "Nâng cấp phương tiện đua của bạn từ mũi đến đuôi. Tuyển mộ và nâng cấp đội pit. Tuyển một quản lý pit phù hợp với triết lý đua của bạn. Sau đó mang kỹ năng của bạn vượt ra ngoài đường đua: gara đua của bạn cũng là nhà chứa phi thuyền cá nhân, và mọi khả năng bạn phát triển đều theo bạn vào các trận chiến không gian trong Hyper Quest và Overlord of the 7 Realms."
       ],
       "introClose": "Hãy đọc tiếp để khám phá cách trò chơi hoạt động, bạn có thể giành được những gì và sự nghiệp đua xe của bạn thúc đẩy toàn bộ vũ trụ phát triển như thế nào.",
       "calloutLine1": "Cuộc đua để kiếm tiền. Kiếm tiền để nâng cấp.",
@@ -24,7 +24,7 @@
         {
           "num": "02",
           "title": "Xây dựng nhóm của bạn",
-          "body": "Đua xe là môn thể thao đồng đội. Tuyển dụng các chuyên gia của đội đua pit, những người mang lại những phần thưởng độc đáo, tiếp nhiên liệu nhanh hơn, chẩn đoán thời gian thực, sửa chữa thân tàu khẩn cấp giữa cuộc đua và điều chỉnh hiệu suất giữa các vòng đua. Mỗi thành viên phi hành đoàn sẽ thăng cấp theo kinh nghiệm, tích hợp các khả năng mạnh mẽ cùng với các nâng cấp xe của bạn. Sau đó, thuê một người quản lý đường đua để điều phối các hoạt động, đưa ra chiến lược cuộc đua và mở khóa các biện pháp nâng cao hiệu suất của toàn đội trong cả mùa giải."
+          "body": "Đua xe là môn thể thao đồng đội. Tuyển các chuyên gia đội pit mang lại phần thưởng thêm độc đáo: tiếp nhiên liệu nhanh hơn, chẩn đoán theo thời gian thực, sửa chữa thân tàu khẩn cấp giữa cuộc đua và tinh chỉnh hiệu suất giữa các vòng. Mỗi thành viên lên cấp theo kinh nghiệm, cộng dồn các khả năng mạnh mẽ lên trên các nâng cấp phương tiện của bạn. Sau đó tuyển một quản lý pit để điều phối hoạt động, quyết định chiến thuật đua và mở khóa các mức tăng hiệu suất cho cả đội, tích lũy dần trong suốt một mùa giải."
         },
         {
           "num": "03",
@@ -44,12 +44,12 @@
           "body": "Mỗi cuộc đua bạn hoàn thành đều được trả tiền. Giành chiến thắng và phần thưởng sẽ nhân lên. Chiến thắng trong cuộc đua sẽ mở khóa các bộ phận xe cao cấp, vật liệu nâng cấp quý hiếm, mã thông báo tuyển dụng phi hành đoàn độc quyền và các khoản tín dụng để tài trợ cho công trình tiếp theo của bạn. Bán những chiếc xe đã nâng cấp để kiếm lợi nhuận, tái đầu tư vào máy móc mới và xem đế chế đua xe của bạn phát triển sau mỗi lần lên bục vinh quang."
         },
         {
-          "title": "Sự kiện tiền thật",
-          "body": "Hyper Racing đưa sự cạnh tranh lên một tầm cao mới với các sự kiện và giải đấu được xếp hạng trong đó tiền thật được đưa vào. Tham gia các cuộc thi dựa trên kỹ năng, chứng minh khả năng của bạn trước những phi công giỏi nhất trong thiên hà và giành chiến thắng với khoản thanh toán bằng tiền thật. Vị trí của bạn càng cao thì giải thưởng càng lớn. Từ các thử thách xếp hạng hàng tuần cho đến các sự kiện vô địch theo mùa, luôn có cơ hội cho những người có thành tích cao nhất biến kỹ năng đua xe của họ thành thu nhập thực sự."
+          "title": "Sự kiện xếp hạng",
+          "body": "Hyper Racing được thiết kế xoay quanh các sự kiện xếp hạng và giải đấu. Các cuộc thi dựa trên kỹ năng có thể cho phép bạn chứng tỏ khả năng trước những phi công giỏi nhất thiên hà để nhận phần thưởng trong game, danh hiệu và vị trí trên bảng xếp hạng. Từ thử thách xếp hạng hàng tuần đến các giải vô địch theo mùa, những người chơi hàng đầu có thể có nhiều cơ hội để nổi bật."
         },
         {
           "title": "Sự kiện giải thưởng hoạt động như thế nào",
-          "body": "Người chơi đủ điều kiện thông qua chơi xếp hạng, đáp ứng ngưỡng thành tích để được tham gia các giải đấu có giải thưởng bằng tiền mặt. Các sự kiện được tổ chức xoay quanh việc mai mối công bằng, đảm bảo mọi đối thủ đều phải đối mặt với những đối thủ có kỹ năng tương tự. Phí tham gia minh bạch, tổng giải thưởng được hiển thị rõ ràng trước khi bạn cam kết và các khoản thanh toán được xử lý nhanh chóng sau khi mỗi sự kiện kết thúc. Nó mang tính cạnh tranh, công bằng và phần thưởng là có thật."
+          "body": "Người chơi có thể đủ điều kiện thông qua chơi xếp hạng bằng cách đạt các ngưỡng thành tích. Các sự kiện được lên kế hoạch dựa trên việc ghép trận công bằng, để mọi đối thủ đều gặp người có kỹ năng tương đương. Luật sự kiện và phần thưởng trong game dự kiến sẽ được hiển thị rõ ràng trước khi bạn tham gia."
         },
         {
           "title": "Sự tiến bộ vượt xa đường đua",
@@ -79,7 +79,7 @@
       "faq": [
         {
           "q": "Hyper Racing là gì?",
-          "a": "Một trò chơi đua xe bay cường độ cao lấy bối cảnh trên các thế giới ngoài hành tinh. Xây dựng, nâng cấp và đua các phương tiện có thể tùy chỉnh hoàn toàn thông qua các vòng đua khoa học viễn tưởng nguy hiểm trong khi cạnh tranh để giành phần thưởng trong trò chơi và giải thưởng tiền mặt thực sự."
+          "a": "Một trò chơi đua phương tiện bay cường độ cao trên các thế giới ngoài hành tinh. Chế tạo, nâng cấp và đua những phương tiện tùy biến hoàn toàn qua các đường đua khoa học viễn tưởng nguy hiểm trong khi tranh tài để nhận phần thưởng trong game."
         },
         {
           "q": "Tôi có thể nâng cấp xe đua của mình không?",
@@ -94,8 +94,8 @@
           "a": "Người quản lý đường đua điều phối các hoạt động của đội, đưa ra chiến lược cuộc đua và mở khóa các biện pháp tăng hiệu suất cho toàn đội. Người quản lý phòng thủ bảo vệ xe của bạn trong điều kiện khắc nghiệt; các nhà quản lý tích cực thúc đẩy mọi hệ thống đạt tốc độ tối đa."
         },
         {
-          "q": "Tôi có thể thắng tiền thật không?",
-          "a": "Vâng. Các sự kiện và giải đấu được xếp hạng có tổng giải thưởng bằng tiền thật. Đủ điều kiện thông qua chơi xếp hạng, cạnh tranh với các đối thủ có kỹ năng tương tự và kiếm được các khoản thanh toán thực sự dựa trên vị trí kết thúc của bạn. Thử thách hàng tuần và giải vô địch theo mùa diễn ra liên tục."
+          "q": "Sự kiện xếp hạng có giải thưởng không?",
+          "a": "Các sự kiện xếp hạng và giải đấu được lên kế hoạch cung cấp phần thưởng trong game, danh hiệu và vị trí trên bảng xếp hạng. Chúng không có giải thưởng bằng tiền mặt hay tiền."
         },
         {
           "q": "Phần thưởng cuộc đua hoạt động như thế nào?",
@@ -121,7 +121,7 @@
       "subtitle": "Thiên hà của bạn. Quy tắc của bạn. Vận may của bạn.",
       "intro": [
         "Hyper Quest là một cuộc phiêu lưu ngoài không gian thế giới mở, nơi bạn chỉ huy con tàu vũ trụ có thể nâng cấp hoàn toàn của riêng mình, Quest Racer, băng qua một thiên hà rộng lớn và nguy hiểm. Bạn đã rời bỏ nền văn minh quê nhà của mình nhiều năm trước để tìm kiếm quyền lực, sự giàu có và danh tiếng. Giờ đây toàn bộ vũ trụ là sân chơi của bạn và mỗi nhiệm vụ bạn hoàn thành sẽ đưa bạn đến gần hơn với sự thống trị của thiên hà.",
-        "Nhưng Hyper Quest không chỉ là một trò chơi. Đây là một nền tảng cạnh tranh nơi tiền thật đang được sử dụng. Hoàn thành các nhiệm vụ, chinh phục thử thách và ra về với số tiền thật trong túi và/hoặc phần thưởng của bạn. Từ những nhiệm vụ nhanh chóng chỉ mất vài phút cho đến những chuyến thám hiểm hoành tráng kéo dài nhiều ngày, mọi nhiệm vụ đều thành công. Thử thách càng khó thì phần thưởng càng lớn.",
+        "Hyper Quest được lên kế hoạch không chỉ là một trò chơi: hoàn thành nhiệm vụ, chinh phục thử thách và thu thập phần thưởng trong game. Từ những nhiệm vụ nhanh chỉ mất vài phút đến các cuộc viễn chinh hoành tráng kéo dài nhiều ngày, thử thách càng khó thì phần thưởng trong game càng lớn.",
         "Nâng cấp tàu vũ trụ của bạn từ thân tàu đến buồng lái. Trang bị cho nó hệ thống vũ khí tàn khốc. Tuyển dụng các chuyên gia có khả năng tích lũy các phần thưởng mạnh mẽ dựa trên hiệu suất và cấp độ sức mạnh của tàu của bạn. Khai thác các tiểu hành tinh, vận chuyển hàng hóa nguy hiểm, săn tìm kho báu ẩn giấu, bắt cóc các mục tiêu có giá trị cao hoặc trở thành tay súng đánh thuê. Cách bạn cai trị vũ trụ hoàn toàn là sự lựa chọn của bạn.",
         "Mọi thứ bạn xây dựng trong Hyper Quest đều được nạp trực tiếp vào Hyper Racing và Overlord of the 7 Realms. Một vũ trụ, sự phát triển liền mạch, tiềm năng không giới hạn. Đọc tiếp để khám phá cách hoạt động của nhiệm vụ, những gì bạn có thể kiếm được cũng như cách bạn và tàu vũ trụ của bạn trở thành con tàu đáng sợ nhất trong thiên hà."
       ],
@@ -137,7 +137,7 @@
         {
           "num": "02",
           "title": "Khám phá thiên hà",
-          "body": "Du hành qua các cổng đến các hành tinh xa xôi, mỗi hành tinh có môi trường độc đáo, vật liệu quý giá và các đường đua mới. Theo dõi bản đồ thiên hà để lập biểu đồ cho các khu vực chưa được khám phá và giành quyền đặt tên cho các hành tinh mà bạn khám phá đầu tiên. Khai thác tài nguyên từ các cánh đồng tiểu hành tinh, trục vớt các bộ phận từ di tích cổ và những con tàu bị bỏ hoang, đồng thời thu thập manh mối dẫn đến vận may ẩn giấu rải rác trên các vì sao."
+          "body": "Du hành qua các cổng dịch chuyển đến những hành tinh xa xôi, mỗi nơi có môi trường độc đáo, vật liệu quý giá và đường đua mới. Lần theo bản đồ thiên hà để vẽ nên những vùng chưa được khám phá và giành quyền đặt tên cho các hành tinh bạn phát hiện đầu tiên. Khai thác tài nguyên từ các vành đai tiểu hành tinh, thu hồi linh kiện từ di tích cổ và tàu bị bỏ hoang, và thu thập manh mối dẫn đến những kho báu ẩn giấu rải rác giữa các vì sao."
         },
         {
           "num": "03",
@@ -154,19 +154,19 @@
       "rewards": [
         {
           "title": "Phần thưởng trong trò chơi",
-          "body": "Mỗi nhiệm vụ bạn hoàn thành đều được trả tiền. Tín dụng, vật liệu nâng cấp, thành phần quý hiếm, mã thông báo tuyển dụng chuyên gia và vật phẩm độc quyền sẽ chảy vào kho của bạn sau mỗi nhiệm vụ thành công. Nhiệm vụ càng khó thì chiến lợi phẩm càng phong phú. Khám phá những vật liệu quý hiếm trên các hành tinh xa xôi, trục vớt những bộ phận có giá trị cao từ các di tích cổ xưa và dự trữ tài nguyên giúp bạn vươn lên vị trí thống trị thiên hà."
+          "body": "Mỗi nhiệm vụ bạn hoàn thành đều được thiết kế để thưởng cho bạn trong game. Tín dụng, vật liệu nâng cấp, linh kiện hiếm, token tuyển mộ chuyên gia và vật phẩm độc quyền đổ về kho đồ của bạn sau mỗi nhiệm vụ thành công. Nhiệm vụ càng khó, chiến lợi phẩm càng hậu hĩnh. Khám phá vật liệu hiếm trên các hành tinh xa xôi, thu hồi linh kiện giá trị cao từ di tích cổ và tích trữ tài nguyên tiếp sức cho con đường vươn tới vị thế thống trị thiên hà của bạn."
         },
         {
-          "title": "Thanh toán bằng tiền thật",
-          "body": "Hyper Quest đưa việc chơi game vượt ra ngoài phạm vi giải trí. Một số nhiệm vụ và thử thách xếp hạng nhất định cung cấp các khoản thanh toán bằng tiền thật. Hoàn thành các nhiệm vụ cấp cao, thống trị các sự kiện trên bảng xếp hạng và tham gia các giải vô địch nhiệm vụ theo mùa với tiền thật. Bạn càng trở nên lành nghề và táo bạo thì số tiền thưởng càng lớn. Từ tiền thưởng nhiệm vụ hàng tuần cho đến các giải đấu hoành tráng theo mùa, luôn có cơ hội biến cuộc phiêu lưu thiên hà của bạn thành thu nhập thực sự."
+          "title": "Phần thưởng vô địch",
+          "body": "Một số nhiệm vụ và thử thách xếp hạng có thể cung cấp phần thưởng cao cấp trong game. Các nhiệm vụ bậc cao, sự kiện bảng xếp hạng và giải vô địch nhiệm vụ theo mùa đang được lên kế hoạch, và bạn càng giỏi và táo bạo, phần thưởng trong game càng có thể tốt hơn."
         },
         {
-          "title": "Cách thức thanh toán nhiệm vụ hoạt động",
-          "body": "Người chơi đủ điều kiện nhận các nhiệm vụ thưởng tiền mặt bằng cách xây dựng danh tiếng của mình và đáp ứng các ngưỡng hiệu suất. Độ khó, thời gian và mức độ nguy hiểm của nhiệm vụ sẽ quyết định tổng giải thưởng. Các khoản thanh toán minh bạch, hiển thị rõ ràng trước khi bạn chấp nhận bất kỳ nhiệm vụ nào và được xử lý nhanh chóng sau khi hoàn thành. Cho dù bạn đang thực hiện chuyến vận chuyển hàng hóa kéo dài 10 phút hay chuyến thám hiểm không gian sâu kéo dài một tuần, phần thưởng đều phù hợp với rủi ro."
+          "title": "Phần thưởng nhiệm vụ hoạt động thế nào",
+          "body": "Người chơi có thể đủ điều kiện nhận nhiệm vụ cao cấp bằng cách xây dựng danh tiếng và đạt các ngưỡng thành tích. Độ khó, thời lượng và mức độ nguy hiểm của nhiệm vụ quyết định phần thưởng trong game, dự kiến sẽ được hiển thị trước khi bạn nhận bất kỳ nhiệm vụ nào. Dù bạn chạy một chuyến hàng mười phút hay một cuộc viễn chinh không gian sâu kéo dài cả tuần, phần thưởng được thiết kế để tương xứng với rủi ro."
         },
         {
           "title": "Sự tiến bộ được đền đáp xứng đáng",
-          "body": "Phần thưởng nhiệm vụ được cấp trực tiếp vào việc nâng cấp tàu, hệ thống vũ khí và tuyển dụng chuyên gia của bạn. Mỗi khoản thanh toán đều giúp bạn mạnh mẽ hơn, từ đó mở khóa các nhiệm vụ khó hơn với phần thưởng thậm chí còn lớn hơn. Thu nhập cũng được chuyển sang Hyper Racing và Overlord of the 7 Realms, tạo ra một vòng lặp tiến triển khen thưởng cho sự cống hiến trên toàn bộ hệ sinh thái Hyper Tek."
+          "body": "Phần thưởng nhiệm vụ đi thẳng vào nâng cấp tàu, hệ thống vũ khí và tuyển mộ chuyên gia của bạn. Mỗi phần thưởng khiến bạn mạnh hơn, từ đó mở khóa các nhiệm vụ khó hơn. Tiến trình cũng được lên kế hoạch mang sang Hyper Racing và Overlord of the 7 Realms."
         }
       ],
       "upgradesTitle": "Nâng cấp tàu của bạn, trang bị cho kho vũ khí của bạn, tuyển dụng thủy thủ đoàn của bạn",
@@ -192,19 +192,19 @@
       "faq": [
         {
           "q": "HyperQuest là gì?",
-          "a": "Một cuộc phiêu lưu không gian thế giới mở, nơi bạn chỉ huy một con tàu vũ trụ có thể nâng cấp hoàn toàn trên một thiên hà rộng lớn. Hoàn thành các nhiệm vụ, khám phá thế giới ngoài hành tinh, nâng cấp tàu của bạn, tuyển dụng chuyên gia và kiếm phần thưởng bằng tiền thật cùng với sự giàu có trong trò chơi."
+          "a": "Một cuộc phiêu lưu không gian thế giới mở, nơi bạn chỉ huy một phi thuyền có thể nâng cấp toàn diện xuyên qua thiên hà rộng lớn. Hoàn thành nhiệm vụ, khám phá các thế giới ngoài hành tinh, nâng cấp tàu, tuyển mộ chuyên gia và thu thập phần thưởng trong game."
         },
         {
           "q": "Nhiệm vụ hoạt động như thế nào?",
           "a": "Nhận nhiệm vụ từ bảng nhiệm vụ trong trò chơi. Các nhiệm vụ bao gồm từ việc vận chuyển hàng hóa nhanh chóng chỉ mất vài phút cho đến những cuộc thám hiểm hoành tráng kéo dài nhiều ngày vào sâu trong không gian chưa được khám phá. Mỗi nhiệm vụ đều có mục tiêu rõ ràng, xếp hạng nguy hiểm và cấp độ phần thưởng được hiển thị trước khi bạn chấp nhận."
         },
         {
-          "q": "Tôi có thể kiếm được tiền thật không?",
-          "a": "Vâng. Một số nhiệm vụ, thử thách xếp hạng và chức vô địch theo mùa nhất định cung cấp các khoản thanh toán bằng tiền thật. Xây dựng danh tiếng của bạn, đáp ứng các ngưỡng hiệu suất và đủ điều kiện nhận các nhiệm vụ thưởng tiền mặt ngày càng sinh lợi. Tiền thưởng hàng tuần và các giải đấu theo mùa diễn ra liên tục."
+          "q": "Tôi có thể kiếm tiền từ nhiệm vụ không?",
+          "a": "Không. Nhiệm vụ, thử thách xếp hạng và giải vô địch theo mùa được lên kế hoạch chỉ cung cấp phần thưởng trong game, không phải tiền mặt hay tiền."
         },
         {
           "q": "Tôi có thể kiếm được phần thưởng gì trong trò chơi?",
-          "a": "Mỗi nhiệm vụ hoàn thành sẽ trả các khoản tín dụng, vật liệu nâng cấp, thành phần quý hiếm, mã thông báo tuyển dụng chuyên gia và vật phẩm độc quyền. Nhiệm vụ càng khó và càng dài thì phần thưởng càng phong phú. Khám phá những vật liệu quý hiếm trên các hành tinh xa xôi và thu thập những bộ phận có giá trị cao từ các di tích cổ xưa."
+          "a": "Mỗi nhiệm vụ hoàn thành đều được thiết kế để thưởng tín dụng, vật liệu nâng cấp, linh kiện hiếm, token tuyển mộ chuyên gia và vật phẩm độc quyền. Nhiệm vụ càng khó và càng dài, phần thưởng càng hậu hĩnh. Khám phá vật liệu hiếm trên các hành tinh xa xôi và thu hồi linh kiện giá trị cao từ di tích cổ."
         },
         {
           "q": "Tôi có thể nâng cấp tàu vũ trụ của mình không?",
@@ -220,7 +220,7 @@
         },
         {
           "q": "Những loại nhiệm vụ có sẵn?",
-          "a": "Vận chuyển hàng hóa, khai thác tiểu hành tinh, săn tìm kho báu, săn tiền thưởng, thu hồi đồ tạo tác, hoạt động bí mật, khám phá hành tinh, phòng thủ cướp biển, nhiệm vụ trục vớt, v.v. Các nhiệm vụ bao gồm từ những cuộc chạy nhanh trong 10 phút cho đến những chuyến thám hiểm không gian sâu kéo dài nhiều ngày."
+          "a": "Vận chuyển hàng hóa, khai thác tiểu hành tinh, săn kho báu, săn bounty, thu hồi cổ vật, hoạt động bí mật, khám phá hành tinh, phòng thủ chống cướp biển, nhiệm vụ thu hồi và nhiều hơn nữa. Nhiệm vụ trải dài từ những chuyến đi nhanh mười phút đến các cuộc viễn chinh không gian sâu kéo dài nhiều ngày."
         },
         {
           "q": "Tôi có thể khám phá các hành tinh mới không?",
@@ -251,7 +251,7 @@
       "intro": [
         "Overlord of the 7 Realms là một trò chơi chiến lược chiến đấu ba cấp độ không giống bất kỳ trò chơi nào khác trong trò chơi. Bạn mạo hiểm đi qua một cánh cổng vào một vũ trụ song song và hạ cánh xuống một hành tinh xa lạ thù địch. Con tàu của bạn bị đắm, hệ thống của bạn không hoạt động và các sinh vật trên hành tinh đang dần tiến đến gần. Sự sống còn chỉ là sự khởi đầu. Sự thống trị là mục tiêu.",
         "Xây dựng lại con tàu của bạn từ đống đổ nát. Sao chép và huấn luyện quân đội trong phòng thí nghiệm trên tàu của bạn. Chế ngự động vật hoang dã trên hành tinh để tạo ra kỵ binh có sức tàn phá. Sau đó, tham gia cuộc chiến trên ba chiều chiến đấu: chiến đấu trên mặt đất chống lại quái vật và người chơi đối thủ, tấn công từ mặt đất vào không gian vào các mục tiêu trên quỹ đạo hoặc mặt đất và chiến tranh từ không gian đến không gian trên Battle Ring khổng lồ quay quanh hành tinh.",
-        "Đây không chỉ là một trò chơi chiến lược khác. Overlord có tính năng tương tác VR thời gian thực, phần thưởng bằng tiền thật khi hoàn thành các sự kiện và nhiệm vụ hàng ngày cũng như các cuộc xâm lược hai tuần một lần của Hammerongs đáng sợ, loài ngoài hành tinh mạnh nhất còn tồn tại. Hai tuần một lần, họ đến để khai thác hành tinh và cứ hai tuần một lần, những người chơi dũng cảm có thể thách đấu họ để nhận những phần thưởng khổng lồ và phần thưởng huyền thoại.",
+        "Đây không chỉ là một trò chơi chiến thuật nữa. Giống như Hyper Racing và Hyper Quest, Overlord có tương tác VR theo thời gian thực và phần thưởng trong game khi hoàn thành sự kiện, nhiệm vụ và các cuộc xâm lược hai tuần một lần của Hammerong đáng sợ, loài ngoài hành tinh mạnh nhất đang tồn tại. Cứ hai tuần một lần, chúng kéo đến để vơ vét tài nguyên hành tinh, và cứ hai tuần một lần, những người chơi dũng cảm có thể thách thức chúng để giành phần thưởng thêm khổng lồ và phần thưởng huyền thoại.",
         "Nâng cấp tàu vũ trụ của bạn, trang bị vũ khí hủy diệt, tuyển dụng các chuyên gia để nâng cao cấp độ sức mạnh của bạn và tạo dựng các liên minh để kiểm soát toàn bộ khu vực. Mọi thứ bạn xây dựng đều kết nối trực tiếp với Hyper Racing và Hyper Quest thông qua hệ sinh thái Hyper Tek được chia sẻ. Một vũ trụ, ba trò chơi, chiến tranh không giới hạn. Hãy đọc tiếp để khám phá cách hoạt động của hệ thống chiến đấu và lý do Overlord thay đổi mọi thứ."
       ],
       "calloutLine1": "Sự sống còn chỉ là sự khởi đầu.",
@@ -296,7 +296,7 @@
           },
           {
             "title": "Lợi thế so với các trò chơi khác",
-            "body": "Không có trò chơi nào khác kết hợp chiến tranh ba cấp độ, trạm chiến đấu quỹ đạo có thể khám phá, VR thời gian thực và tiền thật và phần thưởng trong trò chơi trong một trải nghiệm duy nhất. Chỉ riêng Battle Ring đã bổ sung thêm một khía cạnh lối chơi mà các đối thủ không thể sánh được. Khi bạn kết hợp điều đó với chiến đấu trên mặt đất, chiến tranh ngoài không gian, trải nghiệm VR và hệ sinh thái Hyper Tek được kết nối với nhau, Overlord sẽ đứng trong một danh mục riêng."
+            "body": "Không trò chơi nào khác kết hợp chiến tranh ba tầng, một trạm chiến đấu quỹ đạo có thể khám phá, VR theo thời gian thực và phần thưởng trong game trong một trải nghiệm duy nhất. Riêng Battle Ring đã thêm một chiều lối chơi mà đối thủ không thể sánh kịp. Khi kết hợp với chiến đấu mặt đất, chiến tranh không gian, sự đắm chìm VR và hệ sinh thái Hyper Tek liên kết, Overlord đứng ở một hạng mục riêng."
           }
         ]
       },
@@ -312,7 +312,7 @@
         },
         {
           "title": "Tuyển dụng chuyên gia",
-          "body": "Các chuyên gia là nhân tố phân chia những người chơi giỏi khỏi Overlord. Có được những chuyên gia độc đáo, những người mang lại những phần thưởng mạnh mẽ cho hiệu suất và mức sức mạnh tổng thể của con tàu của bạn. Các chuyên gia chiến thuật cải thiện hiệu quả triển khai quân đội, các chuyên gia kỹ thuật đẩy nhanh việc sửa chữa và nâng cấp tàu, các chuyên gia vũ khí tăng lượng sát thương trên tất cả các hệ thống và các chuyên gia tình báo tiết lộ vị trí và điểm yếu của kẻ thù. Xếp chồng nhiều chuyên gia để tạo ra sức mạnh tổng hợp mạnh mẽ giúp khuếch đại mọi khía cạnh hoạt động của bạn."
+          "body": "Chuyên gia là yếu tố nhân sức mạnh và, kết hợp với kỹ năng, là điều phân biệt người chơi giỏi với các Overlord. Thu nạp các chuyên gia độc đáo mang lại phần thưởng thêm mạnh mẽ cho hiệu suất tổng thể và cấp sức mạnh của tàu. Chuyên gia chiến thuật cải thiện hiệu quả triển khai quân, chuyên gia kỹ thuật đẩy nhanh việc sửa chữa và nâng cấp tàu, chuyên gia vũ khí tăng sát thương trên mọi hệ thống, và chuyên gia tình báo tiết lộ vị trí cùng điểm yếu của kẻ địch. Kết hợp nhiều chuyên gia để tạo nên sức mạnh phối hợp hủy diệt, khuếch đại mọi khía cạnh trong hoạt động của bạn. Tuy nhiên, người chơi không nạp tiền có thể yên tâm rằng Hyper Tek được tạo ra để giải quyết các vấn đề trong game. Dù có thể cộng dồn nhiều lần, cơ chế chơi công bằng bảo đảm việc cộng dồn không phải là hệ thống điểm đổi điểm đơn giản. Thay vào đó, nó vận hành theo thang trượt để sức mạnh thuần túy không lấn át tầm quan trọng của kỹ năng. Trò chơi này đề cao cả sức mạnh lẫn kỹ năng, thay vì dựa vào may rủi!"
         },
         {
           "title": "Xây dựng quân đội của bạn",
@@ -331,7 +331,7 @@
         },
         {
           "title": "Đã kết nối với Hệ sinh thái Hyper Tek",
-          "body": "Chúa tể của 7 cõi không tồn tại một cách biệt lập. Nó được tích hợp hoàn toàn vào vũ trụ Hyper Tek cùng với Hyper Racing và Hyper Quest. Tài nguyên kiếm được trong Overlord có thể được sử dụng cho cả ba trò chơi. Nâng cấp tàu, tiền thưởng chuyên môn, kỹ năng chiến đấu và nguyên liệu được chuyển đổi liền mạch giữa các tựa game. Khả năng đua xe đạt được trong Hyper Racing sẽ cải thiện kỹ năng phi công của bạn trong trận chiến ngoài không gian Overlord. Vật liệu thu thập được trong Hyper Quest sẽ thúc đẩy quá trình nâng cấp của bạn trên hành tinh. Thị trường Hyper Tek kết nối mọi thứ, tạo ra một nền kinh tế thống nhất trong đó sự tiến bộ trong một trò chơi sẽ thúc đẩy sự tiến bộ của cả ba trò chơi."
+          "body": "Overlord of the 7 Realms không tồn tại biệt lập. Nó được tích hợp hoàn toàn vào vũ trụ Hyper Tek cùng với Hyper Racing và Hyper Quest. Tài nguyên kiếm được trong Overlord có thể dùng trong cả ba trò chơi. Nâng cấp tàu, phần thưởng thêm của chuyên gia, kỹ năng chiến đấu và vật liệu luân chuyển liền mạch giữa các tựa game. Khả năng đua có được trong Hyper Racing cải thiện kỹ năng phi công của bạn trong chiến đấu không gian của Overlord. Vật liệu thu thập trong Hyper Quest tiếp sức cho các nâng cấp của bạn trên hành tinh. Marketplace Hyper Tek kết nối mọi thứ, tạo nên một vũ trụ liên kết nơi tiến bộ ở một trò chơi thúc đẩy bước tiến ở cả ba."
         },
         {
           "title": "Một vũ trụ, ba trò chơi, sức mạnh vô hạn",
@@ -342,7 +342,7 @@
       "faq": [
         {
           "q": "Chúa tể của 7 cõi là gì?",
-          "a": "Trò chơi chiến lược chiến đấu ba cấp độ trong đó bạn hạ cánh xuống một hành tinh xa lạ, xây dựng lại con tàu của mình, nhân bản quân đội và chiến đấu trên ba chiều: mặt đất đối đất, mặt đất đối không và không gian đối không. Có tính năng tương tác VR, phần thưởng bằng tiền thật và các cuộc xâm lược Hammerong hai tuần một lần."
+          "a": "Một trò chơi chiến thuật chiến đấu ba tầng, nơi bạn hạ cánh khẩn cấp xuống một hành tinh xa lạ, dựng lại tàu, nhân bản quân đội và chiến đấu trên ba chiều: mặt đất đối mặt đất, mặt đất đối không gian và không gian đối không gian. Các tính năng dự kiến bao gồm tương tác VR, phần thưởng trong game và các cuộc xâm lược của Hammerong hai tuần một lần."
         },
         {
           "q": "Hệ thống chiến đấu ba cấp là gì?",
@@ -366,7 +366,7 @@
         },
         {
           "q": "Tôi có thể kiếm được phần thưởng gì?",
-          "a": "Các nhiệm vụ, nhiệm vụ, trận chiến và sự kiện hàng ngày đều trả các khoản tín dụng, vật liệu nâng cấp và tiền thưởng tiến triển. Các sự kiện đặc biệt và cuộc xâm lược của Hammerong mang đến những phần thưởng cao cấp và độc quyền. Những thử thách có độ khó cao hơn và các cuộc thi xếp hạng mang lại khoản thanh toán lớn hơn bao gồm cả tiền thật."
+          "a": "Nhiệm vụ hàng ngày, nhiệm vụ, trận chiến và sự kiện được thiết kế để thưởng tín dụng, vật liệu nâng cấp và phần thưởng thêm về tiến trình. Sự kiện đặc biệt và các cuộc xâm lược của Hammerong có thể cung cấp phần thưởng cao cấp và độc quyền trong game. Các thử thách độ khó cao hơn và cuộc thi xếp hạng được lên kế hoạch cung cấp phần thưởng trong game lớn hơn."
         },
         {
           "q": "Overlord có hỗ trợ VR không?",
@@ -382,7 +382,7 @@
         },
         {
           "q": "Overlord có được liên kết với các trò chơi Hyper Tek khác không?",
-          "a": "Tích hợp đầy đủ. Tài nguyên, nâng cấp tàu, tiền thưởng chuyên môn và kỹ năng chiến đấu luân chuyển giữa Overlord, Hyper Racing và Hyper Quest. Khả năng đua xe cải thiện khả năng chiến đấu ngoài không gian của bạn, vật liệu Nhiệm vụ thúc đẩy quá trình nâng cấp của bạn và thị trường Hyper Tek kết nối toàn bộ nền kinh tế."
+          "a": "Tích hợp hoàn toàn. Tài nguyên, nâng cấp tàu, phần thưởng thêm của chuyên gia và kỹ năng chiến đấu được lên kế hoạch luân chuyển giữa Overlord, Hyper Racing và Hyper Quest. Khả năng đua cải thiện chiến đấu không gian của bạn, vật liệu từ Quest tiếp sức cho nâng cấp, và marketplace Hyper Tek kết nối cả ba trò chơi."
         },
         {
           "q": "Những loại vũ khí có sẵn?",
@@ -801,7 +801,7 @@
       },
       "mining_rp": {
         "title": "Khai Thác RP",
-        "desc": "Đơn vị khai thác đuôi mạn trái. Phối hợp với khoang RS để tối đa hóa sản lượng khai thác tài nguyên vùng đuôi."
+        "desc": "Đơn vị khai thác mạn trái phía sau. Hoạt động song song với khoang RS để tối đa hóa việc khai thác tài nguyên ở khu vực phía sau."
       },
       "fuel_ref": {
         "title": "Lò Lọc Nhiên Liệu",
@@ -933,11 +933,11 @@
       },
       "hydro_2": {
         "title": "Phòng Thủy Canh 2",
-        "desc": "Phòng thủy canh phụ mở rộng sự đa dạng và sản lượng cây trồng. Hỗ trợ dinh dưỡng thủy thủ và sản xuất hàng hóa thương mại."
+        "desc": "Buồng thủy canh thứ cấp mở rộng sự đa dạng và sản lượng cây trồng. Hỗ trợ dinh dưỡng cho phi hành đoàn và sản xuất hàng hóa thương mại."
       },
       "hydro_3": {
         "title": "Phòng Thủy Canh 3",
-        "desc": "Đơn vị trồng thứ ba chuyên về cây lương thực chủ lực năng suất cao. Cung cấp nguồn calo cơ bản cho đội thủy thủ đông đảo."
+        "desc": "Đơn vị trồng trọt thứ ba chuyên về cây lương thực sản lượng cao. Cung cấp nguồn calo cơ bản cho các phi hành đoàn đông người."
       },
       "hydro_4": {
         "title": "Phòng Thủy Canh 4",
@@ -1113,7 +1113,7 @@
     "viewArrow": "XEM →",
     "selectCategory": "CHỌN DANH MỤC",
     "comingSoon": "SẮP RA MẮT",
-    "specialistProfileDesc": "Hồ sơ chuyên gia — thống kê đầy đủ sẽ có khi game ra mắt.",
+    "specialistProfileDesc": "Hồ sơ chuyên gia — chỉ số và khả năng đầy đủ có thể có khi trò chơi ra mắt.",
     "alliance": {
       "rank": {
         "leader": "Lãnh đạo",
@@ -1131,8 +1131,8 @@
         "editInfoDesc": "Thay đổi tên, thẻ và mô tả",
         "joinRequests": "Quản lý yêu cầu tham gia",
         "joinRequestsDesc": "Xem xét và chấp nhận thành viên mới",
-        "donationGoals": "Đặt mục tiêu quyên góp",
-        "donationGoalsDesc": "Cấu hình mục tiêu quyên góp hàng tuần",
+        "donationGoals": "Đặt mục tiêu đóng góp",
+        "donationGoalsDesc": "Thiết lập chỉ tiêu đóng góp hàng tuần",
         "warSettings": "Cài đặt chiến tranh liên minh",
         "warSettingsDesc": "Cấu hình quy tắc tham gia chiến tranh",
         "kickMembers": "Đuổi thành viên",
@@ -1141,7 +1141,7 @@
       "allianceMail": {
         "warResults": "Kết quả chiến tranh liên minh",
         "strategyPlan": "Kế hoạch chiến lược mới",
-        "donationSummary": "Tóm tắt quyên góp hàng tuần",
+        "donationSummary": "Tổng kết đóng góp hàng tuần",
         "meeting1800": "Cuộc họp lúc 18:00",
         "levelUp": "Liên minh lên cấp!"
       }
@@ -1166,7 +1166,7 @@
       "tradingPlasma": "Trao đổi thanh plasma lấy sách công nghệ",
       "needHelpAsteroid": "Cần giúp đỡ nhiệm vụ tiểu hành tinh",
       "allianceRecruiting": "Liên minh chúng tôi đang tuyển, nhắn DM cho tôi",
-      "donationGoalsPlasma": "Mục tiêu quyên góp: cần thanh plasma!",
+      "donationGoalsPlasma": "Mục tiêu đóng góp: cần thanh plasma!",
       "warStarts2Hours": "Chiến tranh bắt đầu sau 2 giờ, chuẩn bị",
       "handleMedicalSupport": "Tôi sẽ lo hỗ trợ y tế",
       "wts50Engines": "BÁN: 50 động cơ, nhắn PM",
@@ -1203,6 +1203,6 @@
       "speedRacingTournament": "Giải đua tốc độ",
       "overlordChampionship": "Giải vô địch Overlord"
     },
-    "eventDetailPlaceholder": "Chi tiết đầy đủ về sự kiện, phần thưởng và tùy chọn tham gia sẽ có sẵn khi sự kiện này ra mắt."
+    "eventDetailPlaceholder": "Chi tiết đầy đủ về sự kiện, phần thưởng và các lựa chọn tham gia có thể có khi sự kiện này bắt đầu."
   }
 }

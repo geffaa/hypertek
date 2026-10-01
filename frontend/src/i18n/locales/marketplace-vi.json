@@ -9,7 +9,7 @@
       "auctions": "Đấu Giá",
       "trades": "Giao Dịch",
       "quests": "Nhiệm Vụ",
-      "hire": "Thuê Mướn",
+      "hire": "Cho thuê",
       "bounty": "Tiền Thưởng"
     },
     "banner": {
@@ -31,23 +31,23 @@
       "facts": [
         {
           "label": "NFA",
-          "desc": "Tài sản độc quyền của Hypertek. Phần thưởng trong game cao nhất. Giá trị mua lại tối thiểu được đảm bảo tăng theo mỗi lần bán."
+          "desc": "Vật phẩm chỉ có từ Hyper Tek. Phần thưởng thêm trong game cao nhất. Programmatic Trade-In Value được cộng thêm sau mỗi lần bán lại."
         },
         {
           "label": "NFC",
-          "desc": "Được tạo bởi Hypertek hoặc người chơi được cấp phép. Bao gồm phần thưởng trong game. Mua lại tối thiểu được đảm bảo."
+          "desc": "Được tạo bởi Hyper Tek hoặc người chơi được cấp phép. Có phần thưởng thêm trong game. Có Programmatic Trade-In Value."
         },
         {
           "label": "NFT",
-          "desc": "Vật phẩm sưu tập do người chơi tạo ra. Không có phần thưởng trong game. Không có đảm bảo mua lại. Có thể giao dịch trên thị trường."
+          "desc": "Vật phẩm sưu tầm do người chơi tạo. Không có phần thưởng thêm trong game. Không có giá trị đổi trả. Có thể giao dịch trên marketplace."
         },
         {
           "label": "Hoa Hồng",
-          "desc": "Phí nền tảng thay đổi tùy tin đăng. Bán lại: người bán 86%, tiền bản quyền nghệ sĩ 2%, +5% vào quỹ mua lại, nền tảng 7%."
+          "desc": "Phí nền tảng thay đổi theo từng tin đăng. Phân chia khi bán lại: người bán 86%, bản quyền nghệ sĩ 2%, 5% vào khoản phân bổ đổi trả của vật phẩm, nền tảng 7%."
         },
         {
-          "label": "Tăng Trưởng Mua Lại",
-          "desc": "+5% giá mỗi lần bán lại được cộng vào giá trị mua lại tối thiểu của tài sản. Chỉ tăng, không bao giờ giảm."
+          "label": "Khoản phân bổ đổi trả",
+          "desc": "5% giá mỗi lần bán lại được cộng vào khoản phân bổ đổi trả của vật phẩm. Số tiền hoàn lại khi đổi trả tuân theo Tiered Loyalty Return Schedule và luôn thấp hơn số tiền được phân bổ."
         },
         {
           "label": "Ví Lưu Ký",
@@ -67,7 +67,8 @@
             "NFC (Nhân Vật Không Thể Thay Thế) là các mục người chơi được cấp phép với phần thưởng trong game và mua lại.",
             "NFT (Token Không Thể Thay Thế) là các vật phẩm sưu tập do người dùng tạo ra — giao diện, vũ khí và nhiều hơn nữa."
           ],
-          "cta": "Học Những Điều Cơ Bản"
+          "cta": "Học Những Điều Cơ Bản",
+          "intro": "NFA/NFC/NFT là các tác phẩm nghệ thuật kỹ thuật số. NFA và NFC có phần thưởng thêm trong game và Programmatic Trade-In Value."
         },
         {
           "label": "Thị Trường",
@@ -110,21 +111,21 @@
           "cta": "Khám Phá Nhiệm Vụ"
         },
         {
-          "label": "Thuê Mướn",
-          "tagline": "Mượn tài sản hoặc kiếm tiền từ tài sản của bạn",
+          "label": "Cho thuê",
+          "tagline": "Cho thuê vật phẩm của bạn để nhận phần thưởng trong game",
           "details": [
             "Thuê các chuyên gia hoặc thiết bị mạnh mẽ cho một nhiệm vụ duy nhất mà không cần mua.",
-            "Liệt kê các tài sản nhàn rỗi của bạn cho thuê và kiếm thu nhập thụ động khi bạn vắng mặt.",
+            "Người chơi có thể cho người chơi khác thuê các vật phẩm chưa dùng đến để nhận phần thưởng trong game do họ tự thỏa thuận với nhau.",
             "Thời hạn linh hoạt — theo giờ, ngày hoặc theo nhiệm vụ."
           ],
-          "cta": "Duyệt Thuê Mướn"
+          "cta": "Xem mục Cho thuê"
         },
         {
           "label": "Tiền Thưởng",
           "tagline": "Săn mục tiêu, nhận thưởng, đứng đầu bảng xếp hạng",
           "details": [
             "Chấp nhận tiền thưởng do người chơi khác hoặc hệ thống đăng để kiếm phần thưởng tiền điện tử.",
-            "Leo lên bảng xếp hạng tiền thưởng để mở khóa các danh hiệu độc quyền và phần thưởng bổ sung.",
+            "Leo bảng xếp hạng bounty để mở khóa danh hiệu độc quyền và phần thưởng trong game.",
             "Đăng tiền thưởng của riêng bạn để tuyển dụng người chơi có kỹ năng cho mục tiêu của bạn."
           ],
           "cta": "Xem Tiền Thưởng"
@@ -136,7 +137,7 @@
       "subtitle": "Duyệt NFA, NFC và NFT có sẵn để mua ngay lập tức — giao diện, vũ khí, chuyên gia, tàu vũ trụ và nhiều hơn nữa.",
       "filterAll": "Tất Cả",
       "samplePreviewTitle": "Xem Trước Thị Trường Mẫu",
-      "samplePreviewDesc": "Các mục bên dưới là xem trước mẫu trình bày các loại tài sản kỹ thuật số sẽ có sẵn trên thị trường HyperTek. Các mục thực tế với tác phẩm nghệ thuật độc đáo và quyền sở hữu được xác minh blockchain sẽ có sẵn khi ra mắt.",
+      "samplePreviewDesc": "Các vật phẩm dưới đây là bản xem trước mẫu về các loại vật phẩm kỹ thuật số có thể có trên marketplace Hyper Tek. Vật phẩm thực tế với tác phẩm độc nhất và quyền sở hữu được xác minh trên blockchain có thể có sẵn khi ra mắt.",
       "noItems": "Chưa có mục nào. Hãy kiểm tra lại sau.",
       "categories": {
         "skins": "Giao Diện",
@@ -197,7 +198,7 @@
       },
       "preview": {
         "title": "Xem Trước Tính Năng Trong Game",
-        "desc": "Hệ thống Đấu Giá sẽ hoàn toàn hoạt động trong game khi ra mắt. Các mục hiển thị ở đây là mẫu để trình bày cho nhà đầu tư/người dùng."
+        "desc": "Hệ thống đấu giá có thể hoạt động trong game khi ra mắt. Các vật phẩm hiển thị ở đây là mẫu, chỉ để xem trước."
       },
       "card": {
         "currentBid": "Giá thầu hiện tại",
@@ -369,7 +370,7 @@
       "earnFromQuests": "Muốn kiếm tiền từ nhiệm vụ? Chơi trò chơi →",
       "moneyQuests": "Nhiệm Vụ Tiền (kho 11%)",
       "resourceQuests": "Nhiệm Vụ Tài Nguyên (kho 20%)",
-      "footerNote1": "# Các nhiệm vụ có tải trọng kết hợp sẽ được thanh toán bằng các số tiền trong bảng riêng.",
+      "footerNote1": "# Nhiệm vụ có hàng hóa kết hợp sử dụng phần thưởng trong bảng riêng.",
       "footerNote2": "# Dữ liệu hành tinh sẽ đồng bộ khi các trò chơi ra mắt.",
       "inGame": "Trong game",
       "open": "Mở",
@@ -407,43 +408,43 @@
       }
     },
     "hire": {
-      "heading": "Thuê Mướn",
+      "heading": "Cho thuê",
       "listings": "niêm yết",
       "listBtn": "Đăng",
-      "forHireLabel": "Cho Thuê",
-      "wantingToHire": "Muốn Thuê",
+      "forHireLabel": "Cho thuê",
+      "wantingToHire": "Muốn thuê",
       "noListings": "Không có niêm yết {{filter}}",
-      "lockedTitle": "Nội dung Gaming HyperTek chỉ để hiển thị.",
-      "lockedDesc": "This is part of Hyper Tek's genuine 'Play to Earn' system, where players can earn real cash rewards, and or Materials/Resources.",
+      "lockedTitle": "Tính năng cho thuê có thể được mở nếu các trò chơi được phát hành.",
+      "lockedDesc": "Người chơi có thể cho người chơi khác thuê vật phẩm và nhận phần thưởng trong game do họ tự thỏa thuận với nhau, tùy theo luật chơi cuối cùng.",
       "forHireBadge": "CHO THUÊ",
-      "wantedBadge": "MUỐN THUÊ",
+      "wantedBadge": "CẦN THUÊ",
       "price": "Giá",
       "maxDuration": "Thời Hạn Tối Đa",
-      "hireBtn": "Thuê",
+      "hireBtn": "Cho thuê",
       "fulfillBtn": "Thực Hiện Yêu Cầu",
       "rules": {
         "durations": "8 giờ · 1 ngày · 3 ngày · 1 tuần · 1 tháng",
         "cooldown": "Thời gian hồi phục: gấp 2 lần thời hạn thuê",
         "commission": "Hoa hồng thay đổi",
-        "payment": "Thanh toán bằng Hyper Bucks hoặc Vật Liệu"
+        "payment": "Phần thưởng trong game do người chơi thỏa thuận"
       },
       "preview": {
         "title": "Xem Trước Tính Năng Trong Game",
-        "desc": "Hệ thống Thuê Mướn sẽ hoàn toàn hoạt động trong game khi ra mắt. Các mục hiển thị ở đây là mẫu để trình bày cho nhà đầu tư/người dùng."
+        "desc": "Tính năng cho thuê có thể hoạt động trong game khi ra mắt. Các vật phẩm hiển thị ở đây là mẫu, chỉ để xem trước."
       },
       "hireModal": {
-        "hireTitle": "Thuê Chuyên Gia",
-        "fulfillTitle": "Thực Hiện Yêu Cầu Thuê",
+        "hireTitle": "Cho thuê chuyên gia",
+        "fulfillTitle": "Đáp ứng yêu cầu thuê",
         "forHireBadge": "CHO THUÊ",
         "wantedBadge": "CẦN THUÊ",
         "price": "Giá",
         "duration": "Thời Hạn",
-        "howHire": "Cách thuê hoạt động",
+        "howHire": "Cách cho thuê hoạt động",
         "howFulfill": "Cách thực hiện yêu cầu hoạt động",
-        "proceedHire": "Tiến Hành Thuê",
+        "proceedHire": "Tiếp tục cho thuê",
         "offerFulfill": "Đề Nghị Thực Hiện",
         "commission": "Hoa hồng nền tảng thay đổi · Thời gian hồi phục áp dụng sau khi trả lại",
-        "confirmHire": "Xác Nhận Thuê",
+        "confirmHire": "Xác nhận cho thuê",
         "confirmOffer": "Xác Nhận Đề Nghị",
         "specialist": "Chuyên Gia",
         "payment": "Thanh Toán",
@@ -461,19 +462,19 @@
         "close": "Đóng"
       },
       "createModal": {
-        "listTitle": "Đăng Cho Thuê",
-        "postTitle": "Đăng Muốn Thuê",
-        "forHireBtn": "Cho Thuê",
-        "wantingBtn": "Muốn Thuê",
+        "listTitle": "Đăng tin Cho thuê",
+        "postTitle": "Đăng tin Muốn thuê",
+        "forHireBtn": "Cho thuê",
+        "wantingBtn": "Muốn thuê",
         "itemNameHire": "Tên chuyên gia / mục *",
-        "itemNameWant": "Những gì bạn muốn thuê *",
+        "itemNameWant": "Bạn muốn thuê gì *",
         "descPlaceholder": "Mô tả",
         "categoryPlaceholder": "Danh mục (tùy chọn)",
         "paymentType": "Loại Thanh Toán",
-        "hyperBucks": "Hyper Bucks",
+        "hyperBucks": "Phần thưởng trong game",
         "materials": "Vật Liệu",
-        "amountLabel": "Số Tiền (Hyper Bucks)",
-        "afterCommission": "Bạn nhận {{amount}} HB sau hoa hồng nền tảng",
+        "amountLabel": "Phần thưởng trong game",
+        "afterCommission": "Bạn nhận {{amount}} trong game sau hoa hồng nền tảng",
         "maxDuration": "Thời Hạn Tối Đa",
         "disclaimer": "Hoa hồng thay đổi · Thời gian hồi phục = 2 lần thời hạn thuê sau khi trả lại",
         "listing": "Đang Đăng…",
@@ -508,7 +509,7 @@
         "postedBy": "Đăng Bởi",
         "claimedBy": "Nhận Bởi",
         "status": "Trạng Thái",
-        "netHB": "{{amount}} HB ròng"
+        "netHB": "{{amount}} ròng"
       },
       "pagination": {
         "prev": "Trước",
@@ -540,6 +541,20 @@
       "dashboardTitle": "Bảng điều khiển của bạn hiện đang khóa, nhưng hãy sẵn sàng; buổi ra mắt chính thức đang đến rất gần!",
       "desc": "Đừng để điều này ngăn bạn đăng ký và khám phá dự án tuyệt vời này. Khám phá vô số lợi ích và cách sự tham gia của bạn có thể thúc đẩy thành công của nó! Tham gia ngay và trở thành một Hyper Tekken hôm nay!",
       "buttonLabel": "Mở khi ra mắt chính thức"
+    },
+    "gameLock": {
+      "quests": {
+        "title": "Nhiệm vụ có thể được mở nếu các trò chơi được phát hành.",
+        "desc": "Người chơi có thể giao vật phẩm cho người chơi khác để nhận phần thưởng trong game, tùy theo luật chơi cuối cùng."
+      },
+      "hire": {
+        "title": "Tính năng cho thuê có thể được mở nếu các trò chơi được phát hành.",
+        "desc": "Người chơi có thể cho người chơi khác thuê vật phẩm và nhận phần thưởng trong game do họ tự thỏa thuận với nhau, tùy theo luật chơi cuối cùng."
+      },
+      "bounty": {
+        "title": "Bounty có thể được mở nếu các trò chơi được phát hành.",
+        "desc": "Bounty chỉ có thể cung cấp phần thưởng trong game, tùy theo luật chơi cuối cùng."
+      }
     }
   },
   "musicPlayer": {
@@ -581,9 +596,9 @@
       "platform": "Platform",
       "noDesc": "Không có mô tả nào được cung cấp cho mặt hàng này.",
       "price": "Giá",
-      "minBuyback": "Đảm bảo mua lại tối thiểu",
+      "minBuyback": "Programmatic Trade-In Value",
       "reservePrice": "Giá dự trữ",
-      "buybackNote": "Tài sản này không thể được bán dưới giá trị mua lại tối thiểu của nó.",
+      "buybackNote": "Giá khởi điểm không thể đặt thấp hơn khoản phân bổ đổi trả của vật phẩm này.",
       "networkNote": "USDC trên cơ sở · ETH cơ sở cần thiết cho gas (chỉ thanh toán bằng ví)",
       "buyWithCard": "Mua bằng thẻ",
       "makeOffer": "Đưa ra ưu đãi",

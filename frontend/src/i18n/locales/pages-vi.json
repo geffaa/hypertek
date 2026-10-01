@@ -12,7 +12,7 @@
       "three-worlds": "02  Ba Thế Giới",
       "technology": "03  Công Nghệ",
       "nfa": "04  Tài Sản Không Thể Thay Thế",
-      "hyperbucks": "05  Nền Kinh Tế HyperBucks",
+      "hyperbucks": "05  Gems",
       "marketplace": "06  Thị Trường",
       "roadmap": "07  Lộ Trình",
       "conclusion": "08  Kết Luận"
@@ -29,7 +29,7 @@
     "docs": {
       "tos": "Điều Khoản Dịch Vụ",
       "api": "Điều Khoản Dịch Vụ API",
-      "packs": "Điều Khoản Dịch Vụ Gói",
+      "packs": "Điều khoản gói",
       "privacy": "Chính Sách Quyền Riêng Tư",
       "copy": "Chính Sách Bản Quyền",
       "tm": "Chính Sách Nhãn Hiệu",
@@ -127,7 +127,7 @@
       "2": "Bạn hào hứng thế nào về một vũ trụ nơi ba trò chơi đầy đủ được kết nối thành một trải nghiệm?",
       "3": "Phần nào của HyperTek 100 thu hút bạn nhất?",
       "4": "Điều gì sẽ làm cho HyperTek 100 trở thành trò chơi 'bắt buộc phải chơi' với bạn?",
-      "5": "Bạn có xem xét hỗ trợ dự án này khi chúng tôi mở chiến dịch crowdfunding không?",
+      "5": "Bạn có quan tâm đến đợt phát hành truy cập sớm của các vật phẩm phiên bản giới hạn không?",
       "6": "Theo dõi chúng tôi trên X"
     },
     "nameLabel": "Tên Của Bạn",
@@ -158,7 +158,7 @@
     "unlisted": "Chưa Đăng",
     "backToMarketplace": "Thị Trường",
     "samplePreviewTitle": "Xem Trước Thị Trường Mẫu",
-    "samplePreviewDesc": "Các mục bên dưới là xem trước mẫu trình bày các loại tài sản kỹ thuật số sẽ có sẵn. Các mục thực tế với tác phẩm nghệ thuật độc đáo và quyền sở hữu được xác minh blockchain sẽ có sẵn khi ra mắt.",
+    "samplePreviewDesc": "Các vật phẩm dưới đây là bản xem trước mẫu về các loại vật phẩm kỹ thuật số có thể có. Vật phẩm thực tế với tác phẩm độc nhất và quyền sở hữu được xác minh trên blockchain có thể có sẵn khi ra mắt.",
     "noItemsFound": "Không tìm thấy mục nào trong danh mục này",
     "preview": "Xem Trước",
     "buyNow": "Mua Ngay",
@@ -182,14 +182,14 @@
     "error": "Xin lỗi, tôi không thể nhận được phản hồi ngay lúc này. Vui lòng thử lại hoặc liên hệ nhóm hỗ trợ của chúng tôi.",
     "peek": {
       "0": "Cần giúp đỡ? Hỏi tôi bất cứ điều gì!",
-      "1": "Câu hỏi về HyperBucks?",
+      "1": "Thắc mắc về Gems?",
       "2": "Tò mò về cách hoạt động của đấu giá?"
     },
     "shortcuts": {
-      "earnLabel": "Kiếm HyperBucks",
-      "earnText": "Làm thế nào để kiếm HyperBucks?",
-      "cashOutLabel": "Rút HB",
-      "cashOutText": "Làm thế nào để rút HyperBucks của tôi?",
+      "earnLabel": "Nhận Gems",
+      "earnText": "Làm thế nào để có Gems?",
+      "cashOutLabel": "Giá trị đổi trả",
+      "cashOutText": "Programmatic Trade-In Value hoạt động như thế nào?",
       "auctionsLabel": "Cách Đấu Giá Hoạt Động",
       "auctionsText": "Đấu giá hoạt động như thế nào?",
       "gamesLabel": "Trò Chơi Có Sẵn",
@@ -263,7 +263,8 @@
       "trade": "Thương mại",
       "auction": "Đấu giá",
       "questing": "Đang tìm kiếm",
-      "bounty": "Tiền thưởng"
+      "bounty": "Tiền thưởng",
+      "forHire": "Cho thuê"
     },
     "categories": {
       "all": "Tất cả",
@@ -349,7 +350,7 @@
       "playerLabel": "\nNgười chơi\n",
       "platformLabel": "\nNền tảng\n",
       "platLabel": "\nnền tảng\n",
-      "notePayouts": "\nCác nhiệm vụ có tải trọng kết hợp sẽ được thanh toán bằng số tiền trong bảng riêng biệt.\n",
+      "notePayouts": "Nhiệm vụ có hàng hóa kết hợp sử dụng phần thưởng trong bảng riêng.",
       "notePlanet": "\nDữ liệu hành tinh sẽ đồng bộ hóa khi trò chơi bắt đầu hoạt động.\n",
       "dailySlots": "\nKhe nhiệm vụ hàng ngày\n",
       "used": "\nđã sử dụng\n",
@@ -383,8 +384,8 @@
       "colSelling": "\nbán hàng\n",
       "colBuying": "\nMua hàng\n",
       "colTrading": "\nGiao dịch\n",
-      "colOnHire": "\nĐang thuê\n",
-      "colHiring": "\ntuyển dụng\n",
+      "colOnHire": "Đã cho thuê",
+      "colHiring": "Cho thuê",
       "groupMarketplace": "\nTHỊ TRƯỜNG\n",
       "groupAuction": "\nĐẤU GIÁ"
     }
@@ -397,7 +398,7 @@
       "myCollections": "Bộ sưu tập của tôi",
       "transactions": "Giao dịch",
       "offers": "Ưu đãi",
-      "hyperBucks": "HyperBucks",
+      "hyperBucks": "Gems",
       "earnings": "Thu nhập",
       "support": "Hỗ trợ",
       "signOut": "Ký tên Out"
@@ -436,7 +437,7 @@
       "transactions": "Giao dịch",
       "transactionsDesc": "Lịch sử thanh toán",
       "withdraw": "Rút tiền",
-      "withdrawDesc": "Rút số dư HB của bạn"
+      "withdrawDesc": "Rút tiền thu được từ việc bán hàng trên marketplace"
     },
     "transactions": {
       "title": "Lịch sử giao dịch",
@@ -467,7 +468,7 @@
       "noSentOffersHint": "Thực hiện ưu đãi cho bất kỳ mặt hàng nào trong Thị trường",
       "colItem": "Item",
       "colYourOffer": "Ưu đãi của bạn",
-      "colFloorPrice": "Tầng Giá",
+      "colFloorPrice": "Giá thấp nhất",
       "colOfferDuration": "Thời lượng ưu đãi",
       "colStatus": "Trạng thái",
       "colAction": "Hành động",
@@ -638,11 +639,10 @@
       }
     },
     "hyperbucks": {
-      "title": " HyperBucks ",
-      "subtitle": " 250 HB = $1 USD · tỷ giá cố định ",
+      "title": "Gems",
+      "subtitle": "Mua Gems để mua hàng trong game",
       "currentBalance": " Số dư hiện tại ",
       "tabTopUp": " Nạp tiền ",
-      "tabCashout": " Rút tiền ",
       "success": {
         "title": " Nạp tiền thành công! ",
         "added": " được thêm vào tài khoản của bạn.",
@@ -652,30 +652,24 @@
       },
       "topup": {
         "amountLabel": " Số tiền (USD) ",
-        "hyperBucks": " HyperBucks ",
+        "hyperBucks": "Gems",
         "preparing": " Đang chuẩn bị... ",
         "proceed": " Tiến hành thanh toán ",
         "enterAmount": " Nhập số tiền để tiếp tục ",
-        "secured": " Được bảo đảm bởi Stripe · 250 HB = $1 USD · tối thiểu $1 ",
+        "secured": "Bảo mật bởi Stripe · tối thiểu $1",
         "quickSelect": " Chọn nhanh ",
         "paying": " Thanh toán ",
         "processing": " Đang xử lý... ",
-        "pay": " Thanh toán "
+        "pay": " Thanh toán ",
+        "rate": "Tối thiểu $1 · Gems chỉ dùng để mua hàng trong game"
       },
       "cashout": {
-        "amountLabel": " Số tiền (HB) ",
-        "minUsdc": " Tối thiểu 250 HB ",
-        "minBank": " Tối thiểu 2500 HB ",
         "receiveVia": " Nhận qua ",
         "usdcWallet": " Ví USDC ",
-        "usdcMin": " Tối thiểu 250 HB · ~$0,01 gas ",
         "bankAccount": " Tài khoản ngân hàng ",
-        "bankMin": " Tối thiểu 2500 HB ($10) · yêu cầu chi tiết ngân hàng ",
         "addBank": " Thêm chi tiết ngân hàng trong Hồ sơ → ",
         "noWallet": " Không có ví nào được kết nối ",
         "sendingOtp": " Gửi OTP... ",
-        "toUsdc": " Rút tiền vào Ví USDC ",
-        "toBank": " Rút tiền vào tài khoản ngân hàng ",
         "kycNote": " Hoàn tất xác minh danh tính để tiếp tục "
       },
       "otp": {
@@ -686,7 +680,6 @@
         "bankAccount": " Tài khoản ngân hàng ",
         "label": " Mã OTP ",
         "processing": " Đang xử lý... ",
-        "confirm": " Xác nhận rút tiền ",
         "sending": " Đang gửi... ",
         "resend": " Gửi lại mã "
       },
