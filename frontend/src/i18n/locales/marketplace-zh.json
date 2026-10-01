@@ -9,7 +9,7 @@
       "auctions": "拍卖",
       "trades": "交易",
       "quests": "任务",
-      "hire": "雇佣",
+      "hire": "出租",
       "bounty": "赏金"
     },
     "banner": {
@@ -31,23 +31,23 @@
       "facts": [
         {
           "label": "NFA",
-          "desc": "Hypertek 专属资产。最高游戏内奖励。具有随每次销售增长的保底回购价值。"
+          "desc": "Hyper Tek 专属物品。最高的游戏内加成。每次转售都会增加的 Programmatic Trade-In Value。"
         },
         {
           "label": "NFC",
-          "desc": "由 Hypertek 或授权玩家创建。包含游戏内奖励。保证最低回购价值。"
+          "desc": "由 Hyper Tek 或获得授权的玩家创作。包含游戏内加成。包含 Programmatic Trade-In Value。"
         },
         {
           "label": "NFT",
-          "desc": "玩家创建的收藏品。无游戏内奖励。无回购保证。可在市场上交易。"
+          "desc": "玩家创作的收藏品。无游戏内加成。无折换价值。可在市场上交易。"
         },
         {
           "label": "佣金",
-          "desc": "平台费依上架而异。转售时：卖家获得 86%，艺术家版税 2%，+5% 进入回购基金，平台 7%。"
+          "desc": "平台费用因挂单而异。转售分配：卖家 86%，艺术家版税 2%，5% 进入该物品的折换分配额，平台 7%。"
         },
         {
-          "label": "回购增长",
-          "desc": "每次转售价格的 +5% 会添加到资产的最低回购价值中。只增不减。"
+          "label": "折换分配额",
+          "desc": "每次转售价格的 5% 会加入该物品的折换分配额。折换时返还的金额遵循 Tiered Loyalty Return Schedule，并且始终低于分配金额。"
         },
         {
           "label": "托管钱包",
@@ -67,7 +67,8 @@
             "NFC（非同质角色）是具有游戏内奖励和回购保证的授权玩家物品。",
             "NFT（非同质代币）是用户创建的收藏品 — 皮肤、武器等。"
           ],
-          "cta": "了解基础知识"
+          "cta": "了解基础知识",
+          "intro": "NFA/NFC/NFT 是数字艺术品。NFA 和 NFC 带有游戏内加成和 Programmatic Trade-In Value。"
         },
         {
           "label": "市场",
@@ -110,21 +111,21 @@
           "cta": "探索任务"
         },
         {
-          "label": "雇佣",
-          "tagline": "借用资产或从您的资产中获利",
+          "label": "出租",
+          "tagline": "出租你的物品以换取游戏内奖励",
           "details": [
             "为单次任务租用强大的专家或装备，无需全额购买。",
-            "将您闲置的资产出租，在您不在时赚取被动收入。",
+            "玩家或许可以把闲置物品出租给其他玩家，换取双方自行协商的游戏内奖励。",
             "灵活时长 — 按小时、按天或按任务协议。"
           ],
-          "cta": "浏览雇佣"
+          "cta": "浏览出租"
         },
         {
           "label": "赏金",
           "tagline": "追捕目标，领取奖励，登上排行榜",
           "details": [
             "接受其他玩家或系统发布的赏金以赚取加密奖励。",
-            "攀登赏金排行榜以解锁独家称号和奖励加成。",
+            "攀登悬赏排行榜，解锁专属称号和游戏内奖励。",
             "发布您自己的赏金以为您的目标招募技术玩家。"
           ],
           "cta": "查看赏金"
@@ -136,7 +137,7 @@
       "subtitle": "浏览可立即购买的 NFA、NFC 和 NFT — 皮肤、武器、专家、飞船等。",
       "filterAll": "全部",
       "samplePreviewTitle": "市场示例预览",
-      "samplePreviewDesc": "以下物品是展示 HyperTek 市场将提供的数字资产类型的示例预览。具有独特艺术作品和区块链验证所有权的实际物品将在上线时提供。",
+      "samplePreviewDesc": "以下物品是 Hyper Tek 市场上可能提供的各类数字物品的示例预览。具有独特艺术品和区块链验证所有权的实际物品可能在上线时提供。",
       "noItems": "暂无可用物品，请稍后再查看。",
       "categories": {
         "skins": "皮肤",
@@ -197,7 +198,7 @@
       },
       "preview": {
         "title": "游戏内功能预览",
-        "desc": "拍卖系统将在游戏上线时完全启用。此处显示的物品是为投资者/用户展示的示例。"
+        "desc": "拍卖系统可能在上线时于游戏内启用。此处显示的物品仅为预览用的示例。"
       },
       "card": {
         "currentBid": "当前出价",
@@ -369,7 +370,7 @@
       "earnFromQuests": "想从任务中获利？进入游戏 →",
       "moneyQuests": "金钱任务（11% 奖池）",
       "resourceQuests": "资源任务（20% 奖池）",
-      "footerNote1": "# 具有组合载荷的任务将使用单独的表格金额支付。",
+      "footerNote1": "# 组合载荷的任务使用单独表格中的奖励。",
       "footerNote2": "# 游戏上线时，星球数据将同步。",
       "inGame": "游戏内",
       "open": "开放",
@@ -407,43 +408,43 @@
       }
     },
     "hire": {
-      "heading": "雇佣",
+      "heading": "出租",
       "listings": "个上架",
       "listBtn": "上架",
-      "forHireLabel": "待雇佣",
-      "wantingToHire": "寻求雇佣",
+      "forHireLabel": "出租",
+      "wantingToHire": "求租",
       "noListings": "没有{{filter}}上架",
-      "lockedTitle": "HyperTek 游戏内容仅供展示。",
-      "lockedDesc": "This is part of Hyper Tek's genuine 'Play to Earn' system, where players can earn real cash rewards, and or Materials/Resources.",
-      "forHireBadge": "待雇佣",
-      "wantedBadge": "寻求雇佣",
+      "lockedTitle": "如果游戏发布，出租功能可能会开放。",
+      "lockedDesc": "根据最终游戏规则，玩家或许可以把物品出租给其他玩家，并获得双方自行协商的游戏内奖励。",
+      "forHireBadge": "出租",
+      "wantedBadge": "求租",
       "price": "价格",
       "maxDuration": "最长时长",
-      "hireBtn": "雇佣",
+      "hireBtn": "出租",
       "fulfillBtn": "履行请求",
       "rules": {
         "durations": "8小时 · 1天 · 3天 · 1周 · 1月",
         "cooldown": "冷却时间：2倍租用时长",
         "commission": "佣金不固定",
-        "payment": "以 Hyper Bucks 或材料支付"
+        "payment": "玩家之间协商的游戏内奖励"
       },
       "preview": {
         "title": "游戏内功能预览",
-        "desc": "雇佣系统将在游戏上线时完全启用。此处显示的物品是为投资者/用户展示的示例。"
+        "desc": "出租功能可能在上线时于游戏内启用。此处显示的物品仅为预览用的示例。"
       },
       "hireModal": {
-        "hireTitle": "雇佣专家",
-        "fulfillTitle": "履行雇佣请求",
-        "forHireBadge": "待雇佣",
+        "hireTitle": "出租专家",
+        "fulfillTitle": "满足求租请求",
+        "forHireBadge": "出租",
         "wantedBadge": "招募中",
         "price": "价格",
         "duration": "时长",
-        "howHire": "雇佣流程",
+        "howHire": "出租如何运作",
         "howFulfill": "履行请求的流程",
-        "proceedHire": "继续雇佣",
+        "proceedHire": "继续出租",
         "offerFulfill": "提供履行",
         "commission": "平台佣金不固定 · 归还后冷却时间生效",
-        "confirmHire": "确认雇佣",
+        "confirmHire": "确认出租",
         "confirmOffer": "确认报价",
         "specialist": "专家",
         "payment": "支付",
@@ -461,19 +462,19 @@
         "close": "关闭"
       },
       "createModal": {
-        "listTitle": "上架待雇佣",
-        "postTitle": "发布寻求雇佣",
-        "forHireBtn": "待雇佣",
-        "wantingBtn": "寻求雇佣",
+        "listTitle": "挂出出租",
+        "postTitle": "发布求租",
+        "forHireBtn": "出租",
+        "wantingBtn": "求租",
         "itemNameHire": "专家/物品名称 *",
-        "itemNameWant": "您想雇佣的内容 *",
+        "itemNameWant": "你想租什么 *",
         "descPlaceholder": "描述",
         "categoryPlaceholder": "类别（可选）",
         "paymentType": "支付类型",
-        "hyperBucks": "Hyper Bucks",
+        "hyperBucks": "游戏内奖励",
         "materials": "材料",
-        "amountLabel": "金额 (Hyper Bucks)",
-        "afterCommission": "扣除平台佣金后您获得 {{amount}} HB",
+        "amountLabel": "游戏内奖励",
+        "afterCommission": "扣除平台佣金后，你在游戏内获得 {{amount}}",
         "maxDuration": "最长时长",
         "disclaimer": "佣金不固定 · 冷却时间 = 归还后 2 倍租用时长",
         "listing": "上架中…",
@@ -508,7 +509,7 @@
         "postedBy": "发布者",
         "claimedBy": "领取者",
         "status": "状态",
-        "netHB": "{{amount}} HB 净额"
+        "netHB": "净得 {{amount}}"
       },
       "pagination": {
         "prev": "上一页",
@@ -540,6 +541,20 @@
       "dashboardTitle": "您的仪表板目前处于锁定状态，但请做好准备；正式上线近在眼前！",
       "desc": "别让这阻止你注册并深入探索这个不可思议的项目。发现它的众多好处，看看你的参与如何推动它走向成功！立即加入，今天就成为一名 Hyper Tekken！",
       "buttonLabel": "正式上线时开放"
+    },
+    "gameLock": {
+      "quests": {
+        "title": "如果游戏发布，任务可能会开放。",
+        "desc": "根据最终游戏规则，玩家或许可以向其他玩家交付物品以换取游戏内奖励。"
+      },
+      "hire": {
+        "title": "如果游戏发布，出租功能可能会开放。",
+        "desc": "根据最终游戏规则，玩家或许可以把物品出租给其他玩家，并获得双方自行协商的游戏内奖励。"
+      },
+      "bounty": {
+        "title": "如果游戏发布，悬赏可能会开放。",
+        "desc": "根据最终游戏规则，悬赏只可能提供游戏内奖励。"
+      }
     }
   },
   "musicPlayer": {
@@ -581,9 +596,9 @@
       "platform": "平台",
       "noDesc": "未提供该商品的描述。",
       "price": "价格",
-      "minBuyback": "最低回购保证",
+      "minBuyback": "Programmatic Trade-In Value",
       "reservePrice": "保留价格",
-      "buybackNote": "此资产不能以低于其最低回购价值的价格出售。",
+      "buybackNote": "保留价不能低于该物品的折换分配额。",
       "networkNote": "USDC 基础 · 基础 ETH 所需Gas（仅限钱包付款）",
       "buyWithCard": "用卡购买",
       "makeOffer": "出价",

@@ -9,7 +9,7 @@
       "auctions": "拍賣",
       "trades": "交易",
       "quests": "任務",
-      "hire": "招募",
+      "hire": "出租",
       "bounty": "賞金"
     },
     "banner": {
@@ -31,23 +31,23 @@
       "facts": [
         {
           "label": "NFA",
-          "desc": "僅 Hypertek 資產。最高遊戲內獎勵。隨每次銷售增長的保障最低回購價值。"
+          "desc": "Hyper Tek 專屬物品。最高的遊戲內加成。每次轉售都會增加的 Programmatic Trade-In Value。"
         },
         {
           "label": "NFC",
-          "desc": "由 Hypertek 或授權玩家創建。包含遊戲內獎勵。保障最低回購價。"
+          "desc": "由 Hyper Tek 或獲得授權的玩家創作。包含遊戲內加成。包含 Programmatic Trade-In Value。"
         },
         {
           "label": "NFT",
-          "desc": "玩家創作的收藏品。無遊戲內獎勵。無回購保障。可在市集交易。"
+          "desc": "玩家創作的收藏品。無遊戲內加成。無折換價值。可在市集上交易。"
         },
         {
           "label": "佣金",
-          "desc": "平台費用依刊登而異。轉售時：賣方獲得 86%，藝術家版稅 2%，+5% 進入回購基金，平台 7%。"
+          "desc": "平台費用因刊登而異。轉售分配：賣家 86%，藝術家版稅 2%，5% 進入該物品的折換分配額，平台 7%。"
         },
         {
-          "label": "回購增長",
-          "desc": "每次二手售價的 +5% 計入資產的最低回購價值。只會增長，永不減少。"
+          "label": "折換分配額",
+          "desc": "每次轉售價格的 5% 會加入該物品的折換分配額。折換時返還的金額遵循 Tiered Loyalty Return Schedule，並且始終低於分配金額。"
         },
         {
           "label": "託管錢包",
@@ -67,7 +67,8 @@
             "NFC（非同質化角色）是授權玩家物品，具有遊戲內獎勵和回購保障。",
             "NFT（非同質化代幣）是用戶創作的收藏品——皮膚、武器等等。"
           ],
-          "cta": "學習基礎知識"
+          "cta": "學習基礎知識",
+          "intro": "NFA/NFC/NFT 是數位藝術品。NFA 與 NFC 具備遊戲內加成與 Programmatic Trade-In Value。"
         },
         {
           "label": "市集",
@@ -110,21 +111,21 @@
           "cta": "探索任務"
         },
         {
-          "label": "招募",
-          "tagline": "借用資產或從您的資產中獲益",
+          "label": "出租",
+          "tagline": "出租你的物品以換取遊戲內獎勵",
           "details": [
             "為單次任務租用強大的專家或裝備，無需直接購買。",
-            "將您自己閒置的資產列出出租，在您離開時賺取被動收入。",
+            "玩家或許可以把閒置物品出租給其他玩家，換取雙方自行協商的遊戲內獎勵。",
             "靈活的時間——按小時、按天或按任務協議。"
           ],
-          "cta": "瀏覽招募"
+          "cta": "瀏覽出租"
         },
         {
           "label": "賞金",
           "tagline": "追蹤目標，索取獎勵，登上排行榜",
           "details": [
             "接受其他玩家或系統發布的賞金任務以賺取加密獎勵。",
-            "攀登賞金排行榜以解鎖獨家稱號和額外獎勵。",
+            "攀登懸賞排行榜，解鎖專屬稱號與遊戲內獎勵。",
             "發布您自己的賞金招募技術高超的玩家實現您的目標。"
           ],
           "cta": "查看賞金"
@@ -136,7 +137,7 @@
       "subtitle": "瀏覽可立即購買的 NFA、NFC 和 NFT——皮膚、武器、專家、太空船等等。",
       "filterAll": "全部",
       "samplePreviewTitle": "市集樣本預覽",
-      "samplePreviewDesc": "以下物品是樣本預覽，展示了將在 HyperTek 市集上提供的數位資產類型。具有獨特藝術品和區塊鏈驗證所有權的實際物品將在發佈時提供。",
+      "samplePreviewDesc": "以下物品是 Hyper Tek 市集上可能提供的各類數位物品的範例預覽。具有獨特藝術品與區塊鏈驗證所有權的實際物品可能在上線時提供。",
       "noItems": "目前沒有可用物品，請稍後再查看。",
       "categories": {
         "skins": "皮膚",
@@ -197,7 +198,7 @@
       },
       "preview": {
         "title": "遊戲內功能預覽",
-        "desc": "拍賣系統將在遊戲發佈時完全上線。此處顯示的物品是供投資者/用戶展示的種子樣本。"
+        "desc": "拍賣系統可能在上線時於遊戲內啟用。此處顯示的物品僅為預覽用的範例。"
       },
       "card": {
         "currentBid": "當前出價",
@@ -369,7 +370,7 @@
       "earnFromQuests": "想從任務中賺取收益？玩遊戲 →",
       "moneyQuests": "金錢任務（11% 池）",
       "resourceQuests": "資源任務（20% 池）",
-      "footerNote1": "# 有合併酬載的任務將使用單獨的表格金額支付。",
+      "footerNote1": "# 組合載荷的任務使用獨立表格中的獎勵。",
       "footerNote2": "# 遊戲上線後，星球數據將同步。",
       "inGame": "遊戲內",
       "open": "開放",
@@ -407,43 +408,43 @@
       }
     },
     "hire": {
-      "heading": "招募",
+      "heading": "出租",
       "listings": "個上架",
       "listBtn": "上架",
-      "forHireLabel": "待招募",
-      "wantingToHire": "希望招募",
+      "forHireLabel": "出租",
+      "wantingToHire": "求租",
       "noListings": "沒有 {{filter}} 上架",
-      "lockedTitle": "HyperTek 遊戲內容僅供展示。",
-      "lockedDesc": "This is part of Hyper Tek's genuine 'Play to Earn' system, where players can earn real cash rewards, and or Materials/Resources.",
-      "forHireBadge": "待招募",
-      "wantedBadge": "希望招募",
+      "lockedTitle": "如果遊戲發行，出租功能可能會開放。",
+      "lockedDesc": "依最終遊戲規則，玩家或許可以把物品出租給其他玩家，並獲得雙方自行協商的遊戲內獎勵。",
+      "forHireBadge": "出租",
+      "wantedBadge": "求租",
       "price": "價格",
       "maxDuration": "最長時間",
-      "hireBtn": "招募",
+      "hireBtn": "出租",
       "fulfillBtn": "履行請求",
       "rules": {
         "durations": "8小時 · 1天 · 3天 · 1週 · 1個月",
         "cooldown": "冷卻時間：租用時間的 2 倍",
         "commission": "佣金不固定",
-        "payment": "使用 Hyper Bucks 或材料支付"
+        "payment": "玩家之間協商的遊戲內獎勵"
       },
       "preview": {
         "title": "遊戲內功能預覽",
-        "desc": "招募系統將在遊戲發佈時完全上線。此處顯示的物品是供投資者/用戶展示的種子樣本。"
+        "desc": "出租功能可能在上線時於遊戲內啟用。此處顯示的物品僅為預覽用的範例。"
       },
       "hireModal": {
-        "hireTitle": "招募專家",
-        "fulfillTitle": "履行招募請求",
-        "forHireBadge": "待招募",
+        "hireTitle": "出租專家",
+        "fulfillTitle": "滿足求租請求",
+        "forHireBadge": "出租",
         "wantedBadge": "徵求",
         "price": "價格",
         "duration": "時間",
-        "howHire": "招募運作方式",
+        "howHire": "出租如何運作",
         "howFulfill": "履行請求運作方式",
-        "proceedHire": "繼續招募",
+        "proceedHire": "繼續出租",
         "offerFulfill": "提出履行報價",
         "commission": "平台佣金不固定 · 歸還後適用冷卻時間",
-        "confirmHire": "確認招募",
+        "confirmHire": "確認出租",
         "confirmOffer": "確認報價",
         "specialist": "專家",
         "payment": "付款",
@@ -461,19 +462,19 @@
         "close": "關閉"
       },
       "createModal": {
-        "listTitle": "上架招募",
-        "postTitle": "發布希望招募",
-        "forHireBtn": "待招募",
-        "wantingBtn": "希望招募",
+        "listTitle": "刊登出租",
+        "postTitle": "發布求租",
+        "forHireBtn": "出租",
+        "wantingBtn": "求租",
         "itemNameHire": "專家/物品名稱 *",
-        "itemNameWant": "您想招募的內容 *",
+        "itemNameWant": "你想租什麼 *",
         "descPlaceholder": "描述",
         "categoryPlaceholder": "類別（可選）",
         "paymentType": "付款類型",
-        "hyperBucks": "Hyper Bucks",
+        "hyperBucks": "遊戲內獎勵",
         "materials": "材料",
-        "amountLabel": "金額（Hyper Bucks）",
-        "afterCommission": "扣除平台佣金後，您獲得 {{amount}} HB",
+        "amountLabel": "遊戲內獎勵",
+        "afterCommission": "扣除平台佣金後，你在遊戲內獲得 {{amount}}",
         "maxDuration": "最長時間",
         "disclaimer": "佣金不固定 · 冷卻時間 = 歸還後租用時間的 2 倍",
         "listing": "上架中…",
@@ -508,7 +509,7 @@
         "postedBy": "發布者",
         "claimedBy": "索取者",
         "status": "狀態",
-        "netHB": "{{amount}} HB 淨額"
+        "netHB": "淨得 {{amount}}"
       },
       "pagination": {
         "prev": "上一頁",
@@ -540,6 +541,20 @@
       "dashboardTitle": "您的儀表板目前處於鎖定狀態，但請做好準備；正式上線近在眼前！",
       "desc": "別讓這阻止你註冊並深入探索這個不可思議的專案。發現它的眾多好處，看看你的參與如何推動它走向成功！立即加入，今天就成為一名 Hyper Tekken！",
       "buttonLabel": "正式上線時開放"
+    },
+    "gameLock": {
+      "quests": {
+        "title": "如果遊戲發行，任務可能會開放。",
+        "desc": "依最終遊戲規則，玩家或許可以向其他玩家交付物品以換取遊戲內獎勵。"
+      },
+      "hire": {
+        "title": "如果遊戲發行，出租功能可能會開放。",
+        "desc": "依最終遊戲規則，玩家或許可以把物品出租給其他玩家，並獲得雙方自行協商的遊戲內獎勵。"
+      },
+      "bounty": {
+        "title": "如果遊戲發行，懸賞可能會開放。",
+        "desc": "依最終遊戲規則，懸賞只可能提供遊戲內獎勵。"
+      }
     }
   },
   "musicPlayer": {
@@ -581,9 +596,9 @@
       "platform": "平台",
       "noDesc": "沒有提供該項目的描述。",
       "price": "價格",
-      "minBuyback": "最低迴購保證",
+      "minBuyback": "Programmatic Trade-In Value",
       "reservePrice": "保留價",
-      "buybackNote": "該資產不能以低於其最低迴購價值的價格出售。",
+      "buybackNote": "底價不能低於該物品的折換分配額。",
       "networkNote": "USDC on Base · Gas 所需的 Base ETH（僅限錢包支付）",
       "buyWithCard": "用卡片購買",
       "makeOffer": "提出報價",

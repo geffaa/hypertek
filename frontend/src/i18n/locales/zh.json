@@ -87,19 +87,19 @@
     "highlights": [
       {
         "label": "互联宇宙",
-        "desc": "3款游戏 — 1个共享经济与进阶系统"
+        "desc": "3 款游戏，一套共享进度系统"
       },
       {
         "label": "真实所有权",
-        "desc": "NFA具有保证最低回购"
+        "desc": "带有 Programmatic Trade-In Value 的 NFA/NFC/NFT"
       },
       {
-        "label": "边玩边赚",
-        "desc": "每一个行动都为您的现实奖励做贡献"
+        "label": "Play-to-Own",
+        "desc": "你收集的每件物品都属于你，并记录在链上"
       },
       {
-        "label": "现金兑出",
-        "desc": "将游戏内货币/奖励转换为现金提现"
+        "label": "Item Loyalty Program",
+        "desc": "物品持有时间越长，其折换等级越高，但始终低于分配给该物品的金额"
       },
       {
         "label": "联动进阶",
@@ -119,12 +119,12 @@
   "homeMarket": {
     "featured": "精选",
     "sectionTitle": "限量版NFA物品",
-    "buybackBadge": "所有NFA/NFC/NFT均提供保证回购",
+    "buybackBadge": "NFA 和 NFC 的 Programmatic Trade-In Value",
     "urgency": "快行动！一旦售罄，将永久消失！",
     "loading": "加载中...",
     "empty": "暂无上架物品。",
     "price": "价格",
-    "minBuyback": "最低回购",
+    "minBuyback": "折换价值",
     "buyNow": "立即购买"
   },
   "gaming": {
@@ -175,15 +175,15 @@
       "aboutPageSubtitleSpan": "构建 Web3.5 游戏的未来。",
       "aboutHeroTitle1": "重新定义游戏。",
       "aboutHeroTitle2": "由 Web3.5 驱动。",
-      "aboutHeroDesc": "Hyper Tek 100 是新一代游戏生态系统，每个资产都是真实的，每笔交易都在链上，每位玩家都是真正的利益相关者。三款相互连接的游戏。一个共享经济体系。为未来而生。",
+      "aboutHeroDesc": "Hyper Tek 100 是一个开发中的游戏项目，每件物品都记录在链上并归玩家所有。计划推出三款相互关联的游戏，共用一套进度系统。",
       "pillar1Title": "Web3.5 技术",
       "pillar1Desc": "链上资产、真实所有权以及建立在 Base 上的透明市场。",
       "pillar2Title": "真实资产价值",
       "pillar2Desc": "每件游戏内物品都是可交易的资产。游戏、赚取并拥有您的进度。",
       "pillar3Title": "公平生态系统",
-      "pillar3Desc": "佣金分配和回购机制，旨在奖励每位参与者。",
+      "pillar3Desc": "透明的佣金分配，以及内置于每件符合条件物品中的 Programmatic Trade-In Value。",
       "pillar4Title": "加入我们",
-      "pillar4Desc": "从早期投资者到活跃玩家，加入 Hyper Tek 宇宙的多种途径。",
+      "pillar4Desc": "从收藏者到活跃玩家，加入 Hyper Tek 宇宙的方式可能有多种。",
       "aboutDiscoverBtn": "探索我们的故事"
     }
   },
@@ -192,25 +192,25 @@
     "pageLinkSubtitle": "路线图、筹资目标、套餐，以及你的支持如何构建 Hyper Tek 宇宙。",
     "pageLinkCta": "查看页面",
     "tryGaming": "试用游戏界面",
-    "badge": "限量版 NFA 与优惠游戏套餐 – 立即行动！",
+    "badge": "限量版 NFA 与游戏礼包，售完即止",
     "intro1": "我们已从个人资金中战略性地投入超过 $440,000 美元，现正寻求额外 $395,000 美元，以实现这一突破性项目。我们致力于通过提供激动人心的体验来彻底革新游戏，解决行业中一些最紧迫的挑战。随着多项资金计划的推出，这是您参与真正具有变革性事物的机会。",
-    "intro2": "首先，我们将推出多款极为稀有的 Stage 1 非同质化资产（NFA）物品，每一款都提供无与伦比、永不重复的游戏内加成。一旦这些物品售罄或我们达成资金目标，任何剩余未铸造的限量版 NFA 将永久从我们的网站移除。这是坚定不移的保证！",
-    "intro3": "请记住，每件 Hyper Tek 非同质化数字物品都附带保证的最低回购。这些限量版 NFA 拥有可观的游戏内加成——其中最高的加成将永不重复——将提升您的游戏体验并带向全新高度。",
-    "intro4": "如果您对所看到或读到的关于 Hyper Tek 项目的内容充满热情，并希望与我们一同重塑游戏行业，或者您是寻找丰厚机会的精明投资者，那么此刻正是您的时机。趁还能把握时，确保您的限量供应物品，成为蓬勃发展的 Hyper Tek 生态系统中不可或缺的一员。别再等待——一旦售罄，便不再有！",
-    "intro5": "我们的第二项计划是在我们自己的网站上推出独家套餐，并计划通过早期支持者平台上架。通过自行操作，我们节省了约 10% 的平台费用，并将这些节省以完整的 10% 折扣直接回馈给您。此优惠仅限有限时间！一旦我们将这些套餐上架至 Kickstarter 等平台，折扣价将不再提供。",
+    "intro2": "我们将发行少量第 1 阶段 Non-Fungible Asset (NFA) 物品。每件物品都列出了游戏发布后可能适用的游戏内加成，第 1 阶段的加成等级不计划再次提供。供应量设有硬性上限：这些物品售罄后，任何剩余未铸造的限量版 NFA 将从网站下架。",
+    "intro3": "符合条件的 Hyper Tek 物品带有 Programmatic Trade-In Value，由链上托管合约保管。这些限量版 NFA 还列出了在游戏发布后，根据最终游戏规则可能适用的游戏内加成。",
+    "intro4": "如果你喜欢目前看到的 Hyper Tek 项目，并想拥有其中一件限量物品，现在正是时候。供应量有上限，物品售完后不会再次铸造。",
+    "intro5": "我们的第二批发行是一组在我们自己的网站上直接销售的专属游戏礼包，价格比日后可能在其他渠道提供的价格低 10%。该价格仅限时提供。",
     "keyPointsTitle": "需要谨记的要点：",
-    "intro6": "我们推出的第一个 NFT 在没有保证最低回购或游戏内加成的情况下，以惊人的 $147 万美元售出！这是您获取世界上一些最稀有 NFT 的机会，即 Hyper Tek 非同质化资产（HT NFAs），并附带保证最低回购以及当今最大的 HT 游戏内加成。这是投资者美梦成真，但仅限存货售完为止。",
-    "intro7": "虽然大多数游戏声称提供「边玩边赚」（P2E），但它们通常只是提供可供交易的游戏内代币。Hyper Tek 项目以扎实的游戏内机制保证真正的「P2E」，并由多重奖励流支持，这些奖励可兑换为真正的现金提现。准备好与我们一同体验游戏的未来吧！",
+    "intro6": "Hyper Tek Non-Fungible Assets (HT NFA) 是 Hyper Tek 系列中游戏内加成最大的数字收藏品，这些加成在游戏发布后可能适用，同时带有 Programmatic Trade-In Value。售完即止。",
+    "intro7": "Hyper Tek 以 Play-to-Own 模式打造：你收集的物品属于你，记录在链上，并带有在计划中的游戏里可能适用的游戏内功用。物品作为数字收藏品出售，而不是赚钱的途径。",
     "collectionsLabel": "收藏品",
-    "sectionTitle": "捐赠等级套餐",
+    "sectionTitle": "限量版游戏礼包",
     "discount": "比标价节省10%",
-    "donationTierLabel": "捐赠等级",
-    "donationTierPrefix": "捐赠等级：",
+    "donationTierLabel": "礼包等级",
+    "donationTierPrefix": "礼包等级：",
     "rewardsTitle": "奖励与权益",
     "noteTitle": "备注",
-    "commonNote": "现在捐赠的奖励、奖金和折扣。\n\n注意：除了用于游戏内或特定购买的代金券外，所有其他奖励、奖金和折扣不能与任何其他促销活动合并使用。\n\n所有捐赠包将在游戏开发中包含书面致谢。",
+    "commonNote": "每个礼包包含的物品、加成和折扣。\n\n注意：除用于游戏内购买的随附 Gems 外，加成和折扣不可与任何其他促销叠加使用。\n\n如果游戏发布，每个礼包都包含在游戏片尾字幕中署名。",
     "specialConditionTitle": "特别条件",
-    "specialCondition": "在游戏/多款游戏成功开发并完成后，每位捐赠者将在游戏内获得超过其原始投资价值的奖励或套餐，并且任何承诺的奖金或奖励将在游戏发布后兑现。",
+    "specialCondition": "物品按现状出售。礼包中列出的游戏内加成、折扣和 Gems 仅在游戏发布后才可能适用，并以最终游戏规则为准。不承诺任何利润、付款或财务回报。",
     "imageComing": "图片即将上线"
   },
   "dashboard": {
