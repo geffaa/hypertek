@@ -213,6 +213,11 @@ export async function createTrade(req, res) {
       }
     }
 
+    // Gems are an in-game consumable, not something players pay each other with.
+    if ((Number(offeringHB) || 0) > 0 || (Number(requestingHB) || 0) > 0) {
+      return res.status(400).json({ error: "Gems cannot be exchanged between players. Trades are item for item." });
+    }
+
     const resolvedImage = req.file ? await saveTradeImage(req.file) : (imageUrl || "");
     const hbOffered = Number(offeringHB) || 0;
 

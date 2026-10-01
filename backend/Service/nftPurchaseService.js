@@ -225,7 +225,7 @@ export async function finalizeNFAPurchase({
   // Enforce reserve price: block purchases below minimumBuybackUSD for NFA and NFC
   if ((isNFA || assetType === "NFC") && subCollection.minimumBuybackUSD > 0 && cleanPrice < subCollection.minimumBuybackUSD) {
     throw Object.assign(
-      new Error(`Price $${cleanPrice} is below this ${assetType}'s minimum buyback of $${subCollection.minimumBuybackUSD}. Cannot sell below guaranteed value.`),
+      new Error(`Price $${cleanPrice} is below this ${assetType}'s trade-in allocation of $${subCollection.minimumBuybackUSD}. The price cannot be set below the item's trade-in allocation.`),
       { code: "BELOW_RESERVE", minimumBuybackUSD: subCollection.minimumBuybackUSD }
     );
   }
