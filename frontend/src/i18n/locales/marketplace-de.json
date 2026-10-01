@@ -31,23 +31,23 @@
       "facts": [
         {
           "label": "NFA",
-          "desc": "Exklusives Hypertek-Asset. Höchste spielinterne Boni. Garantierter Mindestrückkaufwert, der mit jedem Verkauf steigt."
+          "desc": "Hyper Tek-nur-Element. Höchste Boni im Spiel. Programmatic Trade-In Value, den jeder Weiterverkauf erhöht."
         },
         {
           "label": "NFC",
-          "desc": "Erstellt von Hypertek oder lizenzierten Spielern. Spielinterne Boni inklusive. Mindestrückkauf garantiert."
+          "desc": "Erstellt von Hyper Tek oder lizenzierten Spielern. In-Game-Boni enthalten. Programmatic Trade-In Value enthalten."
         },
         {
           "label": "NFT",
-          "desc": "Von Spielern erstelltes Sammlerstück. Keine spielinternen Boni. Keine Rückkaufgarantie. Handelbar auf dem Marktplatz."
+          "desc": "Vom Spieler erstelltes Sammlerstück. Keine Boni im Spiel. Kein Inzahlungnahmewert. Auf dem Marktplatz handelbar."
         },
         {
           "label": "Provision",
-          "desc": "Plattformgebühr variiert je nach Angebot. Wiederverkauf: Verkäufer 86%, Künstlerhonorar 2%, +5% Rückkauf, Plattform 7%."
+          "desc": "Die Plattformgebühr variiert je nach Eintrag. Aufteilung der Wiederverkäufe: Verkäufer 86 %, Künstler-Lizenzgebühr 2 %, 5 % für die Inzahlungnahme des Artikels, Plattform 7 %."
         },
         {
-          "label": "Rückkaufwachstum",
-          "desc": "+5% jedes Wiederverkaufspreises werden zum Mindestrückkaufwert des Assets addiert. Er wächst nur."
+          "label": "Trade-In-Zuteilung",
+          "desc": "5 % jedes Wiederverkaufspreises werden zum Inzahlungnahmekontingent des Artikels hinzugefügt. Der bei einer Inzahlungnahme zurückgegebene Betrag folgt dem Tiered Loyalty Return Schedule und ist immer geringer als der zugewiesene Betrag."
         },
         {
           "label": "Custodial Wallet",
@@ -67,7 +67,8 @@
             "NFCs (Non-Fungible Characters) sind lizenzierte Spielerartikel mit spielinternen Boni und Rückkauf.",
             "NFTs (Non-Fungible Tokens) sind von Nutzern erstellte Sammlerstücke — Skins, Waffen und mehr."
           ],
-          "cta": "Grundlagen erlernen"
+          "cta": "Grundlagen erlernen",
+          "intro": "NFAs/NFCs/NFTs sind digitale Kunstwerke. NFAs und NFCs tragen Boni im Spiel und eine Programmatic Trade-In Value."
         },
         {
           "label": "Der Marktplatz",
@@ -111,20 +112,20 @@
         },
         {
           "label": "Zu vermieten",
-          "tagline": "Leihe Assets aus oder verdiene an deinen",
+          "tagline": "Geben Sie Ihre Gegenstände heraus, um Belohnungen im Spiel zu erhalten",
           "details": [
             "Miete mächtige Spezialisten oder Ausrüstung für eine einzelne Mission, ohne zu kaufen.",
-            "Liste deine eigenen inaktiven Assets zur Vermietung und verdiene passives Einkommen während deiner Abwesenheit.",
+            "Spieler können möglicherweise ungenutzte Gegenstände an andere Spieler weitergeben, um Belohnungen im Spiel zu erhalten, die sie untereinander aushandeln.",
             "Flexible Laufzeiten — stündlich, täglich oder per-Mission-Vereinbarungen."
           ],
-          "cta": "Vermietungen durchsuchen"
+          "cta": "Durchsuchen, um zu vermieten"
         },
         {
           "label": "Kopfgeld",
           "tagline": "Jage Ziele, beanspruche Belohnungen, führe die Bestenliste an",
           "details": [
             "Nimm Kopfgelder an, die von anderen Spielern oder dem System gepostet werden, um Krypto-Belohnungen zu verdienen.",
-            "Erklimme die Kopfgeld-Bestenliste, um exklusive Titel und Bonuszahlungen freizuschalten.",
+            "Erklimme die Kopfgeld-Rangliste, um exklusive Titel und In-Game-Belohnungen freizuschalten.",
             "Poste deine eigenen Kopfgelder, um qualifizierte Spieler für deine Ziele zu rekrutieren."
           ],
           "cta": "Kopfgelder ansehen"
@@ -136,7 +137,7 @@
       "subtitle": "Durchsuche NFAs, NFCs und NFTs, die sofort käuflich sind — Skins, Waffen, Spezialisten, Raumschiffe und mehr.",
       "filterAll": "Alle",
       "samplePreviewTitle": "Marktplatz-Vorschau",
-      "samplePreviewDesc": "Die unten stehenden Artikel sind Beispielvorschauen, die die Arten digitaler Assets auf dem HyperTek-Marktplatz zeigen. Tatsächliche Artikel mit einzigartigen Kunstwerken und blockchain-verifiziertem Eigentum werden beim Start verfügbar sein.",
+      "samplePreviewDesc": "Bei den folgenden Artikeln handelt es sich um Beispielvorschauen der Arten digitaler Artikel, die möglicherweise auf dem Hyper Tek-Marktplatz verfügbar sind. Bei der Veröffentlichung sind möglicherweise tatsächliche Artikel mit einzigartiger Grafik und Blockchain-verifiziertem Besitz verfügbar.",
       "noItems": "Noch keine Artikel verfügbar. Schau bald wieder vorbei.",
       "categories": {
         "skins": "Skins",
@@ -197,7 +198,7 @@
       },
       "preview": {
         "title": "Vorschau der spielinternen Funktion",
-        "desc": "Das Auktionssystem wird beim Launch vollständig im Spiel verfügbar sein. Die hier gezeigten Artikel sind Beispiele für Investoren/Nutzer."
+        "desc": "Das Auktionssystem kann beim Start im Spiel live gehen. Bei den hier gezeigten Artikeln handelt es sich lediglich um gesäte Muster zur Vorschau."
       },
       "card": {
         "currentBid": "Aktuelles Gebot",
@@ -369,7 +370,7 @@
       "earnFromQuests": "Möchtest du mit Quests verdienen? Spiele das Spiel →",
       "moneyQuests": "Geld-Quests (11% Pool)",
       "resourceQuests": "Ressourcen-Quests (20% Pool)",
-      "footerNote1": "# Quests mit kombinierten Lasten werden unter Verwendung der separaten Tabellenbeträge ausgezahlt.",
+      "footerNote1": "# Quests mit kombinierten Nutzlasten verwenden die separaten Tabellenbelohnungen.",
       "footerNote2": "# Planetendaten werden synchronisiert, wenn die Spiele live gehen.",
       "inGame": "Im Spiel",
       "open": "Offen",
@@ -411,39 +412,39 @@
       "listings": "Angebote",
       "listBtn": "Listen",
       "forHireLabel": "Zu vermieten",
-      "wantingToHire": "Suche zur Miete",
+      "wantingToHire": "Ich möchte vermieten",
       "noListings": "Keine {{filter}} Angebote",
-      "lockedTitle": "HyperTek Gaming-Inhalte nur zur Anzeige.",
-      "lockedDesc": "This is part of Hyper Tek's genuine 'Play to Earn' system, where players can earn real cash rewards, and or Materials/Resources.",
+      "lockedTitle": "Eine Vermietung kann möglich werden, wenn die Spiele veröffentlicht werden.",
+      "lockedDesc": "Spieler können möglicherweise Gegenstände an andere Spieler herausgeben und Belohnungen im Spiel erhalten, die sie untereinander aushandeln, vorbehaltlich der endgültigen Spielregeln.",
       "forHireBadge": "ZU VERMIETEN",
-      "wantedBadge": "SUCHE ZUR MIETE",
+      "wantedBadge": "Wollte vermieten",
       "price": "Preis",
       "maxDuration": "Max. Laufzeit",
-      "hireBtn": "Mieten",
+      "hireBtn": "Lass",
       "fulfillBtn": "Anfrage erfüllen",
       "rules": {
         "durations": "8h · 1T · 3T · 1W · 1Mo",
         "cooldown": "Abklingzeit: 2× Mietdauer",
         "commission": "Provision variiert",
-        "payment": "Zahle in Hyper Bucks oder Materialien"
+        "payment": "Belohnungen im Spiel, die zwischen den Spielern ausgehandelt werden"
       },
       "preview": {
         "title": "Vorschau der spielinternen Funktion",
-        "desc": "Das Vermietungssystem wird beim Launch vollständig im Spiel verfügbar sein. Die hier gezeigten Artikel sind Beispiele für Investoren/Nutzer."
+        "desc": "Letting kann beim Start im Spiel live gehen. Bei den hier gezeigten Artikeln handelt es sich lediglich um gesäte Muster zur Vorschau."
       },
       "hireModal": {
-        "hireTitle": "Spezialisten mieten",
-        "fulfillTitle": "Mietanfrage erfüllen",
+        "hireTitle": "Lassen Sie den Spezialisten",
+        "fulfillTitle": "Vermietungsanfrage erfüllen",
         "forHireBadge": "ZU VERMIETEN",
         "wantedBadge": "GESUCHT",
         "price": "Preis",
         "duration": "Laufzeit",
-        "howHire": "Wie das Mieten funktioniert",
+        "howHire": "So funktioniert Vermietung",
         "howFulfill": "Wie das Erfüllen einer Anfrage funktioniert",
-        "proceedHire": "Zur Miete fortfahren",
+        "proceedHire": "Fahren Sie mit Let fort",
         "offerFulfill": "Anbieten zu erfüllen",
         "commission": "Plattformprovision variiert · Abklingzeit gilt nach Rückgabe",
-        "confirmHire": "Miete bestätigen",
+        "confirmHire": "Vermietung bestätigen",
         "confirmOffer": "Angebot bestätigen",
         "specialist": "Spezialist",
         "payment": "Zahlung",
@@ -461,19 +462,19 @@
         "close": "Schließen"
       },
       "createModal": {
-        "listTitle": "Zur Vermietung listen",
-        "postTitle": "Suchanzeige zur Miete posten",
+        "listTitle": "Liste zur Vermietung",
+        "postTitle": "Beitrag zum Vermieten",
         "forHireBtn": "Zu vermieten",
-        "wantingBtn": "Suche zur Miete",
+        "wantingBtn": "Ich möchte vermieten",
         "itemNameHire": "Spezialist / Artikelname *",
-        "itemNameWant": "Was du mieten möchtest *",
+        "itemNameWant": "Was Sie vermieten möchten *",
         "descPlaceholder": "Beschreibung",
         "categoryPlaceholder": "Kategorie (optional)",
         "paymentType": "Zahlungsart",
-        "hyperBucks": "Hyper Bucks",
+        "hyperBucks": "Belohnung im Spiel",
         "materials": "Materialien",
-        "amountLabel": "Betrag (Hyper Bucks)",
-        "afterCommission": "Du erhältst {{amount}} HB nach Plattformprovision",
+        "amountLabel": "Belohnung im Spiel",
+        "afterCommission": "Sie erhalten {{amount}} im Spiel nach der Plattformprovision",
         "maxDuration": "Max. Laufzeit",
         "disclaimer": "Provision variiert · Abklingzeit = 2× Mietdauer nach Rückgabe",
         "listing": "Wird gelistet…",
@@ -508,7 +509,7 @@
         "postedBy": "Gepostet von",
         "claimedBy": "Beansprucht von",
         "status": "Status",
-        "netHB": "{{amount}} HB netto"
+        "netHB": "{{amount}} netto"
       },
       "pagination": {
         "prev": "Zurück",
@@ -540,6 +541,20 @@
       "dashboardTitle": "Dein Dashboard ist derzeit gesperrt, aber mach dich bereit; der offizielle Start steht kurz bevor!",
       "desc": "Lass dich davon nicht abhalten, dich zu registrieren und in dieses unglaubliche Projekt einzutauchen. Entdecke die vielen Vorteile und wie dein Beitrag seinen Erfolg vorantreiben kann! Mach jetzt mit und werde noch heute ein Hyper Tekken!",
       "buttonLabel": "Öffnet zum offiziellen Start"
+    },
+    "gameLock": {
+      "quests": {
+        "title": "Quests werden möglicherweise verfügbar, wenn die Spiele veröffentlicht werden.",
+        "desc": "Spieler können vorbehaltlich der endgültigen Spielregeln möglicherweise Gegenstände an andere Spieler liefern, um Belohnungen im Spiel zu erhalten."
+      },
+      "hire": {
+        "title": "Eine Vermietung kann möglich werden, wenn die Spiele veröffentlicht werden.",
+        "desc": "Spieler können unter Umständen Gegenstände an andere Spieler herausgeben und Belohnungen im Spiel erhalten, die sie untereinander aushandeln, vorbehaltlich der endgültigen Spielregeln."
+      },
+      "bounty": {
+        "title": "Kopfgelder können verfügbar werden, wenn die Spiele veröffentlicht werden.",
+        "desc": "Kopfgelder können vorbehaltlich der endgültigen Spielregeln nur Belohnungen im Spiel bieten."
+      }
     }
   },
   "musicPlayer": {
@@ -581,9 +596,9 @@
       "platform": "Plattform",
       "noDesc": "Keine Beschreibung für diesen Artikel angegeben.",
       "price": "Preis",
-      "minBuyback": "Mindestrückkaufgarantie",
+      "minBuyback": "Programmatic Trade-In Value",
       "reservePrice": "Mindestpreis",
-      "buybackNote": "Dieser Vermögenswert kann nicht unter seinem Mindestrückkaufwert verkauft werden.",
+      "buybackNote": "Der Mindestpreis kann nicht unter der Inzahlungnahmezuteilung dieses Artikels liegen.",
       "networkNote": "USDC auf Basis · Basis-ETH erforderlich für Benzin (nur Brieftaschenzahlungen)",
       "buyWithCard": "Mit Karte kaufen",
       "makeOffer": "Angebot machen",
