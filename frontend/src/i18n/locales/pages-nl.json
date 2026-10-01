@@ -12,7 +12,7 @@
       "three-worlds": "02  De drie werelden",
       "technology": "03  Technologie",
       "nfa": "04  Non-Fungible Assets",
-      "hyperbucks": "05  HyperBucks-economie",
+      "hyperbucks": "05  Gems",
       "marketplace": "06  Marktplaats",
       "roadmap": "07  Routekaart",
       "conclusion": "08  Conclusie"
@@ -29,7 +29,7 @@
     "docs": {
       "tos": "Gebruiksvoorwaarden",
       "api": "API-gebruiksvoorwaarden",
-      "packs": "Pakket-gebruiksvoorwaarden",
+      "packs": "Pakketvoorwaarden",
       "privacy": "Privacybeleid",
       "copy": "Auteursrechtbeleid",
       "tm": "Merkbeleid",
@@ -127,7 +127,7 @@
       "2": "Hoe enthousiast ben je over een universum waar drie volledige spellen zijn verbonden in één ervaring?",
       "3": "Welk onderdeel van HyperTek 100 interesseert je het meest?",
       "4": "Wat zou HyperTek 100 een 'must-play'-spel voor je maken?",
-      "5": "Zou je overwegen dit project te steunen wanneer we onze crowdfundingcampagne openen?",
+      "5": "Zou je interesse hebben in de release met vroege toegang van items in beperkte oplage?",
       "6": "Volg ons op X"
     },
     "nameLabel": "Uw naam",
@@ -158,7 +158,7 @@
     "unlisted": "Niet vermeld",
     "backToMarketplace": "Marktplaats",
     "samplePreviewTitle": "Voorbeeld marktplaatspreview",
-    "samplePreviewDesc": "De onderstaande items zijn voorbeeldpreviews die de typen digitale activa tonen die beschikbaar zullen zijn. Werkelijke items met unieke kunst en blockchain-geverifieerd eigendom zullen beschikbaar zijn bij de lancering.",
+    "samplePreviewDesc": "De items hieronder zijn voorbeeldweergaven van het soort digitale items dat mogelijk beschikbaar komt. Echte items met unieke artwork en op de blockchain geverifieerd eigendom zijn mogelijk beschikbaar bij de lancering.",
     "noItemsFound": "Geen items gevonden in deze categorie",
     "preview": "Voorbeeld",
     "buyNow": "Nu kopen",
@@ -182,14 +182,14 @@
     "error": "Sorry, ik kon nu geen antwoord krijgen. Probeer het opnieuw of neem contact op met ons ondersteuningsteam.",
     "peek": {
       "0": "Hulp nodig? Vraag mij alles!",
-      "1": "Vragen over HyperBucks?",
+      "1": "Vragen over Gems?",
       "2": "Benieuwd hoe veilingen werken?"
     },
     "shortcuts": {
-      "earnLabel": "HyperBucks verdienen",
-      "earnText": "Hoe verdien ik HyperBucks?",
-      "cashOutLabel": "HB uitbetalen",
-      "cashOutText": "Hoe betaal ik mijn HyperBucks uit?",
+      "earnLabel": "Gems krijgen",
+      "earnText": "Hoe kom ik aan Gems?",
+      "cashOutLabel": "Inruilwaarde",
+      "cashOutText": "Hoe werkt de Programmatic Trade-In Value?",
       "auctionsLabel": "Hoe veilingen werken",
       "auctionsText": "Hoe werken veilingen?",
       "gamesLabel": "Beschikbare spellen",
@@ -263,7 +263,8 @@
       "trade": "Handel",
       "auction": "Veiling",
       "questing": "Zoekend",
-      "bounty": "Bounty"
+      "bounty": "Bounty",
+      "forHire": "Te huur"
     },
     "categories": {
       "all": "Allemaal",
@@ -349,7 +350,7 @@
       "playerLabel": "\nSpeler\n",
       "platformLabel": "\nPlatform\n",
       "platLabel": "\nPlat\n",
-      "notePayouts": "\nQuests met gecombineerde payloads worden uitbetaald met behulp van de afzonderlijke tafelbedragen.\n",
+      "notePayouts": "Quests met gecombineerde ladingen gebruiken de beloningen uit de aparte tabel.",
       "notePlanet": "\nPlanet-gegevens worden gesynchroniseerd wanneer de games live gaan.\n",
       "dailySlots": "\nDagelijkse Quest-slots\n",
       "used": "\ngebruikt\n",
@@ -383,8 +384,8 @@
       "colSelling": "\nVerkopen\n",
       "colBuying": "\nKopen\n",
       "colTrading": "\nHandelen\n",
-      "colOnHire": "\nOp huur\n",
-      "colHiring": "\nAanwerven\n",
+      "colOnHire": "Verhuurd",
+      "colHiring": "Verhuur",
       "groupMarketplace": "\nMARKTPLAATS\n",
       "groupAuction": "\nVEILING"
     }
@@ -397,7 +398,7 @@
       "myCollections": "Mijn Verzamelingen",
       "transactions": "Transacties",
       "offers": "Aanbiedingen",
-      "hyperBucks": "HyperBucks",
+      "hyperBucks": "Gems",
       "earnings": "Inkomsten",
       "support": "Ondersteuning",
       "signOut": "Afmelden"
@@ -436,7 +437,7 @@
       "transactions": "Transacties",
       "transactionsDesc": "Betaling geschiedenis",
       "withdraw": "Opnemen",
-      "withdrawDesc": "Je HB-saldo opnemen"
+      "withdrawDesc": "Neem de opbrengst van je verkopen op de marktplaats op"
     },
     "transactions": {
       "title": "Transactiegeschiedenis",
@@ -467,7 +468,7 @@
       "noSentOffersHint": "Doe een bod op een artikel op de Marktplaats",
       "colItem": "Item",
       "colYourOffer": "Je eigen Aanbieding",
-      "colFloorPrice": "Vloerprijs",
+      "colFloorPrice": "Laagste prijs",
       "colOfferDuration": "Duur van aanbieding",
       "colStatus": "Status",
       "colAction": "Actie",
@@ -638,11 +639,10 @@
       }
     },
     "hyperbucks": {
-      "title": " HyperBucks ",
-      "subtitle": " 250 HB = $1 USD · vaste rente ",
+      "title": "Gems",
+      "subtitle": "Koop Gems voor in-game aankopen",
       "currentBalance": " Huidig saldo ",
       "tabTopUp": " Opwaarderen ",
-      "tabCashout": " Uitbetalen ",
       "success": {
         "title": " Opwaarderen succesvol! ",
         "added": " toegevoegd aan uw account.",
@@ -652,30 +652,24 @@
       },
       "topup": {
         "amountLabel": " Bedrag (USD) ",
-        "hyperBucks": " HyperBucks ",
+        "hyperBucks": "Gems",
         "preparing": " Voorbereiden... ",
         "proceed": " Ga door naar betaling ",
         "enterAmount": " Voer een bedrag in om door te gaan ",
-        "secured": " Beveiligd door Stripe · 250 HB = $1 USD · min $1 ",
+        "secured": "Beveiligd door Stripe · min. $1",
         "quickSelect": " Snelle selectie ",
         "paying": " Betalen ",
         "processing": " Verwerken... ",
-        "pay": " Betalen "
+        "pay": " Betalen ",
+        "rate": "Min. $1 · Gems zijn alleen voor in-game aankopen"
       },
       "cashout": {
-        "amountLabel": " Bedrag (HB) ",
-        "minUsdc": " Min 250 HB ",
-        "minBank": " Min 2500 HB ",
         "receiveVia": " Ontvangen via ",
         "usdcWallet": " USDC Wallet ",
-        "usdcMin": " Min 250 HB · ~$0,01 benzine ",
         "bankAccount": " Bankrekening ",
-        "bankMin": " Min 2500 HB ($10) · bankgegevens vereist ",
         "addBank": " Bankgegevens toevoegen in profiel → ",
         "noWallet": " Geen portemonnee verbonden ",
         "sendingOtp": " OTP verzenden... ",
-        "toUsdc": " Uitbetaling naar USDC-portemonnee ",
-        "toBank": " Uitbetaling naar bankrekening ",
         "kycNote": " Volledige identiteitsverificatie om door te gaan "
       },
       "otp": {
@@ -686,7 +680,6 @@
         "bankAccount": " Bankrekening ",
         "label": " OTP-code ",
         "processing": " Verwerken... ",
-        "confirm": " Uitbetaling bevestigen ",
         "sending": " Verzenden... ",
         "resend": " Code opnieuw verzenden "
       },

@@ -31,23 +31,23 @@
       "facts": [
         {
           "label": "NFA",
-          "desc": "Asset esclusivo Hypertek. Bonus in gioco più elevati. Valore di riacquisto minimo garantito che cresce ad ogni vendita."
+          "desc": "Oggetto esclusivo Hyper Tek. I bonus di gioco più alti. Programmatic Trade-In Value a cui si aggiunge ogni rivendita."
         },
         {
           "label": "NFC",
-          "desc": "Creato da Hypertek o giocatori con licenza. Bonus in gioco inclusi. Riacquisto minimo garantito."
+          "desc": "Creato da Hyper Tek o da giocatori con licenza. Bonus di gioco inclusi. Programmatic Trade-In Value incluso."
         },
         {
           "label": "NFT",
-          "desc": "Oggetto da collezione creato dai giocatori. Nessun bonus in gioco. Nessuna garanzia di riacquisto. Scambiabile nel marketplace."
+          "desc": "Oggetto da collezione creato dai giocatori. Nessun bonus di gioco. Nessun valore di permuta. Scambiabile sul marketplace."
         },
         {
           "label": "Commissione",
-          "desc": "La commissione di piattaforma varia in base all'inserzione. Rivendite: venditore 86%, royalty artista 2%, +5% riacquisto, piattaforma 7%."
+          "desc": "La commissione della piattaforma varia per annuncio. Ripartizione delle rivendite: venditore 86%, royalty dell'artista 2%, 5% all'assegnazione di permuta dell'oggetto, piattaforma 7%."
         },
         {
-          "label": "Crescita del riacquisto",
-          "desc": "+5% di ogni prezzo di rivendita viene aggiunto al valore di riacquisto minimo dell'asset. Cresce sempre."
+          "label": "Assegnazione di permuta",
+          "desc": "Il 5% del prezzo di ogni rivendita viene aggiunto all'assegnazione di permuta dell'oggetto. L'importo restituito in una permuta segue il Tiered Loyalty Return Schedule ed è sempre inferiore all'importo assegnato."
         },
         {
           "label": "Portafoglio custodiale",
@@ -67,7 +67,8 @@
             "Gli NFCs (Non-Fungible Characters) sono articoli di giocatori con licenza con bonus in gioco e riacquisto.",
             "Gli NFTs (Non-Fungible Tokens) sono oggetti da collezione creati dagli utenti — skin, armi e altro."
           ],
-          "cta": "Impara le basi"
+          "cta": "Impara le basi",
+          "intro": "NFA/NFC/NFT sono opere d'arte digitali. NFA e NFC hanno bonus di gioco e un Programmatic Trade-In Value."
         },
         {
           "label": "Il Marketplace",
@@ -111,20 +112,20 @@
         },
         {
           "label": "In affitto",
-          "tagline": "Prendi in prestito asset o guadagna dai tuoi",
+          "tagline": "Affitta i tuoi oggetti in cambio di ricompense di gioco",
           "details": [
             "Noleggia specialisti o equipaggiamento potenti per una singola missione senza acquistare.",
-            "Elenca i tuoi asset inattivi in affitto e guadagna reddito passivo durante la tua assenza.",
+            "I giocatori potrebbero affittare gli oggetti inutilizzati ad altri giocatori in cambio di ricompense di gioco concordate tra loro.",
             "Durate flessibili — orario, giornaliero o per accordi per missione."
           ],
-          "cta": "Sfoglia i noleggi"
+          "cta": "Sfoglia In affitto"
         },
         {
           "label": "Taglie",
           "tagline": "Caccia obiettivi, reclama ricompense, guida la classifica",
           "details": [
             "Accetta taglie pubblicate da altri giocatori o dal sistema per guadagnare ricompense crypto.",
-            "Scala la classifica delle taglie per sbloccare titoli esclusivi e pagamenti bonus.",
+            "Scala la classifica delle taglie per sbloccare titoli esclusivi e ricompense di gioco.",
             "Pubblica le tue taglie per reclutare giocatori esperti per i tuoi obiettivi."
           ],
           "cta": "Vedi le taglie"
@@ -136,7 +137,7 @@
       "subtitle": "Sfoglia NFAs, NFCs e NFTs disponibili per l'acquisto immediato — skin, armi, specialisti, astronavi e altro.",
       "filterAll": "Tutto",
       "samplePreviewTitle": "Anteprima del Marketplace",
-      "samplePreviewDesc": "Gli articoli qui sotto sono anteprime che mostrano i tipi di asset digitali disponibili nel marketplace HyperTek. Gli articoli reali con opere d'arte uniche e proprietà verificata su blockchain saranno disponibili al lancio.",
+      "samplePreviewDesc": "Gli oggetti qui sotto sono anteprime di esempio dei tipi di oggetti digitali che potrebbero essere disponibili sul marketplace Hyper Tek. Gli oggetti reali, con grafica unica e proprietà verificata sulla blockchain, potrebbero essere disponibili al lancio.",
       "noItems": "Nessun articolo disponibile ancora. Torna presto.",
       "categories": {
         "skins": "Skin",
@@ -197,7 +198,7 @@
       },
       "preview": {
         "title": "Anteprima della funzione in gioco",
-        "desc": "Il sistema d'asta sarà completamente attivo nel gioco al lancio. Gli articoli mostrati qui sono campioni per investitori/utenti."
+        "desc": "Il sistema di aste potrebbe essere attivato nel gioco al lancio. Gli oggetti mostrati qui sono esempi solo a scopo di anteprima."
       },
       "card": {
         "currentBid": "Offerta attuale",
@@ -369,7 +370,7 @@
       "earnFromQuests": "Vuoi guadagnare dalle missioni? Gioca →",
       "moneyQuests": "Missioni denaro (pool dell'11%)",
       "resourceQuests": "Missioni risorse (pool del 20%)",
-      "footerNote1": "# Le missioni con carichi combinati verranno pagate utilizzando gli importi delle tabelle separate.",
+      "footerNote1": "# Le missioni con carichi combinati usano le ricompense della tabella separata.",
       "footerNote2": "# I dati planetari si sincronizzeranno quando i giochi andranno live.",
       "inGame": "In gioco",
       "open": "Aperto",
@@ -411,12 +412,12 @@
       "listings": "annunci",
       "listBtn": "Elenca",
       "forHireLabel": "In affitto",
-      "wantingToHire": "Cerca da affittare",
+      "wantingToHire": "Cerco in affitto",
       "noListings": "Nessun annuncio {{filter}}",
-      "lockedTitle": "Contenuto gaming HyperTek solo a scopo dimostrativo.",
-      "lockedDesc": "This is part of Hyper Tek's genuine 'Play to Earn' system, where players can earn real cash rewards, and or Materials/Resources.",
+      "lockedTitle": "L'affitto potrebbe diventare disponibile se i giochi verranno pubblicati.",
+      "lockedDesc": "I giocatori potrebbero affittare oggetti ad altri giocatori e ricevere ricompense di gioco concordate tra loro, secondo le regole definitive del gioco.",
       "forHireBadge": "IN AFFITTO",
-      "wantedBadge": "CERCA DA AFFITTARE",
+      "wantedBadge": "CERCASI IN AFFITTO",
       "price": "Prezzo",
       "maxDuration": "Durata massima",
       "hireBtn": "Affitta",
@@ -425,25 +426,25 @@
         "durations": "8h · 1g · 3g · 1sett · 1mese",
         "cooldown": "Tempo di recupero: 2× durata noleggio",
         "commission": "La commissione varia",
-        "payment": "Paga in Hyper Bucks o Materiali"
+        "payment": "Ricompense di gioco concordate tra giocatori"
       },
       "preview": {
         "title": "Anteprima della funzione in gioco",
-        "desc": "Il sistema In affitto sarà completamente attivo nel gioco al lancio. Gli articoli mostrati qui sono campioni per investitori/utenti."
+        "desc": "L'affitto potrebbe essere attivato nel gioco al lancio. Gli oggetti mostrati qui sono esempi solo a scopo di anteprima."
       },
       "hireModal": {
-        "hireTitle": "Assumi specialista",
-        "fulfillTitle": "Soddisfa richiesta di assunzione",
+        "hireTitle": "Affitta specialista",
+        "fulfillTitle": "Soddisfa la richiesta di affitto",
         "forHireBadge": "IN AFFITTO",
         "wantedBadge": "RICERCATO",
         "price": "Prezzo",
         "duration": "Durata",
-        "howHire": "Come funziona l'assunzione",
+        "howHire": "Come funziona l'affitto",
         "howFulfill": "Come funziona il soddisfacimento di una richiesta",
-        "proceedHire": "Procedi all'assunzione",
+        "proceedHire": "Procedi con l'affitto",
         "offerFulfill": "Offri di soddisfare",
         "commission": "La commissione di piattaforma varia · Tempo di recupero applicato dopo il ritorno",
-        "confirmHire": "Conferma assunzione",
+        "confirmHire": "Conferma affitto",
         "confirmOffer": "Conferma offerta",
         "specialist": "Specialista",
         "payment": "Pagamento",
@@ -461,19 +462,19 @@
         "close": "Chiudi"
       },
       "createModal": {
-        "listTitle": "Elenca in affitto",
-        "postTitle": "Pubblica richiesta di noleggio",
+        "listTitle": "Metti in affitto",
+        "postTitle": "Pubblica ricerca di affitto",
         "forHireBtn": "In affitto",
-        "wantingBtn": "Cerca da affittare",
+        "wantingBtn": "Cerco in affitto",
         "itemNameHire": "Specialista / nome articolo *",
         "itemNameWant": "Cosa vuoi affittare *",
         "descPlaceholder": "Descrizione",
         "categoryPlaceholder": "Categoria (facoltativo)",
         "paymentType": "Tipo di pagamento",
-        "hyperBucks": "Hyper Bucks",
+        "hyperBucks": "Ricompensa di gioco",
         "materials": "Materiali",
-        "amountLabel": "Importo (Hyper Bucks)",
-        "afterCommission": "Ricevi {{amount}} HB dopo la commissione di piattaforma",
+        "amountLabel": "Ricompensa di gioco",
+        "afterCommission": "Ricevi {{amount}} nel gioco dopo la commissione della piattaforma",
         "maxDuration": "Durata massima",
         "disclaimer": "La commissione varia · Tempo di recupero = 2× durata noleggio dopo il ritorno",
         "listing": "Pubblicazione in corso…",
@@ -508,7 +509,7 @@
         "postedBy": "Pubblicato da",
         "claimedBy": "Reclamato da",
         "status": "Stato",
-        "netHB": "{{amount}} HB netto"
+        "netHB": "{{amount}} netti"
       },
       "pagination": {
         "prev": "Prec.",
@@ -540,6 +541,20 @@
       "dashboardTitle": "La tua dashboard è al momento bloccata, ma preparati; il lancio ufficiale è dietro l'angolo!",
       "desc": "Non lasciare che questo ti impedisca di registrarti e immergerti in questo incredibile progetto. Scopri i suoi numerosi vantaggi e come il tuo coinvolgimento può guidarne il successo! Unisciti a noi e diventa un Hyper Tekken oggi stesso!",
       "buttonLabel": "Apre al lancio ufficiale"
+    },
+    "gameLock": {
+      "quests": {
+        "title": "Le missioni potrebbero diventare disponibili se i giochi verranno pubblicati.",
+        "desc": "I giocatori potrebbero consegnare oggetti ad altri giocatori in cambio di ricompense di gioco, secondo le regole definitive del gioco."
+      },
+      "hire": {
+        "title": "L'affitto potrebbe diventare disponibile se i giochi verranno pubblicati.",
+        "desc": "I giocatori potrebbero affittare oggetti ad altri giocatori e ricevere ricompense di gioco concordate tra loro, secondo le regole definitive del gioco."
+      },
+      "bounty": {
+        "title": "Le taglie potrebbero diventare disponibili se i giochi verranno pubblicati.",
+        "desc": "Le taglie potrebbero offrire solo ricompense di gioco, secondo le regole definitive del gioco."
+      }
     }
   },
   "musicPlayer": {
@@ -581,9 +596,9 @@
       "platform": "Piattaforma",
       "noDesc": "Nessuna descrizione fornita per questo articolo.",
       "price": "Prezzo",
-      "minBuyback": "Garanzia di riacquisto minimo",
+      "minBuyback": "Programmatic Trade-In Value",
       "reservePrice": "Prezzo di riserva",
-      "buybackNote": "Questo asset non può essere venduto al di sotto del suo valore di riacquisto minimo.",
+      "buybackNote": "Il prezzo di riserva non può essere fissato al di sotto dell'assegnazione di permuta di questo oggetto.",
       "networkNote": "USDC su base · ETH di base richiesto per il gas (solo pagamenti con portafoglio)",
       "buyWithCard": "Acquista con carta",
       "makeOffer": "Fai un'offerta",

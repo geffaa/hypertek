@@ -9,7 +9,7 @@
       "auctions": "Veilingen",
       "trades": "Ruilhandel",
       "quests": "Quests",
-      "hire": "Te Huur",
+      "hire": "Te huur",
       "bounty": "Premies"
     },
     "banner": {
@@ -31,23 +31,23 @@
       "facts": [
         {
           "label": "NFA",
-          "desc": "Exclusief Hypertek-bezit. Hoogste bonussen in het spel. Gegarandeerde minimale terugkoopwaarde die groeit met elke verkoop."
+          "desc": "Item alleen van Hyper Tek. Hoogste in-game bonussen. Programmatic Trade-In Value waar elke doorverkoop aan bijdraagt."
         },
         {
           "label": "NFC",
-          "desc": "Gemaakt door Hypertek of gelicentieerde spelers. Bonussen in het spel inbegrepen. Minimale terugkoop gegarandeerd."
+          "desc": "Gemaakt door Hyper Tek of door spelers met een licentie. Inclusief in-game bonussen. Inclusief Programmatic Trade-In Value."
         },
         {
           "label": "NFT",
-          "desc": "Door spelers gemaakt verzamelobject. Geen bonussen in het spel. Geen terugkoopgarantie. Verhandelbaar op de marktplaats."
+          "desc": "Door spelers gemaakt verzamelobject. Geen in-game bonussen. Geen inruilwaarde. Verhandelbaar op de marktplaats."
         },
         {
           "label": "Commissie",
-          "desc": "Platformkosten variëren per vermelding. Doorverkoop: verkoper 86%, kunstenaarsroyalty 2%, +5% naar buyback, platform 7%."
+          "desc": "De platformkosten verschillen per aanbieding. Verdeling bij doorverkoop: verkoper 86%, royalty voor de kunstenaar 2%, 5% naar de inruiltoewijzing van het item, platform 7%."
         },
         {
-          "label": "Terugkoopgroei",
-          "desc": "+5% van elke doorverkoopprijs wordt toegevoegd aan de minimale terugkoopwaarde van het bezit."
+          "label": "Inruiltoewijzing",
+          "desc": "5% van elke doorverkoopprijs wordt toegevoegd aan de inruiltoewijzing van het item. Het bedrag dat bij inruil wordt teruggegeven volgt het Tiered Loyalty Return Schedule en is altijd lager dan het toegewezen bedrag."
         },
         {
           "label": "Bewaarwallet",
@@ -67,7 +67,8 @@
             "NFCs zijn gelicentieerde spelersitems met bonussen in het spel.",
             "NFTs zijn door gebruikers gemaakte verzamelobjecten."
           ],
-          "cta": "Leer de Basis"
+          "cta": "Leer de Basis",
+          "intro": "NFA's/NFC's/NFT's zijn digitale kunstwerken. NFA's en NFC's hebben in-game bonussen en een Programmatic Trade-In Value."
         },
         {
           "label": "De Marktplaats",
@@ -110,21 +111,21 @@
           "cta": "Verken Quests"
         },
         {
-          "label": "Te Huur",
-          "tagline": "Leen bezittingen of verdien met de jouwe",
+          "label": "Te huur",
+          "tagline": "Verhuur je items voor in-game beloningen",
           "details": [
             "Huur krachtige specialisten of uitrusting voor één missie.",
-            "Noteer je eigen inactieve bezittingen voor verhuur.",
+            "Spelers kunnen mogelijk ongebruikte items aan andere spelers verhuren voor in-game beloningen die ze onderling afspreken.",
             "Flexibele duur — per uur, per dag of per missie."
           ],
-          "cta": "Bekijk Te Huur"
+          "cta": "Bekijk Te huur"
         },
         {
           "label": "Premies",
           "tagline": "Jaag op doelen, claim beloningen",
           "details": [
             "Accepteer premies geplaatst door andere spelers of het systeem.",
-            "Klim de premie-ranglijst op.",
+            "Klim op de bounty-ranglijst om exclusieve titels en in-game beloningen vrij te spelen.",
             "Post je eigen premies om bekwame spelers te werven."
           ],
           "cta": "Bekijk Premies"
@@ -136,7 +137,7 @@
       "subtitle": "Blader door NFAs, NFCs en NFTs beschikbaar voor directe aankoop.",
       "filterAll": "Alles",
       "samplePreviewTitle": "Voorbeeld Marktplaats Preview",
-      "samplePreviewDesc": "De onderstaande items zijn voorbeeldpreviews die de typen digitale bezittingen tonen die beschikbaar zullen zijn.",
+      "samplePreviewDesc": "De items hieronder zijn voorbeeldweergaven van het soort digitale items dat mogelijk beschikbaar komt op de Hyper Tek-marktplaats. Echte items met unieke artwork en op de blockchain geverifieerd eigendom zijn mogelijk beschikbaar bij de lancering.",
       "noItems": "Nog geen items beschikbaar. Kom binnenkort terug.",
       "categories": {
         "skins": "Skins",
@@ -197,7 +198,7 @@
       },
       "preview": {
         "title": "In-game Functiepreview",
-        "desc": "Het veilingsysteem zal volledig actief zijn in het spel bij de lancering."
+        "desc": "Het veilingsysteem gaat mogelijk bij de lancering in-game live. De items die hier worden getoond zijn voorbeelden, alleen ter preview."
       },
       "card": {
         "currentBid": "Huidig bod",
@@ -369,7 +370,7 @@
       "earnFromQuests": "Wil je verdienen met quests? Speel het spel →",
       "moneyQuests": "Geldquests (pool 11%)",
       "resourceQuests": "Resourcequests (pool 20%)",
-      "footerNote1": "# Quests met gecombineerde ladingen worden uitbetaald met de afzonderlijke tabelbedragen.",
+      "footerNote1": "# Quests met gecombineerde ladingen gebruiken de beloningen uit de aparte tabel.",
       "footerNote2": "# Planeetgegevens worden gesynchroniseerd wanneer de spellen live gaan.",
       "inGame": "In-game",
       "open": "Open",
@@ -407,43 +408,43 @@
       }
     },
     "hire": {
-      "heading": "Te Huur",
+      "heading": "Te huur",
       "listings": "aanbiedingen",
       "listBtn": "Noteren",
-      "forHireLabel": "Te Huur",
-      "wantingToHire": "Wil Huren",
+      "forHireLabel": "Te huur",
+      "wantingToHire": "Te huur gezocht",
       "noListings": "Geen {{filter}} aanbiedingen",
-      "lockedTitle": "HyperTek Gaming-inhoud alleen voor weergavedoeleinden.",
-      "lockedDesc": "This is part of Hyper Tek's genuine 'Play to Earn' system, where players can earn real cash rewards, and or Materials/Resources.",
+      "lockedTitle": "Verhuur kan beschikbaar komen als de games worden uitgebracht.",
+      "lockedDesc": "Spelers kunnen mogelijk items aan andere spelers verhuren en in-game beloningen ontvangen die ze onderling afspreken, volgens de definitieve spelregels.",
       "forHireBadge": "TE HUUR",
-      "wantedBadge": "GEZOCHT",
+      "wantedBadge": "TE HUUR GEZOCHT",
       "price": "Prijs",
       "maxDuration": "Max. Duur",
-      "hireBtn": "Huren",
+      "hireBtn": "Verhuren",
       "fulfillBtn": "Verzoek Vervullen",
       "rules": {
         "durations": "8u · 1d · 3d · 1w · 1m",
         "cooldown": "Cooldown: 2× huurduur",
         "commission": "Commissie varieert",
-        "payment": "Betalen in Hyper Bucks of Materialen"
+        "payment": "In-game beloningen die spelers onderling afspreken"
       },
       "preview": {
         "title": "In-game Functiepreview",
-        "desc": "Het Te Huur-systeem zal volledig actief zijn in het spel bij de lancering."
+        "desc": "Verhuur gaat mogelijk bij de lancering in-game live. De items die hier worden getoond zijn voorbeelden, alleen ter preview."
       },
       "hireModal": {
-        "hireTitle": "Specialist Huren",
-        "fulfillTitle": "Huurverzoek Vervullen",
+        "hireTitle": "Specialist verhuren",
+        "fulfillTitle": "Verhuurverzoek invullen",
         "forHireBadge": "TE HUUR",
         "wantedBadge": "GEZOCHT",
         "price": "Prijs",
         "duration": "Duur",
-        "howHire": "Hoe huren werkt",
+        "howHire": "Hoe verhuur werkt",
         "howFulfill": "Hoe een verzoek vervullen werkt",
-        "proceedHire": "Doorgaan met Huren",
+        "proceedHire": "Doorgaan met verhuur",
         "offerFulfill": "Aanbieden te Vervullen",
         "commission": "Platformcommissie varieert · Cooldown geldt na terugkeer",
-        "confirmHire": "Huur Bevestigen",
+        "confirmHire": "Verhuur bevestigen",
         "confirmOffer": "Aanbod Bevestigen",
         "specialist": "Specialist",
         "payment": "Betaling",
@@ -461,19 +462,19 @@
         "close": "Sluiten"
       },
       "createModal": {
-        "listTitle": "Te Huur Noteren",
-        "postTitle": "Wil Huren Plaatsen",
-        "forHireBtn": "Te Huur",
-        "wantingBtn": "Wil Huren",
+        "listTitle": "Te huur aanbieden",
+        "postTitle": "Oproep Te huur gezocht plaatsen",
+        "forHireBtn": "Te huur",
+        "wantingBtn": "Te huur gezocht",
         "itemNameHire": "Specialist / itemnaam *",
-        "itemNameWant": "Wat je wil huren *",
+        "itemNameWant": "Wat je wilt huren *",
         "descPlaceholder": "Beschrijving",
         "categoryPlaceholder": "Categorie (optioneel)",
         "paymentType": "Betalingstype",
-        "hyperBucks": "Hyper Bucks",
+        "hyperBucks": "In-game beloning",
         "materials": "Materialen",
-        "amountLabel": "Bedrag (Hyper Bucks)",
-        "afterCommission": "Je ontvangt {{amount}} HB na platformcommissie",
+        "amountLabel": "In-game beloning",
+        "afterCommission": "Je ontvangt {{amount}} in-game na de platformcommissie",
         "maxDuration": "Max. Duur",
         "disclaimer": "Commissie varieert · Cooldown = 2× huurduur na terugkeer",
         "listing": "Noteren…",
@@ -508,7 +509,7 @@
         "postedBy": "Geplaatst Door",
         "claimedBy": "Geclaimd Door",
         "status": "Status",
-        "netHB": "{{amount}} HB netto"
+        "netHB": "{{amount}} netto"
       },
       "pagination": {
         "prev": "Vorig",
@@ -540,6 +541,20 @@
       "dashboardTitle": "Je dashboard is momenteel vergrendeld, maar maak je klaar; de officiële lancering staat voor de deur!",
       "desc": "Laat dit je er niet van weerhouden je aan te melden en in dit ongelooflijke project te duiken. Ontdek de vele voordelen en hoe jouw betrokkenheid het succes kan aandrijven! Doe nu mee en word vandaag nog een Hyper Tekken!",
       "buttonLabel": "Opent bij de officiële lancering"
+    },
+    "gameLock": {
+      "quests": {
+        "title": "Quests kunnen beschikbaar komen als de games worden uitgebracht.",
+        "desc": "Spelers kunnen mogelijk items bij andere spelers afleveren voor in-game beloningen, volgens de definitieve spelregels."
+      },
+      "hire": {
+        "title": "Verhuur kan beschikbaar komen als de games worden uitgebracht.",
+        "desc": "Spelers kunnen mogelijk items aan andere spelers verhuren en in-game beloningen ontvangen die ze onderling afspreken, volgens de definitieve spelregels."
+      },
+      "bounty": {
+        "title": "Bounty's kunnen beschikbaar komen als de games worden uitgebracht.",
+        "desc": "Bounty's kunnen alleen in-game beloningen bieden, volgens de definitieve spelregels."
+      }
     }
   },
   "musicPlayer": {
@@ -581,9 +596,9 @@
       "platform": "Platform",
       "noDesc": "Er is geen beschrijving gegeven voor dit artikel.",
       "price": "Prijs",
-      "minBuyback": "Minimale terugkoopgarantie",
+      "minBuyback": "Programmatic Trade-In Value",
       "reservePrice": "Reserveprijs",
-      "buybackNote": "Dit actief kan niet onder de minimale terugkoopwaarde worden verkocht.",
+      "buybackNote": "De minimumprijs kan niet lager worden ingesteld dan de inruiltoewijzing van dit item.",
       "networkNote": "USDC op basis · Basis-ETH vereist voor gas (alleen portemonnee-betalingen)",
       "buyWithCard": "Koop met kaart",
       "makeOffer": "Doe een bod",

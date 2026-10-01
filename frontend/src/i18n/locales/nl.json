@@ -89,19 +89,19 @@
     "highlights": [
       {
         "label": "Onderling verbonden universum",
-        "desc": "3 spellen — 1 gedeelde economie en progressiesysteem"
+        "desc": "3 games, één gedeeld voortgangssysteem"
       },
       {
         "label": "Echt eigendom",
-        "desc": "NFA's met gegarandeerde minimale terugkoop"
+        "desc": "NFA/NFC/NFT's met een Programmatic Trade-In Value"
       },
       {
-        "label": "Speel om te verdienen",
-        "desc": "Elke actie draagt bij aan je echte wereldbeloningen"
+        "label": "Play-to-Own",
+        "desc": "Elk item dat je verzamelt is van jou, vastgelegd op de blockchain"
       },
       {
-        "label": "Uitbetalingen",
-        "desc": "In-game valuta/beloningen omzetten naar contante uitbetalingen"
+        "label": "Item Loyalty Program",
+        "desc": "Hoe langer je een item houdt, hoe hoger de inruiltrap, altijd lager dan het bedrag dat eraan is toegewezen"
       },
       {
         "label": "Gekoppelde progressie",
@@ -121,12 +121,12 @@
   "homeMarket": {
     "featured": "Aanbevolen",
     "sectionTitle": "Beperkte editie NFA-artikelen",
-    "buybackBadge": "Gegarandeerde terugkoop op alle NFA's/NFC's/NFT's",
+    "buybackBadge": "Programmatic Trade-In Value op NFA's en NFC's",
     "urgency": "Handel snel, als ze weg zijn, zijn ze WEG!",
     "loading": "Artikelen laden...",
     "empty": "Nog geen gelistte artikelen.",
     "price": "Prijs",
-    "minBuyback": "Min terugkoop",
+    "minBuyback": "Inruilwaarde",
     "buyNow": "Nu kopen"
   },
   "gaming": {
@@ -177,15 +177,15 @@
       "aboutPageSubtitleSpan": "De toekomst van Web3.5-gaming bouwen.",
       "aboutHeroTitle1": "Gaming opnieuw voorgesteld.",
       "aboutHeroTitle2": "Aangedreven door Web3.5.",
-      "aboutHeroDesc": "Hyper Tek 100 is een gaming-ecosysteem van de volgende generatie waar elk asset reëel is, elke transactie on-chain is en elke speler een echte stakeholder is. Drie onderling verbonden spellen. Één gedeelde economie. Gebouwd voor de toekomst.",
+      "aboutHeroDesc": "Hyper Tek 100 is een gameproject in ontwikkeling waarin elk item op de blockchain is vastgelegd en eigendom is van de speler. Er zijn drie onderling verbonden games gepland, met één gedeeld voortgangssysteem.",
       "pillar1Title": "Web3.5-technologie",
       "pillar1Desc": "On-chain assets, echt eigendom en een transparante marktplaats gebouwd op Base.",
       "pillar2Title": "Echte Asset-waarde",
       "pillar2Desc": "Elk in-game item is een verhandelbaar asset. Speel, verdien en bezit je voortgang.",
       "pillar3Title": "Eerlijk Ecosysteem",
-      "pillar3Desc": "Commissieverdeling en terugkoopsmechanismen ontworpen om elke deelnemer te belonen.",
+      "pillar3Desc": "Transparante commissieverdeling en een Programmatic Trade-In Value ingebouwd in elk in aanmerking komend item.",
       "pillar4Title": "Doe Mee",
-      "pillar4Desc": "Van vroege investeerders tot actieve spelers. Meerdere wegen om deel te nemen aan het Hyper Tek-universum.",
+      "pillar4Desc": "Van verzamelaars tot actieve spelers: er kunnen meerdere manieren zijn om deel te nemen aan het Hyper Tek-universum.",
       "aboutDiscoverBtn": "Ontdek Ons Verhaal"
     }
   },
@@ -194,411 +194,27 @@
     "pageLinkSubtitle": "Roadmap, financieringsdoelen, pakketten en hoe jouw steun het Hyper Tek-universum opbouwt.",
     "pageLinkCta": "Pagina bekijken",
     "tryGaming": "Probeer de game-interface",
-    "badge": "NFA'S IN BEPERKTE OPLAGE EN GAMINGPAKKETTEN MET KORTING – KOM NU IN ACTIE!",
+    "badge": "NFA'S IN BEPERKTE OPLAGE EN GAMEPAKKETTEN, VERKRIJGBAAR ZOLANG DE VOORRAAD STREKT",
     "intro1": "We hebben strategisch meer dan $440.000 uit persoonlijke middelen geïnvesteerd en zoeken nu een extra $395.000 om dit baanbrekende project tot wasdom te brengen. We willen gaming revolutioneren door meeslepende ervaringen te bieden die enkele van de meest urgente uitdagingen in de sector aanpakken. Met meerdere financieringsinitiatieven beschikbaar is dit jouw kans om deel uit te maken van iets werkelijk transformatiefs.",
-    "intro2": "Allereerst lanceren we een aantal uiterst zeldzame Stage 1 Non-Fungible Asset (NFA)-items, die elk ongeëvenaarde in-game bonussen bieden die NOOIT zullen worden herhaald. Zodra deze items uitverkocht zijn of we ons financieringsdoel bereiken, worden alle resterende niet-geslagen NFA's in beperkte oplage definitief van onze website verwijderd. Dit is een ijzersterke garantie!",
-    "intro3": "Vergeet niet: elk Hyper Tek Non-Fungible Digital-item wordt geleverd met een gegarandeerde minimale terugkoop. Deze NFA's in beperkte oplage, die aanzienlijke in-game bonussen bieden—waarvan de hoogste nooit zullen worden herhaald—zullen je game-ervaring verbeteren en naar nieuwe hoogten tillen.",
-    "intro4": "Als je gepassioneerd bent over wat je hebt gezien of gelezen over het Hyper Tek Project en je wilt je bij ons aansluiten om de gamingindustrie opnieuw vorm te geven, of als je een scherpe investeerder bent die op zoek is naar een lucratieve kans, dan is dit jouw moment. Veilig je items met beperkte beschikbaarheid zolang het kan en word een integraal onderdeel van het bloeiende Hyper Tek-ecosysteem. Wacht niet—eenmaal weg, voorgoed weg!",
-    "intro5": "Ons tweede initiatief omvat het lanceren van exclusieve pakketten op onze eigen website, die we van plan zijn te vermelden op een crowdfundingplatform. Door dit zelf te doen, besparen we ongeveer 10% aan crowdfundingkosten, en we geven die besparing rechtstreeks aan jou door met een volledige korting van 10%. Dit aanbod is slechts voor beperkte tijd beschikbaar! Zodra we deze pakketten vermelden op een crowdfundingplatform zoals Kickstarter, is het kortingstarief niet langer beschikbaar.",
+    "intro2": "We brengen een klein aantal Non-Fungible Asset (NFA)-items van Fase 1 uit. Elk item vermeldt in-game bonussen die kunnen gelden als de games worden uitgebracht, en het is niet de bedoeling de bonusniveaus van Fase 1 te herhalen. Het aanbod heeft een harde limiet: zodra deze items zijn uitverkocht, worden de resterende niet-gemunte NFA's in beperkte oplage van de website verwijderd.",
+    "intro3": "In aanmerking komende Hyper Tek-items hebben een Programmatic Trade-In Value, bewaard in een escrow op de blockchain. Deze NFA's in beperkte oplage vermelden ook in-game bonussen die kunnen gelden, volgens de definitieve spelregels, als de games worden uitgebracht.",
+    "intro4": "Als je enthousiast bent over wat je van het Hyper Tek-project hebt gezien en een van deze beperkte items wilt bezitten, is dit het moment. Het aanbod is beperkt en zodra een item op is, wordt het niet opnieuw gemunt.",
+    "intro5": "Onze tweede release is een set exclusieve gamepakketten die rechtstreeks op onze eigen website worden verkocht, voor een prijs die 10% lager ligt dan waarvoor ze later mogelijk elders worden aangeboden. Deze prijs geldt slechts voor een beperkte tijd.",
     "keyPointsTitle": "Belangrijke punten om te onthouden:",
-    "intro6": "De eerste NFT die we lanceerden werd verkocht voor maar liefst $1,47 miljoen zonder een gegarandeerde minimale terugkoop of in-game bonussen! Dit is jouw kans om enkele van de zeldzaamste NFT's ter wereld te bemachtigen, de Hyper Tek Non-Fungible Assets (HT NFAs), compleet met een gegarandeerde minimale terugkoop en de grootste HT in-game bonussen die vandaag beschikbaar zijn. Het is een droom van elke investeerder die uitkomt, maar alleen zolang de voorraad strekt.",
-    "intro7": "Terwijl de meeste games beweren \"Play to Earn\" (P2E) te bieden, bieden ze vaak slechts in-game tokens om te verhandelen. Het Hyper Tek Project garandeert echt \"P2E\" met solide in-game mechanieken, ondersteund door meerdere beloningsstromen die kunnen worden omgezet in echte uitbetalingen. Maak je klaar om samen met ons de toekomst van gaming te ervaren!",
+    "intro6": "Hyper Tek Non-Fungible Assets (HT NFA's) zijn digitale verzamelobjecten met de grootste in-game bonussen uit het Hyper Tek-assortiment, die kunnen gelden als de games worden uitgebracht, plus een Programmatic Trade-In Value. Alleen verkrijgbaar zolang de voorraad strekt.",
+    "intro7": "Hyper Tek is opgezet als Play-to-Own: de items die je verzamelt zijn van jou, vastgelegd op de blockchain, met in-game nut dat kan gelden in de geplande games. Items worden verkocht als digitale verzamelobjecten, niet als een manier om geld te verdienen.",
     "collectionsLabel": "Collecties",
-    "sectionTitle": "Donatiepakketten",
+    "sectionTitle": "Gamepakketten in beperkte oplage",
     "discount": "Bespaar 10% op genoemde prijzen",
-    "donationTierLabel": "Donatieniveau",
-    "donationTierPrefix": "Donatieniveau:",
+    "donationTierLabel": "Pakketniveau",
+    "donationTierPrefix": "Pakketniveau:",
     "rewardsTitle": "Beloningen en voordelen",
     "noteTitle": "Opmerking",
-    "commonNote": "Beloningen, bonussen en/of kortingen voor nu doneren.\n\nOPMERKING: Behalve de voucher die wordt gebruikt voor online spellen of geselecteerde aankopen, kunnen alle andere beloningen, bonussen en/of kortingen niet worden gecombineerd of gebruikt in combinatie met andere promoties.\n\nAlle donatiepakketten bevatten schriftelijke eindkrediet in de spelontwikkeling.",
+    "commonNote": "Items, bonussen en kortingen die in elk pakket zijn inbegrepen.\n\nLET OP: behalve de Gems die zijn inbegrepen voor in-game aankopen, kunnen bonussen en kortingen niet worden gecombineerd met andere acties.\n\nElk pakket bevat een naamsvermelding in de aftiteling van de games, als de games worden uitgebracht.",
     "specialConditionTitle": "Bijzondere voorwaarde",
-    "specialCondition": "Bij de succesvolle ontwikkeling en voltooiing van het spel/de spellen, zal elke persoon die doneert een minimale waarde ontvangen die meer is dan zijn oorspronkelijke investering in beloningen of pakketten die in het spel/de spellen worden gebruikt, en eventuele bonussen of beloningen die zijn beloofd voor het doneren worden gegeven zodra het spel/de spellen worden uitgebracht.",
+    "specialCondition": "Items worden verkocht zoals ze zijn. In-game bonussen, kortingen en Gems die in een pakket staan, kunnen alleen gelden als de games worden uitgebracht en vallen onder de definitieve spelregels. Er wordt geen winst, betaling of financieel rendement beloofd.",
     "imageComing": "Afbeelding komt binnenkort",
-    "close": "Sluiten",
-    "items": [
-      {
-        "title": "Rekruut",
-        "rewards": [
-          "Jouw naam zal verschijnen in de eindtitels van het spel onder de titel \"Rekruut\"",
-          "Je ontvangt $35 USD credits te gebruiken voor in-game aankopen (kan niet worden omgezet in contante uitbetalingen)",
-          "Je ontvangt wekelijkse updates over het spel via e-mail",
-          "Je kunt deelnemen aan de Discord-chat.",
-          "Als Rekruut ontvang je 10% korting op in-game aankopen gedurende de eerste 12 maanden"
-        ]
-      },
-      {
-        "title": "Cadet beginnerklasse",
-        "rewards": [
-          "Jouw naam zal verschijnen in de eindtitels van het spel onder de titel \"Cadet beginnerklasse\"",
-          "Je ontvangt $90 USD credits te gebruiken voor in-game aankopen (kan niet worden omgezet in contante uitbetalingen)",
-          "Je ontvangt wekelijkse updates over het spel via e-mail",
-          "Je kunt deelnemen aan de Discord-chat.",
-          "Als Cadet beginnerklasse ontvang je een bonus van 10% toename in resourceverzameling",
-          "5% toename in trainingssnelheid",
-          "10% korting op in-game aankopen gedurende de eerste 12 maanden",
-          "#Kies om slechts $50 te doneren om onze missie te steunen, en als je wilt, zal jouw naam verschijnen in de eindtitels van het spel onder de titel \"Ingeschreven ererekruutklasse\""
-        ]
-      },
-      {
-        "title": "Cadet 1e klas",
-        "rewards": [
-          "Jouw naam zal verschijnen in de eindtitels van het spel onder de titel \"Cadet 1e klas\"",
-          "Je ontvangt $125 USD credits te gebruiken voor in-game aankopen (kan niet worden omgezet in contante uitbetalingen)",
-          "Je ontvangt wekelijkse updates over het spel via e-mail",
-          "Je kunt deelnemen aan de Discord-chat.",
-          "Als Cadet 1e klas ontvang je een bonus van 10% toename in resourceverzameling",
-          "5% toename in trainingssnelheid",
-          "5% meer prijsgeld",
-          "5% aanvals- en verdedigingsverhoging",
-          "10% korting op in-game aankopen gedurende de eerste 24 maanden"
-        ]
-      },
-      {
-        "title": "Leidende cadet",
-        "rewards": [
-          "Jouw naam zal verschijnen in de eindtitels van het spel onder de titel \"Leidende cadet\"",
-          "Je ontvangt $170 USD credits te gebruiken voor in-game aankopen (kan niet worden omgezet in contante uitbetalingen)",
-          "Je ontvangt wekelijkse updates over het spel via e-mail",
-          "Je kunt deelnemen aan de Discord-chat.",
-          "Als Leidende cadet ontvang je een bonus van 10% toename in resourceverzameling",
-          "5% toename in trainingssnelheid",
-          "5% meer prijsgeld",
-          "5% aanvals- en verdedigingsverhoging",
-          "10% korting op in-game aankopen gedurende de eerste 24 maanden"
-        ]
-      },
-      {
-        "title": "Leidende cadet speciale klasse",
-        "rewards": [
-          "Jouw naam zal verschijnen in de eindtitels van het spel onder de titel \"Leidende cadet speciale klasse\"",
-          "Je ontvangt $240 USD credits te gebruiken voor in-game aankopen (kan niet worden omgezet in contante uitbetalingen)",
-          "Je ontvangt wekelijkse updates over het spel via e-mail",
-          "Je kunt deelnemen aan de Discord-chat.",
-          "Als Leidende cadet speciale klasse ontvang je een bonus van 10% toename in resourceverzameling",
-          "5% toename in trainingssnelheid",
-          "5% meer prijsgeld",
-          "5% aanvals- en verdedigingsverhoging",
-          "15% korting op in-game aankopen gedurende de eerste 24 maanden"
-        ]
-      },
-      {
-        "title": "Senior cadet",
-        "rewards": [
-          "Jouw naam zal verschijnen in de eindtitels van het spel onder de titel \"Leidende cadet speciale klasse\"",
-          "Je ontvangt $390 USD credits te gebruiken voor in-game aankopen (kan niet worden omgezet in contante uitbetalingen)",
-          "Je ontvangt wekelijkse updates over het spel via e-mail",
-          "Je kunt deelnemen aan de Discord-chat.",
-          "Als Senior cadet ontvang je een bonus van 15% toename in resourceverzameling",
-          "5% toename in trainingssnelheid",
-          "10% toename in gezondheid",
-          "5% meer prijsgeld",
-          "5% aanvals- en verdedigingsverhoging",
-          "20% korting op in-game aankopen gedurende de eerste 12 maanden",
-          "10% korting op in-game aankopen voor een tweede 12 maanden",
-          "#Kies om slechts $250 te doneren om onze missie te steunen, als je wilt, zal jouw naam verschijnen in de eindtitels van het spel onder de titel \"Ingeschreven ere senior speciale klasse\""
-        ]
-      },
-      {
-        "title": "Senior cadet speciale klasse",
-        "rewards": [
-          "Jouw naam zal verschijnen in de eindtitels van het spel onder de titel \"Senior cadet speciale klasse\"",
-          "Je ontvangt $440 USD credits te gebruiken voor in-game aankopen (kan niet worden omgezet in contante uitbetalingen)",
-          "Je ontvangt wekelijkse updates over het spel via e-mail",
-          "Je kunt deelnemen aan de Discord-chat.",
-          "Als Senior cadet speciale klasse ontvang je een bonus van 15% toename in resourceverzameling",
-          "1,0% hogere kans op het verkrijgen van NFA's of zeldzame items gedurende de eerste 12 maanden",
-          "10% toename in trainingssnelheid",
-          "10% toename in gezondheid",
-          "10% meer prijsgeld",
-          "5% aanvals- en verdedigingsverhoging",
-          "5% grotere aanvalscapaciteit",
-          "20% korting op in-game aankopen gedurende de eerste 12 maanden",
-          "10% korting op in-game aankopen voor een tweede 12 maanden"
-        ]
-      },
-      {
-        "title": "Vluchtcadet",
-        "rewards": [
-          "Jouw naam zal verschijnen in de eindtitels van het spel onder de titel \"Vluchtcadet\"",
-          "Je ontvangt $550 USD credits te gebruiken voor in-game aankopen (kan niet worden omgezet in contante uitbetalingen)",
-          "Je ontvangt wekelijkse updates over het spel via e-mail",
-          "Je kunt deelnemen aan de Discord-chat.",
-          "Als Vluchtluitenant ontvang je een bonus van 15% toename in resourceverzameling",
-          "1,5% hogere kans op het verkrijgen van NFA's of zeldzame items gedurende de eerste 12 maanden",
-          "15% toename in trainingssnelheid",
-          "15% toename in gezondheid",
-          "10% meer prijsgeld",
-          "5% aanvals- en verdedigingsverhoging",
-          "5% grotere aanvalscapaciteit",
-          "1 mega resourcepakket",
-          "1 NFA Superieure teamspecialist die schip- en racingbonussen biedt, plus een gegarandeerde minimale terugkoop van $150",
-          "20% korting op in-game aankopen gedurende de eerste 12 maanden",
-          "10% korting op in-game aankopen voor een tweede 12 maanden"
-        ]
-      },
-      {
-        "title": "Vluchtluitenant",
-        "rewards": [
-          "Jouw naam zal verschijnen in de eindtitels van het spel onder de titel \"Vluchtluitenant\"",
-          "Je ontvangt $6800 USD credits te gebruiken voor in-game aankopen (kan niet worden omgezet in contante uitbetalingen)",
-          "Je ontvangt wekelijkse updates over het spel via e-mail",
-          "Je kunt deelnemen aan de Discord-chat.",
-          "Als Vluchtluitenant ontvang je een bonus van 20% toename in resourceverzameling",
-          "1,5% hogere kans op het verkrijgen van NFA's of zeldzame items gedurende de eerste 12 maanden",
-          "20% toename in trainingssnelheid",
-          "15% toename in gezondheid",
-          "15% meer prijsgeld",
-          "8% aanvals- en verdedigingsverhoging",
-          "7% grotere aanvalscapaciteit",
-          "Bonus racingonderdelen",
-          "1 mega resourcepakket",
-          "1 buitenwereldse havenpas",
-          "1 NFA Superieure teamspecialist die schip- en racingbonussen biedt, plus een gegarandeerde minimale terugkoop van $150",
-          "20% korting op in-game aankopen gedurende de eerste 12 maanden",
-          "10% korting op in-game aankopen voor een tweede 12 maanden",
-          "#Kies om slechts $500 te doneren om onze missie te steunen, en als je wilt, zal jouw naam verschijnen in de eindtitels van het spel onder de titel \"Ingeschreven ere vluchtluitenant\""
-        ]
-      },
-      {
-        "title": "Vluchtluitenant speciale klasse",
-        "rewards": [
-          "Jouw naam zal verschijnen in de eindtitels van het spel onder de titel \"Vluchtluitenant speciale klasse\"",
-          "Je ontvangt $1.050 USD credits te gebruiken voor in-game aankopen (kan niet worden omgezet in contante uitbetalingen)",
-          "Je ontvangt wekelijkse updates over het spel via e-mail",
-          "Je kunt deelnemen aan de Discord-chat.",
-          "Als Vluchtluitenant speciale klasse ontvang je een bonus van 20% toename in resourceverzameling",
-          "1,5% hogere kans op het verkrijgen van NFA's of zeldzame items gedurende de eerste 12 maanden",
-          "1,0% hogere kans op het verkrijgen van NFA's of zeldzame items doorlopend",
-          "20% toename in trainingssnelheid",
-          "20% toename in gezondheid",
-          "15% meer prijsgeld",
-          "10% aanvals- en verdedigingsverhoging",
-          "7% grotere aanvalscapaciteit",
-          "Bonus racingonderdelen",
-          "1 mega resourcepakket",
-          "1 extra host avatars",
-          "1 buitenwereldse havenpas",
-          "1 NFA Superieure teamspecialist die schip- en racingbonussen biedt, plus een gegarandeerde minimale terugkoop van $150",
-          "20% korting op in-game aankopen gedurende de eerste 12 maanden",
-          "10% korting op in-game aankopen voor een tweede 12 maanden"
-        ]
-      },
-      {
-        "title": "Wingman",
-        "rewards": [
-          "Jouw naam zal verschijnen in de eindtitels van het spel onder de titel \"Wingman\"",
-          "Je ontvangt $1.480 USD credits te gebruiken voor in-game aankopen (kan niet worden omgezet in contante uitbetalingen)",
-          "Je ontvangt wekelijkse updates over het spel via e-mail",
-          "Je kunt deelnemen aan de Discord-chat.",
-          "Als Wingman ontvang je een bonus van 25% toename in resourceverzameling",
-          "2,0% hogere kans op het verkrijgen van NFA's of zeldzame items gedurende de eerste 12 maanden",
-          "1,0% hogere kans op het verkrijgen van NFA's of zeldzame items doorlopend",
-          "25% toename in trainingssnelheid",
-          "20% toename in gezondheid",
-          "20% meer prijsgeld",
-          "10% aanvals- en verdedigingsverhoging",
-          "8% grotere aanvalscapaciteit",
-          "Bonus racingonderdelen",
-          "1 mega resourcepakket",
-          "1 mega kristalpakket",
-          "1 extra host avatars",
-          "1 buitenwereldse havenpas",
-          "2 NFA Superieure teamspecialisten die schip- en racingbonussen bieden, plus een gegarandeerde minimale terugkoop van $150 elk",
-          "20% korting op in-game aankopen gedurende de eerste 12 maanden",
-          "Ontvang doorlopend nog eens 10% korting op aankopen in het spel/de spellen",
-          "#Kies om slechts $1.000 te doneren om onze missie te steunen, en als je wilt, zal jouw naam verschijnen in de eindtitels van het spel onder de titel \"Ingeschreven ere wingman\""
-        ]
-      },
-      {
-        "title": "Senior wingman klasse",
-        "rewards": [
-          "Jouw naam zal verschijnen in de eindtitels van het spel onder de titel \"Senior wingman klasse\"",
-          "Je ontvangt $2.200 USD credits te gebruiken voor in-game aankopen (kan niet worden omgezet in contante uitbetalingen)",
-          "Je ontvangt wekelijkse updates over het spel via e-mail",
-          "Je kunt deelnemen aan de Discord-chat.",
-          "Als Senior wingman klasse ontvang je een bonus van 25% toename in resourceverzameling",
-          "3,0% hogere kans op het verkrijgen van NFA's of zeldzame items gedurende de eerste 12 maanden",
-          "1,5% hogere kans op het verkrijgen van NFA's of zeldzame items doorlopend",
-          "30% toename in trainingssnelheid",
-          "25% toename in gezondheid",
-          "20% meer prijsgeld",
-          "15% aanvals- en verdedigingsverhoging",
-          "10% grotere aanvalscapaciteit",
-          "1 extra teleportatieplaats voor aanvallen/verdedigen",
-          "Bonus racingonderdelen",
-          "1 mega resourcepakket",
-          "1 mega kristalpakket",
-          "1 extra host avatars",
-          "1 buitenwereldse havenpas",
-          "2 NFA Superieure teamspecialisten die schip- en racingbonussen bieden, plus een gegarandeerde minimale terugkoop van $150 elk",
-          "20% korting op in-game aankopen gedurende de eerste 12 maanden",
-          "Ontvang doorlopend nog eens 10% korting op aankopen in het spel/de spellen"
-        ]
-      },
-      {
-        "title": "Technisch officier",
-        "rewards": [
-          "Jouw naam zal verschijnen in de eindtitels van het spel onder de titel \"Technisch officier\"",
-          "Je ontvangt $2.900 USD credits te gebruiken voor in-game aankopen (kan niet worden omgezet in contante uitbetalingen)",
-          "Je ontvangt wekelijkse updates over het spel via e-mail",
-          "Je kunt deelnemen aan de Discord-chat.",
-          "Als Technisch officier ontvang je een bonus van 25% toename in resourceverzameling",
-          "3,5% hogere kans op het verkrijgen van NFA's of zeldzame items gedurende de eerste 12 maanden",
-          "2,0% hogere kans op het verkrijgen van NFA's of zeldzame items doorlopend",
-          "30% toename in trainingssnelheid",
-          "25% toename in gezondheid",
-          "25% meer prijsgeld",
-          "15% aanvals- en verdedigingsverhoging",
-          "10% grotere aanvalscapaciteit",
-          "1 extra teleportatieplaats voor aanvallen/verdedigen",
-          "Bonus racingonderdelen",
-          "2 mega resourcepakketten",
-          "1 mega kristalpakket",
-          "2 extra host avatars",
-          "2 buitenwereldse havenpassen",
-          "3 NFA Superieure teamspecialisten die schip- en racingbonussen bieden, plus een gegarandeerde minimale terugkoop van $150 elk",
-          "25% korting op in-game aankopen gedurende de eerste 12 maanden",
-          "Ontvang doorlopend nog eens 20% korting op aankopen in het spel/de spellen",
-          "Gepersonaliseerde avatar gemodelleerd naar de donor, verschijnt door het hele spel",
-          "Inkomstendeling! Deel in maximaal 2,5% winstpool gegenereerd door de verkoop van in-game pakketten en NFA's",
-          "Exclusieve ontwikkelaarstoegang met maandelijkse privé-updates over het spel, de ontwikkeling, plus mogelijkheden om feedback te geven",
-          "Exclusief Quest-racer-ontwerp voor gebruik in het spel",
-          "Honkbalstijl verzamelkaart van jouw exclusieve questracer, naar je gestuurd met een waarderingsbrief"
-        ]
-      },
-      {
-        "title": "Teamspecialist",
-        "rewards": [
-          "Jouw naam zal verschijnen in de eindtitels van het spel onder de titel \"Teamspecialist\"",
-          "Je ontvangt $3.300 USD credits te gebruiken voor in-game aankopen (kan niet worden omgezet in contante uitbetalingen)",
-          "Je ontvangt wekelijkse updates over het spel via e-mail",
-          "Je kunt deelnemen aan de Discord-chat.",
-          "Als Teamspecialist ontvang je een bonus van 30% toename in resourceverzameling",
-          "5% hogere kans op het verkrijgen van NFA's of zeldzame items gedurende de eerste 12 maanden",
-          "2,5% hogere kans op het verkrijgen van NFA's of zeldzame items doorlopend",
-          "30% toename in trainingssnelheid",
-          "30% toename in gezondheid",
-          "25% meer prijsgeld",
-          "15% aanvals- en verdedigingsverhoging",
-          "10% grotere aanvalscapaciteit",
-          "1 extra teleportatieplaats voor aanvallen/verdedigen",
-          "Bonus racingonderdelen",
-          "3 mega resourcepakketten",
-          "1 mega kristalpakket",
-          "2 extra host avatars",
-          "2 buitenwereldse havenpassen",
-          "2 NFA Superieure teamspecialisten die schip- en racingbonussen bieden, plus een gegarandeerde minimale terugkoop van $150 elk",
-          "1 NFA Uitzonderlijke teamspecialist die schip- en racingbonussen biedt, plus een gegarandeerde minimale terugkoop van $400 elk",
-          "25% korting op in-game aankopen gedurende de eerste 24 maanden",
-          "Ontvang doorlopend nog eens 20% korting op aankopen in het spel/de spellen",
-          "Gepersonaliseerde avatar gemodelleerd naar de donor, verschijnt door het hele spel",
-          "Inkomstendeling! Deel in maximaal 2,5% winstpool gegenereerd door de verkoop van in-game pakketten en NFA's",
-          "Exclusieve ontwikkelaarstoegang met maandelijkse privé-updates over het spel, de ontwikkeling, plus mogelijkheden om feedback te geven",
-          "Exclusief Quest-racer-ontwerp voor gebruik in het spel",
-          "Honkbalstijl verzamelkaart van jouw exclusieve questracer, naar je gestuurd met een waarderingsbrief",
-          "#Kies om slechts $2.500 te doneren om onze missie te steunen en als je wilt, zal jouw naam verschijnen in de eindtitels van het spel onder de titel \"Ingeschreven ere teamspecialist\""
-        ]
-      },
-      {
-        "title": "Teamspecialist majoor",
-        "rewards": [
-          "Jouw naam zal verschijnen in de eindtitels van het spel onder de titel \"Teamspecialist majoor\"",
-          "Je ontvangt $6.500 USD credits te gebruiken voor in-game aankopen (kan niet worden omgezet in contante uitbetalingen)",
-          "Je ontvangt wekelijkse updates over het spel via e-mail",
-          "Je kunt deelnemen aan de Discord-chat.",
-          "Als Teamspecialist majoor ontvang je een bonus van 35% toename in resourceverzameling/mijnbouw",
-          "7% hogere kans op het verkrijgen van NFA's of zeldzame items gedurende de eerste 12 maanden",
-          "3,5% hogere kans op het verkrijgen van NFA's of zeldzame items doorlopend",
-          "35% toename in trainingssnelheid",
-          "30% toename in gezondheid",
-          "30% meer prijsgeld",
-          "20% aanvals- en verdedigingsverhoging",
-          "10% grotere aanvalscapaciteit",
-          "1 extra teleportatieplaats voor aanvallen/verdedigen",
-          "Bonus racingonderdelen",
-          "4 mega resourcepakketten",
-          "1 mega kristalpakket",
-          "2 extra host avatars",
-          "2 buitenwereldse havenpassen",
-          "3 NFA Superieure teamspecialisten die schip- en racingbonussen bieden, plus een gegarandeerde minimale terugkoop van $150 elk",
-          "1 NFA Uitzonderlijke teamspecialist die schip- en racingbonussen biedt, plus een gegarandeerde minimale terugkoop van $400 elk",
-          "25% korting op in-game aankopen gedurende de eerste 24 maanden",
-          "Ontvang doorlopend nog eens 20% korting op aankopen in het spel/de spellen",
-          "Gepersonaliseerde avatar gemodelleerd naar de donor, verschijnt door het hele spel",
-          "Inkomstendeling! Deel in maximaal 5% winstpool gegenereerd door de verkoop van in-game pakketten en NFA's",
-          "Exclusieve ontwikkelaarstoegang met maandelijkse privé-updates over het spel, de ontwikkeling, plus mogelijkheden om feedback te geven",
-          "Exclusief Quest-racer-ontwerp voor gebruik in het spel",
-          "Honkbalstijl verzamelkaart van jouw exclusieve questracer, naar je gestuurd met een waarderingsbrief"
-        ]
-      },
-      {
-        "title": "Commandar Elite",
-        "rewards": [
-          "Jouw naam zal verschijnen in de eindtitels van het spel onder de titel \"Commandar Elite\"",
-          "Je ontvangt $9.000 USD credits te gebruiken voor in-game aankopen",
-          "Je ontvangt wekelijkse updates over het spel via e-mail",
-          "Je kunt deelnemen aan de Discord-chat.",
-          "Als Commander Elite ontvang je een bonus van 35% toename in resourceverzameling/mijnbouw",
-          "7,5% hogere kans op het verkrijgen van NFA's of zeldzame items gedurende de eerste 12 maanden",
-          "4% hogere kans op het verkrijgen van NFA's of zeldzame items doorlopend",
-          "40% toename in trainingssnelheid",
-          "35% toename in gezondheid",
-          "30% meer prijsgeld",
-          "20% aanvals- en verdedigingsverhoging",
-          "20% grotere aanvalscapaciteit",
-          "2 extra teleportatieplaatsen voor aanvallen/verdedigen",
-          "Bonus racingonderdelen",
-          "4 mega resourcepakketten",
-          "2 mega kristalpakketten",
-          "2 extra host avatars",
-          "3 buitenwereldse havenpassen",
-          "4 NFA Superieure teamspecialisten die schip- en racingbonussen bieden, plus een gegarandeerde minimale terugkoop van $150 elk",
-          "1 NFA Uitzonderlijke teamspecialist die schip- en racingbonussen biedt, plus een gegarandeerde minimale terugkoop van $400 elk",
-          "30% korting op in-game aankopen gedurende de eerste 12 maanden",
-          "25% korting op in-game aankopen voor de tweede 12 maanden",
-          "Ontvang doorlopend nog eens 20% korting op aankopen in het spel/de spellen",
-          "Gepersonaliseerde avatar gemodelleerd naar de donor, verschijnt door het hele spel",
-          "Inkomstendeling! Deel in maximaal 5% winstpool gegenereerd door de verkoop van in-game pakketten en NFA's",
-          "Exclusieve ontwikkelaarstoegang met maandelijkse privé-updates over het spel, de ontwikkeling, plus mogelijkheden om feedback te geven",
-          "Exclusief Quest-racer-ontwerp voor gebruik in het spel",
-          "Honkbalstijl verzamelkaart van jouw exclusieve questracer, naar je gestuurd met een waarderingsbrief"
-        ]
-      },
-      {
-        "title": "Over Lord",
-        "rewards": [
-          "Jouw naam zal verschijnen in de eindtitels van het spel onder de titel \"Over Lord\"",
-          "Je ontvangt $15.000 USD credits te gebruiken voor in-game aankopen (kan niet worden omgezet in contante uitbetalingen)",
-          "Je ontvangt wekelijkse updates over het spel via e-mail",
-          "Je kunt deelnemen aan de Discord-chat.",
-          "Als Overlord ontvang je een bonus van 40% toename in resourceverzameling/mijnbouw",
-          "10% hogere kans op het verkrijgen van NFA's of zeldzame items gedurende de eerste 12 maanden",
-          "5% hogere kans op het verkrijgen van NFA's of zeldzame items doorlopend",
-          "50% toename in trainingssnelheid",
-          "40% toename in gezondheid",
-          "40% meer prijsgeld",
-          "25% aanvals- en verdedigingsverhoging",
-          "25% grotere aanvalscapaciteit",
-          "2 extra teleportatieplaatsen voor aanvallen/verdedigen",
-          "Bonus racingonderdelen",
-          "6 mega resourcepakketten",
-          "3 mega kristalpakketten",
-          "2 extra host avatars",
-          "4 buitenwereldse havenpassen",
-          "4 NFA Superieure teamspecialisten die schip- en racingbonussen bieden, plus een gegarandeerde minimale terugkoop van $150 elk",
-          "2 NFA Legendarische teamspecialisten die schip- en racingbonussen bieden, plus een gegarandeerde minimale terugkoop van $650 elk",
-          "1 NFA Epische teamspecialist die schip- en racingbonussen biedt, plus een gegarandeerde minimale terugkoop van $1000 elk",
-          "40% korting op in-game aankopen gedurende de eerste 12 maanden",
-          "30% korting op in-game aankopen voor de tweede 12 maanden",
-          "Ontvang nog eens 20% korting op aankopen in het spel/de spellen zolang je betrokken bent bij het spel",
-          "Gepersonaliseerde avatar gemodelleerd naar de donor, verschijnt door het hele spel",
-          "Inkomstendeling! Deel in maximaal 5% winstpool gegenereerd door de verkoop van in-game pakketten en NFA's",
-          "Exclusieve ontwikkelaarstoegang met maandelijkse privé-updates over het spel, de ontwikkeling, plus mogelijkheden om feedback te geven",
-          "Exclusief Quest-racer-ontwerp voor gebruik in het spel",
-          "Honkbalstijl verzamelkaart van jouw exclusieve questracer, naar je gestuurd met een waarderingsbrief"
-        ]
-      }
-    ]
+    "close": "Sluiten"
   },
   "dashboard": {
     "mobileNotice": {

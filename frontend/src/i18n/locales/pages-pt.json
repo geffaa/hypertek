@@ -12,7 +12,7 @@
       "three-worlds": "02  Os Três Mundos",
       "technology": "03  Tecnologia",
       "nfa": "04  Ativos Não-Fungíveis",
-      "hyperbucks": "05  Economia HyperBucks",
+      "hyperbucks": "05  Gems",
       "marketplace": "06  Mercado",
       "roadmap": "07  Roteiro",
       "conclusion": "08  Conclusão"
@@ -29,7 +29,7 @@
     "docs": {
       "tos": "Termos de Serviço",
       "api": "Termos de Serviço da API",
-      "packs": "Termos de Serviço de Pacotes",
+      "packs": "Termos dos pacotes",
       "privacy": "Política de Privacidade",
       "copy": "Política de Direitos Autorais",
       "tm": "Política de Marca Registrada",
@@ -127,7 +127,7 @@
       "2": "Quão animado você está com um universo onde três jogos completos estão conectados em uma só experiência?",
       "3": "Qual parte do HyperTek 100 te interessa mais?",
       "4": "O que tornaria o HyperTek 100 um jogo 'obrigatório' para você?",
-      "5": "Você consideraria apoiar este projeto quando abrirmos nossa campanha de crowdfunding?",
+      "5": "Você teria interesse no lançamento de acesso antecipado de itens de edição limitada?",
       "6": "Siga-nos no X"
     },
     "nameLabel": "Seu Nome",
@@ -158,7 +158,7 @@
     "unlisted": "Não Listado",
     "backToMarketplace": "Mercado",
     "samplePreviewTitle": "Prévia de Amostra do Mercado",
-    "samplePreviewDesc": "Os itens abaixo são prévias de amostra mostrando os tipos de ativos digitais que estarão disponíveis. Itens reais com arte única e propriedade verificada por blockchain estarão disponíveis no lançamento.",
+    "samplePreviewDesc": "Os itens abaixo são prévias de exemplo dos tipos de itens digitais que poderão estar disponíveis. Os itens reais, com arte única e propriedade verificada na blockchain, poderão estar disponíveis no lançamento.",
     "noItemsFound": "Nenhum item encontrado nesta categoria",
     "preview": "Visualizar",
     "buyNow": "Comprar Agora",
@@ -182,14 +182,14 @@
     "error": "Desculpe, não foi possível obter uma resposta agora. Tente novamente ou entre em contato com nossa equipe de suporte.",
     "peek": {
       "0": "Precisa de ajuda? Pergunte-me qualquer coisa!",
-      "1": "Dúvidas sobre HyperBucks?",
+      "1": "Dúvidas sobre Gems?",
       "2": "Curioso sobre como os leilões funcionam?"
     },
     "shortcuts": {
-      "earnLabel": "Ganhar HyperBucks",
-      "earnText": "Como ganho HyperBucks?",
-      "cashOutLabel": "Sacar HB",
-      "cashOutText": "Como saco meus HyperBucks?",
+      "earnLabel": "Obter Gems",
+      "earnText": "Como obtenho Gems?",
+      "cashOutLabel": "Valor de troca",
+      "cashOutText": "Como funciona o Programmatic Trade-In Value?",
       "auctionsLabel": "Como os Leilões Funcionam",
       "auctionsText": "Como funcionam os leilões?",
       "gamesLabel": "Jogos Disponíveis",
@@ -263,7 +263,8 @@
       "trade": "Comércio",
       "auction": "Leilão",
       "questing": "Missão",
-      "bounty": "Recompensa"
+      "bounty": "Recompensa",
+      "forHire": "Para alugar"
     },
     "categories": {
       "all": "Todos",
@@ -349,7 +350,7 @@
       "playerLabel": "\nJogador\n",
       "platformLabel": "\nPlataforma\n",
       "platLabel": "\nPlat\n",
-      "notePayouts": "\nMissões com cargas combinadas serão pagas usando os valores da tabela separada.\n",
+      "notePayouts": "Missões com cargas combinadas usam as recompensas da tabela separada.",
       "notePlanet": "\nOs dados do planeta serão sincronizados quando os jogos começarem.\n",
       "dailySlots": "\nSlots de missões diárias\n",
       "used": "\nusado\n",
@@ -383,8 +384,8 @@
       "colSelling": "\nVendendo\n",
       "colBuying": "\nComprando\n",
       "colTrading": "\nNegociação\n",
-      "colOnHire": "\nContratado\n",
-      "colHiring": "\nContratação\n",
+      "colOnHire": "Alugado",
+      "colHiring": "Alugando",
       "groupMarketplace": "\nMERCADO\n",
       "groupAuction": "\nLEILÃO"
     }
@@ -397,7 +398,7 @@
       "myCollections": "Minhas coleções",
       "transactions": "Transações",
       "offers": "Ofertas",
-      "hyperBucks": "HiperBucks",
+      "hyperBucks": "Gems",
       "earnings": "Ganhos",
       "support": "Apoiar",
       "signOut": "Sair"
@@ -436,7 +437,7 @@
       "transactions": "Transações",
       "transactionsDesc": "Histórico de pagamentos",
       "withdraw": "Retirar",
-      "withdrawDesc": "Retire seu saldo HB"
+      "withdrawDesc": "Retire o valor das suas vendas no marketplace"
     },
     "transactions": {
       "title": "Histórico de transações",
@@ -467,7 +468,7 @@
       "noSentOffersHint": "Faça uma oferta em qualquer item do Marketplace",
       "colItem": "Item",
       "colYourOffer": "Sua oferta",
-      "colFloorPrice": "Preço mínimo",
+      "colFloorPrice": "Menor preço",
       "colOfferDuration": "Duração da oferta",
       "colStatus": "Status",
       "colAction": "Ação",
@@ -638,11 +639,10 @@
       }
     },
     "hyperbucks": {
-      "title": " HyperBucks ",
-      "subtitle": " 250 HB = $1 USD · taxa fixa ",
+      "title": "Gems",
+      "subtitle": "Compre Gems para compras no jogo",
       "currentBalance": " Saldo Atual ",
       "tabTopUp": " Recarga ",
-      "tabCashout": " Saque ",
       "success": {
         "title": " Recarga realizada com sucesso! ",
         "added": " adicionado à sua conta.",
@@ -652,30 +652,24 @@
       },
       "topup": {
         "amountLabel": " Valor (USD) ",
-        "hyperBucks": " HyperBucks ",
+        "hyperBucks": "Gems",
         "preparing": " Preparando... ",
         "proceed": " Prossiga para o pagamento ",
         "enterAmount": " Insira um valor para continuar ",
-        "secured": " Garantido por Stripe · 250 HB = $1 USD · min $1 ",
+        "secured": "Protegido por Stripe · mín. $1",
         "quickSelect": " Seleção Rápida ",
         "paying": " Pagando ",
         "processing": " Processando... ",
-        "pay": " Pagamento "
+        "pay": " Pagamento ",
+        "rate": "Mín. $1 · Gems são apenas para compras no jogo"
       },
       "cashout": {
-        "amountLabel": " Valor (HB) ",
-        "minUsdc": " Min 250 HB ",
-        "minBank": " Min 2500 HB ",
         "receiveVia": " Receba via ",
         "usdcWallet": " Carteira USDC ",
-        "usdcMin": " Min 250 HB · ~$0,01 gás ",
         "bankAccount": " Conta bancária ",
-        "bankMin": " Min 2500 HB ($10) · dados bancários necessários ",
         "addBank": " Adicione detalhes bancários no perfil → ",
         "noWallet": " Nenhuma carteira conectada ",
         "sendingOtp": " Enviando OTP... ",
-        "toUsdc": " Saque para carteira USDC ",
-        "toBank": " Saque para conta bancária ",
         "kycNote": " Conclua a verificação de identidade para continuar "
       },
       "otp": {
@@ -686,7 +680,6 @@
         "bankAccount": " Conta bancária ",
         "label": " Código OTP ",
         "processing": " Processando... ",
-        "confirm": " Confirmar saque ",
         "sending": " Enviando... ",
         "resend": " Reenviar código "
       },

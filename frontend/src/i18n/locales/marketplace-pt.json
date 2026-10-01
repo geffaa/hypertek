@@ -9,7 +9,7 @@
       "auctions": "Leilões",
       "trades": "Trocas",
       "quests": "Missões",
-      "hire": "Contratação",
+      "hire": "Para alugar",
       "bounty": "Recompensas"
     },
     "banner": {
@@ -31,23 +31,23 @@
       "facts": [
         {
           "label": "NFA",
-          "desc": "Ativo exclusivo da Hypertek. Maiores bônus no jogo. Valor mínimo garantido de recompra que cresce a cada venda."
+          "desc": "Item exclusivo da Hyper Tek. Os maiores bônus no jogo. Programmatic Trade-In Value que cada revenda aumenta."
         },
         {
           "label": "NFC",
-          "desc": "Criado pela Hypertek ou jogadores licenciados. Bônus no jogo incluídos. Recompra mínima garantida."
+          "desc": "Criado pela Hyper Tek ou por jogadores licenciados. Bônus no jogo incluídos. Programmatic Trade-In Value incluído."
         },
         {
           "label": "NFT",
-          "desc": "Colecionável criado pelo jogador. Sem bônus no jogo. Sem garantia de recompra. Negociável no mercado."
+          "desc": "Colecionável criado por jogadores. Sem bônus no jogo. Sem valor de troca. Negociável no marketplace."
         },
         {
           "label": "Comissão",
-          "desc": "A taxa da plataforma varia conforme o anúncio. Revendas: vendedor 86%, royalty do artista 2%, +5% para buyback, plataforma 7%."
+          "desc": "A taxa da plataforma varia por anúncio. Divisão das revendas: vendedor 86%, royalty do artista 2%, 5% para a alocação de troca do item, plataforma 7%."
         },
         {
-          "label": "Crescimento da Recompra",
-          "desc": "+5% de cada preço de revenda é adicionado ao valor mínimo de recompra do ativo. Só cresce."
+          "label": "Alocação de troca",
+          "desc": "5% do preço de cada revenda é somado à alocação de troca do item. O valor devolvido em uma troca segue o Tiered Loyalty Return Schedule e é sempre menor do que o valor alocado."
         },
         {
           "label": "Carteira Custodial",
@@ -67,7 +67,8 @@
             "NFCs (Non-Fungible Characters) são itens de jogadores licenciados com bônus no jogo e recompra.",
             "NFTs (Non-Fungible Tokens) são colecionáveis criados pelo usuário — skins, armas e mais."
           ],
-          "cta": "Aprender o Básico"
+          "cta": "Aprender o Básico",
+          "intro": "NFAs/NFCs/NFTs são obras de arte digitais. NFAs e NFCs têm bônus no jogo e um Programmatic Trade-In Value."
         },
         {
           "label": "O Mercado",
@@ -110,21 +111,21 @@
           "cta": "Explorar Missões"
         },
         {
-          "label": "Contratação",
-          "tagline": "Alugue ativos ou ganhe com os seus",
+          "label": "Para alugar",
+          "tagline": "Alugue seus itens em troca de recompensas no jogo",
           "details": [
             "Alugue especialistas ou equipamentos poderosos para uma única missão sem comprar.",
-            "Liste seus próprios ativos ociosos para aluguel e ganhe renda passiva enquanto está ausente.",
+            "Os jogadores poderão alugar itens ociosos para outros jogadores em troca de recompensas no jogo que negociarem entre si.",
             "Durações flexíveis — acordos por hora, diários ou por missão."
           ],
-          "cta": "Explorar Contratação"
+          "cta": "Ver Para alugar"
         },
         {
           "label": "Recompensas",
           "tagline": "Caçe alvos, reivindique recompensas, lidere o ranking",
           "details": [
             "Aceite recompensas postadas por outros jogadores ou pelo sistema para ganhar criptomoedas.",
-            "Suba no ranking de recompensas para desbloquear títulos exclusivos e bônus de pagamento.",
+            "Suba no ranking de caçadas para desbloquear títulos exclusivos e recompensas no jogo.",
             "Poste suas próprias recompensas para recrutar jogadores habilidosos para seus objetivos."
           ],
           "cta": "Ver Recompensas"
@@ -136,7 +137,7 @@
       "subtitle": "Navegue por NFAs, NFCs e NFTs disponíveis para compra imediata — skins, armas, especialistas, naves espaciais e mais.",
       "filterAll": "Todos",
       "samplePreviewTitle": "Prévia de Amostra do Mercado",
-      "samplePreviewDesc": "Os itens abaixo são prévias de amostra mostrando os tipos de ativos digitais que estarão disponíveis no mercado HyperTek. Itens reais com arte única e propriedade verificada por blockchain estarão disponíveis no lançamento.",
+      "samplePreviewDesc": "Os itens abaixo são prévias de exemplo dos tipos de itens digitais que poderão estar disponíveis no marketplace da Hyper Tek. Os itens reais, com arte única e propriedade verificada na blockchain, poderão estar disponíveis no lançamento.",
       "noItems": "Nenhum item disponível ainda. Volte em breve.",
       "categories": {
         "skins": "Skins",
@@ -197,7 +198,7 @@
       },
       "preview": {
         "title": "Prévia de Recurso do Jogo",
-        "desc": "O sistema de leilão estará totalmente ativo no jogo no lançamento. Os itens mostrados aqui são amostras para demonstração a investidores/usuários."
+        "desc": "O sistema de leilões poderá entrar no ar no jogo no lançamento. Os itens mostrados aqui são exemplos apenas para visualização."
       },
       "card": {
         "currentBid": "Lance atual",
@@ -369,7 +370,7 @@
       "earnFromQuests": "Quer ganhar com missões? Jogue →",
       "moneyQuests": "Missões Monetárias (pool de 11%)",
       "resourceQuests": "Missões de Recursos (pool de 20%)",
-      "footerNote1": "# Missões com cargas combinadas serão pagas usando os valores da tabela separada.",
+      "footerNote1": "# Missões com cargas combinadas usam as recompensas da tabela separada.",
       "footerNote2": "# Dados dos planetas sincronizarão quando os jogos ficarem ativos.",
       "inGame": "No jogo",
       "open": "Aberta",
@@ -407,43 +408,43 @@
       }
     },
     "hire": {
-      "heading": "Contratação",
+      "heading": "Para alugar",
       "listings": "listagens",
       "listBtn": "Listar",
-      "forHireLabel": "Para Contratar",
-      "wantingToHire": "Quer Contratar",
+      "forHireLabel": "Para alugar",
+      "wantingToHire": "Procurando para alugar",
       "noListings": "Nenhuma listagem {{filter}}",
-      "lockedTitle": "Conteúdo de jogos HyperTek apenas para fins de exibição.",
-      "lockedDesc": "This is part of Hyper Tek's genuine 'Play to Earn' system, where players can earn real cash rewards, and or Materials/Resources.",
-      "forHireBadge": "PARA CONTRATAR",
-      "wantedBadge": "QUER CONTRATAR",
+      "lockedTitle": "O aluguel poderá ficar disponível se os jogos forem lançados.",
+      "lockedDesc": "Os jogadores poderão alugar itens para outros jogadores e receber recompensas no jogo que negociarem entre si, de acordo com as regras finais do jogo.",
+      "forHireBadge": "PARA ALUGAR",
+      "wantedBadge": "PROCURA-SE PARA ALUGAR",
       "price": "Preço",
       "maxDuration": "Duração Máxima",
-      "hireBtn": "Contratar",
+      "hireBtn": "Alugar",
       "fulfillBtn": "Cumprir Solicitação",
       "rules": {
         "durations": "8h · 1d · 3d · 1sem · 1mês",
         "cooldown": "Recarga: 2× duração do aluguel",
         "commission": "A comissão varia",
-        "payment": "Pague em Hyper Bucks ou Materiais"
+        "payment": "Recompensas no jogo negociadas entre jogadores"
       },
       "preview": {
         "title": "Prévia de Recurso do Jogo",
-        "desc": "O sistema de contratação estará totalmente ativo no jogo no lançamento. Os itens mostrados aqui são amostras para demonstração a investidores/usuários."
+        "desc": "O aluguel poderá entrar no ar no jogo no lançamento. Os itens mostrados aqui são exemplos apenas para visualização."
       },
       "hireModal": {
-        "hireTitle": "Contratar Especialista",
-        "fulfillTitle": "Cumprir Solicitação de Contratação",
-        "forHireBadge": "PARA CONTRATAR",
+        "hireTitle": "Alugar especialista",
+        "fulfillTitle": "Atender pedido de aluguel",
+        "forHireBadge": "PARA ALUGAR",
         "wantedBadge": "PROCURADO",
         "price": "Preço",
         "duration": "Duração",
-        "howHire": "Como a contratação funciona",
+        "howHire": "Como funciona o aluguel",
         "howFulfill": "Como cumprir uma solicitação",
-        "proceedHire": "Prosseguir com a Contratação",
+        "proceedHire": "Continuar para o aluguel",
         "offerFulfill": "Oferecer para Cumprir",
         "commission": "A comissão da plataforma varia · Recarga aplica-se após devolução",
-        "confirmHire": "Confirmar Contratação",
+        "confirmHire": "Confirmar aluguel",
         "confirmOffer": "Confirmar Oferta",
         "specialist": "Especialista",
         "payment": "Pagamento",
@@ -461,19 +462,19 @@
         "close": "Fechar"
       },
       "createModal": {
-        "listTitle": "Listar Para Contratar",
-        "postTitle": "Publicar Quer Contratar",
-        "forHireBtn": "Para Contratar",
-        "wantingBtn": "Quer Contratar",
+        "listTitle": "Anunciar para alugar",
+        "postTitle": "Publicar procura de aluguel",
+        "forHireBtn": "Para alugar",
+        "wantingBtn": "Procurando para alugar",
         "itemNameHire": "Nome do especialista / item *",
-        "itemNameWant": "O que você quer contratar *",
+        "itemNameWant": "O que você quer alugar *",
         "descPlaceholder": "Descrição",
         "categoryPlaceholder": "Categoria (opcional)",
         "paymentType": "Tipo de Pagamento",
-        "hyperBucks": "Hyper Bucks",
+        "hyperBucks": "Recompensa no jogo",
         "materials": "Materiais",
-        "amountLabel": "Valor (Hyper Bucks)",
-        "afterCommission": "Você recebe {{amount}} HB após a comissão da plataforma",
+        "amountLabel": "Recompensa no jogo",
+        "afterCommission": "Você recebe {{amount}} no jogo após a comissão da plataforma",
         "maxDuration": "Duração Máxima",
         "disclaimer": "A comissão varia · Recarga = 2× duração do aluguel após devolução",
         "listing": "Listando…",
@@ -508,7 +509,7 @@
         "postedBy": "Publicado Por",
         "claimedBy": "Reivindicado Por",
         "status": "Status",
-        "netHB": "{{amount}} HB líquido"
+        "netHB": "{{amount}} líquido"
       },
       "pagination": {
         "prev": "Anterior",
@@ -540,6 +541,20 @@
       "dashboardTitle": "Seu painel está bloqueado no momento, mas prepare-se; o lançamento oficial está chegando!",
       "desc": "Não deixe que isso o impeça de se cadastrar e mergulhar neste projeto incrível. Descubra os inúmeros benefícios e como o seu envolvimento pode impulsionar o sucesso! Junte-se a nós e torne-se um Hyper Tekken hoje!",
       "buttonLabel": "Abre no lançamento oficial"
+    },
+    "gameLock": {
+      "quests": {
+        "title": "As missões poderão ficar disponíveis se os jogos forem lançados.",
+        "desc": "Os jogadores poderão entregar itens a outros jogadores em troca de recompensas no jogo, de acordo com as regras finais do jogo."
+      },
+      "hire": {
+        "title": "O aluguel poderá ficar disponível se os jogos forem lançados.",
+        "desc": "Os jogadores poderão alugar itens para outros jogadores e receber recompensas no jogo que negociarem entre si, de acordo com as regras finais do jogo."
+      },
+      "bounty": {
+        "title": "As caçadas poderão ficar disponíveis se os jogos forem lançados.",
+        "desc": "As caçadas poderão oferecer apenas recompensas no jogo, de acordo com as regras finais do jogo."
+      }
     }
   },
   "musicPlayer": {
@@ -581,9 +596,9 @@
       "platform": "Plataforma",
       "noDesc": "Nenhuma descrição fornecida para este item.",
       "price": "Preço",
-      "minBuyback": "Garantia de recompra mínima",
+      "minBuyback": "Programmatic Trade-In Value",
       "reservePrice": "Preço de reserva",
-      "buybackNote": "Este ativo não pode ser vendido abaixo de seu valor mínimo de recompra.",
+      "buybackNote": "O preço de reserva não pode ser definido abaixo da alocação de troca deste item.",
       "networkNote": "USDC na Base · Base ETH necessário para gás (somente pagamentos com carteira)",
       "buyWithCard": "Compre com cartão",
       "makeOffer": "Faça uma oferta",

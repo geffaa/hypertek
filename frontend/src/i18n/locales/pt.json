@@ -87,19 +87,19 @@
     "highlights": [
       {
         "label": "Universo Interconectado",
-        "desc": "3 jogos — 1 economia e sistema de progressão compartilhados"
+        "desc": "3 jogos, um único sistema de progressão compartilhado"
       },
       {
         "label": "Propriedade Real",
-        "desc": "NFAs com recompra mínima garantida"
+        "desc": "NFA/NFC/NFTs com um Programmatic Trade-In Value"
       },
       {
-        "label": "Jogar para Ganhar",
-        "desc": "Cada ação contribui para suas recompensas no mundo real"
+        "label": "Play-to-Own",
+        "desc": "Cada item que você coleciona é seu, registrado na blockchain"
       },
       {
-        "label": "Pagamentos em Dinheiro",
-        "desc": "Convertendo moeda/recompensas do jogo em pagamentos em dinheiro"
+        "label": "Item Loyalty Program",
+        "desc": "Quanto mais tempo você mantém um item, maior é o nível de troca dele, sempre abaixo do valor alocado a ele"
       },
       {
         "label": "Progressão Vinculada",
@@ -119,12 +119,12 @@
   "homeMarket": {
     "featured": "Destaque",
     "sectionTitle": "Itens NFA Edição Limitada",
-    "buybackBadge": "Recompra Garantida em todos NFAs/NFCs/NFTs",
+    "buybackBadge": "Programmatic Trade-In Value em NFAs e NFCs",
     "urgency": "Aja rápido, uma vez que se esgotarem, não voltam!",
     "loading": "Carregando itens...",
     "empty": "Nenhum item listado ainda.",
     "price": "Preço",
-    "minBuyback": "Recompra Mínima",
+    "minBuyback": "Valor de troca",
     "buyNow": "Comprar Agora"
   },
   "gaming": {
@@ -175,15 +175,15 @@
       "aboutPageSubtitleSpan": "Construindo o futuro do gaming Web3.5.",
       "aboutHeroTitle1": "Reimaginando o Gaming.",
       "aboutHeroTitle2": "Impulsionado pela Web3.5.",
-      "aboutHeroDesc": "A Hyper Tek 100 é um ecossistema de jogos de próxima geração onde cada ativo é real, cada transação é on-chain e cada jogador é um verdadeiro acionista. Três jogos interligados. Uma economia partilhada. Construído para o futuro.",
+      "aboutHeroDesc": "Hyper Tek 100 é um projeto de jogos em desenvolvimento em que cada item é registrado na blockchain e pertence ao seu jogador. Estão planejados três jogos interligados, com um único sistema de progressão compartilhado.",
       "pillar1Title": "Tecnologia Web3.5",
       "pillar1Desc": "Ativos on-chain, propriedade real e um mercado transparente construído na Base.",
       "pillar2Title": "Valor Real de Ativos",
       "pillar2Desc": "Cada item do jogo é um ativo negociável. Jogue, ganhe e possua o seu progresso.",
       "pillar3Title": "Ecossistema Justo",
-      "pillar3Desc": "Divisões de comissões e mecanismos de recompra projetados para recompensar cada participante.",
+      "pillar3Desc": "Divisão transparente de comissões e um Programmatic Trade-In Value incorporado a cada item elegível.",
       "pillar4Title": "Participe",
-      "pillar4Desc": "De investidores iniciais a jogadores ativos. Múltiplos caminhos para se juntar ao universo Hyper Tek.",
+      "pillar4Desc": "De colecionadores a jogadores ativos, pode haver várias formas de entrar no universo Hyper Tek.",
       "aboutDiscoverBtn": "Descubra a Nossa História"
     }
   },
@@ -192,25 +192,25 @@
     "pageLinkSubtitle": "Roteiro, metas de financiamento, pacotes e como o seu apoio constrói o universo Hyper Tek.",
     "pageLinkCta": "Ver página",
     "tryGaming": "Experimente a interface de jogo",
-    "badge": "NFAs DE EDIÇÃO LIMITADA E PACOTES DE JOGO COM DESCONTO – AJA AGORA!",
+    "badge": "NFAs DE EDIÇÃO LIMITADA E PACOTES DE JOGO, DISPONÍVEIS ENQUANTO DURAR O ESTOQUE",
     "intro1": "Investimos estrategicamente mais de US$ 440.000 de financiamento pessoal e agora buscamos mais US$ 395.000 para concretizar este projeto inovador. Nosso objetivo é revolucionar os jogos ao proporcionar experiências emocionantes que enfrentam alguns dos desafios mais urgentes do setor. Com várias iniciativas de financiamento disponíveis, esta é a sua chance de fazer parte de algo verdadeiramente transformador.",
-    "intro2": "Antes de mais nada, estamos lançando vários itens Non-Fungible Asset (NFA) de Stage 1 extremamente raros, cada um oferecendo bônus dentro do jogo incomparáveis que NUNCA serão repetidos. Assim que esses itens se esgotarem ou atingirmos nossa meta de financiamento, quaisquer NFAs de edição limitada não cunhados restantes serão removidos do nosso site para sempre. Esta é uma garantia inabalável!",
-    "intro3": "Lembre-se, todo item Hyper Tek Non-Fungible Digital vem com uma recompra mínima garantida. Esses NFAs de edição limitada, que apresentam bônus significativos dentro do jogo—dos quais os mais altos nunca serão repetidos—aprimorarão sua experiência de jogo e a levarão a novos patamares.",
-    "intro4": "Se você é apaixonado pelo que viu ou leu sobre o Hyper Tek Project e quer se juntar a nós para remodelar a indústria de jogos, ou se é um investidor astuto em busca de uma oportunidade lucrativa, este é o seu momento. Garanta seus itens de disponibilidade limitada enquanto pode e torne-se parte integrante do próspero Ecossistema Hyper Tek. Não espere—uma vez esgotados, acabaram!",
-    "intro5": "Nossa segunda iniciativa envolve o lançamento de pacotes exclusivos em nosso próprio site, que planejamos listar em uma plataforma de crowdfunding. Ao fazer isso nós mesmos, economizamos cerca de 10% em taxas de crowdfunding e repassamos essa economia diretamente a você com um desconto total de 10%. Esta oferta está disponível por tempo limitado! Assim que listarmos esses pacotes em uma plataforma de crowdfunding como o Kickstarter, o preço com desconto não estará mais disponível.",
+    "intro2": "Estamos lançando um pequeno número de itens Non-Fungible Asset (NFA) da Fase 1. Cada um lista bônus no jogo que podem se aplicar se os jogos forem lançados, e não há planos de repetir os níveis de bônus da Fase 1. A oferta tem um limite fixo: quando esses itens se esgotarem, os NFAs de edição limitada restantes que não tiverem sido emitidos serão removidos do site.",
+    "intro3": "Os itens elegíveis da Hyper Tek têm um Programmatic Trade-In Value, mantido em um escrow na blockchain. Esses NFAs de edição limitada também listam bônus no jogo que podem se aplicar, de acordo com as regras finais do jogo, se os jogos forem lançados.",
+    "intro4": "Se você gostou do que viu do Projeto Hyper Tek e quer ter um desses itens limitados, a hora é agora. A oferta é limitada e, quando um item se esgota, ele não será emitido novamente.",
+    "intro5": "Nosso segundo lançamento é um conjunto de pacotes de jogo exclusivos vendidos diretamente em nosso próprio site, por um preço 10% menor do que aquele pelo qual poderão ser oferecidos em outros lugares mais tarde. Esse preço está disponível apenas por tempo limitado.",
     "keyPointsTitle": "Pontos-chave a lembrar:",
-    "intro6": "O primeiro NFT que lançamos foi vendido por impressionantes US$ 1,47 milhão, sem recompra mínima garantida ou bônus dentro do jogo! Esta é a sua chance de adquirir alguns dos NFTs mais raros do mundo, os Hyper Tek Non-Fungible Assets (HT NFAs), com recompra mínima garantida e os maiores bônus HT dentro do jogo disponíveis hoje. É o sonho de um investidor tornado realidade, mas apenas enquanto durarem os estoques.",
-    "intro7": "Embora a maioria dos jogos afirme oferecer \"Play to Earn\" (P2E), muitas vezes eles apenas oferecem tokens dentro do jogo para negociação. O Hyper Tek Project garante um \"P2E\" real, com mecânicas sólidas dentro do jogo, sustentadas por múltiplos fluxos de recompensa que podem ser convertidos em pagamentos reais em dinheiro. Prepare-se para experimentar o futuro dos jogos conosco!",
+    "intro6": "Os Hyper Tek Non-Fungible Assets (HT NFAs) são colecionáveis digitais com os maiores bônus no jogo da linha Hyper Tek, que podem se aplicar se os jogos forem lançados, além de um Programmatic Trade-In Value. Disponíveis apenas enquanto durar o estoque.",
+    "intro7": "Hyper Tek foi criado como Play-to-Own: os itens que você coleciona são seus, registrados na blockchain, com utilidade no jogo que pode se aplicar aos jogos planejados. Os itens são vendidos como colecionáveis digitais, não como uma forma de ganhar dinheiro.",
     "collectionsLabel": "Coleções",
-    "sectionTitle": "Pacotes por Nível de Doação",
+    "sectionTitle": "Pacotes de jogo de edição limitada",
     "discount": "Economize 10% do preço listado",
-    "donationTierLabel": "Nível de Doação",
-    "donationTierPrefix": "Nível de Doação:",
+    "donationTierLabel": "Nível do pacote",
+    "donationTierPrefix": "Nível do pacote:",
     "rewardsTitle": "Recompensas & Benefícios",
     "noteTitle": "Nota",
-    "commonNote": "Recompensas, Bônus e/ou Descontos por doar agora.\n\nNOTA: Além do voucher para uso em jogos ou compras selecionadas, todas as outras Recompensas, Bônus e/ou Descontos não podem ser combinados ou usados em conjunto com outras promoções.\n\nTodos os pacotes de doação incluirão créditos escritos no desenvolvimento do jogo.",
+    "commonNote": "Itens, bônus e descontos incluídos em cada pacote.\n\nNOTA: Com exceção das Gems incluídas para compras no jogo, bônus e descontos não podem ser combinados com nenhuma outra promoção.\n\nTodo pacote inclui seu nome nos créditos finais dos jogos, se os jogos forem lançados.",
     "specialConditionTitle": "Condição Especial",
-    "specialCondition": "Com o desenvolvimento e conclusão bem-sucedidos do(s) jogo(s), cada pessoa que doou receberá um valor mínimo maior do que seu investimento original em recompensas ou pacotes para uso no(s) jogo(s), e quaisquer bônus ou recompensas prometidos por doação serão entregues após o lançamento do(s) jogo(s).",
+    "specialCondition": "Os itens são vendidos no estado em que se encontram. Bônus no jogo, descontos e Gems listados em um pacote só podem se aplicar se os jogos forem lançados e estão sujeitos às regras finais do jogo. Não se promete nenhum lucro, pagamento ou retorno financeiro.",
     "imageComing": "Imagem em breve"
   },
   "dashboard": {

@@ -193,8 +193,8 @@
       "subtitle": "A experiência de corrida com veículos voadores mais intensa da galáxia,\nonde a habilidade recompensa e os campeões são forjados.",
       "intro": [
         "Hyper Racing é um jogo de corrida competitivo de alta adrenalina ambientado em mundos alienígenas, onde os jogadores constroem, aprimoram e pilotam veículos de corrida voadores totalmente personalizáveis pelos circuitos mais perigosos da galáxia. De formações rochosas flutuantes e tubos de lava vulcânicos a desertos áridos e passagens montanhosas, cada corrida é um teste de preparação, reflexos e estratégia.",
-        "Mas Hyper Racing é mais do que um jogo; é uma plataforma competitiva onde recompensas reais estão em jogo. Os melhores desempenhos podem entrar em eventos classificados e torneios com premiações em dinheiro real. Quanto melhor você corre, mais você ganha. Seja buscando glória no placar ou construindo um império de corridas, tudo o que você faz em Hyper Racing impulsiona você para frente.",
-        "Faça upgrade dos seus veículos de corrida do nariz à cauda. Recrute e suba de nível com sua equipe de pit. Contrate um gerente de pit que combine com sua filosofia de corrida. Em seguida, leve suas habilidades para além da pista — sua garagem de corrida é também o hangar da sua espaçonave pessoal, e cada habilidade que você desenvolve se transfere para o combate espacial em Hyper Quest e Senhor dos 7 Reinos."
+        "Hyper Racing está planejado como uma plataforma competitiva. Os melhores poderão participar de eventos ranqueados e torneios com recompensas no jogo em disputa. Seja em busca da glória no ranking ou construindo um império de corridas, tudo o que você faz no Hyper Racing foi pensado para fazer você avançar.",
+        "Melhore seus veículos de corrida de ponta a ponta. Recrute e evolua sua equipe de box. Recrute um chefe de box que combine com sua filosofia de corrida. Depois leve suas habilidades para além da pista: sua garagem de corrida também é o hangar da sua nave pessoal, e cada habilidade que você desenvolve vai para o combate espacial em Hyper Quest e Overlord of the 7 Realms."
       ],
       "introClose": "Continue lendo para descobrir como o jogo funciona, o que você pode ganhar e como sua carreira de corrida alimenta um universo inteiro de progressão.",
       "calloutLine1": "Corra para Ganhar. Ganhe para Evoluir.",
@@ -209,7 +209,7 @@
         {
           "num": "02",
           "title": "Monte Sua Equipe",
-          "body": "Corrida é um esporte coletivo. Recrute especialistas de pit que ofereçam bônus únicos: reabastecimento mais rápido, diagnósticos em tempo real, reparos emergenciais de casco durante a corrida e ajustes de desempenho entre voltas. Cada membro da equipe sobe de nível com a experiência, acumulando habilidades poderosas sobre os upgrades do seu veículo. Em seguida, contrate um gerente de pit para coordenar as operações, definir a estratégia de corrida e desbloquear impulsos de desempenho para toda a equipe que se compõem ao longo de uma temporada completa."
+          "body": "Corrida é um esporte de equipe. Recrute especialistas de box que trazem bônus únicos: reabastecimento mais rápido, diagnósticos em tempo real, reparos de emergência no casco no meio da corrida e ajustes de desempenho entre as voltas. Cada membro da equipe sobe de nível com a experiência, acumulando habilidades poderosas além das melhorias do seu veículo. Depois recrute um chefe de box para coordenar as operações, definir a estratégia de corrida e desbloquear ganhos de desempenho para toda a equipe que se acumulam ao longo de uma temporada inteira."
         },
         {
           "num": "03",
@@ -229,12 +229,12 @@
           "body": "Cada corrida que você termina paga dividendos. Vença, e as recompensas se multiplicam. As vitórias desbloqueiam componentes premium para veículos, materiais raros de upgrade, tokens exclusivos de recrutamento de equipe e créditos para financiar sua próxima construção. Venda veículos aprimorados com lucro, reinvista em novas máquinas e veja seu império de corridas crescer a cada pódio."
         },
         {
-          "title": "Eventos com Dinheiro Real",
-          "body": "Hyper Racing leva a competição ao próximo nível com eventos classificados e torneios onde dinheiro real está em jogo. Entre em competições baseadas em habilidades, prove sua capacidade contra os melhores pilotos da galáxia e saia com premiações em dinheiro real. Quanto melhor sua colocação, maior o prêmio. De desafios semanais classificados a eventos de campeonato sazonais, sempre há oportunidades para os melhores desempenhos converterem suas habilidades de corrida em ganhos reais."
+          "title": "Eventos ranqueados",
+          "body": "Hyper Racing foi pensado em torno de eventos ranqueados e torneios. Competições baseadas em habilidade poderão permitir que você prove sua capacidade contra os melhores pilotos da galáxia por recompensas no jogo, títulos e posição no ranking. De desafios ranqueados semanais a campeonatos sazonais, os melhores poderão encontrar muitas chances de se destacar."
         },
         {
           "title": "Como Funcionam os Eventos com Premiação",
-          "body": "Os jogadores se qualificam por meio de partidas classificadas, atingindo limiares de desempenho que garantem entrada em torneios com premiação em dinheiro. Os eventos são estruturados em torno de matchmaking justo, garantindo que cada competidor enfrente adversários de habilidade semelhante. As taxas de inscrição são transparentes, os prêmios são claramente exibidos antes de você se comprometer, e os pagamentos são processados rapidamente após o encerramento de cada evento. É competitivo, é justo, e as recompensas são reais."
+          "body": "Os jogadores poderão se classificar pelo jogo ranqueado ao atingir limites de desempenho. Os eventos são planejados com base em um pareamento justo, para que cada competidor enfrente oponentes de nível semelhante. As regras dos eventos e as recompensas no jogo devem ser mostradas com clareza antes de você se comprometer."
         },
         {
           "title": "Progressão Além da Pista",
@@ -264,7 +264,7 @@
       "faq": [
         {
           "q": "O que é Hyper Racing?",
-          "a": "Um jogo de corrida de alta intensidade com veículos voadores ambientado em mundos alienígenas. Construa, evolua e corra com veículos totalmente personalizáveis em circuitos de ficção científica repletos de perigos, competindo por recompensas no jogo e prêmios em dinheiro real."
+          "a": "Um jogo de corrida de veículos voadores de alta intensidade em mundos alienígenas. Construa, melhore e pilote veículos totalmente personalizáveis em circuitos perigosos de ficção científica enquanto compete por recompensas no jogo."
         },
         {
           "q": "Posso fazer upgrade do meu veículo de corrida?",
@@ -279,8 +279,8 @@
           "a": "O gerente de pit coordena as operações da equipe, define a estratégia de corrida e desbloqueia impulsos de desempenho para toda a equipe. Gerentes defensivos protegem seu veículo em condições adversas; gerentes agressivos forçam cada sistema ao máximo para obter velocidade máxima."
         },
         {
-          "q": "Posso ganhar dinheiro real?",
-          "a": "Sim. Eventos classificados e torneios apresentam premiações em dinheiro real. Qualifique-se por meio de partidas classificadas, compita contra adversários de habilidade semelhante e ganhe recompensas reais com base na sua posição final. Desafios semanais e campeonatos sazonais acontecem continuamente."
+          "q": "Há prêmios nos eventos ranqueados?",
+          "a": "Os eventos ranqueados e torneios estão planejados para oferecer recompensas no jogo, títulos e posição no ranking. Eles não oferecem prêmios em dinheiro."
         },
         {
           "q": "Como funcionam as recompensas das corridas?",
@@ -306,7 +306,7 @@
       "subtitle": "Sua galáxia. Suas regras. Sua fortuna.",
       "intro": [
         "Hyper Quest é uma aventura espacial de mundo aberto onde você comanda sua própria espaçonave totalmente aprimorável, a Quest Racer, por uma galáxia vasta e perigosa. Você deixou sua civilização natal há anos em busca de poder, riqueza e fama. Agora o universo inteiro é o seu playground, e cada missão que você completa o aproxima da dominação galáctica.",
-        "Mas Hyper Quest não é apenas um jogo. É uma plataforma competitiva onde dinheiro real está em jogo. Complete missões, conquiste desafios e saia com dinheiro real no bolso e/ou recompensas. De missões rápidas que levam minutos a expedições épicas de vários dias, cada missão paga. Quanto mais difícil o desafio, maior a recompensa.",
+        "Hyper Quest está planejado como mais do que um jogo: conclua missões, vença desafios e colete recompensas no jogo. De missões rápidas de poucos minutos a expedições épicas de vários dias, quanto maior o desafio, maior a recompensa no jogo.",
         "Faça upgrade da sua espaçonave do casco à cabine. Equipe-a com sistemas de armas devastadores. Recrute especialistas que acumulam poderosos bônus ao desempenho e nível de poder da sua nave. Mine asteroides, transporte cargas perigosas, cace tesouros escondidos, sequestre alvos de alto valor ou torne-se um mercenário. Como você domina o universo é inteiramente sua escolha.",
         "Tudo que você constrói em Hyper Quest alimenta diretamente Hyper Racing e Senhor dos 7 Reinos. Um universo, progressão contínua, potencial ilimitado. Continue lendo para descobrir como as missões funcionam, o que você pode ganhar e como você e sua espaçonave se tornam a embarcação mais temida da galáxia."
       ],
@@ -322,7 +322,7 @@
         {
           "num": "02",
           "title": "Explore a Galáxia",
-          "body": "Viaje por portais para planetas distantes, cada um com ambientes únicos, materiais valiosos e novos circuitos de corrida. Siga mapas galácticos para cartografar regiões inexploradas e ganhe direitos de nomeação para os planetas que descobrir primeiro. Mine recursos de campos de asteroides, recupere peças de relíquias antigas e naves abandonadas, e colete pistas que levam a fortunas escondidas espalhadas pelas estrelas."
+          "body": "Viaje por portais a planetas distantes, cada um com ambientes únicos, materiais valiosos e novos circuitos de corrida. Siga mapas galácticos para mapear regiões inexploradas e ganhe o direito de nomear os planetas que você descobrir primeiro. Extraia recursos de campos de asteroides, recupere peças de relíquias antigas e naves abandonadas e reúna pistas que levam a tesouros escondidos espalhados pelas estrelas."
         },
         {
           "num": "03",
@@ -339,19 +339,19 @@
       "rewards": [
         {
           "title": "Recompensas no Jogo",
-          "body": "Cada missão que você completa paga dividendos. Créditos, materiais de upgrade, componentes raros, tokens de recrutamento de especialistas e itens exclusivos chegam ao seu inventário a cada missão bem-sucedida. Quanto mais difícil a missão, mais rica a recompensa. Descubra materiais raros em planetas distantes, recupere peças valiosas de relíquias antigas e acumule recursos que impulsionam sua ascensão à supremacia galáctica."
+          "body": "Cada missão que você conclui foi pensada para recompensar você no jogo. Créditos, materiais de melhoria, componentes raros, fichas de recrutamento de especialistas e itens exclusivos entram no seu inventário a cada missão bem-sucedida. Quanto mais difícil a missão, mais rico o saque. Descubra materiais raros em planetas distantes, recupere peças de alto valor de relíquias antigas e acumule recursos que impulsionam sua ascensão à supremacia galáctica."
         },
         {
-          "title": "Pagamentos em Dinheiro Real",
-          "body": "Hyper Quest leva os jogos além do entretenimento. Certas missões e desafios classificados oferecem pagamentos em dinheiro real. Complete missões de alto nível, domine eventos de placar e participe de campeonatos de missões sazonais onde dinheiro real está em jogo. Quanto mais habilidoso e ousado você se tornar, maiores os pagamentos. De recompensas semanais de missões a torneios sazonais épicos, sempre há oportunidades para transformar suas aventuras galácticas em ganhos reais."
+          "title": "Recompensas de campeonato",
+          "body": "Certas missões e desafios ranqueados poderão oferecer recompensas premium no jogo. Estão planejados missões de alto nível, eventos de ranking e campeonatos sazonais de missões, e quanto mais habilidoso e ousado você se tornar, melhores poderão ser as recompensas no jogo."
         },
         {
-          "title": "Como Funcionam os Pagamentos das Missões",
-          "body": "Os jogadores se qualificam para missões com recompensas em dinheiro construindo sua reputação e atingindo limiares de desempenho. A dificuldade, duração e nível de perigo da missão determinam o prêmio. Os pagamentos são transparentes, claramente exibidos antes de você aceitar qualquer missão, e processados rapidamente após a conclusão. Seja fazendo um transporte de carga de dez minutos ou uma expedição de uma semana no espaço profundo, as recompensas equivalem ao risco."
+          "title": "Como funcionam as recompensas das missões",
+          "body": "Os jogadores poderão se qualificar para missões premium construindo sua reputação e atingindo limites de desempenho. A dificuldade, a duração e o nível de perigo da missão determinam a recompensa no jogo, que deve ser mostrada antes de você aceitar qualquer missão. Seja em um transporte de carga de dez minutos ou em uma expedição de uma semana ao espaço profundo, as recompensas são pensadas para corresponder ao risco."
         },
         {
           "title": "Progressão que Gera Progressão",
-          "body": "As recompensas das missões alimentam diretamente os upgrades da sua nave, sistemas de armas e recrutamento de especialistas. Cada pagamento o torna mais forte, desbloqueando missões mais difíceis com recompensas ainda maiores. Os ganhos também se transferem para Hyper Racing e Senhor dos 7 Reinos, criando um ciclo de progressão que recompensa dedicação em todo o ecossistema Hyper Tek."
+          "body": "As recompensas das missões vão diretamente para as melhorias da sua nave, seus sistemas de armas e o recrutamento de especialistas. Cada recompensa deixa você mais forte, o que desbloqueia missões mais difíceis. Também está planejado que o progresso seja levado para Hyper Racing e Overlord of the 7 Realms."
         }
       ],
       "upgradesTitle": "Evolua Sua Nave, Arme Seu Arsenal, Recrute Sua Tripulação",
@@ -377,19 +377,19 @@
       "faq": [
         {
           "q": "O que é Hyper Quest?",
-          "a": "Uma aventura espacial de mundo aberto onde você comanda uma espaçonave totalmente aprimorável por uma vasta galáxia. Complete missões, explore mundos alienígenas, melhore sua nave, recrute especialistas e ganhe recompensas em dinheiro real além de riquezas no jogo."
+          "a": "Uma aventura espacial de mundo aberto em que você comanda uma nave totalmente melhorável por uma vasta galáxia. Conclua missões, explore mundos alienígenas, melhore sua nave, recrute especialistas e colete recompensas no jogo."
         },
         {
           "q": "Como as missões funcionam?",
           "a": "Aceite missões do quadro de missões no jogo. As missões variam de transporte rápido de carga levando apenas minutos a épicas expedições de vários dias para o espaço inexplorado. Cada missão tem objetivos claros, classificações de perigo e níveis de recompensa exibidos antes de você aceitar."
         },
         {
-          "q": "Posso ganhar dinheiro real?",
-          "a": "Sim. Certas missões, desafios classificados e campeonatos sazonais oferecem pagamentos em dinheiro real. Construa sua reputação, atinja limiares de desempenho e qualifique-se para missões com recompensas em dinheiro cada vez mais lucrativas. Recompensas semanais e torneios sazonais acontecem continuamente."
+          "q": "Posso ganhar dinheiro com as missões?",
+          "a": "Não. Missões, desafios ranqueados e campeonatos sazonais estão planejados para oferecer apenas recompensas no jogo, não dinheiro."
         },
         {
           "q": "Que recompensas no jogo posso ganhar?",
-          "a": "Cada missão completada paga créditos, materiais de upgrade, componentes raros, tokens de recrutamento de especialistas e itens exclusivos. Quanto mais difícil e longa a missão, mais ricas as recompensas. Descubra materiais raros em planetas distantes e recupere peças valiosas de relíquias antigas."
+          "a": "Cada missão concluída foi pensada para recompensar com créditos, materiais de melhoria, componentes raros, fichas de recrutamento de especialistas e itens exclusivos. Quanto mais difícil e longa a missão, mais ricas as recompensas. Descubra materiais raros em planetas distantes e recupere peças de alto valor de relíquias antigas."
         },
         {
           "q": "Posso fazer upgrade da minha espaçonave?",
@@ -405,7 +405,7 @@
         },
         {
           "q": "Que tipos de missões estão disponíveis?",
-          "a": "Transporte de carga, mineração de asteroides, caça ao tesouro, caça a recompensas, recuperação de artefatos, operações clandestinas, exploração planetária, defesa contra piratas, missões de recuperação e muito mais. As missões variam de corridas rápidas de dez minutos a expedições de vários dias no espaço profundo."
+          "a": "Transporte de carga, mineração de asteroides, caça ao tesouro, caçadas, recuperação de artefatos, operações secretas, exploração planetária, defesa contra piratas, missões de recuperação e muito mais. As missões vão de corridas rápidas de dez minutos a expedições de vários dias ao espaço profundo."
         },
         {
           "q": "Posso descobrir novos planetas?",
@@ -436,7 +436,7 @@
       "intro": [
         "Senhor dos 7 Reinos é um jogo de estratégia de batalha em três níveis diferente de tudo o que existe nos jogos. Você aventurou-se por um portal para um universo paralelo e fez um pouso forçado em um planeta alienígena hostil. Sua nave está destruída, seus sistemas estão falhando e as criaturas do planeta já estão se aproximando. Sobreviver é apenas o começo. A dominação é o objetivo.",
         "Reconstrua sua nave a partir dos destroços. Clone e treine exércitos nos seus laboratórios de bordo. Domestique a vida selvagem do planeta para criar cavalaria montada devastadora. Em seguida, leve a luta por três dimensões de batalha: combate terra-a-terra contra monstros e jogadores rivais, ataques terra-ao-espaço em alvos orbitais ou terrestres, e guerra espaço-a-espaço a bordo do massivo Anel de Batalha que orbita o planeta.",
-        "Este não é apenas mais um jogo de estratégia. Senhor dos 7 Reinos apresenta interação VR em tempo real, recompensas em dinheiro real por completar eventos e missões diárias, e invasões quinzenais pelos temíveis Hammerongs, a espécie alienígena mais poderosa da existência. A cada quinzena, eles chegam para minerar o planeta, e a cada quinzena, jogadores corajosos podem desafiá-los por bônus massivos e recompensas lendárias.",
+        "Este não é só mais um jogo de estratégia. Assim como Hyper Racing e Hyper Quest, Overlord traz interação em realidade virtual em tempo real e recompensas no jogo por concluir eventos, missões e invasões quinzenais dos temíveis Hammerongs, a espécie alienígena mais poderosa que existe. A cada quinzena eles chegam para minerar o planeta a céu aberto, e a cada quinzena jogadores corajosos podem desafiá-los por bônus enormes e recompensas lendárias.",
         "Faça upgrade da sua espaçonave, equipe-a com armas devastadoras, recrute especialistas que amplificam seu nível de poder e forge alianças para controlar regiões inteiras. Tudo que você constrói se conecta diretamente a Hyper Racing e Hyper Quest por meio do ecossistema compartilhado Hyper Tek. Um universo, três jogos, guerra ilimitada. Continue lendo para descobrir como o sistema de batalha funciona e por que Senhor dos 7 Reinos muda tudo."
       ],
       "calloutLine1": "Sobreviver é Apenas o Começo.",
@@ -481,7 +481,7 @@
           },
           {
             "title": "A Vantagem Sobre Outros Jogos",
-            "body": "Nenhum outro jogo combina guerra em três níveis, uma estação de batalha orbital explorável, VR em tempo real e recompensas em dinheiro real e/ou no jogo em uma única experiência. O Anel de Batalha sozinho adiciona uma dimensão de gameplay que os concorrentes não conseguem igualar. Quando você combina isso com combate terrestre, guerra espacial, imersão VR e o ecossistema interconectado Hyper Tek, Senhor dos 7 Reinos ocupa uma categoria própria."
+            "body": "Nenhum outro jogo combina guerra em três níveis, uma estação de batalha orbital explorável, realidade virtual em tempo real e recompensas no jogo em uma única experiência. Só o Battle Ring já adiciona uma dimensão de jogo que os concorrentes não conseguem igualar. Somando a isso o combate em solo, a guerra espacial, a imersão em realidade virtual e o ecossistema interligado da Hyper Tek, Overlord fica em uma categoria própria."
           }
         ]
       },
@@ -497,7 +497,7 @@
         },
         {
           "title": "Recrute Especialistas",
-          "body": "Os especialistas são os multiplicadores de força que separam bons jogadores dos Senhores. Adquira especialistas únicos que trazem bônus poderosos ao desempenho geral e nível de poder da sua nave. Especialistas táticos melhoram a eficiência de implantação de tropas, especialistas em engenharia aceleram reparos e upgrades da nave, especialistas em armas aumentam o dano em todos os sistemas, e especialistas em inteligência revelam posições e fraquezas inimigas. Combine múltiplos especialistas para criar sinergias devastadoras que amplificam cada aspecto da sua operação."
+          "body": "Os especialistas são o multiplicador de força e, combinados com habilidade, são o que separa os bons jogadores dos Overlords. Obtenha especialistas únicos que trazem bônus poderosos para o desempenho geral e o nível de poder da sua nave. Especialistas táticos melhoram a eficiência do envio de tropas, especialistas em engenharia aceleram reparos e melhorias da nave, especialistas em armas aumentam o dano em todos os sistemas e especialistas em inteligência revelam posições e fraquezas do inimigo. Combine vários especialistas para criar um esforço conjunto devastador que amplia cada aspecto da sua operação. Ainda assim, quem não gasta pode ficar tranquilo: a Hyper Tek foi criada para enfrentar problemas dos jogos. Embora seja possível combinar vários especialistas, as mecânicas de jogo justas fazem com que o acúmulo não seja um sistema simples de ponto por ponto. Ele funciona em uma escala decrescente para que o poder bruto não ofusque a importância da habilidade. Este jogo valoriza tanto o poder quanto a habilidade, em vez de depender da sorte!"
         },
         {
           "title": "Construa Seus Exércitos",
@@ -516,7 +516,7 @@
         },
         {
           "title": "Conectado ao Ecossistema Hyper Tek",
-          "body": "Senhor dos 7 Reinos não existe isolado. Está totalmente integrado ao universo Hyper Tek ao lado de Hyper Racing e Hyper Quest. Recursos ganhos em Senhor dos 7 Reinos podem ser usados nos três jogos. Upgrades de nave, bônus de especialistas, habilidades de combate e materiais fluem perfeitamente entre os títulos. Habilidades de corrida adquiridas em Hyper Racing melhoram suas habilidades de piloto no combate espacial de Senhor dos 7 Reinos. Materiais coletados em Hyper Quest alimentam seus upgrades no planeta. O marketplace Hyper Tek conecta tudo, criando uma economia unificada onde o progresso em um jogo impulsiona o avanço nos três."
+          "body": "Overlord of the 7 Realms não existe de forma isolada. Ele está totalmente integrado ao universo Hyper Tek, ao lado de Hyper Racing e Hyper Quest. Os recursos obtidos em Overlord podem ser usados nos três jogos. Melhorias de nave, bônus de especialistas, habilidades de combate e materiais circulam sem interrupção entre os títulos. As habilidades de corrida obtidas em Hyper Racing melhoram sua pilotagem no combate espacial de Overlord. Os materiais coletados em Hyper Quest alimentam suas melhorias no planeta. O marketplace da Hyper Tek conecta tudo, criando um universo conectado em que o progresso em um jogo impulsiona o avanço nos três."
         },
         {
           "title": "Um Universo, Três Jogos, Poder Ilimitado",
@@ -527,7 +527,7 @@
       "faq": [
         {
           "q": "O que é Senhor dos 7 Reinos?",
-          "a": "Um jogo de estratégia de batalha em três níveis onde você faz um pouso forçado em um planeta alienígena, reconstrói sua nave, clona exércitos e luta em três dimensões: terra-a-terra, terra-ao-espaço e espaço-a-espaço. Apresenta interação VR, recompensas em dinheiro real e invasões quinzenais dos Hammerongs."
+          "a": "Um jogo de estratégia de batalha em três níveis em que você faz um pouso forçado em um planeta alienígena, reconstrói sua nave, clona exércitos e luta em três dimensões: solo-solo, solo-espaço e espaço-espaço. Os recursos planejados incluem interação em realidade virtual, recompensas no jogo e invasões quinzenais dos Hammerongs."
         },
         {
           "q": "O que é o sistema de batalha em três níveis?",
@@ -551,7 +551,7 @@
         },
         {
           "q": "Que recompensas posso ganhar?",
-          "a": "Tarefas diárias, missões, batalhas e eventos pagam créditos, materiais de upgrade e bônus de progressão. Eventos especiais e invasões dos Hammerongs oferecem recompensas premium e exclusivas. Desafios de maior dificuldade e competições classificadas rendem pagamentos maiores, incluindo dinheiro real."
+          "a": "Tarefas diárias, missões, batalhas e eventos são pensados para recompensar com créditos, materiais de melhoria e bônus de progressão. Eventos especiais e invasões dos Hammerongs poderão oferecer recompensas no jogo premium e exclusivas. Desafios de maior dificuldade e competições ranqueadas estão planejados para oferecer recompensas no jogo maiores."
         },
         {
           "q": "Senhor dos 7 Reinos suporta VR?",
@@ -567,7 +567,7 @@
         },
         {
           "q": "Senhor dos 7 Reinos está ligado a outros jogos Hyper Tek?",
-          "a": "Totalmente integrado. Recursos, upgrades de nave, bônus de especialistas e habilidades de combate fluem entre Senhor dos 7 Reinos, Hyper Racing e Hyper Quest. Habilidades de corrida melhoram seu combate espacial, materiais de missões alimentam seus upgrades, e o marketplace Hyper Tek conecta toda a economia."
+          "a": "Totalmente integrado. Está planejado que recursos, melhorias de nave, bônus de especialistas e habilidades de combate circulem entre Overlord, Hyper Racing e Hyper Quest. As habilidades de corrida melhoram seu combate espacial, os materiais de Quest alimentam suas melhorias e o marketplace da Hyper Tek conecta os três jogos."
         },
         {
           "q": "Quais armas estão disponíveis?",
@@ -801,7 +801,7 @@
       },
       "mining_rp": {
         "title": "Mining RP",
-        "desc": "Unidade de mineração traseira de bombordo. Trabalha em conjunto com a baía RS para maximizar o rendimento de extração de recursos na retaguarda."
+        "desc": "Unidade de mineração do porto traseiro. Trabalha em conjunto com a baía RS para maximizar a extração de recursos do campo traseiro."
       },
       "fuel_ref": {
         "title": "Refinaria de Combustível",
@@ -933,11 +933,11 @@
       },
       "hydro_2": {
         "title": "Célula Hidropônica 2",
-        "desc": "Célula hidropônica secundária que expande a variedade e o rendimento das colheitas. Apoia a nutrição da tripulação e a produção de commodities para comércio."
+        "desc": "Célula hidropônica secundária que amplia a variedade e a produção de cultivos. Dá suporte à nutrição da tripulação e à produção de mercadorias para troca."
       },
       "hydro_3": {
         "title": "Célula Hidropônica 3",
-        "desc": "Unidade de cultivo terciária especializada em culturas básicas de alto rendimento. Fornece suprimento calórico básico para grandes contingentes de tripulação."
+        "desc": "Unidade de cultivo terciária especializada em culturas básicas de alta produção. Fornece o suprimento calórico básico para tripulações numerosas."
       },
       "hydro_4": {
         "title": "Célula Hidropônica 4",
@@ -1113,7 +1113,7 @@
     "viewArrow": "VER →",
     "selectCategory": "SELECIONAR CATEGORIA",
     "comingSoon": "EM BREVE",
-    "specialistProfileDesc": "Perfil do especialista — estatísticas completas e habilidades disponíveis no lançamento.",
+    "specialistProfileDesc": "Perfil do especialista — as estatísticas e habilidades completas poderão estar disponíveis quando o jogo for lançado.",
     "alliance": {
       "rank": {
         "leader": "Líder",
@@ -1131,8 +1131,8 @@
         "editInfoDesc": "Alterar nome, etiqueta e descrição",
         "joinRequests": "Gerenciar pedidos de adesão",
         "joinRequestsDesc": "Revisar e aceitar novos membros",
-        "donationGoals": "Definir metas de doação",
-        "donationGoalsDesc": "Configurar metas semanais de doação",
+        "donationGoals": "Definir metas de contribuição",
+        "donationGoalsDesc": "Configurar as metas semanais de contribuição",
         "warSettings": "Configurações de guerra da aliança",
         "warSettingsDesc": "Configurar regras de participação na guerra",
         "kickMembers": "Expulsar membros",
@@ -1141,7 +1141,7 @@
       "allianceMail": {
         "warResults": "Resultados da guerra da aliança",
         "strategyPlan": "Novo plano de estratégia",
-        "donationSummary": "Resumo semanal de doações",
+        "donationSummary": "Resumo semanal de contribuições",
         "meeting1800": "Reunião às 18:00",
         "levelUp": "Aliança subiu de nível!"
       }
@@ -1166,7 +1166,7 @@
       "tradingPlasma": "Troco barras de plasma por livros de tecnologia",
       "needHelpAsteroid": "Preciso de ajuda com a missão asteroide",
       "allianceRecruiting": "Nossa aliança está recrutando, me chame",
-      "donationGoalsPlasma": "Metas de doação: barras de plasma necessárias!",
+      "donationGoalsPlasma": "Metas de contribuição: precisamos de barras de plasma!",
       "warStarts2Hours": "A guerra começa em 2 horas, prepare-se",
       "handleMedicalSupport": "Vou cuidar do suporte médico",
       "wts50Engines": "VENDO: 50 motores, MP me",
@@ -1203,6 +1203,6 @@
       "speedRacingTournament": "Torneio de Corrida Veloz",
       "overlordChampionship": "Campeonato Overlord"
     },
-    "eventDetailPlaceholder": "Detalhes completos do evento, recompensas e opções de participação estarão disponíveis quando este evento for lançado."
+    "eventDetailPlaceholder": "Os detalhes completos do evento, as recompensas e as opções de participação poderão estar disponíveis quando este evento for lançado."
   }
 }
