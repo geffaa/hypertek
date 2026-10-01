@@ -31,23 +31,23 @@
       "facts": [
         {
           "label": "NFA",
-          "desc": "Yalnızca Hypertek varlığı. En yüksek oyun içi bonuslar. Her satışta büyüyen garantili minimum geri alım değeri."
+          "desc": "Yalnızca Hyper Tek'e ait öğe. En yüksek oyun içi bonuslar. Her yeniden satışın eklendiği Programmatic Trade-In Value."
         },
         {
           "label": "NFC",
-          "desc": "Hypertek veya lisanslı oyuncular tarafından oluşturulmuş. Oyun içi bonuslar dahil. Minimum geri alım garantili."
+          "desc": "Hyper Tek veya lisanslı oyuncular tarafından oluşturuldu. Oyun içi bonuslar dahil. Programmatic Trade-In Value dahil."
         },
         {
           "label": "NFT",
-          "desc": "Oyuncu tarafından oluşturulan koleksiyon. Oyun içi bonus yok. Geri alım garantisi yok. Pazar yerinde takas edilebilir."
+          "desc": "Oyuncu tarafından oluşturulan koleksiyon öğesi. Oyun içi bonus yok. Takas değeri yok. Pazar yerinde alınıp satılabilir."
         },
         {
           "label": "Komisyon",
-          "desc": "Platform ücreti ilana göre değişir. Yeniden satışlarda: satıcı %86, sanatçı telif hakkı %2, geri alıma +%5, platform %7."
+          "desc": "Platform ücreti ilana göre değişir. Yeniden satış paylaşımı: satıcı %86, sanatçı telifi %2, öğenin takas tahsisine %5, platform %7."
         },
         {
-          "label": "Geri Alım Büyümesi",
-          "desc": "Her yeniden satış fiyatının +%5'i varlığın minimum geri alım değerine eklenir. Yalnızca büyür."
+          "label": "Takas Tahsisi",
+          "desc": "Her yeniden satış fiyatının %5'i öğenin takas tahsisine eklenir. Bir takasta iade edilen tutar Tiered Loyalty Return Schedule'a göre belirlenir ve her zaman tahsis edilen tutardan azdır."
         },
         {
           "label": "Emanet Cüzdan",
@@ -67,7 +67,8 @@
             "NFC (Değiştirilemez Karakterler) oyun içi bonuslar ve geri alıma sahip lisanslı oyuncu öğeleridir.",
             "NFT (Değiştirilemez Tokenlar) kullanıcı tarafından oluşturulan koleksiyonlardır — kostümler, silahlar ve daha fazlası."
           ],
-          "cta": "Temel Bilgileri Öğren"
+          "cta": "Temel Bilgileri Öğren",
+          "intro": "NFA'lar/NFC'ler/NFT'ler dijital sanat eserleridir. NFA'lar ve NFC'ler oyun içi bonuslar ve bir Programmatic Trade-In Value taşır."
         },
         {
           "label": "Pazar Yeri",
@@ -111,20 +112,20 @@
         },
         {
           "label": "Kiralık",
-          "tagline": "Varlık kiralayın veya kendinizinkinden kazanın",
+          "tagline": "Öğelerini oyun içi ödüller karşılığında kiraya ver",
           "details": [
             "Tamamen satın almadan tek bir görev için güçlü uzmanlar veya ekipman kiralayın.",
-            "Kendi boşta kalan varlıklarınızı kiralık olarak listeleyin ve yokken pasif gelir kazanın.",
+            "Oyuncular, kullanmadıkları öğeleri kendi aralarında anlaştıkları oyun içi ödüller karşılığında diğer oyunculara kiraya verebilir.",
             "Esnek süreler — saatlik, günlük veya görev başına anlaşmalar."
           ],
-          "cta": "Kiralamaları Görüntüle"
+          "cta": "Kiralıklara Göz At"
         },
         {
           "label": "Ödül",
           "tagline": "Hedefleri avlayın, ödüller talep edin, liderlik tablosuna yükselın",
           "details": [
             "Kripto ödülleri kazanmak için diğer oyuncular veya sistem tarafından yayınlanan ödülleri kabul edin.",
-            "Özel unvanları ve bonus ödemeleri açmak için ödül liderlik tablosuna tırmanın.",
+            "Özel unvanların ve oyun içi ödüllerin kilidini açmak için bounty sıralamasında yüksel.",
             "Hedefleriniz için yetenekli oyuncular işe almak amacıyla kendi ödüllerinizi yayınlayın."
           ],
           "cta": "Ödülleri Görüntüle"
@@ -136,7 +137,7 @@
       "subtitle": "Anında satın alma için mevcut NFA, NFC ve NFT'lere göz atın — kostümler, silahlar, uzmanlar, uzay gemileri ve daha fazlası.",
       "filterAll": "Tümü",
       "samplePreviewTitle": "Örnek Pazar Yeri Önizlemesi",
-      "samplePreviewDesc": "Aşağıdaki öğeler, HyperTek pazar yerinde mevcut olacak dijital varlık türlerini sergileyen örnek önizlemelerdir. Benzersiz sanat eseri ve blockchain doğrulamalı sahiplik içeren gerçek öğeler lansmanda mevcut olacak.",
+      "samplePreviewDesc": "Aşağıdaki öğeler, Hyper Tek pazar yerinde sunulabilecek dijital öğe türlerinin örnek önizlemeleridir. Benzersiz sanat eserine ve blok zincirinde doğrulanmış sahipliğe sahip gerçek öğeler lansmanda sunulabilir.",
       "noItems": "Henüz mevcut öğe yok. Yakında tekrar kontrol edin.",
       "categories": {
         "skins": "Kostümler",
@@ -197,7 +198,7 @@
       },
       "preview": {
         "title": "Oyun İçi Özellik Önizlemesi",
-        "desc": "Müzayede sistemi lansmanda oyun içinde tamamen canlı olacak. Burada gösterilen öğeler yatırımcı/kullanıcı vitrini için tohumlanmış örneklerdir."
+        "desc": "Açık artırma sistemi lansmanda oyun içinde devreye girebilir. Burada gösterilen öğeler yalnızca önizleme amaçlı örneklerdir."
       },
       "card": {
         "currentBid": "Mevcut teklif",
@@ -369,7 +370,7 @@
       "earnFromQuests": "Görevlerden kazanmak ister misiniz? Oyunu oynayın →",
       "moneyQuests": "Para Görevleri (%11 havuz)",
       "resourceQuests": "Kaynak Görevleri (%20 havuz)",
-      "footerNote1": "# Birleşik yüklü görevler ayrı tablo tutarları kullanılarak ödenecek.",
+      "footerNote1": "# Birleşik yüklü görevler ayrı tablodaki ödülleri kullanır.",
       "footerNote2": "# Gezegen verileri oyunlar yayına girdiğinde senkronize edilecek.",
       "inGame": "Oyun içi",
       "open": "Açık",
@@ -413,26 +414,26 @@
       "forHireLabel": "Kiralık",
       "wantingToHire": "Kiralamak İstiyor",
       "noListings": "{{filter}} liste yok",
-      "lockedTitle": "HyperTek Gaming içeriği yalnızca görüntüleme amaçlıdır.",
-      "lockedDesc": "This is part of Hyper Tek's genuine 'Play to Earn' system, where players can earn real cash rewards, and or Materials/Resources.",
+      "lockedTitle": "Oyunlar yayınlanırsa kiralama kullanıma sunulabilir.",
+      "lockedDesc": "Oyuncular, nihai oyun kurallarına bağlı olarak öğeleri diğer oyunculara kiraya verebilir ve kendi aralarında anlaştıkları oyun içi ödülleri alabilir.",
       "forHireBadge": "KİRALIK",
-      "wantedBadge": "KİRALAMAK İSTİYOR",
+      "wantedBadge": "KİRALIK ARANIYOR",
       "price": "Fiyat",
       "maxDuration": "Maks Süre",
-      "hireBtn": "Kirala",
+      "hireBtn": "Kiraya Ver",
       "fulfillBtn": "Talebi Karşıla",
       "rules": {
         "durations": "8s · 1 gün · 3 gün · 1 hafta · 1 ay",
         "cooldown": "Bekleme: 2× kiralama süresi",
         "commission": "Komisyon değişir",
-        "payment": "Hyper Bucks veya Malzeme ile öde"
+        "payment": "Oyuncular arasında anlaşılan oyun içi ödüller"
       },
       "preview": {
         "title": "Oyun İçi Özellik Önizlemesi",
-        "desc": "Kiralık sistemi lansmanda oyun içinde tamamen canlı olacak. Burada gösterilen öğeler yatırımcı/kullanıcı vitrini için tohumlanmış örneklerdir."
+        "desc": "Kiralama lansmanda oyun içinde devreye girebilir. Burada gösterilen öğeler yalnızca önizleme amaçlı örneklerdir."
       },
       "hireModal": {
-        "hireTitle": "Uzman Kirala",
+        "hireTitle": "Uzmanı Kiraya Ver",
         "fulfillTitle": "Kiralama Talebini Karşıla",
         "forHireBadge": "KİRALIK",
         "wantedBadge": "ARANIYOR",
@@ -440,10 +441,10 @@
         "duration": "Süre",
         "howHire": "Kiralama nasıl çalışır",
         "howFulfill": "Talep karşılama nasıl çalışır",
-        "proceedHire": "Kiralamaya Devam Et",
+        "proceedHire": "Kiralamaya Geç",
         "offerFulfill": "Karşılamayı Teklif Et",
         "commission": "Platform komisyonu değişir · İadeden sonra bekleme süresi uygulanır",
-        "confirmHire": "Kiralama Onayla",
+        "confirmHire": "Kiralamayı Onayla",
         "confirmOffer": "Teklifi Onayla",
         "specialist": "Uzman",
         "payment": "Ödeme",
@@ -461,19 +462,19 @@
         "close": "Kapat"
       },
       "createModal": {
-        "listTitle": "Kiralık Listele",
-        "postTitle": "Kiralama Talebi Yayınla",
+        "listTitle": "Kiralık Olarak Listele",
+        "postTitle": "Kiralama İsteği Yayınla",
         "forHireBtn": "Kiralık",
         "wantingBtn": "Kiralamak İstiyor",
         "itemNameHire": "Uzman / öğe adı *",
-        "itemNameWant": "Ne kiralamak istiyorsunuz *",
+        "itemNameWant": "Ne kiralamak istiyorsun *",
         "descPlaceholder": "Açıklama",
         "categoryPlaceholder": "Kategori (isteğe bağlı)",
         "paymentType": "Ödeme Türü",
-        "hyperBucks": "Hyper Bucks",
+        "hyperBucks": "Oyun içi ödül",
         "materials": "Malzemeler",
-        "amountLabel": "Tutar (Hyper Bucks)",
-        "afterCommission": "Platform komisyonu sonrası {{amount}} HB alırsınız",
+        "amountLabel": "Oyun içi ödül",
+        "afterCommission": "Platform komisyonundan sonra oyun içinde {{amount}} alırsın",
         "maxDuration": "Maks Süre",
         "disclaimer": "Komisyon değişir · Bekleme = iadeden sonra 2× kiralama süresi",
         "listing": "Listeleniyor…",
@@ -508,7 +509,7 @@
         "postedBy": "Yayınlayan",
         "claimedBy": "Talep Eden",
         "status": "Durum",
-        "netHB": "{{amount}} HB net"
+        "netHB": "{{amount}} net"
       },
       "pagination": {
         "prev": "Önceki",
@@ -540,6 +541,20 @@
       "dashboardTitle": "Kontrol panelin şu anda kilitli, ama hazır ol; resmi lansman çok yakında!",
       "desc": "Bunun seni kaydolmaktan ve bu inanılmaz projeye dalmaktan alıkoymasına izin verme. Sayısız avantajını keşfet ve katılımının başarısını nasıl ileriye taşıyabileceğini gör! Şimdi katıl ve bugün bir Hyper Tekken ol!",
       "buttonLabel": "Resmi lansmanda açılıyor"
+    },
+    "gameLock": {
+      "quests": {
+        "title": "Oyunlar yayınlanırsa görevler kullanıma sunulabilir.",
+        "desc": "Oyuncular, nihai oyun kurallarına bağlı olarak oyun içi ödüller karşılığında diğer oyunculara öğe teslim edebilir."
+      },
+      "hire": {
+        "title": "Oyunlar yayınlanırsa kiralama kullanıma sunulabilir.",
+        "desc": "Oyuncular, nihai oyun kurallarına bağlı olarak öğeleri diğer oyunculara kiraya verebilir ve kendi aralarında anlaştıkları oyun içi ödülleri alabilir."
+      },
+      "bounty": {
+        "title": "Oyunlar yayınlanırsa bounty'ler kullanıma sunulabilir.",
+        "desc": "Bounty'ler, nihai oyun kurallarına bağlı olarak yalnızca oyun içi ödüller sunabilir."
+      }
     }
   },
   "musicPlayer": {
@@ -581,9 +596,9 @@
       "platform": "Platform",
       "noDesc": "Bu ürün için açıklama sağlanmadı.",
       "price": "Fiyat",
-      "minBuyback": "Minimum Geri Alım Garantisi",
+      "minBuyback": "Programmatic Trade-In Value",
       "reservePrice": "Rezerv Fiyatı",
-      "buybackNote": "Bu varlık minimum geri satın alma değerinin altında satılamaz.",
+      "buybackNote": "Rezerv fiyat, bu öğenin takas tahsisinin altında belirlenemez.",
       "networkNote": "Temelde USDC · Temel ETH gaz için gereklidir (yalnızca cüzdan ödemeleri)",
       "buyWithCard": "Kartla Satın Al",
       "makeOffer": "Teklif Yap",

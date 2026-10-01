@@ -12,7 +12,7 @@
       "three-worlds": "02  Ang Tatlong Mundo",
       "technology": "03  Teknolohiya",
       "nfa": "04  Mga Non-Fungible Asset",
-      "hyperbucks": "05  Ekonomiya ng HyperBucks",
+      "hyperbucks": "05  Gems",
       "marketplace": "06  Marketplace",
       "roadmap": "07  Roadmap",
       "conclusion": "08  Konklusyon"
@@ -29,7 +29,7 @@
     "docs": {
       "tos": "Mga Tuntunin ng Serbisyo",
       "api": "Mga Tuntunin ng Serbisyo ng API",
-      "packs": "Mga Tuntunin ng Serbisyo ng Packs",
+      "packs": "Mga Tuntunin ng Package",
       "privacy": "Patakaran sa Privacy",
       "copy": "Patakaran sa Karapatang Ari",
       "tm": "Patakaran sa Trademark",
@@ -127,7 +127,7 @@
       "2": "Gaano ka kasabik tungkol sa isang universe kung saan tatlong buong laro ay nakakonekta sa isang karanasan?",
       "3": "Aling bahagi ng HyperTek 100 ang pinaka-interesado sa iyo?",
       "4": "Ano ang gagawing 'dapat laruin' ang HyperTek 100 para sa iyo?",
-      "5": "Isasaalang-alang mo ba ang pagsuporta sa proyektong ito kapag binuksan namin ang aming crowdfunding campaign?",
+      "5": "Interesado ka ba sa early-access na release ng mga limited edition na item?",
       "6": "Sundan kami sa X"
     },
     "nameLabel": "Ang Iyong Pangalan",
@@ -158,7 +158,7 @@
     "unlisted": "Hindi Nakalista",
     "backToMarketplace": "Marketplace",
     "samplePreviewTitle": "Sample na Preview ng Marketplace",
-    "samplePreviewDesc": "Ang mga item sa ibaba ay mga sample na preview na nagpapakita ng mga uri ng digital asset na magiging available. Ang mga aktwal na item na may natatanging artwork at blockchain-verified na pagmamay-ari ay magiging available sa launch.",
+    "samplePreviewDesc": "Ang mga item sa ibaba ay mga sample na preview ng mga uri ng digital na item na maaaring maging available. Ang mga aktuwal na item na may natatanging artwork at pagmamay-aring na-verify sa blockchain ay maaaring maging available sa launch.",
     "noItemsFound": "Walang item na natagpuan sa kategoryang ito",
     "preview": "Preview",
     "buyNow": "Bilhin Ngayon",
@@ -182,14 +182,14 @@
     "error": "Paumanhin, hindi ako makakuha ng tugon ngayon. Pakisubukang muli o makipag-ugnayan sa aming koponan ng suporta.",
     "peek": {
       "0": "Kailangan ng tulong? Magtanong ng kahit ano!",
-      "1": "Mga tanong tungkol sa HyperBucks?",
+      "1": "May tanong tungkol sa Gems?",
       "2": "Nag-aalala kung paano gumagana ang mga auction?"
     },
     "shortcuts": {
-      "earnLabel": "Kumita ng HyperBucks",
-      "earnText": "Paano ako kumikita ng HyperBucks?",
-      "cashOutLabel": "Cash Out HB",
-      "cashOutText": "Paano ko i-cash out ang aking HyperBucks?",
+      "earnLabel": "Kumuha ng Gems",
+      "earnText": "Paano ako makakakuha ng Gems?",
+      "cashOutLabel": "Trade-In Value",
+      "cashOutText": "Paano gumagana ang Programmatic Trade-In Value?",
       "auctionsLabel": "Paano Gumagana ang Mga Auction",
       "auctionsText": "Paano gumagana ang mga auction?",
       "gamesLabel": "Mga Available na Laro",
@@ -264,7 +264,7 @@
       "auction": "Auctions",
       "questing": "Quests",
       "bounty": "Bounty",
-      "forHire": "For Hire"
+      "forHire": "Paupahan"
     },
     "categories": {
       "all": "Lahat",
@@ -350,7 +350,7 @@
       "playerLabel": "\nManlalaro\n",
       "platformLabel": "\nPlataporma\n",
       "platLabel": "\nPlat\n",
-      "notePayouts": "\nAng mga quest na may pinagsamang mga payload ay babayaran gamit ang magkahiwalay na halaga ng talahanayan.\n",
+      "notePayouts": "Ang mga quest na may pinagsamang payload ay gumagamit ng mga reward sa hiwalay na talahanayan.",
       "notePlanet": "\nMagsi-sync ang data ng planeta kapag naging live ang mga laro.\n",
       "dailySlots": "\nPang-araw-araw na Quest Slots\n",
       "used": "\nginamit\n",
@@ -384,8 +384,8 @@
       "colSelling": "\nNagbebenta\n",
       "colBuying": "\nPagbili\n",
       "colTrading": "\npangangalakal\n",
-      "colOnHire": "\nOn Hire\n",
-      "colHiring": "\nPag-hire\n",
+      "colOnHire": "Pinaupahan",
+      "colHiring": "Pagpapaupa",
       "groupMarketplace": "\nMARKETPLACE\n",
       "groupAuction": "\nAUCTION"
     }
@@ -398,7 +398,7 @@
       "myCollections": "Aking Mga Koleksyon",
       "transactions": "Mga transaksyon",
       "offers": "Mga alok",
-      "hyperBucks": "HyperBucks",
+      "hyperBucks": "Gems",
       "earnings": "Mga kita",
       "support": "Suporta",
       "signOut": "Mag-sign Out"
@@ -437,7 +437,7 @@
       "transactions": "Mga transaksyon",
       "transactionsDesc": "Kasaysayan ng pagbabayad",
       "withdraw": "Mag-withdraw",
-      "withdrawDesc": "I-withdraw ang iyong balanse sa HB"
+      "withdrawDesc": "I-withdraw ang kinita mo sa mga benta sa marketplace"
     },
     "transactions": {
       "title": "Kasaysayan ng Transaksyon",
@@ -468,7 +468,7 @@
       "noSentOffersHint": "Gumawa ng isang alok sa anumang item sa Marketplace",
       "colItem": "item",
       "colYourOffer": "Iyong Alok",
-      "colFloorPrice": "Presyo sa sahig",
+      "colFloorPrice": "Pinakamababang Presyo",
       "colOfferDuration": "Tagal ng Alok",
       "colStatus": "Katayuan",
       "colAction": "Aksyon",
@@ -639,11 +639,10 @@
       }
     },
     "hyperbucks": {
-      "title": "HyperBucks",
-      "subtitle": "250 HB = $1 USD · fixed rate",
+      "title": "Gems",
+      "subtitle": "Bumili ng Gems para sa mga in-game na pagbili",
       "currentBalance": "Kasalukuyang Balanse",
       "tabTopUp": "Top Up",
-      "tabCashout": "Cashout",
       "success": {
         "title": "Matagumpay ang Top-Up!",
         "added": "idinagdag sa iyong account.",
@@ -653,30 +652,24 @@
       },
       "topup": {
         "amountLabel": "Halaga (USD)",
-        "hyperBucks": "HyperBucks",
+        "hyperBucks": "Gems",
         "preparing": "Inihahanda...",
         "proceed": "Magpatuloy sa Pagbabayad",
         "enterAmount": "Maglagay ng halaga upang magpatuloy",
-        "secured": "Secured by Stripe · 250 HB = $1 USD · min $1",
+        "secured": "Secured ng Stripe · min $1",
         "quickSelect": "Mabilis na Pumili",
         "paying": "Nagbabayad",
         "processing": "Pinoproseso...",
-        "pay": "Magbayad"
+        "pay": "Magbayad",
+        "rate": "Min $1 · Para lang sa mga in-game na pagbili ang Gems"
       },
       "cashout": {
-        "amountLabel": "Halaga (HB)",
-        "minUsdc": "Min 250 HB",
-        "minBank": "Min 2500 HB",
         "receiveVia": "Tumanggap sa pamamagitan ng",
         "usdcWallet": "USDC Wallet",
-        "usdcMin": "Min 250 HB · ~$0.01 gas",
         "bankAccount": "Bank Account",
-        "bankMin": "Min 2500 HB ($10) · kinakailangan ang mga detalye ng bangko",
         "addBank": "Magdagdag ng mga detalye ng bangko sa Profile →",
         "noWallet": "Walang nakakonektang wallet",
         "sendingOtp": "Nagpapadala ng OTP...",
-        "toUsdc": "Cashout sa USDC Wallet",
-        "toBank": "Cashout sa Bank Account",
         "kycNote": "Kumpletuhin ang pag-verify ng pagkakakilanlan upang magpatuloy"
       },
       "otp": {
@@ -687,7 +680,6 @@
         "bankAccount": "Bank Account",
         "label": "OTP Code",
         "processing": "Pinoproseso...",
-        "confirm": "Kumpirmahin ang Cashout",
         "sending": "Ipinapadala...",
         "resend": "Muling ipadala ang code"
       },

@@ -12,7 +12,7 @@
       "three-worlds": "02  Üç Dünya",
       "technology": "03  Teknoloji",
       "nfa": "04  Değiştirilemez Varlıklar",
-      "hyperbucks": "05  HyperBucks Ekonomisi",
+      "hyperbucks": "05  Gems",
       "marketplace": "06  Pazar Yeri",
       "roadmap": "07  Yol Haritası",
       "conclusion": "08  Sonuç"
@@ -29,7 +29,7 @@
     "docs": {
       "tos": "Hizmet Koşulları",
       "api": "API Hizmet Koşulları",
-      "packs": "Paket Hizmet Koşulları",
+      "packs": "Paket Şartları",
       "privacy": "Gizlilik Politikası",
       "copy": "Telif Hakkı Politikası",
       "tm": "Ticari Marka Politikası",
@@ -127,7 +127,7 @@
       "2": "Üç tam oyunun tek bir deneyimde birleştiği bir evrenden ne kadar heyecan duyuyorsunuz?",
       "3": "HyperTek 100'ün hangi kısmı sizi en çok ilgilendiriyor?",
       "4": "HyperTek 100'ü 'mutlaka oynanması gereken' bir oyun yapacak olan şey nedir?",
-      "5": "Kitle fonlaması kampanyamızı açtığımızda bu projeyi desteklemeyi düşünür müsünüz?",
+      "5": "Sınırlı sayıdaki öğelerin erken erişim yayınıyla ilgilenir misin?",
       "6": "X'te bizi takip edin"
     },
     "nameLabel": "Adınız",
@@ -158,7 +158,7 @@
     "unlisted": "Listelenmedi",
     "backToMarketplace": "Pazar Yeri",
     "samplePreviewTitle": "Örnek Pazar Yeri Önizlemesi",
-    "samplePreviewDesc": "Aşağıdaki öğeler, mevcut olacak dijital varlık türlerini gösteren örnek önizlemelerdir. Başlatma sırasında benzersiz eserler ve blok zinciri doğrulamalı sahiplikle gerçek öğeler mevcut olacak.",
+    "samplePreviewDesc": "Aşağıdaki öğeler, sunulabilecek dijital öğe türlerinin örnek önizlemeleridir. Benzersiz sanat eserine ve blok zincirinde doğrulanmış sahipliğe sahip gerçek öğeler lansmanda sunulabilir.",
     "noItemsFound": "Bu kategoride öğe bulunamadı",
     "preview": "Önizleme",
     "buyNow": "Hemen Satın Al",
@@ -182,14 +182,14 @@
     "error": "Üzgünüm, şu anda yanıt alamadım. Lütfen tekrar deneyin veya destek ekibimizle iletişime geçin.",
     "peek": {
       "0": "Yardıma mı ihtiyacınız var? Bana sorun!",
-      "1": "HyperBucks hakkında sorularınız mı var?",
+      "1": "Gems hakkında soruların mı var?",
       "2": "Açık artırmaların nasıl çalıştığını merak ediyor musunuz?"
     },
     "shortcuts": {
-      "earnLabel": "HyperBucks Kazan",
-      "earnText": "HyperBucks nasıl kazanırım?",
-      "cashOutLabel": "HB'yi Çek",
-      "cashOutText": "HyperBucks'ımı nasıl çekerim?",
+      "earnLabel": "Gems Al",
+      "earnText": "Gems'i nasıl alırım?",
+      "cashOutLabel": "Takas Değeri",
+      "cashOutText": "Programmatic Trade-In Value nasıl çalışır?",
       "auctionsLabel": "Açık Artırmalar Nasıl Çalışır",
       "auctionsText": "Açık artırmalar nasıl çalışır?",
       "gamesLabel": "Mevcut Oyunlar",
@@ -263,7 +263,8 @@
       "trade": "Ticaret",
       "auction": "Açık artırma",
       "questing": "Arayış",
-      "bounty": "Ödül"
+      "bounty": "Ödül",
+      "forHire": "Kiralık"
     },
     "categories": {
       "all": "Hepsi",
@@ -349,7 +350,7 @@
       "playerLabel": "\nOyuncu\n",
       "platformLabel": "\nplatformu\n",
       "platLabel": "\nPlaka\n",
-      "notePayouts": "\nBirleşik yüklere sahip görevler ayrı tablo tutarları kullanılarak ödenecektir.\n",
+      "notePayouts": "Birleşik yüklü görevler ayrı tablodaki ödülleri kullanır.",
       "notePlanet": "\nOyunlar yayına girdiğinde gezegen verileri senkronize edilecek.\n",
       "dailySlots": "\nGünlük Görev Slotları\n",
       "used": "\nkullanılmış\n",
@@ -383,8 +384,8 @@
       "colSelling": "\nSatış\n",
       "colBuying": "\nSatın alma\n",
       "colTrading": "\nTicaret\n",
-      "colOnHire": "\nKiralık\n",
-      "colHiring": "\nişe alma\n",
+      "colOnHire": "Kiraya Verildi",
+      "colHiring": "Kiralama",
       "groupMarketplace": "\nPAZAR YERİ\n",
       "groupAuction": "\nMÜZAYEDE"
     }
@@ -397,7 +398,7 @@
       "myCollections": "My Koleksiyonlar",
       "transactions": "İşlemler",
       "offers": "Teklifler",
-      "hyperBucks": "HyperBucks",
+      "hyperBucks": "Gems",
       "earnings": "Kazançlar",
       "support": "Destek",
       "signOut": "Çıkış Yap"
@@ -436,7 +437,7 @@
       "transactions": "İşlemler",
       "transactionsDesc": "Ödeme geçmiş",
       "withdraw": "Çekim",
-      "withdrawDesc": "HB bakiyenizi çekin"
+      "withdrawDesc": "Pazar yeri satış gelirini çek"
     },
     "transactions": {
       "title": "İşlem Geçmişi",
@@ -467,7 +468,7 @@
       "noSentOffersHint": "Piyasadaki herhangi bir öğe için teklif yapın",
       "colItem": "Öğe",
       "colYourOffer": "Sizin Teklif",
-      "colFloorPrice": "Taban Fiyatı",
+      "colFloorPrice": "En Düşük Fiyat",
       "colOfferDuration": "Teklif Süresi",
       "colStatus": "Durum",
       "colAction": "Eylem",
@@ -638,11 +639,10 @@
       }
     },
     "hyperbucks": {
-      "title": " HyperBucks ",
-      "subtitle": " 250 HB = 1 ABD Doları · sabit oran ",
+      "title": "Gems",
+      "subtitle": "Oyun içi satın alımlar için Gems satın al",
       "currentBalance": " Mevcut Bakiye ",
       "tabTopUp": " Yükleme ",
-      "tabCashout": " Para Çekme ",
       "success": {
         "title": " Yükleme Başarılı! ",
         "added": " hesabınıza eklendi.",
@@ -652,30 +652,24 @@
       },
       "topup": {
         "amountLabel": " Tutar (USD) ",
-        "hyperBucks": " HyperBucks ",
+        "hyperBucks": "Gems",
         "preparing": " Hazırlanıyor... ",
         "proceed": " Ödemeye Devam Et ",
         "enterAmount": " Devam etmek için bir tutar girin ",
-        "secured": " Stripe Tarafından Güvenceye Alındı · 250 HB = 1 USD · min. 1 $ ",
+        "secured": "Stripe ile güvende · min. $1",
         "quickSelect": " Hızlı Seçim ",
         "paying": " Ödüyor ",
         "processing": " İşleniyor... ",
-        "pay": " Öde "
+        "pay": " Öde ",
+        "rate": "Min. $1 · Gems yalnızca oyun içi satın alımlar içindir"
       },
       "cashout": {
-        "amountLabel": " Tutar (HB) ",
-        "minUsdc": " Min 250 HB ",
-        "minBank": " Min 2500 HB ",
         "receiveVia": " ",
         "usdcWallet": " USDC Cüzdanı aracılığıyla alın ",
-        "usdcMin": " Min 250 HB · ~$0,01 gaz ",
         "bankAccount": " Banka Hesabı ",
-        "bankMin": " Min 2500 HB ($10) · banka bilgileri gerekli ",
         "addBank": " Banka ayrıntılarını Profile ekleyin → ",
         "noWallet": " Cüzdan bağlı değil ",
         "sendingOtp": " OTP Gönderiliyor... ",
-        "toUsdc": " USDC Cüzdanına Para Çekme ",
-        "toBank": " Banka Hesabına Para Çekme ",
         "kycNote": " Devam etmek için kimlik doğrulamayı tamamlayın "
       },
       "otp": {
@@ -686,7 +680,6 @@
         "bankAccount": " Banka Hesabı ",
         "label": " OTP Kodu ",
         "processing": " İşleniyor... ",
-        "confirm": " Nakit Ödemeyi Onayla ",
         "sending": " Gönderiliyor... ",
         "resend": " Kodu yeniden gönder "
       },

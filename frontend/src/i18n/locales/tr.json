@@ -89,19 +89,19 @@
     "highlights": [
       {
         "label": "Birbirine Bagli Evren",
-        "desc": "3 oyun - 1 ortak ekonomi ve ilerleme sistemi"
+        "desc": "3 oyun, tek ortak ilerleme sistemi"
       },
       {
         "label": "Gercek Sahiplik",
-        "desc": "Garantili minimum geri alim ile NFA'lar"
+        "desc": "Programmatic Trade-In Value içeren NFA/NFC/NFT'ler"
       },
       {
-        "label": "Oynayarak Kazan",
-        "desc": "Her eylem gercek dunya odullerinize katki saglar"
+        "label": "Play-to-Own",
+        "desc": "Topladığın her öğe senindir ve zincir üzerinde kayıtlıdır"
       },
       {
-        "label": "Nakit Odeme",
-        "desc": "Oyun ici para birimini/odulleri nakit odemelere donusturme"
+        "label": "Item Loyalty Program",
+        "desc": "Bir öğeyi ne kadar uzun süre tutarsan takas kademesi o kadar yükselir, ancak her zaman öğeye ayrılan tutarın altında kalır"
       },
       {
         "label": "Bagli Ilerleme",
@@ -121,12 +121,12 @@
   "homeMarket": {
     "featured": "One Cikan",
     "sectionTitle": "Sinirli Surumlu NFA Urunleri",
-    "buybackBadge": "Tum NFA/NFC/NFT'lerde Garantili Geri Alim",
+    "buybackBadge": "NFA ve NFC'lerde Programmatic Trade-In Value",
     "urgency": "Cabuk hareket edin, gidince gidiyorlar!",
     "loading": "Urunler yukleniyor...",
     "empty": "Henuz listelenmis urun yok.",
     "price": "Fiyat",
-    "minBuyback": "Min Geri Alim",
+    "minBuyback": "Takas Değeri",
     "buyNow": "Simdi Satin Al"
   },
   "gaming": {
@@ -177,15 +177,15 @@
       "aboutPageSubtitleSpan": "Web3.5 oyunculuğunun geleceğini inşa ediyoruz.",
       "aboutHeroTitle1": "Oyunculuğu Yeniden Hayal Ediyoruz.",
       "aboutHeroTitle2": "Web3.5 ile Güçlendirilmiş.",
-      "aboutHeroDesc": "Hyper Tek 100, her varlığın gerçek olduğu, her işlemin on-chain olduğu ve her oyuncunun gerçek bir paydaş olduğu yeni nesil bir oyun ekosistemidir. Üç birbirine bağlı oyun. Bir ortak ekonomi. Gelecek için inşa edilmiş.",
+      "aboutHeroDesc": "Hyper Tek 100, her öğenin zincir üzerinde kaydedildiği ve oyuncusuna ait olduğu, geliştirme aşamasındaki bir oyun projesidir. Tek bir ortak ilerleme sistemiyle birbirine bağlı üç oyun planlanıyor.",
       "pillar1Title": "Web3.5 Teknolojisi",
       "pillar1Desc": "On-chain varlıklar, gerçek sahiplik ve Base üzerine kurulu şeffaf bir pazar.",
       "pillar2Title": "Gerçek Varlık Değeri",
       "pillar2Desc": "Her oyun içi öğe işlem yapılabilir bir varlıktır. Oyna, kazan ve ilerlemenin sahibi ol.",
       "pillar3Title": "Adil Ekosistem",
-      "pillar3Desc": "Her katılımcıyı ödüllendirmek için tasarlanmış komisyon bölümleri ve geri alım mekanizmaları.",
+      "pillar3Desc": "Şeffaf komisyon paylaşımı ve uygun her öğeye yerleşik bir Programmatic Trade-In Value.",
       "pillar4Title": "Katıl",
-      "pillar4Desc": "Erken yatırımcılardan aktif oyunculara. Hyper Tek evrenine katılmak için birden fazla yol.",
+      "pillar4Desc": "Koleksiyonculardan aktif oyunculara, Hyper Tek evrenine katılmanın birkaç yolu olabilir.",
       "aboutDiscoverBtn": "Hikayemizi Keşfedin"
     }
   },
@@ -194,411 +194,27 @@
     "pageLinkSubtitle": "Yol haritası, finansman hedefleri, paketler ve desteğinizin Hyper Tek evrenini nasıl inşa ettiği.",
     "pageLinkCta": "Sayfayı görüntüle",
     "tryGaming": "Oyun arayüzünü deneyin",
-    "badge": "SINIRLI SAYIDA NFA VE İNDİRİMLİ OYUN PAKETLERİ – HEMEN HAREKETE GEÇ!",
+    "badge": "SINIRLI SAYIDA NFA'LAR VE OYUN PAKETLERİ, STOKLAR TÜKENENE KADAR",
     "intro1": "Kişisel fonlardan stratejik olarak 440.000 doların üzerinde yatırım yaptık ve şimdi bu çığır açan projeyi hayata geçirmek için ek 395.000 dolar arıyoruz. Sektörün en acil zorluklarından bazılarını ele alan heyecan verici deneyimler sunarak oyun dünyasında devrim yaratmayı hedefliyoruz. Birden fazla finansman girişiminin mevcut olduğu bu dönemde, bu gerçekten dönüştürücü bir şeyin parçası olma şansınız.",
-    "intro2": "Her şeyden önce, her biri ASLA tekrarlanmayacak eşsiz oyun içi bonuslar sunan, son derece nadir birkaç Stage 1 Non-Fungible Asset (NFA) öğesini piyasaya sürüyoruz. Bu öğeler tükendiğinde veya finansman hedefimize ulaştığımızda, kalan basılmamış sınırlı sayıdaki NFA'lar web sitemizden kalıcı olarak kaldırılacaktır. Bu, tavizsiz bir garantidir!",
-    "intro3": "Unutmayın, her Hyper Tek Non-Fungible Digital öğesi garantili bir minimum geri alımla birlikte gelir. Önemli oyun içi bonuslar sunan—en yüksek bonusları asla tekrarlanmayacak olan—bu sınırlı sayıdaki NFA'lar, oyun deneyiminizi geliştirecek ve onu yeni zirvelere taşıyacaktır.",
-    "intro4": "Hyper Tek Project hakkında gördükleriniz veya okuduklarınız konusunda tutkuluysanız ve oyun sektörünü yeniden şekillendirmede bize katılmak istiyorsanız ya da kazançlı bir fırsat arayan keskin bir yatırımcıysanız, işte tam zamanı. Sınırlı sayıdaki öğelerinizi mümkünken güvence altına alın ve gelişen Hyper Tek Ekosistemi'nin ayrılmaz bir parçası olun. Beklemeyin—bir kez tükendiklerinde, biter!",
-    "intro5": "İkinci girişimimiz, bir kitle fonlaması platformunda listelemeyi planladığımız, kendi web sitemizde özel paketler sunmayı içeriyor. Bunu kendimiz yaparak kitle fonlaması ücretlerinde yaklaşık %10 tasarruf ediyoruz ve bu tasarrufu tam %10 indirimle doğrudan size aktarıyoruz. Bu teklif yalnızca sınırlı bir süre için geçerlidir! Bu paketleri Kickstarter gibi bir kitle fonlaması platformunda listelediğimizde, indirimli fiyat artık geçerli olmayacaktır.",
+    "intro2": "Az sayıda 1. Aşama Non-Fungible Asset (NFA) öğesi yayınlıyoruz. Her biri, oyunlar yayınlanırsa geçerli olabilecek oyun içi bonusları listeler ve 1. Aşama bonus seviyelerinin tekrarlanması planlanmıyor. Arz kesin olarak sınırlıdır: bu öğeler tükendiğinde, basılmamış kalan sınırlı sayıdaki NFA'lar web sitesinden kaldırılacaktır.",
+    "intro3": "Uygun Hyper Tek öğeleri, zincir üzerindeki bir emanet (escrow) hesabında tutulan bir Programmatic Trade-In Value taşır. Bu sınırlı sayıdaki NFA'lar ayrıca, oyunlar yayınlanırsa nihai oyun kurallarına bağlı olarak geçerli olabilecek oyun içi bonusları da listeler.",
+    "intro4": "Hyper Tek Projesi'nde gördüklerini beğendiysen ve bu sınırlı öğelerden birine sahip olmak istiyorsan şimdi tam zamanı. Arz sınırlıdır ve bir öğe tükendiğinde yeniden basılmayacaktır.",
+    "intro5": "İkinci yayınımız, doğrudan kendi web sitemizde satılan ve daha sonra başka yerlerde sunulabilecekleri fiyattan %10 daha düşük fiyatlı özel oyun paketlerinden oluşuyor. Bu fiyat yalnızca sınırlı bir süre için geçerlidir.",
     "keyPointsTitle": "Hatırlanması Gereken Önemli Noktalar:",
-    "intro6": "Piyasaya sürdüğümüz ilk NFT, garantili minimum geri alım veya oyun içi bonus olmadan şaşırtıcı bir şekilde 1,47 milyon dolara satıldı! Bu, dünyanın en nadir NFT'lerinden bazılarını, garantili minimum geri alım ve bugün mevcut en büyük HT oyun içi bonuslarıyla birlikte gelen Hyper Tek Non-Fungible Assets'i (HT NFAs) edinme şansınız. Bu, gerçekleşen bir yatırımcı rüyası, ancak yalnızca stoklar tükenene kadar.",
-    "intro7": "Çoğu oyun \"Play to Earn\" (P2E) sunduğunu iddia etse de, genellikle yalnızca ticaret için oyun içi tokenlar sunarlar. Hyper Tek Project, gerçek nakit ödemelere dönüştürülebilen birden fazla ödül akışıyla desteklenen sağlam oyun içi mekaniklerle gerçek bir \"P2E\" garanti eder. Bizimle oyunun geleceğini deneyimlemeye hazır olun!",
+    "intro6": "Hyper Tek Non-Fungible Assets (HT NFA'lar), Hyper Tek ürün yelpazesindeki en büyük oyun içi bonuslara sahip dijital koleksiyon öğeleridir; bu bonuslar oyunlar yayınlanırsa geçerli olabilir ve ayrıca bir Programmatic Trade-In Value içerirler. Yalnızca stoklar tükenene kadar mevcuttur.",
+    "intro7": "Hyper Tek, Play-to-Own olarak tasarlandı: topladığın öğeler senindir, zincir üzerinde kayıtlıdır ve planlanan oyunlarda geçerli olabilecek oyun içi faydaya sahiptir. Öğeler para kazanma yolu olarak değil, dijital koleksiyon öğesi olarak satılır.",
     "collectionsLabel": "Koleksiyonlar",
-    "sectionTitle": "Bagis Katman Paketleri",
+    "sectionTitle": "Sınırlı Sayıda Oyun Paketleri",
     "discount": "Listelenen fiyatlardan %10 tasarruf edin",
-    "donationTierLabel": "Bagis Katmani",
-    "donationTierPrefix": "Bagis Katmani:",
+    "donationTierLabel": "Paket Kademesi",
+    "donationTierPrefix": "Paket Kademesi:",
     "rewardsTitle": "Oduller ve Avantajlar",
     "noteTitle": "Not",
-    "commonNote": "Simdi bagis yapmanin odul, bonus ve/veya indirimleri.\n\nNOT: Oyun ici veya secilmis satin alimlar icin kullanilacak voucherler disinda, diger tum Oduller, Bonuslar ve/veya Indirimler baska herhangi bir promosyonla birleştirilemez veya kullanılamaz.\n\nTum bagis paketleri oyun gelistirmede yazili son jenerik kreditlerini icеrecektir.",
+    "commonNote": "Her pakete dahil olan öğeler, bonuslar ve indirimler.\n\nNOT: Oyun içi satın alımlar için dahil edilen Gems dışında, bonuslar ve indirimler başka hiçbir promosyonla birleştirilemez.\n\nOyunlar yayınlanırsa her paket, oyunların kapanış jeneriğinde adının yer almasını içerir.",
     "specialConditionTitle": "Ozel Kosul",
-    "specialCondition": "Oyun/oyunlarin basarili gelistirilmesi ve tamamlanmasi uzerine, bagis yapan her kisi oyun/oyunlarda kullanilmak uzere orijinal yatirimindan daha fazla minimum deger odul veya paket alacak ve bagis icin vaat edilen herhangi bir bonus veya odul oyun/oyunlar piyasaya suruldukten sonra verilecektir.",
+    "specialCondition": "Öğeler olduğu gibi satılır. Bir pakette listelenen oyun içi bonuslar, indirimler ve Gems yalnızca oyunlar yayınlanırsa geçerli olabilir ve nihai oyun kurallarına tabidir. Hiçbir kâr, ödeme veya finansal getiri vaat edilmez.",
     "imageComing": "Gorsel yakinda geliyor",
-    "close": "Kapat",
-    "items": [
-      {
-        "title": "Yeni Asker",
-        "rewards": [
-          "Adınız oyunun son jeneriklerinde \"Yeni Asker\" unvaniyla gorunecek",
-          "Oyun ici satin alimlar icin kullanilmak uzere 35 USD kredi alacaksiniz (nakit odemelere donusturulemez)",
-          "Oyun hakkinda haftalik guncellemeler e-posta yoluyla alacaksiniz",
-          "Discord sohbetine katilabileceksiniz.",
-          "Bir Yeni Asker olarak ilk 12 ay icin oyun ici satin alimlarda %10 Indirim alacaksiniz"
-        ]
-      },
-      {
-        "title": "Cadet Acemi Sinifi",
-        "rewards": [
-          "Adınız oyunun son jeneriklerinde \"Cadet Acemi Sinifi\" unvaniyla gorunecek",
-          "Oyun ici satin alimlar icin kullanilmak uzere 90 USD kredi alacaksiniz (nakit odemelere donusturulemez)",
-          "Oyun hakkinda haftalik guncellemeler e-posta yoluyla alacaksiniz",
-          "Discord sohbetine katilabileceksiniz.",
-          "Bir Cadet Acemi Sinifi olarak kaynak toplamada %10 artis bonusu alacaksiniz",
-          "Egitim hizinda %5 artis",
-          "Ilk 12 ay icin oyun ici satin alimlarda %10 indirim",
-          "#Misyonumuzu desteklemek icin sadece 50 dolar bagis yapmay secin ve isterseniz adınız oyunun son jeneriklerinde \"Listeli Onursal Acemi Sinifi\" unvaniyla gorunecek"
-        ]
-      },
-      {
-        "title": "Cadet 1. Sinif",
-        "rewards": [
-          "Adınız oyunun son jeneriklerinde \"Cadet 1. Sinif\" unvaniyla gorunecek",
-          "Oyun ici satin alimlar icin kullanilmak uzere 125 USD kredi alacaksiniz (nakit odemelere donusturulemez)",
-          "Oyun hakkinda haftalik guncellemeler e-posta yoluyla alacaksiniz",
-          "Discord sohbetine katilabileceksiniz.",
-          "Bir Cadet 1. Sinif olarak kaynak toplamada %10 artis bonusu alacaksiniz",
-          "Egitim hizinda %5 artis",
-          "Daha fazla odul parasinda %5",
-          "Saldiri ve savunmada %5 artis",
-          "Ilk 24 ay icin oyun ici satin alimlarda %10 indirim"
-        ]
-      },
-      {
-        "title": "Onde Gelen Cadet",
-        "rewards": [
-          "Adınız oyunun son jeneriklerinde \"Onde Gelen Cadet\" unvaniyla gorunecek",
-          "Oyun ici satin alimlar icin kullanilmak uzere 170 USD kredi alacaksiniz (nakit odemelere donusturulemez)",
-          "Oyun hakkinda haftalik guncellemeler e-posta yoluyla alacaksiniz",
-          "Discord sohbetine katilabileceksiniz.",
-          "Bir Onde Gelen Cadet olarak kaynak toplamada %10 artis bonusu alacaksiniz",
-          "Egitim hizinda %5 artis",
-          "Daha fazla odul parasinda %5",
-          "Saldiri ve savunmada %5 artis",
-          "Ilk 24 ay icin oyun ici satin alimlarda %10 indirim"
-        ]
-      },
-      {
-        "title": "Onde Gelen Cadet Ozel Sinifi",
-        "rewards": [
-          "Adınız oyunun son jeneriklerinde \"Onde Gelen Cadet Ozel Sinifi\" unvaniyla gorunecek",
-          "Oyun ici satin alimlar icin kullanilmak uzere 240 USD kredi alacaksiniz (nakit odemelere donusturulemez)",
-          "Oyun hakkinda haftalik guncellemeler e-posta yoluyla alacaksiniz",
-          "Discord sohbetine katilabileceksiniz.",
-          "Bir Onde Gelen Cadet Ozel Sinifi olarak kaynak toplamada %10 artis bonusu alacaksiniz",
-          "Egitim hizinda %5 artis",
-          "Daha fazla odul parasinda %5",
-          "Saldiri ve savunmada %5 artis",
-          "Ilk 24 ay icin oyun ici satin alimlarda %15 indirim"
-        ]
-      },
-      {
-        "title": "Kıdemli Cadet",
-        "rewards": [
-          "Adınız oyunun son jeneriklerinde \"Onde Gelen Cadet Ozel Sinifi\" unvaniyla gorunecek",
-          "Oyun ici satin alimlar icin kullanilmak uzere 390 USD kredi alacaksiniz (nakit odemelere donusturulemez)",
-          "Oyun hakkinda haftalik guncellemeler e-posta yoluyla alacaksiniz",
-          "Discord sohbetine katilabileceksiniz.",
-          "Bir Kıdemli Cadet olarak kaynak toplamada %15 artis bonusu alacaksiniz",
-          "Egitim hizinda %5 artis",
-          "Saglikta %10 artis",
-          "Daha fazla odul parasinda %5",
-          "Saldiri ve savunmada %5 artis",
-          "Ilk 12 ay icin oyun ici satin alimlarda %20 indirim",
-          "Ikinci 12 ay icin oyun ici satin alimlarda %10 indirim",
-          "#Misyonumuzu desteklemek icin sadece 250 dolar bagis yapmay secin, isterseniz adınız oyunun son jeneriklerinde \"Listeli Onursal Kıdemli Ozel Sinif\" unvaniyla gorunecek"
-        ]
-      },
-      {
-        "title": "Kıdemli Cadet Ozel Sinifi",
-        "rewards": [
-          "Adınız oyunun son jeneriklerinde \"Kıdemli Cadet Ozel Sinifi\" unvaniyla gorunecek",
-          "Oyun ici satin alimlar icin kullanilmak uzere 440 USD kredi alacaksiniz (nakit odemelere donusturulemez)",
-          "Oyun hakkinda haftalik guncellemeler e-posta yoluyla alacaksiniz",
-          "Discord sohbetine katilabileceksiniz.",
-          "Bir Kıdemli Cadet Ozel Sinifi olarak kaynak toplamada %15 artis bonusu alacaksiniz",
-          "Ilk 12 ay icinde NFA veya nadir esya elde etmede %1,0 daha yuksek sans",
-          "Egitim hizinda %10 artis",
-          "Saglikta %10 artis",
-          "Daha fazla odul parasinda %10",
-          "Saldiri ve savunmada %5 artis",
-          "Saldiri buyuklugu kapasitesinde %5 daha fazla",
-          "Ilk 12 ay icin oyun ici satin alimlarda %20 indirim",
-          "Ikinci 12 ay icin oyun ici satin alimlarda %10 indirim"
-        ]
-      },
-      {
-        "title": "Ucus Cadeti",
-        "rewards": [
-          "Adınız oyunun son jeneriklerinde \"Ucus Cadeti\" unvaniyla gorunecek",
-          "Oyun ici satin alimlar icin kullanilmak uzere 550 USD kredi alacaksiniz (nakit odemelere donusturulemez)",
-          "Oyun hakkinda haftalik guncellemeler e-posta yoluyla alacaksiniz",
-          "Discord sohbetine katilabileceksiniz.",
-          "Bir Ucus Yuzbasi olarak kaynak toplamada %15 artis bonusu alacaksiniz",
-          "Ilk 12 ay icinde NFA veya nadir esya elde etmede %1,5 daha yuksek sans",
-          "Egitim hizinda %15 artis",
-          "Saglikta %15 artis",
-          "Daha fazla odul parasinda %10",
-          "Saldiri ve savunmada %5 artis",
-          "Saldiri buyuklugu kapasitesinde %5 daha fazla",
-          "1 mega kaynak paketi",
-          "Gemi ve yaris bonuslari sunan ve garantili minimum geri alimi 150 dolar olan 1 NFA Ustun takim uzmani",
-          "Ilk 12 ay icin oyun ici satin alimlarda %20 indirim",
-          "Ikinci 12 ay icin oyun ici satin alimlarda %10 indirim"
-        ]
-      },
-      {
-        "title": "Ucus Yuzbasi",
-        "rewards": [
-          "Adınız oyunun son jeneriklerinde \"Ucus Yuzbasi\" unvaniyla gorunecek",
-          "Oyun ici satin alimlar icin kullanilmak uzere 6800 USD kredi alacaksiniz (nakit odemelere donusturulemez)",
-          "Oyun hakkinda haftalik guncellemeler e-posta yoluyla alacaksiniz",
-          "Discord sohbetine katilabileceksiniz.",
-          "Bir Ucus Yuzbasi olarak kaynak toplamada %20 artis bonusu alacaksiniz",
-          "Ilk 12 ay icinde NFA veya nadir esya elde etmede %1,5 daha yuksek sans",
-          "Egitim hizinda %20 artis",
-          "Saglikta %15 artis",
-          "Daha fazla odul parasinda %15",
-          "Saldiri ve savunmada %8 artis",
-          "Saldiri buyuklugu kapasitesinde %7 daha fazla",
-          "Bonus yaris parcalari",
-          "1 mega kaynak paketi",
-          "1 dis dunya liman geci",
-          "Gemi ve yaris bonuslari sunan ve garantili minimum geri alimi 150 dolar olan 1 NFA Ustun takim uzmani",
-          "Ilk 12 ay icin oyun ici satin alimlarda %20 indirim",
-          "Ikinci 12 ay icin oyun ici satin alimlarda %10 indirim",
-          "#Misyonumuzu desteklemek icin sadece 500 dolar bagis yapmay secin ve isterseniz adınız oyunun son jeneriklerinde \"Listeli Onursal Ucus Yuzbasi\" unvaniyla gorunecek"
-        ]
-      },
-      {
-        "title": "Ucus Yuzbasi Ozel Sinifi",
-        "rewards": [
-          "Adınız oyunun son jeneriklerinde \"Ucus Yuzbasi Ozel Sinifi\" unvaniyla gorunecek",
-          "Oyun ici satin alimlar icin kullanilmak uzere 1.050 USD kredi alacaksiniz (nakit odemelere donusturulemez)",
-          "Oyun hakkinda haftalik guncellemeler e-posta yoluyla alacaksiniz",
-          "Discord sohbetine katilabileceksiniz.",
-          "Bir Ucus Yuzbasi Ozel Sinifi olarak kaynak toplamada %20 artis bonusu alacaksiniz",
-          "Ilk 12 ay icinde NFA veya nadir esya elde etmede %1,5 daha yuksek sans",
-          "Devam eden NFA veya nadir esya elde etmede %1,0 daha yuksek sans",
-          "Egitim hizinda %20 artis",
-          "Saglikta %20 artis",
-          "Daha fazla odul parasinda %15",
-          "Saldiri ve savunmada %10 artis",
-          "Saldiri buyuklugu kapasitesinde %7 daha fazla",
-          "Bonus yaris parcalari",
-          "1 mega kaynak paketi",
-          "1 ekstra ana bilgisayar avatari",
-          "1 dis dunya liman geci",
-          "Gemi ve yaris bonuslari sunan ve garantili minimum geri alimi 150 dolar olan 1 NFA Ustun takim uzmani",
-          "Ilk 12 ay icin oyun ici satin alimlarda %20 indirim",
-          "Ikinci 12 ay icin oyun ici satin alimlarda %10 indirim"
-        ]
-      },
-      {
-        "title": "Kanat Arkadasi",
-        "rewards": [
-          "Adınız oyunun son jeneriklerinde \"Kanat Arkadasi\" unvaniyla gorunecek",
-          "Oyun ici satin alimlar icin kullanilmak uzere 1.480 USD kredi alacaksiniz (nakit odemelere donusturulemez)",
-          "Oyun hakkinda haftalik guncellemeler e-posta yoluyla alacaksiniz",
-          "Discord sohbetine katilabileceksiniz.",
-          "Bir Kanat Arkadasi olarak kaynak toplamada %25 artis bonusu alacaksiniz",
-          "Ilk 12 ay icinde NFA veya nadir esya elde etmede %2,0 daha yuksek sans",
-          "Devam eden NFA veya nadir esya elde etmede %1,0 daha yuksek sans",
-          "Egitim hizinda %25 artis",
-          "Saglikta %20 artis",
-          "Daha fazla odul parasinda %20",
-          "Saldiri ve savunmada %10 artis",
-          "Saldiri buyuklugu kapasitesinde %8 daha fazla",
-          "Bonus yaris parcalari",
-          "1 mega kaynak paketi",
-          "1 mega kristal paketi",
-          "1 ekstra ana bilgisayar avatari",
-          "1 dis dunya liman geci",
-          "Her biri garantili minimum geri alimi 150 dolar olan 2 NFA Ustun takim uzmani",
-          "Ilk 12 ay icin oyun ici satin alimlarda %20 indirim",
-          "Oyun/oyunlardaki herhangi bir satin alimda suresiz olarak %10 daha fazla indirim alin",
-          "#Misyonumuzu desteklemek icin sadece 1.000 dolar bagis yapmay secin ve isterseniz adınız oyunun son jeneriklerinde \"Listeli Onursal Kanat Arkadasi\" unvaniyla gorunecek"
-        ]
-      },
-      {
-        "title": "Kıdemli Kanat Arkadasi Sinifi",
-        "rewards": [
-          "Adınız oyunun son jeneriklerinde \"Kıdemli Kanat Arkadasi Sinifi\" unvaniyla gorunecek",
-          "Oyun ici satin alimlar icin kullanilmak uzere 2.200 USD kredi alacaksiniz (nakit odemelere donusturulemez)",
-          "Oyun hakkinda haftalik guncellemeler e-posta yoluyla alacaksiniz",
-          "Discord sohbetine katilabileceksiniz.",
-          "Bir Kıdemli Kanat Arkadasi Sinifi olarak kaynak toplamada %25 artis bonusu alacaksiniz",
-          "Ilk 12 ay icinde NFA veya nadir esya elde etmede %3,0 daha yuksek sans",
-          "Devam eden NFA veya nadir esya elde etmede %1,5 daha yuksek sans",
-          "Egitim hizinda %30 artis",
-          "Saglikta %25 artis",
-          "Daha fazla odul parasinda %20",
-          "Saldiri ve savunmada %15 artis",
-          "Saldiri buyuklugu kapasitesinde %10 daha fazla",
-          "Saldiri/savunma icin 1 ekstra teleportasyon yuvasi",
-          "Bonus yaris parcalari",
-          "1 mega kaynak paketi",
-          "1 mega kristal paketi",
-          "1 ekstra ana bilgisayar avatari",
-          "1 dis dunya liman geci",
-          "Her biri garantili minimum geri alimi 150 dolar olan 2 NFA Ustun takim uzmani",
-          "Ilk 12 ay icin oyun ici satin alimlarda %20 indirim",
-          "Oyun/oyunlardaki herhangi bir satin alimda suresiz olarak %10 daha fazla indirim alin"
-        ]
-      },
-      {
-        "title": "Teknik Subay",
-        "rewards": [
-          "Adınız oyunun son jeneriklerinde \"Teknik Subay\" unvaniyla gorunecek",
-          "Oyun ici satin alimlar icin kullanilmak uzere 2.900 USD kredi alacaksiniz (nakit odemelere donusturulemez)",
-          "Oyun hakkinda haftalik guncellemeler e-posta yoluyla alacaksiniz",
-          "Discord sohbetine katilabileceksiniz.",
-          "Bir Teknik Subay olarak kaynak toplamada %25 artis bonusu alacaksiniz",
-          "Ilk 12 ay icinde NFA veya nadir esya elde etmede %3,5 daha yuksek sans",
-          "Devam eden NFA veya nadir esya elde etmede %2,0 daha yuksek sans",
-          "Egitim hizinda %30 artis",
-          "Saglikta %25 artis",
-          "Odul parasinda %25 daha fazla",
-          "Saldiri ve savunmada %15 artis",
-          "Saldiri buyuklugu kapasitesinde %10 daha fazla",
-          "Saldiri/savunma icin 1 ekstra teleportasyon yuvasi",
-          "Bonus yaris parcalari",
-          "2 mega kaynak paketi",
-          "1 mega kristal paketi",
-          "2 ekstra ana bilgisayar avatari",
-          "2 dis dunya liman geci",
-          "Her biri garantili minimum geri alimi 150 dolar olan 3 NFA Ustun takim uzmani",
-          "Ilk 12 ay icin oyun ici satin alimlarda %25 indirim",
-          "Oyun/oyunlardaki herhangi bir satin alimda suresiz olarak %20 daha fazla indirim alin",
-          "Bagisci modelleme uzerine kisiye ozel Avatar, oyun genelinde gorunecek",
-          "Gelir paylasimi! Oyun ici paket ve NFA satislarindan elde edilen kar havuzunun %2,5'ine kadar paylasim",
-          "Oyun hakkinda aylik ozel guncellemelerle ozel gelistirici erisimi ve geri bildirim firsatlari",
-          "Oyun ici kullanilacak ozel Quest yariscisi tasarimi",
-          "Bagisci onur mektubuyla birlikte gonderilen ozel yarisciya ait beyzbol tarz koleksiyonluk karti"
-        ]
-      },
-      {
-        "title": "Takim Uzmani",
-        "rewards": [
-          "Adınız oyunun son jeneriklerinde \"Takim Uzmani\" unvaniyla gorunecek",
-          "Oyun ici satin alimlar icin kullanilmak uzere 3.300 USD kredi alacaksiniz (nakit odemelere donusturulemez)",
-          "Oyun hakkinda haftalik guncellemeler e-posta yoluyla alacaksiniz",
-          "Discord sohbetine katilabileceksiniz.",
-          "Bir Takim Uzmani olarak kaynak toplamada %30 artis bonusu alacaksiniz",
-          "Ilk 12 ay icinde NFA veya nadir esya elde etmede %5 daha yuksek sans",
-          "Devam eden NFA veya nadir esya elde etmede %2,5 daha yuksek sans",
-          "Egitim hizinda %30 artis",
-          "Saglikta %30 artis",
-          "Odul parasinda %25 daha fazla",
-          "Saldiri ve savunmada %15 artis",
-          "Saldiri buyuklugu kapasitesinde %10 daha fazla",
-          "Saldiri/savunma icin 1 ekstra teleportasyon yuvasi",
-          "Bonus yaris parcalari",
-          "3 mega kaynak paketi",
-          "1 mega kristal paketi",
-          "2 ekstra ana bilgisayar avatari",
-          "2 dis dunya liman geci",
-          "Her biri garantili minimum geri alimi 150 dolar olan 2 NFA Ustun takim uzmani",
-          "Garantili minimum geri alimi 400 dolar olan 1 NFA Olaganustu takim uzmani",
-          "Ilk 24 ay icin oyun ici satin alimlarda %25 indirim",
-          "Oyun/oyunlardaki herhangi bir satin alimda suresiz olarak %20 daha fazla indirim alin",
-          "Bagisci modelleme uzerine kisiye ozel Avatar, oyun genelinde gorunecek",
-          "Gelir paylasimi! Oyun ici paket ve NFA satislarindan elde edilen kar havuzunun %2,5'ine kadar paylasim",
-          "Oyun hakkinda aylik ozel guncellemelerle ozel gelistirici erisimi ve geri bildirim firsatlari",
-          "Oyun ici kullanilacak ozel Quest yariscisi tasarimi",
-          "Bagisci onur mektubuyla birlikte gonderilen ozel yarisciya ait beyzbol tarz koleksiyonluk karti",
-          "#Misyonumuzu desteklemek icin sadece 2.500 dolar bagis yapmay secin ve isterseniz adınız oyunun son jeneriklerinde \"Listeli Onursal Takim Uzmani\" unvaniyla gorunecek"
-        ]
-      },
-      {
-        "title": "Takim Uzmani Majoru",
-        "rewards": [
-          "Adınız oyunun son jeneriklerinde \"Takim Uzmani Majoru\" unvaniyla gorunecek",
-          "Oyun ici satin alimlar icin kullanilmak uzere 6.500 USD kredi alacaksiniz (nakit odemelere donusturulemez)",
-          "Oyun hakkinda haftalik guncellemeler e-posta yoluyla alacaksiniz",
-          "Discord sohbetine katilabileceksiniz.",
-          "Bir Takim Uzmani Majoru olarak kaynak toplama/madencilikte %35 artis bonusu alacaksiniz",
-          "Ilk 12 ay icinde NFA veya nadir esya elde etmede %7 daha yuksek sans",
-          "Devam eden NFA veya nadir esya elde etmede %3,5 daha yuksek sans",
-          "Egitim hizinda %35 artis",
-          "Saglikta %30 artis",
-          "Odul parasinda %30 daha fazla",
-          "Saldiri ve savunmada %20 artis",
-          "Saldiri buyuklugu kapasitesinde %10 daha fazla",
-          "Saldiri/savunma icin 1 ekstra teleportasyon yuvasi",
-          "Bonus yaris parcalari",
-          "4 mega kaynak paketi",
-          "1 mega kristal paketi",
-          "2 ekstra ana bilgisayar avatari",
-          "2 dis dunya liman geci",
-          "Her biri garantili minimum geri alimi 150 dolar olan 3 NFA Ustun takim uzmani",
-          "Garantili minimum geri alimi 400 dolar olan 1 NFA Olaganustu takim uzmani",
-          "Ilk 24 ay icin oyun ici satin alimlarda %25 indirim",
-          "Oyun/oyunlardaki herhangi bir satin alimda suresiz olarak %20 daha fazla indirim alin",
-          "Bagisci modelleme uzerine kisiye ozel Avatar, oyun genelinde gorunecek",
-          "Gelir paylasimi! Oyun ici paket ve NFA satislarindan elde edilen kar havuzunun %5'ine kadar paylasim",
-          "Oyun hakkinda aylik ozel guncellemelerle ozel gelistirici erisimi ve geri bildirim firsatlari",
-          "Oyun ici kullanilacak ozel Quest yariscisi tasarimi",
-          "Bagisci onur mektubuyla birlikte gonderilen ozel yarisciya ait beyzbol tarz koleksiyonluk karti"
-        ]
-      },
-      {
-        "title": "Komutan Elit",
-        "rewards": [
-          "Adınız oyunun son jeneriklerinde \"Komutan Elit\" unvaniyla gorunecek",
-          "Oyun ici satin alimlar icin kullanilmak uzere 9.000 USD kredi alacaksiniz",
-          "Oyun hakkinda haftalik guncellemeler e-posta yoluyla alacaksiniz",
-          "Discord sohbetine katilabileceksiniz.",
-          "Bir Komutan Elit olarak kaynak toplama/madencilikte %35 artis bonusu alacaksiniz",
-          "Ilk 12 ay icinde NFA veya nadir esya elde etmede %7,5 daha yuksek sans",
-          "Devam eden NFA veya nadir esya elde etmede %4 daha yuksek sans",
-          "Egitim hizinda %40 artis",
-          "Saglikta %35 artis",
-          "Odul parasinda %30 daha fazla",
-          "Saldiri ve savunmada %20 artis",
-          "Saldiri buyuklugu kapasitesinde %20 daha fazla",
-          "Saldiri/savunma icin 2 ekstra teleportasyon yuvasi",
-          "Bonus yaris parcalari",
-          "4 mega kaynak paketi",
-          "2 mega kristal paketi",
-          "2 ekstra ana bilgisayar avatari",
-          "3 dis dunya liman geci",
-          "Her biri garantili minimum geri alimi 150 dolar olan 4 NFA Ustun takim uzmani",
-          "Garantili minimum geri alimi 400 dolar olan 1 NFA Olaganustu takim uzmani",
-          "Ilk 12 ay icin oyun ici satin alimlarda %30 indirim",
-          "Ikinci 12 ay icin oyun ici satin alimlarda %25 indirim",
-          "Oyun/oyunlardaki herhangi bir satin alimda suresiz olarak %20 daha fazla indirim alin",
-          "Bagisci modelleme uzerine kisiye ozel Avatar, oyun genelinde gorunecek",
-          "Gelir paylasimi! Oyun ici paket ve NFA satislarindan elde edilen kar havuzunun %5'ine kadar paylasim",
-          "Oyun hakkinda aylik ozel guncellemelerle ozel gelistirici erisimi ve geri bildirim firsatlari",
-          "Oyun ici kullanilacak ozel Quest yariscisi tasarimi",
-          "Bagisci onur mektubuyla birlikte gonderilen ozel yarisciya ait beyzbol tarz koleksiyonluk karti"
-        ]
-      },
-      {
-        "title": "Overlord",
-        "rewards": [
-          "Adınız oyunun son jeneriklerinde \"Overlord\" unvaniyla gorunecek",
-          "Oyun ici satin alimlar icin kullanilmak uzere 15.000 USD kredi alacaksiniz (nakit odemelere donusturulemez)",
-          "Oyun hakkinda haftalik guncellemeler e-posta yoluyla alacaksiniz",
-          "Discord sohbetine katilabileceksiniz.",
-          "Bir Overlord olarak kaynak toplama/madencilikte %40 artis bonusu alacaksiniz",
-          "Ilk 12 ay icinde NFA veya nadir esya elde etmede %10 daha yuksek sans",
-          "Devam eden NFA veya nadir esya elde etmede %5 daha yuksek sans",
-          "Egitim hizinda %50 artis",
-          "Saglikta %40 artis",
-          "Odul parasinda %40 daha fazla",
-          "Saldiri ve savunmada %25 artis",
-          "Saldiri buyuklugu kapasitesinde %25 daha fazla",
-          "Saldiri/savunma icin 2 ekstra teleportasyon yuvasi",
-          "Bonus yaris parcalari",
-          "6 mega kaynak paketi",
-          "3 mega kristal paketi",
-          "2 ekstra ana bilgisayar avatari",
-          "4 dis dunya liman geci",
-          "Her biri garantili minimum geri alimi 150 dolar olan 4 NFA Ustun takim uzmani",
-          "Her biri garantili minimum geri alimi 650 dolar olan 2 NFA Efsanevi takim uzmani",
-          "Garantili minimum geri alimi 1000 dolar olan 1 NFA Destansi takim uzmani",
-          "Ilk 12 ay icin oyun ici satin alimlarda %40 indirim",
-          "Ikinci 12 ay icin oyun ici satin alimlarda %30 indirim",
-          "Oyun/oyunlarda yer aldiginiz sure boyunca herhangi bir satin alimda %20 daha fazla indirim alin",
-          "Bagisci modelleme uzerine kisiye ozel Avatar, oyun genelinde gorunecek",
-          "Gelir paylasimi! Oyun ici paket ve NFA satislarindan elde edilen kar havuzunun %5'ine kadar paylasim",
-          "Oyun hakkinda aylik ozel guncellemelerle ozel gelistirici erisimi ve geri bildirim firsatlari",
-          "Oyun ici kullanilacak ozel Quest yariscisi tasarimi",
-          "Bagisci onur mektubuyla birlikte gonderilen ozel yarisciya ait beyzbol tarz koleksiyonluk karti"
-        ]
-      }
-    ]
+    "close": "Kapat"
   },
   "dashboard": {
     "mobileNotice": {

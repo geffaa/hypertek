@@ -8,8 +8,8 @@
       "subtitle": "Cea mai intensă experiență de curse cu vehicule zburătoare din galaxie,\nunde priceperea plătește și se fac campioni.",
       "intro": [
         "Hyper Racing este un joc de curse competitiv de mare octanism, care se desfășoară în lumi extraterestre, în care jucătorii construiesc, modernizează și pilotează vehicule de curse zburătoare complet personalizabile prin unele dintre cele mai periculoase circuite din galaxie. De la formațiuni de rocă plutitoare și tuburi de lavă vulcanică până la pustii și trecători de munte, fiecare cursă este un test de pregătire, reflexe și strategie.",
-        "Dar Hyper Racing este mai mult decât un simplu joc; este o platformă competitivă în care recompense reale sunt pe linie. Performanții de top pot intra în evenimente și turnee clasate cu fonduri de premii în bani reale. Cu cât concurezi mai bine, cu atât câștigi mai mult. Indiferent dacă urmărești gloria clasamentului sau construiești un imperiu al curselor, tot ceea ce faci în Hyper Racing te duce mai departe.",
-        "Îmbunătățiți-vă vehiculele de curse de la nas la coadă. Recrutați-vă și creșteți-vă echipajul de groapă. Angajează un manager de boxă care se potrivește cu filozofia ta de curse. Apoi du-ți abilitățile dincolo de pistă, garajul tău de curse funcționează ca hangarul navei tale spațiale personale, iar fiecare abilitate pe care o dezvolți este implicată în lupta spațială în Hyper Quest și Overlord of the 7 Realms."
+        "Hyper Racing este planificat ca o platformă competitivă. Cei mai buni ar putea participa la evenimente clasate și turnee cu recompense în joc puse în joc. Fie că urmărești gloria în clasament, fie că îți construiești un imperiu al curselor, tot ce faci în Hyper Racing este conceput să te ducă înainte.",
+        "Îmbunătățește-ți vehiculele de curse de la bot la coadă. Recrutează-ți echipa de la boxe și crește-i nivelul. Recrutează un manager de boxe care se potrivește cu filosofia ta de curse. Apoi du-ți abilitățile dincolo de pistă: garajul tău de curse este și hangarul navei tale spațiale personale, iar fiecare abilitate pe care o dezvolți te însoțește în luptele spațiale din Hyper Quest și Overlord of the 7 Realms."
       ],
       "introClose": "Citește mai departe pentru a descoperi cum funcționează jocul, ce poți câștiga și cum cariera ta de curse alimentează un întreg univers de progresie.",
       "calloutLine1": "Cursa pentru a câștiga. Câștigă pentru a face upgrade.",
@@ -24,7 +24,7 @@
         {
           "num": "02",
           "title": "Construiește-ți echipa",
-          "body": "Cursa este un sport de echipă. Recrutați specialiști în echipajul de boxă care aduc bonusuri unice, realimentare mai rapidă, diagnosticare în timp real, reparații de urgență la mijlocul cursei și modificări de performanță între ture. Fiecare membru al echipajului crește cu experiență, stivuind abilități puternice pe lângă upgrade-urile vehiculului tău. Apoi angajați un manager de boxă care să coordoneze operațiunile, să apeleze strategia de cursă și să deblocheze creșterile de performanță la nivelul întregii echipe care se adaugă pe un sezon întreg."
+          "body": "Cursele sunt un sport de echipă. Recrutează specialiști la boxe care aduc bonusuri unice: realimentare mai rapidă, diagnosticare în timp real, reparații de urgență ale fuzelajului în timpul cursei și ajustări de performanță între tururi. Fiecare membru al echipei crește în nivel odată cu experiența, adăugând abilități puternice peste îmbunătățirile vehiculului tău. Apoi recrutează un manager de boxe care să coordoneze operațiunile, să stabilească strategia de cursă și să deblocheze creșteri de performanță pentru toată echipa, care se acumulează pe parcursul unui sezon întreg."
         },
         {
           "num": "03",
@@ -44,12 +44,12 @@
           "body": "Fiecare cursă pe care o termini plătește. Câștigă, iar recompensele se înmulțesc. Victoriile în cursă deblochează componente premium pentru vehicule, materiale de upgrade rare, jetoane exclusive de recrutare a echipajului și credite pentru a vă finanța următoarea construcție. Vinde vehicule îmbunătățite pentru profit, reinvestește în mașini noi și urmărește-ți cum imperiul de curse crește cu fiecare podium."
         },
         {
-          "title": "Evenimente cu numerar real",
-          "body": "Hyper Racing duce competiția la nivelul următor cu evenimente și turnee clasate în care bani reali sunt în joc. Intră în competiții bazate pe abilități, dovedește-ți abilitățile împotriva celor mai buni piloți din galaxie și pleacă cu plăți în numerar reale. Cu cât plasezi mai sus, cu atât fondul de premii este mai mare. De la provocări cu clasare săptămânală până la evenimente sezoniere ale campionatului, există întotdeauna oportunități pentru cei mai buni performanțe de a-și transforma abilitățile de curse în câștiguri reale."
+          "title": "Evenimente clasate",
+          "body": "Hyper Racing este conceput în jurul evenimentelor clasate și al turneelor. Competițiile bazate pe îndemânare ți-ar putea permite să îți dovedești abilitățile în fața celor mai buni piloți din galaxie pentru recompense în joc, titluri și poziție în clasament. De la provocări clasate săptămânale la campionate sezoniere, cei mai buni ar putea avea multe ocazii să iasă în evidență."
         },
         {
           "title": "Cum funcționează evenimentele cu premii",
-          "body": "Jucătorii se califică prin joc clasat, îndeplinind pragurile de performanță care acordă intrarea la turnee cu premii în bani. Evenimentele sunt structurate în jurul unui matchmaking corect, asigurându-se că fiecare concurent se confruntă cu adversari cu abilități similare. Taxele de intrare sunt transparente, fondurile de premiere sunt afișate clar înainte de a vă angaja, iar plățile sunt procesate rapid după încheierea fiecărui eveniment. Este competitiv, este corect, iar recompensele sunt reale."
+          "body": "Jucătorii s-ar putea califica prin jocul clasat, atingând praguri de performanță. Evenimentele sunt planificate în jurul unui matchmaking corect, astfel încât fiecare concurent să întâlnească adversari de nivel similar. Regulile evenimentelor și recompensele în joc sunt gândite să fie afișate clar înainte să te angajezi."
         },
         {
           "title": "Progresia dincolo de pistă",
@@ -79,7 +79,7 @@
       "faq": [
         {
           "q": "Ce este Hyper Racing?",
-          "a": "Un joc de curse cu vehicule zburătoare de mare intensitate, plasat în lumi extraterestre. Construiește, modernizează și concurează cu vehicule complet personalizabile prin circuite științifico-fantastice periculoase, în timp ce concurează pentru recompense în joc și premii în bani reali."
+          "a": "Un joc de curse de mare intensitate cu vehicule zburătoare, pe lumi extraterestre. Construiește, îmbunătățește și pilotează vehicule complet personalizabile pe circuite SF periculoase, concurând pentru recompense în joc."
         },
         {
           "q": "Îmi pot actualiza vehiculul de curse?",
@@ -94,8 +94,8 @@
           "a": "Managerul gropii coordonează operațiunile echipajului, apelează strategia de cursă și deblochează creșteri de performanță la nivelul întregii echipe. Managerii defensivi vă protejează vehiculul în condiții grele; managerii agresivi imping fiecare sistem pentru viteza maxima."
         },
         {
-          "q": "Pot câștiga bani reali?",
-          "a": "Da. Evenimentele și turneele clasificate includ fonduri de premii în bani reale. Califică-te prin jocul clasat, concurează împotriva adversarilor la fel de calificați și câștigă plăți reale în funcție de poziția ta finală. Provocările săptămânale și campionatele sezoniere rulează continuu."
+          "q": "Există premii pentru evenimentele clasate?",
+          "a": "Evenimentele clasate și turneele sunt planificate să ofere recompense în joc, titluri și poziție în clasament. Nu oferă premii în numerar sau în bani."
         },
         {
           "q": "Cum funcționează recompensele de cursă?",
@@ -121,7 +121,7 @@
       "subtitle": "Galaxia ta. Regulile tale. Averea ta.",
       "intro": [
         "Hyper Quest este o aventură spațială în lume deschisă în care îți comandi propria ta navă spațială complet upgradabilă, Quest Racer, printr-o galaxie vastă și periculoasă. Ți-ai părăsit civilizația de acasă cu ani în urmă în căutare de putere, bogăție și faimă. Acum, întregul univers este locul tău de joacă, iar fiecare misiune pe care o finalizezi te aduce mai aproape de dominația galactică.",
-        "Dar Hyper Quest nu este doar un joc. Este o platformă competitivă în care banii reali sunt în joc. Finalizează misiuni, învinge provocări și pleacă cu bani reali în buzunar și/sau recompense. De la misiuni rapide care durează minute până la expediții epice de mai multe zile, fiecare misiune dă roade. Cu cât provocarea este mai grea, cu atât recompensa este mai mare.",
+        "Hyper Quest este planificat ca mai mult decât un joc: finalizează misiuni, învinge provocări și adună recompense în joc. De la misiuni rapide de câteva minute la expediții epice de mai multe zile, cu cât provocarea este mai grea, cu atât recompensa în joc este mai mare.",
         "Îmbunătățiți-vă nava spațială de la carenă la cabina de pilotaj. Înarmați-l cu sisteme de arme devastatoare. Recrutați specialiști care stivuiesc bonusuri puternice pe performanța și nivelul de putere al navei dvs. Mine de asteroizi, transportă mărfuri periculoase, vânează comori ascunse, răpește ținte de mare valoare sau devii un pistol angajat. Modul în care conduci universul este în totalitate alegerea ta.",
         "Tot ceea ce construiești în Hyper Quest se alimentează direct în Hyper Racing și Overlord of the 7 Realms. Un univers, progresie fără întreruperi, potențial nelimitat. Citește mai departe pentru a descoperi cum funcționează misiunile, ce poți câștiga și cum tu și nava ta spațială devii cea mai de temut navă din galaxie."
       ],
@@ -137,7 +137,7 @@
         {
           "num": "02",
           "title": "Explorează Galaxia",
-          "body": "Călătorește prin portaluri către planete îndepărtate, fiecare cu medii unice, materiale valoroase și noi circuite de curse. Urmărește hărți galactice pentru a cartografia regiuni neexplorate și pentru a câștiga drepturi de denumire pentru planetele pe care le descoperi mai întâi. Mine de resurse din câmpurile de asteroizi, salvează părți din relicve antice și nave abandonate și adună indicii care duc la averi ascunse împrăștiate peste stele."
+          "body": "Călătorește prin portaluri spre planete îndepărtate, fiecare cu medii unice, materiale valoroase și circuite de curse noi. Urmează hărți galactice pentru a cartografia regiuni neexplorate și câștigă dreptul de a numi planetele pe care le descoperi primul. Extrage resurse din câmpuri de asteroizi, recuperează piese din relicve antice și nave abandonate și adună indicii care duc la comori ascunse, risipite printre stele."
         },
         {
           "num": "03",
@@ -154,19 +154,19 @@
       "rewards": [
         {
           "title": "Recompense în joc",
-          "body": "Fiecare misiune pe care o finalizați plătește. Creditele, materialele de upgrade, componentele rare, jetoanele de recrutare specializate și articolele exclusive curg în inventarul tău cu fiecare misiune reușită. Cu cât căutarea este mai grea, cu atât transportul este mai bogat. Descoperiți materiale rare pe planete îndepărtate, salvați piese de mare valoare din relicve antice și stocați resurse care vă alimentează ascensiunea către supremația galactică."
+          "body": "Fiecare misiune pe care o finalizezi este concepută să te recompenseze în joc. Credite, materiale de îmbunătățire, componente rare, jetoane de recrutare a specialiștilor și obiecte exclusive ajung în inventarul tău cu fiecare misiune reușită. Cu cât misiunea este mai grea, cu atât prada este mai bogată. Descoperă materiale rare pe planete îndepărtate, recuperează piese valoroase din relicve antice și strânge resurse care îți alimentează ascensiunea spre supremația galactică."
         },
         {
-          "title": "Plăți reale în numerar",
-          "body": "Hyper Quest duce jocurile dincolo de divertisment. Anumite misiuni și provocări clasificate oferă plăți reale în numerar. Finalizează misiuni de nivel înalt, domina evenimentele clasamentului și participă la campionate sezoniere de misiuni în care bani reali sunt în joc. Cu cât devii mai priceput și mai îndrăzneț, cu atât plățile sunt mai mari. De la recompense săptămânale de misiuni până la turnee sezoniere epice, există întotdeauna oportunități de a vă transforma aventurile galactice în câștiguri reale."
+          "title": "Recompense de campionat",
+          "body": "Anumite misiuni și provocări clasate pot oferi recompense premium în joc. Sunt planificate misiuni de nivel înalt, evenimente de clasament și campionate sezoniere de misiuni, iar cu cât devii mai priceput și mai îndrăzneț, cu atât recompensele în joc pot fi mai bune."
         },
         {
-          "title": "Cum funcționează plățile Quest",
-          "body": "Jucătorii se califică pentru misiuni cu recompense în numerar, construindu-și reputația și îndeplinind pragurile de performanță. Dificultatea misiunii, durata și nivelul de pericol determină fondul de premii. Plățile sunt transparente, afișate clar înainte de a accepta orice misiune și procesate rapid după finalizare. Indiferent dacă efectuați un transport de marfă de zece minute sau o expediție în spațiul adânc de o săptămână, recompensele se potrivesc cu riscul."
+          "title": "Cum funcționează recompensele misiunilor",
+          "body": "Jucătorii s-ar putea califica pentru misiuni premium construindu-și reputația și atingând praguri de performanță. Dificultatea, durata și nivelul de pericol al misiunii determină recompensa în joc, care este gândită să fie afișată înainte să accepți orice misiune. Fie că faci un transport de marfă de zece minute, fie o expediție de o săptămână în spațiul îndepărtat, recompensele sunt concepute să corespundă riscului."
         },
         {
           "title": "Progresie care dă înainte",
-          "body": "Recompensele Quest se alimentează direct în upgrade-urile navei, sistemele de arme și recrutarea de specialiști. Fiecare plată te face mai puternic, ceea ce deblochează misiuni mai dificile cu recompense și mai mari. Câștigurile sunt transmise și în Hyper Racing și Overlord of the 7 Realms, creând o buclă de progresie care recompensează dedicarea în întregul ecosistem Hyper Tek."
+          "body": "Recompensele misiunilor merg direct în îmbunătățirile navei, sistemele de arme și recrutarea specialiștilor. Fiecare recompensă te face mai puternic, ceea ce deblochează misiuni mai grele. Este planificat ca progresul să se transfere și în Hyper Racing și Overlord of the 7 Realms."
         }
       ],
       "upgradesTitle": "Îmbunătățiți-vă nava, înarmați-vă arsenalul, recrutați-vă echipajul",
@@ -192,19 +192,19 @@
       "faq": [
         {
           "q": "Ce este Hyper Quest?",
-          "a": "O aventură spațială în lume deschisă în care comandați o navă spațială complet upgradabilă într-o galaxie vastă. Finalizează misiuni, explorează lumi extraterestre, îmbunătățește-ți nava, recrutează specialiști și câștigă recompense reale în bani alături de bogățiile din joc."
+          "a": "O aventură spațială open-world în care comanzi o navă spațială complet îmbunătățibilă printr-o galaxie vastă. Finalizează misiuni, explorează lumi extraterestre, îmbunătățește-ți nava, recrutează specialiști și adună recompense în joc."
         },
         {
           "q": "Cum funcționează misiunile?",
           "a": "Acceptați misiuni de pe panoul de misiuni din joc. Misiunile variază de la curse rapide de marfă care durează doar câteva minute până la expediții epice de mai multe zile în adâncul spațiului neexplorat. Fiecare misiune are obiective clare, evaluări de pericol și niveluri de recompensă afișate înainte de a accepta."
         },
         {
-          "q": "Pot câștiga bani reali?",
-          "a": "Da. Anumite misiuni, provocări clasificate și campionate sezoniere oferă plăți reale în numerar. Construiți-vă reputația, atingeți pragurile de performanță și calificați-vă pentru misiuni de recompensă în numerar din ce în ce mai profitabile. Recompensele săptămânale și turneele sezoniere rulează continuu."
+          "q": "Pot câștiga bani din misiuni?",
+          "a": "Nu. Misiunile, provocările clasate și campionatele sezoniere sunt planificate să ofere doar recompense în joc, nu numerar sau bani."
         },
         {
           "q": "Ce recompense în joc pot câștiga?",
-          "a": "Fiecare misiune finalizată plătește credite, materiale de upgrade, componente rare, jetoane de recrutare specializate și articole exclusive. Cu cât misiunea este mai grea și mai lungă, cu atât recompensele sunt mai bogate. Descoperiți materiale rare pe planete îndepărtate și salvați piese de mare valoare din relicve antice."
+          "a": "Fiecare misiune finalizată este concepută să recompenseze cu credite, materiale de îmbunătățire, componente rare, jetoane de recrutare a specialiștilor și obiecte exclusive. Cu cât misiunea este mai grea și mai lungă, cu atât recompensele sunt mai bogate. Descoperă materiale rare pe planete îndepărtate și recuperează piese valoroase din relicve antice."
         },
         {
           "q": "Îmi pot face upgrade nava spațială?",
@@ -220,7 +220,7 @@
         },
         {
           "q": "Ce tipuri de misiuni sunt disponibile?",
-          "a": "Transport de mărfuri, minerit de asteroizi, vânătoare de comori, vânătoare de recompense, recuperare de artefacte, operațiuni sub acoperire, explorare planetară, apărare piraților, misiuni de salvare și multe altele. Misiunile variază de la alergări rapide de zece minute la expediții de mai multe zile în spațiul adânc."
+          "a": "Transport de marfă, minerit de asteroizi, vânătoare de comori, vânătoare de bounty, recuperare de artefacte, operațiuni sub acoperire, explorare planetară, apărare împotriva piraților, misiuni de recuperare și altele. Misiunile variază de la curse rapide de zece minute la expediții de mai multe zile în spațiul îndepărtat."
         },
         {
           "q": "Pot descoperi noi planete?",
@@ -251,7 +251,7 @@
       "intro": [
         "Overlord of the 7 Realms este un joc de strategie de luptă cu trei niveluri, spre deosebire de orice altceva în jocuri. Te-ai aventurat printr-un portal într-un univers paralel și te-ai prăbușit pe o planetă extraterestră ostilă. Nava ta este distrusă, sistemele tale eșuează și creaturile planetei se apropie deja. Supraviețuirea este doar începutul. Dominanța este scopul.",
         "Reconstruiește-ți nava de la epavă în sus. Clonează și antrenează armate în laboratoarele tale de la bord. Îmblanziți fauna sălbatică a planetei pentru a crea o cavalerie călare devastatoare. Apoi luați lupta în trei dimensiuni de luptă: luptă sol la sol împotriva monștrilor și jucătorilor rivali, atacuri sol-spațiu asupra țintelor orbitale sau terestre și război spațiu-spațiu la bordul masivului Battle Ring care orbitează planeta.",
-        "Acesta nu este doar un alt joc de strategie. Overlord oferă interacțiune VR în timp real, recompense reale în bani pentru finalizarea evenimentelor și misiunilor zilnice și invaziile din două săptămâni ale înfricoșatorilor Hammerong, cea mai puternică specie extraterestră existentă. La fiecare două săptămâni, ei sosesc pentru a dezbraca planeta și, la fiecare două săptămâni, jucătorii curajoși îi pot provoca pentru bonusuri masive și recompense legendare.",
+        "Acesta nu este doar încă un joc de strategie. La fel ca Hyper Racing și Hyper Quest, Overlord oferă interacțiune VR în timp real și recompense în joc pentru finalizarea evenimentelor, a misiunilor și a invaziilor de la fiecare două săptămâni ale temuților Hammerongi, cea mai puternică specie extraterestră existentă. La fiecare două săptămâni sosesc pentru a secătui planeta de resurse, și la fiecare două săptămâni jucătorii curajoși îi pot provoca pentru bonusuri uriașe și recompense legendare.",
         "Îmbunătățiți-vă nava spațială, înarmați-o cu arme devastatoare, recrutați specialiști care vă amplifică nivelul de putere și creați alianțe pentru a controla regiuni întregi. Tot ceea ce construiești se conectează direct la Hyper Racing și Hyper Quest prin ecosistemul comun Hyper Tek. Un univers, trei jocuri, război nelimitat. Citiți mai departe pentru a descoperi cum funcționează sistemul de luptă și de ce Overlord schimbă totul."
       ],
       "calloutLine1": "Supraviețuirea este doar începutul.",
@@ -296,7 +296,7 @@
           },
           {
             "title": "Avantajul față de alte jocuri",
-            "body": "Niciun alt joc nu combină războiul pe trei niveluri, o stație de luptă orbitală explorabilă, VR în timp real și bani reali și/sau recompense în joc într-o singură experiență. Numai Inelul de luptă adaugă o dimensiune de joc pe care concurenții nu o pot egala. Când combini asta cu lupta la sol, războiul spațial, imersiunea VR și ecosistemul Hyper Tek interconectat, Overlord se află într-o categorie proprie."
+            "body": "Niciun alt joc nu combină războiul pe trei niveluri, o stație de luptă orbitală explorabilă, VR în timp real și recompense în joc într-o singură experiență. Battle Ring adaugă singur o dimensiune de gameplay pe care concurenții nu o pot egala. Adaugă lupta la sol, războiul spațial, imersiunea VR și ecosistemul interconectat Hyper Tek, iar Overlord se află într-o categorie proprie."
           }
         ]
       },
@@ -312,7 +312,7 @@
         },
         {
           "title": "Recrutați specialiști",
-          "body": "Specialiștii sunt multiplicatorii de forță care separă jucătorii buni de Overlords. Obține specialiști unici care aduc bonusuri puternice performanței generale și nivelului de putere a navei tale. Specialiștii tactici îmbunătățesc eficiența desfășurării trupelor, specialiștii în inginerie accelerează reparațiile și upgrade-urile navelor, specialiștii în arme măresc producția de daune în toate sistemele, iar specialiștii în informații dezvăluie pozițiile și punctele slabe ale inamicului. Adunați mai mulți specialiști pentru a crea sinergii devastatoare care amplifică fiecare aspect al operațiunii dumneavoastră."
+          "body": "Specialiștii sunt multiplicatorul de forță și, împreună cu îndemânarea, sunt ceea ce îi deosebește pe jucătorii buni de Overlorzi. Obține specialiști unici care aduc bonusuri puternice performanței generale și nivelului de putere al navei tale. Specialiștii tactici îmbunătățesc eficiența desfășurării trupelor, specialiștii ingineri accelerează reparațiile și îmbunătățirile navei, specialiștii în arme cresc daunele în toate sistemele, iar specialiștii în informații dezvăluie pozițiile și slăbiciunile inamicului. Combină mai mulți specialiști pentru a crea un efort concertat devastator care amplifică fiecare aspect al operațiunii tale. Totuși, jucătorii care nu cheltuie bani pot fi liniștiți: Hyper Tek a fost creat pentru a rezolva problemele din gaming. Deși combinarea multiplă este posibilă, mecanicile corecte ale jocului fac ca aceasta să nu fie un simplu sistem punct cu punct. Funcționează în schimb pe o scară glisantă, astfel încât puterea brută să nu umbrească importanța îndemânării. Acest joc pune accent atât pe putere, cât și pe îndemânare, nu pe noroc!"
         },
         {
           "title": "Construiește-ți armatele",
@@ -331,7 +331,7 @@
         },
         {
           "title": "Conectat la ecosistemul Hyper Tek",
-          "body": "Stăpânul celor 7 Tărâmuri nu există izolat. Este complet integrat în universul Hyper Tek alături de Hyper Racing și Hyper Quest. Resursele câștigate în Overlord pot fi folosite în toate cele trei jocuri. Actualizările navelor, bonusurile de specialitate, abilitățile de luptă și materialele curg fără probleme între titluri. Abilitățile de curse dobândite în Hyper Racing îți îmbunătățesc abilitățile de pilot în lupta spațială Overlord. Materialele adunate în Hyper Quest alimentează upgrade-urile tale pe planetă. Piața Hyper Tek conectează totul, creând o economie unificată în care progresul într-un singur joc ajută la avansarea în toate trei."
+          "body": "Overlord of the 7 Realms nu există izolat. Este complet integrat în universul Hyper Tek, alături de Hyper Racing și Hyper Quest. Resursele câștigate în Overlord pot fi folosite în toate cele trei jocuri. Îmbunătățirile navei, bonusurile specialiștilor, abilitățile de luptă și materialele circulă fără întreruperi între titluri. Abilitățile de curse obținute în Hyper Racing îți îmbunătățesc abilitățile de pilot în luptele spațiale din Overlord. Materialele adunate în Hyper Quest îți alimentează îmbunătățirile de pe planetă. Marketplace-ul Hyper Tek leagă totul, creând un univers conectat în care progresul dintr-un joc alimentează avansarea în toate trei."
         },
         {
           "title": "Un univers, trei jocuri, putere nelimitată",
@@ -342,7 +342,7 @@
       "faq": [
         {
           "q": "Ce este Overlord of the 7 Realms?",
-          "a": "Un joc de strategie de luptă pe trei niveluri în care aterizezi prăbușit pe o planetă extraterestră, îți reconstruiești nava, clonezi armate și lupți în trei dimensiuni: sol-sol, sol-spațiu și spațiu-spațiu. Prezintă interacțiune VR, recompense în numerar reale și invazii Hammerong din două săptămâni."
+          "a": "Un joc de strategie cu bătălii pe trei niveluri, în care aterizezi forțat pe o planetă extraterestră, îți reconstruiești nava, clonezi armate și lupți în trei dimensiuni: sol-sol, sol-spațiu și spațiu-spațiu. Funcțiile planificate includ interacțiune VR, recompense în joc și invazii Hammerong la fiecare două săptămâni."
         },
         {
           "q": "Ce este sistemul de luptă cu trei niveluri?",
@@ -366,7 +366,7 @@
         },
         {
           "q": "Ce recompense pot câștiga?",
-          "a": "Sarcinile zilnice, misiunile, bătăliile și evenimentele plătesc credite, materiale de upgrade și bonusuri de progres. Evenimentele speciale și invaziile Hammerong oferă recompense premium și exclusive. Provocările cu dificultate mai mare și competițiile clasate generează plăți mai mari, inclusiv bani reali."
+          "a": "Sarcinile zilnice, misiunile, bătăliile și evenimentele sunt concepute să recompenseze cu credite, materiale de îmbunătățire și bonusuri de progresie. Evenimentele speciale și invaziile Hammerong pot oferi recompense premium și exclusive în joc. Provocările de dificultate mai mare și competițiile clasate sunt planificate să ofere recompense în joc mai mari."
         },
         {
           "q": "Overlord acceptă VR?",
@@ -382,7 +382,7 @@
         },
         {
           "q": "Este Overlord legat de alte jocuri Hyper Tek?",
-          "a": "Complet integrat. Resursele, upgrade-urile navelor, bonusurile de specialitate și abilitățile de luptă curg între Overlord, Hyper Racing și Hyper Quest. Abilitățile de curse vă îmbunătățesc lupta în spațiu, materialele Quest vă alimentează upgrade-urile, iar piața Hyper Tek conectează întreaga economie."
+          "a": "Complet integrat. Resursele, îmbunătățirile navei, bonusurile specialiștilor și abilitățile de luptă sunt planificate să circule între Overlord, Hyper Racing și Hyper Quest. Abilitățile de curse îți îmbunătățesc luptele spațiale, materialele din Quest îți alimentează îmbunătățirile, iar marketplace-ul Hyper Tek leagă toate cele trei jocuri."
         },
         {
           "q": "Ce arme sunt disponibile?",
@@ -801,7 +801,7 @@
       },
       "mining_rp": {
         "title": "Minerit BS Pupa",
-        "desc": "Unitate minieră babord spate. Lucrează în tandem cu compartimentul BD pentru a maximiza randamentul de extracție din câmpul din spate."
+        "desc": "Unitate de minerit din babordul pupa. Lucrează împreună cu hangarul RS pentru a maximiza extracția de resurse din câmpul din spate."
       },
       "fuel_ref": {
         "title": "Rafinărie de combustibil",
@@ -933,11 +933,11 @@
       },
       "hydro_2": {
         "title": "Celulă hidroponică 2",
-        "desc": "Celulă hidroponică secundară care extinde varietatea și randamentul culturilor. Susține nutriția echipajului și producția de mărfuri comerciale."
+        "desc": "Celulă hidroponică secundară care extinde varietatea și producția culturilor. Susține hrana echipajului și producția de mărfuri comerciale."
       },
       "hydro_3": {
         "title": "Celulă hidroponică 3",
-        "desc": "Unitate terțiară specializată în culturi de bază cu randament ridicat. Asigură aportul caloric de bază pentru echipaje numeroase."
+        "desc": "Unitate de cultură terțiară specializată în culturi de bază cu randament ridicat. Asigură aportul caloric de bază pentru echipaje numeroase."
       },
       "hydro_4": {
         "title": "Celulă hidroponică 4",
@@ -1113,7 +1113,7 @@
     "viewArrow": "VIZUALIZARE →",
     "selectCategory": "SELECTEAZĂ CATEGORIE",
     "comingSoon": "ÎN CURÂND",
-    "specialistProfileDesc": "Profilul specialistului — statistici complete disponibile la lansarea jocului.",
+    "specialistProfileDesc": "Profil de specialist — statisticile și abilitățile complete ar putea fi disponibile la lansarea jocului.",
     "alliance": {
       "rank": {
         "leader": "Lider",
@@ -1131,8 +1131,8 @@
         "editInfoDesc": "Schimbă nume, etichetă și descriere",
         "joinRequests": "Gestionează cereri de aderare",
         "joinRequestsDesc": "Revizuiește și acceptă noi membri",
-        "donationGoals": "Stabilește obiective de donare",
-        "donationGoalsDesc": "Configurează obiective săptămânale de donare",
+        "donationGoals": "Stabilește obiectivele de contribuție",
+        "donationGoalsDesc": "Configurează țintele săptămânale de contribuție",
         "warSettings": "Setări război alianță",
         "warSettingsDesc": "Configurează regulile de participare la război",
         "kickMembers": "Dă afară membri",
@@ -1141,7 +1141,7 @@
       "allianceMail": {
         "warResults": "Rezultate război alianță",
         "strategyPlan": "Plan nou de strategie",
-        "donationSummary": "Rezumat donații săptămânale",
+        "donationSummary": "Rezumatul săptămânal al contribuțiilor",
         "meeting1800": "Întâlnire la 18:00",
         "levelUp": "Alianța a avansat în nivel!"
       }
@@ -1166,7 +1166,7 @@
       "tradingPlasma": "Schimb bare de plasmă cu cărți tehnice",
       "needHelpAsteroid": "Am nevoie de ajutor la misiunea asteroid",
       "allianceRecruiting": "Alianța noastră recrutează, trimite-mi DM",
-      "donationGoalsPlasma": "Obiective donare: bare de plasmă necesare!",
+      "donationGoalsPlasma": "Obiective de contribuție: e nevoie de tije de plasmă!",
       "warStarts2Hours": "Războiul începe în 2 ore, pregătiți-vă",
       "handleMedicalSupport": "Mă ocup de suportul medical",
       "wts50Engines": "VÂND: 50 motoare, trimite PM",
@@ -1203,6 +1203,6 @@
       "speedRacingTournament": "Turneu de curse de viteză",
       "overlordChampionship": "Campionatul Overlord"
     },
-    "eventDetailPlaceholder": "Detaliile complete ale evenimentului, recompensele și opțiunile de participare vor fi disponibile când acest eveniment va fi lansat."
+    "eventDetailPlaceholder": "Detaliile complete ale evenimentului, recompensele și opțiunile de participare ar putea fi disponibile când începe acest eveniment."
   }
 }

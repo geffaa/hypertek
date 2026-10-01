@@ -9,18 +9,18 @@
       },
       {
         "v": "NFA",
-        "l": "Gwarantowany minimalny odkup"
+        "l": "Programmatic Trade-In Value"
       },
       {
         "v": "P2E",
-        "l": "Play-to-Earn"
+        "l": "Play-to-Own"
       }
     ],
     "subtitle": [
       "Misją Hyper Tek było rozwiązanie wielu problemów w branży gier i przedefiniowanie sposobu działania ekosystemów gier poprzez stworzenie połączonego wszechświata, w którym gracze nie są ograniczeni do jednego stylu rozgrywki. Łącząc wiele gatunków w jeden system postępów, projekt Hyper Tek zapewnia dynamiczne środowisko, w którym gracze mogą eksplorować, rywalizować i rozwijać się w ujednoliconym świecie.",
-      "Projekt dąży do przyznania prawdziwej własności aktywom cyfrowym mającym realną wartość, która rośnie z czasem, z gwarantowanym minimalnym odkupem wszystkich Non-Fungible Artworks, oraz prawdziwej infrastruktury play-to-earn w ekosystemie, do której gracze się przyczyniają.",
+      "Celem jest danie graczom prawdziwej własności ich cyfrowych przedmiotów, z których każdy ma użyteczność w grze i Programmatic Trade-In Value, w ekosystemie, który gracze pomagają kształtować.",
       "Projekt ma na celu wzmocnienie pozycji graczy poprzez zapewnienie im znaczącej własności nad ich postępami i nagrodami, przy jednoczesnym wspieraniu kreatywności, współpracy i rywalizacji.",
-      "Długoterminową wizją Hyper Tek jest zbudowanie żywego cyfrowego wszechświata, w którym wiele gier, gospodarek i społeczności współistnieje na jednej połączonej platformie."
+      "Długoterminowym celem Hyper Tek jest zbudowanie cyfrowego uniwersum, w którym wiele gier i społeczności może współistnieć na jednej połączonej platformie."
     ],
     "section01": {
       "label": "Nasza misja",
@@ -28,7 +28,7 @@
       "heading2": "może być gra",
       "paras": [
         "Projekt Hyper Tek został założony przez Dona Bennetta, który wyobraził sobie środowisko gier, w którym wiele gatunków mogło współistnieć w jednym systemie postępów. Zamiast zmuszać graczy do pozostawania w jednej pętli rozgrywki, Hyper Tek pozwala im eksplorować różne aktywności, jednocześnie budując postać, zasoby i reputację w całym ekosystemie, z postępami, materiałami, nagrodami i osiągnięciami przepływającymi bezproblemowo przez wszystkie gry.",
-        "Projekt łączy trzy główne środowiska gier: Hyper Racing, Hyper Quest i Overlord of the Seven Realms. Każda gra reprezentuje inny styl rozgrywki, jednak wszystkie działają w tym samym wszechświecie i korzystają z tej samej ekonomii graczy. Ten projekt pozwala graczom angażować się w rodzaj rozgrywki, który najbardziej lubią, jednocześnie przyczyniając się do większego ekosystemu, tworząc nową generację środowisk gier, które są głębsze, bardziej wciągające i bardziej satysfakcjonujące niż tradycyjne, samodzielne gry."
+        "Projekt planuje trzy środowiska gry: Hyper Racing, Hyper Quest i Overlord of the Seven Realms. Każda gra oferuje inny styl rozgrywki, ale wszystkie są projektowane tak, by istniały w tym samym uniwersum i dzieliły tę samą progresję gracza. Dzięki temu gracze mają móc oddawać się rozgrywce, którą lubią najbardziej, pozostając częścią większego ekosystemu, w środowiskach głębszych i bardziej wciągających niż tradycyjne, samodzielne gry."
       ]
     },
     "section02": {
@@ -37,8 +37,8 @@
         "label": "Wizja",
         "quote": "...stworzyć nową generację środowisk gier, które są głębsze, bardziej wciągające i bardziej satysfakcjonujące niż tradycyjne, samodzielne gry...",
         "paras": [
-          "Długoterminową wizją Hyper Tek jest zbudowanie żywego cyfrowego wszechświata, w którym wiele gier, gospodarek i społeczności współistnieje na jednej połączonej platformie. Zamiast izolowanych doświadczeń z grami, Hyper Tek dąży do ustanowienia wspólnego ekosystemu, w którym działania graczy wpływają na otaczający ich świat.",
-          "Łącząc strategię, wyścigi i przygodę w jeden spójny system, Hyper Tek dąży do stworzenia nowej generacji środowisk gier, które są głębsze, bardziej wciągające i bardziej satysfakcjonujące niż tradycyjne, samodzielne gry."
+          "Wizją Hyper Tek jest tworzenie struktur, które odpowiadają na problemy branży gier i sztuki cyfrowej. Systemów, w których gracze nie są ograniczeni do jednego stylu rozgrywki, w których posiadanie przedmiotu znaczy więcej niż trzymanie tokena i w których sztukę cyfrową warto kolekcjonować dla jej bonusów w grze.",
+          "Wizją jest cyfrowe uniwersum, w którym kilka gier i społeczności dzieli jedną połączoną platformę. Zamiast trzymać doświadczenia online i w wirtualnej rzeczywistości osobno, Hyper Tek dąży do wspólnego ekosystemu, w którym działania i interakcje graczy mogą kształtować otaczający świat."
         ]
       },
       "mission": {
@@ -46,14 +46,15 @@
         "quote": "...rozwiązanie wielu problemów w branży gier i przedefiniowanie sposobu działania ekosystemów gier...",
         "paras": [
           "Misją Hyper Tek było rozwiązanie wielu problemów w branży gier i przedefiniowanie sposobu działania ekosystemów gier poprzez stworzenie połączonego wszechświata, w którym gracze nie są ograniczeni do jednego stylu rozgrywki.",
-          "Łącząc wiele gatunków w jeden system postępów, Hyper Tek dąży do zapewnienia dynamicznego środowiska, w którym gracze mogą eksplorować, rywalizować i rozwijać się w ujednoliconym świecie. Projekt ma na celu przyznanie prawdziwej własności aktywom cyfrowym mającym realną wartość, która rośnie z czasem, z gwarantowanym minimalnym odkupem wszystkich NFA."
+          "Łącząc wiele gatunków w jeden system progresji, dążymy do dynamicznego środowiska, w którym gracze mogą eksplorować, rywalizować i rozwijać się w spójnym świecie, z prawdziwą własnością swoich cyfrowych przedmiotów i Programmatic Trade-In Value dla kwalifikujących się NFA.",
+          "Cyfrowe uniwersum, w którym wiele gier i społeczności współistnieje na jednej połączonej platformie. Zamiast izolować doświadczenia z gier online i w wirtualnej rzeczywistości, Hyper Tek chce stworzyć wspólny ekosystem, w którym działania i interakcje graczy mogą wpływać na otaczający ich świat."
         ]
       }
     },
     "section03": {
       "label": "Wszechświat",
-      "heading": "Trzy światy. Jedna gospodarka.",
-      "subtitle": "Każda gra jest bramą — różna w rozgrywce, zjednoczona w ekonomii i postępach.",
+      "heading": "Trzy światy. Jedno uniwersum.",
+      "subtitle": "Każda gra to brama: inna w rozgrywce, wspólna w progresji.",
       "discover": "Odkryj",
       "tryUI": "Wypróbuj interfejs",
       "games": [
@@ -65,7 +66,7 @@
         {
           "name": "Hyper Quest",
           "tag": "Eksploracja · Handel",
-          "desc": "Przemierzaj planety, realizuj misje i handluj zasobami na stale rozwijającej się mapie gwiazd. Każda dostawa kształtuje gospodarkę."
+          "desc": "Podróżuj między planetami, wykonuj misje i handluj zasobami na stale rozszerzającej się mapie gwiazd. Każda dostawa kształtuje galaktykę."
         },
         {
           "name": "Overlord of the Seven Realms",
@@ -76,9 +77,9 @@
     },
     "section04": {
       "label": "Niefungowalne cyfrowe dzieła sztuki",
-      "heading": "Cyfrowa sztuka z gwarantowaną wartością",
+      "heading": "Sztuka cyfrowa z użytecznością w grze",
       "subtitle": "Podsumowanie w 60 sekund",
-      "quote": "Jeden wszechświat. Trzy gry. Gwarantowana wartość. Przyszłość własności cyfrowej zaczyna się z Hyper Tek.",
+      "quote": "Jedno uniwersum. Trzy gry. Prawdziwa własność. Przyszłość cyfrowej własności zaczyna się od Hyper Tek.",
       "cards": [
         {
           "title": "Czym są?",
@@ -101,49 +102,49 @@
         {
           "title": "Dlaczego zachowują wartość",
           "bullets": [
-            "Gwarantowany minimalny odkup każdego dzieła sztuki",
-            "Odkup rośnie z każdą odsprzedażą",
+            "Programmatic Trade-In Value dla każdego kwalifikującego się dzieła",
+            "Każda odsprzedaż zwiększa alokację wymiany przedmiotu",
             "Indeksowany inflacyjnie dwa razy w roku",
             "Twoja wartość zawsze rośnie, nigdy nie maleje"
           ]
         },
         {
           "title": "Sprawiedliwy z założenia",
-          "body": "Większość prowizji z każdej sprzedaży nie zostaje w Hyper Tek 100, lecz wraca do ekosystemu: finansuje własną gwarantowaną wartość odkupu danego przedmiotu, opłaca tantiemy artystów i nagradza autentyczną aktywność play-to-earn. Gracze mogą obniżyć opłaty, tworząc questy, które płacą innym za udział, napędzając interakcje społeczne na każdym poziomie. To wyjątkowa cecha Hyper Tek."
+          "body": "Większość prowizji z każdej sprzedaży nie zostaje w Hyper Tek 100. Wraca do ekosystemu: do własnej alokacji wymiany danego przedmiotu, przechowywanej w escrow, oraz na tantiemy dla artystów. Kupujący, którzy publikują misje, mogą obniżyć swoją prowizję w formie zniżki, a gracze, którzy wykonują misje, otrzymują nagrody w grze."
         },
         {
           "title": "Dołącz teraz",
-          "body": "Zamierzamy wkrótce uruchomić kampanię crowdfundingową, aby ukończyć tworzenie Projektu Hyper Tek. Jak możesz pomóc? Każde dzieło sztuki, które kupujesz lub tworzysz, bezpośrednio finansuje rozwój. Posiadaj sztukę, która gwarantuje utrzymanie i wzrost wartości, pomagając jednocześnie budować przyszłość gier.",
+          "body": "Każde dzieło to edycja limitowana: gdy podaż się wyczerpie, nie wróci. Ponieważ podaż jest ograniczona, każde dzieło pozostaje rzadkie. Posiadaj sztukę kolekcjonerską z użytecznością w grze, która może obowiązywać, jeśli gry zostaną wydane.",
           "link": "[www.hypertek.com] — Przeglądaj. Kupuj. Twórz. Posiadaj przyszłość."
         }
       ]
     },
     "section05": {
-      "label": "Crowdfunding — Pomóż budować przyszłość",
+      "label": "Wczesny dostęp — przedmioty z edycji limitowanej",
       "heading": "Twoje wsparcie zasila wszechświat Hyper Tek",
       "subtitle": "Każde zakupione dzieło sztuki bezpośrednio finansuje trzy połączone gry. Oto, co razem budujemy.",
       "phaseLabel": "Faza",
-      "crowdfundingNow": "Trwa crowdfunding",
+      "crowdfundingNow": "Wczesny dostęp już teraz",
       "phases": [
         {
           "name": "Fundament",
-          "desc": "Strona internetowa uruchomiona • Interfejs użytkownika zbudowany • Rynek operacyjny • System NFA/NFC/NFT zaprojektowany • Ramy gwarantowanego odkupu na miejscu"
+          "desc": "Strona działa • Interfejs użytkownika gotowy • Marketplace gotowy • System NFA/NFC/NFT zaprojektowany • Ramy Programmatic Trade-In Value wdrożone"
         },
         {
-          "name": "Trwa crowdfunding",
+          "name": "Wczesny dostęp już teraz",
           "desc": "Sprzedaż dzieł sztuki NFA/NFC/NFT na żywo • Włączone NFT tworzone przez graczy • Aktywny podział prowizji • Budowanie społeczności • Środki płynące do tworzenia gier"
         },
         {
           "name": "Premiera alfa",
-          "desc": "Hyper Racing alfa • Pierwsze grywalne środowisko gry • Integracja NFA w grze • Ekskluzywne nagrody dla wczesnych sponsorów • Handel na żywym rynku"
+          "desc": "Planowane: alfa Hyper Racing • Pierwsze grywalne środowisko gry • Integracja NFA w grze • Bonusy dla przedmiotów z wczesnego dostępu • Handel na żywo na marketplace"
         },
         {
           "name": "Ekspansja ekosystemu",
-          "desc": "Hyper Quest alfa • Postępy między grami na żywo • Integracja waluty Hyper Bucks • Rozszerzone kolekcje NFA • Turnieje z nagrodami gotówkowymi"
+          "desc": "Planowane: alfa Hyper Quest • Progresja między grami • Integracja Gems • Rozszerzone kolekcje NFA • Wydarzenia z nagrodami w grze"
         },
         {
           "name": "Premiera Overlord",
-          "desc": "Overlord of the 7 Realms alfa • Trzypoziomowy system bitew • Dostęp do Battle Ring • Integracja VR • Pełna trójgamowa zunifikowana gospodarka"
+          "desc": "Planowane: alfa Overlord of the 7 Realms • Trzypoziomowy system walki • Dostęp do Battle Ring • Integracja VR • Pełna wspólna progresja trzech gier"
         },
         {
           "name": "Pełne wydanie",
@@ -154,7 +155,7 @@
       "helpItems": [
         {
           "bold": "Kup NFA, NFC lub NFT",
-          "text": "— posiadaj cyfrową sztukę z gwarantowaną wartością, która finansuje tworzenie gier"
+          "text": "Odkryj sztukę cyfrową z bonusami w grze, które mogą obowiązywać, jeśli gry zostaną wydane, oraz z Programmatic Trade-In Value. Dostępne do wyczerpania zapasów."
         },
         {
           "bold": "Stwórz własne NFT",
@@ -170,20 +171,20 @@
     "section06": {
       "label": "Gry Web3.5 i przewaga konkurencyjna",
       "heading": "HYPER TEK, ROZWIĄZANIE DO GIER WEB3 I KLUCZOWE ZALETY",
-      "subtitle": "Łącząc immersyjne gry, dynamiczny rynek cyfrowy, nagradzanie graczy i inwestorów.",
+      "subtitle": "Łączymy wciągające gry, cyfrowy marketplace napędzany przez graczy i graczy, którzy kolekcjonują.",
       "cards": [
         {
           "label": "Namacalne nagrody i przedsiębiorczość",
           "bullets": [
-            "Prawdziwa własność NFA/NFC/NFT z gwarantowanym minimalnym odkupem",
-            "Podział przychodów przez kontrolowaną przez graczy gospodarkę cyfrową",
-            "Rzeczywista wartość z rosnącymi cenami aktywów w grze",
-            "Prawdziwe mechaniki play-to-earn"
+            "Prawdziwa własność NFA/NFC/NFT z Programmatic Trade-In Value",
+            "Handel między graczami na marketplace",
+            "Użyteczność w grze, która może obowiązywać w planowanych grach",
+            "Projekt przedmiotów w modelu Play-to-Own"
           ]
         },
         {
-          "label": "Ekosystem wypłat",
-          "body": "Bezproblemowo przekształcaj zarobki z gier w walutę świata rzeczywistego; Twoja cyfrowa praca ma wymierną, możliwą do wypłaty wartość. Czas, który poświęcasz na granie w Hyper Tek, mógłby pomóc pokryć koszty zakupów spożywczych, paliwa i rachunków za media."
+          "label": "Item Loyalty Program",
+          "body": "Zatrzymaj kwalifikujący się przedmiot dłużej, a jego poziom wymiany wzrośnie zgodnie z Tiered Loyalty Return Schedule, od 80% alokacji w pierwszym roku do 97% po piątym roku. Zwracana kwota jest zawsze niższa od kwoty przypisanej, więc jest to cecha produktu, a nie sposób na zarabianie pieniędzy."
         },
         {
           "label": "Nieskończona rozgrywka w połączonych światach",
@@ -197,7 +198,7 @@
       ]
     },
     "closing": {
-      "body": "Inwestorzy, partnerzy i innowatorzy, którzy wierzą w przyszłość połączonych ekosystemów gier, są zaproszeni do zapoznania się z projektem i dołączenia do podróży, gdy Hyper Tek kontynuuje budowanie następnej generacji cyfrowych światów.",
+      "body": "Partnerów, graczy i twórców, którzy wierzą w połączone ekosystemy gier, zapraszamy do poznania projektu i śledzenia dalszej budowy Hyper Tek.",
       "exploreMarketplace": "Eksploruj rynek",
       "viewGames": "Zobacz gry"
     }

@@ -9,7 +9,7 @@
       "auctions": "Mga Auction",
       "trades": "Mga Palitan",
       "quests": "Mga Quest",
-      "hire": "Para Paupahan",
+      "hire": "Paupahan",
       "bounty": "Mga Gantimpala"
     },
     "banner": {
@@ -31,23 +31,23 @@
       "facts": [
         {
           "label": "NFA",
-          "desc": "Asset na eksklusibo sa Hypertek. Pinakamataas na bonus sa laro. Garantisadong minimum na halaga ng buyback na lumalaki sa bawat benta."
+          "desc": "Item na mula lang sa Hyper Tek. Pinakamataas na in-game bonus. Programmatic Trade-In Value na dinaragdagan ng bawat resale."
         },
         {
           "label": "NFC",
-          "desc": "Nilikha ng Hypertek o mga lisensyadong manlalaro. Kasama ang mga bonus sa laro. Garantisadong minimum na buyback."
+          "desc": "Ginawa ng Hyper Tek o ng mga lisensyadong player. Kasama ang mga in-game bonus. Kasama ang Programmatic Trade-In Value."
         },
         {
           "label": "NFT",
-          "desc": "Kolektible na nilikha ng manlalaro. Walang bonus sa laro. Walang garantiya ng buyback. Maaaring ipagpalit sa palengke."
+          "desc": "Collectible na ginawa ng player. Walang in-game bonus. Walang trade-in value. Maaaring i-trade sa marketplace."
         },
         {
           "label": "Komisyon",
-          "desc": "Nag-iiba ang bayad sa platform depende sa listing. Muling benta: nagbebenta 86%, royalty ng artista 2%, +5% sa buyback, platform 7%."
+          "desc": "Nag-iiba ang platform fee sa bawat listing. Hatian sa resale: seller 86%, royalty ng artist 2%, 5% sa trade-in allocation ng item, platform 7%."
         },
         {
-          "label": "Paglago ng Buyback",
-          "desc": "+5% ng bawat presyo ng muling pagbebenta ay idinaragdag sa minimum na halaga ng buyback ng asset."
+          "label": "Trade-In Allocation",
+          "desc": "5% ng bawat presyo ng resale ay idinaragdag sa trade-in allocation ng item. Ang halagang ibinabalik sa trade-in ay sumusunod sa Tiered Loyalty Return Schedule at palaging mas mababa kaysa sa halagang nakalaan."
         },
         {
           "label": "Custodial na Wallet",
@@ -67,7 +67,8 @@
             "Ang mga NFC ay mga lisensyadong item ng manlalaro na may mga bonus sa laro.",
             "Ang mga NFT ay mga kolektible na nilikha ng gumagamit."
           ],
-          "cta": "Alamin ang Mga Batayan"
+          "cta": "Alamin ang Mga Batayan",
+          "intro": "Ang mga NFA/NFC/NFT ay mga digital artwork. Ang mga NFA at NFC ay may mga in-game bonus at Programmatic Trade-In Value."
         },
         {
           "label": "Ang Palengke",
@@ -110,21 +111,21 @@
           "cta": "I-explore ang mga Quest"
         },
         {
-          "label": "Para Paupahan",
-          "tagline": "Humiram ng mga asset o kumita mula sa iyong sarili",
+          "label": "Paupahan",
+          "tagline": "Paupahan ang iyong mga item kapalit ng mga in-game reward",
           "details": [
             "Mag-rent ng makapangyarihang mga espesyalista o kagamitan para sa iisang misyon.",
-            "Ilista ang iyong sariling mga idle asset para sa renta.",
+            "Maaaring mapaupahan ng mga player ang mga item na hindi nila ginagamit sa ibang player kapalit ng mga in-game reward na pinagkakasunduan nila mismo.",
             "Flexible na tagal — bawat oras, araw-araw o per-misyon."
           ],
-          "cta": "Tingnan ang Para Paupahan"
+          "cta": "Tingnan ang Paupahan"
         },
         {
           "label": "Mga Gantimpala",
           "tagline": "Mangaso ng mga target, mag-angkin ng gantimpala",
           "details": [
             "Tumanggap ng mga gantimpala na inipost ng ibang manlalaro o sistema.",
-            "Umakyat sa leaderboard ng gantimpala.",
+            "Umakyat sa bounty leaderboard para ma-unlock ang mga eksklusibong titulo at in-game reward.",
             "Mag-post ng sariling mga gantimpala para mag-recruit ng mga manlalaro."
           ],
           "cta": "Tingnan ang mga Gantimpala"
@@ -136,7 +137,7 @@
       "subtitle": "I-browse ang mga NFA, NFC at NFT na available para sa agarang pagbili.",
       "filterAll": "Lahat",
       "samplePreviewTitle": "Sample Preview ng Palengke",
-      "samplePreviewDesc": "Ang mga item sa ibaba ay mga sample na preview na nagpapakita ng mga uri ng digital asset na magiging available.",
+      "samplePreviewDesc": "Ang mga item sa ibaba ay mga sample na preview ng mga uri ng digital na item na maaaring maging available sa Hyper Tek marketplace. Ang mga aktuwal na item na may natatanging artwork at pagmamay-aring na-verify sa blockchain ay maaaring maging available sa launch.",
       "noItems": "Walang available na item pa. Bumalik sa ibang pagkakataon.",
       "categories": {
         "skins": "Mga Skin",
@@ -197,7 +198,7 @@
       },
       "preview": {
         "title": "Preview ng Feature sa Laro",
-        "desc": "Ang sistema ng auction ay magiging ganap na aktibo sa laro sa paglulunsad."
+        "desc": "Maaaring maging live in-game ang Auction system sa launch. Ang mga item na ipinapakita rito ay mga sample para sa preview lang."
       },
       "card": {
         "currentBid": "Kasalukuyang bid",
@@ -369,7 +370,7 @@
       "earnFromQuests": "Gusto kumita mula sa mga quest? Maglaro →",
       "moneyQuests": "Mga Quest sa Pera (pool 11%)",
       "resourceQuests": "Mga Quest sa Mapagkukunan (pool 20%)",
-      "footerNote1": "# Ang mga quest na may pinagsanib na payload ay babayaran gamit ang mga hiwalay na halaga ng talahanayan.",
+      "footerNote1": "# Ang mga quest na may pinagsamang payload ay gumagamit ng mga reward sa hiwalay na talahanayan.",
       "footerNote2": "# Ang data ng planeta ay mag-si-sync kapag aktibo na ang mga laro.",
       "inGame": "Sa laro",
       "open": "Bukas",
@@ -407,43 +408,43 @@
       }
     },
     "hire": {
-      "heading": "Para Paupahan",
+      "heading": "Paupahan",
       "listings": "mga listahan",
       "listBtn": "Ilista",
-      "forHireLabel": "Para Paupahan",
-      "wantingToHire": "Gustong Kumuha",
+      "forHireLabel": "Paupahan",
+      "wantingToHire": "Gustong Umupa",
       "noListings": "Walang {{filter}} na listahan",
-      "lockedTitle": "Nilalaman ng HyperTek Gaming para sa pagpapakita lamang.",
-      "lockedDesc": "This is part of Hyper Tek's genuine 'Play to Earn' system, where players can earn real cash rewards, and or Materials/Resources.",
-      "forHireBadge": "PARA PAUPAHAN",
-      "wantedBadge": "GUSTONG KUMUHA",
+      "lockedTitle": "Maaaring maging available ang pagpapaupa kung mailabas ang mga laro.",
+      "lockedDesc": "Maaaring mapaupahan ng mga player ang mga item sa ibang player at makatanggap ng mga in-game reward na pinagkakasunduan nila mismo, alinsunod sa pinal na mga patakaran ng laro.",
+      "forHireBadge": "PAUPAHAN",
+      "wantedBadge": "NAGHAHANAP NG MAUUPAHAN",
       "price": "Presyo",
       "maxDuration": "Pinakamataas na Tagal",
-      "hireBtn": "Kumuha",
+      "hireBtn": "Paupahan",
       "fulfillBtn": "Tuparin ang Kahilingan",
       "rules": {
         "durations": "8h · 1d · 3d · 1l · 1b",
         "cooldown": "Cooldown: 2× tagal ng renta",
         "commission": "Nag-iiba ang komisyon",
-        "payment": "Magbayad sa Hyper Bucks o Materyales"
+        "payment": "Mga in-game reward na pinagkasunduan ng mga player"
       },
       "preview": {
         "title": "Preview ng Feature sa Laro",
-        "desc": "Ang sistema ng Para Paupahan ay magiging ganap na aktibo sa laro sa paglulunsad."
+        "desc": "Maaaring maging live in-game ang pagpapaupa sa launch. Ang mga item na ipinapakita rito ay mga sample para sa preview lang."
       },
       "hireModal": {
-        "hireTitle": "Kumuha ng Espesyalista",
-        "fulfillTitle": "Tuparin ang Kahilingan sa Pagkuha",
-        "forHireBadge": "PARA PAUPAHAN",
+        "hireTitle": "Paupahan ang Specialist",
+        "fulfillTitle": "Tuparin ang Kahilingan sa Pag-upa",
+        "forHireBadge": "PAUPAHAN",
         "wantedBadge": "GUSTO",
         "price": "Presyo",
         "duration": "Tagal",
-        "howHire": "Paano gumagana ang pagkuha",
+        "howHire": "Paano gumagana ang pagpapaupa",
         "howFulfill": "Paano gumagana ang pagtutpad ng kahilingan",
-        "proceedHire": "Magpatuloy sa Pagkuha",
+        "proceedHire": "Magpatuloy sa Pagpapaupa",
         "offerFulfill": "Mag-alok na Tuparin",
         "commission": "Nag-iiba ang komisyon ng platform · Nalalapat ang cooldown pagkatapos ibalik",
-        "confirmHire": "Kumpirmahin ang Pagkuha",
+        "confirmHire": "Kumpirmahin ang Pagpapaupa",
         "confirmOffer": "Kumpirmahin ang Alok",
         "specialist": "Espesyalista",
         "payment": "Bayad",
@@ -461,19 +462,19 @@
         "close": "Isara"
       },
       "createModal": {
-        "listTitle": "Ilista Para Paupahan",
-        "postTitle": "Mag-post ng Gustong Kumuha",
-        "forHireBtn": "Para Paupahan",
-        "wantingBtn": "Gustong Kumuha",
+        "listTitle": "I-list Bilang Paupahan",
+        "postTitle": "I-post ang Gustong Umupa",
+        "forHireBtn": "Paupahan",
+        "wantingBtn": "Gustong Umupa",
         "itemNameHire": "Espesyalista / pangalan ng item *",
-        "itemNameWant": "Ang gusto mong kumuha *",
+        "itemNameWant": "Ano ang gusto mong upahan *",
         "descPlaceholder": "Paglalarawan",
         "categoryPlaceholder": "Kategorya (opsyonal)",
         "paymentType": "Uri ng Bayad",
-        "hyperBucks": "Hyper Bucks",
+        "hyperBucks": "In-game reward",
         "materials": "Materyales",
-        "amountLabel": "Halaga (Hyper Bucks)",
-        "afterCommission": "Matatanggap mo ang {{amount}} HB pagkatapos ng komisyon ng platform",
+        "amountLabel": "In-game reward",
+        "afterCommission": "Makakatanggap ka ng {{amount}} in-game pagkatapos ng komisyon ng platform",
         "maxDuration": "Pinakamataas na Tagal",
         "disclaimer": "Nag-iiba ang komisyon · Cooldown = 2× tagal ng renta pagkatapos ibalik",
         "listing": "Naglilista…",
@@ -508,7 +509,7 @@
         "postedBy": "Ini-post Ng",
         "claimedBy": "Inangkin Ng",
         "status": "Katayuan",
-        "netHB": "{{amount}} HB net"
+        "netHB": "{{amount}} net"
       },
       "pagination": {
         "prev": "Nakaraan",
@@ -540,6 +541,20 @@
       "dashboardTitle": "Naka-lock pa ang iyong dashboard, pero maghanda ka; paparating na ang opisyal na paglunsad!",
       "desc": "Huwag mong hayaang pigilan ka nito sa pag-sign up at pagsisid sa kamangha-manghang proyektong ito. Tuklasin ang maraming benepisyo nito at kung paano makakatulong ang iyong pakikilahok sa tagumpay nito! Sumali ka na at maging isang Hyper Tekken ngayon!",
       "buttonLabel": "Magbubukas sa opisyal na paglunsad"
+    },
+    "gameLock": {
+      "quests": {
+        "title": "Maaaring maging available ang mga quest kung mailabas ang mga laro.",
+        "desc": "Maaaring makapag-deliver ang mga player ng mga item sa ibang player kapalit ng mga in-game reward, alinsunod sa pinal na mga patakaran ng laro."
+      },
+      "hire": {
+        "title": "Maaaring maging available ang pagpapaupa kung mailabas ang mga laro.",
+        "desc": "Maaaring mapaupahan ng mga player ang mga item sa ibang player at makatanggap ng mga in-game reward na pinagkakasunduan nila mismo, alinsunod sa pinal na mga patakaran ng laro."
+      },
+      "bounty": {
+        "title": "Maaaring maging available ang mga bounty kung mailabas ang mga laro.",
+        "desc": "Mga in-game reward lang ang maaaring ialok ng mga bounty, alinsunod sa pinal na mga patakaran ng laro."
+      }
     }
   },
   "musicPlayer": {
@@ -581,9 +596,9 @@
       "platform": "Plataporma",
       "noDesc": "Walang ibinigay na paglalarawan para sa item na ito.",
       "price": "Presyo",
-      "minBuyback": "Min Garantiya sa Pagbili",
+      "minBuyback": "Programmatic Trade-In Value",
       "reservePrice": "Presyo ng Reserve",
-      "buybackNote": "Hindi maaaring ibenta ang asset na ito nang mas mababa sa pinakamababang halaga ng buyback nito.",
+      "buybackNote": "Hindi maaaring itakda ang reserve price nang mas mababa sa trade-in allocation ng item na ito.",
       "networkNote": "USDC on Base · Kinakailangan ang Base ETH para sa gas (mga pagbabayad sa wallet lang)",
       "buyWithCard": "Bumili Gamit ang Card",
       "makeOffer": "Mag-alok",

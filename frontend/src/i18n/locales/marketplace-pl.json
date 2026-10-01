@@ -9,7 +9,7 @@
       "auctions": "Aukcje",
       "trades": "Wymiany",
       "quests": "Misje",
-      "hire": "Wynajem",
+      "hire": "Do wynajęcia",
       "bounty": "Łowy"
     },
     "banner": {
@@ -31,23 +31,23 @@
       "facts": [
         {
           "label": "NFA",
-          "desc": "Wyłącznie od Hypertek. Najwyższe bonusy w grze. Gwarantowana minimalna wartość odkupu, która rośnie z każdą sprzedażą."
+          "desc": "Przedmiot wyłącznie od Hyper Tek. Najwyższe bonusy w grze. Programmatic Trade-In Value, którą zwiększa każda odsprzedaż."
         },
         {
           "label": "NFC",
-          "desc": "Stworzony przez Hypertek lub licencjonowanych graczy. Bonusy w grze uwzględnione. Gwarantowany minimalny odkup."
+          "desc": "Stworzone przez Hyper Tek lub licencjonowanych graczy. Bonusy w grze w zestawie. Programmatic Trade-In Value w zestawie."
         },
         {
           "label": "NFT",
-          "desc": "Kolekcjonerski przedmiot tworzony przez gracza. Bez bonusów w grze. Bez gwarancji odkupu. Handlowy na rynku."
+          "desc": "Przedmiot kolekcjonerski stworzony przez gracza. Bez bonusów w grze. Bez wartości wymiany. Można nim handlować na marketplace."
         },
         {
           "label": "Prowizja",
-          "desc": "Opłata platformy różni się w zależności od ogłoszenia. Odsprzedaż: sprzedawca 86%, honorarium artysty 2%, +5% na buyback, platforma 7%."
+          "desc": "Opłata platformy różni się w zależności od oferty. Podział przy odsprzedaży: sprzedający 86%, tantiemy artysty 2%, 5% do alokacji wymiany przedmiotu, platforma 7%."
         },
         {
-          "label": "Wzrost odkupu",
-          "desc": "+5% każdej ceny odsprzedaży jest dodawane do minimalnej wartości odkupu zasobu. Tylko rośnie."
+          "label": "Alokacja wymiany",
+          "desc": "5% ceny każdej odsprzedaży jest dodawane do alokacji wymiany przedmiotu. Kwota zwracana przy wymianie wynika z Tiered Loyalty Return Schedule i jest zawsze niższa od kwoty przypisanej."
         },
         {
           "label": "Portfel powierniczy",
@@ -67,7 +67,8 @@
             "NFC (Non-Fungible Characters) to przedmioty licencjonowanych graczy z bonusami w grze i odkupem.",
             "NFT (Non-Fungible Tokens) to kolekcjonerskie przedmioty tworzone przez użytkowników — skórki, broń i więcej."
           ],
-          "cta": "Poznaj podstawy"
+          "cta": "Poznaj podstawy",
+          "intro": "NFA/NFC/NFT to cyfrowe dzieła sztuki. NFA i NFC mają bonusy w grze oraz Programmatic Trade-In Value."
         },
         {
           "label": "Rynek",
@@ -110,21 +111,21 @@
           "cta": "Przeglądaj misje"
         },
         {
-          "label": "Wynajem",
-          "tagline": "Wypożyczaj aktywa lub zarabiaj na swoich",
+          "label": "Do wynajęcia",
+          "tagline": "Wynajmij swoje przedmioty za nagrody w grze",
           "details": [
             "Wynajmij potężnych specjalistów lub sprzęt na jedną misję bez zakupu.",
-            "Wystawiaj własne nieużywane aktywa do wynajmu i zarabiaj pasywnie podczas nieobecności.",
+            "Gracze mogą mieć możliwość wynajmowania nieużywanych przedmiotów innym graczom za nagrody w grze, które uzgadniają między sobą.",
             "Elastyczne czasy — godzinowo, dziennie lub na misję."
           ],
-          "cta": "Przeglądaj wynajem"
+          "cta": "Przeglądaj Do wynajęcia"
         },
         {
           "label": "Łowy",
           "tagline": "Poluj na cele, zgarniaj nagrody, bądź na szczycie",
           "details": [
             "Przyjmuj łowy opublikowane przez innych graczy lub system, aby zdobyć kryptowaluty.",
-            "Wspinaj się na tablicy wyników łowów, aby odblokować ekskluzywne tytuły i bonusy.",
+            "Wspinaj się w rankingu bounty, aby odblokować ekskluzywne tytuły i nagrody w grze.",
             "Publikuj własne łowy, aby werbować wykwalifikowanych graczy do swoich celów."
           ],
           "cta": "Zobacz łowy"
@@ -136,7 +137,7 @@
       "subtitle": "Przeglądaj NFA, NFC i NFT dostępne do natychmiastowego zakupu — skórki, broń, specjalistów, statki kosmiczne i więcej.",
       "filterAll": "Wszystkie",
       "samplePreviewTitle": "Przykładowy podgląd rynku",
-      "samplePreviewDesc": "Poniższe przedmioty są przykładowymi podglądami prezentującymi typy aktywów cyfrowych, które będą dostępne na rynku HyperTek. Rzeczywiste przedmioty z unikalnym artwork'iem i zweryfikowaną przez blockchain własnością będą dostępne przy uruchomieniu.",
+      "samplePreviewDesc": "Poniższe przedmioty to przykładowe podglądy rodzajów cyfrowych przedmiotów, które mogą być dostępne na marketplace Hyper Tek. Rzeczywiste przedmioty z unikalną grafiką i własnością zweryfikowaną w blockchainie mogą być dostępne przy premierze.",
       "noItems": "Brak dostępnych przedmiotów. Sprawdź ponownie wkrótce.",
       "categories": {
         "skins": "Skórki",
@@ -197,7 +198,7 @@
       },
       "preview": {
         "title": "Podgląd funkcji w grze",
-        "desc": "System aukcji będzie w pełni aktywny w grze przy uruchomieniu. Pokazane tutaj przedmioty są przykładami dla inwestorów i użytkowników."
+        "desc": "System aukcji może zostać uruchomiony w grze przy premierze. Pokazane tu przedmioty to przykłady służące wyłącznie do podglądu."
       },
       "card": {
         "currentBid": "Aktualna oferta",
@@ -369,7 +370,7 @@
       "earnFromQuests": "Chcesz zarabiać na misjach? Graj →",
       "moneyQuests": "Misje pieniężne (pula 11%)",
       "resourceQuests": "Misje zasobów (pula 20%)",
-      "footerNote1": "# Misje z połączonymi ładunkami będą wypłacane przy użyciu oddzielnych kwot z tabeli.",
+      "footerNote1": "# Misje z łączonymi ładunkami korzystają z nagród z osobnej tabeli.",
       "footerNote2": "# Dane planet zsynchronizują się, gdy gry zostaną uruchomione.",
       "inGame": "W grze",
       "open": "Otwarte",
@@ -407,16 +408,16 @@
       }
     },
     "hire": {
-      "heading": "Wynajem",
+      "heading": "Do wynajęcia",
       "listings": "ogłoszeń",
       "listBtn": "Wystaw",
       "forHireLabel": "Do wynajęcia",
-      "wantingToHire": "Szukam do wynajęcia",
+      "wantingToHire": "Chcę wynająć",
       "noListings": "Brak {{filter}} ogłoszeń",
-      "lockedTitle": "Treść gier HyperTek tylko do celów demonstracyjnych.",
-      "lockedDesc": "This is part of Hyper Tek's genuine 'Play to Earn' system, where players can earn real cash rewards, and or Materials/Resources.",
+      "lockedTitle": "Wynajem może stać się dostępny, jeśli gry zostaną wydane.",
+      "lockedDesc": "Gracze mogą mieć możliwość wynajmowania przedmiotów innym graczom i otrzymywania nagród w grze, które uzgadniają między sobą, zgodnie z ostatecznymi zasadami gry.",
       "forHireBadge": "DO WYNAJĘCIA",
-      "wantedBadge": "SZUKAM DO WYNAJĘCIA",
+      "wantedBadge": "POSZUKIWANE DO WYNAJĘCIA",
       "price": "Cena",
       "maxDuration": "Maks. czas",
       "hireBtn": "Wynajmij",
@@ -425,15 +426,15 @@
         "durations": "8h · 1d · 3d · 1t · 1m",
         "cooldown": "Przerwa: 2× czas wynajmu",
         "commission": "Prowizja różni się",
-        "payment": "Płatność w Hyper Bucks lub materiałach"
+        "payment": "Nagrody w grze uzgadniane między graczami"
       },
       "preview": {
         "title": "Podgląd funkcji w grze",
-        "desc": "System wynajmu będzie w pełni aktywny w grze przy uruchomieniu. Pokazane tutaj przedmioty są przykładami dla inwestorów i użytkowników."
+        "desc": "Wynajem może zostać uruchomiony w grze przy premierze. Pokazane tu przedmioty to przykłady służące wyłącznie do podglądu."
       },
       "hireModal": {
         "hireTitle": "Wynajmij specjalistę",
-        "fulfillTitle": "Zrealizuj zapytanie o wynajem",
+        "fulfillTitle": "Zrealizuj prośbę o wynajem",
         "forHireBadge": "DO WYNAJĘCIA",
         "wantedBadge": "POSZUKIWANY",
         "price": "Cena",
@@ -462,18 +463,18 @@
       },
       "createModal": {
         "listTitle": "Wystaw do wynajęcia",
-        "postTitle": "Opublikuj zapytanie o wynajem",
+        "postTitle": "Opublikuj Chcę wynająć",
         "forHireBtn": "Do wynajęcia",
-        "wantingBtn": "Szukam do wynajęcia",
+        "wantingBtn": "Chcę wynająć",
         "itemNameHire": "Specjalista / nazwa przedmiotu *",
-        "itemNameWant": "Czego chcesz wynająć *",
+        "itemNameWant": "Co chcesz wynająć *",
         "descPlaceholder": "Opis",
         "categoryPlaceholder": "Kategoria (opcjonalne)",
         "paymentType": "Rodzaj płatności",
-        "hyperBucks": "Hyper Bucks",
+        "hyperBucks": "Nagroda w grze",
         "materials": "Materiały",
-        "amountLabel": "Kwota (Hyper Bucks)",
-        "afterCommission": "Otrzymujesz {{amount}} HB po prowizji platformy",
+        "amountLabel": "Nagroda w grze",
+        "afterCommission": "Otrzymujesz {{amount}} w grze po prowizji platformy",
         "maxDuration": "Maks. czas trwania",
         "disclaimer": "Prowizja różni się · Przerwa = 2× czas wynajmu po zwrocie",
         "listing": "Wystawianie…",
@@ -508,7 +509,7 @@
         "postedBy": "Opublikowane przez",
         "claimedBy": "Przyjęte przez",
         "status": "Status",
-        "netHB": "{{amount}} HB netto"
+        "netHB": "{{amount}} netto"
       },
       "pagination": {
         "prev": "Poprzednia",
@@ -540,6 +541,20 @@
       "dashboardTitle": "Twój panel jest obecnie zablokowany, ale przygotuj się; oficjalna premiera tuż tuż!",
       "desc": "Nie pozwól, aby to powstrzymało cię przed rejestracją i zanurzeniem się w tym niesamowitym projekcie. Odkryj jego liczne korzyści i zobacz, jak twoje zaangażowanie może napędzać jego sukces! Dołącz teraz i zostań Hyper Tekken już dziś!",
       "buttonLabel": "Otwarcie przy oficjalnej premierze"
+    },
+    "gameLock": {
+      "quests": {
+        "title": "Misje mogą stać się dostępne, jeśli gry zostaną wydane.",
+        "desc": "Gracze mogą mieć możliwość dostarczania przedmiotów innym graczom za nagrody w grze, zgodnie z ostatecznymi zasadami gry."
+      },
+      "hire": {
+        "title": "Wynajem może stać się dostępny, jeśli gry zostaną wydane.",
+        "desc": "Gracze mogą mieć możliwość wynajmowania przedmiotów innym graczom i otrzymywania nagród w grze, które uzgadniają między sobą, zgodnie z ostatecznymi zasadami gry."
+      },
+      "bounty": {
+        "title": "Bounty mogą stać się dostępne, jeśli gry zostaną wydane.",
+        "desc": "Bounty mogą oferować wyłącznie nagrody w grze, zgodnie z ostatecznymi zasadami gry."
+      }
     }
   },
   "musicPlayer": {
@@ -581,9 +596,9 @@
       "platform": "Platforma",
       "noDesc": "Nie podano opisu dla tego przedmiotu.",
       "price": "Cena",
-      "minBuyback": "Minimalna gwarancja wykupu",
+      "minBuyback": "Programmatic Trade-In Value",
       "reservePrice": "Cena minimalna",
-      "buybackNote": "Tego aktywa nie można sprzedać poniżej minimalnej wartości wykupu.",
+      "buybackNote": "Ceny minimalnej nie można ustawić poniżej alokacji wymiany tego przedmiotu.",
       "networkNote": "USDC na podstawie · Baza W przypadku gazu wymagane jest ETH (tylko płatności portfelem)",
       "buyWithCard": "Kup za pomocą karty",
       "makeOffer": "Złóż ofertę",

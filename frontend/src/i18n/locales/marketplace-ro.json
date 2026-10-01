@@ -31,23 +31,23 @@
       "facts": [
         {
           "label": "NFA",
-          "desc": "Activ exclusiv Hypertek. Cele mai mari bonusuri în joc. Valoare minimă garantată de răscumpărare care crește cu fiecare vânzare."
+          "desc": "Obiect exclusiv Hyper Tek. Cele mai mari bonusuri în joc. Programmatic Trade-In Value la care adaugă fiecare revânzare."
         },
         {
           "label": "NFC",
-          "desc": "Creat de Hypertek sau jucători licențiați. Bonusuri în joc incluse. Răscumpărare minimă garantată."
+          "desc": "Creat de Hyper Tek sau de jucători licențiați. Bonusuri în joc incluse. Programmatic Trade-In Value inclusă."
         },
         {
           "label": "NFT",
-          "desc": "Colecționar creat de jucători. Fără bonusuri în joc. Fără garanție de răscumpărare. Comercializabil pe piață."
+          "desc": "Obiect de colecție creat de jucători. Fără bonusuri în joc. Fără valoare de schimb. Tranzacționabil pe marketplace."
         },
         {
           "label": "Comision",
-          "desc": "Taxa platformei variază în funcție de anunț. Revânzări: vânzător 86%, royalty artist 2%, +5% către buyback, platformă 7%."
+          "desc": "Taxa platformei variază în funcție de listare. Împărțirea la revânzare: vânzător 86%, redevența artistului 2%, 5% către alocarea de schimb a obiectului, platformă 7%."
         },
         {
-          "label": "Creștere Răscumpărare",
-          "desc": "+5% din fiecare preț de revânzare se adaugă la valoarea minimă de răscumpărare a activului."
+          "label": "Alocare de schimb",
+          "desc": "5% din prețul fiecărei revânzări se adaugă la alocarea de schimb a obiectului. Suma returnată la un schimb urmează Tiered Loyalty Return Schedule și este întotdeauna mai mică decât suma alocată."
         },
         {
           "label": "Portofel Custodial",
@@ -67,7 +67,8 @@
             "NFCs sunt articole de jucători licențiați cu bonusuri în joc.",
             "NFTs sunt colecționare create de utilizatori."
           ],
-          "cta": "Învață Bazele"
+          "cta": "Învață Bazele",
+          "intro": "NFA-urile/NFC-urile/NFT-urile sunt opere de artă digitală. NFA-urile și NFC-urile au bonusuri în joc și o Programmatic Trade-In Value."
         },
         {
           "label": "Piața",
@@ -111,10 +112,10 @@
         },
         {
           "label": "De închiriat",
-          "tagline": "Împrumutați active sau câștigați din ale voastre",
+          "tagline": "Dă-ți obiectele în chirie pentru recompense în joc",
           "details": [
             "Închiriați specialiști puternici pentru o singură misiune.",
-            "Listați propriile active inactive pentru închiriere.",
+            "Jucătorii ar putea să dea în chirie obiectele nefolosite altor jucători pentru recompense în joc pe care le negociază între ei.",
             "Durate flexibile — orar, zilnic sau per misiune."
           ],
           "cta": "Vezi De închiriat"
@@ -124,7 +125,7 @@
           "tagline": "Vânați ținte, revendicați recompense",
           "details": [
             "Acceptați recompense postate de alți jucători sau sistem.",
-            "Urcați în clasamentul de recompense.",
+            "Urcă în clasamentul bounty pentru a debloca titluri exclusive și recompense în joc.",
             "Postați propriile recompense pentru a recruta jucători."
           ],
           "cta": "Vezi Recompense"
@@ -136,7 +137,7 @@
       "subtitle": "Răsfoi NFAs, NFCs și NFTs disponibile pentru cumpărare imediată.",
       "filterAll": "Toate",
       "samplePreviewTitle": "Previzualizare Eșantion Piață",
-      "samplePreviewDesc": "Articolele de mai jos sunt previzualizări eșantion care prezintă tipurile de active digitale care vor fi disponibile.",
+      "samplePreviewDesc": "Obiectele de mai jos sunt previzualizări exemplificative ale tipurilor de obiecte digitale care ar putea fi disponibile pe marketplace-ul Hyper Tek. Obiectele reale, cu artă unică și proprietate verificată pe blockchain, ar putea fi disponibile la lansare.",
       "noItems": "Nu există articole disponibile încă. Reveniți curând.",
       "categories": {
         "skins": "Skin-uri",
@@ -197,7 +198,7 @@
       },
       "preview": {
         "title": "Previzualizare Funcție În Joc",
-        "desc": "Sistemul de licitații va fi complet activ în joc la lansare."
+        "desc": "Sistemul de licitații ar putea fi activat în joc la lansare. Obiectele afișate aici sunt exemple, doar pentru previzualizare."
       },
       "card": {
         "currentBid": "Ofertă curentă",
@@ -369,7 +370,7 @@
       "earnFromQuests": "Vrei să câștigi din misiuni? Joacă →",
       "moneyQuests": "Misiuni Bani (pool 11%)",
       "resourceQuests": "Misiuni Resurse (pool 20%)",
-      "footerNote1": "# Misiunile cu sarcini combinate vor fi plătite folosind sumele tabelului separat.",
+      "footerNote1": "# Misiunile cu încărcături combinate folosesc recompensele din tabelul separat.",
       "footerNote2": "# Datele planetare se vor sincroniza când jocurile vor fi live.",
       "inGame": "În joc",
       "open": "Deschis",
@@ -410,40 +411,40 @@
       "heading": "De închiriat",
       "listings": "listări",
       "listBtn": "Listare",
-      "forHireLabel": "De Închiriat",
-      "wantingToHire": "Doresc să Angajeze",
+      "forHireLabel": "De închiriat",
+      "wantingToHire": "Doresc să închiriez",
       "noListings": "Nicio listare {{filter}}",
-      "lockedTitle": "Conținut HyperTek Gaming doar pentru afișare.",
-      "lockedDesc": "This is part of Hyper Tek's genuine 'Play to Earn' system, where players can earn real cash rewards, and or Materials/Resources.",
+      "lockedTitle": "Închirierea ar putea deveni disponibilă dacă jocurile sunt lansate.",
+      "lockedDesc": "Jucătorii ar putea să dea obiecte în chirie altor jucători și să primească recompense în joc pe care le negociază între ei, conform regulilor finale ale jocului.",
       "forHireBadge": "DE ÎNCHIRIAT",
-      "wantedBadge": "DORIT",
+      "wantedBadge": "CĂUTAT PENTRU ÎNCHIRIERE",
       "price": "Preț",
       "maxDuration": "Durată Maximă",
-      "hireBtn": "Angajați",
+      "hireBtn": "Dă în chirie",
       "fulfillBtn": "Îndepliniți Cererea",
       "rules": {
         "durations": "8h · 1z · 3z · 1s · 1l",
         "cooldown": "Cooldown: 2× durata închirierii",
         "commission": "Comisionul variază",
-        "payment": "Plată în Hyper Bucks sau Materiale"
+        "payment": "Recompense în joc negociate între jucători"
       },
       "preview": {
         "title": "Previzualizare Funcție În Joc",
-        "desc": "Sistemul De Închiriat va fi complet activ în joc la lansare."
+        "desc": "Închirierea ar putea fi activată în joc la lansare. Obiectele afișate aici sunt exemple, doar pentru previzualizare."
       },
       "hireModal": {
-        "hireTitle": "Angajați Specialist",
-        "fulfillTitle": "Îndepliniți Cererea de Angajare",
+        "hireTitle": "Dă în chirie specialistul",
+        "fulfillTitle": "Îndeplinește cererea de închiriere",
         "forHireBadge": "DE ÎNCHIRIAT",
         "wantedBadge": "DORIT",
         "price": "Preț",
         "duration": "Durată",
-        "howHire": "Cum funcționează angajarea",
+        "howHire": "Cum funcționează închirierea",
         "howFulfill": "Cum funcționează îndeplinirea unei cereri",
-        "proceedHire": "Continuați la Angajare",
+        "proceedHire": "Continuă spre închiriere",
         "offerFulfill": "Oferiți să Îndepliniți",
         "commission": "Comisionul platformei variază · Cooldown se aplică după returnare",
-        "confirmHire": "Confirmați Angajarea",
+        "confirmHire": "Confirmă închirierea",
         "confirmOffer": "Confirmați Oferta",
         "specialist": "Specialist",
         "payment": "Plată",
@@ -461,19 +462,19 @@
         "close": "Închide"
       },
       "createModal": {
-        "listTitle": "Listare De Închiriat",
-        "postTitle": "Postați Dorință de Angajare",
-        "forHireBtn": "De Închiriat",
-        "wantingBtn": "Doresc să Angajeze",
+        "listTitle": "Listează De închiriat",
+        "postTitle": "Publică Doresc să închiriez",
+        "forHireBtn": "De închiriat",
+        "wantingBtn": "Doresc să închiriez",
         "itemNameHire": "Specialist / numele articolului *",
-        "itemNameWant": "Ce doriți să angajați *",
+        "itemNameWant": "Ce vrei să închiriezi *",
         "descPlaceholder": "Descriere",
         "categoryPlaceholder": "Categorie (opțional)",
         "paymentType": "Tip Plată",
-        "hyperBucks": "Hyper Bucks",
+        "hyperBucks": "Recompensă în joc",
         "materials": "Materiale",
-        "amountLabel": "Sumă (Hyper Bucks)",
-        "afterCommission": "Primiți {{amount}} HB după comisionul platformei",
+        "amountLabel": "Recompensă în joc",
+        "afterCommission": "Primești {{amount}} în joc după comisionul platformei",
         "maxDuration": "Durată Maximă",
         "disclaimer": "Comisionul variază · Cooldown = 2× durata închirierii după returnare",
         "listing": "Se listează…",
@@ -508,7 +509,7 @@
         "postedBy": "Postat De",
         "claimedBy": "Revendicat De",
         "status": "Status",
-        "netHB": "{{amount}} HB net"
+        "netHB": "{{amount}} net"
       },
       "pagination": {
         "prev": "Prev",
@@ -540,6 +541,20 @@
       "dashboardTitle": "Panoul tău este momentan blocat, dar pregătește-te; lansarea oficială este chiar după colț!",
       "desc": "Nu lăsa asta să te împiedice să te înscrii și să te scufunzi în acest proiect incredibil. Descoperă numeroasele beneficii și cum implicarea ta îi poate conduce succesul! Alătură-te acum și devino un Hyper Tekken chiar azi!",
       "buttonLabel": "Se deschide la lansarea oficială"
+    },
+    "gameLock": {
+      "quests": {
+        "title": "Misiunile ar putea deveni disponibile dacă jocurile sunt lansate.",
+        "desc": "Jucătorii ar putea să livreze obiecte altor jucători pentru recompense în joc, conform regulilor finale ale jocului."
+      },
+      "hire": {
+        "title": "Închirierea ar putea deveni disponibilă dacă jocurile sunt lansate.",
+        "desc": "Jucătorii ar putea să dea obiecte în chirie altor jucători și să primească recompense în joc pe care le negociază între ei, conform regulilor finale ale jocului."
+      },
+      "bounty": {
+        "title": "Bounty-urile ar putea deveni disponibile dacă jocurile sunt lansate.",
+        "desc": "Bounty-urile pot oferi doar recompense în joc, conform regulilor finale ale jocului."
+      }
     }
   },
   "musicPlayer": {
@@ -581,9 +596,9 @@
       "platform": "Platformă",
       "noDesc": "Nu este furnizată nicio descriere pentru acest articol.",
       "price": "Preţ",
-      "minBuyback": "Garanție minimă de răscumpărare",
+      "minBuyback": "Programmatic Trade-In Value",
       "reservePrice": "Preț de rezervă",
-      "buybackNote": "Acest activ nu poate fi vândut sub valoarea minimă de răscumpărare.",
+      "buybackNote": "Prețul de rezervă nu poate fi stabilit sub alocarea de schimb a acestui obiect.",
       "networkNote": "USDC pe bază · ETH de bază necesar pentru gaz (numai plăți cu portofel)",
       "buyWithCard": "Cumpărați cu card",
       "makeOffer": "Faceți oferta",

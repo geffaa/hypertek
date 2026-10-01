@@ -12,7 +12,7 @@
       "three-worlds": "02  Cele trei lumi",
       "technology": "03  Tehnologie",
       "nfa": "04  Non-Fungible Assets",
-      "hyperbucks": "05  Economia HyperBucks",
+      "hyperbucks": "05  Gems",
       "marketplace": "06  Piață",
       "roadmap": "07  Foaie de parcurs",
       "conclusion": "08  Concluzie"
@@ -29,7 +29,7 @@
     "docs": {
       "tos": "Termeni de utilizare",
       "api": "Termeni de utilizare API",
-      "packs": "Termeni de utilizare pachete",
+      "packs": "Termenii pachetelor",
       "privacy": "Politica de confidențialitate",
       "copy": "Politica privind drepturile de autor",
       "tm": "Politica privind mărcile comerciale",
@@ -127,7 +127,7 @@
       "2": "Cât de entuziasmat ești de un univers unde trei jocuri complete sunt conectate într-o singură experiență?",
       "3": "Ce parte din HyperTek 100 te interesează cel mai mult?",
       "4": "Ce ar face HyperTek 100 un joc pe care trebuie neapărat să-l joci?",
-      "5": "Ai lua în considerare să susții acest proiect când deschidem campania de crowdfunding?",
+      "5": "Te-ar interesa lansarea cu acces timpuriu a obiectelor în ediție limitată?",
       "6": "Urmărește-ne pe X"
     },
     "nameLabel": "Numele tău",
@@ -158,7 +158,7 @@
     "unlisted": "Nelistate",
     "backToMarketplace": "Piață",
     "samplePreviewTitle": "Previzualizare eșantion de piață",
-    "samplePreviewDesc": "Articolele de mai jos sunt previzualizări eșantion care prezintă tipurile de active digitale ce vor fi disponibile. Articolele reale cu artwork unic și proprietate verificată prin blockchain vor fi disponibile la lansare.",
+    "samplePreviewDesc": "Obiectele de mai jos sunt previzualizări exemplificative ale tipurilor de obiecte digitale care ar putea fi disponibile. Obiectele reale, cu artă unică și proprietate verificată pe blockchain, ar putea fi disponibile la lansare.",
     "noItemsFound": "Nu s-au găsit articole în această categorie",
     "preview": "Previzualizare",
     "buyNow": "Cumpără acum",
@@ -182,14 +182,14 @@
     "error": "Îmi pare rău, nu am putut obține un răspuns acum. Te rugăm să încerci din nou sau să contactezi echipa noastră de asistență.",
     "peek": {
       "0": "Ai nevoie de ajutor? Întreabă-mă orice!",
-      "1": "Întrebări despre HyperBucks?",
+      "1": "Întrebări despre Gems?",
       "2": "Curios cum funcționează licitațiile?"
     },
     "shortcuts": {
-      "earnLabel": "Câștigă HyperBucks",
-      "earnText": "Cum câștig HyperBucks?",
-      "cashOutLabel": "Retrage HB",
-      "cashOutText": "Cum îmi retrag HyperBucks?",
+      "earnLabel": "Obține Gems",
+      "earnText": "Cum obțin Gems?",
+      "cashOutLabel": "Valoare de schimb",
+      "cashOutText": "Cum funcționează Programmatic Trade-In Value?",
       "auctionsLabel": "Cum funcționează licitațiile",
       "auctionsText": "Cum funcționează licitațiile?",
       "gamesLabel": "Jocuri disponibile",
@@ -263,7 +263,8 @@
       "trade": "Comerț",
       "auction": "Licitatie",
       "questing": "Căutând",
-      "bounty": "Bounty"
+      "bounty": "Bounty",
+      "forHire": "De închiriat"
     },
     "categories": {
       "all": "Toate",
@@ -349,7 +350,7 @@
       "playerLabel": "\nJucător\n",
       "platformLabel": "\nPlatformă\n",
       "platLabel": "\nPlat\n",
-      "notePayouts": "\nMisiunile cu încărcături utile combinate vor fi plătite folosind sumele de tabel separate.\n",
+      "notePayouts": "Misiunile cu încărcături combinate folosesc recompensele din tabelul separat.",
       "notePlanet": "\nDatele planetei se vor sincroniza când jocurile vor fi live.\n",
       "dailySlots": "\nSloturi zilnice de misiuni\n",
       "used": "\nfolosit\n",
@@ -383,8 +384,8 @@
       "colSelling": "\nDe vânzare\n",
       "colBuying": "\nCumpărând\n",
       "colTrading": "\nTrading\n",
-      "colOnHire": "\nPe închiriere\n",
-      "colHiring": "\nAngajarea\n",
+      "colOnHire": "Dat în chirie",
+      "colHiring": "Închiriere",
       "groupMarketplace": "\nPIAȚĂ\n",
       "groupAuction": "\nLICITATIE"
     }
@@ -397,7 +398,7 @@
       "myCollections": "Colecțiile mele",
       "transactions": "Tranzacții",
       "offers": "Oferte",
-      "hyperBucks": "HyperBucks",
+      "hyperBucks": "Gems",
       "earnings": "Câștiguri",
       "support": "Sprijin",
       "signOut": "Sign out"
@@ -436,7 +437,7 @@
       "transactions": "Tranzacții",
       "transactionsDesc": "Istoricul plăților",
       "withdraw": "Retrage",
-      "withdrawDesc": "Retrageți-vă soldul HB"
+      "withdrawDesc": "Retrage încasările din vânzările tale de pe marketplace"
     },
     "transactions": {
       "title": "Istoricul tranzacțiilor",
@@ -467,7 +468,7 @@
       "noSentOffersHint": "Faceți o ofertă pentru orice articol din Piață",
       "colItem": "Articol",
       "colYourOffer": "Oferta dvs",
-      "colFloorPrice": "Pret etaj",
+      "colFloorPrice": "Cel mai mic preț",
       "colOfferDuration": "Durata ofertei",
       "colStatus": "Stare",
       "colAction": "Acţiune",
@@ -638,11 +639,10 @@
       }
     },
     "hyperbucks": {
-      "title": "HyperBucks",
-      "subtitle": "250 HB = 1 USD · tarif fix",
+      "title": "Gems",
+      "subtitle": "Cumpără Gems pentru achiziții în joc",
       "currentBalance": "Sold curent",
       "tabTopUp": "Încărcați",
-      "tabCashout": "Retragere",
       "success": {
         "title": "Încărcare reușită!",
         "added": "adăugat la contul dvs.",
@@ -652,30 +652,24 @@
       },
       "topup": {
         "amountLabel": "Sumă (USD)",
-        "hyperBucks": "HyperBucks",
+        "hyperBucks": "Gems",
         "preparing": "Se pregatesc...",
         "proceed": "Treceți la Plată",
         "enterAmount": "Introduceți o sumă pentru a continua",
-        "secured": "Securizat de Stripe · 250 HB = 1 USD · min 1 USD",
+        "secured": "Securizat de Stripe · min. $1",
         "quickSelect": "Selectare rapidă",
         "paying": "Plătind",
         "processing": "Prelucrare...",
-        "pay": "Plată"
+        "pay": "Plată",
+        "rate": "Min. $1 · Gems sunt doar pentru achiziții în joc"
       },
       "cashout": {
-        "amountLabel": "Suma (HB)",
-        "minUsdc": "Min 250 HB",
-        "minBank": "Min 2500 HB",
         "receiveVia": "Primiți prin",
         "usdcWallet": "Portofel USDC",
-        "usdcMin": "Min 250 HB · ~ 0,01 USD gaz",
         "bankAccount": "Cont bancar",
-        "bankMin": "Min 2500 HB ($10) · sunt necesare detalii bancare",
         "addBank": "Adăugați detalii bancare în Profil →",
         "noWallet": "Niciun portofel conectat",
         "sendingOtp": "Se trimite OTP...",
-        "toUsdc": "Încasați în portofelul USDC",
-        "toBank": "Încasare în contul bancar",
         "kycNote": "Finalizați verificarea identității pentru a continua"
       },
       "otp": {
@@ -686,7 +680,6 @@
         "bankAccount": "Cont bancar",
         "label": "Cod OTP",
         "processing": "Prelucrare...",
-        "confirm": "Confirmați retragerea",
         "sending": "Se trimite...",
         "resend": "Retrimiteți codul"
       },
