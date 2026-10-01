@@ -12,7 +12,7 @@
       "three-worlds": "02  العوالم الثلاثة",
       "technology": "03  التكنولوجيا",
       "nfa": "04  الأصول غير القابلة للاستبدال",
-      "hyperbucks": "05  اقتصاد HyperBucks",
+      "hyperbucks": "05  Gems",
       "marketplace": "06  السوق",
       "roadmap": "07  خارطة الطريق",
       "conclusion": "08  الخلاصة"
@@ -29,7 +29,7 @@
     "docs": {
       "tos": "شروط الخدمة",
       "api": "شروط خدمة API",
-      "packs": "شروط خدمة الحزم",
+      "packs": "شروط الباقات",
       "privacy": "سياسة الخصوصية",
       "copy": "سياسة حقوق النشر",
       "tm": "سياسة العلامات التجارية",
@@ -127,7 +127,7 @@
       "2": "ما مدى حماسك لكون تترابط فيه ثلاث ألعاب كاملة في تجربة واحدة؟",
       "3": "أي جزء من HyperTek 100 يثير اهتمامك أكثر؟",
       "4": "ما الذي سيجعل HyperTek 100 لعبة لا يمكنك تفويتها؟",
-      "5": "هل ستفكر في دعم هذا المشروع عند فتح حملة التمويل الجماعي؟",
+      "5": "هل يهمك إصدار الوصول المبكر للعناصر المحدودة الإصدار؟",
       "6": "تابعنا على X"
     },
     "nameLabel": "اسمك",
@@ -158,7 +158,7 @@
     "unlisted": "غير مدرج",
     "backToMarketplace": "السوق",
     "samplePreviewTitle": "معاينة نموذج السوق",
-    "samplePreviewDesc": "العناصر أدناه هي معاينات نموذجية تُظهر أنواع الأصول الرقمية التي ستكون متاحة. ستتوفر العناصر الفعلية ذات الأعمال الفنية الفريدة والملكية المُتحقق منها عبر البلوكتشين عند الإطلاق.",
+    "samplePreviewDesc": "العناصر أدناه معاينات نموذجية لأنواع العناصر الرقمية التي قد تتوفر. العناصر الفعلية بأعمالها الفنية الفريدة وملكيتها الموثقة على البلوكشين قد تتوفر عند الإطلاق.",
     "noItemsFound": "لم يتم العثور على عناصر في هذه الفئة",
     "preview": "معاينة",
     "buyNow": "اشترِ الآن",
@@ -182,14 +182,14 @@
     "error": "عذرًا، لم أتمكن من الحصول على رد الآن. يرجى المحاولة مرة أخرى أو الاتصال بفريق الدعم لدينا.",
     "peek": {
       "0": "هل تحتاج مساعدة؟ اسألني أي شيء!",
-      "1": "أسئلة حول HyperBucks؟",
+      "1": "أسئلة عن Gems؟",
       "2": "هل تريد معرفة كيفية عمل المزادات؟"
     },
     "shortcuts": {
-      "earnLabel": "اكسب HyperBucks",
-      "earnText": "كيف أكسب HyperBucks؟",
-      "cashOutLabel": "سحب HB",
-      "cashOutText": "كيف أسحب HyperBucks الخاصة بي؟",
+      "earnLabel": "احصل على Gems",
+      "earnText": "كيف أحصل على Gems؟",
+      "cashOutLabel": "قيمة الاستبدال",
+      "cashOutText": "كيف تعمل Programmatic Trade-In Value؟",
       "auctionsLabel": "كيف تعمل المزادات",
       "auctionsText": "كيف تعمل المزادات؟",
       "gamesLabel": "الألعاب المتاحة",
@@ -263,7 +263,8 @@
       "trade": "التجارة",
       "auction": "مزاد",
       "questing": "البحث",
-      "bounty": "باونتي"
+      "bounty": "باونتي",
+      "forHire": "للإيجار"
     },
     "categories": {
       "all": "الكل",
@@ -349,7 +350,7 @@
       "playerLabel": "\nلاعب\n",
       "platformLabel": "\nمنصة\n",
       "platLabel": "\nبلات\n",
-      "notePayouts": "\nسيتم دفع المهام ذات الحمولات المجمعة باستخدام مبالغ الجدول المنفصلة.\n",
+      "notePayouts": "المهام ذات الحمولات المجمعة تستخدم مكافآت الجدول المنفصل.",
       "notePlanet": "\nستتم مزامنة بيانات الكوكب عند بدء تشغيل الألعاب.\n",
       "dailySlots": "\nفتحات المهام اليومية\n",
       "used": "\nتستخدم\n",
@@ -383,8 +384,8 @@
       "colSelling": "\nبيع\n",
       "colBuying": "\nشراء\n",
       "colTrading": "\nالتداول\n",
-      "colOnHire": "\nعلى تأجير\n",
-      "colHiring": "\nالتوظيف\n",
+      "colOnHire": "مؤجَّر",
+      "colHiring": "التأجير",
       "groupMarketplace": "\nالسوق\n",
       "groupAuction": "\nمزاد"
     }
@@ -397,7 +398,7 @@
       "myCollections": "مجموعاتي",
       "transactions": "المعاملات",
       "offers": "العروض",
-      "hyperBucks": "هايبربكس",
+      "hyperBucks": "Gems",
       "earnings": "الأرباح",
       "support": "يدعم",
       "signOut": "تسجيل الخروج"
@@ -436,7 +437,7 @@
       "transactions": "المعاملات",
       "transactionsDesc": "تاريخ الدفع",
       "withdraw": "ينسحب",
-      "withdrawDesc": "سحب رصيد HB الخاص بك"
+      "withdrawDesc": "اسحب عائدات مبيعاتك في السوق"
     },
     "transactions": {
       "title": "تاريخ المعاملات",
@@ -467,7 +468,7 @@
       "noSentOffersHint": "تقديم عرض على أي عنصر في Marketplace",
       "colItem": "غرض",
       "colYourOffer": "العرض الخاص بك",
-      "colFloorPrice": "سعر الكلمة",
+      "colFloorPrice": "أدنى سعر",
       "colOfferDuration": "مدة العرض",
       "colStatus": "حالة",
       "colAction": "فعل",
@@ -638,11 +639,10 @@
       }
     },
     "hyperbucks": {
-      "title": " HyperBucks ",
-      "subtitle": " 250 HB = 1 دولار أمريكي · سعر ثابت ",
+      "title": "Gems",
+      "subtitle": "اشترِ Gems لعمليات الشراء داخل اللعبة",
       "currentBalance": " الرصيد الحالي ",
       "tabTopUp": " تعبئة الرصيد ",
-      "tabCashout": " سحب النقود ",
       "success": {
         "title": " تعبئة الرصيد ناجحة! ",
         "added": " تضاف إلى حسابك.",
@@ -652,30 +652,24 @@
       },
       "topup": {
         "amountLabel": " المبلغ (بالدولار الأمريكي) ",
-        "hyperBucks": " HyperBucks ",
+        "hyperBucks": "Gems",
         "preparing": " التحضير... ",
         "proceed": " تابع الدفع ",
         "enterAmount": " أدخل مبلغًا للمتابعة ",
-        "secured": " مؤمن بواسطة Stripe · 250 HB = 1 دولار أمريكي · الحد الأدنى 1 دولار ",
+        "secured": "مؤمَّن عبر Stripe · الحد الأدنى $1",
         "quickSelect": " التحديد السريع ",
         "paying": " الدفع ",
         "processing": " المعالجة... ",
-        "pay": " الدفع "
+        "pay": " الدفع ",
+        "rate": "الحد الأدنى $1 · Gems لعمليات الشراء داخل اللعبة فقط"
       },
       "cashout": {
-        "amountLabel": " المبلغ (HB) ",
-        "minUsdc": " الحد الأدنى 250 HB ",
-        "minBank": " الحد الأدنى 2500 HB ",
         "receiveVia": " الاستلام عبر ",
         "usdcWallet": " محفظة USDC ",
-        "usdcMin": " الحد الأدنى 250 HB · ~0.01 دولار غاز ",
         "bankAccount": " الحساب البنكي ",
-        "bankMin": " الحد الأدنى 2500 HB (10 دولارات) · تفاصيل البنك مطلوبة ",
         "addBank": " أضف تفاصيل البنك في الملف الشخصي → ",
         "noWallet": " لا توجد محفظة متصلة ",
         "sendingOtp": " إرسال OTP... ",
-        "toUsdc": " السحب إلى محفظة USDC ",
-        "toBank": " السحب إلى الحساب البنكي ",
         "kycNote": " أكمل التحقق من الهوية للمتابعة "
       },
       "otp": {
@@ -686,7 +680,6 @@
         "bankAccount": " الحساب البنكي ",
         "label": " رمز OTP ",
         "processing": " المعالجة... ",
-        "confirm": " تأكيد السحب ",
         "sending": " إرسال... ",
         "resend": " إعادة إرسال الرمز "
       },

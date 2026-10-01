@@ -12,7 +12,7 @@
       "three-worlds": "02  שלושת העולמות",
       "technology": "03  טכנולוגיה",
       "nfa": "04  נכסים בלתי ניתנים להחלפה",
-      "hyperbucks": "05  כלכלת HyperBucks",
+      "hyperbucks": "05  Gems",
       "marketplace": "06  שוק",
       "roadmap": "07  מפת דרכים",
       "conclusion": "08  סיכום"
@@ -29,7 +29,7 @@
     "docs": {
       "tos": "תנאי שירות",
       "api": "תנאי שירות API",
-      "packs": "תנאי שירות חבילות",
+      "packs": "תנאי החבילות",
       "privacy": "מדיניות פרטיות",
       "copy": "מדיניות זכויות יוצרים",
       "tm": "מדיניות סימנים מסחריים",
@@ -127,7 +127,7 @@
       "2": "עד כמה אתה נרגש מיקום שבו שלושה משחקים מלאים מחוברים לחוויה אחת?",
       "3": "איזה חלק של HyperTek 100 מעניין אותך ביותר?",
       "4": "מה יהפוך את HyperTek 100 למשחק שחייבים לשחק בו?",
-      "5": "האם תשקול לתמוך בפרויקט זה כשנפתח את קמפיין גיוס ההמונים שלנו?",
+      "5": "הייתם מתעניינים בשחרור הגישה המוקדמת של פריטים במהדורה מוגבלת?",
       "6": "עקוב אחרינו ב-X"
     },
     "nameLabel": "שמך",
@@ -158,7 +158,7 @@
     "unlisted": "לא מפורסם",
     "backToMarketplace": "שוק",
     "samplePreviewTitle": "תצוגה מקדימה לדוגמה של השוק",
-    "samplePreviewDesc": "הפריטים להלן הם תצוגות מקדימה לדוגמה המציגות את סוגי הנכסים הדיגיטליים שיהיו זמינים. פריטים אמיתיים עם אמנות ייחודית ובעלות מאומתת על בלוקצ'יין יהיו זמינים בהשקה.",
+    "samplePreviewDesc": "הפריטים שלמטה הם תצוגות מקדימות לדוגמה של סוגי הפריטים הדיגיטליים שעשויים להיות זמינים. פריטים ממשיים עם אמנות ייחודית ובעלות מאומתת בבלוקצ'יין עשויים להיות זמינים בהשקה.",
     "noItemsFound": "לא נמצאו פריטים בקטגוריה זו",
     "preview": "תצוגה מקדימה",
     "buyNow": "קנה עכשיו",
@@ -182,14 +182,14 @@
     "error": "מצטער, לא הצלחתי לקבל תגובה כרגע. אנא נסה שוב או צור קשר עם צוות התמיכה.",
     "peek": {
       "0": "צריך עזרה? שאל אותי כל דבר!",
-      "1": "שאלות על HyperBucks?",
+      "1": "שאלות על Gems?",
       "2": "סקרן איך המכירות הפומביות עובדות?"
     },
     "shortcuts": {
-      "earnLabel": "הרוויח HyperBucks",
-      "earnText": "כיצד אני מרוויח HyperBucks?",
-      "cashOutLabel": "משוך HB",
-      "cashOutText": "כיצד אני מושך את ה-HyperBucks שלי?",
+      "earnLabel": "קבלת Gems",
+      "earnText": "איך משיגים Gems?",
+      "cashOutLabel": "ערך החלפה",
+      "cashOutText": "איך Programmatic Trade-In Value עובד?",
       "auctionsLabel": "כיצד מכירות פומביות עובדות",
       "auctionsText": "כיצד מכירות פומביות עובדות?",
       "gamesLabel": "משחקים זמינים",
@@ -263,7 +263,8 @@
       "trade": "סחר",
       "auction": "מכירה פומבית",
       "questing": "חיפוש",
-      "bounty": "באונטי"
+      "bounty": "באונטי",
+      "forHire": "להשכרה"
     },
     "categories": {
       "all": "הכל",
@@ -349,7 +350,7 @@
       "playerLabel": "\nשחקן\n",
       "platformLabel": "\nפלטפורמה\n",
       "platLabel": "\nפלט\n",
-      "notePayouts": "\nקווסטים עם מטענים משולבים ישולמו באמצעות סכומי הטבלה הנפרדים.\n",
+      "notePayouts": "משימות עם מטענים משולבים משתמשות בתגמולים שבטבלה הנפרדת.",
       "notePlanet": "\nנתוני כוכב הלכת יסונכרנו כשהמשחקים יעלו לאוויר.\n",
       "dailySlots": "\nמשבצות קווסט יומיות\n",
       "used": "\nבשימוש\n",
@@ -383,8 +384,8 @@
       "colSelling": "\nמוכר\n",
       "colBuying": "\nקונה\n",
       "colTrading": "\nמסחר\n",
-      "colOnHire": "\nבהשכרה\n",
-      "colHiring": "\nגיוס עובדים\n",
+      "colOnHire": "מושכר",
+      "colHiring": "השכרה",
       "groupMarketplace": "\nMARKETPLACE\n",
       "groupAuction": "\nמכירה פומבית"
     }
@@ -397,7 +398,7 @@
       "myCollections": "האוספים שלי",
       "transactions": "עסקאות",
       "offers": "הצעות",
-      "hyperBucks": "HyperBucks",
+      "hyperBucks": "Gems",
       "earnings": "רווחים",
       "support": "תְמִיכָה",
       "signOut": "צא"
@@ -436,7 +437,7 @@
       "transactions": "עסקאות",
       "transactionsDesc": "היסטוריית תשלומים",
       "withdraw": "לָסֶגֶת",
-      "withdrawDesc": "משך את יתרת ה-HB שלך"
+      "withdrawDesc": "משיכת ההכנסות מהמכירות שלכם במרקטפלייס"
     },
     "transactions": {
       "title": "היסטוריית עסקאות",
@@ -467,7 +468,7 @@
       "noSentOffersHint": "הצע הצעה על כל פריט ב-Marketplace",
       "colItem": "פָּרִיט",
       "colYourOffer": "ההצעה שלך",
-      "colFloorPrice": "מחיר רצפה",
+      "colFloorPrice": "המחיר הנמוך ביותר",
       "colOfferDuration": "משך המבצע",
       "colStatus": "סטָטוּס",
       "colAction": "פְּעוּלָה",
@@ -638,11 +639,10 @@
       }
     },
     "hyperbucks": {
-      "title": "HyperBucks",
-      "subtitle": "250 HB = $1 USD · תעריף קבוע",
+      "title": "Gems",
+      "subtitle": "קנו Gems לרכישות בתוך המשחק",
       "currentBalance": "יתרה נוכחית",
       "tabTopUp": "Top Up",
-      "tabCashout": "מזומן",
       "success": {
         "title": "הטעינה הצליחה!",
         "added": "נוסף לחשבון שלך.",
@@ -652,30 +652,24 @@
       },
       "topup": {
         "amountLabel": "סכום (דולר ארה\"ב)",
-        "hyperBucks": "HyperBucks",
+        "hyperBucks": "Gems",
         "preparing": "עֲרִיכָה...",
         "proceed": "המשך לתשלום",
         "enterAmount": "הזן סכום כדי להמשיך",
-        "secured": "מאובטח על ידי Stripe · 250 HB = $1 USD · מינימום $1",
+        "secured": "מאובטח על ידי Stripe · מינימום $1",
         "quickSelect": "בחירה מהירה",
         "paying": "משלם",
         "processing": "מעבד...",
-        "pay": "לְשַׁלֵם"
+        "pay": "לְשַׁלֵם",
+        "rate": "מינימום $1 · Gems מיועדים לרכישות בתוך המשחק בלבד"
       },
       "cashout": {
-        "amountLabel": "כמות (HB)",
-        "minUsdc": "מינימום 250 HB",
-        "minBank": "מינימום 2500 HB",
         "receiveVia": "קבלו דרך",
         "usdcWallet": "ארנק USDC",
-        "usdcMin": "מינימום 250 HB · ~$0.01 גז",
         "bankAccount": "חשבון בנק",
-        "bankMin": "מינימום 2500 HB ($10) · נדרשים פרטי בנק",
         "addBank": "הוסף פרטי בנק בפרופיל →",
         "noWallet": "אין ארנק מחובר",
         "sendingOtp": "שולח OTP...",
-        "toUsdc": "תשלום לארנק USDC",
-        "toBank": "מזומן לחשבון הבנק",
         "kycNote": "השלם את אימות הזהות כדי להמשיך"
       },
       "otp": {
@@ -686,7 +680,6 @@
         "bankAccount": "חשבון בנק",
         "label": "קוד OTP",
         "processing": "מעבד...",
-        "confirm": "אשר את הקופה",
         "sending": "שְׁלִיחָה...",
         "resend": "שלח שוב קוד"
       },
