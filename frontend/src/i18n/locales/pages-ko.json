@@ -12,7 +12,7 @@
       "three-worlds": "02  세 가지 세계",
       "technology": "03  기술",
       "nfa": "04  비대체 자산",
-      "hyperbucks": "05  HyperBucks 경제",
+      "hyperbucks": "05  Gems",
       "marketplace": "06  마켓플레이스",
       "roadmap": "07  로드맵",
       "conclusion": "08  결론"
@@ -29,7 +29,7 @@
     "docs": {
       "tos": "서비스 약관",
       "api": "API 서비스 약관",
-      "packs": "팩 서비스 약관",
+      "packs": "패키지 약관",
       "privacy": "개인정보 처리방침",
       "copy": "저작권 정책",
       "tm": "상표 정책",
@@ -127,7 +127,7 @@
       "2": "세 개의 완전한 게임이 하나의 경험으로 연결된 우주에 얼마나 흥미를 느끼시나요?",
       "3": "HyperTek 100의 어떤 부분이 가장 흥미로우신가요?",
       "4": "무엇이 HyperTek 100을 당신에게 '꼭 해야 할 게임'으로 만들까요?",
-      "5": "크라우드펀딩 캠페인을 시작할 때 이 프로젝트를 지원할 의향이 있으신가요?",
+      "5": "한정판 아이템의 얼리 액세스 출시에 관심이 있으신가요?",
       "6": "X에서 팔로우하세요"
     },
     "nameLabel": "이름",
@@ -158,7 +158,7 @@
     "unlisted": "미등록",
     "backToMarketplace": "마켓플레이스",
     "samplePreviewTitle": "마켓플레이스 샘플 미리보기",
-    "samplePreviewDesc": "아래 아이템들은 마켓플레이스에서 제공될 디지털 자산 유형을 보여주는 샘플 미리보기입니다. 고유한 아트워크와 블록체인 검증 소유권을 가진 실제 아이템은 출시 시 제공됩니다.",
+    "samplePreviewDesc": "아래 아이템은 제공될 수 있는 디지털 아이템 유형의 샘플 미리보기입니다. 고유한 아트워크와 블록체인으로 검증된 소유권을 가진 실제 아이템은 출시 시 제공될 수 있습니다.",
     "noItemsFound": "이 카테고리에서 아이템을 찾을 수 없습니다",
     "preview": "미리보기",
     "buyNow": "지금 구매",
@@ -182,14 +182,14 @@
     "error": "죄송합니다. 현재 응답을 받을 수 없습니다. 다시 시도하거나 지원팀에 문의하세요.",
     "peek": {
       "0": "도움이 필요하세요? 무엇이든 물어보세요!",
-      "1": "HyperBucks에 대한 질문이 있으신가요?",
+      "1": "Gems에 대해 궁금한 점이 있나요?",
       "2": "경매 방식이 궁금하신가요?"
     },
     "shortcuts": {
-      "earnLabel": "HyperBucks 획득",
-      "earnText": "HyperBucks를 어떻게 획득하나요?",
-      "cashOutLabel": "HB 출금",
-      "cashOutText": "HyperBucks를 어떻게 출금하나요?",
+      "earnLabel": "Gems 받기",
+      "earnText": "Gems는 어떻게 얻나요?",
+      "cashOutLabel": "트레이드인 가치",
+      "cashOutText": "Programmatic Trade-In Value는 어떻게 작동하나요?",
       "auctionsLabel": "경매 방식",
       "auctionsText": "경매는 어떻게 작동하나요?",
       "gamesLabel": "이용 가능한 게임",
@@ -263,7 +263,8 @@
       "trade": "무역",
       "auction": "경매",
       "questing": "퀘스트 중",
-      "bounty": "현상금"
+      "bounty": "현상금",
+      "forHire": "대여"
     },
     "categories": {
       "all": "모두",
@@ -349,7 +350,7 @@
       "playerLabel": "\n플레이어\n",
       "platformLabel": "\n플랫폼\n",
       "platLabel": "\n플랫\n",
-      "notePayouts": "\n페이로드가 결합된 퀘스트는 별도의 표 금액을 사용하여 지급됩니다.\n",
+      "notePayouts": "복합 화물 퀘스트는 별도 표의 보상을 사용합니다.",
       "notePlanet": "\n게임이 시작되면 행성 데이터가 동기화됩니다.\n",
       "dailySlots": "\n일일 퀘스트 슬롯\n",
       "used": "\n사용됨\n",
@@ -383,8 +384,8 @@
       "colSelling": "\n판매\n",
       "colBuying": "\n구매\n",
       "colTrading": "\n거래\n",
-      "colOnHire": "\n고용 중\n",
-      "colHiring": "\n채용\n",
+      "colOnHire": "대여 중",
+      "colHiring": "대여",
       "groupMarketplace": "\n마켓플레이스\n",
       "groupAuction": "\n경매"
     }
@@ -397,7 +398,7 @@
       "myCollections": "내 컬렉션",
       "transactions": "거래",
       "offers": "제안",
-      "hyperBucks": "HyperBucks",
+      "hyperBucks": "Gems",
       "earnings": "수익",
       "support": "지원",
       "signOut": "Sign Out"
@@ -436,7 +437,7 @@
       "transactions": "거래",
       "transactionsDesc": "결제 내역",
       "withdraw": "Withdraw",
-      "withdrawDesc": "HB 잔액 인출"
+      "withdrawDesc": "마켓플레이스 판매 대금 출금"
     },
     "transactions": {
       "title": "거래 내역",
@@ -467,7 +468,7 @@
       "noSentOffersHint": "마켓플레이스의 모든 항목에 제안하기",
       "colItem": "Item",
       "colYourOffer": "Your Offer",
-      "colFloorPrice": "Floor 가격",
+      "colFloorPrice": "최저가",
       "colOfferDuration": "혜택 기간",
       "colStatus": "상태",
       "colAction": "Action",
@@ -638,11 +639,10 @@
       }
     },
     "hyperbucks": {
-      "title": " HyperBucks ",
-      "subtitle": " 250 HB = $1 USD · 고정 금리 ",
+      "title": "Gems",
+      "subtitle": "게임 내 구매용 Gems 구매",
       "currentBalance": " 현재 잔액 ",
       "tabTopUp": " 충전 ",
-      "tabCashout": " 캐시아웃 ",
       "success": {
         "title": " 충전 성공! ",
         "added": " 귀하의 계정에 추가되었습니다.",
@@ -652,30 +652,24 @@
       },
       "topup": {
         "amountLabel": " 금액(USD) ",
-        "hyperBucks": " HyperBucks ",
+        "hyperBucks": "Gems",
         "preparing": " 준비 중... ",
         "proceed": " 결제 진행 ",
         "enterAmount": " 계속하려면 금액 입력 ",
-        "secured": " Stripe에 의해 보호됨 · 250 HB = $1 USD · 최소 $1 ",
+        "secured": "Stripe로 보호 · 최소 $1",
         "quickSelect": " 빠른 선택 ",
         "paying": " 결제 중 ",
         "processing": " 처리 중... ",
-        "pay": " 결제 "
+        "pay": " 결제 ",
+        "rate": "최소 $1 · Gems는 게임 내 구매 전용입니다"
       },
       "cashout": {
-        "amountLabel": " 금액(HB) ",
-        "minUsdc": " 최소 250HB ",
-        "minBank": " 최소 2500HB ",
         "receiveVia": " ",
         "usdcWallet": " USDC 지갑 ",
-        "usdcMin": " 최소 250 HB · ~$0.01 가스 ",
         "bankAccount": " 은행 계좌 ",
-        "bankMin": " 최소 2500 HB ($10) · 은행 정보 필요 ",
         "addBank": " 프로필에 은행 정보 추가 → ",
         "noWallet": " 연결된 지갑 없음 ",
         "sendingOtp": " OTP 전송 중... ",
-        "toUsdc": " USDC 지갑으로 캐시아웃 ",
-        "toBank": " 은행 계좌로 캐시아웃 ",
         "kycNote": " 계속하려면 신원 확인 완료 "
       },
       "otp": {
@@ -686,7 +680,6 @@
         "bankAccount": " 은행 계좌 ",
         "label": " OTP 코드 ",
         "processing": " 처리 중... ",
-        "confirm": " 현금 지급 확인 ",
         "sending": " 보내는 중... ",
         "resend": " 코드 재전송 "
       },

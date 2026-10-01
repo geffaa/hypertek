@@ -12,7 +12,7 @@
       "three-worlds": "02  3つの世界",
       "technology": "03  テクノロジー",
       "nfa": "04  非代替可能アセット",
-      "hyperbucks": "05  HyperBucksエコノミー",
+      "hyperbucks": "05  Gems",
       "marketplace": "06  マーケットプレイス",
       "roadmap": "07  ロードマップ",
       "conclusion": "08  結論"
@@ -29,7 +29,7 @@
     "docs": {
       "tos": "利用規約",
       "api": "API 利用規約",
-      "packs": "パック利用規約",
+      "packs": "パッケージ規約",
       "privacy": "プライバシーポリシー",
       "copy": "著作権ポリシー",
       "tm": "商標ポリシー",
@@ -127,7 +127,7 @@
       "2": "3つのフルゲームが1つの体験につながるユニバースにどれほど興奮していますか？",
       "3": "HyperTek 100のどの部分に最も興味がありますか？",
       "4": "何がHyperTek 100を「絶対プレイしたいゲーム」にしますか？",
-      "5": "クラウドファンディングキャンペーンを開始する際、このプロジェクトの支援を検討しますか？",
+      "5": "限定版アイテムのアーリーアクセスリリースに興味はありますか?",
       "6": "Xでフォローしてください"
     },
     "nameLabel": "お名前",
@@ -158,7 +158,7 @@
     "unlisted": "未出品",
     "backToMarketplace": "マーケットプレイス",
     "samplePreviewTitle": "マーケットプレイスサンプルプレビュー",
-    "samplePreviewDesc": "以下のアイテムはマーケットプレイスで提供されるデジタルアセットの種類を紹介するサンプルプレビューです。ユニークなアートワークとブロックチェーン検証済み所有権を持つ実際のアイテムはローンチ時に提供されます。",
+    "samplePreviewDesc": "以下のアイテムは、提供される可能性のあるデジタルアイテムの種類を示すサンプルプレビューです。独自のアートワークとブロックチェーンで検証された所有権を持つ実際のアイテムは、ローンチ時に提供される可能性があります。",
     "noItemsFound": "このカテゴリにアイテムが見つかりません",
     "preview": "プレビュー",
     "buyNow": "今すぐ購入",
@@ -182,14 +182,14 @@
     "error": "申し訳ありませんが、現在応答を取得できません。もう一度お試しいただくか、サポートチームにお問い合わせください。",
     "peek": {
       "0": "お手伝いが必要ですか？何でも聞いてください！",
-      "1": "HyperBucksについてのご質問は？",
+      "1": "Gems についてご質問がありますか?",
       "2": "オークションの仕組みが気になりますか？"
     },
     "shortcuts": {
-      "earnLabel": "HyperBucksを稼ぐ",
-      "earnText": "HyperBucksはどうやって稼ぎますか？",
-      "cashOutLabel": "HBを換金",
-      "cashOutText": "HyperBucksはどうやって換金しますか？",
+      "earnLabel": "Gems を入手",
+      "earnText": "Gems はどうやって入手しますか?",
+      "cashOutLabel": "下取り価値",
+      "cashOutText": "Programmatic Trade-In Value はどのように機能しますか?",
       "auctionsLabel": "オークションの仕組み",
       "auctionsText": "オークションはどのように機能しますか？",
       "gamesLabel": "利用可能なゲーム",
@@ -263,7 +263,8 @@
       "trade": "貿易",
       "auction": "オークション",
       "questing": "クエスト中",
-      "bounty": "報奨金"
+      "bounty": "報奨金",
+      "forHire": "貸出"
     },
     "categories": {
       "all": "すべて",
@@ -349,7 +350,7 @@
       "playerLabel": "\nプレーヤー\n",
       "platformLabel": "\nプラットフォーム\n",
       "platLabel": "\nプラット\n",
-      "notePayouts": "\nペイロードが結合されたクエストは、別の表の金額を使用して支払われます。\n",
+      "notePayouts": "複合ペイロードのクエストは別表の報酬を使用します。",
       "notePlanet": "\nゲームが公開されると、惑星のデータが同期されます。\n",
       "dailySlots": "\nデイリークエストスロット\n",
       "used": "\n使用済み\n",
@@ -383,8 +384,8 @@
       "colSelling": "\n販売\n",
       "colBuying": "\n購入する\n",
       "colTrading": "\n取引\n",
-      "colOnHire": "\nレンタル中\n",
-      "colHiring": "\n採用\n",
+      "colOnHire": "貸出中",
+      "colHiring": "貸出",
       "groupMarketplace": "\nマーケットプレイス\n",
       "groupAuction": "\nオークション"
     }
@@ -397,7 +398,7 @@
       "myCollections": "マイコレクション",
       "transactions": "トランザクション",
       "offers": "オファー",
-      "hyperBucks": "HyperBucks",
+      "hyperBucks": "Gems",
       "earnings": "収益",
       "support": "サポート",
       "signOut": "署名アウト"
@@ -436,7 +437,7 @@
       "transactions": "取引",
       "transactionsDesc": "支払い履歴",
       "withdraw": "出金",
-      "withdrawDesc": "HB 残高を出金"
+      "withdrawDesc": "マーケットプレイスの売上金を出金する"
     },
     "transactions": {
       "title": "取引履歴",
@@ -467,7 +468,7 @@
       "noSentOffersHint": "マーケットプレイスのアイテムにオファーを出します",
       "colItem": "アイテム",
       "colYourOffer": "あなたのオファー",
-      "colFloorPrice": "フロア価格",
+      "colFloorPrice": "最低価格",
       "colOfferDuration": "オファー期間",
       "colStatus": "ステータス",
       "colAction": "アクション",
@@ -638,11 +639,10 @@
       }
     },
     "hyperbucks": {
-      "title": " HyperBucks ",
-      "subtitle": " 250 HB = $1 USD · 固定金利 ",
+      "title": "Gems",
+      "subtitle": "ゲーム内購入用の Gems を購入",
       "currentBalance": " 現在の残高 ",
       "tabTopUp": " 補充 ",
-      "tabCashout": " キャッシュアウト ",
       "success": {
         "title": " 補充成功! ",
         "added": " がアカウントに追加されました。",
@@ -652,30 +652,24 @@
       },
       "topup": {
         "amountLabel": " 金額 (USD) ",
-        "hyperBucks": " HyperBucks ",
+        "hyperBucks": "Gems",
         "preparing": " 準備中... ",
         "proceed": " 支払いに進む ",
         "enterAmount": " 続行するには金額を入力してください ",
-        "secured": " Stripe で保護 · 250 HB = $1 USD · 最低 $1 ",
+        "secured": "Stripe で保護 · 最低 $1",
         "quickSelect": " クイック選択 ",
         "paying": " 支払い中 ",
         "processing": " 処理... ",
-        "pay": " 支払い "
+        "pay": " 支払い ",
+        "rate": "最低 $1 · Gems はゲーム内購入専用です"
       },
       "cashout": {
-        "amountLabel": " 金額 (HB) ",
-        "minUsdc": " 最低 250 HB ",
-        "minBank": " 最低 2500 HB ",
         "receiveVia": " 経由で受け取る ",
         "usdcWallet": " USDC ウォレット ",
-        "usdcMin": " 最低 250 HB · ~$0.01 ガス ",
         "bankAccount": " 銀行口座 ",
-        "bankMin": " 最低 2500 HB ($10) · 銀行詳細が必要 ",
         "addBank": " プロフィールに銀行詳細を追加 → ",
         "noWallet": " いいえウォレットが接続されました ",
         "sendingOtp": " OTP を送信中... ",
-        "toUsdc": " USDC ウォレットにキャッシュアウト ",
-        "toBank": " 銀行口座にキャッシュアウト ",
         "kycNote": " 続行するには本人確認を完了してください "
       },
       "otp": {
@@ -686,7 +680,6 @@
         "bankAccount": " 銀行口座 ",
         "label": " OTPコード ",
         "processing": " 処理中... ",
-        "confirm": " 出金確認 ",
         "sending": " 送信... ",
         "resend": " コードを再送信 "
       },
