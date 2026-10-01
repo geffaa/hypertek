@@ -41,7 +41,7 @@
       "rewards": [
         {
           "title": "Recompense în joc",
-          "body": "Fiecare cursă pe care o termini plătește. Câștigă, iar recompensele se înmulțesc. Victoriile în cursă deblochează componente premium pentru vehicule, materiale de upgrade rare, jetoane exclusive de recrutare a echipajului și credite pentru a vă finanța următoarea construcție. Vinde vehicule îmbunătățite pentru profit, reinvestește în mașini noi și urmărește-ți cum imperiul de curse crește cu fiecare podium."
+          "body": "Fiecare cursă pe care o termini este concepută să te recompenseze în joc. Câștigă, iar recompensele se pot multiplica. Victoriile pot debloca componente premium pentru vehicule, materiale rare de îmbunătățire, jetoane exclusive de recrutare a echipei și credite pentru următoarea construcție. Îmbunătățește-ți vehiculele, schimbă-le cu alți jucători și privește cum imperiul tău de curse crește cu fiecare podium."
         },
         {
           "title": "Evenimente clasate",
@@ -60,7 +60,7 @@
       "upgrades": [
         {
           "title": "Upgrade-uri pentru vehicule de curse",
-          "body": "Vehiculul dumneavoastră de curse este o mașină complet modulară. Fiecare componentă poate fi schimbată, reglată și îmbunătățită: carcase, propulsoare, scuturi, carcase exterioare, motoare, stabilizatoare, sisteme de răcire și suprafețe aerodinamice. Compozitele ușoare oferă viteză brută; Armura rezistentă vă ține în viață în condiții atmosferice brutale. Calea de upgrade este profundă, iar alegerile pe care le faci îți definesc identitatea de curse. Cumpără vehicule noi, transformă-le în candidați la campionat, concurează-le către victorie și vinde-le cu profit când ești gata pentru următoarea provocare."
+          "body": "Vehiculul tău de curse este o mașină complet modulară. Fiecare componentă poate fi schimbată, reglată și îmbunătățită: fuzelaje, propulsoare, scuturi, carcase exterioare, motoare, stabilizatoare, sisteme de răcire și suprafețe aerodinamice. Compozitele ușoare oferă viteză pură; blindajul greu te ține în viață în condiții atmosferice brutale. Traseul de îmbunătățire este profund, iar alegerile tale îți definesc identitatea de pilot. Colecționează vehicule noi, transformă-le în candidate la titlu, du-le la victorie și schimbă-le cu alți jucători când ești pregătit pentru următoarea provocare."
         },
         {
           "title": "Actualizări principale ale navelor spațiale",
@@ -68,7 +68,7 @@
         },
         {
           "title": "Bucla de upgrade",
-          "body": "Cursa pentru a câștiga. Câștigă pentru a face upgrade. Faceți upgrade pentru a câștiga curse mai mari cu recompense mai mari. Distribuiți acele recompense atât în ​​vehiculele dvs. de curse, cât și în nava voastră spațială. Cu cât nava este mai bună, cu atât călătoriți mai departe și circuitele devin mai periculoase și mai profitabile. Este o buclă de progresie care recompensează dedicarea și abilitățile la fiecare nivel."
+          "body": "Concurează ca să aduni recompense, folosește recompensele pentru îmbunătățiri și îmbunătățește ca să intri în curse mai mari, cu recompense în joc mai mari. Direcționează aceste recompense atât către vehiculele de curse, cât și către nava ta spațială. Cu cât nava este mai bună, cu atât călătorești mai departe și cu atât circuitele devin mai periculoase și mai pline de satisfacții. Este o buclă de progresie care răsplătește dedicarea și îndemânarea la fiecare nivel."
         },
         {
           "title": "Impact între jocuri",
@@ -99,7 +99,7 @@
         },
         {
           "q": "Cum funcționează recompensele de cursă?",
-          "a": "Fiecare cursă plătește credite, materiale de upgrade și jetoane de echipaj. Victoriile îți înmulțesc câștigurile. Cumpărați vehicule, transformați-le în mașini de curse, câștigați curse și vindeți-le cu profit pentru a finanța îmbunătățiri suplimentare și îmbunătățiri ale navelor spațiale."
+          "a": "Fiecare cursă este concepută să recompenseze în joc cu credite, materiale de îmbunătățire și jetoane de echipă. Victoriile îți pot multiplica recompensele. Colecționează vehicule, transformă-le în mașini de curse, câștigă curse și schimbă-le cu alți jucători în timp ce lucrezi la noi îmbunătățiri și la îmbunătățirile navei spațiale."
         },
         {
           "q": "Pot să-mi fac și nava spațială principală?",

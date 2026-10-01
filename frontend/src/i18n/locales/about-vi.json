@@ -121,8 +121,8 @@
     },
     "section05": {
       "label": "Truy cập sớm — Vật phẩm phiên bản giới hạn",
-      "heading": "Sự Hỗ Trợ Của Bạn Thúc Đẩy Vũ Trụ Hyper Tek",
-      "subtitle": "Mỗi tác phẩm nghệ thuật được mua trực tiếp tài trợ cho ba trò chơi liên kết. Đây là những gì chúng tôi đang cùng nhau xây dựng.",
+      "heading": "Tham gia sớm\nvũ trụ Hyper Tek",
+      "subtitle": "Tác phẩm và gói phiên bản giới hạn có trên Marketplace Hyper Tek cho đến khi hết hàng.\nVật phẩm là đồ sưu tầm kỹ thuật số được bán nguyên trạng, không phải khoản đầu tư, và không có cam kết nào về lợi nhuận.\nĐây là vị trí hiện tại của chúng tôi và những gì đang được lên kế hoạch.",
       "phaseLabel": "Giai Đoạn",
       "crowdfundingNow": "Truy cập sớm ngay",
       "phases": [
@@ -132,7 +132,7 @@
         },
         {
           "name": "Truy cập sớm ngay",
-          "desc": "Bán tác phẩm NFA/NFC/NFT đang diễn ra • NFT do người chơi tạo được kích hoạt • Chia sẻ hoa hồng đang hoạt động • Xây dựng cộng đồng • Tiền chảy vào phát triển game"
+          "desc": "Đang mở bán tác phẩm NFA/NFC/NFT • Đã bật NFT do người chơi tạo • Có gói phiên bản giới hạn • Xây dựng cộng đồng"
         },
         {
           "name": "Ra Mắt Alpha",
@@ -148,10 +148,10 @@
         },
         {
           "name": "Ra Mắt Đầy Đủ",
-          "desc": "Cả ba trò chơi đều hoàn toàn hoạt động • Hệ sinh thái NFA đầy đủ • VR đầy đủ trên tất cả các tựa game • Giải đấu toàn cầu • Vũ trụ liên kết được hiện thực hóa"
+          "desc": "Dự kiến: cả ba trò chơi hoạt động • Hệ sinh thái NFA hoàn chỉnh • VR trên mọi tựa game • Giải đấu toàn cầu • Vũ trụ liên kết thành hiện thực"
         }
       ],
-      "helpHeading": "BẠN Có Thể Giúp Gì Ngay Bây Giờ",
+      "helpHeading": "Cách bạn có thể tham gia ngay bây giờ",
       "helpItems": [
         {
           "bold": "Mua một NFA, NFC hoặc NFT",
@@ -159,14 +159,14 @@
         },
         {
           "bold": "Tạo NFT của riêng bạn",
-          "text": "— trở thành nhà sáng tạo trên thị trường, bạn kiếm tiền từ mỗi lần bán, và khoản hoa hồng giúp tài trợ cho dự án"
+          "text": "— trở thành nhà sáng tạo trên marketplace và giới thiệu tác phẩm của riêng bạn tới người chơi khác"
         },
         {
           "bold": "Chia sẻ và lan truyền thông tin",
-          "text": "— mỗi người ủng hộ mới đẩy nhanh hành trình đến khi ra mắt"
+          "text": "— kể cho người chơi và nhà sưu tầm khác về vũ trụ Hyper Tek"
         }
       ],
-      "link": "[www.hypertek.com] — Ủng Hộ Dự Án. Sở Hữu Tương Lai."
+      "link": "[www.hypertek.com] — Sưu tầm tác phẩm. Sở hữu vật phẩm của bạn."
     },
     "section06": {
       "label": "Gaming Web3.5 & Lợi Thế Cạnh Tranh",

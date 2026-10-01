@@ -121,8 +121,8 @@
     },
     "section05": {
       "label": "Acces timpuriu — Obiecte în ediție limitată",
-      "heading": "Sprijinul tău alimentează universul Hyper Tek",
-      "subtitle": "Fiecare operă de artă cumpărată finanțează direct trei jocuri interconectate. Iată ce construim împreună.",
+      "heading": "Alătură-te din timp\nuniversului Hyper Tek",
+      "subtitle": "Operele și pachetele în ediție limitată sunt disponibile pe Marketplace-ul Hyper Tek în limita stocului.\nObiectele sunt obiecte digitale de colecție vândute ca atare, nu o investiție, și nu se promite niciun profit.\nIată unde ne aflăm și ce este planificat.",
       "phaseLabel": "Faza",
       "crowdfundingNow": "Acces timpuriu acum",
       "phases": [
@@ -132,7 +132,7 @@
         },
         {
           "name": "Acces timpuriu acum",
-          "desc": "Vânzări de opere de artă NFA/NFC/NFT active • NFT-uri create de jucători activate • Partajare comision activă • Construirea comunității • Fonduri direcționate în dezvoltarea jocurilor"
+          "desc": "Vânzările de opere NFA/NFC/NFT sunt active • NFT-urile create de jucători sunt activate • Pachete în ediție limitată disponibile • Construirea comunității"
         },
         {
           "name": "Lansare Alpha",
@@ -148,10 +148,10 @@
         },
         {
           "name": "Lansare completă",
-          "desc": "Toate cele trei jocuri complet active • Ecosistem NFA complet • VR complet în toate titlurile • Turnee globale • Universul interconectat realizat"
+          "desc": "Planificat: toate cele trei jocuri active • Ecosistem NFA complet • VR în toate titlurile • Turnee globale • Universul interconectat realizat"
         }
       ],
-      "helpHeading": "Cum POȚI ajuta chiar acum",
+      "helpHeading": "Cum poți participa chiar acum",
       "helpItems": [
         {
           "bold": "Cumpără un NFA, NFC sau NFT",
@@ -159,14 +159,14 @@
         },
         {
           "bold": "Creează-ți propriul NFT",
-          "text": "— devino creator pe piață, câștigi din fiecare vânzare, iar comisionul ajută la finanțarea proiectului"
+          "text": "— devino creator în marketplace și oferă propriile opere altor jucători"
         },
         {
           "bold": "Distribuie și răspândește vestea",
-          "text": "— fiecare nou susținător accelerează drumul spre lansare"
+          "text": "— spune-le altor jucători și colecționari despre universul Hyper Tek"
         }
       ],
-      "link": "[www.hypertek.com] — Susține proiectul. Deține viitorul."
+      "link": "[www.hypertek.com] — Colecționează arta. Deține-ți obiectele."
     },
     "section06": {
       "label": "Jocuri Web3.5 și avantaj competitiv",

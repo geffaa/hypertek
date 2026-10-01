@@ -41,7 +41,7 @@
       "rewards": [
         {
           "title": "Oyun İçi Ödüller",
-          "body": "Bitirdiğiniz her yarış karşılığını verir. Kazanın ve ödüller çoğalsın. Yarış zaferleri premium araç bileşenlerinin, nadir yükseltme malzemelerinin, özel mürettebat işe alım jetonlarının ve bir sonraki inşanızı finanse edecek kredilerin kilidini açar. Kâr elde etmek için yükseltilmiş araçlar satın, yeni makinelere yeniden yatırım yapın ve yarış imparatorluğunuzun her podyum bitişinde büyümesini izleyin."
+          "body": "Bitirdiğin her yarış seni oyun içinde ödüllendirmek için tasarlandı. Kazanırsan ödüller katlanabilir. Yarış galibiyetleri premium araç bileşenlerinin, nadir yükseltme malzemelerinin, özel ekip alım jetonlarının ve bir sonraki yapın için kredilerin kilidini açabilir. Araçlarını yükselt, diğer oyuncularla takas et ve her podyumla yarış imparatorluğunun büyümesini izle."
         },
         {
           "title": "Dereceli Etkinlikler",
@@ -60,7 +60,7 @@
       "upgrades": [
         {
           "title": "Yarış Aracı Yükseltmeleri",
-          "body": "Yarış aracınız tamamen modüler bir makinedir. Her bileşen değiştirilebilir, ayarlanabilir ve yükseltilebilir: gövdeler, iticiler, kalkanlar, dış kabuklar, motorlar, dengeleyiciler, soğutma sistemleri ve aerodinamik yüzeyler. Hafif kompozitler ham hız sağlar; ağır hizmet zırhı zorlu atmosfer koşullarında hayatta kalmanızı sağlar. Yükseltme yolu derindir ve yaptığınız seçimler yarış kimliğinizi tanımlar. Yeni araçlar satın alın, onları şampiyona yarışmacılarına dönüştürün, zafere kadar yarışın ve bir sonraki mücadeleye hazır olduğunuzda kârla satın."
+          "body": "Yarış aracın tamamen modüler bir makinedir. Her bileşen değiştirilebilir, ayarlanabilir ve yükseltilebilir: gövdeler, iticiler, kalkanlar, dış kabuklar, motorlar, dengeleyiciler, soğutma sistemleri ve aerodinamik yüzeyler. Hafif kompozitler saf hız sağlar; ağır zırh seni acımasız atmosfer koşullarında hayatta tutar. Yükseltme yolu derindir ve yaptığın seçimler yarış kimliğini belirler. Yeni araçlar topla, onları şampiyonluk adayına dönüştür, zafere taşı ve bir sonraki mücadeleye hazır olduğunda diğer oyuncularla takas et."
         },
         {
           "title": "Ana Uzay Gemisi Yükseltmeleri",
@@ -68,7 +68,7 @@
         },
         {
           "title": "Yükseltme Döngüsü",
-          "body": "Kazanmak için yarışın. Yükseltmek için kazanın. Daha büyük ödüllerle daha büyük yarışları kazanmak için yükseltin. Bu ödülleri hem yarış araçlarınıza hem de uzay geminize aktarın. Geminiz ne kadar iyi olursa, o kadar uzağa gidersiniz ve turlar o kadar tehlikeli ve kazançlı hale gelir. Her seviyede adanmışlığı ve beceriyi ödüllendiren bir ilerleme döngüsüdür."
+          "body": "Ödül toplamak için yarış, ödülleri yükseltme için kullan, daha büyük oyun içi ödüllü daha büyük yarışlara girmek için yükselt. Bu ödülleri hem yarış araçlarına hem de uzay gemine aktar. Gemin ne kadar iyiyse o kadar uzağa gidersin ve pistler o kadar tehlikeli ve tatmin edici hale gelir. Bu, her seviyede emeği ve beceriyi ödüllendiren bir ilerleme döngüsüdür."
         },
         {
           "title": "Oyunlar Arası Etki",
@@ -99,7 +99,7 @@
         },
         {
           "q": "Yarış ödülleri nasıl çalışır?",
-          "a": "Her yarışta kredi, yükseltme malzemeleri ve mürettebat jetonları ödenir. Zaferler kazancınızı katlar. Araçlar satın alın, onları yarış makinelerine dönüştürün, yarışları kazanın ve daha fazla geliştirme ve uzay gemisi yükseltmelerine fon sağlamak için bunları kârla satabilirsiniz."
+          "a": "Her yarış oyun içinde kredi, yükseltme malzemesi ve ekip jetonu ile ödüllendirmek için tasarlandı. Galibiyetler ödüllerini katlayabilir. Araç topla, onları yarış makinelerine yükselt, yarışları kazan ve yeni geliştirmeler ile uzay gemisi yükseltmeleri için çalışırken diğer oyuncularla takas et."
         },
         {
           "q": "Ana uzay gemimi de yükseltebilir miyim?",

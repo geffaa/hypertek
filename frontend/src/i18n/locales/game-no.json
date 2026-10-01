@@ -41,7 +41,7 @@
       "rewards": [
         {
           "title": "Belønninger i spillet",
-          "body": "Hvert løp du fullfører betaler seg. Vinn, og belønningene multipliseres. Race-seire låser opp førsteklasses kjøretøykomponenter, sjeldne oppgraderingsmaterialer, eksklusive rekrutteringspoletter og kreditter for å finansiere ditt neste bygg. Selg oppgraderte kjøretøy for profitt, reinvester i nye maskiner, og se racingimperiet ditt vokse med hver pallplassering."
+          "body": "Hvert løp du fullfører er utformet for å belønne deg i spillet. Vinner du, kan belønningene mangedobles. Seire kan låse opp premiumkomponenter til kjøretøy, sjeldne oppgraderingsmaterialer, eksklusive poletter for rekruttering av mannskap og kreditter til ditt neste bygg. Oppgrader kjøretøyene dine, bytt dem med andre spillere og se racingimperiet ditt vokse med hver pallplass."
         },
         {
           "title": "Rangerte arrangementer",
@@ -60,7 +60,7 @@
       "upgrades": [
         {
           "title": "Oppgraderinger av racerbiler",
-          "body": "Racerbilen din er en fullstendig modulær maskin. Hver komponent kan byttes, innstilles og oppgraderes: skrog, thrustere, skjold, ytre skall, motorer, stabilisatorer, kjølesystemer og aerodynamiske overflater. Lette kompositter leverer råhastighet; kraftig rustning holder deg i live gjennom brutale atmosfæriske forhold. Oppgraderingsveien er dyp, og valgene du tar definerer racingidentiteten din. Kjøp nye kjøretøy, bygg dem til mesterskapsutfordrer, kjør dem til seier, og selg dem med fortjeneste når du er klar for neste utfordring."
+          "body": "Racerkjøretøyet ditt er en fullt modulær maskin. Hver komponent kan byttes, justeres og oppgraderes: skrog, rakettmotorer, skjold, ytterskall, motorer, stabilisatorer, kjølesystemer og aerodynamiske flater. Lette kompositter gir ren fart; kraftig panser holder deg i live under brutale atmosfæriske forhold. Oppgraderingsløpet er dypt, og valgene dine former racingidentiteten din. Saml nye kjøretøy, bygg dem til mesterskapskandidater, kjør dem til seier og bytt dem med andre spillere når du er klar for neste utfordring."
         },
         {
           "title": "Hovedoppgraderinger av romskip",
@@ -68,7 +68,7 @@
         },
         {
           "title": "Oppgraderingssløyfen",
-          "body": "Race for å tjene. Tjen for å oppgradere. Oppgrader for å vinne større løp med større belønninger. Legg disse belønningene inn i både racerkjøretøyene og romskipet ditt. Jo bedre skipet ditt er, jo lenger reiser du og desto farligere og mer lukrative blir kretsene. Det er en progresjonsløkke som belønner engasjement og ferdigheter på alle nivåer."
+          "body": "Kjør løp for å samle belønninger, bruk belønningene til å oppgradere, og oppgrader for å delta i større løp med større belønninger i spillet. Bruk belønningene på både racerkjøretøyene og romskipet ditt. Jo bedre skip, desto lenger reiser du og desto farligere og mer givende blir banene. Det er en progresjonssløyfe som belønner innsats og ferdigheter på alle nivåer."
         },
         {
           "title": "Effekt på tvers av spill",
@@ -99,7 +99,7 @@
         },
         {
           "q": "Hvordan fungerer løpsbelønninger?",
-          "a": "Hvert løp betaler ut kreditter, oppgraderingsmateriell og mannskapsmerker. Seirer multipliserer inntektene dine. Kjøp kjøretøy, oppgrader dem til racingmaskiner, vinn løp og selg dem med fortjeneste for å finansiere ytterligere forbedringer og romskipoppgraderinger."
+          "a": "Hvert løp er utformet for å gi kreditter, oppgraderingsmaterialer og mannskapspoletter i spillet. Seire kan mangedoble belønningene dine. Saml kjøretøy, oppgrader dem til racermaskiner, vinn løp og bytt dem med andre spillere mens du jobber mot flere forbedringer og oppgraderinger av romskipet."
         },
         {
           "q": "Kan jeg oppgradere hovedromskipet mitt også?",

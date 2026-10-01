@@ -45,7 +45,7 @@ const ComingSoonModal = ({ isOpen, onClose, title, message, feature }) => {
   const heading = title || "Almost Here";
   const body =
     message ||
-    `${feature ? `${feature} is` : "This experience is"} in final preparation and will go live at our official launch. Back the project now to be among the first through the door.`;
+    `${feature ? `${feature} is` : "This experience is"} in development and may go live at our official launch. Join early access now to be among the first through the door.`;
 
   return createPortal(
     <div

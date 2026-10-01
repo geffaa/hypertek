@@ -121,8 +121,8 @@
     },
     "section05": {
       "label": "Early Access — Limited Edition Items",
-      "heading": "Your Support Powers\nthe Hyper Tek Universe",
-      "subtitle": "Every artwork purchased from the Hyper Tek Marketplace directly supports the Hyper Tek Gaming development.\nThis is your chance to invest in a project with incredible potential for financial returns.\nHere's where we are at and what we are building together.",
+      "heading": "Join the Hyper Tek\nUniverse Early",
+      "subtitle": "Limited edition artwork and packages are available on the Hyper Tek Marketplace while supply lasts.\nItems are digital collectibles sold as is, not an investment, and no profit is promised.\nHere's where we are at and what is planned.",
       "phaseLabel": "Phase",
       "crowdfundingNow": "Early Access Now",
       "phases": [
@@ -132,7 +132,7 @@
         },
         {
           "name": "Early Access Now",
-          "desc": "NFA/NFC/NFT artwork sales live • Player-created NFTs enabled • Commission-sharing active • Community building • Funds flowing into game development"
+          "desc": "NFA/NFC/NFT artwork sales live • Player-created NFTs enabled • Limited edition packages available • Community building"
         },
         {
           "name": "Alpha Launch",
@@ -148,10 +148,10 @@
         },
         {
           "name": "Full Release",
-          "desc": "All three games fully live • Complete NFA ecosystem • Full VR across all titles • Global tournaments • The interconnected universe realized"
+          "desc": "Planned: all three games live • Complete NFA ecosystem • VR across all titles • Global tournaments • The interconnected universe realised"
         }
       ],
-      "helpHeading": "How YOU Can Help Right Now",
+      "helpHeading": "How You Can Take Part Right Now",
       "helpItems": [
         {
           "bold": "PURCHASE DIGITAL ARTWORK",
@@ -159,14 +159,14 @@
         },
         {
           "bold": "Create your own NFT",
-          "text": "— become a creator in the marketplace, you earn from every sale, and the commission helps fund the project"
+          "text": "— become a creator in the marketplace and offer your own artwork to other players"
         },
         {
           "bold": "Share and spread the word",
-          "text": "— every new supporter accelerates the journey to launch"
+          "text": "— tell other players and collectors about the Hyper Tek universe"
         }
       ],
-      "link": "[www.hypertek.com] — Back the Project. Own the Future."
+      "link": "[www.hypertek.com] — Collect the Art. Own Your Items."
     },
     "section06": {
       "label": "Web3.5 Gaming & Competitive Edge",

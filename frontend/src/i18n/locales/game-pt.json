@@ -226,7 +226,7 @@
       "rewards": [
         {
           "title": "Recompensas no Jogo",
-          "body": "Cada corrida que você termina paga dividendos. Vença, e as recompensas se multiplicam. As vitórias desbloqueiam componentes premium para veículos, materiais raros de upgrade, tokens exclusivos de recrutamento de equipe e créditos para financiar sua próxima construção. Venda veículos aprimorados com lucro, reinvista em novas máquinas e veja seu império de corridas crescer a cada pódio."
+          "body": "Cada corrida que você termina foi pensada para recompensar você dentro do jogo. Vença, e as recompensas podem se multiplicar. As vitórias podem desbloquear componentes premium de veículos, materiais raros de melhoria, fichas exclusivas de recrutamento de equipe e créditos para a sua próxima construção. Melhore seus veículos, troque-os com outros jogadores e veja seu império de corridas crescer a cada pódio."
         },
         {
           "title": "Eventos ranqueados",
@@ -245,7 +245,7 @@
       "upgrades": [
         {
           "title": "Upgrades do Veículo de Corrida",
-          "body": "Seu veículo de corrida é uma máquina totalmente modular. Cada componente pode ser trocado, ajustado e melhorado: cascos, propulsores, escudos, carenagens externas, motores, estabilizadores, sistemas de refrigeração e superfícies aerodinâmicas. Compósitos leves entregam velocidade bruta; armadura reforçada mantém você vivo em condições atmosféricas brutais. O caminho de upgrade é profundo, e as escolhas que você faz definem sua identidade nas corridas. Compre novos veículos, transforme-os em contendores ao campeonato, vença corridas e venda-os com lucro quando estiver pronto para o próximo desafio."
+          "body": "Seu veículo de corrida é uma máquina totalmente modular. Cada componente pode ser trocado, ajustado e melhorado: cascos, propulsores, escudos, carenagens, motores, estabilizadores, sistemas de refrigeração e superfícies aerodinâmicas. Compósitos leves entregam velocidade pura; a blindagem pesada mantém você vivo em condições atmosféricas brutais. O caminho de melhorias é profundo, e suas escolhas definem sua identidade nas pistas. Colecione veículos novos, transforme-os em candidatos ao título, leve-os à vitória e troque-os com outros jogadores quando estiver pronto para o próximo desafio."
         },
         {
           "title": "Upgrades da Espaçonave Principal",
@@ -253,7 +253,7 @@
         },
         {
           "title": "O Ciclo de Evolução",
-          "body": "Corra para ganhar. Ganhe para evoluir. Evolua para vencer corridas maiores com recompensas maiores. Canalize essas recompensas tanto para seus veículos de corrida quanto para sua espaçonave. Quanto melhor a sua nave, mais longe você viaja e mais perigosos e lucrativos os circuitos se tornam. É um ciclo de progressão que recompensa dedicação e habilidade em todos os níveis."
+          "body": "Corra para conseguir recompensas, use as recompensas para melhorar e melhore para entrar em corridas maiores com recompensas maiores dentro do jogo. Direcione essas recompensas tanto para seus veículos de corrida quanto para sua nave espacial. Quanto melhor a sua nave, mais longe você viaja e mais perigosos e recompensadores ficam os circuitos. É um ciclo de progressão que recompensa dedicação e habilidade em todos os níveis."
         },
         {
           "title": "Impacto Entre os Jogos",
@@ -284,7 +284,7 @@
         },
         {
           "q": "Como funcionam as recompensas das corridas?",
-          "a": "Cada corrida paga créditos, materiais de upgrade e tokens de equipe. As vitórias multiplicam seus ganhos. Compre veículos, transforme-os em máquinas de corrida, vença corridas e venda-os com lucro para financiar mais melhorias e upgrades da espaçonave."
+          "a": "Cada corrida foi pensada para recompensar com créditos, materiais de melhoria e fichas de equipe dentro do jogo. As vitórias podem multiplicar suas recompensas. Colecione veículos, transforme-os em máquinas de corrida, vença corridas e troque-os com outros jogadores enquanto avança rumo a novas melhorias e melhorias da nave espacial."
         },
         {
           "q": "Posso fazer upgrade da minha espaçonave principal também?",

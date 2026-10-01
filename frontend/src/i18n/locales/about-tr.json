@@ -121,8 +121,8 @@
     },
     "section05": {
       "label": "Erken Erişim — Sınırlı Sayıda Öğeler",
-      "heading": "Desteginiz Hyper Tek Evrenini Guclendirir",
-      "subtitle": "Satin alinan her sanat eseri dogrudan uc birbirine bagli oyunu finanse eder. Birlikte insa ettiğimiz sey budur.",
+      "heading": "Hyper Tek Evrenine\nErkenden Katıl",
+      "subtitle": "Sınırlı sayıdaki sanat eserleri ve paketler, stoklar tükenene kadar Hyper Tek Pazar Yeri'nde mevcuttur.\nÖğeler olduğu gibi satılan dijital koleksiyon öğeleridir, yatırım değildir ve hiçbir kâr vaat edilmez.\nİşte bulunduğumuz nokta ve planlananlar.",
       "phaseLabel": "Aşama",
       "crowdfundingNow": "Erken Erişim Şimdi",
       "phases": [
@@ -132,7 +132,7 @@
         },
         {
           "name": "Erken Erişim Şimdi",
-          "desc": "NFA/NFC/NFT sanat eseri satislari canli • Oyuncu tarafindan olusturulan NFT'ler etkin • Komisyon paylasimi aktif • Topluluk insa etme • Fonlar oyun gelistirmeye akiyor"
+          "desc": "NFA/NFC/NFT sanat eseri satışları yayında • Oyuncuların oluşturduğu NFT'ler etkin • Sınırlı sayıda paketler mevcut • Topluluk oluşturma"
         },
         {
           "name": "Alfa Lansmani",
@@ -148,10 +148,10 @@
         },
         {
           "name": "Tam Surum",
-          "desc": "Her uc oyun tam olarak canli • Tam NFA ekosistemi • Tum basliкlar genelinde tam VR • Kuresel turnuvalar • Birbirine bagli evren gerceklesti"
+          "desc": "Planlanan: üç oyunun tamamı yayında • Eksiksiz NFA ekosistemi • Tüm oyunlarda VR • Küresel turnuvalar • Birbirine bağlı evren gerçeğe dönüşüyor"
         }
       ],
-      "helpHeading": "SIMDI Nasil Yardim Edebilirsiniz",
+      "helpHeading": "Şu Anda Nasıl Katılabilirsin",
       "helpItems": [
         {
           "bold": "Bir NFA, NFC veya NFT Satin Alin",
@@ -159,14 +159,14 @@
         },
         {
           "bold": "Kendi NFT'nizi Olusturun",
-          "text": "— pazar yerinde bir yaratici olun, her satistan kazanin ve komisyon projeyi finanse etmeye yardimci olur"
+          "text": "— pazar yerinde içerik üreticisi ol ve kendi sanat eserlerini diğer oyunculara sun"
         },
         {
           "bold": "Paylasin ve Haberi Yayın",
-          "text": "— her yeni destekci lansmana gidis yolculugunu hizlandiriyor"
+          "text": "— diğer oyunculara ve koleksiyonculara Hyper Tek evreninden bahset"
         }
       ],
-      "link": "[www.hypertek.com] — Projeyi Destekle. Gelecege Sahip Ol."
+      "link": "[www.hypertek.com] — Sanatı Topla. Öğelerinin Sahibi Ol."
     },
     "section06": {
       "label": "Web3.5 Oyunculugu ve Rekabet Ustu",

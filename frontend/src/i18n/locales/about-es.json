@@ -121,8 +121,8 @@
     },
     "section05": {
       "label": "Acceso anticipado — Objetos de edición limitada",
-      "heading": "Tu apoyo impulsa el universo Hyper Tek",
-      "subtitle": "Cada obra de arte comprada financia directamente tres juegos interconectados. Esto es lo que estamos construyendo juntos.",
+      "heading": "Únete pronto al\nuniverso Hyper Tek",
+      "subtitle": "Las obras y los paquetes de edición limitada están disponibles en el Marketplace de Hyper Tek hasta agotar existencias.\nLos objetos son coleccionables digitales que se venden tal cual, no son una inversión y no se promete ningún beneficio.\nAquí puedes ver dónde estamos y qué está previsto.",
       "phaseLabel": "Fase",
       "crowdfundingNow": "Acceso anticipado ya",
       "phases": [
@@ -132,7 +132,7 @@
         },
         {
           "name": "Acceso anticipado ya",
-          "desc": "Ventas de obras de arte NFA/NFC/NFT en vivo • NFT creados por jugadores habilitados • Reparto de comisiones activo • Construcción de la comunidad • Fondos fluyendo hacia el desarrollo del juego"
+          "desc": "Venta de obras NFA/NFC/NFT en marcha • NFT creados por jugadores habilitados • Paquetes de edición limitada disponibles • Creación de comunidad"
         },
         {
           "name": "Lanzamiento Alpha",
@@ -148,10 +148,10 @@
         },
         {
           "name": "Lanzamiento completo",
-          "desc": "Los tres juegos completamente en vivo • Ecosistema NFA completo • VR completo en todos los títulos • Torneos globales • El universo interconectado realizado"
+          "desc": "Previsto: los tres juegos en marcha • Ecosistema NFA completo • VR en todos los títulos • Torneos globales • El universo interconectado hecho realidad"
         }
       ],
-      "helpHeading": "Cómo TÚ puedes ayudar ahora mismo",
+      "helpHeading": "Cómo puedes participar ahora mismo",
       "helpItems": [
         {
           "bold": "Compra un NFA, NFC o NFT",
@@ -159,14 +159,14 @@
         },
         {
           "bold": "Crea tu propio NFT",
-          "text": "— conviértete en creador en el marketplace, ganas con cada venta y la comisión ayuda a financiar el proyecto"
+          "text": "— conviértete en creador del marketplace y ofrece tus propias obras a otros jugadores"
         },
         {
           "bold": "Comparte y corre la voz",
-          "text": "— cada nuevo seguidor acelera el camino hacia el lanzamiento"
+          "text": "— habla del universo Hyper Tek a otros jugadores y coleccionistas"
         }
       ],
-      "link": "[www.hypertek.com] — Apoya el proyecto. Posee el futuro."
+      "link": "[www.hypertek.com] — Colecciona el arte. Sé dueño de tus objetos."
     },
     "section06": {
       "label": "Gaming Web3.5 y ventaja competitiva",

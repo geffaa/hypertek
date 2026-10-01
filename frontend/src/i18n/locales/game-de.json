@@ -41,7 +41,7 @@
       "rewards": [
         {
           "title": "Belohnungen im Spiel",
-          "body": "Jedes Rennen, das Sie beenden, zahlt sich aus. Gewinnen Sie und die Belohnungen vervielfachen sich. Durch Rennsiege werden Premium-Fahrzeugkomponenten, seltene Upgrade-Materialien, exklusive Crew-Rekrutierungstoken und Credits freigeschaltet, mit denen Sie Ihren nächsten Bau finanzieren können. Verkaufen Sie verbesserte Fahrzeuge mit Gewinn, investieren Sie in neue Maschinen und beobachten Sie, wie Ihr Rennimperium mit jedem Podiumsplatz wächst."
+          "body": "Jedes Rennen, das du beendest, ist darauf ausgelegt, dich im Spiel zu belohnen. Gewinnst du, können sich die Belohnungen vervielfachen. Rennsiege können Premium-Fahrzeugkomponenten, seltene Upgrade-Materialien, exklusive Token zur Crew-Rekrutierung und Credits für deinen nächsten Build freischalten. Rüste deine Fahrzeuge auf, handle sie mit anderen Spielern und sieh zu, wie dein Rennimperium mit jedem Podiumsplatz wächst."
         },
         {
           "title": "Ranglisten-Events",
@@ -60,7 +60,7 @@
       "upgrades": [
         {
           "title": "Upgrades für Rennfahrzeuge",
-          "body": "Ihr Rennfahrzeug ist eine vollständig modulare Maschine. Jede Komponente kann ausgetauscht, abgestimmt und aufgerüstet werden: Rümpfe, Triebwerke, Schilde, Außenhüllen, Motoren, Stabilisatoren, Kühlsysteme und aerodynamische Oberflächen. Leichte Verbundwerkstoffe sorgen für pure Geschwindigkeit; Hochleistungspanzerung hält Sie auch unter brutalen atmosphärischen Bedingungen am Leben. Der Upgrade-Pfad ist tiefgreifend und die Entscheidungen, die Sie treffen, definieren Ihre Rennidentität. Kaufen Sie neue Fahrzeuge, bauen Sie sie zu Meisterschaftskandidaten um, fahren Sie damit zum Sieg und verkaufen Sie sie mit Gewinn, wenn Sie für die nächste Herausforderung bereit sind."
+          "body": "Dein Rennfahrzeug ist eine vollständig modulare Maschine. Jede Komponente lässt sich tauschen, abstimmen und aufrüsten: Rümpfe, Triebwerke, Schilde, Außenhüllen, Motoren, Stabilisatoren, Kühlsysteme und aerodynamische Flächen. Leichte Verbundwerkstoffe liefern pure Geschwindigkeit; schwere Panzerung hält dich unter brutalen atmosphärischen Bedingungen am Leben. Der Upgrade-Pfad ist tief, und deine Entscheidungen prägen deine Rennidentität. Sammle neue Fahrzeuge, baue sie zu Titelanwärtern aus, fahre sie zum Sieg und handle sie mit anderen Spielern, wenn du bereit für die nächste Herausforderung bist."
         },
         {
           "title": "Haupt-Raumschiff-Upgrades",
@@ -68,7 +68,7 @@
         },
         {
           "title": "Die Upgrade-Schleife",
-          "body": "Rennen ums Verdienen. Verdienen Sie, um ein Upgrade zu erhalten. Rüsten Sie auf, um größere Rennen mit größeren Belohnungen zu gewinnen. Leiten Sie diese Belohnungen sowohl in Ihre Rennfahrzeuge als auch in Ihr Raumschiff ein. Je besser Ihr Schiff, desto weiter reisen Sie und desto gefährlicher und lukrativer werden die Strecken. Es handelt sich um eine Fortschrittsschleife, die Hingabe und Können auf jeder Ebene belohnt."
+          "body": "Fahre Rennen, um Belohnungen zu sammeln, nutze Belohnungen für Upgrades und rüste auf, um an größeren Rennen mit größeren Belohnungen im Spiel teilzunehmen. Stecke diese Belohnungen in deine Rennfahrzeuge und in dein Raumschiff. Je besser dein Schiff, desto weiter reist du und desto gefährlicher und lohnender werden die Strecken. Es ist eine Fortschrittsschleife, die Einsatz und Können auf jeder Stufe belohnt."
         },
         {
           "title": "Spielübergreifende Auswirkungen",
@@ -99,7 +99,7 @@
         },
         {
           "q": "Wie funktionieren Rennbelohnungen?",
-          "a": "Bei jedem Rennen werden Credits, Upgrade-Materialien und Crew-Tokens ausgezahlt. Siege vervielfachen Ihren Verdienst. Kaufen Sie Fahrzeuge, rüsten Sie sie zu Rennmaschinen auf, gewinnen Sie Rennen und verkaufen Sie sie mit Gewinn, um weitere Verbesserungen und Raumschiff-Upgrades zu finanzieren."
+          "a": "Jedes Rennen ist darauf ausgelegt, im Spiel Credits, Upgrade-Materialien und Crew-Token zu vergeben. Siege können deine Belohnungen vervielfachen. Sammle Fahrzeuge, rüste sie zu Rennmaschinen auf, gewinne Rennen und handle sie mit anderen Spielern, während du auf weitere Verbesserungen und Raumschiff-Upgrades hinarbeitest."
         },
         {
           "q": "Kann ich auch mein Hauptraumschiff upgraden?",

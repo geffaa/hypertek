@@ -41,7 +41,7 @@
       "rewards": [
         {
           "title": "Belöningar i spelet",
-          "body": "Varje lopp du avslutar betalar ut. Vinn, och belöningarna multipliceras. Tävlingssegrar låser upp förstklassiga fordonskomponenter, sällsynta uppgraderingsmaterial, exklusiva rekryteringspoletter och krediter för att finansiera ditt nästa bygge. Sälj uppgraderade fordon för vinst, återinvestera i nya maskiner och se ditt racingimperium växa för varje pallplats."
+          "body": "Varje lopp du fullföljer är utformat för att belöna dig i spelet. Vinner du kan belöningarna mångdubblas. Segrar kan låsa upp premiumkomponenter till fordon, sällsynta uppgraderingsmaterial, exklusiva polletter för rekrytering av besättning och krediter till ditt nästa bygge. Uppgradera dina fordon, byt dem med andra spelare och se ditt racingimperium växa med varje pallplats."
         },
         {
           "title": "Rankade evenemang",
@@ -60,7 +60,7 @@
       "upgrades": [
         {
           "title": "Uppgraderingar av racerbilar",
-          "body": "Ditt racerfordon är en helt modulär maskin. Varje komponent kan bytas ut, trimmas och uppgraderas: skrov, propeller, sköldar, yttre skal, motorer, stabilisatorer, kylsystem och aerodynamiska ytor. Lättviktskompositer levererar rå hastighet; kraftig rustning håller dig vid liv genom brutala atmosfäriska förhållanden. Uppgraderingsvägen är djup, och de val du gör definierar din racingidentitet. Köp nya fordon, bygg dem till mästerskapsutmanare, kör dem till seger och sälj dem med vinst när du är redo för nästa utmaning."
+          "body": "Ditt racingfordon är en helt modulär maskin. Varje komponent kan bytas, trimmas och uppgraderas: skrov, raketmotorer, sköldar, ytterskal, motorer, stabilisatorer, kylsystem och aerodynamiska ytor. Lätta kompositer ger ren fart; kraftigt pansar håller dig vid liv under brutala atmosfäriska förhållanden. Uppgraderingsvägen är djup och dina val formar din racingidentitet. Samla nya fordon, bygg dem till mästerskapskandidater, kör dem till seger och byt dem med andra spelare när du är redo för nästa utmaning."
         },
         {
           "title": "Huvudsakliga uppgraderingar av rymdskepp",
@@ -68,7 +68,7 @@
         },
         {
           "title": "Uppgraderingsslingan",
-          "body": "Race för att tjäna. Tjäna för att uppgradera. Uppgradera för att vinna större lopp med större belöningar. Lägg in dessa belöningar i både dina racingfordon och ditt rymdskepp. Ju bättre ditt skepp, desto längre du reser och desto farligare och mer lukrativa blir kretsarna. Det är en progressionsslinga som belönar engagemang och skicklighet på alla nivåer."
+          "body": "Tävla för att samla belöningar, använd belöningarna för att uppgradera och uppgradera för att delta i större lopp med större belöningar i spelet. Lägg belöningarna på både dina racingfordon och ditt rymdskepp. Ju bättre skepp, desto längre reser du och desto farligare och mer givande blir banorna. Det är en progressionsloop som belönar engagemang och skicklighet på varje nivå."
         },
         {
           "title": "Cross-Game Impact",
@@ -99,7 +99,7 @@
         },
         {
           "q": "Hur fungerar tävlingsbelöningar?",
-          "a": "Varje lopp betalar ut krediter, uppgraderingsmaterial och besättningspoletter. Segrar multiplicerar dina intäkter. Köp fordon, uppgradera dem till racingmaskiner, vinn lopp och sälj dem med vinst för att finansiera ytterligare förbättringar och uppgraderingar av rymdskepp."
+          "a": "Varje lopp är utformat för att ge krediter, uppgraderingsmaterial och besättningspolletter i spelet. Segrar kan mångdubbla dina belöningar. Samla fordon, uppgradera dem till racingmaskiner, vinn lopp och byt dem med andra spelare medan du arbetar mot fler förbättringar och uppgraderingar av rymdskeppet."
         },
         {
           "q": "Kan jag uppgradera mitt huvudrymdskepp också?",

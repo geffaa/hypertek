@@ -121,8 +121,8 @@
     },
     "section05": {
       "label": "Tidlig tilgang — Gjenstander i begrenset opplag",
-      "heading": "Stotten din driver Hyper Tek-universet",
-      "subtitle": "Hvert kunstverk som kjopes finansierer direkte tre sammenkoblede spill. Her er hva vi bygger sammen.",
+      "heading": "Bli med i Hyper Tek-\nuniverset tidlig",
+      "subtitle": "Kunstverk og pakker i begrenset opplag er tilgjengelige på Hyper Tek-markedsplassen så lenge lageret rekker.\nGjenstander er digitale samleobjekter som selges som de er, ikke en investering, og ingen fortjeneste loves.\nHer ser du hvor vi står og hva som er planlagt.",
       "phaseLabel": "Fase",
       "crowdfundingNow": "Tidlig tilgang nå",
       "phases": [
@@ -132,7 +132,7 @@
         },
         {
           "name": "Tidlig tilgang nå",
-          "desc": "NFA/NFC/NFT-kunstverksalg live • Spillerskapte NFT-er aktivert • Provisjonsdeling aktiv • Fellesskapsbygging • Midler str til spillutvikling"
+          "desc": "Salg av NFA/NFC/NFT-kunstverk i gang • Spillerskapte NFT-er aktivert • Pakker i begrenset opplag tilgjengelige • Bygging av fellesskapet"
         },
         {
           "name": "Alpha-lansering",
@@ -148,10 +148,10 @@
         },
         {
           "name": "Full utgivelse",
-          "desc": "Alle tre spillene fullt live • Komplett NFA-okosystem • Full VR pa alle titler • Globale turneringer • Det sammenkoblede universet realisert"
+          "desc": "Planlagt: alle tre spillene live • Komplett NFA-økosystem • VR i alle titler • Globale turneringer • Det sammenkoblede universet realisert"
         }
       ],
-      "helpHeading": "Hvordan DU kan hjelpe akkurat na",
+      "helpHeading": "Slik kan du bli med akkurat nå",
       "helpItems": [
         {
           "bold": "Kjop en NFA, NFC eller NFT",
@@ -159,14 +159,14 @@
         },
         {
           "bold": "Skap ditt eget NFT",
-          "text": "— bli en skaper pa markedsplassen, du tjener pa hvert salg, og provisjonen bidrar til a finansiere prosjektet"
+          "text": "— bli skaper på markedsplassen og tilby dine egne kunstverk til andre spillere"
         },
         {
           "bold": "Del og spre budskapet",
-          "text": "— hver ny supporter akselererer reisen mot lansering"
+          "text": "— fortell andre spillere og samlere om Hyper Tek-universet"
         }
       ],
-      "link": "[www.hypertek.com] — Stott prosjektet. Eie fremtiden."
+      "link": "[www.hypertek.com] — Saml kunsten. Ei gjenstandene dine."
     },
     "section06": {
       "label": "Web3.5-spilling og konkurransefortrinn",

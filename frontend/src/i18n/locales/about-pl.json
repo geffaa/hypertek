@@ -121,8 +121,8 @@
     },
     "section05": {
       "label": "Wczesny dostęp — przedmioty z edycji limitowanej",
-      "heading": "Twoje wsparcie zasila wszechświat Hyper Tek",
-      "subtitle": "Każde zakupione dzieło sztuki bezpośrednio finansuje trzy połączone gry. Oto, co razem budujemy.",
+      "heading": "Dołącz do uniwersum\nHyper Tek wcześniej",
+      "subtitle": "Dzieła i pakiety z edycji limitowanej są dostępne na Marketplace Hyper Tek do wyczerpania zapasów.\nPrzedmioty to cyfrowe przedmioty kolekcjonerskie sprzedawane w stanie, w jakim są, nie inwestycja, i nie obiecujemy żadnego zysku.\nZobacz, na jakim etapie jesteśmy i co jest planowane.",
       "phaseLabel": "Faza",
       "crowdfundingNow": "Wczesny dostęp już teraz",
       "phases": [
@@ -132,7 +132,7 @@
         },
         {
           "name": "Wczesny dostęp już teraz",
-          "desc": "Sprzedaż dzieł sztuki NFA/NFC/NFT na żywo • Włączone NFT tworzone przez graczy • Aktywny podział prowizji • Budowanie społeczności • Środki płynące do tworzenia gier"
+          "desc": "Sprzedaż dzieł NFA/NFC/NFT trwa • NFT tworzone przez graczy włączone • Pakiety z edycji limitowanej dostępne • Budowanie społeczności"
         },
         {
           "name": "Premiera alfa",
@@ -148,10 +148,10 @@
         },
         {
           "name": "Pełne wydanie",
-          "desc": "Wszystkie trzy gry w pełni dostępne • Kompletny ekosystem NFA • Pełne VR we wszystkich tytułach • Globalne turnieje • Zrealizowany połączony wszechświat"
+          "desc": "Planowane: wszystkie trzy gry uruchomione • Pełny ekosystem NFA • VR we wszystkich tytułach • Globalne turnieje • Połączone uniwersum zrealizowane"
         }
       ],
-      "helpHeading": "Jak TY możesz pomóc już teraz",
+      "helpHeading": "Jak możesz wziąć udział już teraz",
       "helpItems": [
         {
           "bold": "Kup NFA, NFC lub NFT",
@@ -159,14 +159,14 @@
         },
         {
           "bold": "Stwórz własne NFT",
-          "text": "— zostań twórcą na rynku, zarabiasz z każdej sprzedaży, a prowizja pomaga finansować projekt"
+          "text": "— zostań twórcą na marketplace i oferuj własne dzieła innym graczom"
         },
         {
           "bold": "Udostępniaj i szerzaj wieść",
-          "text": "— każdy nowy zwolennik przyspiesza drogę do premiery"
+          "text": "— opowiedz innym graczom i kolekcjonerom o uniwersum Hyper Tek"
         }
       ],
-      "link": "[www.hypertek.com] — Wspieraj projekt. Posiadaj przyszłość."
+      "link": "[www.hypertek.com] — Kolekcjonuj sztukę. Posiadaj swoje przedmioty."
     },
     "section06": {
       "label": "Gry Web3.5 i przewaga konkurencyjna",

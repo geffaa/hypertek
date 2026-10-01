@@ -41,7 +41,7 @@
       "rewards": [
         {
           "title": "Phần thưởng trong trò chơi",
-          "body": "Mỗi cuộc đua bạn hoàn thành đều được trả tiền. Giành chiến thắng và phần thưởng sẽ nhân lên. Chiến thắng trong cuộc đua sẽ mở khóa các bộ phận xe cao cấp, vật liệu nâng cấp quý hiếm, mã thông báo tuyển dụng phi hành đoàn độc quyền và các khoản tín dụng để tài trợ cho công trình tiếp theo của bạn. Bán những chiếc xe đã nâng cấp để kiếm lợi nhuận, tái đầu tư vào máy móc mới và xem đế chế đua xe của bạn phát triển sau mỗi lần lên bục vinh quang."
+          "body": "Mỗi cuộc đua bạn hoàn thành đều được thiết kế để thưởng cho bạn trong game. Chiến thắng, và phần thưởng có thể nhân lên. Các chiến thắng có thể mở khóa linh kiện phương tiện cao cấp, vật liệu nâng cấp hiếm, token tuyển mộ đội độc quyền và tín dụng cho bản dựng tiếp theo của bạn. Nâng cấp phương tiện, trao đổi chúng với người chơi khác và chứng kiến đế chế đua xe của bạn lớn mạnh sau mỗi lần lên bục."
         },
         {
           "title": "Sự kiện xếp hạng",
@@ -60,7 +60,7 @@
       "upgrades": [
         {
           "title": "Nâng cấp xe đua",
-          "body": "Xe đua của bạn là một cỗ máy mô-đun hoàn chỉnh. Mọi bộ phận đều có thể được hoán đổi, điều chỉnh và nâng cấp: thân tàu, bộ đẩy, tấm chắn, vỏ ngoài, động cơ, bộ ổn định, hệ thống làm mát và bề mặt khí động học. Vật liệu tổng hợp nhẹ mang lại tốc độ thô; áo giáp hạng nặng giúp bạn sống sót trong điều kiện khí quyển khắc nghiệt. Con đường nâng cấp sâu sắc và những lựa chọn bạn đưa ra sẽ xác định danh tính đua xe của bạn. Mua xe mới, chế tạo chúng thành ứng cử viên vô địch, chạy đua để giành chiến thắng và bán chúng để kiếm lời khi bạn sẵn sàng cho thử thách tiếp theo."
+          "body": "Phương tiện đua của bạn là một cỗ máy hoàn toàn theo mô-đun. Mọi linh kiện đều có thể thay thế, tinh chỉnh và nâng cấp: thân tàu, động cơ đẩy, khiên, vỏ ngoài, động cơ, bộ ổn định, hệ thống làm mát và bề mặt khí động học. Vật liệu composite nhẹ mang lại tốc độ thuần túy; giáp hạng nặng giữ bạn sống sót trong điều kiện khí quyển khắc nghiệt. Lộ trình nâng cấp rất sâu, và lựa chọn của bạn định hình bản sắc đua của bạn. Sưu tầm phương tiện mới, phát triển chúng thành ứng viên vô địch, đưa chúng tới chiến thắng và trao đổi với người chơi khác khi bạn sẵn sàng cho thử thách tiếp theo."
         },
         {
           "title": "Nâng cấp tàu vũ trụ chính",
@@ -68,7 +68,7 @@
         },
         {
           "title": "Vòng nâng cấp",
-          "body": "Chạy đua để kiếm tiền. Kiếm tiền để nâng cấp. Nâng cấp để giành chiến thắng trong cuộc đua lớn hơn với phần thưởng lớn hơn. Chuyển những phần thưởng đó vào cả phương tiện đua và tàu vũ trụ của bạn. Con tàu của bạn càng tốt thì bạn càng đi xa và các mạch càng trở nên nguy hiểm và sinh lợi. Đó là một vòng lặp tiến triển nhằm khen thưởng sự cống hiến và kỹ năng ở mọi cấp độ."
+          "body": "Đua để thu thập phần thưởng, dùng phần thưởng để nâng cấp, nâng cấp để tham gia những cuộc đua lớn hơn với phần thưởng trong game lớn hơn. Dồn những phần thưởng đó vào cả phương tiện đua lẫn phi thuyền của bạn. Tàu càng tốt, bạn đi càng xa và các đường đua càng nguy hiểm, càng đáng giá. Đây là một vòng lặp tiến trình tưởng thưởng cho sự tận tâm và kỹ năng ở mọi cấp độ."
         },
         {
           "title": "Tác động xuyên trò chơi",
@@ -99,7 +99,7 @@
         },
         {
           "q": "Phần thưởng cuộc đua hoạt động như thế nào?",
-          "a": "Mỗi cuộc đua đều trả các khoản tín dụng, vật liệu nâng cấp và mã thông báo của phi hành đoàn. Chiến thắng nhân lên thu nhập của bạn. Mua phương tiện, nâng cấp chúng thành cỗ máy đua, giành chiến thắng trong cuộc đua và bán chúng để kiếm lời để tài trợ cho những cải tiến tiếp theo và nâng cấp tàu vũ trụ."
+          "a": "Mỗi cuộc đua đều được thiết kế để thưởng tín dụng, vật liệu nâng cấp và token đội trong game. Chiến thắng có thể nhân phần thưởng của bạn lên. Sưu tầm phương tiện, nâng cấp chúng thành cỗ máy đua, thắng các cuộc đua và trao đổi với người chơi khác trong khi bạn hướng tới các cải tiến tiếp theo và nâng cấp phi thuyền."
         },
         {
           "q": "Tôi có thể nâng cấp tàu vũ trụ chính của mình không?",

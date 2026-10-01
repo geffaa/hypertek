@@ -121,8 +121,8 @@
     },
     "section05": {
       "label": "Vroege toegang — Items in beperkte oplage",
-      "heading": "Jouw steun drijft het HyperTek-universum aan",
-      "subtitle": "Elk gekocht kunstwerk financiert direct drie onderling verbonden spellen. Dit is wat we samen bouwen.",
+      "heading": "Stap vroeg in het\nHyper Tek-universum",
+      "subtitle": "Kunstwerken en pakketten in beperkte oplage zijn verkrijgbaar op de Hyper Tek-marktplaats zolang de voorraad strekt.\nItems zijn digitale verzamelobjecten die worden verkocht zoals ze zijn, geen belegging, en er wordt geen winst beloofd.\nHier zie je waar we staan en wat er gepland is.",
       "phaseLabel": "Fase",
       "crowdfundingNow": "Nu vroege toegang",
       "phases": [
@@ -132,7 +132,7 @@
         },
         {
           "name": "Nu vroege toegang",
-          "desc": "NFA/NFC/NFT-kunstwerkverkopen live • Door spelers gemaakte NFT's ingeschakeld • Commissiedeling actief • Gemeenschapsopbouw • Fondsen stromen in spelontwikkeling"
+          "desc": "Verkoop van NFA/NFC/NFT-kunstwerken live • Door spelers gemaakte NFT's ingeschakeld • Pakketten in beperkte oplage beschikbaar • Communityopbouw"
         },
         {
           "name": "Alpha-lancering",
@@ -148,10 +148,10 @@
         },
         {
           "name": "Volledige release",
-          "desc": "Alle drie de spellen volledig live • Compleet NFA-ecosysteem • Volledige VR in alle titels • Wereldwijde toernooien • Het onderling verbonden universum gerealiseerd"
+          "desc": "Gepland: alle drie de games live • Volledig NFA-ecosysteem • VR in alle titels • Wereldwijde toernooien • Het verbonden universum gerealiseerd"
         }
       ],
-      "helpHeading": "Hoe JIJ nu kunt helpen",
+      "helpHeading": "Zo kun je nu meedoen",
       "helpItems": [
         {
           "bold": "Koop een NFA, NFC of NFT",
@@ -159,14 +159,14 @@
         },
         {
           "bold": "Maak je eigen NFT",
-          "text": "— word creator op de marktplaats, je verdient bij elke verkoop, en de commissie helpt het project te financieren"
+          "text": "— word maker op de marktplaats en bied je eigen kunstwerken aan andere spelers aan"
         },
         {
           "bold": "Deel en verspreid het woord",
-          "text": "— elke nieuwe supporter versnelt de reis naar lancering"
+          "text": "— vertel andere spelers en verzamelaars over het Hyper Tek-universum"
         }
       ],
-      "link": "[www.hypertek.com] — Steun het project. Bezit de toekomst."
+      "link": "[www.hypertek.com] — Verzamel de kunst. Bezit je items."
     },
     "section06": {
       "label": "Web3.5-gaming & concurrentievoordeel",

@@ -121,8 +121,8 @@
     },
     "section05": {
       "label": "Early Access — Mga Limited Edition na Item",
-      "heading": "Ang Iyong Suporta ay Nagpapalakas ng Hyper Tek Universe",
-      "subtitle": "Bawat artwork na binili ay direktang nagpopondo ng tatlong magkakaugnay na laro. Narito ang aming pinagsamang itinatatayo.",
+      "heading": "Sumali nang Maaga sa\nHyper Tek Universe",
+      "subtitle": "Available sa Hyper Tek Marketplace ang mga limited edition na artwork at package habang may supply.\nMga digital collectible ang mga item na ibinebenta nang as is, hindi investment, at walang ipinapangakong tubo.\nNarito kung nasaan na kami at kung ano ang nakaplano.",
       "phaseLabel": "Phase",
       "crowdfundingNow": "Early Access Ngayon",
       "phases": [
@@ -132,7 +132,7 @@
         },
         {
           "name": "Early Access Ngayon",
-          "desc": "Benta ng NFA/NFC/NFT artwork live • Pinagana ang player-created NFTs • Aktibo ang pagbabahagi ng komisyon • Pagtatayo ng komunidad • Pondo umaagos sa pag-unlad ng laro"
+          "desc": "Live na ang bentahan ng NFA/NFC/NFT artwork • Naka-enable ang mga NFT na gawa ng player • Available ang mga limited edition na package • Pagbuo ng komunidad"
         },
         {
           "name": "Alpha Launch",
@@ -148,10 +148,10 @@
         },
         {
           "name": "Ganap na Paglabas",
-          "desc": "Tatlong laro ganap na live • Kumpletong NFA ecosystem • Buong VR sa lahat ng titulo • Mga global na tournament • Ang magkakaugnay na universe ay natupad"
+          "desc": "Nakaplano: live ang lahat ng tatlong laro • Kumpletong NFA ecosystem • VR sa lahat ng title • Mga pandaigdigang tournament • Natupad ang magkakaugnay na universe"
         }
       ],
-      "helpHeading": "Paano KAYO Makatutulong Ngayon",
+      "helpHeading": "Paano Ka Makakasali Ngayon",
       "helpItems": [
         {
           "bold": "Bumili ng NFA, NFC, o NFT",
@@ -159,14 +159,14 @@
         },
         {
           "bold": "Lumikha ng iyong sariling NFT",
-          "text": "— maging tagalikha sa marketplace, kumita ka mula sa bawat benta, at tumutulong ang komisyon na pondohan ang proyekto"
+          "text": "— maging creator sa marketplace at ialok ang sarili mong artwork sa ibang player"
         },
         {
           "bold": "Ibahagi at ikalat ang balita",
-          "text": "— bawat bagong tagasuporta ay nagpapabilis sa paglalakbay patungo sa paglulunsad"
+          "text": "— ikuwento sa ibang player at kolektor ang Hyper Tek universe"
         }
       ],
-      "link": "[www.hypertek.com] — Suportahan ang Proyekto. Angkinin ang Hinaharap."
+      "link": "[www.hypertek.com] — Kolektahin ang Art. Ariin ang mga Item Mo."
     },
     "section06": {
       "label": "Web3.5 Gaming at Kompetitibong Kalamangan",

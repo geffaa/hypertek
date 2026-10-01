@@ -121,8 +121,8 @@
     },
     "section05": {
       "label": "Early Access – Artikel in limitierter Auflage",
-      "heading": "Deine Unterstützung treibt das Hyper Tek Universum an",
-      "subtitle": "Jedes gekaufte Kunstwerk finanziert direkt drei miteinander verbundene Spiele. Das bauen wir gemeinsam.",
+      "heading": "Tritt dem Hyper-Tek-Universum\nfrühzeitig bei",
+      "subtitle": "Kunstwerke und Pakete in limitierter Auflage sind auf dem Hyper Tek Marktplatz erhältlich, solange der Vorrat reicht.\nItems sind digitale Sammlerstücke, die wie besehen verkauft werden, keine Geldanlage, und es wird kein Gewinn versprochen.\nHier siehst du, wo wir stehen und was geplant ist.",
       "phaseLabel": "Phase",
       "crowdfundingNow": "Jetzt Early Access",
       "phases": [
@@ -132,7 +132,7 @@
         },
         {
           "name": "Jetzt Early Access",
-          "desc": "NFA/NFC/NFT-Kunstwerkverkäufe live • Von Spielern erstellte NFTs aktiviert • Provisionsaufteilung aktiv • Community-Aufbau • Mittel fließen in die Spielentwicklung"
+          "desc": "Verkauf von NFA/NFC/NFT-Kunstwerken läuft • Von Spielern erstellte NFTs aktiviert • Pakete in limitierter Auflage verfügbar • Community-Aufbau"
         },
         {
           "name": "Alpha-Launch",
@@ -148,10 +148,10 @@
         },
         {
           "name": "Vollständige Veröffentlichung",
-          "desc": "Alle drei Spiele vollständig live • Vollständiges NFA-Ökosystem • Vollständige VR in allen Titeln • Globale Turniere • Das miteinander verbundene Universum realisiert"
+          "desc": "Geplant: alle drei Spiele live • Vollständiges NFA-Ökosystem • VR in allen Titeln • Globale Turniere • Das vernetzte Universum verwirklicht"
         }
       ],
-      "helpHeading": "Wie DU jetzt helfen kannst",
+      "helpHeading": "So kannst du jetzt mitmachen",
       "helpItems": [
         {
           "bold": "Kaufe ein NFA, NFC oder NFT",
@@ -159,14 +159,14 @@
         },
         {
           "bold": "Erstelle dein eigenes NFT",
-          "text": "— werde Ersteller auf dem Marktplatz, du verdienst bei jedem Verkauf, und die Provision hilft, das Projekt zu finanzieren"
+          "text": "— werde Creator auf dem Marktplatz und biete anderen Spielern deine eigenen Kunstwerke an"
         },
         {
           "bold": "Teile und verbreite die Botschaft",
-          "text": "— jeder neue Unterstützer beschleunigt den Weg zum Launch"
+          "text": "— erzähle anderen Spielern und Sammlern vom Hyper-Tek-Universum"
         }
       ],
-      "link": "[www.hypertek.com] — Unterstütze das Projekt. Die Zukunft besitzen."
+      "link": "[www.hypertek.com] — Sammle die Kunst. Besitze deine Items."
     },
     "section06": {
       "label": "Web3.5 Gaming & Wettbewerbsvorteile",

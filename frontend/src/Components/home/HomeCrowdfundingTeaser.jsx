@@ -6,12 +6,12 @@ import { useTranslation } from "react-i18next";
 import HelpCards from "./HelpCards";
 
 const EARLY_ACCESS = {
-  eyebrow: "LIMITED-TIME OPPORTUNITY",
+  eyebrow: "LIMITED-TIME RELEASE",
   heading: "Don't Miss the Early-Access Window",
   bullets: [
     "Limited-edition NFAs and discounted packages are available now – only while early access stays open.",
     "This discounted price is available for a limited time only.",
-    "Limited-edition items remain only until our funding target is reached – then they're gone for good.",
+    "Limited-edition items remain only while supply lasts – then they're gone for good.",
   ],
 };
 
@@ -138,7 +138,7 @@ export default function HomeCrowdfundingTeaser() {
             <div className="flex-1 h-px bg-white/10" />
           </div>
           <p className="font-[Goldman] font-bold text-white text-lg md:text-2xl text-center leading-snug">
-            {linkSlogan || "Back the Project. Own the Future."}
+            {linkSlogan || "Collect the Art. Own Your Items."}
           </p>
           {linkUrl && (
             <Link

@@ -41,7 +41,7 @@
       "rewards": [
         {
           "title": "In-Game Rewards",
-          "body": "Every race you finish pays out. Win, and the rewards multiply. Race victories have the potential to unlock premium vehicle components, rare upgrade materials, exclusive crew recruitment tokens, and credits to fund your next build. Sell upgraded vehicles for profit, reinvest in new machines, and watch your racing empire grow with every podium finish."
+          "body": "Every race you finish is designed to reward you in-game. Win, and the rewards may multiply. Race victories may unlock premium vehicle components, rare upgrade materials, exclusive crew recruitment tokens, and credits for your next build. Upgrade your vehicles, trade them with other players, and watch your racing empire grow with every podium finish."
         },
         {
           "title": "Ranked Events",
@@ -60,15 +60,15 @@
       "upgrades": [
         {
           "title": "Racing Vehicle Upgrades",
-          "body": "Your race vehicle is a fully modular machine. Every component can be swapped, tuned, and upgraded: hulls, thrusters, shields, outer shells, engines, stabilisers, cooling systems, and aerodynamic surfaces. Lightweight composites deliver raw speed; heavy-duty armour keeps you alive through brutal atmospheric conditions. The upgrade path is deep, and the choices you make define your racing identity. Buy new vehicles, build them into championship contenders, race them to victory, and sell them at a profit when you are ready for the next challenge."
+          "body": "Your race vehicle is a fully modular machine. Every component can be swapped, tuned, and upgraded: hulls, thrusters, shields, outer shells, engines, stabilisers, cooling systems, and aerodynamic surfaces. Lightweight composites deliver raw speed; heavy-duty armour keeps you alive through brutal atmospheric conditions. The upgrade path is deep, and the choices you make define your racing identity. Collect new vehicles, build them into championship contenders, race them to victory, and trade them with other players when you are ready for the next challenge."
         },
         {
           "title": "Main Spaceship Upgrades",
-          "body": "Your racing garage is not just a workshop; it is the hangar bay of your personal spaceship. The same resources, credits, and materials you earn on the track can be invested into upgrading your main vessel. Better engines for interplanetary travel, stronger weapons systems for space combat, improved navigation for discovering new racing worlds, and reinforced hulls for surviving hostile encounters during transit. Your spaceship is your home base, your transport, your battleship, and racing makes it stronger."
+          "body": "Your racing garage is not just a workshop; it is the hangar bay of your personal spaceship. The same resources, credits, and materials you earn on the track can be put into upgrading your main vessel. Better engines for interplanetary travel, stronger weapons systems for space combat, improved navigation for discovering new racing worlds, and reinforced hulls for surviving hostile encounters during transit. Your spaceship is your home base, your transport, your battleship, and racing makes it stronger."
         },
         {
           "title": "The Upgrade Loop",
-          "body": "Race to earn, earn to upgrade, upgrade to win bigger races with greater rewards. Funnel those rewards into both your racing vehicles and your spaceship. The better your ship, the further you travel and the more dangerous and lucrative the circuits become. It is a progression loop that rewards dedication and skill at every level."
+          "body": "Race to collect rewards, use rewards to upgrade, upgrade to enter bigger races with greater in-game rewards. Funnel those rewards into both your racing vehicles and your spaceship. The better your ship, the further you travel and the more dangerous and rewarding the circuits become. It is a progression loop that rewards dedication and skill at every level."
         },
         {
           "title": "Cross-Game Impact",
@@ -99,7 +99,7 @@
         },
         {
           "q": "How do race rewards work?",
-          "a": "Every race has the potential to pay out credits, upgrade materials, and crew tokens. Victories multiply your earnings. Buy vehicles, upgrade them into racing machines, win races, and sell them at a profit to fund further enhancements and spaceship upgrades."
+          "a": "Every race is designed to reward credits, upgrade materials, and crew tokens in-game. Victories may multiply your rewards. Collect vehicles, upgrade them into racing machines, win races, and trade them with other players as you work towards further enhancements and spaceship upgrades."
         },
         {
           "q": "Can I upgrade my main spaceship too?",

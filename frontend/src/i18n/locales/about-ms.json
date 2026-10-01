@@ -121,8 +121,8 @@
     },
     "section05": {
       "label": "Akses Awal — Item Edisi Terhad",
-      "heading": "Sokongan Anda Menggerakkan Alam Semesta Hyper Tek",
-      "subtitle": "Setiap karya seni yang dibeli secara langsung membiayai tiga permainan yang saling berkaitan. Inilah yang sedang kami bina bersama.",
+      "heading": "Sertai Alam Semesta\nHyper Tek Lebih Awal",
+      "subtitle": "Karya seni dan pakej edisi terhad tersedia di Marketplace Hyper Tek selagi stok masih ada.\nItem ialah koleksi digital yang dijual seadanya, bukan pelaburan, dan tiada keuntungan dijanjikan.\nInilah kedudukan kami sekarang dan apa yang dirancang.",
       "phaseLabel": "Fasa",
       "crowdfundingNow": "Akses Awal Sekarang",
       "phases": [
@@ -132,7 +132,7 @@
         },
         {
           "name": "Akses Awal Sekarang",
-          "desc": "Jualan karya NFA/NFC/NFT aktif • NFT buatan pemain diaktifkan • Perkongsian komisyen aktif • Membina komuniti • Dana mengalir ke pembangunan permainan"
+          "desc": "Jualan karya seni NFA/NFC/NFT sedang berjalan • NFT ciptaan pemain diaktifkan • Pakej edisi terhad tersedia • Pembinaan komuniti"
         },
         {
           "name": "Pelancaran Alpha",
@@ -148,10 +148,10 @@
         },
         {
           "name": "Keluaran Penuh",
-          "desc": "Ketiga-tiga permainan sepenuhnya aktif • Ekosistem NFA lengkap • VR penuh merentas semua tajuk • Kejohanan global • Alam semesta yang saling berkaitan direalisasikan"
+          "desc": "Dirancang: ketiga-tiga permainan beroperasi • Ekosistem NFA lengkap • VR dalam semua tajuk • Kejohanan global • Alam semesta yang saling berkait menjadi kenyataan"
         }
       ],
-      "helpHeading": "Bagaimana ANDA Boleh Membantu Sekarang",
+      "helpHeading": "Cara Anda Boleh Mengambil Bahagian Sekarang",
       "helpItems": [
         {
           "bold": "Beli NFA, NFC, atau NFT",
@@ -159,14 +159,14 @@
         },
         {
           "bold": "Cipta NFT anda sendiri",
-          "text": "— jadilah pencipta di marketplace, anda memperoleh pendapatan dari setiap jualan, dan komisen membantu membiayai projek ini"
+          "text": "— jadilah pencipta di marketplace dan tawarkan karya seni anda sendiri kepada pemain lain"
         },
         {
           "bold": "Kongsi dan sebarkan berita",
-          "text": "— setiap penyokong baru mempercepatkan perjalanan ke pelancaran"
+          "text": "— ceritakan tentang alam semesta Hyper Tek kepada pemain dan pengumpul lain"
         }
       ],
-      "link": "[www.hypertek.com] — Sokong Projek. Miliki Masa Depan."
+      "link": "[www.hypertek.com] — Kumpul Karyanya. Miliki Item Anda."
     },
     "section06": {
       "label": "Gaming Web3.5 & Kelebihan Kompetitif",

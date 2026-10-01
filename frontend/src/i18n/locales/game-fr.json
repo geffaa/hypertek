@@ -41,7 +41,7 @@
       "rewards": [
         {
           "title": "Récompenses en jeu",
-          "body": "Chaque course que vous terminez est payante. Gagnez et les récompenses se multiplient. Les victoires en course débloquent des composants de véhicule haut de gamme, des matériaux de mise à niveau rares, des jetons de recrutement d'équipage exclusifs et des crédits pour financer votre prochaine construction. Vendez des véhicules améliorés pour faire du profit, réinvestissez dans de nouvelles machines et regardez votre empire de course grandir à chaque podium."
+          "body": "Chaque course que vous terminez est conçue pour vous récompenser en jeu. Gagnez, et les récompenses peuvent se multiplier. Les victoires peuvent débloquer des composants de véhicule premium, des matériaux d'amélioration rares, des jetons exclusifs de recrutement d'équipe et des crédits pour votre prochaine construction. Améliorez vos véhicules, échangez-les avec d'autres joueurs et regardez votre empire de course grandir à chaque podium."
         },
         {
           "title": "Épreuves classées",
@@ -60,7 +60,7 @@
       "upgrades": [
         {
           "title": "Améliorations des véhicules de course",
-          "body": "Votre véhicule de course est une machine entièrement modulaire. Chaque composant peut être échangé, réglé et amélioré : coques, propulseurs, boucliers, coques extérieures, moteurs, stabilisateurs, systèmes de refroidissement et surfaces aérodynamiques. Les composites légers offrent une vitesse brute ; une armure robuste vous maintient en vie dans des conditions atmosphériques brutales. Le chemin de mise à niveau est profond et les choix que vous faites définissent votre identité de course. Achetez de nouveaux véhicules, transformez-les en prétendants au championnat, conduisez-les vers la victoire et vendez-les avec profit lorsque vous êtes prêt à relever le prochain défi."
+          "body": "Votre véhicule de course est une machine entièrement modulaire. Chaque composant peut être remplacé, réglé et amélioré : coques, propulseurs, boucliers, carrosseries, moteurs, stabilisateurs, systèmes de refroidissement et surfaces aérodynamiques. Les composites légers offrent une vitesse pure ; le blindage lourd vous garde en vie dans des conditions atmosphériques brutales. Le parcours d'amélioration est profond et vos choix définissent votre identité de pilote. Collectionnez de nouveaux véhicules, faites-en des prétendants au titre, menez-les à la victoire et échangez-les avec d'autres joueurs lorsque vous êtes prêt pour le défi suivant."
         },
         {
           "title": "Principales améliorations du vaisseau spatial",
@@ -68,7 +68,7 @@
         },
         {
           "title": "La boucle de mise à niveau",
-          "body": "Faites la course pour gagner. Gagnez pour mettre à niveau. Améliorez-vous pour gagner de plus grandes courses avec de plus grandes récompenses. Acheminez ces récompenses vers vos véhicules de course et votre vaisseau spatial. Plus votre navire est performant, plus vous voyagez loin et plus les circuits deviennent dangereux et lucratifs. Il s'agit d'une boucle de progression qui récompense le dévouement et les compétences à tous les niveaux."
+          "body": "Courez pour obtenir des récompenses, utilisez-les pour améliorer, et améliorez pour participer à de plus grandes courses aux récompenses en jeu plus importantes. Consacrez ces récompenses à vos véhicules de course comme à votre vaisseau spatial. Plus votre vaisseau est performant, plus vous voyagez loin et plus les circuits deviennent dangereux et gratifiants. C'est une boucle de progression qui récompense l'engagement et l'habileté à chaque niveau."
         },
         {
           "title": "Impact sur tous les jeux",
@@ -99,7 +99,7 @@
         },
         {
           "q": "Comment fonctionnent les récompenses de course ?",
-          "a": "Chaque course rapporte des crédits, des matériaux de mise à niveau et des jetons d'équipage. Les victoires multiplient vos gains. Achetez des véhicules, améliorez-les en machines de course, gagnez des courses et vendez-les avec profit pour financer d'autres améliorations et mises à niveau de vaisseaux spatiaux."
+          "a": "Chaque course est conçue pour récompenser en jeu avec des crédits, des matériaux d'amélioration et des jetons d'équipe. Les victoires peuvent multiplier vos récompenses. Collectionnez des véhicules, transformez-les en machines de course, gagnez des courses et échangez-les avec d'autres joueurs tout en progressant vers de nouvelles améliorations et des améliorations de vaisseau spatial."
         },
         {
           "q": "Puis-je également améliorer mon vaisseau spatial principal ?",

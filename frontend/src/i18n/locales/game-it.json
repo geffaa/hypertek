@@ -41,7 +41,7 @@
       "rewards": [
         {
           "title": "Premi di gioco",
-          "body": "Ogni gara che finisci paga. Vinci e le ricompense si moltiplicheranno. Le vittorie nelle gare sbloccano componenti premium per veicoli, materiali di aggiornamento rari, gettoni esclusivi per il reclutamento dell'equipaggio e crediti per finanziare la tua prossima costruzione. Vendi veicoli aggiornati a scopo di lucro, reinvesti in nuove macchine e guarda il tuo impero delle corse crescere ad ogni podio."
+          "body": "Ogni gara che concludi è pensata per ricompensarti nel gioco. Vinci, e le ricompense possono moltiplicarsi. Le vittorie possono sbloccare componenti premium per i veicoli, materiali di potenziamento rari, gettoni esclusivi per il reclutamento della squadra e crediti per la tua prossima costruzione. Potenzia i tuoi veicoli, scambiali con altri giocatori e guarda il tuo impero delle corse crescere a ogni podio."
         },
         {
           "title": "Eventi classificati",
@@ -60,7 +60,7 @@
       "upgrades": [
         {
           "title": "Aggiornamenti dei veicoli da corsa",
-          "body": "Il tuo veicolo da corsa è una macchina completamente modulare. Ogni componente può essere scambiato, messo a punto e aggiornato: scafi, propulsori, scudi, gusci esterni, motori, stabilizzatori, sistemi di raffreddamento e superfici aerodinamiche. I compositi leggeri offrono velocità pura; l'armatura resistente ti mantiene in vita in condizioni atmosferiche brutali. Il percorso di aggiornamento è profondo e le scelte che fai definiscono la tua identità di corsa. Acquista nuovi veicoli, trasformali in contendenti al campionato, gareggia con loro fino alla vittoria e vendili con profitto quando sei pronto per la prossima sfida."
+          "body": "Il tuo veicolo da corsa è una macchina completamente modulare. Ogni componente può essere sostituito, messo a punto e potenziato: scafi, propulsori, scudi, carrozzerie, motori, stabilizzatori, sistemi di raffreddamento e superfici aerodinamiche. I compositi leggeri offrono velocità pura; la corazza pesante ti tiene in vita in condizioni atmosferiche brutali. Il percorso di potenziamento è profondo e le tue scelte definiscono la tua identità di pilota. Colleziona nuovi veicoli, trasformali in pretendenti al titolo, portali alla vittoria e scambiali con altri giocatori quando sei pronto per la prossima sfida."
         },
         {
           "title": "Principali aggiornamenti dell'astronave",
@@ -68,7 +68,7 @@
         },
         {
           "title": "Il ciclo di aggiornamento",
-          "body": "Gareggia per guadagnare. Guadagna per aggiornare. Esegui l'upgrade per vincere gare più grandi con ricompense maggiori. Incanala queste ricompense sia nei tuoi veicoli da corsa che nella tua astronave. Migliore è la tua nave, più viaggi lontano e più pericolosi e redditizi diventano i circuiti. È un ciclo di progressione che premia la dedizione e l'abilità a ogni livello."
+          "body": "Corri per ottenere ricompense, usa le ricompense per potenziare e potenzia per entrare in gare più grandi con ricompense di gioco maggiori. Destina queste ricompense sia ai tuoi veicoli da corsa sia alla tua astronave. Più la tua nave è valida, più lontano viaggi e più pericolosi e gratificanti diventano i circuiti. È un ciclo di progressione che premia dedizione e abilità a ogni livello."
         },
         {
           "title": "Impatto tra i giochi",
@@ -99,7 +99,7 @@
         },
         {
           "q": "Come funzionano i premi di gara?",
-          "a": "Ogni gara paga crediti, materiali di aggiornamento e gettoni equipaggio. Le vittorie moltiplicano i tuoi guadagni. Acquista veicoli, potenziali in macchine da corsa, vinci gare e vendili con profitto per finanziare ulteriori miglioramenti e potenziamenti delle astronavi."
+          "a": "Ogni gara è pensata per ricompensare nel gioco con crediti, materiali di potenziamento e gettoni squadra. Le vittorie possono moltiplicare le tue ricompense. Colleziona veicoli, trasformali in macchine da corsa, vinci le gare e scambiali con altri giocatori mentre lavori a ulteriori miglioramenti e potenziamenti dell'astronave."
         },
         {
           "q": "Posso aggiornare anche la mia astronave principale?",

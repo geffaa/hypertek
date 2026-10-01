@@ -191,7 +191,7 @@
   },
   "packages": {
     "badge": "NFA-URI ÎN EDIȚIE LIMITATĂ ȘI PACHETE DE GAMING, DISPONIBILE ÎN LIMITA STOCULUI",
-    "intro1": "Am investit strategic peste 440.000 USD din fonduri personale și acum căutăm încă 395.000 USD pentru a duce la bun sfârșit acest proiect revoluționar. Ne propunem să revoluționăm gamingul oferind experiențe captivante care abordează unele dintre cele mai presante provocări ale industriei. Cu multiple inițiative de finanțare disponibile, aceasta este șansa ta de a face parte din ceva cu adevărat transformator.",
+    "intro1": "Hyper Tek 100 este un proiect de gaming în dezvoltare, care își propune să abordeze unele dintre cele mai presante provocări ale industriei. Site-ul, marketplace-ul și sistemul de obiecte sunt construite, iar trei jocuri interconectate sunt planificate. Înaintea jocurilor, lansăm un număr limitat de obiecte și pachete pentru jucătorii și colecționarii care vor să se alăture universului din timp.",
     "intro2": "Lansăm un număr mic de obiecte Non-Fungible Asset (NFA) din Etapa 1. Fiecare listează bonusuri în joc care se pot aplica dacă jocurile sunt lansate, iar nivelurile de bonus din Etapa 1 nu sunt planificate să fie repetate. Stocul are o limită fixă: odată ce aceste obiecte se epuizează, orice NFA-uri în ediție limitată rămase neemise vor fi eliminate de pe site.",
     "intro3": "Obiectele Hyper Tek eligibile au o Programmatic Trade-In Value, păstrată într-un escrow pe blockchain. Aceste NFA-uri în ediție limitată listează și bonusuri în joc care se pot aplica, conform regulilor finale ale jocului, dacă jocurile sunt lansate.",
     "intro4": "Dacă îți place ce ai văzut din proiectul Hyper Tek și vrei să deții unul dintre aceste obiecte limitate, acum este momentul. Stocul este limitat, iar odată ce un obiect dispare, nu va mai fi emis din nou.",
@@ -210,7 +210,8 @@
     "specialConditionTitle": "Conditie speciala",
     "specialCondition": "Obiectele sunt vândute ca atare. Bonusurile în joc, reducerile și Gems listate într-un pachet se pot aplica doar dacă jocurile sunt lansate și sunt supuse regulilor finale ale jocului. Nu se promite niciun profit, nicio plată și niciun randament financiar.",
     "imageComing": "Imaginea vine in curand",
-    "close": "Inchide"
+    "close": "Inchide",
+    "pageLinkSubtitle": "Foaia de parcurs, pachetele și modul în care jocurile planificate se leagă în universul Hyper Tek."
   },
   "dashboard": {
     "mobileNotice": {

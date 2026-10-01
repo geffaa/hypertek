@@ -41,7 +41,7 @@
       "rewards": [
         {
           "title": "Mga In-Game Rewards",
-          "body": "Bawat karera na natapos mo ay nagbabayad. Manalo, at dumarami ang mga gantimpala. Ang mga tagumpay sa karera ay nag-a-unlock ng mga premium na bahagi ng sasakyan, mga bihirang materyales sa pag-upgrade, mga eksklusibong token sa recruitment ng crew, at mga kredito upang pondohan ang iyong susunod na build. Magbenta ng mga na-upgrade na sasakyan para kumita, muling mamuhunan sa mga bagong makina, at panoorin ang paglaki ng iyong racing empire sa bawat podium finish."
+          "body": "Bawat karerang natatapos mo ay dinisenyo para gantimpalaan ka in-game. Manalo, at maaaring dumami ang mga reward. Maaaring mag-unlock ang mga panalo ng mga premium na component ng sasakyan, bihirang upgrade material, eksklusibong crew recruitment token, at mga credit para sa susunod mong build. I-upgrade ang mga sasakyan mo, i-trade sa ibang player, at panoorin ang paglago ng racing empire mo sa bawat podium."
         },
         {
           "title": "Mga Ranked Event",
@@ -60,7 +60,7 @@
       "upgrades": [
         {
           "title": "Mga Upgrade ng Karera ng Sasakyan",
-          "body": "Ang iyong sasakyan sa karera ay isang ganap na modular na makina. Ang bawat bahagi ay maaaring palitan, tune, at i-upgrade: hull, thrusters, shield, outer shell, engine, stabilizer, cooling system, at aerodynamic surface. Ang mga magaan na composite ay naghahatid ng hilaw na bilis; Ang heavy-duty na armor ay nagpapanatili sa iyo na buhay sa pamamagitan ng malupit na mga kondisyon sa atmospera. Ang landas ng pag-upgrade ay malalim, at ang mga pagpipiliang gagawin mo ay tumutukoy sa iyong pagkakakilanlan sa karera. Bumili ng mga bagong sasakyan, itayo ang mga ito sa mga kampeonato na kalaban, takbuhan ang mga ito sa tagumpay, at ibenta ang mga ito nang may tubo kapag handa ka na para sa susunod na hamon."
+          "body": "Ang race vehicle mo ay isang fully modular na makina. Bawat component ay maaaring palitan, i-tune, at i-upgrade: hull, thruster, shield, outer shell, makina, stabiliser, cooling system, at aerodynamic surface. Nagbibigay ng purong bilis ang magagaan na composite; pinananatili kang buhay ng heavy-duty na armour sa mababagsik na kondisyon ng atmospera. Malalim ang upgrade path, at ang mga pinipili mo ang humuhubog sa racing identity mo. Mangolekta ng mga bagong sasakyan, gawin silang championship contender, ihatid sa tagumpay, at i-trade sa ibang player kapag handa ka na sa susunod na hamon."
         },
         {
           "title": "Mga Pangunahing Pag-upgrade ng Spaceship",
@@ -68,7 +68,7 @@
         },
         {
           "title": "Ang Upgrade Loop",
-          "body": "Race para kumita. Kumita para mag-upgrade. Mag-upgrade para manalo ng mas malalaking karera na may mas malalaking reward. I-funnel ang mga reward na iyon sa iyong mga racing vehicle at sa iyong spaceship. Kung mas mahusay ang iyong barko, mas malayo ang iyong paglalakbay at mas mapanganib at kumikita ang mga circuit. Isa itong progression loop na nagbibigay gantimpala sa dedikasyon at kasanayan sa bawat antas."
+          "body": "Kumarera para mangolekta ng reward, gamitin ang reward para mag-upgrade, at mag-upgrade para makasali sa mas malalaking karera na may mas malalaking in-game reward. Ilagay ang mga reward na iyon sa parehong racing vehicle at spaceship mo. Habang mas mahusay ang barko mo, mas malayo ang nararating mo at mas mapanganib at mas sulit ang mga circuit. Isa itong progression loop na gumagantimpala sa dedikasyon at kasanayan sa bawat antas."
         },
         {
           "title": "Cross-Game Impact",
@@ -99,7 +99,7 @@
         },
         {
           "q": "Paano gumagana ang mga gantimpala sa lahi?",
-          "a": "Bawat karera ay nagbabayad ng mga kredito, mga materyales sa pag-upgrade, at mga token ng crew. Ang mga tagumpay ay nagpaparami sa iyong mga kita. Bumili ng mga sasakyan, i-upgrade ang mga ito sa mga racing machine, manalo sa mga karera, at ibenta ang mga ito nang may tubo para pondohan ang mga karagdagang pagpapahusay at pag-upgrade ng spaceship."
+          "a": "Bawat karera ay dinisenyo para magbigay ng mga credit, upgrade material, at crew token in-game. Maaaring paramihin ng mga panalo ang mga reward mo. Mangolekta ng mga sasakyan, i-upgrade sila bilang mga racing machine, manalo sa mga karera, at i-trade sa ibang player habang patuloy kang gumagawa tungo sa mga karagdagang enhancement at upgrade ng spaceship."
         },
         {
           "q": "Maaari ko bang i-upgrade ang aking pangunahing sasakyang pangkalawakan?",
