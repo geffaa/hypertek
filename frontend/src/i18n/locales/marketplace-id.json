@@ -9,7 +9,7 @@
       "auctions": "Lelang",
       "trades": "Perdagangan",
       "quests": "Misi",
-      "hire": "Sewa",
+      "hire": "Disewakan",
       "bounty": "Hadiah"
     },
     "banner": {
@@ -31,23 +31,23 @@
       "facts": [
         {
           "label": "NFA",
-          "desc": "Aset eksklusif Hypertek. Bonus dalam game tertinggi. Nilai buyback minimum terjamin yang tumbuh dengan setiap penjualan."
+          "desc": "Item khusus Hyper Tek. Bonus dalam game tertinggi. Programmatic Trade-In Value yang bertambah di setiap penjualan ulang."
         },
         {
           "label": "NFC",
-          "desc": "Dibuat oleh Hypertek atau pemain berlisensi. Bonus dalam game termasuk. Buyback minimum terjamin."
+          "desc": "Dibuat oleh Hyper Tek atau pemain berlisensi. Termasuk bonus dalam game. Termasuk Programmatic Trade-In Value."
         },
         {
           "label": "NFT",
-          "desc": "Kolektibel buatan pemain. Tidak ada bonus dalam game. Tidak ada jaminan buyback. Dapat diperdagangkan di marketplace."
+          "desc": "Koleksi buatan pemain. Tanpa bonus dalam game. Tanpa nilai tukar tambah. Dapat diperdagangkan di marketplace."
         },
         {
           "label": "Komisi",
-          "desc": "Biaya platform bervariasi tergantung listing. Penjualan kembali: penjual 86%, royalti artis 2%, +5% ke buyback, platform 7%."
+          "desc": "Biaya platform berbeda-beda per listing. Pembagian penjualan ulang: penjual 86%, royalti seniman 2%, 5% ke alokasi tukar tambah item, platform 7%."
         },
         {
-          "label": "Pertumbuhan Buyback",
-          "desc": "+5% dari setiap harga penjualan kembali ditambahkan ke nilai buyback minimum aset. Hanya tumbuh, tidak pernah menyusut."
+          "label": "Alokasi Tukar Tambah",
+          "desc": "5% dari setiap harga penjualan ulang ditambahkan ke alokasi tukar tambah item. Jumlah yang dikembalikan saat tukar tambah mengikuti Tiered Loyalty Return Schedule dan selalu lebih kecil dari jumlah yang dialokasikan."
         },
         {
           "label": "Dompet Kustodial",
@@ -67,7 +67,8 @@
             "NFC (Karakter Non-Fungible) adalah item pemain berlisensi dengan bonus dalam game dan buyback.",
             "NFT (Token Non-Fungible) adalah kolektibel buatan pengguna — skin, senjata, dan banyak lagi."
           ],
-          "cta": "Pelajari Dasar-Dasarnya"
+          "cta": "Pelajari Dasar-Dasarnya",
+          "intro": "NFA/NFC/NFT adalah karya seni digital. NFA dan NFC memiliki bonus dalam game dan Programmatic Trade-In Value."
         },
         {
           "label": "Marketplace",
@@ -110,21 +111,21 @@
           "cta": "Jelajahi Misi"
         },
         {
-          "label": "Sewa",
-          "tagline": "Pinjam aset atau hasilkan dari milik Anda",
+          "label": "Disewakan",
+          "tagline": "Sewakan item Anda untuk hadiah dalam game",
           "details": [
             "Sewa spesialis atau perlengkapan yang kuat untuk satu misi tanpa membelinya.",
-            "Daftarkan aset menganggur Anda untuk disewa dan hasilkan pendapatan pasif saat Anda pergi.",
+            "Pemain mungkin dapat menyewakan item yang tidak terpakai kepada pemain lain untuk hadiah dalam game yang mereka sepakati sendiri.",
             "Durasi fleksibel — per jam, harian, atau per kesepakatan misi."
           ],
-          "cta": "Jelajahi Sewa"
+          "cta": "Lihat Disewakan"
         },
         {
           "label": "Hadiah",
           "tagline": "Buru target, klaim hadiah, puncaki papan peringkat",
           "details": [
             "Terima hadiah yang diposting oleh pemain lain atau sistem untuk mendapatkan hadiah kripto.",
-            "Naiki papan peringkat hadiah untuk membuka gelar eksklusif dan pembayaran bonus.",
+            "Naiki papan peringkat bounty untuk membuka gelar eksklusif dan hadiah dalam game.",
             "Posting hadiah sendiri untuk merekrut pemain terampil untuk tujuan Anda."
           ],
           "cta": "Lihat Hadiah"
@@ -136,7 +137,7 @@
       "subtitle": "Jelajahi NFA, NFC, dan NFT yang tersedia untuk pembelian langsung — skin, senjata, spesialis, pesawat ruang angkasa, dan banyak lagi.",
       "filterAll": "Semua",
       "samplePreviewTitle": "Pratinjau Marketplace Sampel",
-      "samplePreviewDesc": "Item di bawah ini adalah pratinjau sampel yang menampilkan jenis aset digital yang akan tersedia di marketplace HyperTek. Item sebenarnya dengan karya seni unik dan kepemilikan yang diverifikasi blockchain akan tersedia saat peluncuran.",
+      "samplePreviewDesc": "Item di bawah ini adalah pratinjau contoh jenis item digital yang mungkin tersedia di marketplace Hyper Tek. Item sebenarnya, dengan karya seni unik dan kepemilikan yang terverifikasi di blockchain, mungkin tersedia saat peluncuran.",
       "noItems": "Belum ada item yang tersedia. Coba lagi nanti.",
       "categories": {
         "skins": "Skin",
@@ -197,7 +198,7 @@
       },
       "preview": {
         "title": "Pratinjau Fitur Dalam Game",
-        "desc": "Sistem Lelang akan sepenuhnya aktif dalam game saat peluncuran. Item yang ditampilkan di sini adalah sampel untuk showcase investor/pengguna."
+        "desc": "Sistem lelang mungkin aktif di dalam game saat peluncuran. Item yang ditampilkan di sini adalah contoh, hanya untuk pratinjau."
       },
       "card": {
         "currentBid": "Tawaran saat ini",
@@ -369,7 +370,7 @@
       "earnFromQuests": "Ingin menghasilkan dari misi? Mainkan gamenya →",
       "moneyQuests": "Misi Uang (pool 11%)",
       "resourceQuests": "Misi Sumber Daya (pool 20%)",
-      "footerNote1": "# Misi dengan muatan gabungan akan dibayar menggunakan jumlah tabel terpisah.",
+      "footerNote1": "# Quest dengan muatan gabungan memakai hadiah dari tabel terpisah.",
       "footerNote2": "# Data planet akan disinkronkan saat game diluncurkan.",
       "inGame": "Dalam game",
       "open": "Terbuka",
@@ -407,34 +408,34 @@
       }
     },
     "hire": {
-      "heading": "Sewa",
+      "heading": "Disewakan",
       "listings": "listing",
       "listBtn": "Daftarkan",
-      "forHireLabel": "Untuk Disewa",
-      "wantingToHire": "Ingin Menyewa",
+      "forHireLabel": "Disewakan",
+      "wantingToHire": "Mencari Sewaan",
       "noListings": "Tidak ada listing {{filter}}",
-      "lockedTitle": "Konten Gaming HyperTek hanya untuk tampilan.",
-      "lockedDesc": "This is part of Hyper Tek's genuine 'Play to Earn' system, where players can earn real cash rewards, and or Materials/Resources.",
-      "forHireBadge": "UNTUK DISEWA",
-      "wantedBadge": "INGIN MENYEWA",
+      "lockedTitle": "Penyewaan mungkin tersedia jika game dirilis.",
+      "lockedDesc": "Pemain mungkin dapat menyewakan item kepada pemain lain dan menerima hadiah dalam game yang mereka sepakati sendiri, sesuai aturan akhir game.",
+      "forHireBadge": "DISEWAKAN",
+      "wantedBadge": "DICARI SEWAAN",
       "price": "Harga",
       "maxDuration": "Durasi Maksimum",
-      "hireBtn": "Sewa",
+      "hireBtn": "Sewakan",
       "fulfillBtn": "Penuhi Permintaan",
       "rules": {
         "durations": "8j · 1h · 3h · 1mg · 1bl",
         "cooldown": "Cooldown: 2× durasi sewa",
         "commission": "Komisi bervariasi",
-        "payment": "Bayar dengan Hyper Bucks atau Material"
+        "payment": "Hadiah dalam game yang disepakati antarpemain"
       },
       "preview": {
         "title": "Pratinjau Fitur Dalam Game",
-        "desc": "Sistem Sewa akan sepenuhnya aktif dalam game saat peluncuran. Item yang ditampilkan di sini adalah sampel untuk showcase investor/pengguna."
+        "desc": "Penyewaan mungkin aktif di dalam game saat peluncuran. Item yang ditampilkan di sini adalah contoh, hanya untuk pratinjau."
       },
       "hireModal": {
-        "hireTitle": "Sewa Spesialis",
+        "hireTitle": "Sewakan Spesialis",
         "fulfillTitle": "Penuhi Permintaan Sewa",
-        "forHireBadge": "UNTUK DISEWA",
+        "forHireBadge": "DISEWAKAN",
         "wantedBadge": "DICARI",
         "price": "Harga",
         "duration": "Durasi",
@@ -461,19 +462,19 @@
         "close": "Tutup"
       },
       "createModal": {
-        "listTitle": "Daftarkan untuk Disewa",
-        "postTitle": "Posting Ingin Menyewa",
-        "forHireBtn": "Untuk Disewa",
-        "wantingBtn": "Ingin Menyewa",
+        "listTitle": "Pasang untuk Disewakan",
+        "postTitle": "Pasang Pencarian Sewaan",
+        "forHireBtn": "Disewakan",
+        "wantingBtn": "Mencari Sewaan",
         "itemNameHire": "Nama spesialis / item *",
         "itemNameWant": "Apa yang ingin Anda sewa *",
         "descPlaceholder": "Deskripsi",
         "categoryPlaceholder": "Kategori (opsional)",
         "paymentType": "Jenis Pembayaran",
-        "hyperBucks": "Hyper Bucks",
+        "hyperBucks": "Hadiah dalam game",
         "materials": "Material",
-        "amountLabel": "Jumlah (Hyper Bucks)",
-        "afterCommission": "Anda menerima {{amount}} HB setelah komisi platform",
+        "amountLabel": "Hadiah dalam game",
+        "afterCommission": "Anda menerima {{amount}} dalam game setelah komisi platform",
         "maxDuration": "Durasi Maksimum",
         "disclaimer": "Komisi bervariasi · Cooldown = 2× durasi sewa setelah pengembalian",
         "listing": "Mendaftarkan…",
@@ -508,7 +509,7 @@
         "postedBy": "Diposting Oleh",
         "claimedBy": "Diklaim Oleh",
         "status": "Status",
-        "netHB": "{{amount}} HB bersih"
+        "netHB": "{{amount}} bersih"
       },
       "pagination": {
         "prev": "Sebelumnya",
@@ -540,6 +541,20 @@
       "dashboardTitle": "Dasbor Anda saat ini terkunci, tapi bersiaplah; peluncuran resmi sudah di depan mata!",
       "desc": "Jangan biarkan ini menghalangimu mendaftar dan menyelami proyek luar biasa ini. Temukan berbagai manfaatnya dan bagaimana keterlibatanmu bisa mendorong kesuksesannya! Bergabunglah sekarang dan jadilah seorang Hyper Tekken hari ini!",
       "buttonLabel": "Terbuka saat peluncuran resmi"
+    },
+    "gameLock": {
+      "quests": {
+        "title": "Quest mungkin tersedia jika game dirilis.",
+        "desc": "Pemain mungkin dapat mengantarkan item kepada pemain lain untuk hadiah dalam game, sesuai aturan akhir game."
+      },
+      "hire": {
+        "title": "Penyewaan mungkin tersedia jika game dirilis.",
+        "desc": "Pemain mungkin dapat menyewakan item kepada pemain lain dan menerima hadiah dalam game yang mereka sepakati sendiri, sesuai aturan akhir game."
+      },
+      "bounty": {
+        "title": "Bounty mungkin tersedia jika game dirilis.",
+        "desc": "Bounty hanya mungkin menawarkan hadiah dalam game, sesuai aturan akhir game."
+      }
     }
   },
   "musicPlayer": {
@@ -581,9 +596,9 @@
       "platform": "Platform",
       "noDesc": "Tidak ada deskripsi untuk item ini.",
       "price": "Harga",
-      "minBuyback": "Jaminan Pembelian Kembali Minimal",
+      "minBuyback": "Programmatic Trade-In Value",
       "reservePrice": "Harga Cadangan",
-      "buybackNote": "Aset ini tidak dapat dijual di bawah nilai pembelian kembali minimumnya.",
+      "buybackNote": "Harga cadangan tidak dapat ditetapkan di bawah alokasi tukar tambah item ini.",
       "networkNote": "USDC di Basis · Diperlukan Basis ETH untuk bahan bakar (hanya pembayaran melalui dompet)",
       "buyWithCard": "Beli Dengan Kartu",
       "makeOffer": "Buat Penawaran",

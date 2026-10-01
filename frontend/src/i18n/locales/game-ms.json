@@ -8,8 +8,8 @@
       "subtitle": "Pengalaman perlumbaan kenderaan terbang yang paling sengit di galaksi,\ndi mana kemahiran membayar, dan juara dibuat.",
       "intro": [
         "Hyper Racing ialah permainan perlumbaan kompetitif beroktan tinggi yang ditetapkan merentasi dunia asing, di mana pemain membina, menaik taraf dan merintis kenderaan perlumbaan terbang yang boleh disesuaikan sepenuhnya melalui beberapa litar paling berbahaya di galaksi. Daripada formasi batu terapung dan tiub lava gunung berapi ke padang pasir dan laluan gunung, setiap perlumbaan adalah ujian persediaan, refleks dan strategi.",
-        "Tetapi Hyper Racing adalah lebih daripada sekadar permainan; ia adalah platform yang kompetitif di mana ganjaran sebenar tersedia. Pemain berprestasi tinggi boleh menyertai acara dan kejohanan berperingkat dengan kumpulan hadiah wang tunai sebenar. Lebih baik anda berlumba, lebih banyak pendapatan anda. Sama ada anda mengejar kejayaan papan pendahulu atau membina empayar perlumbaan, semua yang anda lakukan dalam Hyper Racing menggerakkan anda ke hadapan.",
-        "Naik taraf kenderaan perlumbaan anda dari hidung ke ekor. Rekrut dan tingkatkan krew pit anda. Upah pengurus pit yang sepadan dengan falsafah perlumbaan anda. Kemudian bawa kemahiran anda di luar trek, garaj perlumbaan anda berfungsi sebagai hangar kapal angkasa peribadi anda, dan setiap keupayaan yang anda kembangkan membawa ke dalam pertempuran angkasa merentasi Hyper Quest dan Overlord of the 7 Realms."
+        "Hyper Racing dirancang sebagai platform kompetitif. Pemain terbaik mungkin dapat menyertai acara berperingkat dan kejohanan dengan ganjaran dalam permainan sebagai taruhan. Sama ada anda mengejar kegemilangan di papan pendahulu atau membina empayar perlumbaan, semua yang anda lakukan dalam Hyper Racing direka untuk membawa anda ke hadapan.",
+        "Naik taraf kenderaan lumba anda dari hujung ke hujung. Rekrut dan naikkan tahap kru pit anda. Rekrut pengurus pit yang sepadan dengan falsafah perlumbaan anda. Kemudian bawa kemahiran anda melangkaui litar: garaj lumba anda juga menjadi hangar kapal angkasa peribadi anda, dan setiap kebolehan yang anda bangunkan dibawa ke pertempuran angkasa dalam Hyper Quest dan Overlord of the 7 Realms."
       ],
       "introClose": "Teruskan membaca untuk mengetahui cara permainan ini berfungsi, perkara yang boleh anda menangi dan cara kerjaya perlumbaan anda menyemarakkan seluruh alam kemajuan.",
       "calloutLine1": "Berlumba untuk Mendapat. Perolehi untuk Meningkatkan.",
@@ -24,7 +24,7 @@
         {
           "num": "02",
           "title": "Bina Pasukan Anda",
-          "body": "Lumba adalah sukan berpasukan. Rekrut pakar krew pit yang membawa bonus unik, pengisian minyak yang lebih pantas, diagnostik masa nyata, pembaikan badan kapal kecemasan pertengahan perlumbaan dan tweak prestasi antara pusingan. Setiap ahli krew naik tahap dengan pengalaman, menyusun kebolehan hebat di atas peningkatan kenderaan anda. Kemudian ambil pengurus pit untuk menyelaraskan operasi, memanggil strategi perlumbaan dan membuka kunci prestasi seluruh pasukan meningkatkan kompaun itu sepanjang musim penuh."
+          "body": "Perlumbaan ialah sukan berpasukan. Rekrut pakar kru pit yang membawa bonus unik: pengisian bahan api lebih pantas, diagnostik masa nyata, pembaikan kecemasan badan kapal di tengah perlumbaan dan pelarasan prestasi antara pusingan. Setiap ahli kru naik tahap dengan pengalaman, menambah kebolehan hebat di atas naik taraf kenderaan anda. Kemudian rekrut pengurus pit untuk menyelaras operasi, menentukan strategi perlumbaan dan membuka peningkatan prestasi seluruh pasukan yang terkumpul sepanjang satu musim."
         },
         {
           "num": "03",
@@ -44,12 +44,12 @@
           "body": "Setiap perlumbaan yang anda habiskan berbaloi. Menang, dan ganjarannya berlipat ganda. Kemenangan perlumbaan membuka kunci komponen kenderaan premium, bahan naik taraf yang jarang berlaku, token pengambilan kru eksklusif dan kredit untuk membiayai binaan anda yang seterusnya. Jual kenderaan yang dinaik taraf untuk keuntungan, melabur semula dalam mesin baharu dan saksikan empayar perlumbaan anda berkembang dengan setiap penamat podium."
         },
         {
-          "title": "Acara Tunai Sebenar",
-          "body": "Hyper Racing membawa persaingan ke peringkat seterusnya dengan acara dan kejohanan berperingkat yang memerlukan wang sebenar. Sertai pertandingan berasaskan kemahiran, buktikan keupayaan anda menentang juruterbang terbaik di galaksi, dan pergi dengan pembayaran tunai sebenar. Lebih tinggi anda meletakkan, lebih besar kumpulan hadiah. Daripada cabaran peringkat mingguan kepada acara kejohanan bermusim, sentiasa ada peluang untuk pemain berprestasi tinggi untuk menukar kemahiran perlumbaan mereka kepada pendapatan sebenar."
+          "title": "Acara Berperingkat",
+          "body": "Hyper Racing direka berasaskan acara berperingkat dan kejohanan. Pertandingan berasaskan kemahiran mungkin membolehkan anda membuktikan kebolehan menentang juruterbang terbaik di galaksi untuk ganjaran dalam permainan, gelaran dan kedudukan di papan pendahulu. Daripada cabaran berperingkat mingguan hingga kejohanan bermusim, pemain terbaik mungkin menemui banyak peluang untuk menonjol."
         },
         {
           "title": "Bagaimana Acara Hadiah Berfungsi",
-          "body": "Pemain layak melalui permainan berperingkat, memenuhi ambang prestasi yang memberikan penyertaan ke kejohanan hadiah wang tunai. Acara distrukturkan di sekitar perjodohan yang adil, memastikan setiap pesaing menghadapi lawan yang mempunyai kemahiran yang sama. Yuran penyertaan adalah telus, kumpulan hadiah dipaparkan dengan jelas sebelum anda membuat komitmen, dan pembayaran diproses dengan cepat selepas setiap acara berakhir. Ia berdaya saing, adil, dan ganjarannya adalah nyata."
+          "body": "Pemain mungkin layak melalui permainan berperingkat dengan memenuhi ambang prestasi. Acara dirancang berasaskan padanan yang adil, supaya setiap peserta berdepan lawan yang setara kemahirannya. Peraturan acara dan ganjaran dalam permainan dimaksudkan untuk ditunjukkan dengan jelas sebelum anda membuat komitmen."
         },
         {
           "title": "Kemajuan Melangkaui Trek",
@@ -79,7 +79,7 @@
       "faq": [
         {
           "q": "Apakah Hyper Racing?",
-          "a": "Permainan perlumbaan kenderaan terbang intensiti tinggi yang ditetapkan merentasi dunia asing. Bina, naik taraf dan lumba kenderaan yang boleh disesuaikan sepenuhnya melalui litar sci-fi berbahaya sambil bersaing untuk ganjaran dalam permainan dan hadiah wang tunai sebenar."
+          "a": "Permainan lumba kenderaan terbang berintensiti tinggi yang berlatarkan dunia asing. Bina, naik taraf dan lumba kenderaan yang boleh disesuaikan sepenuhnya melalui litar fiksyen sains yang berbahaya sambil bersaing untuk ganjaran dalam permainan."
         },
         {
           "q": "Bolehkah saya menaik taraf kenderaan perlumbaan saya?",
@@ -94,8 +94,8 @@
           "a": "Pengurus pit menyelaraskan operasi anak kapal, memanggil strategi perlumbaan dan membuka kunci peningkatan prestasi seluruh pasukan. Pengurus pertahanan melindungi kenderaan anda dalam keadaan yang teruk; pengurus yang agresif mendorong setiap sistem untuk kelajuan maksimum."
         },
         {
-          "q": "Bolehkah saya memenangi wang sebenar?",
-          "a": "ya. Acara dan kejohanan berperingkat menampilkan kumpulan hadiah wang tunai sebenar. Layak melalui permainan berperingkat, bersaing dengan lawan yang sama mahir, dan dapatkan bayaran sebenar berdasarkan kedudukan penamat anda. Cabaran mingguan dan kejohanan bermusim berjalan secara berterusan."
+          "q": "Adakah terdapat hadiah untuk acara berperingkat?",
+          "a": "Acara berperingkat dan kejohanan dirancang untuk menawarkan ganjaran dalam permainan, gelaran dan kedudukan di papan pendahulu. Ia tidak menawarkan hadiah tunai atau wang."
         },
         {
           "q": "Bagaimanakah ganjaran perlumbaan berfungsi?",
@@ -121,7 +121,7 @@
       "subtitle": "galaksi anda. Peraturan anda. rezeki awak.",
       "intro": [
         "Hyper Quest ialah pengembaraan ruang dunia terbuka di mana anda memerintah kapal angkasa anda sendiri yang boleh dinaik taraf sepenuhnya, Quest Racer, merentasi galaksi yang luas dan berbahaya. Anda meninggalkan tamadun rumah anda bertahun-tahun yang lalu untuk mencari kuasa, kekayaan dan kemasyhuran. Kini seluruh alam semesta adalah taman permainan anda, dan setiap pencarian yang anda selesaikan membawa anda lebih dekat kepada penguasaan galaksi.",
-        "Tetapi Hyper Quest bukan sekadar permainan. Ia adalah platform yang kompetitif di mana wang tunai sebenar tersedia. Selesaikan pencarian, takluki cabaran dan pergi dengan wang sebenar di dalam poket dan atau ganjaran anda. Daripada misi pantas yang mengambil masa beberapa minit hingga ekspedisi berbilang hari yang epik, setiap pencarian membuahkan hasil. Lebih sukar cabaran, lebih besar ganjarannya.",
+        "Hyper Quest dirancang sebagai lebih daripada sekadar permainan: selesaikan quest, tawan cabaran dan kumpul ganjaran dalam permainan. Daripada misi pantas yang mengambil masa beberapa minit hingga ekspedisi epik berhari-hari, semakin sukar cabarannya, semakin besar ganjaran dalam permainannya.",
         "Tingkatkan kapal angkasa anda dari badan kapal ke kokpit. Bekali ia dengan sistem senjata yang memusnahkan. Rekrut pakar yang menyusun bonus hebat pada prestasi kapal anda dan tahap kuasa. Melombong asteroid, mengangkut kargo berbahaya, memburu khazanah tersembunyi, menculik sasaran bernilai tinggi, atau menjadi senjata upahan. Bagaimana anda memerintah alam semesta adalah pilihan anda sepenuhnya.",
         "Semua yang anda bina dalam Hyper Quest disuap terus ke Hyper Racing dan Overlord of the 7 Realms. Satu alam semesta, perkembangan yang lancar, potensi tanpa had. Teruskan membaca untuk mengetahui cara pencarian berfungsi, apa yang anda boleh peroleh dan bagaimana anda dan kapal angkasa anda menjadi kapal yang paling digeruni di galaksi."
       ],
@@ -137,7 +137,7 @@
         {
           "num": "02",
           "title": "Terokai Galaxy",
-          "body": "Perjalanan melalui portal ke planet yang jauh, masing-masing dengan persekitaran yang unik, bahan berharga dan litar perlumbaan baharu. Ikuti peta galaksi untuk mencarta kawasan yang belum diterokai dan dapatkan hak penamaan untuk planet yang anda temui dahulu. Tambang sumber daripada medan asteroid, selamatkan bahagian daripada peninggalan purba dan kapal terbiar, dan kumpulkan petunjuk yang membawa kepada kekayaan tersembunyi yang bertaburan di seluruh bintang."
+          "body": "Mengembara melalui portal ke planet yang jauh, masing-masing dengan persekitaran unik, bahan berharga dan litar lumba baharu. Ikuti peta galaksi untuk memetakan kawasan yang belum diterokai dan peroleh hak menamakan planet yang anda temui dahulu. Lombong sumber dari medan asteroid, dapatkan semula alat ganti daripada relik purba dan kapal terbiar, serta kumpul petunjuk yang membawa kepada harta tersembunyi yang bertaburan di celah bintang."
         },
         {
           "num": "03",
@@ -154,19 +154,19 @@
       "rewards": [
         {
           "title": "Ganjaran Dalam Permainan",
-          "body": "Setiap pencarian yang anda selesaikan berbaloi. Kredit, bahan naik taraf, komponen jarang berlaku, token pengambilan pakar dan item eksklusif mengalir ke dalam inventori anda dengan setiap misi yang berjaya. Semakin sukar pencarian, semakin kaya hasil tangkapan. Temui bahan-bahan yang jarang ditemui di planet yang jauh, selamatkan bahagian bernilai tinggi daripada peninggalan purba dan sumber simpanan yang mendorong peningkatan anda kepada ketuanan galaksi."
+          "body": "Setiap quest yang anda selesaikan direka untuk memberi anda ganjaran dalam permainan. Kredit, bahan naik taraf, komponen nadir, token pengambilan pakar dan item eksklusif masuk ke inventori anda dengan setiap misi yang berjaya. Semakin sukar quest, semakin lumayan hasilnya. Temui bahan nadir di planet yang jauh, dapatkan semula alat ganti bernilai tinggi daripada relik purba dan kumpul sumber yang memacu kebangkitan anda ke arah keunggulan galaksi."
         },
         {
-          "title": "Pembayaran Tunai Sebenar",
-          "body": "Hyper Quest mengambil permainan melebihi hiburan. Pencarian dan cabaran peringkat tertentu menawarkan pembayaran tunai sebenar. Selesaikan misi peringkat tinggi, kuasai acara papan pendahulu dan sertai kejohanan pencarian bermusim yang memerlukan wang sebenar. Semakin mahir dan berani anda, semakin besar pembayarannya. Daripada hadiah pencarian mingguan hingga kejohanan bermusim yang epik, sentiasa ada peluang untuk menukar pengembaraan galaksi anda kepada pendapatan sebenar."
+          "title": "Ganjaran Kejohanan",
+          "body": "Quest dan cabaran berperingkat tertentu mungkin menawarkan ganjaran dalam permainan premium. Misi peringkat tinggi, acara papan pendahulu dan kejohanan quest bermusim sedang dirancang, dan semakin mahir serta berani anda, semakin baik ganjaran dalam permainan yang mungkin diperoleh."
         },
         {
-          "title": "Cara Pembayaran Pencarian Berfungsi",
-          "body": "Pemain layak untuk pencarian ganjaran tunai dengan membina reputasi mereka dan memenuhi ambang prestasi. Kesukaran pencarian, tempoh dan tahap bahaya menentukan kumpulan hadiah. Pembayaran adalah telus, dipaparkan dengan jelas sebelum anda menerima sebarang misi dan diproses dengan cepat setelah selesai. Sama ada anda menjalankan pengangkutan kargo selama sepuluh minit atau ekspedisi dalam angkasa lepas selama seminggu, ganjaran sepadan dengan risiko."
+          "title": "Cara Ganjaran Quest Berfungsi",
+          "body": "Pemain mungkin layak untuk quest premium dengan membina reputasi dan memenuhi ambang prestasi. Kesukaran, tempoh dan tahap bahaya quest menentukan ganjaran dalam permainan, yang dimaksudkan untuk ditunjukkan sebelum anda menerima sebarang misi. Sama ada anda menjalankan penghantaran kargo sepuluh minit atau ekspedisi angkasa lepas selama seminggu, ganjarannya direka supaya sepadan dengan risikonya."
         },
         {
           "title": "Kemajuan Yang Membayar Ke Hadapan",
-          "body": "Ganjaran pencarian suapan terus ke dalam peningkatan kapal anda, sistem senjata dan pengambilan pakar. Setiap pembayaran menjadikan anda lebih kuat, yang membuka kunci pencarian yang lebih sukar dengan ganjaran yang lebih besar. Pendapatan juga dibawa ke dalam Hyper Racing dan Overlord of the 7 Realms, mewujudkan gelung kemajuan yang memberi ganjaran kepada dedikasi merentas keseluruhan ekosistem Hyper Tek."
+          "body": "Ganjaran quest disalurkan terus ke naik taraf kapal, sistem senjata dan pengambilan pakar anda. Setiap ganjaran menjadikan anda lebih kuat, lalu membuka quest yang lebih sukar. Kemajuan juga dirancang untuk dibawa ke Hyper Racing dan Overlord of the 7 Realms."
         }
       ],
       "upgradesTitle": "Naik taraf Kapal Anda, Lengkapi Arsenal Anda, Rekrut Anak Kapal Anda",
@@ -192,19 +192,19 @@
       "faq": [
         {
           "q": "Apakah Hyper Quest?",
-          "a": "Pengembaraan ruang dunia terbuka di mana anda memerintah kapal angkasa yang boleh dinaik taraf sepenuhnya merentasi galaksi yang luas. Selesaikan pencarian, terokai dunia asing, tingkatkan kapal anda, rekrut pakar dan dapatkan ganjaran tunai sebenar bersama kekayaan dalam permainan."
+          "a": "Pengembaraan angkasa dunia terbuka di mana anda memerintah kapal angkasa yang boleh dinaik taraf sepenuhnya merentas galaksi yang luas. Selesaikan quest, terokai dunia asing, naik taraf kapal anda, rekrut pakar dan kumpul ganjaran dalam permainan."
         },
         {
           "q": "Bagaimanakah pencarian berfungsi?",
           "a": "Terima misi daripada papan pencarian dalam permainan. Pencarian terdiri daripada larian kargo pantas yang mengambil masa hanya beberapa minit hingga ekspedisi berbilang hari epik jauh ke dalam angkasa yang belum dipetakan. Setiap pencarian mempunyai objektif yang jelas, penilaian bahaya dan peringkat ganjaran yang dipaparkan sebelum anda menerimanya."
         },
         {
-          "q": "Bolehkah saya memperoleh wang tunai sebenar?",
-          "a": "ya. Pencarian tertentu, cabaran peringkat dan kejohanan bermusim menawarkan pembayaran tunai sebenar. Bina reputasi anda, penuhi ambang prestasi dan layak untuk misi ganjaran tunai yang semakin lumayan. Hadiah mingguan dan kejohanan bermusim berjalan secara berterusan."
+          "q": "Bolehkah saya memperoleh wang daripada quest?",
+          "a": "Tidak. Quest, cabaran berperingkat dan kejohanan bermusim dirancang untuk menawarkan ganjaran dalam permainan sahaja, bukan tunai atau wang."
         },
         {
           "q": "Apakah ganjaran dalam permainan yang boleh saya perolehi?",
-          "a": "Setiap pencarian yang telah selesai membayar kredit, bahan naik taraf, komponen jarang berlaku, token pengambilan pakar dan item eksklusif. Semakin sukar dan panjang pencarian, semakin kaya ganjarannya. Temui bahan yang jarang ditemui di planet yang jauh dan selamatkan bahagian bernilai tinggi daripada peninggalan purba."
+          "a": "Setiap quest yang selesai direka untuk memberi ganjaran berupa kredit, bahan naik taraf, komponen nadir, token pengambilan pakar dan item eksklusif. Semakin sukar dan lama quest, semakin lumayan ganjarannya. Temui bahan nadir di planet yang jauh dan dapatkan semula alat ganti bernilai tinggi daripada relik purba."
         },
         {
           "q": "Bolehkah saya menaik taraf kapal angkasa saya?",
@@ -220,7 +220,7 @@
         },
         {
           "q": "Apakah jenis pencarian yang tersedia?",
-          "a": "Pengangkutan kargo, perlombongan asteroid, pemburuan harta karun, pemburuan hadiah, pemulihan artifak, operasi penyamaran, penerokaan planet, pertahanan lanun, misi menyelamat dan banyak lagi. Pencarian terdiri daripada larian pantas sepuluh minit hingga ekspedisi dalam angkasa lepas berbilang hari."
+          "a": "Pengangkutan kargo, perlombongan asteroid, pemburuan harta, pemburuan bounty, pemulihan artifak, operasi penyamaran, penerokaan planet, pertahanan daripada lanun, misi pemulihan dan banyak lagi. Quest merangkumi perjalanan pantas sepuluh minit hingga ekspedisi angkasa lepas berhari-hari."
         },
         {
           "q": "Bolehkah saya menemui planet baharu?",
@@ -251,7 +251,7 @@
       "intro": [
         "Overlord of the 7 Realms ialah permainan strategi pertempuran tiga peringkat tidak seperti permainan lain dalam permainan. Anda meneroka melalui portal ke alam semesta selari dan terhempas di planet asing yang bermusuhan. Kapal anda rosak, sistem anda gagal, dan makhluk planet ini sudah semakin hampir. Kemandirian hanyalah permulaan. Penguasaan adalah matlamat.",
         "Bina semula kapal anda dari bangkai kapal. Klon dan latih tentera dalam makmal atas kapal anda. Jinak hidupan liar di planet ini untuk mencipta pasukan berkuda berkuda yang dahsyat. Kemudian bertarung merentasi tiga dimensi pertempuran: pertempuran darat ke darat menentang raksasa dan pemain saingan, serangan darat ke angkasa lepas ke atas sasaran orbit atau darat, dan peperangan angkasa ke angkasa di atas Cincin Pertempuran besar-besaran yang mengorbit planet ini.",
-        "Ini bukan sekadar permainan strategi lain. Overlord menampilkan interaksi VR masa nyata, ganjaran wang tunai sebenar untuk menyelesaikan acara harian dan pencarian, dan pencerobohan dua minggu sekali oleh Hammerong yang menakutkan, spesies asing paling berkuasa yang ada. Setiap dua minggu, mereka tiba untuk menanggalkan planet ini, dan setiap dua minggu, pemain yang berani boleh mencabar mereka untuk mendapatkan bonus besar dan ganjaran legenda.",
+        "Ini bukan sekadar satu lagi permainan strategi. Seperti Hyper Racing dan Hyper Quest, Overlord menampilkan interaksi VR masa nyata dan ganjaran dalam permainan untuk menyelesaikan acara, quest dan pencerobohan dua mingguan oleh Hammerong yang digeruni, spesies makhluk asing paling berkuasa yang wujud. Setiap dua minggu mereka tiba untuk melombong planet habis-habisan, dan setiap dua minggu pemain yang berani boleh mencabar mereka untuk bonus besar dan ganjaran legenda.",
         "Tingkatkan kapal angkasa anda, lengkapinya dengan senjata yang memusnahkan, rekrut pakar yang menguatkan tahap kuasa anda dan jalin pakatan untuk mengawal seluruh wilayah. Semua yang anda bina bersambung terus ke Hyper Racing dan Hyper Quest melalui ekosistem Hyper Tek yang dikongsi. Satu alam semesta, tiga permainan, peperangan tanpa had. Teruskan membaca untuk mengetahui cara sistem pertempuran berfungsi dan sebab Overlord mengubah segala-galanya."
       ],
       "calloutLine1": "Kelangsungan Hidup hanyalah Permulaan.",
@@ -296,7 +296,7 @@
           },
           {
             "title": "Kelebihan Berbanding Permainan Lain",
-            "body": "Tiada permainan lain yang menggabungkan peperangan tiga peringkat, stesen pertempuran orbit yang boleh diterokai, VR masa nyata dan wang tunai sebenar dan atau ganjaran dalam permainan dalam satu pengalaman. Battle Ring sahaja menambah dimensi permainan yang tidak dapat dipadankan oleh pesaing. Apabila anda menggabungkannya dengan pertempuran darat, peperangan angkasa lepas, rendaman VR dan ekosistem Hyper Tek yang saling berkaitan, Overlord berdiri dalam kategori tersendiri."
+            "body": "Tiada permainan lain yang menggabungkan peperangan tiga peringkat, stesen tempur orbit yang boleh diterokai, VR masa nyata dan ganjaran dalam permainan dalam satu pengalaman. Battle Ring sahaja sudah menambah dimensi permainan yang tidak dapat ditandingi pesaing. Apabila digabungkan dengan pertempuran darat, peperangan angkasa, imersi VR dan ekosistem Hyper Tek yang saling berhubung, Overlord berada dalam kategori tersendiri."
           }
         ]
       },
@@ -312,7 +312,7 @@
         },
         {
           "title": "Rekrut Pakar",
-          "body": "Pakar ialah pengganda kuasa yang memisahkan pemain yang baik daripada Tuan Besar. Dapatkan pakar unik yang membawa bonus hebat kepada prestasi keseluruhan kapal anda dan tahap kuasa. Pakar taktikal meningkatkan kecekapan penggunaan tentera, pakar kejuruteraan mempercepatkan pembaikan dan naik taraf kapal, pakar senjata meningkatkan output kerosakan merentas semua sistem dan pakar perisikan mendedahkan kedudukan dan kelemahan musuh. Susun berbilang pakar untuk mencipta sinergi yang dahsyat yang menguatkan setiap aspek operasi anda."
+          "body": "Pakar ialah pengganda kekuatan dan, digabungkan dengan kemahiran, inilah yang membezakan pemain yang baik daripada Overlord. Dapatkan pakar unik yang membawa bonus hebat kepada prestasi keseluruhan dan tahap kuasa kapal anda. Pakar taktikal meningkatkan kecekapan pengerahan tentera, pakar kejuruteraan mempercepat pembaikan dan naik taraf kapal, pakar senjata meningkatkan kerosakan merentas semua sistem, dan pakar perisikan mendedahkan kedudukan serta kelemahan musuh. Gabungkan beberapa pakar untuk mewujudkan usaha bersepadu yang dahsyat yang menguatkan setiap aspek operasi anda. Namun, pemain yang tidak berbelanja boleh berasa lega kerana Hyper Tek dicipta untuk menangani isu dalam dunia permainan. Walaupun penggabungan boleh dilakukan, mekanik permainan yang adil memastikan penggabungan bukan sistem mata demi mata yang mudah. Sebaliknya, ia berfungsi pada skala menurun supaya kuasa mentah tidak mengatasi kepentingan kemahiran. Permainan ini menekankan kuasa dan kemahiran, bukan bergantung pada nasib!"
         },
         {
           "title": "Bina Tentera Anda",
@@ -331,7 +331,7 @@
         },
         {
           "title": "Disambungkan kepada Ekosistem Hyper Tek",
-          "body": "Penguasa 7 Alam tidak wujud secara berasingan. Ia disepadukan sepenuhnya ke dalam alam semesta Hyper Tek bersama Hyper Racing dan Hyper Quest. Sumber yang diperoleh dalam Overlord boleh digunakan merentas ketiga-tiga permainan. Peningkatan kapal, bonus pakar, kemahiran tempur dan bahan mengalir dengan lancar antara tajuk. Kebolehan perlumbaan yang diperoleh dalam Hyper Racing meningkatkan kemahiran juruterbang anda dalam pertempuran angkasa Overlord. Bahan yang dikumpulkan dalam Hyper Quest memacu peningkatan anda di planet ini. Pasaran Hyper Tek menghubungkan segala-galanya, mewujudkan ekonomi bersatu di mana kemajuan dalam satu permainan menguatkan kemajuan dalam ketiga-tiganya."
+          "body": "Overlord of the 7 Realms tidak wujud secara terasing. Ia disepadukan sepenuhnya ke dalam alam semesta Hyper Tek bersama Hyper Racing dan Hyper Quest. Sumber yang diperoleh dalam Overlord boleh digunakan merentas ketiga-tiga permainan. Naik taraf kapal, bonus pakar, kemahiran tempur dan bahan mengalir lancar antara tajuk. Kebolehan lumba yang diperoleh dalam Hyper Racing meningkatkan kemahiran juruterbang anda dalam pertempuran angkasa Overlord. Bahan yang dikumpul dalam Hyper Quest memacu naik taraf anda di planet. Marketplace Hyper Tek menghubungkan semuanya, mewujudkan satu alam semesta yang berhubung di mana kemajuan dalam satu permainan memacu kemaraan dalam ketiga-tiganya."
         },
         {
           "title": "Satu Alam Semesta, Tiga Permainan, Kuasa Tanpa Had",
@@ -342,7 +342,7 @@
       "faq": [
         {
           "q": "Apakah Overlord of the 7 Realms?",
-          "a": "Permainan strategi pertempuran tiga peringkat di mana anda mendarat di planet asing, membina semula kapal anda, mengklon tentera dan bertarung merentasi tiga dimensi: darat ke darat, darat ke angkasa dan ruang ke angkasa. Menampilkan interaksi VR, ganjaran tunai sebenar dan pencerobohan Hammerong setiap dua minggu."
+          "a": "Permainan strategi pertempuran tiga peringkat di mana anda mendarat cemas di planet asing, membina semula kapal anda, mengklon tentera dan bertempur merentas tiga dimensi: darat-ke-darat, darat-ke-angkasa dan angkasa-ke-angkasa. Ciri yang dirancang termasuk interaksi VR, ganjaran dalam permainan dan pencerobohan Hammerong dua mingguan."
         },
         {
           "q": "Apakah sistem pertempuran tiga peringkat?",
@@ -366,7 +366,7 @@
         },
         {
           "q": "Apakah ganjaran yang boleh saya perolehi?",
-          "a": "Tugas harian, pencarian, pertempuran dan acara semuanya membayar kredit, bahan naik taraf dan bonus kemajuan. Acara khas dan pencerobohan Hammerong menawarkan ganjaran premium dan eksklusif. Cabaran kesukaran yang lebih tinggi dan pertandingan berperingkat menghasilkan pembayaran yang lebih besar termasuk wang tunai sebenar."
+          "a": "Tugasan harian, quest, pertempuran dan acara direka untuk memberi ganjaran berupa kredit, bahan naik taraf dan bonus kemajuan. Acara khas dan pencerobohan Hammerong mungkin menawarkan ganjaran dalam permainan premium dan eksklusif. Cabaran yang lebih sukar dan pertandingan berperingkat dirancang untuk menawarkan ganjaran dalam permainan yang lebih besar."
         },
         {
           "q": "Adakah Overlord menyokong VR?",
@@ -382,7 +382,7 @@
         },
         {
           "q": "Adakah Overlord dikaitkan dengan permainan Hyper Tek yang lain?",
-          "a": "bersepadu sepenuhnya. Sumber, peningkatan kapal, bonus pakar dan aliran kemahiran tempur antara Overlord, Hyper Racing dan Hyper Quest. Kebolehan perlumbaan meningkatkan pertempuran ruang angkasa anda, bahan Quest menyemarakkan peningkatan anda, dan pasaran Hyper Tek menghubungkan seluruh ekonomi."
+          "a": "Disepadukan sepenuhnya. Sumber, naik taraf kapal, bonus pakar dan kemahiran tempur dirancang untuk mengalir antara Overlord, Hyper Racing dan Hyper Quest. Kebolehan lumba meningkatkan pertempuran angkasa anda, bahan Quest memacu naik taraf anda, dan marketplace Hyper Tek menghubungkan ketiga-tiga permainan."
         },
         {
           "q": "Apakah senjata yang ada?",
@@ -801,7 +801,7 @@
       },
       "mining_rp": {
         "title": "Mining RP",
-        "desc": "Unit perlombongan port belakang. Bekerja seiring dengan teluk RS untuk memaksimumkan hasil pengekstrakan sumber medan belakang."
+        "desc": "Unit perlombongan pelabuhan belakang. Berfungsi seiring dengan ruang RS untuk memaksimumkan pengekstrakan sumber di medan belakang."
       },
       "fuel_ref": {
         "title": "Penapisan Bahan Api",
@@ -933,11 +933,11 @@
       },
       "hydro_2": {
         "title": "Sel Hidroponik 2",
-        "desc": "Sel hidroponik sekunder yang mengembangkan kepelbagaian dan hasil tanaman. Menyokong pemakanan krew dan pengeluaran komoditi perdagangan."
+        "desc": "Sel hidroponik sekunder yang meluaskan kepelbagaian dan hasil tanaman. Menyokong pemakanan kru dan pengeluaran komoditi dagangan."
       },
       "hydro_3": {
         "title": "Sel Hidroponik 3",
-        "desc": "Unit penanaman tertier yang pakar dalam tanaman ruji hasil tinggi. Menyediakan bekalan kalori asas untuk komplemen krew yang besar."
+        "desc": "Unit penanaman tertier yang mengkhusus dalam tanaman ruji berhasil tinggi. Menyediakan bekalan kalori asas untuk kru yang ramai."
       },
       "hydro_4": {
         "title": "Sel Hidroponik 4",
@@ -1113,7 +1113,7 @@
     "viewArrow": "LIHAT →",
     "selectCategory": "PILIH KATEGORI",
     "comingSoon": "AKAN DATANG",
-    "specialistProfileDesc": "Profil pakar — statistik penuh akan tersedia apabila permainan dilancarkan.",
+    "specialistProfileDesc": "Profil pakar — statistik dan kebolehan penuh mungkin tersedia apabila permainan dilancarkan.",
     "alliance": {
       "rank": {
         "leader": "Pemimpin",
@@ -1131,8 +1131,8 @@
         "editInfoDesc": "Tukar nama, teg & keterangan",
         "joinRequests": "Urus Permintaan Sertai",
         "joinRequestsDesc": "Semak dan terima ahli baru",
-        "donationGoals": "Tetapkan Sasaran Derma",
-        "donationGoalsDesc": "Konfigurasi sasaran derma mingguan",
+        "donationGoals": "Tetapkan Sasaran Sumbangan",
+        "donationGoalsDesc": "Konfigurasikan sasaran sumbangan mingguan",
         "warSettings": "Tetapan Perang Pakatan",
         "warSettingsDesc": "Konfigurasi peraturan penyertaan perang",
         "kickMembers": "Buang Ahli",
@@ -1141,7 +1141,7 @@
       "allianceMail": {
         "warResults": "Keputusan Perang Pakatan",
         "strategyPlan": "Pelan Strategi Baru",
-        "donationSummary": "Ringkasan Derma Mingguan",
+        "donationSummary": "Ringkasan Sumbangan Mingguan",
         "meeting1800": "Mesyuarat pada 18:00",
         "levelUp": "Pakatan Naik Tahap!"
       }
@@ -1166,7 +1166,7 @@
       "tradingPlasma": "Tukar batang plasma dengan buku teknologi",
       "needHelpAsteroid": "Perlukan bantuan misi asteroid",
       "allianceRecruiting": "Pakatan kami merekrut, DM saya",
-      "donationGoalsPlasma": "Sasaran derma: batang plasma diperlukan!",
+      "donationGoalsPlasma": "Sasaran sumbangan: rod plasma diperlukan!",
       "warStarts2Hours": "Perang bermula dalam 2 jam, bersedia",
       "handleMedicalSupport": "Saya akan uruskan sokongan perubatan",
       "wts50Engines": "JUAL: 50 enjin, PM saya",
@@ -1203,6 +1203,6 @@
       "speedRacingTournament": "Pertandingan Lumba Laju",
       "overlordChampionship": "Kejuaraan Overlord"
     },
-    "eventDetailPlaceholder": "Butiran acara penuh, ganjaran dan pilihan penyertaan akan tersedia apabila acara ini dilancarkan."
+    "eventDetailPlaceholder": "Butiran penuh acara, ganjaran dan pilihan penyertaan mungkin tersedia apabila acara ini dilancarkan."
   }
 }

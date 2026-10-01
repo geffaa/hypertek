@@ -89,19 +89,19 @@
     "highlights": [
       {
         "label": "Alam Semesta Bersambung",
-        "desc": "3 permainan — 1 ekonomi dan sistem kemajuan yang dikongsi"
+        "desc": "3 permainan, satu sistem kemajuan yang dikongsi"
       },
       {
         "label": "Pemilikan Sebenar",
-        "desc": "NFA dengan jaminan belian balik minimum"
+        "desc": "NFA/NFC/NFT dengan Programmatic Trade-In Value"
       },
       {
-        "label": "Main-untuk-Jana",
-        "desc": "Setiap tindakan menyumbang kepada ganjaran dunia sebenar anda"
+        "label": "Play-to-Own",
+        "desc": "Setiap item yang anda kumpul adalah milik anda, direkodkan di blockchain"
       },
       {
-        "label": "Pembayaran Pengeluaran Tunai",
-        "desc": "Menukar mata wang/ganjaran dalam permainan kepada pembayaran pengeluaran tunai"
+        "label": "Item Loyalty Program",
+        "desc": "Semakin lama anda menyimpan sesuatu item, semakin tinggi peringkat tukar belinya, sentiasa di bawah jumlah yang diperuntukkan kepadanya"
       },
       {
         "label": "Kemajuan Berpaut",
@@ -121,12 +121,12 @@
   "homeMarket": {
     "featured": "Pilihan",
     "sectionTitle": "Item NFA Edisi Terhad",
-    "buybackBadge": "Belian Balik Terjamin pada Semua NFA/NFC/NFT",
+    "buybackBadge": "Programmatic Trade-In Value pada NFA dan NFC",
     "urgency": "Bertindak cepat, sebaik sahaja habis, ia HILANG!",
     "loading": "Memuatkan item...",
     "empty": "Tiada item yang disenaraikan lagi.",
     "price": "Harga",
-    "minBuyback": "Belian Balik Min",
+    "minBuyback": "Nilai tukar beli",
     "buyNow": "Beli Sekarang"
   },
   "gaming": {
@@ -177,15 +177,15 @@
       "aboutPageSubtitleSpan": "Membina masa depan gaming Web3.5.",
       "aboutHeroTitle1": "Mengembalikan Gaming.",
       "aboutHeroTitle2": "Dikuasakan oleh Web3.5.",
-      "aboutHeroDesc": "Hyper Tek 100 adalah ekosistem gaming generasi seterusnya di mana setiap aset adalah nyata, setiap perdagangan adalah on-chain, dan setiap pemain adalah pemegang kepentingan sejati. Tiga permainan yang saling berhubung. Satu ekonomi bersama. Dibina untuk masa depan.",
+      "aboutHeroDesc": "Hyper Tek 100 ialah projek permainan yang sedang dibangunkan, di mana setiap item direkodkan di blockchain dan dimiliki oleh pemainnya. Tiga permainan yang saling berhubung dirancang, dengan satu sistem kemajuan yang dikongsi.",
       "pillar1Title": "Teknologi Web3.5",
       "pillar1Desc": "Aset on-chain, pemilikan nyata, dan pasaran telus yang dibina di Base.",
       "pillar2Title": "Nilai Aset Sebenar",
       "pillar2Desc": "Setiap item dalam permainan adalah aset yang boleh diperdagangkan. Main, jana, dan miliki kemajuan anda.",
       "pillar3Title": "Ekosistem Adil",
-      "pillar3Desc": "Pembahagian komisyen dan mekanisme buyback yang direka untuk memberi ganjaran kepada setiap peserta.",
+      "pillar3Desc": "Pembahagian komisen yang telus dan Programmatic Trade-In Value yang terbina dalam setiap item yang layak.",
       "pillar4Title": "Sertai",
-      "pillar4Desc": "Dari pelabur awal hingga pemain aktif. Pelbagai laluan untuk menyertai alam semesta Hyper Tek.",
+      "pillar4Desc": "Daripada pengumpul hingga pemain aktif, mungkin terdapat beberapa cara untuk menyertai alam semesta Hyper Tek.",
       "aboutDiscoverBtn": "Temui Kisah Kami"
     }
   },
@@ -194,411 +194,27 @@
     "pageLinkSubtitle": "Peta jalan, matlamat pendanaan, pakej dan bagaimana sokongan anda membina alam Hyper Tek.",
     "pageLinkCta": "Lihat halaman",
     "tryGaming": "Cuba antara muka permainan",
-    "badge": "NFA EDISI TERHAD DAN PAKEJ PERMAINAN DISKAUN – BERTINDAK SEKARANG!",
+    "badge": "NFA EDISI TERHAD DAN PAKEJ PERMAINAN, TERSEDIA SELAGI STOK MASIH ADA",
     "intro1": "Kami telah melabur secara strategik lebih $440,000 daripada pembiayaan peribadi dan kini mencari tambahan $395,000 untuk merealisasikan projek perintis ini. Kami menyasarkan untuk merevolusikan permainan dengan menyampaikan pengalaman menggembirakan yang menangani beberapa cabaran paling mendesak dalam industri. Dengan pelbagai inisiatif pembiayaan tersedia, inilah peluang anda untuk menjadi sebahagian daripada sesuatu yang benar-benar transformatif.",
-    "intro2": "Pertama sekali, kami melancarkan beberapa item Non-Fungible Asset (NFA) Stage 1 yang amat jarang ditemui, setiap satunya menawarkan bonus dalam permainan tiada tandingan yang TIDAK akan diulang. Sebaik sahaja item ini habis dijual atau kami mencapai sasaran pembiayaan, sebarang NFA edisi terhad yang belum dicetak akan dialih keluar daripada laman web kami selama-lamanya. Ini ialah jaminan yang kukuh!",
-    "intro3": "Ingat, setiap item Hyper Tek Non-Fungible Digital disertakan dengan belian semula minimum terjamin. NFA edisi terhad ini, yang menawarkan bonus dalam permainan yang ketara—yang bonus tertingginya tidak akan diulang—akan meningkatkan pengalaman permainan anda dan membawanya ke tahap baharu.",
-    "intro4": "Jika anda meminati apa yang anda lihat atau baca tentang Hyper Tek Project dan ingin menyertai kami dalam membentuk semula industri permainan, atau jika anda seorang pelabur bijak yang mencari peluang yang menguntungkan, inilah masanya. Dapatkan item ketersediaan terhad anda selagi mampu dan jadilah sebahagian penting daripada Ekosistem Hyper Tek yang berkembang pesat. Jangan tunggu—sebaik sahaja ia habis, ia hilang!",
-    "intro5": "Inisiatif kedua kami melibatkan pelancaran pakej eksklusif di laman web kami sendiri, yang kami rancang untuk disenaraikan melalui platform early backer. Dengan melakukannya sendiri, kami menjimatkan sekitar 10% yuran platform, dan kami menyalurkan penjimatan itu terus kepada anda dengan diskaun penuh 10%. Tawaran ini tersedia untuk tempoh terhad sahaja! Sebaik sahaja kami menyenaraikan pakej ini di platform seperti Kickstarter, kadar diskaun tidak lagi tersedia.",
+    "intro2": "Kami mengeluarkan sebilangan kecil item Non-Fungible Asset (NFA) Peringkat 1. Setiap satu menyenaraikan bonus dalam permainan yang mungkin terpakai jika permainan dilancarkan, dan tahap bonus Peringkat 1 tidak dirancang untuk diulang. Bekalan mempunyai had tetap: sebaik sahaja item ini habis dijual, baki NFA edisi terhad yang belum dicetak akan dikeluarkan daripada laman web.",
+    "intro3": "Item Hyper Tek yang layak mempunyai Programmatic Trade-In Value, yang disimpan dalam escrow di blockchain. NFA edisi terhad ini juga menyenaraikan bonus dalam permainan yang mungkin terpakai, tertakluk kepada peraturan akhir permainan, jika permainan dilancarkan.",
+    "intro4": "Jika anda suka apa yang anda lihat tentang Projek Hyper Tek dan ingin memiliki salah satu item terhad ini, inilah masanya. Bekalan adalah terhad, dan sebaik sahaja sesuatu item habis, ia tidak akan dicetak lagi.",
+    "intro5": "Keluaran kedua kami ialah satu set pakej permainan eksklusif yang dijual terus di laman web kami sendiri, pada harga 10% lebih rendah daripada harga yang mungkin ditawarkan di tempat lain kemudian. Harga ini hanya tersedia untuk tempoh terhad.",
     "keyPointsTitle": "Perkara Penting untuk Diingati:",
-    "intro6": "NFT pertama yang kami lancarkan terjual pada harga $1.47 juta yang mengagumkan tanpa belian semula minimum terjamin atau bonus dalam permainan! Inilah peluang anda untuk memperoleh beberapa NFT paling jarang di dunia, Hyper Tek Non-Fungible Assets (HT NFAs), lengkap dengan belian semula minimum terjamin dan bonus HT dalam permainan terbesar yang tersedia hari ini. Ia impian pelabur yang menjadi kenyataan, tetapi hanya selagi stok masih ada.",
-    "intro7": "Walaupun kebanyakan permainan mendakwa menyediakan \"Play to Earn\" (P2E), mereka selalunya hanya menawarkan token dalam permainan untuk didagangkan. Hyper Tek Project menjamin \"P2E\" sebenar dengan mekanik dalam permainan yang kukuh disokong oleh pelbagai aliran ganjaran yang boleh ditukar kepada bayaran tunai sebenar. Bersedialah untuk mengalami masa depan permainan bersama kami!",
+    "intro6": "Hyper Tek Non-Fungible Assets (HT NFA) ialah koleksi digital dengan bonus dalam permainan terbesar dalam rangkaian Hyper Tek, yang mungkin terpakai jika permainan dilancarkan, serta Programmatic Trade-In Value. Hanya tersedia selagi stok masih ada.",
+    "intro7": "Hyper Tek dibina sebagai Play-to-Own: item yang anda kumpul adalah milik anda, direkodkan di blockchain, dengan kegunaan dalam permainan yang mungkin terpakai merentas permainan yang dirancang. Item dijual sebagai koleksi digital, bukan sebagai cara untuk menjana wang.",
     "collectionsLabel": "Koleksi",
-    "sectionTitle": "Pakej Peringkat Derma",
+    "sectionTitle": "Pakej Permainan Edisi Terhad",
     "discount": "Jimat 10% daripada harga yang disenaraikan",
-    "donationTierLabel": "Peringkat Derma",
-    "donationTierPrefix": "Peringkat Derma:",
+    "donationTierLabel": "Peringkat Pakej",
+    "donationTierPrefix": "Peringkat Pakej:",
     "rewardsTitle": "Ganjaran & Faedah",
     "noteTitle": "Nota",
-    "commonNote": "Ganjaran, Bonus dan atau Diskaun untuk menderma sekarang.\n\nNOTA: Selain daripada baucar yang akan digunakan untuk permainan dalam talian atau pembelian terpilih, semua Ganjaran, Bonus dan atau Diskaun lain tidak boleh digabungkan atau digunakan bersama dengan mana-mana promosi lain.\n\nSemua pakej derma akan menyertakan kredit akhir bertulis dalam pembangunan permainan.",
+    "commonNote": "Item, bonus dan diskaun yang disertakan dalam setiap pakej.\n\nNOTA: Selain Gems yang disertakan untuk pembelian dalam permainan, bonus dan diskaun tidak boleh digabungkan dengan promosi lain.\n\nSetiap pakej menyertakan nama anda dalam kredit akhir permainan, jika permainan dilancarkan.",
     "specialConditionTitle": "Syarat Khas",
-    "specialCondition": "Atas pembangunan dan penyiapan permainan/permainan yang berjaya, setiap orang yang menderma akan menerima nilai minimum lebih daripada pelaburan asal mereka dalam ganjaran atau pakej untuk digunakan dalam permainan/permainan, dan mana-mana bonus atau ganjaran yang dijanjikan untuk menderma akan diberikan setelah permainan/permainan dikeluarkan.",
+    "specialCondition": "Item dijual seadanya. Bonus dalam permainan, diskaun dan Gems yang disenaraikan dalam pakej hanya mungkin terpakai jika permainan dilancarkan, dan tertakluk kepada peraturan akhir permainan. Tiada keuntungan, bayaran atau pulangan kewangan dijanjikan.",
     "imageComing": "Gambar akan datang",
-    "close": "Tutup",
-    "items": [
-      {
-        "title": "Rekrut",
-        "rewards": [
-          "Nama anda akan muncul dalam kredit akhir permainan di bawah tajuk \"Rekrut\"",
-          "Anda akan menerima kredit $35 USD untuk digunakan bagi pembelian dalam permainan (tidak boleh ditukar kepada pembayaran pengeluaran tunai)",
-          "Anda akan menerima kemas kini mingguan tentang permainan melalui e-mel",
-          "Anda akan dapat menyertai sembang Discord.",
-          "Sebagai Rekrut, anda akan menerima Diskaun 10% untuk pembelian dalam permainan selama 12 bulan pertama"
-        ]
-      },
-      {
-        "title": "Kadet Kelas Pemula",
-        "rewards": [
-          "Nama anda akan muncul dalam kredit akhir permainan di bawah tajuk \"Kadet Kelas Pemula\"",
-          "Anda akan menerima kredit $90 USD untuk digunakan bagi pembelian dalam permainan (tidak boleh ditukar kepada pembayaran pengeluaran tunai)",
-          "Anda akan menerima kemas kini mingguan tentang permainan melalui e-mel",
-          "Anda akan dapat menyertai sembang Discord.",
-          "Sebagai Kadet Kelas Pemula, anda akan menerima bonus peningkatan 10% dalam pengumpulan sumber",
-          "Peningkatan 5% dalam kelajuan latihan",
-          "Diskaun 10% untuk pembelian dalam permainan selama 12 bulan pertama",
-          "#Pilih untuk menderma $50 sahaja untuk menyokong misi kami, dan, jika anda mahu, nama anda akan muncul dalam kredit akhir permainan di bawah tajuk \"Kadet Pemula Kehormat Berdaftar\""
-        ]
-      },
-      {
-        "title": "Kadet Kelas Pertama",
-        "rewards": [
-          "Nama anda akan muncul dalam kredit akhir permainan di bawah tajuk \"Kadet Kelas Pertama\"",
-          "Anda akan menerima kredit $125 USD untuk digunakan bagi pembelian dalam permainan (tidak boleh ditukar kepada pembayaran pengeluaran tunai)",
-          "Anda akan menerima kemas kini mingguan tentang permainan melalui e-mel",
-          "Anda akan dapat menyertai sembang Discord.",
-          "Sebagai Kadet Kelas Pertama, anda akan menerima bonus peningkatan 10% dalam pengumpulan sumber",
-          "Peningkatan 5% dalam kelajuan latihan",
-          "5% lebih wang hadiah",
-          "Peningkatan 5% dalam serangan dan pertahanan",
-          "Diskaun 10% untuk pembelian dalam permainan selama 24 bulan pertama"
-        ]
-      },
-      {
-        "title": "Kadet Utama",
-        "rewards": [
-          "Nama anda akan muncul dalam kredit akhir permainan di bawah tajuk \"Kadet Utama\"",
-          "Anda akan menerima kredit $170 USD untuk digunakan bagi pembelian dalam permainan (tidak boleh ditukar kepada pembayaran pengeluaran tunai)",
-          "Anda akan menerima kemas kini mingguan tentang permainan melalui e-mel",
-          "Anda akan dapat menyertai sembang Discord.",
-          "Sebagai Kadet Utama, anda akan menerima bonus peningkatan 10% dalam pengumpulan sumber",
-          "Peningkatan 5% dalam kelajuan latihan",
-          "5% lebih wang hadiah",
-          "Peningkatan 5% dalam serangan dan pertahanan",
-          "Diskaun 10% untuk pembelian dalam permainan selama 24 bulan pertama"
-        ]
-      },
-      {
-        "title": "Kadet Utama Kelas Khas",
-        "rewards": [
-          "Nama anda akan muncul dalam kredit akhir permainan di bawah tajuk \"Kadet Utama Kelas Khas\"",
-          "Anda akan menerima kredit $240 USD untuk digunakan bagi pembelian dalam permainan (tidak boleh ditukar kepada pembayaran pengeluaran tunai)",
-          "Anda akan menerima kemas kini mingguan tentang permainan melalui e-mel",
-          "Anda akan dapat menyertai sembang Discord.",
-          "Sebagai Kadet Utama Kelas Khas, anda akan menerima bonus peningkatan 10% dalam pengumpulan sumber",
-          "Peningkatan 5% dalam kelajuan latihan",
-          "5% lebih wang hadiah",
-          "Peningkatan 5% dalam serangan dan pertahanan",
-          "Diskaun 15% untuk pembelian dalam permainan selama 24 bulan pertama"
-        ]
-      },
-      {
-        "title": "Kadet Kanan",
-        "rewards": [
-          "Nama anda akan muncul dalam kredit akhir permainan di bawah tajuk \"Kadet Utama Kelas Khas\"",
-          "Anda akan menerima kredit $390 USD untuk digunakan bagi pembelian dalam permainan (tidak boleh ditukar kepada pembayaran pengeluaran tunai)",
-          "Anda akan menerima kemas kini mingguan tentang permainan melalui e-mel",
-          "Anda akan dapat menyertai sembang Discord.",
-          "Sebagai Kadet Kanan, anda akan menerima bonus peningkatan 15% dalam pengumpulan sumber",
-          "Peningkatan 5% dalam kelajuan latihan",
-          "Peningkatan 10% dalam kesihatan",
-          "5% lebih wang hadiah",
-          "Peningkatan 5% dalam serangan dan pertahanan",
-          "Diskaun 20% untuk pembelian dalam permainan selama 12 bulan pertama",
-          "Diskaun 10% untuk pembelian dalam permainan bagi 12 bulan kedua",
-          "#Pilih untuk menderma $250 sahaja untuk menyokong misi kami, jika anda mahu, nama anda akan muncul dalam kredit akhir permainan di bawah tajuk \"Kadet Kanan Khas Kehormat Berdaftar\""
-        ]
-      },
-      {
-        "title": "Kadet Kanan Kelas Khas",
-        "rewards": [
-          "Nama anda akan muncul dalam kredit akhir permainan di bawah tajuk \"Kadet Kanan Kelas Khas\"",
-          "Anda akan menerima kredit $440 USD untuk digunakan bagi pembelian dalam permainan (tidak boleh ditukar kepada pembayaran pengeluaran tunai)",
-          "Anda akan menerima kemas kini mingguan tentang permainan melalui e-mel",
-          "Anda akan dapat menyertai sembang Discord.",
-          "Sebagai Kadet Kanan Kelas Khas, anda akan menerima bonus peningkatan 15% dalam pengumpulan sumber",
-          "Peluang 1.0% lebih tinggi untuk mendapatkan NFA atau item langka dalam 12 bulan pertama",
-          "Peningkatan 10% dalam kelajuan latihan",
-          "Peningkatan 10% dalam kesihatan",
-          "10% lebih wang hadiah",
-          "Peningkatan 5% dalam serangan dan pertahanan",
-          "5% kapasiti saiz serangan yang lebih besar",
-          "Diskaun 20% untuk pembelian dalam permainan selama 12 bulan pertama",
-          "Diskaun 10% untuk pembelian dalam permainan bagi 12 bulan kedua"
-        ]
-      },
-      {
-        "title": "Kadet Penerbangan",
-        "rewards": [
-          "Nama anda akan muncul dalam kredit akhir permainan di bawah tajuk \"Kadet Penerbangan\"",
-          "Anda akan menerima kredit $550 USD untuk digunakan bagi pembelian dalam permainan (tidak boleh ditukar kepada pembayaran pengeluaran tunai)",
-          "Anda akan menerima kemas kini mingguan tentang permainan melalui e-mel",
-          "Anda akan dapat menyertai sembang Discord.",
-          "Sebagai Leftenan Penerbangan, anda akan menerima bonus peningkatan 15% dalam pengumpulan sumber",
-          "Peluang 1.5% lebih tinggi untuk mendapatkan NFA atau item langka dalam 12 bulan pertama",
-          "Peningkatan 15% dalam kelajuan latihan",
-          "Peningkatan 15% dalam kesihatan",
-          "10% lebih wang hadiah",
-          "Peningkatan 5% dalam serangan dan pertahanan",
-          "5% kapasiti saiz serangan yang lebih besar",
-          "1 pakej sumber mega",
-          "1 NFA pakar pasukan unggul menawarkan bonus kapal dan lumba, serta belian balik minimum terjamin sebanyak $150",
-          "Diskaun 20% untuk pembelian dalam permainan selama 12 bulan pertama",
-          "Diskaun 10% untuk pembelian dalam permainan bagi 12 bulan kedua"
-        ]
-      },
-      {
-        "title": "Leftenan Penerbangan",
-        "rewards": [
-          "Nama anda akan muncul dalam kredit akhir permainan di bawah tajuk \"Leftenan Penerbangan\"",
-          "Anda akan menerima kredit $6800 USD untuk digunakan bagi pembelian dalam permainan (tidak boleh ditukar kepada pembayaran pengeluaran tunai)",
-          "Anda akan menerima kemas kini mingguan tentang permainan melalui e-mel",
-          "Anda akan dapat menyertai sembang Discord.",
-          "Sebagai Leftenan Penerbangan, anda akan menerima bonus peningkatan 20% dalam pengumpulan sumber",
-          "Peluang 1.5% lebih tinggi untuk mendapatkan NFA atau item langka dalam 12 bulan pertama",
-          "Peningkatan 20% dalam kelajuan latihan",
-          "Peningkatan 15% dalam kesihatan",
-          "15% lebih wang hadiah",
-          "Peningkatan 8% dalam serangan dan pertahanan",
-          "7% kapasiti saiz serangan yang lebih besar",
-          "Bahagian lumba bonus",
-          "1 pakej sumber mega",
-          "1 pas pelabuhan luar dunia",
-          "1 NFA pakar pasukan unggul menawarkan bonus kapal dan lumba, serta belian balik minimum terjamin sebanyak $150",
-          "Diskaun 20% untuk pembelian dalam permainan selama 12 bulan pertama",
-          "Diskaun 10% untuk pembelian dalam permainan bagi 12 bulan kedua",
-          "#Pilih untuk menderma $500 sahaja untuk menyokong misi kami, dan, jika anda mahu, nama anda akan muncul dalam kredit akhir permainan di bawah tajuk \"Leftenan Penerbangan Kehormat Berdaftar\""
-        ]
-      },
-      {
-        "title": "Leftenan Penerbangan Kelas Khas",
-        "rewards": [
-          "Nama anda akan muncul dalam kredit akhir permainan di bawah tajuk \"Leftenan Penerbangan Kelas Khas\"",
-          "Anda akan menerima kredit $1,050 USD untuk digunakan bagi pembelian dalam permainan (tidak boleh ditukar kepada pembayaran pengeluaran tunai)",
-          "Anda akan menerima kemas kini mingguan tentang permainan melalui e-mel",
-          "Anda akan dapat menyertai sembang Discord.",
-          "Sebagai Leftenan Penerbangan Kelas Khas, anda akan menerima bonus peningkatan 20% dalam pengumpulan sumber",
-          "Peluang 1.5% lebih tinggi untuk mendapatkan NFA atau item langka dalam 12 bulan pertama",
-          "Peluang 1.0% lebih tinggi untuk mendapatkan NFA atau item langka secara berterusan",
-          "Peningkatan 20% dalam kelajuan latihan",
-          "Peningkatan 20% dalam kesihatan",
-          "15% lebih wang hadiah",
-          "Peningkatan 10% dalam serangan dan pertahanan",
-          "7% kapasiti saiz serangan yang lebih besar",
-          "Bahagian lumba bonus",
-          "1 pakej sumber mega",
-          "1 avatar hos tambahan",
-          "1 pas pelabuhan luar dunia",
-          "1 NFA pakar pasukan unggul menawarkan bonus kapal dan lumba, serta belian balik minimum terjamin sebanyak $150",
-          "Diskaun 20% untuk pembelian dalam permainan selama 12 bulan pertama",
-          "Diskaun 10% untuk pembelian dalam permainan bagi 12 bulan kedua"
-        ]
-      },
-      {
-        "title": "Wingman",
-        "rewards": [
-          "Nama anda akan muncul dalam kredit akhir permainan di bawah tajuk \"Wingman\"",
-          "Anda akan menerima kredit $1,480 USD untuk digunakan bagi pembelian dalam permainan (tidak boleh ditukar kepada pembayaran pengeluaran tunai)",
-          "Anda akan menerima kemas kini mingguan tentang permainan melalui e-mel",
-          "Anda akan dapat menyertai sembang Discord.",
-          "Sebagai Wingman, anda akan menerima bonus peningkatan 25% dalam pengumpulan sumber",
-          "Peluang 2.0% lebih tinggi untuk mendapatkan NFA atau item langka dalam 12 bulan pertama",
-          "Peluang 1.0% lebih tinggi untuk mendapatkan NFA atau item langka secara berterusan",
-          "Peningkatan 25% dalam kelajuan latihan",
-          "Peningkatan 20% dalam kesihatan",
-          "20% lebih wang hadiah",
-          "Peningkatan 10% dalam serangan dan pertahanan",
-          "8% kapasiti saiz serangan yang lebih besar",
-          "Bahagian lumba bonus",
-          "1 pakej sumber mega",
-          "1 pakej kristal mega",
-          "1 avatar hos tambahan",
-          "1 pas pelabuhan luar dunia",
-          "2 NFA pakar pasukan unggul menawarkan bonus kapal dan lumba, serta belian balik minimum terjamin sebanyak $150 setiap satu",
-          "Diskaun 20% untuk pembelian dalam permainan selama 12 bulan pertama",
-          "Terima tambahan 10% diskaun berterusan untuk mana-mana pembelian dalam permainan/permainan",
-          "#Pilih untuk menderma $1,000 sahaja untuk menyokong misi kami, dan, jika anda mahu, nama anda akan muncul dalam kredit akhir permainan di bawah tajuk \"Wingman Kehormat Berdaftar\""
-        ]
-      },
-      {
-        "title": "Wingman Kelas Kanan",
-        "rewards": [
-          "Nama anda akan muncul dalam kredit akhir permainan di bawah tajuk \"Wingman Kelas Kanan\"",
-          "Anda akan menerima kredit $2,200 USD untuk digunakan bagi pembelian dalam permainan (tidak boleh ditukar kepada pembayaran pengeluaran tunai)",
-          "Anda akan menerima kemas kini mingguan tentang permainan melalui e-mel",
-          "Anda akan dapat menyertai sembang Discord.",
-          "Sebagai Wingman Kelas Kanan, anda akan menerima bonus peningkatan 25% dalam pengumpulan sumber",
-          "Peluang 3.0% lebih tinggi untuk mendapatkan NFA atau item langka dalam 12 bulan pertama",
-          "Peluang 1.5% lebih tinggi untuk mendapatkan NFA atau item langka secara berterusan",
-          "Peningkatan 30% dalam kelajuan latihan",
-          "Peningkatan 25% dalam kesihatan",
-          "20% lebih wang hadiah",
-          "Peningkatan 15% dalam serangan dan pertahanan",
-          "10% kapasiti saiz serangan yang lebih besar",
-          "1 slot teleportasi tambahan untuk menyerang/mempertahankan",
-          "Bahagian lumba bonus",
-          "1 pakej sumber mega",
-          "1 pakej kristal mega",
-          "1 avatar hos tambahan",
-          "1 pas pelabuhan luar dunia",
-          "2 NFA pakar pasukan unggul menawarkan bonus kapal dan lumba, serta belian balik minimum terjamin sebanyak $150 setiap satu",
-          "Diskaun 20% untuk pembelian dalam permainan selama 12 bulan pertama",
-          "Terima tambahan 10% diskaun berterusan untuk mana-mana pembelian dalam permainan/permainan"
-        ]
-      },
-      {
-        "title": "Pegawai Teknikal",
-        "rewards": [
-          "Nama anda akan muncul dalam kredit akhir permainan di bawah tajuk \"Pegawai Teknikal\"",
-          "Anda akan menerima kredit $2,900 USD untuk digunakan bagi pembelian dalam permainan (tidak boleh ditukar kepada pembayaran pengeluaran tunai)",
-          "Anda akan menerima kemas kini mingguan tentang permainan melalui e-mel",
-          "Anda akan dapat menyertai sembang Discord.",
-          "Sebagai Pegawai Teknikal, anda akan menerima bonus peningkatan 25% dalam pengumpulan sumber",
-          "Peluang 3.5% lebih tinggi untuk mendapatkan NFA atau item langka dalam 12 bulan pertama",
-          "Peluang 2.0% lebih tinggi untuk mendapatkan NFA atau item langka secara berterusan",
-          "Peningkatan 30% dalam kelajuan latihan",
-          "Peningkatan 25% dalam kesihatan",
-          "25% lebih wang hadiah",
-          "Peningkatan 15% dalam serangan dan pertahanan",
-          "10% kapasiti saiz serangan yang lebih besar",
-          "1 slot teleportasi tambahan untuk menyerang/mempertahankan",
-          "Bahagian lumba bonus",
-          "2 pakej sumber mega",
-          "1 pakej kristal mega",
-          "2 avatar hos tambahan",
-          "2 pas pelabuhan luar dunia",
-          "3 NFA pakar pasukan unggul menawarkan bonus kapal dan lumba, serta belian balik minimum terjamin sebanyak $150 setiap satu",
-          "Diskaun 25% untuk pembelian dalam permainan selama 12 bulan pertama",
-          "Terima tambahan 20% diskaun berterusan untuk mana-mana pembelian dalam permainan/permainan",
-          "Avatar peribadi bermodel selepas penderma, muncul merentas permainan",
-          "Perkongsian hasil! Kongsi sehingga 2.5% kumpulan keuntungan yang dijana dari penjualan pakej dalam permainan dan NFA",
-          "Akses pembangun eksklusif dengan kemas kini peribadi bulanan tentang permainan, pembangunan, serta peluang untuk memberikan maklum balas",
-          "Reka bentuk pelumba Misi eksklusif untuk digunakan dalam permainan",
-          "Kad kolektif gaya bisbol bagi lumba misi eksklusif anda, dihantar kepada anda dengan surat penghargaan"
-        ]
-      },
-      {
-        "title": "Pakar Pasukan",
-        "rewards": [
-          "Nama anda akan muncul dalam kredit akhir permainan di bawah tajuk \"Pakar Pasukan\"",
-          "Anda akan menerima kredit $3,300 USD untuk digunakan bagi pembelian dalam permainan (tidak boleh ditukar kepada pembayaran pengeluaran tunai)",
-          "Anda akan menerima kemas kini mingguan tentang permainan melalui e-mel",
-          "Anda akan dapat menyertai sembang Discord.",
-          "Sebagai Pakar Pasukan, anda akan menerima bonus peningkatan 30% dalam pengumpulan sumber",
-          "Peluang 5% lebih tinggi untuk mendapatkan NFA atau item langka dalam 12 bulan pertama",
-          "Peluang 2.5% lebih tinggi untuk mendapatkan NFA atau item langka secara berterusan",
-          "Peningkatan 30% dalam kelajuan latihan",
-          "Peningkatan 30% dalam kesihatan",
-          "25% lebih wang hadiah",
-          "Peningkatan 15% dalam serangan dan pertahanan",
-          "10% kapasiti saiz serangan yang lebih besar",
-          "1 slot teleportasi tambahan untuk menyerang/mempertahankan",
-          "Bahagian lumba bonus",
-          "3 pakej sumber mega",
-          "1 pakej kristal mega",
-          "2 avatar hos tambahan",
-          "2 pas pelabuhan luar dunia",
-          "2 NFA pakar pasukan unggul menawarkan bonus kapal dan lumba, serta belian balik minimum terjamin sebanyak $150 setiap satu",
-          "1 NFA pakar pasukan luar biasa menawarkan bonus kapal dan lumba, serta belian balik minimum terjamin sebanyak $400 setiap satu",
-          "Diskaun 25% untuk pembelian dalam permainan selama 24 bulan pertama",
-          "Terima tambahan 20% diskaun berterusan untuk mana-mana pembelian dalam permainan/permainan",
-          "Avatar peribadi bermodel selepas penderma, muncul merentas permainan",
-          "Perkongsian hasil! Kongsi sehingga 2.5% kumpulan keuntungan yang dijana dari penjualan pakej dalam permainan dan NFA",
-          "Akses pembangun eksklusif dengan kemas kini peribadi bulanan tentang permainan, pembangunan, serta peluang untuk memberikan maklum balas",
-          "Reka bentuk pelumba Misi eksklusif untuk digunakan dalam permainan",
-          "Kad kolektif gaya bisbol bagi lumba misi eksklusif anda, dihantar kepada anda dengan surat penghargaan",
-          "#Pilih untuk menderma $2,500 sahaja untuk menyokong misi kami dan, jika anda mahu, nama anda akan muncul dalam kredit akhir permainan di bawah tajuk \"Pakar Pasukan Kehormat Berdaftar\""
-        ]
-      },
-      {
-        "title": "Pakar Pasukan Major",
-        "rewards": [
-          "Nama anda akan muncul dalam kredit akhir permainan di bawah tajuk \"Pakar Pasukan Major\"",
-          "Anda akan menerima kredit $6,500 USD untuk digunakan bagi pembelian dalam permainan (tidak boleh ditukar kepada pembayaran pengeluaran tunai)",
-          "Anda akan menerima kemas kini mingguan tentang permainan melalui e-mel",
-          "Anda akan dapat menyertai sembang Discord.",
-          "Sebagai Pakar Pasukan Major, anda akan menerima bonus peningkatan 35% dalam pengumpulan/perlombongan sumber",
-          "Peluang 7% lebih tinggi untuk mendapatkan NFA atau item langka dalam 12 bulan pertama",
-          "Peluang 3.5% lebih tinggi untuk mendapatkan NFA atau item langka secara berterusan",
-          "Peningkatan 35% dalam kelajuan latihan",
-          "Peningkatan 30% dalam kesihatan",
-          "30% lebih wang hadiah",
-          "Peningkatan 20% dalam serangan dan pertahanan",
-          "10% kapasiti saiz serangan yang lebih besar",
-          "1 slot teleportasi tambahan untuk menyerang/mempertahankan",
-          "Bahagian lumba bonus",
-          "4 pakej sumber mega",
-          "1 pakej kristal mega",
-          "2 avatar hos tambahan",
-          "2 pas pelabuhan luar dunia",
-          "3 NFA pakar pasukan unggul menawarkan bonus kapal dan lumba, serta belian balik minimum terjamin sebanyak $150 setiap satu",
-          "1 NFA pakar pasukan luar biasa menawarkan bonus kapal dan lumba, serta belian balik minimum terjamin sebanyak $400 setiap satu",
-          "Diskaun 25% untuk pembelian dalam permainan selama 24 bulan pertama",
-          "Terima tambahan 20% diskaun berterusan untuk mana-mana pembelian dalam permainan/permainan",
-          "Avatar peribadi bermodel selepas penderma, muncul merentas permainan",
-          "Perkongsian hasil! Kongsi sehingga 5% kumpulan keuntungan yang dijana dari penjualan pakej dalam permainan dan NFA",
-          "Akses pembangun eksklusif dengan kemas kini peribadi bulanan tentang permainan, pembangunan, serta peluang untuk memberikan maklum balas",
-          "Reka bentuk pelumba Misi eksklusif untuk digunakan dalam permainan",
-          "Kad kolektif gaya bisbol bagi lumba misi eksklusif anda, dihantar kepada anda dengan surat penghargaan"
-        ]
-      },
-      {
-        "title": "Komander Elit",
-        "rewards": [
-          "Nama anda akan muncul dalam kredit akhir permainan di bawah tajuk \"Komander Elit\"",
-          "Anda akan menerima kredit $9,000 USD untuk digunakan bagi pembelian dalam permainan",
-          "Anda akan menerima kemas kini mingguan tentang permainan melalui e-mel",
-          "Anda akan dapat menyertai sembang Discord.",
-          "Sebagai Komander Elit, anda akan menerima bonus peningkatan 35% dalam pengumpulan/perlombongan sumber",
-          "Peluang 7.5% lebih tinggi untuk mendapatkan NFA atau item langka dalam 12 bulan pertama",
-          "Peluang 4% lebih tinggi untuk mendapatkan NFA atau item langka secara berterusan",
-          "Peningkatan 40% dalam kelajuan latihan",
-          "Peningkatan 35% dalam kesihatan",
-          "30% lebih wang hadiah",
-          "Peningkatan 20% dalam serangan dan pertahanan",
-          "20% kapasiti saiz serangan yang lebih besar",
-          "2 slot teleportasi tambahan untuk menyerang/mempertahankan",
-          "Bahagian lumba bonus",
-          "4 pakej sumber mega",
-          "2 pakej kristal mega",
-          "2 avatar hos tambahan",
-          "3 pas pelabuhan luar dunia",
-          "4 NFA pakar pasukan unggul menawarkan bonus kapal dan lumba, serta belian balik minimum terjamin sebanyak $150 setiap satu",
-          "1 NFA pakar pasukan luar biasa menawarkan bonus kapal dan lumba, serta belian balik minimum terjamin sebanyak $400 setiap satu",
-          "Diskaun 30% untuk pembelian dalam permainan selama 12 bulan pertama",
-          "Diskaun 25% untuk pembelian dalam permainan bagi 12 bulan kedua",
-          "Terima tambahan 20% diskaun berterusan untuk mana-mana pembelian dalam permainan/permainan",
-          "Avatar peribadi bermodel selepas penderma, muncul merentas permainan",
-          "Perkongsian hasil! Kongsi sehingga 5% kumpulan keuntungan yang dijana dari penjualan pakej dalam permainan dan NFA",
-          "Akses pembangun eksklusif dengan kemas kini peribadi bulanan tentang permainan, pembangunan, serta peluang untuk memberikan maklum balas",
-          "Reka bentuk pelumba Misi eksklusif untuk digunakan dalam permainan",
-          "Kad kolektif gaya bisbol bagi lumba misi eksklusif anda, dihantar kepada anda dengan surat penghargaan"
-        ]
-      },
-      {
-        "title": "Over Lord",
-        "rewards": [
-          "Nama anda akan muncul dalam kredit akhir permainan di bawah tajuk \"Over Lord\"",
-          "Anda akan menerima kredit $15,000 USD untuk digunakan bagi pembelian dalam permainan (tidak boleh ditukar kepada pembayaran pengeluaran tunai)",
-          "Anda akan menerima kemas kini mingguan tentang permainan melalui e-mel",
-          "Anda akan dapat menyertai sembang Discord.",
-          "Sebagai Overlord, anda akan menerima bonus peningkatan 40% dalam pengumpulan/perlombongan sumber",
-          "Peluang 10% lebih tinggi untuk mendapatkan NFA atau item langka dalam 12 bulan pertama",
-          "Peluang 5% lebih tinggi untuk mendapatkan NFA atau item langka secara berterusan",
-          "Peningkatan 50% dalam kelajuan latihan",
-          "Peningkatan 40% dalam kesihatan",
-          "40% lebih wang hadiah",
-          "Peningkatan 25% dalam serangan dan pertahanan",
-          "25% kapasiti saiz serangan yang lebih besar",
-          "2 slot teleportasi tambahan untuk menyerang/mempertahankan",
-          "Bahagian lumba bonus",
-          "6 pakej sumber mega",
-          "3 pakej kristal mega",
-          "2 avatar hos tambahan",
-          "4 pas pelabuhan luar dunia",
-          "4 NFA pakar pasukan unggul menawarkan bonus kapal dan lumba, serta belian balik minimum terjamin sebanyak $150 setiap satu",
-          "2 NFA pakar pasukan legenda menawarkan bonus kapal dan lumba, serta belian balik minimum terjamin sebanyak $650 setiap satu",
-          "1 NFA pakar pasukan epik menawarkan bonus kapal dan lumba, serta belian balik minimum terjamin sebanyak $1000 setiap satu",
-          "Diskaun 40% untuk pembelian dalam permainan selama 12 bulan pertama",
-          "Diskaun 30% untuk pembelian dalam permainan bagi 12 bulan kedua",
-          "Terima tambahan 20% diskaun untuk mana-mana pembelian dalam permainan/permainan selama anda terlibat dalam permainan",
-          "Avatar peribadi bermodel selepas penderma, muncul merentas permainan",
-          "Perkongsian hasil! Kongsi sehingga 5% kumpulan keuntungan yang dijana dari penjualan pakej dalam permainan dan NFA",
-          "Akses pembangun eksklusif dengan kemas kini peribadi bulanan tentang permainan, pembangunan, serta peluang untuk memberikan maklum balas",
-          "Reka bentuk pelumba Misi eksklusif untuk digunakan dalam permainan",
-          "Kad kolektif gaya bisbol bagi lumba misi eksklusif anda, dihantar kepada anda dengan surat penghargaan"
-        ]
-      }
-    ]
+    "close": "Tutup"
   },
   "dashboard": {
     "mobileNotice": {

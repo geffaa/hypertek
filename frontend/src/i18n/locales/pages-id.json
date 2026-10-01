@@ -12,7 +12,7 @@
       "three-worlds": "02  Tiga Dunia",
       "technology": "03  Teknologi",
       "nfa": "04  Aset Non-Fungible",
-      "hyperbucks": "05  Ekonomi HyperBucks",
+      "hyperbucks": "05  Gems",
       "marketplace": "06  Marketplace",
       "roadmap": "07  Peta Jalan",
       "conclusion": "08  Kesimpulan"
@@ -29,7 +29,7 @@
     "docs": {
       "tos": "Ketentuan Layanan",
       "api": "Ketentuan Layanan API",
-      "packs": "Ketentuan Layanan Paket",
+      "packs": "Ketentuan Paket",
       "privacy": "Kebijakan Privasi",
       "copy": "Kebijakan Hak Cipta",
       "tm": "Kebijakan Merek Dagang",
@@ -127,7 +127,7 @@
       "2": "Seberapa antusias Anda tentang semesta di mana tiga game penuh terhubung menjadi satu pengalaman?",
       "3": "Bagian mana dari HyperTek 100 yang paling menarik minat Anda?",
       "4": "Apa yang akan membuat HyperTek 100 menjadi game 'wajib dimainkan' bagi Anda?",
-      "5": "Apakah Anda akan mempertimbangkan untuk mendukung proyek ini ketika kami membuka kampanye crowdfunding?",
+      "5": "Apakah Anda tertarik dengan rilis akses awal item edisi terbatas?",
       "6": "Ikuti kami di X"
     },
     "nameLabel": "Nama Anda",
@@ -158,7 +158,7 @@
     "unlisted": "Tidak Terdaftar",
     "backToMarketplace": "Marketplace",
     "samplePreviewTitle": "Pratinjau Marketplace Sampel",
-    "samplePreviewDesc": "Item di bawah ini adalah pratinjau sampel yang menampilkan jenis aset digital yang akan tersedia. Item sebenarnya dengan karya seni unik dan kepemilikan yang diverifikasi blockchain akan tersedia saat peluncuran.",
+    "samplePreviewDesc": "Item di bawah ini adalah pratinjau contoh jenis item digital yang mungkin tersedia. Item sebenarnya, dengan karya seni unik dan kepemilikan yang terverifikasi di blockchain, mungkin tersedia saat peluncuran.",
     "noItemsFound": "Tidak ada item ditemukan dalam kategori ini",
     "preview": "Pratinjau",
     "buyNow": "Beli Sekarang",
@@ -182,14 +182,14 @@
     "error": "Maaf, saya tidak dapat mendapatkan respons saat ini. Silakan coba lagi atau hubungi tim dukungan kami.",
     "peek": {
       "0": "Butuh bantuan? Tanyakan apa saja!",
-      "1": "Pertanyaan tentang HyperBucks?",
+      "1": "Ada pertanyaan tentang Gems?",
       "2": "Penasaran bagaimana lelang bekerja?"
     },
     "shortcuts": {
-      "earnLabel": "Dapatkan HyperBucks",
-      "earnText": "Bagaimana cara mendapatkan HyperBucks?",
-      "cashOutLabel": "Cairkan HB",
-      "cashOutText": "Bagaimana cara mencairkan HyperBucks saya?",
+      "earnLabel": "Dapatkan Gems",
+      "earnText": "Bagaimana cara mendapatkan Gems?",
+      "cashOutLabel": "Nilai tukar tambah",
+      "cashOutText": "Bagaimana cara kerja Programmatic Trade-In Value?",
       "auctionsLabel": "Cara Kerja Lelang",
       "auctionsText": "Bagaimana lelang bekerja?",
       "gamesLabel": "Game yang Tersedia",
@@ -263,7 +263,8 @@
       "trade": "Perdagangan",
       "auction": "Lelang",
       "questing": "Pencarian",
-      "bounty": "Hadiah"
+      "bounty": "Hadiah",
+      "forHire": "Disewakan"
     },
     "categories": {
       "all": "Semua",
@@ -349,7 +350,7 @@
       "playerLabel": "\nPemain\n",
       "platformLabel": "\nPeron\n",
       "platLabel": "\nPlat\n",
-      "notePayouts": "\nMisi dengan muatan gabungan akan dibayar menggunakan jumlah tabel terpisah.\n",
+      "notePayouts": "Quest dengan muatan gabungan memakai hadiah dari tabel terpisah.",
       "notePlanet": "\nData planet akan disinkronkan saat game ditayangkan.\n",
       "dailySlots": "\nSlot Pencarian Harian\n",
       "used": "\ndigunakan\n",
@@ -383,8 +384,8 @@
       "colSelling": "\nMenjual\n",
       "colBuying": "\nMembeli\n",
       "colTrading": "\nPerdagangan\n",
-      "colOnHire": "\nSedang Disewa\n",
-      "colHiring": "\nMempekerjakan\n",
+      "colOnHire": "Disewakan",
+      "colHiring": "Menyewakan",
       "groupMarketplace": "\nPASAR\n",
       "groupAuction": "\nLELANG"
     }
@@ -397,7 +398,7 @@
       "myCollections": "Saya Koleksi",
       "transactions": "Transaksi",
       "offers": "Penawaran",
-      "hyperBucks": "HyperBucks",
+      "hyperBucks": "Gems",
       "earnings": "Penghasilan",
       "support": "Dukungan",
       "signOut": "Keluar"
@@ -436,7 +437,7 @@
       "transactions": "Transaksi",
       "transactionsDesc": "Pembayaran riwayat",
       "withdraw": "Penarikan",
-      "withdrawDesc": "Tarik saldo HB Anda"
+      "withdrawDesc": "Tarik hasil penjualan Anda di marketplace"
     },
     "transactions": {
       "title": "Riwayat Transaksi",
@@ -467,7 +468,7 @@
       "noSentOffersHint": "Ajukan penawaran untuk item apa pun di Marketplace",
       "colItem": "Item",
       "colYourOffer": " Milik Anda Penawaran",
-      "colFloorPrice": "Harga Dasar",
+      "colFloorPrice": "Harga Terendah",
       "colOfferDuration": "Durasi Penawaran",
       "colStatus": "Status",
       "colAction": "Aksi",
@@ -638,11 +639,10 @@
       }
     },
     "hyperbucks": {
-      "title": " HyperBucks ",
-      "subtitle": " 250 HB = $1 USD · tarif tetap ",
+      "title": "Gems",
+      "subtitle": "Beli Gems untuk pembelian dalam game",
       "currentBalance": " Saldo Saat Ini ",
       "tabTopUp": " Top Up ",
-      "tabCashout": " Pembayaran ",
       "success": {
         "title": " Top-Up Berhasil! ",
         "added": " ditambahkan ke akun Anda.",
@@ -652,30 +652,24 @@
       },
       "topup": {
         "amountLabel": " Jumlah (USD) ",
-        "hyperBucks": " HyperBucks ",
+        "hyperBucks": "Gems",
         "preparing": " Mempersiapkan... ",
         "proceed": " Lanjutkan ke Pembayaran ",
         "enterAmount": " Masukkan jumlah untuk melanjutkan ",
-        "secured": " Diamankan oleh Stripe · 250 HB = $1 USD · min $1 ",
+        "secured": "Diamankan oleh Stripe · min. $1",
         "quickSelect": " Pilih Cepat ",
         "paying": " Membayar ",
         "processing": " Memproses... ",
-        "pay": " Bayar "
+        "pay": " Bayar ",
+        "rate": "Min. $1 · Gems hanya untuk pembelian dalam game"
       },
       "cashout": {
-        "amountLabel": " Jumlah (HB) ",
-        "minUsdc": " Min 250 HB ",
-        "minBank": " Min 2500 HB ",
         "receiveVia": " Terima melalui ",
         "usdcWallet": " Dompet USDC ",
-        "usdcMin": " Min 250 HB · ~$0,01 gas ",
         "bankAccount": " Rekening Bank ",
-        "bankMin": " Min 2500 HB ($10) · detail bank diperlukan ",
         "addBank": " Tambahkan detail bank di Profil → ",
         "noWallet": " Tidak ada dompet yang terhubung ",
         "sendingOtp": " Mengirim OTP... ",
-        "toUsdc": " Pembayaran ke Dompet USDC ",
-        "toBank": " Pembayaran ke Rekening Bank ",
         "kycNote": " Selesaikan verifikasi identitas untuk melanjutkan "
       },
       "otp": {
@@ -686,7 +680,6 @@
         "bankAccount": " Rekening Bank ",
         "label": " Kode OTP ",
         "processing": " Memproses... ",
-        "confirm": " Konfirmasi Pembayaran ",
         "sending": " Mengirim... ",
         "resend": " Kirim ulang kode "
       },
