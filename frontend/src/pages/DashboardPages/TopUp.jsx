@@ -68,7 +68,7 @@ function CheckoutForm({ hbAmount, usdAmount, onBack }) {
           <p className="text-white/50 text-xs">{t("dashboard.hyperbucks.topup.paying", "Paying")}</p>
           <p className="text-white font-bold text-base">
             ${usdAmount} USD
-            <span className="text-[#002AA8] text-sm font-normal ml-2">= {hbAmount.toLocaleString()} HB</span>
+            <span className="text-[#002AA8] text-sm font-normal ml-2">= {hbAmount.toLocaleString()} Gems</span>
           </p>
         </div>
       </div>
@@ -188,7 +188,7 @@ export default function HyperBucks() {
 
   const handleProceed = async () => {
     if (!activeHB || activeHB < 250) {
-      toast.error('Minimum top-up is $1 USD (250 HB)');
+      toast.error('Minimum top-up is $1 USD');
       return;
     }
     const hbAmount = Math.floor(activeHB / 250) * 250;
@@ -247,7 +247,7 @@ export default function HyperBucks() {
       const data = await res.json();
       if (!res.ok) { toast.error(data.error || 'Verification failed', { id: 'usdc-topup' }); setUsdcTopupStep('idle'); return; }
 
-      toast.success(`${data.hbAmount.toLocaleString()} HB credited!`, { id: 'usdc-topup' });
+      toast.success(`${data.hbAmount.toLocaleString()} Gems added!`, { id: 'usdc-topup' });
       setUsdcTopupStep('done');
       setCustomUsd('');
       setTopupMethod(null);
@@ -322,7 +322,7 @@ export default function HyperBucks() {
             <h2 className="text-white text-2xl font-bold mb-2">{t("dashboard.hyperbucks.success.title", "Top-Up Successful!")}</h2>
             {successHB > 0 && (
               <p className="text-white/60 mb-1">
-                <span className="text-white font-semibold">{successHB.toLocaleString()} HB</span> {t("dashboard.hyperbucks.success.added", "added to your account.")}
+                <span className="text-white font-semibold">{successHB.toLocaleString()} Gems</span> {t("dashboard.hyperbucks.success.added", "added to your account.")}
               </p>
             )}
             <p className="text-white/40 text-sm mb-7">{t("dashboard.hyperbucks.success.reflectSoon", "Your balance will reflect shortly.")}</p>
@@ -345,8 +345,8 @@ export default function HyperBucks() {
       )}
       {/* Header */}
       <div className="mb-6">
-        <h1 className="font-inter font-semibold text-[22px] md:text-[25px] text-white">{t("dashboard.hyperbucks.title", "Hyper Bucks")}</h1>
-        <p className="text-white/50 text-sm mt-1">{t("dashboard.hyperbucks.subtitle", "250 HB = $1 USD · fixed rate")}</p>
+        <h1 className="font-inter font-semibold text-[22px] md:text-[25px] text-white">{t("dashboard.hyperbucks.title", "Gems")}</h1>
+        <p className="text-white/50 text-sm mt-1">{t("dashboard.hyperbucks.subtitle", "Buy Gems for in-game purchases")}</p>
       </div>
 
       {/* Balance Card */}
@@ -358,7 +358,7 @@ export default function HyperBucks() {
           <div>
             <p className="text-white/50 text-xs">{t("dashboard.hyperbucks.currentBalance", "Current Balance")}</p>
             <p className="text-white font-bold text-lg">
-              {hbNum != null ? hbNum.toLocaleString() : '—'} HB
+              {hbNum != null ? hbNum.toLocaleString() : '—'} Gems
             </p>
           </div>
         </div>
@@ -406,7 +406,7 @@ export default function HyperBucks() {
                   <div className="h-6 mb-5">
                     {activeHB > 0 && (
                       <p className="text-blue-300 text-sm font-semibold">
-                        = {activeHB.toLocaleString()} {t("dashboard.hyperbucks.topup.hyperBucks", "Hyper Bucks")}
+                        = {activeHB.toLocaleString()} {t("dashboard.hyperbucks.topup.hyperBucks", "Gems")}
                       </p>
                     )}
                   </div>
@@ -461,7 +461,7 @@ export default function HyperBucks() {
                               {transakBusy ? 'Opening…' : 'Buy USDC'}
                             </button>
                           </div>
-                          <p className="text-white/25 text-[10px] mt-1.5">USDC arrives in your wallet, then pay it below to top up HB.</p>
+                          <p className="text-white/25 text-[10px] mt-1.5">USDC arrives in your wallet, then pay it below to buy Gems.</p>
                         </div>
                       )}
                       {!activeAddress ? (
@@ -494,12 +494,12 @@ export default function HyperBucks() {
                           >
                             {usdcTopupStep === 'sending' ? 'Confirm in wallet...' :
                              usdcTopupStep === 'verifying' ? 'Verifying on-chain...' :
-                             activeHB >= 250 ? `Pay ${activeUSD} USDC → ${activeHB.toLocaleString()} HB` :
+                             activeHB >= 250 ? `Pay ${activeUSD} USDC → ${activeHB.toLocaleString()} Gems` :
                              t("dashboard.hyperbucks.topup.enterAmount", "Enter an amount to continue")}
                           </button>
                           {usdcTopupStep === 'done' && (
                             <div className="flex items-center gap-2 text-green-400 text-sm justify-center">
-                              <FiCheckCircle size={16} /> Hyper Bucks credited successfully!
+                              <FiCheckCircle size={16} /> Gems added successfully!
                             </div>
                           )}
                         </>
@@ -508,7 +508,7 @@ export default function HyperBucks() {
                   )}
 
                   {!topupMethod && (
-                    <p className="text-white/25 text-xs text-center mt-1">{t("dashboard.hyperbucks.topup.rate", "250 HB = $1 USD · min $1")}</p>
+                    <p className="text-white/25 text-xs text-center mt-1">{t("dashboard.hyperbucks.topup.rate", "Min $1 · Gems are for in-game purchases only")}</p>
                   )}
                 </div>
 
@@ -539,7 +539,7 @@ export default function HyperBucks() {
                             </span>
                           )}
                           <p className="text-white/40 text-[10px] mb-0.5">{pkg.label}</p>
-                          <p className="text-white font-bold text-sm">{pkg.hb.toLocaleString()} HB</p>
+                          <p className="text-white font-bold text-sm">{pkg.hb.toLocaleString()} Gems</p>
                           <p className={`text-xs font-semibold ${isActive ? 'text-blue-300' : 'text-white/50'}`}>${pkg.usd} USD</p>
                         </button>
                       );

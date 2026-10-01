@@ -108,7 +108,7 @@ const Header = ({ onMenuClick }) => {
             <HBCoinIcon size={32} />
             <div className="flex flex-col items-start">
               <span className="text-yellow-300 text-xs font-bold leading-tight whitespace-nowrap">
-                {hbBalance.hyperBucks} HB
+                {hbBalance.hyperBucks} Gems
               </span>
               <span className="text-yellow-500/70 text-[10px] leading-tight">
                 ${hbBalance.usdEquivalent} USD

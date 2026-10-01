@@ -663,7 +663,8 @@
         "quickSelect": "Quick Select",
         "paying": "Paying",
         "processing": "Processing...",
-        "pay": "Pay"
+        "pay": "Pay",
+        "rate": "Min $1 · Gems are for in-game purchases only"
       },
       "cashout": {
         "receiveVia": "Receive via",
