@@ -12,7 +12,7 @@
       "three-worlds": "02  De tre verdenene",
       "technology": "03  Teknologi",
       "nfa": "04  Non-Fungible Assets",
-      "hyperbucks": "05  HyperBucks-økonomi",
+      "hyperbucks": "05  Gems",
       "marketplace": "06  Markedsplass",
       "roadmap": "07  Veikart",
       "conclusion": "08  Konklusjon"
@@ -29,7 +29,7 @@
     "docs": {
       "tos": "Tjenestevilkår",
       "api": "API-tjenestevilkår",
-      "packs": "Pakker-tjenestevilkår",
+      "packs": "Pakkevilkår",
       "privacy": "Personvernpolicy",
       "copy": "Opphavsrettpolicy",
       "tm": "Varemerkerettighetspolicy",
@@ -127,7 +127,7 @@
       "2": "Hvor begeistret er du for et univers der tre fullstendige spill er koblet til én opplevelse?",
       "3": "Hvilken del av HyperTek 100 interesserer deg mest?",
       "4": "Hva ville gjort HyperTek 100 til et 'must-play'-spill for deg?",
-      "5": "Ville du vurdere å støtte dette prosjektet når vi åpner vår crowdfunding-kampanje?",
+      "5": "Ville du vært interessert i slippet med tidlig tilgang av gjenstander i begrenset opplag?",
       "6": "Følg oss på X"
     },
     "nameLabel": "Ditt navn",
@@ -158,7 +158,7 @@
     "unlisted": "Ikke listet",
     "backToMarketplace": "Markedsplass",
     "samplePreviewTitle": "Eksempel markedsplassforhåndsvisning",
-    "samplePreviewDesc": "Elementene nedenfor er eksempelforhåndsvisninger som viser typene digitale eiendeler som vil være tilgjengelige. Faktiske elementer med unik kunst og blockchain-verifisert eierskap vil være tilgjengelige ved lansering.",
+    "samplePreviewDesc": "Gjenstandene nedenfor er eksempelvisninger av typene digitale gjenstander som kan bli tilgjengelige. Faktiske gjenstander med unik kunst og blokkjedeverifisert eierskap kan bli tilgjengelige ved lansering.",
     "noItemsFound": "Ingen elementer funnet i denne kategorien",
     "preview": "Forhåndsvisning",
     "buyNow": "Kjøp nå",
@@ -182,14 +182,14 @@
     "error": "Beklager, jeg fikk ikke svar akkurat nå. Prøv igjen eller kontakt supportteamet vårt.",
     "peek": {
       "0": "Trenger du hjelp? Spør meg om hva som helst!",
-      "1": "Spørsmål om HyperBucks?",
+      "1": "Spørsmål om Gems?",
       "2": "Nysgjerrig på hvordan auksjoner fungerer?"
     },
     "shortcuts": {
-      "earnLabel": "Tjen HyperBucks",
-      "earnText": "Hvordan tjener jeg HyperBucks?",
-      "cashOutLabel": "Ta ut HB",
-      "cashOutText": "Hvordan tar jeg ut HyperBucks-ene mine?",
+      "earnLabel": "Skaff Gems",
+      "earnText": "Hvordan skaffer jeg Gems?",
+      "cashOutLabel": "Innbytteverdi",
+      "cashOutText": "Hvordan fungerer Programmatic Trade-In Value?",
       "auctionsLabel": "Hvordan auksjoner fungerer",
       "auctionsText": "Hvordan fungerer auksjoner?",
       "gamesLabel": "Tilgjengelige spill",
@@ -263,7 +263,8 @@
       "trade": "Handel",
       "auction": "Auksjon",
       "questing": "Spørre",
-      "bounty": "Dusør"
+      "bounty": "Dusør",
+      "forHire": "Til leie"
     },
     "categories": {
       "all": "Alle",
@@ -349,7 +350,7 @@
       "playerLabel": "\nSpiller\n",
       "platformLabel": "\nPlattform\n",
       "platLabel": "\nPlat\n",
-      "notePayouts": "\nOppdrag med kombinert nyttelast vil bli utbetalt med de separate tabellbeløpene.\n",
+      "notePayouts": "Oppdrag med kombinerte laster bruker belønningene i den separate tabellen.",
       "notePlanet": "\nPlanetdata vil synkroniseres når spillene går live.\n",
       "dailySlots": "\nDaglige Quest-spilleautomater\n",
       "used": "\nbrukt\n",
@@ -383,8 +384,8 @@
       "colSelling": "\nSelger\n",
       "colBuying": "\nKjøper\n",
       "colTrading": "\nHandel\n",
-      "colOnHire": "\nPå utleie\n",
-      "colHiring": "\nAnsette\n",
+      "colOnHire": "Utleid",
+      "colHiring": "Utleie",
       "groupMarketplace": "\nMARKEDSPLASS\n",
       "groupAuction": "\nAUKSJON"
     }
@@ -397,7 +398,7 @@
       "myCollections": "Mine samlinger",
       "transactions": "Transaksjoner",
       "offers": "Tilbud",
-      "hyperBucks": "HyperBucks",
+      "hyperBucks": "Gems",
       "earnings": "Inntekter",
       "support": "Støtte",
       "signOut": "Logg ut"
@@ -436,7 +437,7 @@
       "transactions": "Transaksjoner",
       "transactionsDesc": "Betalingshistorikk",
       "withdraw": "Trekk tilbake",
-      "withdrawDesc": "Ta ut HB-saldoen din"
+      "withdrawDesc": "Ta ut inntektene fra salgene dine på markedsplassen"
     },
     "transactions": {
       "title": "Transaksjonshistorikk",
@@ -467,7 +468,7 @@
       "noSentOffersHint": "Gi et tilbud på en hvilken som helst vare på markedsplassen",
       "colItem": "Punkt",
       "colYourOffer": "Ditt tilbud",
-      "colFloorPrice": "Gulvpris",
+      "colFloorPrice": "Laveste pris",
       "colOfferDuration": "Tilbudets varighet",
       "colStatus": "Status",
       "colAction": "Handling",
@@ -638,11 +639,10 @@
       }
     },
     "hyperbucks": {
-      "title": "HyperBucks",
-      "subtitle": "250 HB = $1 USD · fast rente",
+      "title": "Gems",
+      "subtitle": "Kjøp Gems for kjøp i spillet",
       "currentBalance": "Nåværende saldo",
       "tabTopUp": "Fyll opp",
-      "tabCashout": "Utbetaling",
       "success": {
         "title": "Påfylling vellykket!",
         "added": "lagt til kontoen din.",
@@ -652,30 +652,24 @@
       },
       "topup": {
         "amountLabel": "Beløp (USD)",
-        "hyperBucks": "HyperBucks",
+        "hyperBucks": "Gems",
         "preparing": "Forbereder...",
         "proceed": "Fortsett til betaling",
         "enterAmount": "Angi et beløp for å fortsette",
-        "secured": "Sikret av Stripe · 250 HB = $1 USD · min $1",
+        "secured": "Sikret av Stripe · min. $1",
         "quickSelect": "Hurtigvalg",
         "paying": "Betaler",
         "processing": "Behandling...",
-        "pay": "Betale"
+        "pay": "Betale",
+        "rate": "Min. $1 · Gems er kun for kjøp i spillet"
       },
       "cashout": {
-        "amountLabel": "Beløp (HB)",
-        "minUsdc": "Min 250 HB",
-        "minBank": "Min 2500 HB",
         "receiveVia": "Motta via",
         "usdcWallet": "USDC-lommebok",
-        "usdcMin": "Min 250 HB · ~$0,01 gass",
         "bankAccount": "Bankkonto",
-        "bankMin": "Min 2500 HB ($10) · bankinformasjon kreves",
         "addBank": "Legg til bankdetaljer i Profil →",
         "noWallet": "Ingen lommebok tilkoblet",
         "sendingOtp": "Sender engangskode …",
-        "toUsdc": "Uttak til USDC Wallet",
-        "toBank": "Uttak til bankkonto",
         "kycNote": "Fullfør identitetsbekreftelsen for å fortsette"
       },
       "otp": {
@@ -686,7 +680,6 @@
         "bankAccount": "Bankkonto",
         "label": "OTP-kode",
         "processing": "Behandling...",
-        "confirm": "Bekreft uttak",
         "sending": "Sender...",
         "resend": "Send kode på nytt"
       },

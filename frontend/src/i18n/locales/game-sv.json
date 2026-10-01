@@ -8,8 +8,8 @@
       "subtitle": "Galaxens mest intensiva flygande fordonsracingupplevelse,\ndär skicklighet lönar sig, och mästare görs.",
       "intro": [
         "Hyper Racing är ett högoktanigt konkurrenskraftigt racingspel som utspelar sig över främmande världar, där spelare bygger, uppgraderar och styr helt anpassningsbara flygande racerfordon genom några av de farligaste banorna i galaxen. Från flytande klippformationer och vulkaniska lavarör till ödemarker och bergspass är varje lopp ett test av förberedelser, reflexer och strategi.",
-        "Men Hyper Racing är mer än bara ett spel; det är en konkurrenskraftig plattform där verkliga belöningar är på spel. Toppspelare kan delta i rankade evenemang och turneringar med riktiga prispotter. Ju bättre du tävlar, desto mer tjänar du. Oavsett om du jagar leaderboard ära eller bygger ett racingimperium, allt du gör i Hyper Racing tar dig framåt.",
-        "Uppgradera dina racerbilar från nos till svans. Rekrytera och höj nivån på ditt depåbesättning. Anställ en pit manager som matchar din racingfilosofi. Ta sedan dina färdigheter bortom banan, ditt racinggarage fungerar som hangar för ditt personliga rymdskepp, och varje förmåga du utvecklar för med sig till rymdstrider över Hyper Quest och Overlord of the 7 Realms."
+        "Hyper Racing planeras som en tävlingsplattform. De bästa kan komma att kunna delta i rankade evenemang och turneringar med belöningar i spelet på spel. Oavsett om du jagar ära på topplistan eller bygger ett racingimperium är allt du gör i Hyper Racing utformat för att föra dig framåt.",
+        "Uppgradera dina racerfordon från nos till stjärt. Rekrytera ditt depåteam och höj dess nivå. Rekrytera en depåchef som passar din racingfilosofi. Ta sedan dina färdigheter bortom banan: ditt racinggarage är också hangaren för ditt personliga rymdskepp, och varje förmåga du utvecklar följer med in i rymdstriderna i Hyper Quest och Overlord of the 7 Realms."
       ],
       "introClose": "Läs vidare för att upptäcka hur spelet fungerar, vad du kan vinna och hur din racingkarriär ger energi till ett helt universum av progression.",
       "calloutLine1": "Race för att tjäna. Tjäna för att uppgradera.",
@@ -24,7 +24,7 @@
         {
           "num": "02",
           "title": "Bygg ditt team",
-          "body": "Racing är en lagsport. Rekrytera pit crew-specialister som ger unika bonusar, snabbare tankning, realtidsdiagnostik, nödreparationer av skrov i mitten av loppet och prestandajusteringar mellan varven. Varje besättningsmedlem går upp i nivå med erfarenhet och lägger kraftfulla förmågor ovanpå dina fordonsuppgraderingar. Anställ sedan en pit manager för att koordinera verksamheten, ringa racestrategi och låsa upp teamomfattande prestationshöjningar som förstärker under en hel säsong."
+          "body": "Racing är en lagsport. Rekrytera depåspecialister som ger unika bonusar: snabbare tankning, diagnostik i realtid, akuta skrovreparationer mitt i loppet och prestandajusteringar mellan varven. Varje teammedlem stiger i nivå med erfarenhet och lägger kraftfulla förmågor ovanpå dina fordonsuppgraderingar. Rekrytera sedan en depåchef som samordnar arbetet, bestämmer loppstrategin och låser upp prestandaökningar för hela teamet som byggs på under en hel säsong."
         },
         {
           "num": "03",
@@ -44,12 +44,12 @@
           "body": "Varje lopp du avslutar betalar ut. Vinn, och belöningarna multipliceras. Tävlingssegrar låser upp förstklassiga fordonskomponenter, sällsynta uppgraderingsmaterial, exklusiva rekryteringspoletter och krediter för att finansiera ditt nästa bygge. Sälj uppgraderade fordon för vinst, återinvestera i nya maskiner och se ditt racingimperium växa för varje pallplats."
         },
         {
-          "title": "Real Cash Events",
-          "body": "Hyper Racing tar konkurrensen till nästa nivå med rankade evenemang och turneringar där riktiga pengar står på spel. Delta i skicklighetsbaserade tävlingar, bevisa din förmåga mot de bästa piloterna i galaxen och gå därifrån med riktiga kontantutbetalningar. Ju högre du placerar dig, desto större prispott. Från veckorankade utmaningar till säsongsbetonade mästerskapsevenemang, det finns alltid möjligheter för toppspelare att omvandla sina racingfärdigheter till riktiga intäkter."
+          "title": "Rankade evenemang",
+          "body": "Hyper Racing är utformat kring rankade evenemang och turneringar. Färdighetsbaserade tävlingar kan låta dig visa vad du kan mot galaxens bästa piloter för belöningar i spelet, titlar och placering på topplistan. Från veckovisa rankade utmaningar till säsongsmästerskap kan de bästa få gott om chanser att utmärka sig."
         },
         {
           "title": "Hur prisevenemang fungerar",
-          "body": "Spelare kvalificerar sig genom rankat spel och möter prestationströsklar som ger inträde till kontantpristurneringar. Evenemang är uppbyggda kring rättvis matchmaking, vilket säkerställer att alla tävlande möter motståndare med liknande skicklighet. Anmälningsavgifterna är transparenta, prispotterna visas tydligt innan du förbinder dig, och utbetalningar behandlas snabbt efter att varje evenemang har avslutats. Det är konkurrenskraftigt, det är rättvist och belöningarna är verkliga."
+          "body": "Spelare kan komma att kvalificera sig genom rankat spel genom att nå prestandatrösklar. Evenemangen planeras kring rättvis matchning, så att varje tävlande möter motståndare på liknande nivå. Evenemangsregler och belöningar i spelet är tänkta att visas tydligt innan du binder dig."
         },
         {
           "title": "Progression Beyond the Track",
@@ -79,7 +79,7 @@
       "faq": [
         {
           "q": "Vad är Hyper Racing?",
-          "a": "Ett högintensivt flygande fordonsracingspel som utspelar sig över främmande världar. Bygg, uppgradera och tävla helt anpassningsbara fordon genom farliga sci-fi-kretsar medan du tävlar om belöningar i spelet och riktiga kontantpriser."
+          "a": "Ett intensivt racingspel med flygande fordon på främmande världar. Bygg, uppgradera och kör fullt anpassningsbara fordon genom farliga sci-fi-banor medan du tävlar om belöningar i spelet."
         },
         {
           "q": "Kan jag uppgradera mitt racerfordon?",
@@ -94,8 +94,8 @@
           "a": "Depåchefen koordinerar besättningens operationer, kallar racestrategi och låser upp teamomfattande prestationshöjningar. Defensiva chefer skyddar ditt fordon under svåra förhållanden; aggressiva chefer pressar varje system för maximal hastighet."
         },
         {
-          "q": "Kan jag vinna riktiga pengar?",
-          "a": "Ja. Rangordnade evenemang och turneringar har riktiga prispotter. Kvalificera dig genom rankat spel, tävla mot liknande skickliga motståndare och tjäna riktiga utbetalningar baserat på din slutposition. Veckovisa utmaningar och säsongsmästerskap pågår kontinuerligt."
+          "q": "Finns det priser i rankade evenemang?",
+          "a": "Rankade evenemang och turneringar planeras erbjuda belöningar i spelet, titlar och placering på topplistan. De erbjuder inga kontant- eller penningpriser."
         },
         {
           "q": "Hur fungerar tävlingsbelöningar?",
@@ -121,7 +121,7 @@
       "subtitle": "Din galax. Dina regler. Din förmögenhet.",
       "intro": [
         "Hyper Quest är ett rymdäventyr i öppen värld där du styr ditt eget helt uppgraderbara rymdskepp, Quest Racer, över en stor och farlig galax. Du lämnade din hemcivilisation för flera år sedan på jakt efter makt, rikedom och berömmelse. Nu är hela universum din lekplats, och varje uppdrag du slutför tar dig närmare galaktisk dominans.",
-        "Men Hyper Quest är inte bara ett spel. Det är en konkurrenskraftig plattform där riktiga pengar står på spel. Slutför uppdrag, besegra utmaningar och gå därifrån med riktiga pengar i fickan och eller belöningar. Från snabba uppdrag som tar minuter till episka flerdagarsexpeditioner, varje uppdrag betalar sig. Ju svårare utmaning, desto större belöning.",
+        "Hyper Quest planeras som mer än ett spel: slutför uppdrag, klara utmaningar och samla belöningar i spelet. Från snabba uppdrag på några minuter till episka expeditioner över flera dagar: ju svårare utmaning, desto större belöning i spelet.",
         "Uppgradera ditt rymdskepp från skrov till cockpit. Beväpna den med förödande vapensystem. Rekrytera specialister som lägger kraftfulla bonusar på ditt skepps prestanda och kraftnivå. Mina asteroider, transportera farlig last, jaga gömda skatter, kidnappa värdefulla mål eller bli en hyrd pistol. Hur du styr universum är helt och hållet ditt val.",
         "Allt du bygger i Hyper Quest matas direkt in i Hyper Racing och Overlord of the 7 Realms. Ett universum, sömlös utveckling, obegränsad potential. Läs vidare för att upptäcka hur questing fungerar, vad du kan tjäna och hur du och ditt rymdskepp blir det mest fruktade fartyget i galaxen."
       ],
@@ -137,7 +137,7 @@
         {
           "num": "02",
           "title": "Utforska galaxen",
-          "body": "Res genom portaler till avlägsna planeter, var och en med unika miljöer, värdefullt material och nya racingbanor. Följ galaktiska kartor för att kartlägga outforskade områden och få namnrättigheter för planeter du först upptäcker. Mina resurser från asteroidfält, rädda delar från forntida reliker och övergivna skepp och samla ledtrådar som leder till dolda förmögenheter utspridda över stjärnorna."
+          "body": "Res genom portaler till avlägsna planeter, var och en med unika miljöer, värdefulla material och nya racingbanor. Följ galaktiska kartor för att kartlägga outforskade områden och förtjäna rätten att namnge planeter du upptäcker först. Utvinn resurser ur asteroidfält, bärga delar från uråldriga reliker och övergivna skepp och samla ledtrådar som leder till dolda skatter utspridda bland stjärnorna."
         },
         {
           "num": "03",
@@ -154,19 +154,19 @@
       "rewards": [
         {
           "title": "Belöningar i spelet",
-          "body": "Varje uppdrag du slutför betalar ut. Krediter, uppgraderingsmaterial, sällsynta komponenter, specialistrekryteringspoletter och exklusiva föremål flödar in i ditt lager med varje framgångsrikt uppdrag. Ju svårare uppdraget är, desto rikare är draget. Upptäck sällsynta material på avlägsna planeter, rädda värdefulla delar från uråldriga reliker och lagra resurser som ger energi till din uppgång till galaktisk överhöghet."
+          "body": "Varje uppdrag du slutför är utformat för att belöna dig i spelet. Krediter, uppgraderingsmaterial, sällsynta komponenter, rekryteringspolletter för specialister och exklusiva föremål hamnar i ditt förråd efter varje lyckat uppdrag. Ju svårare uppdrag, desto rikare byte. Upptäck sällsynta material på avlägsna planeter, bärga värdefulla delar från uråldriga reliker och bygg upp ett förråd av resurser som driver din väg mot galaktisk dominans."
         },
         {
-          "title": "Riktiga kontantbetalningar",
-          "body": "Hyper Quest tar spel bortom underhållning. Vissa uppdrag och rankade utmaningar erbjuder riktiga kontantutbetalningar. Slutför uppdrag på hög nivå, dominera leaderboard-evenemang och delta i säsongsbetonade quest-mästerskap där riktiga pengar står på spel. Ju skickligare och mer vågad du blir, desto större blir utbetalningarna. Från veckovisa uppdragspremier till episka säsongsbetonade turneringar, det finns alltid möjligheter att förvandla dina galaktiska äventyr till riktiga intäkter."
+          "title": "Mästerskapsbelöningar",
+          "body": "Vissa uppdrag och rankade utmaningar kan erbjuda premiumbelöningar i spelet. Uppdrag på hög nivå, topplisteevenemang och säsongsmästerskap i uppdrag planeras, och ju skickligare och djärvare du blir, desto bättre kan belöningarna i spelet bli."
         },
         {
-          "title": "Hur Quest-utbetalningar fungerar",
-          "body": "Spelare kvalificerar sig för kontantbelöningsuppdrag genom att bygga upp sitt rykte och uppfylla prestationströsklar. Questens svårighetsgrad, varaktighet och risknivå avgör prispotten. Utbetalningar är transparenta, tydligt visas innan du accepterar något uppdrag, och behandlas snabbt när de är klara. Oavsett om du kör en tio minuters lasttransport eller en veckolång expedition i rymden, matchar belöningarna risken."
+          "title": "Så fungerar uppdragsbelöningar",
+          "body": "Spelare kan komma att kvalificera sig för premiumuppdrag genom att bygga upp sitt rykte och nå prestandatrösklar. Uppdragets svårighetsgrad, längd och farlighetsnivå avgör belöningen i spelet, som är tänkt att visas innan du accepterar ett uppdrag. Oavsett om du kör en fraktrunda på tio minuter eller en veckolång expedition i yttre rymden är belöningarna utformade för att motsvara risken."
         },
         {
           "title": "Progression som lönar sig",
-          "body": "Quest-belöningar matas direkt in i dina fartygsuppgraderingar, vapensystem och specialistrekrytering. Varje utbetalning gör dig starkare, vilket låser upp svårare uppdrag med ännu större belöningar. Intäkterna överförs också till Hyper Racing och Overlord of the 7 Realms, vilket skapar en progressionsloop som belönar engagemang över hela Hyper Teks ekosystem."
+          "body": "Uppdragsbelöningar går direkt till dina skeppsuppgraderingar, vapensystem och rekrytering av specialister. Varje belöning gör dig starkare, vilket låser upp svårare uppdrag. Det planeras också att framsteg följer med till Hyper Racing och Overlord of the 7 Realms."
         }
       ],
       "upgradesTitle": "Uppgradera ditt skepp, beväpna ditt arsenal, rekrytera din besättning",
@@ -192,19 +192,19 @@
       "faq": [
         {
           "q": "Vad är Hyper Quest?",
-          "a": "Ett rymdäventyr i öppen värld där du styr ett helt uppgraderbart rymdskepp över en stor galax. Slutför uppdrag, utforska främmande världar, uppgradera ditt skepp, rekrytera specialister och tjäna riktiga kontantbelöningar tillsammans med rikedomar i spelet."
+          "a": "Ett rymdäventyr i öppen värld där du styr ett fullt uppgraderbart rymdskepp genom en enorm galax. Slutför uppdrag, utforska främmande världar, uppgradera ditt skepp, rekrytera specialister och samla belöningar i spelet."
         },
         {
           "q": "Hur fungerar uppdrag?",
           "a": "Acceptera uppdrag från spelets uppdragsbräda. Uppdragen sträcker sig från snabba lastkörningar som tar bara några minuter till episka flerdagarsexpeditioner djupt in i okänt utrymme. Varje uppdrag har tydliga mål, riskklassificeringar och belöningsnivåer som visas innan du accepterar."
         },
         {
-          "q": "Kan jag tjäna riktiga pengar?",
-          "a": "Ja. Vissa uppdrag, rankade utmaningar och säsongsbetonade mästerskap erbjuder riktiga kontantutbetalningar. Bygg upp ditt rykte, uppnå prestationströsklar och kvalificera dig för allt mer lukrativa kontantbelöningsuppdrag. Veckovisa bounties och säsongsbetonade turneringar körs kontinuerligt."
+          "q": "Kan jag tjäna pengar på uppdrag?",
+          "a": "Nej. Uppdrag, rankade utmaningar och säsongsmästerskap planeras erbjuda enbart belöningar i spelet, inte kontanter eller pengar."
         },
         {
           "q": "Vilka belöningar i spelet kan jag tjäna?",
-          "a": "Varje avslutat uppdrag betalar ut krediter, uppgraderingsmaterial, sällsynta komponenter, specialistrekryteringspoletter och exklusiva föremål. Ju hårdare och längre uppdrag, desto rikare belöningar. Upptäck sällsynta material på avlägsna planeter och rädda värdefulla delar från forntida reliker."
+          "a": "Varje slutfört uppdrag är utformat för att belöna med krediter, uppgraderingsmaterial, sällsynta komponenter, rekryteringspolletter för specialister och exklusiva föremål. Ju svårare och längre uppdrag, desto rikare belöningar. Upptäck sällsynta material på avlägsna planeter och bärga värdefulla delar från uråldriga reliker."
         },
         {
           "q": "Kan jag uppgradera mitt rymdskepp?",
@@ -220,7 +220,7 @@
         },
         {
           "q": "Vilka typer av uppdrag finns tillgängliga?",
-          "a": "Lasttransport, asteroidbrytning, skattjakt, prisjakt, återhämtning av artefakter, undercover-operationer, planetarisk utforskning, piratförsvar, räddningsuppdrag och mer. Uppdragen sträcker sig från snabba tiominuterslopp till flerdagars djupa rymdexpeditioner."
+          "a": "Frakttransport, asteroidbrytning, skattjakt, bountyjakt, bärgning av artefakter, hemliga operationer, planetutforskning, försvar mot pirater, bärgningsuppdrag med mera. Uppdragen sträcker sig från snabba rundor på tio minuter till flera dagar långa expeditioner i yttre rymden."
         },
         {
           "q": "Kan jag upptäcka nya planeter?",
@@ -251,7 +251,7 @@
       "intro": [
         "Overlord of the 7 Realms är ett strategispel på tre nivåer som inte liknar något annat inom spel. Du vågade dig genom en portal in i ett parallellt universum och kraschlandade på en fientlig främmande planet. Ditt skepp har havererat, dina system havererar och planetens varelser närmar sig redan. Överlevnad är bara början. Dominans är målet.",
         "Bygg om ditt skepp från vraket och uppåt. Klona och träna arméer i dina labb ombord. Tämja planetens vilda djur och skapa förödande beridna kavalleri. Ta sedan kampen över tre stridsdimensioner: mark-till-mark-strid mot monster och rivaliserande spelare, mark-till-rymd-angrepp på orbital- eller markmål och rymd-till-rymden-krigföring ombord på den massiva Battle Ring som kretsar runt planeten.",
-        "Detta är inte bara ännu ett strategispel. Overlord har VR-interaktion i realtid, riktiga kontantbelöningar för att slutföra dagliga händelser och uppdrag, och varannan vecka invasioner av de skräckinjagande Hammerongs, den mäktigaste främmande arten som finns. Var fjortonde dag kommer de för att bryta planeten, och var fjortonde dag kan modiga spelare utmana dem för enorma bonusar och legendariska belöningar.",
+        "Det här är inte bara ännu ett strategispel. Precis som Hyper Racing och Hyper Quest har Overlord VR-interaktion i realtid och belöningar i spelet för att slutföra evenemang, uppdrag och invasioner varannan vecka av de fruktade Hammerongerna, den mäktigaste utomjordiska art som finns. Varannan vecka kommer de för att plundra planeten på resurser, och varannan vecka kan modiga spelare utmana dem om enorma bonusar och legendariska belöningar.",
         "Uppgradera ditt rymdskepp, beväpna det med förödande vapen, rekrytera specialister som förstärker din kraftnivå och skapa allianser för att kontrollera hela regioner. Allt du bygger ansluter direkt till Hyper Racing och Hyper Quest genom det delade Hyper Tek-ekosystemet. Ett universum, tre spel, obegränsad krigföring. Läs vidare för att upptäcka hur stridssystemet fungerar och varför Overlord ändrar allt."
       ],
       "calloutLine1": "Överlevnad är bara början.",
@@ -296,7 +296,7 @@
           },
           {
             "title": "Fördelen framför andra spel",
-            "body": "Inget annat spel kombinerar krigföring på tre nivåer, en utforskabar orbital stridsstation, VR i realtid och riktiga pengar och/eller belöningar i spelet i en enda upplevelse. Enbart Battle Ring lägger till en speldimension som konkurrenterna inte kan matcha. När du kombinerar det med markstrider, rymdkrigföring, VR-nedsänkning och det sammankopplade Hyper Tek-ekosystemet, står Overlord i en egen kategori."
+            "body": "Inget annat spel kombinerar krigföring i tre nivåer, en utforskningsbar stridsstation i omloppsbana, VR i realtid och belöningar i spelet i en och samma upplevelse. Battle Ring ensam tillför en speldimension som konkurrenterna inte kan matcha. Lägg till markstrid, rymdkrig, VR-inlevelse och det sammankopplade Hyper Tek-ekosystemet, så står Overlord i en klass för sig."
           }
         ]
       },
@@ -312,7 +312,7 @@
         },
         {
           "title": "Rekrytera specialister",
-          "body": "Specialister är kraftmultiplikatorerna som skiljer bra spelare från Overlords. Skaffa unika specialister som ger kraftfulla bonusar till ditt skepps övergripande prestanda och kraftnivå. Taktiska specialister förbättrar truppplaceringens effektivitet, ingenjörsspecialister påskyndar reparationer och uppgraderingar av fartyg, vapenspecialister ökar skadorna i alla system, och underrättelsespecialister avslöjar fiendens positioner och svagheter. Stapla flera specialister för att skapa förödande synergier som förstärker varje aspekt av din verksamhet."
+          "body": "Specialister är kraftförstärkaren och, i kombination med skicklighet, det som skiljer bra spelare från Overlords. Skaffa unika specialister som ger kraftfulla bonusar till ditt skepps totala prestanda och kraftnivå. Taktiska specialister förbättrar effektiviteten när trupper sätts in, ingenjörsspecialister snabbar upp reparationer och uppgraderingar av skeppet, vapenspecialister ökar skadan i alla system och underrättelsespecialister avslöjar fiendens positioner och svagheter. Kombinera flera specialister för en förödande samlad insats som förstärker varje del av din operation. Spelare som inte spenderar kan ändå känna sig trygga: Hyper Tek skapades för att ta itu med problem inom spel. Även om det går att kombinera flera, ser de rättvisa spelmekanikerna till att det inte är ett enkelt poäng-för-poäng-system. Det fungerar i stället med en avtagande skala så att rå kraft inte överskuggar vikten av skicklighet. Det här spelet betonar både kraft och skicklighet, i stället för slumpen!"
         },
         {
           "title": "Bygg dina arméer",
@@ -331,7 +331,7 @@
         },
         {
           "title": "Ansluten till Hyper Tek Ecosystem",
-          "body": "Overlord of the 7 Realms existerar inte isolerat. Den är helt integrerad i Hyper Tek-universumet tillsammans med Hyper Racing och Hyper Quest. Resurser som tjänas in i Overlord kan användas i alla tre spelen. Fartygsuppgraderingar, specialistbonusar, stridsfärdigheter och material flyter sömlöst mellan titlarna. Racingförmågor som du fått i Hyper Racing förbättrar dina pilotfärdigheter i Overlord-rymdstrid. Material som samlats i Hyper Quest ger energi till dina uppgraderingar på planeten. Hyper Tek-marknadsplatsen förenar allt och skapar en enhetlig ekonomi där framsteg i ett spel driver framsteg i alla tre."
+          "body": "Overlord of the 7 Realms existerar inte isolerat. Det är fullt integrerat i Hyper Tek-universumet tillsammans med Hyper Racing och Hyper Quest. Resurser som tjänas in i Overlord kan användas i alla tre spelen. Skeppsuppgraderingar, specialistbonusar, stridsfärdigheter och material flyttas sömlöst mellan titlarna. Racingförmågor från Hyper Racing förbättrar dina pilotfärdigheter i rymdstriderna i Overlord. Material som samlas i Hyper Quest driver dina uppgraderingar på planeten. Hyper Tek-marknadsplatsen knyter ihop allt och skapar ett sammankopplat universum där framsteg i ett spel driver utvecklingen i alla tre."
         },
         {
           "title": "Ett universum, tre spel, obegränsad kraft",
@@ -342,7 +342,7 @@
       "faq": [
         {
           "q": "Vad är Overlord of the 7 Realms?",
-          "a": "Ett stridsstrategispel på tre nivåer där du kraschlandar på en främmande planet, bygger om ditt skepp, klonar arméer och slåss över tre dimensioner: mark-till-mark, mark-till-rymden och rymd-till-rymden. Innehåller VR-interaktion, riktiga kontantbelöningar och varannan vecka Hammerong-invasioner."
+          "a": "Ett strategispel med strider i tre nivåer där du kraschlandar på en främmande planet, bygger upp ditt skepp igen, klonar arméer och strider i tre dimensioner: mark mot mark, mark mot rymd och rymd mot rymd. Planerade funktioner är bland annat VR-interaktion, belöningar i spelet och Hammerong-invasioner varannan vecka."
         },
         {
           "q": "Vad är stridssystemet i tre nivåer?",
@@ -366,7 +366,7 @@
         },
         {
           "q": "Vilka belöningar kan jag tjäna?",
-          "a": "Dagliga uppgifter, uppdrag, strider och evenemang betalar alla ut krediter, uppgraderingsmaterial och progressionsbonusar. Specialevenemang och Hammerong-invasioner erbjuder premium och exklusiva belöningar. Utmaningar med högre svårighetsgrad och rankade tävlingar ger större utbetalningar inklusive riktiga pengar."
+          "a": "Dagliga uppgifter, uppdrag, strider och evenemang är utformade för att belöna med krediter, uppgraderingsmaterial och progressionsbonusar. Specialevenemang och Hammerong-invasioner kan erbjuda exklusiva premiumbelöningar i spelet. Svårare utmaningar och rankade tävlingar planeras erbjuda större belöningar i spelet."
         },
         {
           "q": "Stöder Overlord VR?",
@@ -382,7 +382,7 @@
         },
         {
           "q": "Är Overlord länkad till andra Hyper Tek-spel?",
-          "a": "Helt integrerad. Resurser, fartygsuppgraderingar, specialistbonusar och stridsfärdigheter flyter mellan Overlord, Hyper Racing och Hyper Quest. Racingförmågor förbättrar din rymdstrid, Quest-material ger bränsle till dina uppgraderingar och Hyper Tek-marknaden kopplar samman hela ekonomin."
+          "a": "Fullt integrerat. Resurser, skeppsuppgraderingar, specialistbonusar och stridsfärdigheter planeras kunna flyttas mellan Overlord, Hyper Racing och Hyper Quest. Racingförmågor förbättrar dina rymdstrider, material från Quest driver dina uppgraderingar och Hyper Tek-marknadsplatsen knyter ihop alla tre spelen."
         },
         {
           "q": "Vilka vapen finns tillgängliga?",
@@ -801,7 +801,7 @@
       },
       "mining_rp": {
         "title": "Gruva RP",
-        "desc": "Bakre babords gruvbay. Arbetar i tandem med RS-bay för att maximera bakre fältresursutvinningsutbytet."
+        "desc": "Gruvenhet i den bakre hamnen. Arbetar tillsammans med RS-hangaren för att maximera resursutvinningen i det bakre fältet."
       },
       "fuel_ref": {
         "title": "Bränsleraffinaderi",
@@ -933,11 +933,11 @@
       },
       "hydro_2": {
         "title": "Hydroponikscell 2",
-        "desc": "Sekundär hydroponikscell som utökar grödvariation och utbyte. Stöder besättningsernäring och handelsvaruproduktion."
+        "desc": "Sekundär hydroponisk cell som utökar grödornas variation och produktion. Stöder besättningens näring och produktionen av handelsvaror."
       },
       "hydro_3": {
         "title": "Hydroponikscell 3",
-        "desc": "Tertiär odlingsenhet specialiserad på högavkastnings basisgrödor. Tillhandahåller grundläggande kaloribuds för stora besättningskomplement."
+        "desc": "Tertiär odlingsenhet specialiserad på basgrödor med hög produktion. Ger grundläggande kaloriförsörjning för stora besättningar."
       },
       "hydro_4": {
         "title": "Hydroponikscell 4",
@@ -1113,7 +1113,7 @@
     "viewArrow": "VISA →",
     "selectCategory": "VÄLJ KATEGORI",
     "comingSoon": "KOMMER SNART",
-    "specialistProfileDesc": "Specialistprofil — fullständiga statistik och förmågor tillgängliga vid spelets lansering.",
+    "specialistProfileDesc": "Specialistprofil — fullständig statistik och förmågor kan bli tillgängliga när spelet lanseras.",
     "alliance": {
       "rank": {
         "leader": "Ledare",
@@ -1131,8 +1131,8 @@
         "editInfoDesc": "Ändra namn, tagg och beskrivning",
         "joinRequests": "Hantera anslutningsförfrågningar",
         "joinRequestsDesc": "Granska och acceptera nya medlemmar",
-        "donationGoals": "Ange donationsmål",
-        "donationGoalsDesc": "Konfigurera veckliga donationsmål",
+        "donationGoals": "Ange bidragsmål",
+        "donationGoalsDesc": "Ställ in veckovisa bidragsmål",
         "warSettings": "Allianskrigsinställningar",
         "warSettingsDesc": "Konfigurera krigsdeltagarregler",
         "kickMembers": "Sparka medlemmar",
@@ -1141,7 +1141,7 @@
       "allianceMail": {
         "warResults": "AlliansKrigsresultat",
         "strategyPlan": "Ny strategiplan",
-        "donationSummary": "Vecklig donationssammanfattning",
+        "donationSummary": "Veckosammanfattning av bidrag",
         "meeting1800": "Möte kl 18:00",
         "levelUp": "Alliansen gick upp i nivå!"
       }
@@ -1166,7 +1166,7 @@
       "tradingPlasma": "Byter plasmastaavar mot teknikböcker",
       "needHelpAsteroid": "Behöver hjälp med asteroiduppdraget",
       "allianceRecruiting": "Vår allians rekryterar, skicka DM",
-      "donationGoalsPlasma": "Donationsmål: plasmastaavar behövs!",
+      "donationGoalsPlasma": "Bidragsmål: plasmastavar behövs!",
       "warStarts2Hours": "Krig börjar om 2 timmar, förbered er",
       "handleMedicalSupport": "Jag tar hand om medicinskt stöd",
       "wts50Engines": "SÄLJER: 50 motorer, skicka PM",
@@ -1203,6 +1203,6 @@
       "speedRacingTournament": "Hastighetsturnering",
       "overlordChampionship": "Overlord-mästerskap"
     },
-    "eventDetailPlaceholder": "Fullständiga händelsedetaljer, belöningar och deltagandealternativ kommer att vara tillgängliga när detta evenemang lanseras."
+    "eventDetailPlaceholder": "Fullständiga evenemangsdetaljer, belöningar och deltagandealternativ kan bli tillgängliga när det här evenemanget startar."
   }
 }

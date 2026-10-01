@@ -31,23 +31,23 @@
       "facts": [
         {
           "label": "NFA",
-          "desc": "Kun Hypertek-eiendel. Hoyeste spillbonuser. Garantert minimumsinnkjopsverdi som vokser med hvert salg."
+          "desc": "Gjenstand kun fra Hyper Tek. Høyeste bonuser i spillet. Programmatic Trade-In Value som hvert videresalg øker."
         },
         {
           "label": "NFC",
-          "desc": "Skapt av Hypertek eller lisensierte spillere. Spillbonuser inkludert. Minimumsinnkjop garantert."
+          "desc": "Laget av Hyper Tek eller lisensierte spillere. Bonuser i spillet inkludert. Programmatic Trade-In Value inkludert."
         },
         {
           "label": "NFT",
-          "desc": "Spillerskapt samleobjekt. Ingen spillbonuser. Ingen innkjopsgaranti. Kan handles pa markedsplassen."
+          "desc": "Samleobjekt laget av spillere. Ingen bonuser i spillet. Ingen innbytteverdi. Kan handles på markedsplassen."
         },
         {
           "label": "Provisjon",
-          "desc": "Plattformgebyr varierer etter oppføring. Videresalg: selger 86%, artistroyalty 2%, +5% til buyback, plattform 7%."
+          "desc": "Plattformgebyret varierer per oppføring. Fordeling ved videresalg: selger 86 %, kunstnerroyalty 2 %, 5 % til gjenstandens innbyttetildeling, plattform 7 %."
         },
         {
-          "label": "Innkjopsvekst",
-          "desc": "+5% av hvert videresalgspris legges til eiendelens minimumsinnkjopsverdi. Det vokser kun aldri."
+          "label": "Innbyttetildeling",
+          "desc": "5 % av hver videresalgspris legges til gjenstandens innbyttetildeling. Beløpet som returneres ved innbytte følger Tiered Loyalty Return Schedule og er alltid lavere enn det tildelte beløpet."
         },
         {
           "label": "Oppbevaringsommebok",
@@ -67,7 +67,8 @@
             "NFC-er (ikke-fungible karakterer) er lisensierte spillergjenstander med spillbonuser og innkjop.",
             "NFT-er (ikke-fungible tokens) er brukerskapte samleobjekter — skinn, vapen og mer."
           ],
-          "cta": "Laer grunnlaget"
+          "cta": "Laer grunnlaget",
+          "intro": "NFA-er/NFC-er/NFT-er er digitale kunstverk. NFA-er og NFC-er har bonuser i spillet og en Programmatic Trade-In Value."
         },
         {
           "label": "Markedsplassen",
@@ -111,20 +112,20 @@
         },
         {
           "label": "Til leie",
-          "tagline": "Lan eiendeler eller tjen pa dine egne",
+          "tagline": "Lei ut gjenstandene dine mot belønninger i spillet",
           "details": [
             "Lei kraftige spesialister eller utstyr for ett enkelt oppdrag uten a kjope direkte.",
-            "List dine egne inaktive eiendeler for utleie og tjen passiv inntekt mens du er borte.",
+            "Spillere kan komme til å kunne leie ut ubrukte gjenstander til andre spillere mot belønninger i spillet som de avtaler seg imellom.",
             "Fleksible varighet — timesvis, daglig eller per-oppdrags-avtaler."
           ],
-          "cta": "Bla gjennom til leie"
+          "cta": "Se Til leie"
         },
         {
           "label": "Dusjer",
           "tagline": "Jakt mal, krev belonninger, topp lederbordet",
           "details": [
             "Aksepter dusjer publisert av andre spillere eller systemet for a tjene kryptobelonninger.",
-            "Klatr pa dusjledertavlen for a lase opp eksklusive titler og bonusutbetalinger.",
+            "Klatre på bounty-topplisten for å låse opp eksklusive titler og belønninger i spillet.",
             "Legg ut dine egne dusjer for a rekruttere dyktige spillere til malene dine."
           ],
           "cta": "Se dusjer"
@@ -136,7 +137,7 @@
       "subtitle": "Bla gjennom NFA-er, NFC-er og NFT-er tilgjengelig for umiddelbart kjop — skinn, vapen, spesialister, romskip og mer.",
       "filterAll": "Alle",
       "samplePreviewTitle": "Eksempel pa forhansvisning av markedsplass",
-      "samplePreviewDesc": "Gjenstandene nedenfor er eksempel pa forhansvisninger som viser typer digitale eiendeler som vil vaere tilgjengelige pa HyperTek-markedsplassen. Faktiske gjenstander med unik kunst og blokkjede-verifisert eierskap vil vaere tilgjengelige ved lansering.",
+      "samplePreviewDesc": "Gjenstandene nedenfor er eksempelvisninger av typene digitale gjenstander som kan bli tilgjengelige på Hyper Tek-markedsplassen. Faktiske gjenstander med unik kunst og blokkjedeverifisert eierskap kan bli tilgjengelige ved lansering.",
       "noItems": "Ingen gjenstander tilgjengelige enna. Sjekk tilbake snart.",
       "categories": {
         "skins": "Skinn",
@@ -197,7 +198,7 @@
       },
       "preview": {
         "title": "Forhansvisning av spillfunksjon",
-        "desc": "Auksjonssystemet vil vaere fullt live i spillet ved lansering. Gjenstander vist her er seedede eksempler for investor-/brukervisning."
+        "desc": "Auksjonssystemet kan bli aktivert i spillet ved lansering. Gjenstandene som vises her er eksempler, kun for forhåndsvisning."
       },
       "card": {
         "currentBid": "Gjeldende bud",
@@ -369,7 +370,7 @@
       "earnFromQuests": "Vil du tjene pa oppdrag? Spill spillet →",
       "moneyQuests": "Pengeopprag (11% pool)",
       "resourceQuests": "Ressursoppdrag (20% pool)",
-      "footerNote1": "# Oppdrag med kombinerte nyttelaster vil bli utbetalt ved bruk av de separate tabellbeløpene.",
+      "footerNote1": "# Oppdrag med kombinerte laster bruker belønningene i den separate tabellen.",
       "footerNote2": "# Planettdata synkroniseres nar spillene gar live.",
       "inGame": "I spillet",
       "open": "Apen",
@@ -411,39 +412,39 @@
       "listings": "listinger",
       "listBtn": "List",
       "forHireLabel": "Til leie",
-      "wantingToHire": "Onsker a ansette",
+      "wantingToHire": "Ønsker å leie",
       "noListings": "Ingen {{filter}} listinger",
-      "lockedTitle": "HyperTek-spillinnhold kun til visningsformal.",
-      "lockedDesc": "This is part of Hyper Tek's genuine 'Play to Earn' system, where players can earn real cash rewards, and or Materials/Resources.",
+      "lockedTitle": "Utleie kan bli tilgjengelig hvis spillene lanseres.",
+      "lockedDesc": "Spillere kan komme til å kunne leie ut gjenstander til andre spillere og få belønninger i spillet som de avtaler seg imellom, i henhold til de endelige spillereglene.",
       "forHireBadge": "TIL LEIE",
-      "wantedBadge": "ONSKER A ANSETTE",
+      "wantedBadge": "ØNSKES LEID",
       "price": "Pris",
       "maxDuration": "Maks varighet",
-      "hireBtn": "Ansett",
+      "hireBtn": "Lei ut",
       "fulfillBtn": "Innfri foresporsel",
       "rules": {
         "durations": "8t · 1d · 3d · 1u · 1mn",
         "cooldown": "Nedkjoling: 2x leievarighet",
         "commission": "Provisjon varierer",
-        "payment": "Betal med Hyper Bucks eller materialer"
+        "payment": "Belønninger i spillet avtalt mellom spillere"
       },
       "preview": {
         "title": "Forhansvisning av spillfunksjon",
-        "desc": "Til leie-systemet vil vaere fullt live i spillet ved lansering. Gjenstander vist her er seedede eksempler for investor-/brukervisning."
+        "desc": "Utleie kan bli aktivert i spillet ved lansering. Gjenstandene som vises her er eksempler, kun for forhåndsvisning."
       },
       "hireModal": {
-        "hireTitle": "Ansett spesialist",
-        "fulfillTitle": "Innfri leieforespørsel",
+        "hireTitle": "Lei ut spesialist",
+        "fulfillTitle": "Oppfyll leieforespørsel",
         "forHireBadge": "TIL LEIE",
         "wantedBadge": "ONSKET",
         "price": "Pris",
         "duration": "Varighet",
-        "howHire": "Slik fungerer ansettelse",
+        "howHire": "Slik fungerer utleie",
         "howFulfill": "Slik fungerer innfriing av en foresporsel",
-        "proceedHire": "Gje videre til ansettelse",
+        "proceedHire": "Gå videre til utleie",
         "offerFulfill": "Tilby a innfri",
         "commission": "Plattformprovisjon varierer · Nedkjoling gjelder etter retur",
-        "confirmHire": "Bekreft ansettelse",
+        "confirmHire": "Bekreft utleie",
         "confirmOffer": "Bekreft tilbud",
         "specialist": "Spesialist",
         "payment": "Betaling",
@@ -461,19 +462,19 @@
         "close": "Lukk"
       },
       "createModal": {
-        "listTitle": "List til leie",
-        "postTitle": "Legg ut onsker a ansette",
+        "listTitle": "Legg ut til leie",
+        "postTitle": "Legg ut ønskes leid",
         "forHireBtn": "Til leie",
-        "wantingBtn": "Onsker a ansette",
+        "wantingBtn": "Ønsker å leie",
         "itemNameHire": "Spesialist / gjenstandsnavn *",
-        "itemNameWant": "Det du vil ansette *",
+        "itemNameWant": "Hva du vil leie *",
         "descPlaceholder": "Beskrivelse",
         "categoryPlaceholder": "Kategori (valgfritt)",
         "paymentType": "Betalingstype",
-        "hyperBucks": "Hyper Bucks",
+        "hyperBucks": "Belønning i spillet",
         "materials": "Materialer",
-        "amountLabel": "Belop (Hyper Bucks)",
-        "afterCommission": "Du mottar {{amount}} HB etter plattformprovisjon",
+        "amountLabel": "Belønning i spillet",
+        "afterCommission": "Du mottar {{amount}} i spillet etter plattformens provisjon",
         "maxDuration": "Maks varighet",
         "disclaimer": "Provisjon varierer · Nedkjoling = 2x leievarighet etter retur",
         "listing": "Lister...",
@@ -508,7 +509,7 @@
         "postedBy": "Lagt ut av",
         "claimedBy": "Krevd av",
         "status": "Status",
-        "netHB": "{{amount}} HB netto"
+        "netHB": "{{amount}} netto"
       },
       "pagination": {
         "prev": "Forrige",
@@ -540,6 +541,20 @@
       "dashboardTitle": "Dashbordet ditt er låst akkurat nå, men gjør deg klar; den offisielle lanseringen er rett rundt hjørnet!",
       "desc": "Ikke la dette hindre deg i å registrere deg og dykke ned i dette utrolige prosjektet. Oppdag de mange fordelene og hvordan din deltakelse kan drive suksessen! Bli med nå og bli en Hyper Tekken i dag!",
       "buttonLabel": "Åpner ved offisiell lansering"
+    },
+    "gameLock": {
+      "quests": {
+        "title": "Oppdrag kan bli tilgjengelige hvis spillene lanseres.",
+        "desc": "Spillere kan komme til å kunne levere gjenstander til andre spillere mot belønninger i spillet, i henhold til de endelige spillereglene."
+      },
+      "hire": {
+        "title": "Utleie kan bli tilgjengelig hvis spillene lanseres.",
+        "desc": "Spillere kan komme til å kunne leie ut gjenstander til andre spillere og få belønninger i spillet som de avtaler seg imellom, i henhold til de endelige spillereglene."
+      },
+      "bounty": {
+        "title": "Bountyer kan bli tilgjengelige hvis spillene lanseres.",
+        "desc": "Bountyer kan bare tilby belønninger i spillet, i henhold til de endelige spillereglene."
+      }
     }
   },
   "musicPlayer": {
@@ -581,9 +596,9 @@
       "platform": "Plattform",
       "noDesc": "Ingen beskrivelse gitt for denne varen.",
       "price": "Pris",
-      "minBuyback": "Min tilbakekjøpsgaranti",
+      "minBuyback": "Programmatic Trade-In Value",
       "reservePrice": "Reservasjonspris",
-      "buybackNote": "Denne eiendelen kan ikke selges under minimumsverdien for tilbakekjøp.",
+      "buybackNote": "Minsteprisen kan ikke settes lavere enn innbyttetildelingen til denne gjenstanden.",
       "networkNote": "USDC på base · Base ETH kreves for gass (kun lommebokbetalinger)",
       "buyWithCard": "Kjøp med kort",
       "makeOffer": "Gi et tilbud",
