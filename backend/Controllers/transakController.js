@@ -13,8 +13,8 @@ import HBLedger from "../Models/HBLedger.js";
 import TransakOrder from "../Models/TransakOrder.js";
 import transak from "../services/transakService.js";
 
-const HB_TO_USD = 250;          // 250 HB = $1 USD (matches HBController peg)
-const MIN_HB = 250;             // $1 minimum, in HB
+const HB_TO_USD = 2500;         // matches HB_TO_USD in HBController
+const MIN_HB = HB_TO_USD;       // $1 minimum, in HB
 const CRYPTO = "USDC";
 // Transak network code. STAGING has no Base — it delivers USDC on Ethereum Sepolia ("ethereum",
 // chainId 11155111). PRODUCTION uses Base. HB crediting is driven by the Transak order status

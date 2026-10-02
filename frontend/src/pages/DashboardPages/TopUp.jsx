@@ -15,13 +15,15 @@ import HBCoinIcon from '../../Components/Common/HBCoinIcon';
 
 const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
+const GEMS_PER_USD = 2500;
+
 const HB_PACKAGES = [
-  { hb: 250,   usd: 1,   label: 'Starter' },
-  { hb: 1000,  usd: 4,   label: 'Basic' },
-  { hb: 2500,  usd: 10,  label: 'Standard', popular: true },
-  { hb: 5000,  usd: 20,  label: 'Plus', mostPopular: true },
-  { hb: 10000, usd: 40,  label: 'Pro' },
-  { hb: 25000, usd: 100, label: 'Elite' },
+  { hb: 2500,   usd: 1,   label: 'Starter' },
+  { hb: 10000,  usd: 4,   label: 'Basic' },
+  { hb: 25000,  usd: 10,  label: 'Standard', popular: true },
+  { hb: 50000,  usd: 20,  label: 'Plus', mostPopular: true },
+  { hb: 100000, usd: 40,  label: 'Pro' },
+  { hb: 250000, usd: 100, label: 'Elite' },
 ];
 
 function CheckoutForm({ hbAmount, usdAmount, onBack }) {
@@ -166,7 +168,7 @@ export default function HyperBucks() {
 
   // ── Top Up ────────────────────────────────────────────────────────
   const parsedUsd = customUsd ? parseFloat(customUsd) : 0;
-  const activeHB = parsedUsd >= 1 ? Math.floor(parsedUsd * 250) : 0;
+  const activeHB = parsedUsd >= 1 ? Math.floor(parsedUsd * GEMS_PER_USD) : 0;
   const activeUSD = parsedUsd;
 
   // clicking a package fills the input
@@ -187,11 +189,11 @@ export default function HyperBucks() {
   const activePackageHb = HB_PACKAGES.find((p) => p.usd === parsedUsd)?.hb || null;
 
   const handleProceed = async () => {
-    if (!activeHB || activeHB < 250) {
+    if (!activeHB || activeHB < GEMS_PER_USD) {
       toast.error('Minimum top-up is $1 USD');
       return;
     }
-    const hbAmount = Math.floor(activeHB / 250) * 250;
+    const hbAmount = Math.floor(activeHB / GEMS_PER_USD) * GEMS_PER_USD;
     setLoadingIntent(true);
     try {
       const res = await fetch(`${BACKEND_BASE_URL}/api/v1/hb/topup/intent`, {
@@ -310,7 +312,6 @@ export default function HyperBucks() {
   }, []);
 
   const hbNum = hbBalance?.hyperBucks ?? hbBalance?.balance ?? null;
-  const usdEquiv = hbNum != null ? (hbNum / 250).toFixed(2) : null;
 
   return (
     <div className="w-full flex flex-col relative z-10">
@@ -362,7 +363,6 @@ export default function HyperBucks() {
             </p>
           </div>
         </div>
-        {usdEquiv && <p className="text-white/40 text-sm">${usdEquiv} USD</p>}
       </div>
 
       {/* Tabs */}
@@ -437,12 +437,12 @@ export default function HyperBucks() {
                   {topupMethod === 'card' && (
                     <button
                       onClick={handleProceed}
-                      disabled={!activeHB || activeHB < 250 || loadingIntent}
+                      disabled={!activeHB || activeHB < GEMS_PER_USD || loadingIntent}
                       className={`w-full py-4 rounded-2xl font-bold text-base text-white transition-all ${
-                        activeHB >= 250 && !loadingIntent ? 'bg-[#002AA8] hover:bg-blue-700' : 'bg-white/10 cursor-not-allowed text-white/40'
+                        activeHB >= GEMS_PER_USD && !loadingIntent ? 'bg-[#002AA8] hover:bg-blue-700' : 'bg-white/10 cursor-not-allowed text-white/40'
                       }`}
                     >
-                      {loadingIntent ? t("dashboard.hyperbucks.topup.preparing", "Preparing...") : activeHB >= 250 ? `Continue — $${activeUSD} USD` : t("dashboard.hyperbucks.topup.enterAmount", "Enter an amount to continue")}
+                      {loadingIntent ? t("dashboard.hyperbucks.topup.preparing", "Preparing...") : activeHB >= GEMS_PER_USD ? `Continue — $${activeUSD} USD` : t("dashboard.hyperbucks.topup.enterAmount", "Enter an amount to continue")}
                     </button>
                   )}
 
@@ -485,16 +485,16 @@ export default function HyperBucks() {
                           </div>
                           <button
                             onClick={handleUSDCTopup}
-                            disabled={!activeHB || activeHB < 250 || ['sending', 'verifying'].includes(usdcTopupStep)}
+                            disabled={!activeHB || activeHB < GEMS_PER_USD || ['sending', 'verifying'].includes(usdcTopupStep)}
                             className={`w-full py-4 rounded-2xl font-bold text-base text-white transition-all ${
-                              activeHB >= 250 && !['sending', 'verifying'].includes(usdcTopupStep)
+                              activeHB >= GEMS_PER_USD && !['sending', 'verifying'].includes(usdcTopupStep)
                                 ? 'bg-[#002AA8] hover:bg-blue-700'
                                 : 'bg-white/10 cursor-not-allowed text-white/40'
                             }`}
                           >
                             {usdcTopupStep === 'sending' ? 'Confirm in wallet...' :
                              usdcTopupStep === 'verifying' ? 'Verifying on-chain...' :
-                             activeHB >= 250 ? `Pay ${activeUSD} USDC → ${activeHB.toLocaleString()} Gems` :
+                             activeHB >= GEMS_PER_USD ? `Pay ${activeUSD} USDC → ${activeHB.toLocaleString()} Gems` :
                              t("dashboard.hyperbucks.topup.enterAmount", "Enter an amount to continue")}
                           </button>
                           {usdcTopupStep === 'done' && (
@@ -564,7 +564,7 @@ export default function HyperBucks() {
                 }}
               >
                 <CheckoutForm
-                  hbAmount={Math.floor(activeHB / 250) * 250}
+                  hbAmount={Math.floor(activeHB / GEMS_PER_USD) * GEMS_PER_USD}
                   usdAmount={activeUSD}
                   onBack={() => setClientSecret('')}
                 />

@@ -24,7 +24,7 @@ const PACKAGES = [
     image: "/avatar/dryads-female.webp",
     rewards: [
       'Your name may appear in the end credits of the games, if released, under the title \"Recruit\"',
-      "8,750 Gems for in-game purchases (Gems have no cash value)",
+      "87,500 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
       "Recruit rank: 10% discount on in-game purchases for the first 12 months, if the games are released",
@@ -37,7 +37,7 @@ const PACKAGES = [
     image: "/avatar/dryads-male.webp",
     rewards: [
       'Your name may appear in the end credits of the games, if released, under the title \"Cadet Rookie Class\"',
-      "22,500 Gems for in-game purchases (Gems have no cash value)",
+      "225,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
       "Cadet Rookie Class rank: 10% increase in resource gathering, if the games are released",
@@ -52,7 +52,7 @@ const PACKAGES = [
     image: "/avatar/ophidians-male.webp",
     rewards: [
       'Your name may appear in the end credits of the games, if released, under the title \"Cadet 1st Class\"',
-      "31,250 Gems for in-game purchases (Gems have no cash value)",
+      "312,500 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
       "Cadet 1st Class rank: 10% increase in resource gathering, if the games are released",
@@ -69,7 +69,7 @@ const PACKAGES = [
     image: "/avatar/ophidians-female.webp",
     rewards: [
       'Your name may appear in the end credits of the games, if released, under the title \"Leading Cadet\"',
-      "42,500 Gems for in-game purchases (Gems have no cash value)",
+      "425,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
       "Leading Cadet rank: 10% increase in resource gathering, if the games are released",
@@ -86,7 +86,7 @@ const PACKAGES = [
     image: "/avatar/lithionites-female.webp",
     rewards: [
       'Your name may appear in the end credits of the games, if released, under the title \"Leading Cadet Special Class\"',
-      "60,000 Gems for in-game purchases (Gems have no cash value)",
+      "600,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
       "Leading Cadet Special Class rank: 10% increase in resource gathering, if the games are released",
@@ -103,7 +103,7 @@ const PACKAGES = [
     image: "/avatar/lithionites-male.webp",
     rewards: [
       'Your name may appear in the end credits of the games, if released, under the title \"Leading Cadet Special Class\"',
-      "97,500 Gems for in-game purchases (Gems have no cash value)",
+      "975,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
       "Senior Cadet rank: 15% increase in resource gathering, if the games are released",
@@ -122,7 +122,7 @@ const PACKAGES = [
     image: "/avatar/geodians-female.webp",
     rewards: [
       'Your name may appear in the end credits of the games, if released, under the title \"Senior Cadet Special Class\"',
-      "110,000 Gems for in-game purchases (Gems have no cash value)",
+      "1,100,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
       "Senior Cadet Special Class rank: 15% increase in resource gathering, if the games are released",
@@ -143,7 +143,7 @@ const PACKAGES = [
     image: "/avatar/geodians-male.webp",
     rewards: [
       'Your name may appear in the end credits of the games, if released, under the title \"Flight Cadet\"',
-      "137,500 Gems for in-game purchases (Gems have no cash value)",
+      "1,375,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
       "Flight Lieutenant rank: 15% increase in resource gathering, if the games are released",
@@ -166,7 +166,7 @@ const PACKAGES = [
     image: "/avatar/marmulus-female.webp",
     rewards: [
       'Your name may appear in the end credits of the games, if released, under the title \"Flight Lieutenant\"',
-      "1,700,000 Gems for in-game purchases (Gems have no cash value)",
+      "17,000,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
       "Flight Lieutenant rank: 20% increase in resource gathering, if the games are released",
@@ -191,7 +191,7 @@ const PACKAGES = [
     image: "/avatar/marmulus-male.webp",
     rewards: [
       'Your name may appear in the end credits of the games, if released, under the title \"Flight Lieutenant Special Class\"',
-      "262,500 Gems for in-game purchases (Gems have no cash value)",
+      "2,625,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
       "Flight Lieutenant Special Class rank: 20% increase in resource gathering, if the games are released",
@@ -218,7 +218,7 @@ const PACKAGES = [
     image: "/avatar/fawnus-female.webp",
     rewards: [
       'Your name may appear in the end credits of the games, if released, under the title \"Wingman\"',
-      "370,000 Gems for in-game purchases (Gems have no cash value)",
+      "3,700,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
       "Wingman rank: 25% increase in resource gathering, if the games are released",
@@ -246,7 +246,7 @@ const PACKAGES = [
     image: "/avatar/fawnus-male.webp",
     rewards: [
       'Your name may appear in the end credits of the games, if released, under the title \"Wingman Senior Class\"',
-      "550,000 Gems for in-game purchases (Gems have no cash value)",
+      "5,500,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
       "Wingman Senior Class rank: 25% increase in resource gathering, if the games are released",
@@ -275,7 +275,7 @@ const PACKAGES = [
     image: "/avatar/mantasquads-female.webp",
     rewards: [
       'Your name may appear in the end credits of the games, if released, under the title \"Technical Officer\"',
-      "725,000 Gems for in-game purchases (Gems have no cash value)",
+      "7,250,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
       "Technical Officer rank: 25% increase in resource gathering, if the games are released",
@@ -308,7 +308,7 @@ const PACKAGES = [
     image: "/avatar/mantasquads-male.webp",
     rewards: [
       'Your name may appear in the end credits of the games, if released, under the title \"Team Specialist\"',
-      "825,000 Gems for in-game purchases (Gems have no cash value)",
+      "8,250,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
       "Team Specialist rank: 30% increase in resource gathering, if the games are released",
@@ -342,7 +342,7 @@ const PACKAGES = [
     image: "/avatar/team-specialist-major.webp",
     rewards: [
       'Your name may appear in the end credits of the games, if released, under the title \"Team Specialist Major\"',
-      "1,625,000 Gems for in-game purchases (Gems have no cash value)",
+      "16,250,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
       "Team Specialist Major rank: 35% increase in resource gathering/mining, if the games are released",
@@ -376,7 +376,7 @@ const PACKAGES = [
     image: "/avatar/commander-elite.webp",
     rewards: [
       'Your name may appear in the end credits of the games, if released, under the title \"Commandar Elite\"',
-      "2,250,000 Gems for in-game purchases (Gems have no cash value)",
+      "22,500,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
       "Commander Elite rank: 35% increase in resource gathering/mining, if the games are released",
@@ -411,7 +411,7 @@ const PACKAGES = [
     image: "/avatar/overlord.webp",
     rewards: [
       'Your name may appear in the end credits of the games, if released, under the title \"Over Lord\"',
-      "3,750,000 Gems for in-game purchases (Gems have no cash value)",
+      "37,500,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
       "Overlord rank: 40% increase in resource gathering/mining, if the games are released",

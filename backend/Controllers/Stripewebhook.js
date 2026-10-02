@@ -157,7 +157,7 @@ export const StripeWebhook = async (req, res) => {
                       type: "earn",
                       amount: hbAmount,
                       balanceAfter: updated.hyperBucks,
-                      description: `Top-up: ${hbAmount} HB ($${(hbAmount / 250).toFixed(2)} USD)`,
+                      description: `Top-up: ${hbAmount} Gems`,
                       reference: paymentData.paymentIntentId,
                     });
                     console.log(`[StripeWebhook] Hyper Bucks credited: ${hbAmount} HB to user ${topupUserId}`);

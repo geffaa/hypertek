@@ -106,7 +106,7 @@ const UserSchema = new mongoose.Schema(
       default: true,
     },
 
-    // Hyper Bucks — in-game currency (250 HB = $1 USD)
+    // Hyper Bucks — in-game currency (2500 issued per $1 USD paid)
     hyperBucks: {
       type: Number,
       default: 0,

@@ -19,10 +19,10 @@ const ERC20_ABI = [
 ];
 
 // HB conversion constant
-const HB_TO_USD = 250; // 250 HB = $1 USD
-const MIN_USDC_CASHOUT_HB = 250; // $1 minimum for USDC cashout
-const MIN_BANK_CASHOUT_HB = 250; // $1 minimum for bank cashout
-const MIN_TOPUP_HB = 250; // $1 minimum top-up
+const HB_TO_USD = 2500; // Gems issued per $1 USD paid
+const MIN_USDC_CASHOUT_HB = HB_TO_USD; // $1 minimum for USDC cashout
+const MIN_BANK_CASHOUT_HB = HB_TO_USD; // $1 minimum for bank cashout
+const MIN_TOPUP_HB = HB_TO_USD; // $1 minimum top-up
 
 // Bank cashout is AU-only: the platform is an AU Stripe account and Stripe does not support
 // cross-border payouts from AU, so connected accounts and payouts are always AUD.
@@ -927,14 +927,14 @@ export async function topupViaUSDC(req, res) {
 
 // ------------------ CREATE HB TOP-UP PAYMENT INTENT ------------------
 // POST /api/v1/hb/topup/intent
-// Body: { hbAmount } — must be multiple of 250, minimum 250
+// Body: { hbAmount } — must be a multiple of HB_TO_USD, minimum HB_TO_USD
 export async function createHBTopupIntent(req, res) {
   try {
     const userId = req.user.id || req.user._id.toString();
     const { hbAmount } = req.body;
 
-    if (!hbAmount || hbAmount < MIN_TOPUP_HB || hbAmount % 250 !== 0) {
-      return res.status(400).json({ error: "Minimum top-up is 250 HB ($1) and must be a multiple of 250" });
+    if (!hbAmount || hbAmount < MIN_TOPUP_HB || hbAmount % HB_TO_USD !== 0) {
+      return res.status(400).json({ error: `Minimum top-up is $1 (${MIN_TOPUP_HB} Gems) and must be a whole dollar amount` });
     }
 
     const usdAmount = hbAmount / HB_TO_USD;

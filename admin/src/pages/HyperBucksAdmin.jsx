@@ -3,8 +3,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Dashboard_Base_Url } from "../Config";
 
-// Must match HB_TO_USD in backend/Controllers/HBController.js (250 HB = $1)
-const HB_TO_USD = 250;
+// Must match HB_TO_USD in backend/Controllers/HBController.js (2500 per $1)
+const HB_TO_USD = 2500;
 const fmt = (hb) => Number(hb || 0).toLocaleString();
 const fmtUSD = (hb) => `$${(Number(hb || 0) / HB_TO_USD).toFixed(2)}`;
 
