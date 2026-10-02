@@ -80,7 +80,6 @@ const Stripe = lazy(() => import("./pages/Stripe"));
 const PackagesPage = lazy(() => import("./pages/Packages"));
 const PackageCheckoutPage = lazy(() => import("./pages/PackageCheckout"));
 const ClaimNowPage = lazy(() => import("./pages/ClaimNow"));
-const Funnel = lazy(() => import("./pages/Funnel"));
 const Gaming = lazy(() => import("./pages/Gaming"));
 const WalletTest = lazy(() => import("./pages/WalletTest"));
 const Nft101Article = lazy(() => import("./pages/Nft101Article"));
@@ -245,7 +244,6 @@ function AppWrapper() {
             <Route path="/packages" element={<PackagesPage />} />
             <Route path="/packages/:idOrSlug" element={<PackageCheckoutPage />} />
             <Route path="/claim" element={<ClaimNowPage />} />
-            <Route path="/funnel-page" element={<Funnel />} />
 
             <Route
               path="/dashboard"
