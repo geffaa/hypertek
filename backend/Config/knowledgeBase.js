@@ -82,7 +82,7 @@ Marketplace items are paid for in USDC on the Base network.
 Before every purchase, bid or offer you must tick a purchase acknowledgement confirming that:
 - you are buying a digital game item and any listed in-game benefits,
 - the games are still in development and future use is not promised,
-- the purchase is not an investment or a donation, and no profit or return is promised,
+- the purchase is not an investment, and no profit or return is promised,
 - resale is not guaranteed,
 - any trade-in requires surrendering the item and returns less than the amount allocated.
 
