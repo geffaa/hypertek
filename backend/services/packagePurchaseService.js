@@ -7,9 +7,9 @@
  *     later (no live inventory system exists for them yet — see PackageModel.js),
  *     and an optional freshly-minted item funded via computeRewardPackSplit.
  *
- * Sequential by design (matches the existing model's own doc comment): the
- * mint call below manages its own nonce, so two deliveries running at once
- * would collide. `lockedAt` on the purchase row is the mutex.
+ * The mint below sets its own nonces, so it runs inside withServerWallet to
+ * keep other server-wallet transactions out of the way. `lockedAt` on the
+ * purchase row stops the same purchase being fulfilled twice.
  */
 
 import Package from "../Models/PackageModel.js";
@@ -18,9 +18,10 @@ import NFTSystem from "../Models/NFTSystem.js";
 import User from "../Models/User.js";
 import HBLedger from "../Models/HBLedger.js";
 import { finalizeNFAPurchase } from "../Service/nftPurchaseService.js";
-import { getBlockchain, ethers } from "../Service/blockchain.js";
+import { getBlockchain, ethers, withServerWallet } from "../Service/blockchain.js";
 import { computeRewardPackSplit } from "./gmbb/computeSaleSplit.js";
 import { dispatchRoyalty } from "./RoyaltyService.js";
+import { depositToEscrow } from "./tradeInEscrow.js";
 
 const ACTIVE_CHAIN_ID = Number(process.env.BASE_CHAIN_ID) || 84532;
 const LOCK_TTL_MS = 5 * 60 * 1000;
@@ -284,8 +285,9 @@ async function mintRewardItem(purchase) {
     const balance = await provider.getBalance(backendWallet);
     if (balance === 0n) throw new Error("Backend wallet has no ETH for gas");
 
-    const currentNonce = await provider.getTransactionCount(backendWallet, "latest");
     const tokenURI = `ipfs://package-reward-${Date.now()}`;
+    const { tokenId, transferTx } = await withServerWallet(async () => {
+    const currentNonce = await provider.getTransactionCount(backendWallet, "latest");
     const mintTx = await nftContract.mint(backendWallet, tokenURI, 500, { nonce: currentNonce });
     const mintReceipt = await mintTx.wait();
 
@@ -309,6 +311,8 @@ async function mintRewardItem(purchase) {
 
     const markTx = await nftContract.markAsSold(tokenId, { nonce: currentNonce + 2 });
     await markTx.wait();
+    return { tokenId, transferTx };
+    });
 
     // Record the item exactly like any other minted item, under a parent
     // NFTSystem doc scoped to this package (created lazily, one per package).
@@ -336,9 +340,20 @@ async function mintRewardItem(purchase) {
     await parent.save();
     const savedSub = parent.subCollections[parent.subCollections.length - 1];
 
-    // buybackAmount is tracked on rewardFulfillment.gmbbAmount below — same
-    // off-chain-only tracking every other GMBB credit uses today (contract
-    // not wired in yet).
+    // Trade-in share → on-chain escrow for the token just minted, the same
+    // way a single item sale funds it. Non-blocking; a failed deposit stays
+    // as a failed trade_in_escrow payout that the admin can retry.
+    if (buybackAmount > 0) {
+      depositToEscrow({
+        subCollectionId: String(savedSub._id),
+        parentId: String(parent._id),
+        saleRecordId: `package_${purchase._id}`,
+        tokenId,
+        amount: buybackAmount,
+        note: `Package trade-in share — ${purchase.packageName}`,
+      }).catch((err) => console.warn("Package escrow deposit error:", err.message));
+    }
+
     const companyAmount = round2(purchase.priceUSD - buybackAmount);
     if (companyAmount > 0) {
       dispatchRoyalty({
