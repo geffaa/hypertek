@@ -84,21 +84,3 @@ describe("transakService.verifyWebhook", () => {
     await expect(transak.verifyWebhook({ data: forged })).rejects.toThrow();
   });
 });
-
-// ─── Mirror: cashout amount → USD (controller guard) ─────────────────
-// Transak only moves USDC to/from the user's wallet now — no HB crediting in the controller.
-// The one money-math guard left is the cashout minimum + HB→USD conversion.
-const HB_TO_USD = 250;
-const MIN_HB = 250;
-
-function validateCashoutHb(hb) {
-  return Number.isFinite(hb) && hb >= MIN_HB;
-}
-const hbToUsd = (hb) => parseFloat((hb / HB_TO_USD).toFixed(2));
-
-describe("cashout HB guards (mirror)", () => {
-  test.each([250, 500, 8956])("%d HB is a valid cashout amount", (v) => expect(validateCashoutHb(v)).toBe(true));
-  test.each([0, 100, 249, NaN])("%d HB is below the minimum", (v) => expect(validateCashoutHb(v)).toBe(false));
-  test("250 HB = $1.00", () => expect(hbToUsd(250)).toBe(1));
-  test("8956 HB = $35.82", () => expect(hbToUsd(8956)).toBe(35.82));
-});
