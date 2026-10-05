@@ -27,6 +27,7 @@ const chain = { balance: 0n, allowance: 0n, approveCalls: 0, deposits: [], depos
 
 jest.unstable_mockModule("../Service/blockchain.js", () => ({
   getBlockchain: () => ({ nftContract: { target: NFT }, wallet: { address: "0xserver" } }),
+  withServerWallet: (fn) => fn(),
 }));
 
 jest.unstable_mockModule("ethers", () => {

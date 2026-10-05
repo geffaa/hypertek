@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { getBlockchain } from "../Service/blockchain.js";
+import { getBlockchain, withServerWallet } from "../Service/blockchain.js";
 import { RoyaltyPayout } from "./RoyaltyService.js";
 
 const ESCROW_ABI = [
@@ -58,6 +58,7 @@ export async function sendDeposit(payout) {
     const escrow = new ethers.Contract(escrowAddr, ESCROW_ABI, wallet);
     const units = ethers.parseUnits(Number(payout.amount).toFixed(6), 6);
 
+    const tx = await withServerWallet(async () => {
     const balance = await usdc.balanceOf(wallet.address);
     if (balance < units) {
       throw new Error(`Server wallet USDC insufficient. Has ${ethers.formatUnits(balance, 6)}, needs ${payout.amount}`);
@@ -74,8 +75,10 @@ export async function sendDeposit(payout) {
       }
     }
 
-    const tx = await escrow.deposit(payout.nftAddress, BigInt(payout.tokenId), units);
-    await tx.wait();
+    const sent = await escrow.deposit(payout.nftAddress, BigInt(payout.tokenId), units);
+    await sent.wait();
+    return sent;
+    });
 
     console.log(`[TradeInEscrow] ${payout.amount} USDC → escrow for token #${payout.tokenId} | tx ${tx.hash}`);
     return RoyaltyPayout.findByIdAndUpdate(

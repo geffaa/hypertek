@@ -53,6 +53,17 @@ const NETWORKS = {
   },
 };
 
+// Every transaction from the server wallet goes through this queue. Mints,
+// royalty transfers and escrow deposits are fired from different requests,
+// and two of them reading the same nonce at once makes one fail. Callers must
+// not call withServerWallet from inside another withServerWallet callback.
+let walletQueue = Promise.resolve();
+export function withServerWallet(fn) {
+  const run = walletQueue.then(() => fn());
+  walletQueue = run.catch(() => {});
+  return run;
+}
+
 // Cache for initialized providers/wallets/contracts
 const instances = {};
 

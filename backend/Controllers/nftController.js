@@ -6,6 +6,7 @@ import {
   getBlockchain,
   ethers,
   formatEther,
+  withServerWallet,
 } from "../Service/blockchain.js";
 import { cloudinary as getCloudinary, isCloudinaryEnabled as getIsCloudinaryEnabled } from "../Config/cloudinary.js";
 import { dispatchRoyalty } from "../services/RoyaltyService.js";
@@ -701,6 +702,7 @@ export async function mintSubCollection(req, res) {
     let tx, receipt, tokenId;
 
     try {
+      await withServerWallet(async () => {
       // Fetch the latest confirmed nonce to avoid NONCE_EXPIRED errors
       let currentNonce = await provider.getTransactionCount(backendWallet, "latest");
       console.log(`📡 Current Nonce: ${currentNonce}`);
@@ -793,6 +795,7 @@ export async function mintSubCollection(req, res) {
       const markTx = await nftContract.markAsSold(tokenId, { nonce: currentNonce });
       await markTx.wait();
       console.log("Marked as sold on contract (isFirstSale = false)");
+      });
     } catch (mintErr) {
       console.error(" Mint error:", mintErr);
 

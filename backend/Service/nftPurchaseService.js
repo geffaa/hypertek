@@ -2,7 +2,7 @@ import NFTSystem from "../Models/NFTSystem.js";
 import Artist from "../Models/Artist.js";
 import Activity from "../Models/ActivityModel.js";
 import MarketListing from "../Models/MarketListingModel.js";
-import { getBlockchain, ethers } from "./blockchain.js";
+import { getBlockchain, ethers, withServerWallet } from "./blockchain.js";
 import { dispatchRoyalty } from "../services/RoyaltyService.js";
 import { depositToEscrow } from "../services/tradeInEscrow.js";
 import { cancelSiblingListings } from "../services/cancelSiblingListings.js";
@@ -115,7 +115,7 @@ export async function finalizeNFAPurchase({
     const tokenURI = `ipfs://auto-${Date.now()}`;
     const royaltyBps = 500;
 
-    // Fetch latest nonce
+    await withServerWallet(async () => {
     const currentNonce = await provider.getTransactionCount(backendWallet, "latest");
 
     // Mint — contract signature: mint(address creator, string tokenURI, uint16 royaltyBps)
@@ -155,6 +155,7 @@ export async function finalizeNFAPurchase({
     // Mark as sold on contract
     const markTx = await nftContract.markAsSold(tokenId, { nonce: currentNonce + 2 });
     await markTx.wait();
+    });
 
     // Update sub-collection props — only a single item's template adopts the
     // tokenId. Edition templates stay unminted (the buyer copy carries it).

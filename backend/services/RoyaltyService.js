@@ -14,6 +14,7 @@
 import mongoose from "mongoose";
 import nodemailer from "nodemailer";
 import { ethers } from "ethers";
+import { withServerWallet } from "../Service/blockchain.js";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -178,15 +179,17 @@ export async function dispatchRoyaltyOnChain(payout) {
 
     const amountUnits = ethers.parseUnits(payout.amount.toFixed(6), 6);
 
-    const balance = await usdc.balanceOf(await signer.getAddress());
-    if (balance < amountUnits) {
-      throw new Error(
-        `Backend wallet USDC balance insufficient. Has: ${ethers.formatUnits(balance, 6)}, needs: ${payout.amount}`
-      );
-    }
-
-    const tx = await usdc.transfer(payout.creatorWallet, amountUnits);
-    await tx.wait();
+    const tx = await withServerWallet(async () => {
+      const balance = await usdc.balanceOf(await signer.getAddress());
+      if (balance < amountUnits) {
+        throw new Error(
+          `Backend wallet USDC balance insufficient. Has: ${ethers.formatUnits(balance, 6)}, needs: ${payout.amount}`
+        );
+      }
+      const sent = await usdc.transfer(payout.creatorWallet, amountUnits);
+      await sent.wait();
+      return sent;
+    });
 
     const updated = await RoyaltyPayout.findByIdAndUpdate(
       payout._id,
