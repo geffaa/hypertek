@@ -239,7 +239,10 @@
     "resetting": "Nire-reset...",
     "resetPasswordBtn": "I-reset ang Password",
     "backToHome": "← Bumalik sa Tahanan",
-    "backHome": "← Tahanan"
+    "backHome": "← Tahanan",
+    "walletContinue": "Magpatuloy",
+    "walletCreating": "Ginagawa ang iyong secure na wallet...",
+    "walletKeyNote": "Sa iyo ang wallet na ito. Laging makikita ang address mo sa iyong Profile, kung saan maaari mo ring i-export ang private key mo kung kailanganin. Huwag kailanman ibahagi ang key na iyon kahit kanino."
   },
   "profile": {
     "editProfile": "I-edit ang Profile",

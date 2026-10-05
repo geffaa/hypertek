@@ -127,7 +127,9 @@
     "empty": "Nessun articolo elencato ancora.",
     "price": "Prezzo",
     "minBuyback": "Valore di permuta",
-    "buyNow": "Acquista Ora"
+    "buyNow": "Acquista Ora",
+    "comingAtLaunch": "Disponibile al lancio",
+    "previewNotice": "Solo anteprima — gli acquisti apriranno al lancio ufficiale"
   },
   "gaming": {
     "sectionTitle": "INFO GAMING",

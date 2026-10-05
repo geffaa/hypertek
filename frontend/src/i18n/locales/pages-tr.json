@@ -239,7 +239,10 @@
     "resetting": "Sıfırlanıyor...",
     "resetPasswordBtn": "Şifre Sıfırla",
     "backToHome": "← Ana Sayfa'ya geri dön",
-    "backHome": "← Ana sayfa"
+    "backHome": "← Ana sayfa",
+    "walletContinue": "Devam",
+    "walletCreating": "Güvenli cüzdanın oluşturuluyor...",
+    "walletKeyNote": "Bu cüzdan sana ait. Adresin her zaman Profilinde bulunur; gerekirse özel anahtarını da oradan dışa aktarabilirsin. Bu anahtarı asla kimseyle paylaşma."
   },
   "profile": {
     "editProfile": "Profili Düzenle",

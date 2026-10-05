@@ -239,7 +239,10 @@
     "resetting": "Wird zurückgesetzt...",
     "resetPasswordBtn": "Passwort zurücksetzen",
     "backToHome": "← Zurück zur Startseite",
-    "backHome": "← Startseite"
+    "backHome": "← Startseite",
+    "walletContinue": "Weiter",
+    "walletCreating": "Deine sichere Wallet wird erstellt...",
+    "walletKeyNote": "Diese Wallet gehört dir. Deine Adresse findest du jederzeit in deinem Profil, wo du bei Bedarf auch deinen privaten Schlüssel exportieren kannst. Teile diesen Schlüssel niemals mit anderen."
   },
   "profile": {
     "editProfile": "Profil bearbeiten",

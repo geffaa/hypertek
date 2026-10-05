@@ -239,7 +239,10 @@
     "resetting": "Reimpostazione in corso...",
     "resetPasswordBtn": "Reimposta password",
     "backToHome": "← Ritorno a casa",
-    "backHome": "← Casa"
+    "backHome": "← Casa",
+    "walletContinue": "Continua",
+    "walletCreating": "Creazione del tuo wallet sicuro...",
+    "walletKeyNote": "Questo wallet appartiene a te. Il tuo indirizzo è sempre disponibile nel tuo Profilo, dove puoi anche esportare la tua chiave privata se mai ti servisse. Non condividere mai quella chiave con nessuno."
   },
   "profile": {
     "editProfile": "Modifica profilo",

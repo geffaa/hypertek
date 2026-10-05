@@ -48,7 +48,9 @@
     "headingLine2": "伝説が生まれる場所",
     "marketplace": "マーケットプレイス",
     "downloadGame": "ゲームをダウンロード",
-    "tryUI": "UIを試す"
+    "tryUI": "UIを試す",
+    "close": "閉じる",
+    "headingLine1": "HYPER TEK 100:"
   },
   "howItWorks": {
     "sectionTitle": "使い方",
@@ -125,7 +127,9 @@
     "empty": "出品中のアイテムはありません。",
     "price": "価格",
     "minBuyback": "下取り価値",
-    "buyNow": "今すぐ購入"
+    "buyNow": "今すぐ購入",
+    "comingAtLaunch": "ローンチ時に公開",
+    "previewNotice": "プレビューのみ — 購入は正式ローンチ時に開始します"
   },
   "gaming": {
     "sectionTitle": "ゲーム情報",
@@ -211,7 +215,8 @@
     "commonNote": "各パッケージに含まれるアイテム、ボーナス、割引。\n\n注: ゲーム内購入用に含まれる Gems を除き、ボーナスと割引は他のプロモーションと併用できません。\n\nゲームがリリースされた場合、すべてのパッケージにはゲームのエンドクレジットへの名前の掲載が含まれます。",
     "specialConditionTitle": "特別条件",
     "specialCondition": "アイテムは現状有姿で販売されます。パッケージに記載されたゲーム内ボーナス、割引、Gems は、ゲームがリリースされた場合にのみ適用される可能性があり、最終的なゲームルールに従います。利益、支払い、金銭的リターンは一切約束されません。",
-    "imageComing": "画像準備中"
+    "imageComing": "画像準備中",
+    "close": "閉じる"
   },
   "dashboard": {
     "mobileNotice": {

@@ -127,7 +127,9 @@
     "empty": "Inga listade föremål ännu.",
     "price": "Pris",
     "minBuyback": "Inbytesvärde",
-    "buyNow": "Köp nu"
+    "buyNow": "Köp nu",
+    "comingAtLaunch": "Kommer vid lanseringen",
+    "previewNotice": "Endast förhandsvisning — köp öppnar vid den officiella lanseringen"
   },
   "gaming": {
     "sectionTitle": "SPELINFO",

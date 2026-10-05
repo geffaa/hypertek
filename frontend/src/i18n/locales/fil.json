@@ -127,7 +127,9 @@
     "empty": "Wala pang mga item na nakalista.",
     "price": "Presyo",
     "minBuyback": "Trade-In Value",
-    "buyNow": "Bumili Ngayon"
+    "buyNow": "Bumili Ngayon",
+    "comingAtLaunch": "Darating sa launch",
+    "previewNotice": "Preview lang — magbubukas ang pagbili sa opisyal na launch"
   },
   "gaming": {
     "sectionTitle": "IMPORMASYON SA GAMING",

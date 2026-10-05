@@ -239,7 +239,10 @@
     "resetting": "Đang Đặt Lại...",
     "resetPasswordBtn": "Đặt Lại Mật Khẩu",
     "backToHome": "← Trở về nhà",
-    "backHome": "← Trang chủ"
+    "backHome": "← Trang chủ",
+    "walletContinue": "Tiếp tục",
+    "walletCreating": "Đang tạo ví bảo mật của bạn...",
+    "walletKeyNote": "Ví này thuộc về bạn. Địa chỉ của bạn luôn có trong Hồ sơ, nơi bạn cũng có thể xuất khóa riêng nếu cần. Đừng bao giờ chia sẻ khóa đó với bất kỳ ai."
   },
   "profile": {
     "editProfile": "Chỉnh sửa hồ sơ",

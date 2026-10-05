@@ -48,7 +48,9 @@
     "headingLine2": "ONDE LENDAS SÃO FORJADAS",
     "marketplace": "Mercado",
     "downloadGame": "Baixar Jogo",
-    "tryUI": "Experimentar UI"
+    "tryUI": "Experimentar UI",
+    "close": "Fechar",
+    "headingLine1": "HYPER TEK 100:"
   },
   "howItWorks": {
     "sectionTitle": "Como Funciona",
@@ -125,7 +127,9 @@
     "empty": "Nenhum item listado ainda.",
     "price": "Preço",
     "minBuyback": "Valor de troca",
-    "buyNow": "Comprar Agora"
+    "buyNow": "Comprar Agora",
+    "comingAtLaunch": "Disponível no lançamento",
+    "previewNotice": "Apenas prévia — as compras abrem no lançamento oficial"
   },
   "gaming": {
     "sectionTitle": "INFORMAÇÕES DO JOGO",
@@ -211,7 +215,8 @@
     "commonNote": "Itens, bônus e descontos incluídos em cada pacote.\n\nNOTA: Com exceção das Gems incluídas para compras no jogo, bônus e descontos não podem ser combinados com nenhuma outra promoção.\n\nTodo pacote inclui seu nome nos créditos finais dos jogos, se os jogos forem lançados.",
     "specialConditionTitle": "Condição Especial",
     "specialCondition": "Os itens são vendidos no estado em que se encontram. Bônus no jogo, descontos e Gems listados em um pacote só podem se aplicar se os jogos forem lançados e estão sujeitos às regras finais do jogo. Não se promete nenhum lucro, pagamento ou retorno financeiro.",
-    "imageComing": "Imagem em breve"
+    "imageComing": "Imagem em breve",
+    "close": "Fechar"
   },
   "dashboard": {
     "mobileNotice": {

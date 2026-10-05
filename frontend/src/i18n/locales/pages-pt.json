@@ -239,7 +239,10 @@
     "resetting": "Redefinindo...",
     "resetPasswordBtn": "Redefinir Senha",
     "backToHome": "← Voltar para casa",
-    "backHome": "← Página inicial"
+    "backHome": "← Página inicial",
+    "walletContinue": "Continuar",
+    "walletCreating": "Criando sua carteira segura...",
+    "walletKeyNote": "Esta carteira pertence a você. Seu endereço está sempre disponível no seu Perfil, onde você também pode exportar sua chave privada se precisar. Nunca compartilhe essa chave com ninguém."
   },
   "profile": {
     "editProfile": "Editar perfil",

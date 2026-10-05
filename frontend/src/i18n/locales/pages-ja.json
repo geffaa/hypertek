@@ -239,7 +239,10 @@
     "resetting": "リセット中...",
     "resetPasswordBtn": "パスワードをリセット",
     "backToHome": "← ホームに戻る",
-    "backHome": "← ホーム"
+    "backHome": "← ホーム",
+    "walletContinue": "続ける",
+    "walletCreating": "安全なウォレットを作成しています...",
+    "walletKeyNote": "このウォレットはあなたのものです。アドレスはいつでもプロフィールで確認でき、必要な場合はそこで秘密鍵をエクスポートすることもできます。その鍵は決して誰とも共有しないでください。"
   },
   "profile": {
     "editProfile": "プロフィールの編集",

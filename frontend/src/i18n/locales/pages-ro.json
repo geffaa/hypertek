@@ -239,7 +239,10 @@
     "resetting": "Se resetează…",
     "resetPasswordBtn": "Resetează parola",
     "backToHome": "← Înapoi la Acasă",
-    "backHome": "← Acasă"
+    "backHome": "← Acasă",
+    "walletContinue": "Continuă",
+    "walletCreating": "Se creează portofelul tău securizat...",
+    "walletKeyNote": "Acest portofel îți aparține. Adresa ta este mereu disponibilă în Profil, unde îți poți exporta și cheia privată dacă vei avea nevoie. Nu împărtăși niciodată acea cheie cu nimeni."
   },
   "profile": {
     "editProfile": "Editați profilul",

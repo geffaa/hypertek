@@ -127,7 +127,9 @@
     "empty": "Chua co san pham nao duoc niem yet.",
     "price": "Gia",
     "minBuyback": "Giá trị đổi trả",
-    "buyNow": "Mua ngay"
+    "buyNow": "Mua ngay",
+    "comingAtLaunch": "Có khi ra mắt",
+    "previewNotice": "Chỉ xem trước — mua bán mở khi ra mắt chính thức"
   },
   "gaming": {
     "sectionTitle": "THONG TIN TRO CHOI",

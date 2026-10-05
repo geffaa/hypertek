@@ -239,7 +239,10 @@
     "resetting": "重置中...",
     "resetPasswordBtn": "重置密码",
     "backToHome": "← 返回首页",
-    "backHome": "← 首页"
+    "backHome": "← 首页",
+    "walletContinue": "继续",
+    "walletCreating": "正在创建你的安全钱包...",
+    "walletKeyNote": "这个钱包属于你。你的地址随时可以在个人资料中查看，如有需要也可以在那里导出私钥。切勿与任何人分享该私钥。"
   },
   "profile": {
     "editProfile": "编辑个人资料",

@@ -127,7 +127,9 @@
     "empty": "Ingen listede genstande endnu.",
     "price": "Pris",
     "minBuyback": "Indbytningsværdi",
-    "buyNow": "Køb Nu"
+    "buyNow": "Køb Nu",
+    "comingAtLaunch": "Kommer ved lanceringen",
+    "previewNotice": "Kun forhåndsvisning — køb åbner ved den officielle lancering"
   },
   "gaming": {
     "sectionTitle": "GAMING-INFO",

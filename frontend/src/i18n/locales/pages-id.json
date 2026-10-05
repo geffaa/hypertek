@@ -239,7 +239,10 @@
     "resetting": "Mereset...",
     "resetPasswordBtn": "Reset Kata Sandi",
     "backToHome": "← Kembali ke Rumah",
-    "backHome": "← Rumah"
+    "backHome": "← Rumah",
+    "walletContinue": "Lanjutkan",
+    "walletCreating": "Membuat dompet aman Anda...",
+    "walletKeyNote": "Dompet ini milik Anda. Alamat Anda selalu tersedia di Profil, tempat Anda juga dapat mengekspor kunci pribadi jika suatu saat diperlukan. Jangan pernah membagikan kunci itu kepada siapa pun."
   },
   "profile": {
     "editProfile": "Sunting Profil",

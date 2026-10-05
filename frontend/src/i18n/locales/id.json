@@ -127,7 +127,9 @@
     "empty": "Belum ada item yang terdaftar.",
     "price": "Harga",
     "minBuyback": "Nilai tukar tambah",
-    "buyNow": "Beli Sekarang"
+    "buyNow": "Beli Sekarang",
+    "comingAtLaunch": "Hadir saat peluncuran",
+    "previewNotice": "Pratinjau saja — pembelian dibuka saat peluncuran resmi"
   },
   "gaming": {
     "sectionTitle": "INFO GAMING",

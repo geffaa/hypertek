@@ -239,7 +239,10 @@
     "resetting": "Resetowanie…",
     "resetPasswordBtn": "Zresetuj hasło",
     "backToHome": "← Powrót do domu",
-    "backHome": "← Strona główna"
+    "backHome": "← Strona główna",
+    "walletContinue": "Dalej",
+    "walletCreating": "Tworzenie Twojego bezpiecznego portfela...",
+    "walletKeyNote": "Ten portfel należy do Ciebie. Twój adres jest zawsze dostępny w Profilu, gdzie w razie potrzeby możesz też wyeksportować klucz prywatny. Nigdy nikomu nie udostępniaj tego klucza."
   },
   "profile": {
     "editProfile": "Edytuj profil",

@@ -127,7 +127,9 @@
     "empty": "目前沒有上架物品。",
     "price": "價格",
     "minBuyback": "折換價值",
-    "buyNow": "立即購買"
+    "buyNow": "立即購買",
+    "comingAtLaunch": "上線時推出",
+    "previewNotice": "僅供預覽 — 購買將在正式上線時開放"
   },
   "gaming": {
     "sectionTitle": "遊戲資訊",

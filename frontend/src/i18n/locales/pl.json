@@ -127,7 +127,9 @@
     "empty": "Brak wystawionych przedmiotow.",
     "price": "Cena",
     "minBuyback": "Wartość wymiany",
-    "buyNow": "Kup teraz"
+    "buyNow": "Kup teraz",
+    "comingAtLaunch": "Dostępne przy premierze",
+    "previewNotice": "Tylko podgląd — zakupy ruszą w dniu oficjalnej premiery"
   },
   "gaming": {
     "sectionTitle": "INFORMACJE O GRACH",

@@ -127,7 +127,9 @@
     "empty": "Ingen listede gjenstander enna.",
     "price": "Pris",
     "minBuyback": "Innbytteverdi",
-    "buyNow": "Kjop na"
+    "buyNow": "Kjop na",
+    "comingAtLaunch": "Kommer ved lansering",
+    "previewNotice": "Kun forhåndsvisning — kjøp åpner ved offisiell lansering"
   },
   "gaming": {
     "sectionTitle": "SPILLINFO",

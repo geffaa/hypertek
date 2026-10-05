@@ -239,7 +239,10 @@
     "resetting": "Opnieuw instellen...",
     "resetPasswordBtn": "Wachtwoord opnieuw instellen",
     "backToHome": "← Terug naar Thuis",
-    "backHome": "← Thuis"
+    "backHome": "← Thuis",
+    "walletContinue": "Doorgaan",
+    "walletCreating": "Je beveiligde wallet wordt aangemaakt...",
+    "walletKeyNote": "Deze wallet is van jou. Je adres staat altijd in je Profiel, waar je ook je privésleutel kunt exporteren als je die ooit nodig hebt. Deel die sleutel nooit met iemand."
   },
   "profile": {
     "editProfile": "Profiel bewerken",

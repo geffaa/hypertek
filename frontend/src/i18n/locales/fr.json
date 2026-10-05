@@ -127,7 +127,9 @@
     "empty": "Aucun article listé pour l'instant.",
     "price": "Prix",
     "minBuyback": "Valeur de reprise",
-    "buyNow": "Acheter maintenant"
+    "buyNow": "Acheter maintenant",
+    "comingAtLaunch": "Disponible au lancement",
+    "previewNotice": "Aperçu uniquement — les achats ouvriront au lancement officiel"
   },
   "gaming": {
     "sectionTitle": "INFOS GAMING",

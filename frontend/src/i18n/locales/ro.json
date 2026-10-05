@@ -127,7 +127,9 @@
     "empty": "Nu exista inca articole listate.",
     "price": "Pret",
     "minBuyback": "Valoare de schimb",
-    "buyNow": "Cumpara acum"
+    "buyNow": "Cumpara acum",
+    "comingAtLaunch": "Disponibil la lansare",
+    "previewNotice": "Doar previzualizare — cumpărarea se deschide la lansarea oficială"
   },
   "gaming": {
     "sectionTitle": "INFO GAMING",
@@ -211,7 +213,10 @@
     "specialCondition": "Obiectele sunt vândute ca atare. Bonusurile în joc, reducerile și Gems listate într-un pachet se pot aplica doar dacă jocurile sunt lansate și sunt supuse regulilor finale ale jocului. Nu se promite niciun profit, nicio plată și niciun randament financiar.",
     "imageComing": "Imaginea vine in curand",
     "close": "Inchide",
-    "pageLinkSubtitle": "Foaia de parcurs, pachetele și modul în care jocurile planificate se leagă în universul Hyper Tek."
+    "pageLinkSubtitle": "Foaia de parcurs, pachetele și modul în care jocurile planificate se leagă în universul Hyper Tek.",
+    "pageLinkCta": "Vezi pagina",
+    "pageLinkTitle": "Explorează pagina Genesis completă",
+    "tryGaming": "Încearcă interfața de gaming"
   },
   "dashboard": {
     "mobileNotice": {

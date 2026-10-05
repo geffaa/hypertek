@@ -127,7 +127,9 @@
     "empty": "Henuz listelenmis urun yok.",
     "price": "Fiyat",
     "minBuyback": "Takas Değeri",
-    "buyNow": "Simdi Satin Al"
+    "buyNow": "Simdi Satin Al",
+    "comingAtLaunch": "Lansmanda geliyor",
+    "previewNotice": "Yalnızca önizleme — satın alma resmi lansmanda açılacak"
   },
   "gaming": {
     "sectionTitle": "OYUN BILGISI",

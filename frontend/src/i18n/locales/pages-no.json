@@ -239,7 +239,10 @@
     "resetting": "Tilbakestiller...",
     "resetPasswordBtn": "Tilbakestill passord",
     "backToHome": "← Tilbake til Hjem",
-    "backHome": "← Hjem"
+    "backHome": "← Hjem",
+    "walletContinue": "Fortsett",
+    "walletCreating": "Oppretter den sikre lommeboken din...",
+    "walletKeyNote": "Denne lommeboken tilhører deg. Adressen din er alltid tilgjengelig i Profilen din, der du også kan eksportere den private nøkkelen hvis du trenger den. Del aldri den nøkkelen med noen."
   },
   "profile": {
     "editProfile": "Rediger profil",

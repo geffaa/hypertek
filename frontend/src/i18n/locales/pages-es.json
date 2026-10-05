@@ -239,7 +239,10 @@
     "resetting": "Restableciendo...",
     "resetPasswordBtn": "Restablecer contraseña",
     "backToHome": "← Volver a Inicio",
-    "backHome": "← Inicio"
+    "backHome": "← Inicio",
+    "walletContinue": "Continuar",
+    "walletCreating": "Creando tu cartera segura...",
+    "walletKeyNote": "Esta cartera te pertenece. Tu dirección siempre está disponible en tu Perfil, donde también puedes exportar tu clave privada si alguna vez la necesitas. Nunca compartas esa clave con nadie."
   },
   "profile": {
     "editProfile": "Editar perfil",

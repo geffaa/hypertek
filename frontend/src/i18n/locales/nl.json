@@ -127,7 +127,9 @@
     "empty": "Nog geen gelistte artikelen.",
     "price": "Prijs",
     "minBuyback": "Inruilwaarde",
-    "buyNow": "Nu kopen"
+    "buyNow": "Nu kopen",
+    "comingAtLaunch": "Beschikbaar bij de lancering",
+    "previewNotice": "Alleen voorbeeld — kopen kan vanaf de officiële lancering"
   },
   "gaming": {
     "sectionTitle": "GAMING INFO",

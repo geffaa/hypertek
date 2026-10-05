@@ -127,7 +127,9 @@
     "empty": "Noch keine gelisteten Artikel.",
     "price": "Preis",
     "minBuyback": "Trade-In-Wert",
-    "buyNow": "Jetzt kaufen"
+    "buyNow": "Jetzt kaufen",
+    "comingAtLaunch": "Zum Start verfügbar",
+    "previewNotice": "Nur Vorschau — Käufe starten zum offiziellen Launch"
   },
   "gaming": {
     "sectionTitle": "GAMING-INFO",

@@ -239,7 +239,10 @@
     "resetting": "Nulstiller...",
     "resetPasswordBtn": "Nulstil adgangskode",
     "backToHome": "← Tilbage til Hjem",
-    "backHome": "← Hjem"
+    "backHome": "← Hjem",
+    "walletContinue": "Fortsæt",
+    "walletCreating": "Opretter din sikre tegnebog...",
+    "walletKeyNote": "Denne tegnebog tilhører dig. Din adresse er altid tilgængelig i din Profil, hvor du også kan eksportere din private nøgle, hvis du får brug for det. Del aldrig den nøgle med nogen."
   },
   "profile": {
     "editProfile": "Rediger profil",

@@ -239,7 +239,10 @@
     "resetting": "Återställer...",
     "resetPasswordBtn": "Återställ lösenord",
     "backToHome": "← Tillbaka till startsidan",
-    "backHome": "← Hem"
+    "backHome": "← Hem",
+    "walletContinue": "Fortsätt",
+    "walletCreating": "Skapar din säkra plånbok...",
+    "walletKeyNote": "Den här plånboken tillhör dig. Din adress finns alltid i din Profil, där du också kan exportera din privata nyckel om du någon gång behöver den. Dela aldrig den nyckeln med någon."
   },
   "profile": {
     "editProfile": "Redigera profil",

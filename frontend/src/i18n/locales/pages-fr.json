@@ -239,7 +239,10 @@
     "resetting": "Réinitialisation...",
     "resetPasswordBtn": "Réinitialiser le mot de passe",
     "backToHome": "← Retour à l'accueil",
-    "backHome": "← Accueil"
+    "backHome": "← Accueil",
+    "walletContinue": "Continuer",
+    "walletCreating": "Création de votre portefeuille sécurisé...",
+    "walletKeyNote": "Ce portefeuille vous appartient. Votre adresse est toujours disponible dans votre Profil, où vous pouvez aussi exporter votre clé privée si besoin. Ne partagez jamais cette clé avec qui que ce soit."
   },
   "profile": {
     "editProfile": "Modifier le profil",

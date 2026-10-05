@@ -48,7 +48,9 @@
     "headingLine2": "传奇铸就之地",
     "marketplace": "市场",
     "downloadGame": "下载游戏",
-    "tryUI": "体验界面"
+    "tryUI": "体验界面",
+    "close": "关闭",
+    "headingLine1": "HYPER TEK 100:"
   },
   "howItWorks": {
     "sectionTitle": "使用流程",
@@ -125,7 +127,9 @@
     "empty": "暂无上架物品。",
     "price": "价格",
     "minBuyback": "折换价值",
-    "buyNow": "立即购买"
+    "buyNow": "立即购买",
+    "comingAtLaunch": "上线时推出",
+    "previewNotice": "仅供预览 — 购买将在正式上线时开放"
   },
   "gaming": {
     "sectionTitle": "游戏信息",
@@ -211,7 +215,8 @@
     "commonNote": "每个礼包包含的物品、加成和折扣。\n\n注意：除用于游戏内购买的随附 Gems 外，加成和折扣不可与任何其他促销叠加使用。\n\n如果游戏发布，每个礼包都包含在游戏片尾字幕中署名。",
     "specialConditionTitle": "特别条件",
     "specialCondition": "物品按现状出售。礼包中列出的游戏内加成、折扣和 Gems 仅在游戏发布后才可能适用，并以最终游戏规则为准。不承诺任何利润、付款或财务回报。",
-    "imageComing": "图片即将上线"
+    "imageComing": "图片即将上线",
+    "close": "关闭"
   },
   "dashboard": {
     "mobileNotice": {

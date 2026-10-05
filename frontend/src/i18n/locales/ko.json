@@ -48,7 +48,9 @@
     "headingLine2": "전설이 탄생하는 곳",
     "marketplace": "마켓플레이스",
     "downloadGame": "게임 다운로드",
-    "tryUI": "UI 체험하기"
+    "tryUI": "UI 체험하기",
+    "close": "닫기",
+    "headingLine1": "HYPER TEK 100:"
   },
   "howItWorks": {
     "sectionTitle": "이용 방법",
@@ -125,7 +127,9 @@
     "empty": "등록된 아이템이 없습니다.",
     "price": "가격",
     "minBuyback": "트레이드인 가치",
-    "buyNow": "지금 구매"
+    "buyNow": "지금 구매",
+    "comingAtLaunch": "출시 시 공개",
+    "previewNotice": "미리보기 전용 — 구매는 공식 출시 때 열립니다"
   },
   "gaming": {
     "sectionTitle": "게임 정보",
@@ -211,7 +215,8 @@
     "commonNote": "각 패키지에 포함된 아이템, 보너스 및 할인.\n\n참고: 게임 내 구매용으로 포함된 Gems를 제외하고, 보너스와 할인은 다른 프로모션과 함께 사용할 수 없습니다.\n\n게임이 출시될 경우 모든 패키지에는 게임 엔딩 크레딧에 이름이 실리는 혜택이 포함됩니다.",
     "specialConditionTitle": "특별 조건",
     "specialCondition": "아이템은 있는 그대로 판매됩니다. 패키지에 명시된 게임 내 보너스, 할인 및 Gems는 게임이 출시될 경우에만 적용될 수 있으며 최종 게임 규칙을 따릅니다. 어떠한 수익, 지급 또는 금전적 이익도 약속하지 않습니다.",
-    "imageComing": "이미지 곧 공개"
+    "imageComing": "이미지 곧 공개",
+    "close": "닫기"
   },
   "dashboard": {
     "mobileNotice": {

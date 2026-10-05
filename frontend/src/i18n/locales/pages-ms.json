@@ -239,7 +239,10 @@
     "resetting": "Menetapkan semula...",
     "resetPasswordBtn": "Set Semula Kata Laluan",
     "backToHome": "← Kembali ke Laman Utama",
-    "backHome": "← Rumah"
+    "backHome": "← Rumah",
+    "walletContinue": "Teruskan",
+    "walletCreating": "Mencipta dompet selamat anda...",
+    "walletKeyNote": "Dompet ini milik anda. Alamat anda sentiasa tersedia dalam Profil, di mana anda juga boleh mengeksport kunci peribadi jika perlu. Jangan sekali-kali kongsi kunci itu dengan sesiapa."
   },
   "profile": {
     "editProfile": "Edit Profil",

@@ -239,7 +239,10 @@
     "resetting": "重設中...",
     "resetPasswordBtn": "重設密碼",
     "backToHome": "← 回首頁",
-    "backHome": "← 首頁"
+    "backHome": "← 首頁",
+    "walletContinue": "繼續",
+    "walletCreating": "正在建立你的安全錢包...",
+    "walletKeyNote": "這個錢包屬於你。你的地址隨時可以在個人檔案中查看，如有需要也可以在那裡匯出私鑰。切勿與任何人分享該私鑰。"
   },
   "profile": {
     "editProfile": "編輯個人資料",
