@@ -19,15 +19,15 @@ const fadeUp = {
 const PACKAGES = [
   {
     id: 1,
-    title: "Recruit",
+    title: "Enlist",
     tier: "$20 USD",
     image: "/avatar/dryads-female.webp",
     rewards: [
-      'Your name may appear in the end credits of the games, if released, under the title \"Recruit\"',
+      'Your name will appear in the end credits of the games, under the title \"Enlisted\"',
       "87,500 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
-      "Recruit rank: 10% discount on in-game purchases for the first 12 months, if the games are released",
+      "Enlisted rank: 10% discount on in-game purchases for the first 12 months",
     ],
   },
   {
@@ -36,11 +36,11 @@ const PACKAGES = [
     tier: "$50 USD",
     image: "/avatar/dryads-male.webp",
     rewards: [
-      'Your name may appear in the end credits of the games, if released, under the title \"Cadet Rookie Class\"',
+      'Your name will appear in the end credits of the games, under the title \"Cadet Rookie Class\"',
       "225,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
-      "Cadet Rookie Class rank: 10% increase in resource gathering, if the games are released",
+      "Cadet Rookie Class rank: 10% increase in resource gathering",
       "5% Increase in training speed",
       "10% Discount on in-game purchases for the first 12 months",
     ],
@@ -51,11 +51,11 @@ const PACKAGES = [
     tier: "$75 USD",
     image: "/avatar/ophidians-male.webp",
     rewards: [
-      'Your name may appear in the end credits of the games, if released, under the title \"Cadet 1st Class\"',
+      'Your name will appear in the end credits of the games, under the title \"Cadet 1st Class\"',
       "312,500 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
-      "Cadet 1st Class rank: 10% increase in resource gathering, if the games are released",
+      "Cadet 1st Class rank: 10% increase in resource gathering",
       "5% Increase in training speed",
       "5% more in-game prize rewards",
       "5% attack and defence increase",
@@ -68,11 +68,11 @@ const PACKAGES = [
     tier: "$100 USD",
     image: "/avatar/ophidians-female.webp",
     rewards: [
-      'Your name may appear in the end credits of the games, if released, under the title \"Leading Cadet\"',
+      'Your name will appear in the end credits of the games, under the title \"Leading Cadet\"',
       "425,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
-      "Leading Cadet rank: 10% increase in resource gathering, if the games are released",
+      "Leading Cadet rank: 10% increase in resource gathering",
       "5% Increase in training speed",
       "5% more in-game prize rewards",
       "5% attack and defence increase",
@@ -85,11 +85,11 @@ const PACKAGES = [
     tier: "$150 USD",
     image: "/avatar/lithionites-female.webp",
     rewards: [
-      'Your name may appear in the end credits of the games, if released, under the title \"Leading Cadet Special Class\"',
+      'Your name will appear in the end credits of the games, under the title \"Leading Cadet Special Class\"',
       "600,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
-      "Leading Cadet Special Class rank: 10% increase in resource gathering, if the games are released",
+      "Leading Cadet Special Class rank: 10% increase in resource gathering",
       "5% Increase in training speed",
       "5% more in-game prize rewards",
       "5% attack and defence increase",
@@ -102,11 +102,11 @@ const PACKAGES = [
     tier: "$250 USD",
     image: "/avatar/lithionites-male.webp",
     rewards: [
-      'Your name may appear in the end credits of the games, if released, under the title \"Leading Cadet Special Class\"',
+      'Your name will appear in the end credits of the games, under the title \"Leading Cadet Special Class\"',
       "975,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
-      "Senior Cadet rank: 15% increase in resource gathering, if the games are released",
+      "Senior Cadet rank: 15% increase in resource gathering",
       "5% Increase in training speed",
       "10% Increase in health",
       "5% more in-game prize rewards",
@@ -121,11 +121,11 @@ const PACKAGES = [
     tier: "$300 USD",
     image: "/avatar/geodians-female.webp",
     rewards: [
-      'Your name may appear in the end credits of the games, if released, under the title \"Senior Cadet Special Class\"',
+      'Your name will appear in the end credits of the games, under the title \"Senior Cadet Special Class\"',
       "1,100,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
-      "Senior Cadet Special Class rank: 15% increase in resource gathering, if the games are released",
+      "Senior Cadet Special Class rank: 15% increase in resource gathering",
       "1.0% Higher chance of obtaining NFA's or rare items within the first 12 months",
       "10% Increase in training speed",
       "10% Increase in health",
@@ -142,11 +142,11 @@ const PACKAGES = [
     tier: "$400 USD",
     image: "/avatar/geodians-male.webp",
     rewards: [
-      'Your name may appear in the end credits of the games, if released, under the title \"Flight Cadet\"',
+      'Your name will appear in the end credits of the games, under the title \"Flight Cadet\"',
       "1,375,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
-      "Flight Lieutenant rank: 15% increase in resource gathering, if the games are released",
+      "Flight Lieutenant rank: 15% increase in resource gathering",
       "1.5% Higher chance of obtaining NFA's or rare items within the first 12 months",
       "15% Increase in training speed",
       "15% Increase in health",
@@ -165,11 +165,11 @@ const PACKAGES = [
     tier: "$500 USD",
     image: "/avatar/marmulus-female.webp",
     rewards: [
-      'Your name may appear in the end credits of the games, if released, under the title \"Flight Lieutenant\"',
+      'Your name will appear in the end credits of the games, under the title \"Flight Lieutenant\"',
       "17,000,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
-      "Flight Lieutenant rank: 20% increase in resource gathering, if the games are released",
+      "Flight Lieutenant rank: 20% increase in resource gathering",
       "1.5% Higher chance of obtaining NFA's or rare items within the first 12 months",
       "20% Increase in training speed",
       "15% Increase in health",
@@ -190,11 +190,11 @@ const PACKAGES = [
     tier: "$750 USD",
     image: "/avatar/marmulus-male.webp",
     rewards: [
-      'Your name may appear in the end credits of the games, if released, under the title \"Flight Lieutenant Special Class\"',
+      'Your name will appear in the end credits of the games, under the title \"Flight Lieutenant Special Class\"',
       "2,625,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
-      "Flight Lieutenant Special Class rank: 20% increase in resource gathering, if the games are released",
+      "Flight Lieutenant Special Class rank: 20% increase in resource gathering",
       "1.5% Higher chance of obtaining NFA's or rare items within the first 12 months",
       "1.0% higher chance of obtaining NFA's or rare items ongoing",
       "20% Increase in training speed",
@@ -217,11 +217,11 @@ const PACKAGES = [
     tier: "$1,000 USD",
     image: "/avatar/fawnus-female.webp",
     rewards: [
-      'Your name may appear in the end credits of the games, if released, under the title \"Wingman\"',
+      'Your name will appear in the end credits of the games, under the title \"Wingman\"',
       "3,700,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
-      "Wingman rank: 25% increase in resource gathering, if the games are released",
+      "Wingman rank: 25% increase in resource gathering",
       "2.0% Higher chance of obtaining NFA's or rare items within the first 12 months",
       "1.0% higher chance of obtaining NFA's or rare items ongoing",
       "25% Increase in training speed",
@@ -245,11 +245,11 @@ const PACKAGES = [
     tier: "$1,500 USD",
     image: "/avatar/fawnus-male.webp",
     rewards: [
-      'Your name may appear in the end credits of the games, if released, under the title \"Wingman Senior Class\"',
+      'Your name will appear in the end credits of the games, under the title \"Wingman Senior Class\"',
       "5,500,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
-      "Wingman Senior Class rank: 25% increase in resource gathering, if the games are released",
+      "Wingman Senior Class rank: 25% increase in resource gathering",
       "3.0% Higher chance of obtaining NFA's or rare items within the first 12 months",
       "1.5% higher chance of obtaining NFA's or rare items ongoing",
       "30% Increase in training speed",
@@ -274,11 +274,11 @@ const PACKAGES = [
     tier: "$2,000 USD",
     image: "/avatar/mantasquads-female.webp",
     rewards: [
-      'Your name may appear in the end credits of the games, if released, under the title \"Technical Officer\"',
+      'Your name will appear in the end credits of the games, under the title \"Technical Officer\"',
       "7,250,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
-      "Technical Officer rank: 25% increase in resource gathering, if the games are released",
+      "Technical Officer rank: 25% increase in resource gathering",
       "3.5% Higher chance of obtaining NFA's or rare items within the first 12 months",
       "2.0% higher chance of obtaining NFA's or rare items ongoing",
       "30% Increase in training speed",
@@ -307,11 +307,11 @@ const PACKAGES = [
     tier: "$2,500 USD",
     image: "/avatar/mantasquads-male.webp",
     rewards: [
-      'Your name may appear in the end credits of the games, if released, under the title \"Team Specialist\"',
+      'Your name will appear in the end credits of the games, under the title \"Team Specialist\"',
       "8,250,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
-      "Team Specialist rank: 30% increase in resource gathering, if the games are released",
+      "Team Specialist rank: 30% increase in resource gathering",
       "5% Higher chance of obtaining NFA's or rare items within the first 12 months",
       "2.5% higher chance of obtaining NFA's or rare items ongoing",
       "30% Increase in training speed",
@@ -341,11 +341,11 @@ const PACKAGES = [
     tier: "$5,000 USD",
     image: "/avatar/team-specialist-major.webp",
     rewards: [
-      'Your name may appear in the end credits of the games, if released, under the title \"Team Specialist Major\"',
+      'Your name will appear in the end credits of the games, under the title \"Team Specialist Major\"',
       "16,250,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
-      "Team Specialist Major rank: 35% increase in resource gathering/mining, if the games are released",
+      "Team Specialist Major rank: 35% increase in resource gathering/mining",
       "7% Higher chance of obtaining NFA's or rare items within the first 12 months",
       "3.5% higher chance of obtaining NFA's or rare items ongoing",
       "35% Increase in training speed",
@@ -375,11 +375,11 @@ const PACKAGES = [
     tier: "$7,500 USD",
     image: "/avatar/commander-elite.webp",
     rewards: [
-      'Your name may appear in the end credits of the games, if released, under the title \"Commandar Elite\"',
+      'Your name will appear in the end credits of the games, under the title \"Commandar Elite\"',
       "22,500,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
-      "Commander Elite rank: 35% increase in resource gathering/mining, if the games are released",
+      "Commander Elite rank: 35% increase in resource gathering/mining",
       "7.5% Higher chance of obtaining NFA's or rare items within the first 12 months",
       "4% higher chance of obtaining NFA's or rare items ongoing",
       "40% Increase in training speed",
@@ -410,11 +410,11 @@ const PACKAGES = [
     tier: "$10,000 USD",
     image: "/avatar/overlord.webp",
     rewards: [
-      'Your name may appear in the end credits of the games, if released, under the title \"Over Lord\"',
+      'Your name will appear in the end credits of the games, under the title \"Over Lord\"',
       "37,500,000 Gems for in-game purchases (Gems have no cash value)",
       "Weekly development updates by email",
       "Access to the Discord chat",
-      "Overlord rank: 40% increase in resource gathering/mining, if the games are released",
+      "Overlord rank: 40% increase in resource gathering/mining",
       "10% Higher chance of obtaining NFA's or rare items within the first 12 months",
       "5% higher chance of obtaining NFA's or rare items ongoing",
       "50% Increase in training speed",
@@ -525,17 +525,15 @@ function PackageModal({ pkg, onClose }) {
 
             <div className="h-px bg-white/10" />
 
-            {/* Note */}
-            <div className="flex flex-col gap-2">
-              <h4 className="text-white/50 text-[11px] font-bold uppercase tracking-widest">{t("packages.noteTitle")}</h4>
-              <p className="text-white/50 text-[12px] leading-relaxed whitespace-pre-line">{t("packages.commonNote")}</p>
-            </div>
-
             {/* Special Condition */}
             <div className="rounded-lg p-4 flex flex-col gap-2"
               style={{ background: "rgba(126,200,160,0.08)", border: "1px solid rgba(126,200,160,0.25)" }}>
               <h4 className="text-[#7EC8A0] text-[11px] font-bold uppercase tracking-widest">{t("packages.specialConditionTitle")}</h4>
-              <p className="text-white/70 text-[12px] leading-relaxed">{t("packages.specialCondition")}</p>
+              <p className="text-white/70 text-[12px] leading-relaxed whitespace-pre-line">
+                {t("packages.specialCondition").split("**").map((part, i) =>
+                  i % 2 ? <strong key={i} className="text-white/90">{part}</strong> : part
+                )}
+              </p>
             </div>
 
           </div>
