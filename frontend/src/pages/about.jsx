@@ -7,6 +7,7 @@ import { getImageUrl } from "../Config";
 import LazyImage from "../Components/Common/LazyImage";
 import GlowingOrb from "../Components/Common/BgColoring";
 import { useTranslation } from "react-i18next";
+import { TEAM_GROUPS } from "../data/team";
 
 import aboutBg from "../assets/images/aboutpage/about_bg.webp";
 import charImg from "../assets/images/aboutpage/char.webp";
@@ -343,6 +344,53 @@ function About({ isPreview = false }) {
               })}
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
+          MEET THE TEAM
+      ══════════════════════════════════════════════════════ */}
+      <section id="team" className="relative w-full px-6 md:px-12 xl:px-20 pt-12 pb-6">
+        <div className="max-w-[1400px] mx-auto">
+          <motion.div
+            className="text-center mb-10"
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
+          >
+            <h2 className="font-[Goldman] font-bold text-white text-2xl md:text-4xl uppercase tracking-wide">Meet the Team</h2>
+          </motion.div>
+
+          <div className="flex flex-col gap-10">
+            {TEAM_GROUPS.map((group) => (
+              <div key={group.title} className="flex flex-col gap-5">
+                <h3 className="text-sky-300 text-xs font-bold uppercase tracking-[0.25em]">{group.title}</h3>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                  {group.members.map((m) => (
+                    <motion.div
+                      key={m.name}
+                      className="rounded-2xl p-6 flex flex-col sm:flex-row gap-5"
+                      style={{ background: "rgba(56,189,248,0.04)", border: "1px solid rgba(56,189,248,0.18)" }}
+                      initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }}
+                    >
+                      {m.photo ? (
+                        <img src={m.photo} alt={m.name} loading="lazy" className="w-24 h-24 rounded-xl object-cover flex-shrink-0" style={{ border: "1px solid rgba(255,255,255,0.2)" }} />
+                      ) : (
+                        <div className="w-24 h-24 rounded-xl flex-shrink-0 flex items-center justify-center font-[Goldman] text-2xl text-sky-200" style={{ background: "rgba(56,189,248,0.10)", border: "1px solid rgba(56,189,248,0.3)" }}>
+                          {m.name.split(" ").map((w) => w[0]).slice(0, 2).join("")}
+                        </div>
+                      )}
+                      <div className="flex flex-col gap-2 min-w-0">
+                        <div>
+                          <p className="text-white font-[Goldman] font-bold text-lg leading-tight">{m.name}</p>
+                          <p className="text-sky-300/90 text-[13px] font-semibold">{m.role}</p>
+                        </div>
+                        <p className="text-white/65 text-[13px] leading-[1.8] text-left sm:text-justify">{m.bio}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
