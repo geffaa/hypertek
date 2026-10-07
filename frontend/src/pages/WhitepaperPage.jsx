@@ -250,7 +250,7 @@ export default function WhitepaperPage() {
             <Card>
               <h3 className="font-semibold text-white mb-4">Enter Hyper Tek</h3>
               <p className="text-white/60 text-sm leading-relaxed mb-4">
-                Hyper Tek represents the next evolution: a 3-in-1 interconnected gaming universe where strategy, racing, and exploration exist as distinct experiences within a unified ecosystem. Built on Unreal Engine 5 with cross-platform support, your character, assets, and progression flow seamlessly between three immersive worlds.
+                Hyper Tek represents the next evolution: a 3-in-1 interconnected gaming universe where strategy, racing, and exploration exist as distinct experiences within a unified ecosystem. Built on Unreal Engine 5 with cross-platform support, your character, items, and progression flow seamlessly between three immersive worlds.
               </p>
               <div className="grid sm:grid-cols-3 gap-3">
                 {[
@@ -322,7 +322,7 @@ export default function WhitepaperPage() {
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <p className="text-white/60 text-sm leading-relaxed mb-3">
-                    Hyper Tek's three games share a unified player profile and asset database. This isn't superficial. It's deep mechanical integration.
+                    Hyper Tek's three games share a unified player profile and item database. This isn't superficial. It's deep mechanical integration.
                   </p>
                   <div className="space-y-3">
                     {[
@@ -405,7 +405,7 @@ export default function WhitepaperPage() {
             <Card className="mb-6">
               <h3 className="font-semibold text-white mb-4">Blockchain Integration</h3>
               <p className="text-white/60 text-sm leading-relaxed mb-4">
-                Hyper Tek uses blockchain for a specific, valuable purpose: establishing demonstrable ownership of rare in-game assets. Players never need to understand blockchain to enjoy the game; standard email/password accounts work seamlessly.
+                Hyper Tek uses blockchain for a specific, valuable purpose: establishing demonstrable ownership of rare in-game items. Players never need to understand blockchain to enjoy the game; standard email/password accounts work seamlessly.
               </p>
               <div className="grid sm:grid-cols-3 gap-4">
                 {[
@@ -442,7 +442,7 @@ export default function WhitepaperPage() {
 
           {/* ── 04 NFAs ── */}
           <section id="nfa" className="pt-2">
-            <SectionHeading number="04" title="Non-Fungible Assets (NFAs)" />
+            <SectionHeading number="04" title="Non-Fungible Articles (NFAs)" />
 
             <Card className="mb-6">
               <h3 className="font-semibold text-white mb-3">True Ownership with a Programmatic Trade-In Value</h3>

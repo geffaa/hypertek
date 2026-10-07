@@ -17,7 +17,7 @@
     "shop": {
       "overview": "Overview",
       "overviewDesc": "General market overview",
-      "myAssets": "My Assets",
+      "myAssets": "My Items",
       "myAssetsDesc": "Track and manage everything you own",
       "theMarketplace": "The Marketplace",
       "theMarketplaceDesc": "Browse all NFT, NFA & NFC collectibles",
@@ -69,8 +69,8 @@
         "description": "Buy your favorite NFTs and showcase or trade them on your profile anytime."
       },
       {
-        "title": "Earn & Grow",
-        "description": "Earn by selling your collections or gaining popularity in the NFT space."
+        "title": "Collect & Grow",
+        "description": "Grow your collection, or offer your own creations to other players on the marketplace."
       }
     ]
   },
@@ -89,27 +89,27 @@
     "highlights": [
       {
         "label": "Interconnected Universe",
-        "desc": "3 games, one shared progression system"
+        "desc": "3 planned games, one proposed shared progression system"
       },
       {
         "label": "True Ownership",
-        "desc": "NFA/NFC/NFTs with a Programmatic Trade-In Value"
+        "desc": "NFA/NFC/NFTs with proposed Programmatic Trade-In Value"
       },
       {
         "label": "Play-to-Own",
-        "desc": "Every item you collect is yours, recorded on-chain"
+        "desc": "Proposed items that are yours to collect and own, recorded on Base chain"
       },
       {
         "label": "Item Loyalty Program",
-        "desc": "The longer you keep an item, the higher its trade-in tier, always below the amount allocated to it"
+        "desc": "Proposed loyalty program value that may increase under stated terms"
       },
       {
         "label": "Linked Progression",
-        "desc": "Player progression is linked across all suites of games"
+        "desc": "Proposed player progression linked across all planned games"
       },
       {
         "label": "VR/AR Integration",
-        "desc": "VR/AR players can join missions and epic battles in real-time"
+        "desc": "Proposed VR/AR so players may join missions and epic battles in real-time"
       }
     ]
   },
@@ -169,10 +169,10 @@
       "uiPageSubtitle": "The full-spectrum gaming dashboard.",
       "uiPageSubtitleSpan": "Three modes. One immersive experience.",
       "uiHeroLabel": "Interactive Preview",
-      "uiHeroDesc": "Step inside the full Hyper Tek 100 dashboard. Switch between Racing, Quest, and Overlord modes. Each with its own marketplace, asset inventory, and real-time earnings.",
+      "uiHeroDesc": "Step inside the full Hyper Tek 100 dashboard. Switch between Racing, Quest, and Overlord modes, each with its own marketplace and item inventory.",
       "uiStat1": "3 Game Modes",
       "uiStat2": "Full Dashboard",
-      "uiStat3": "Asset Inventory",
+      "uiStat3": "Item Inventory",
       "uiStat4": "Live Marketplace",
       "uiLaunchBtn": "Launch Interface",
       "aboutPageSubtitle": "The team, mission, and vision.",
@@ -181,9 +181,9 @@
       "aboutHeroTitle2": "Powered by Web3.5.",
       "aboutHeroDesc": "Hyper Tek 100 is a gaming project in development where every item is recorded on-chain and owned by its player. Three interconnected games are planned, with one shared progression system.",
       "pillar1Title": "Web3.5 Technology",
-      "pillar1Desc": "On-chain assets, real ownership, and a transparent marketplace built on Base.",
-      "pillar2Title": "True Asset Value",
-      "pillar2Desc": "Every in-game item is a tradeable asset. Play, earn, and own your progress.",
+      "pillar1Desc": "On-chain items, real ownership, and a transparent marketplace built on Base.",
+      "pillar2Title": "True Item Ownership",
+      "pillar2Desc": "Every eligible in-game item is planned to be tradeable. Play, collect, and own your items.",
       "pillar3Title": "Fair Ecosystem",
       "pillar3Desc": "Transparent commission splits and a Programmatic Trade-In Value built into each eligible item.",
       "pillar4Title": "Get Involved",
@@ -198,23 +198,21 @@
     "tryGaming": "Try the Gaming Interface",
     "badge": "LIMITED EDITION NFAs AND GAMING PACKAGES, AVAILABLE WHILE SUPPLY LASTS",
     "intro1": "Hyper Tek 100 is a gaming project in development that sets out to tackle some of the industry's most pressing challenges. The website, marketplace and item system are built, and three interconnected games are planned. Ahead of the games, we are releasing a limited number of items and packages for players and collectors who want to join the universe early.",
-    "intro2": "We are releasing a small number of Stage 1 Non-Fungible Asset (NFA) items. Each lists in-game bonuses that may apply if the games are released, and the Stage 1 bonus levels are not planned to be repeated. Supply is hard-capped: once these items sell out, any remaining unminted limited-edition NFAs will be removed from the website.",
-    "intro3": "Eligible Hyper Tek items carry a Programmatic Trade-In Value, held in an on-chain escrow. These limited edition NFAs also list in-game bonuses that may apply, subject to the final game rules, if the games are released.",
+    "intro2": "We are releasing a small number of Stage 1 Non-Fungible Article (NFA) items. Each lists proposed in-game bonuses that may apply if the games are finalised, and the Stage 1 bonus levels are not planned to be repeated. Supply is hard-capped: once these items sell out, any remaining unminted limited-edition NFAs will be removed from the website.",
+    "intro3": "Eligible Hyper Tek items carry a Programmatic Trade-In Value, held in an on-chain escrow. These limited edition NFAs also list proposed in-game bonuses that may apply, subject to the final game rules, if the games are finalised.",
     "intro4": "If you enjoy what you have seen of the Hyper Tek Project and would like to own one of these limited items, now is the time. Supply is capped, and once an item is gone it will not be minted again.",
     "intro5": "Our second release is a set of exclusive gaming packages sold directly on our own website, at a 10% lower price than they may later be offered elsewhere. This price is available for a limited time only.",
     "keyPointsTitle": "Key Points to Remember:",
-    "intro6": "Hyper Tek Non-Fungible Assets (HT NFAs) are digital collectibles with the largest in-game bonuses in the Hyper Tek range, which may apply if the games are released, plus a Programmatic Trade-In Value. Available only while supply lasts.",
-    "intro7": "Hyper Tek is built as Play-to-Own: the items you collect are yours, recorded on-chain, with in-game utility that may apply across the planned games. Items are sold as digital collectibles, not as a way to make money.",
+    "intro6": "Hyper Tek Non-Fungible Articles (HT NFAs) are digital collectibles with the proposed largest in-game bonuses in the Hyper Tek range, which may apply if the games are finalised, plus a Programmatic Trade-In Value. Available only while supply lasts.",
+    "intro7": "Hyper Tek is built as Play-to-Own: the items you collect are yours, recorded on-chain, with proposed in-game functionality that may apply across the planned games. Items are sold as digital collectibles, not as a way to make money.",
     "collectionsLabel": "Collections",
     "sectionTitle": "Limited Edition Gaming Packages",
     "discount": "Save 10% off listed prices",
     "donationTierLabel": "Package Tier",
     "donationTierPrefix": "Package Tier:",
-    "rewardsTitle": "Rewards & Benefits",
-    "noteTitle": "Note",
-    "commonNote": "Items, bonuses and discounts included in each package.\n\nNOTE: Other than the Gems included for in-game purchases, bonuses and discounts cannot be combined with any other promotion.\n\nEvery package includes a name credit in the end credits of the games, if the games are released.",
+    "rewardsTitle": "Subject to game release and final game terms:",
     "specialConditionTitle": "Special Condition",
-    "specialCondition": "Items are sold as is. In-game bonuses, discounts and Gems listed in a package may only apply if the games are released, and are subject to the final game rules. No profit, payment or financial return is promised.",
+    "specialCondition": "Other than the Gems included for in-game purchases, bonuses and discounts cannot be combined with any other promotion. Every package includes a name credit in the end credits of the games, **subject to game release**.\n\nItems are sold as is. In-game bonuses, discounts and Gems listed in a package may only apply **subject to game release and final game terms**. No profit, payment or financial return is promised.",
     "imageComing": "Image coming soon",
     "close": "Close"
   },

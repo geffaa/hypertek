@@ -30,7 +30,7 @@ HyperTek100 is a gaming project on the Base network. It combines:
 ITEM TYPES
 =====================
 
-NFA (Non-Fungible Asset)
+NFA (Non-Fungible Article)
 - The rarest tier, created by the game architects
 - Lists the largest in-game bonuses, which may apply if the games are released
 - Carries a Programmatic Trade-In Value

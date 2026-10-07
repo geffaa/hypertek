@@ -23,7 +23,7 @@ const CARDS = [
     icon: Boxes,
     accent: "#fbbf24",
     title: "What your wallet can hold",
-    body: "Your wallet can hold all three Hyper Tek asset types: Non-Fungible Assets (NFAs), Collectibles (NFCs), and Tokens (NFTs). It also holds USDC on the Base network, which is what purchases are made in.",
+    body: "Your wallet can hold all three Hyper Tek asset types: Non-Fungible Articles (NFAs), Collectibles (NFCs), and Tokens (NFTs). It also holds USDC on the Base network, which is what purchases are made in.",
   },
   {
     icon: ShieldCheck,

@@ -25,9 +25,9 @@ const DEFAULT_STEPS = [
       "Buy your favorite NFTs and showcase or trade them on your profile anytime.",
   },
   {
-    title: "Earn & Grow",
+    title: "Collect & Grow",
     description:
-      "Earn by selling your collections or gaining popularity in the NFT space.",
+      "Grow your collection, or offer your own creations to other players on the marketplace.",
   },
 ];
 

@@ -170,7 +170,7 @@ function DetailPage({ data }) {
             <motion.p
               key={i}
               variants={fadeUp} custom={i + 2} initial="hidden" animate="visible"
-              className="text-white/70 text-[16px] leading-[1.95]"
+              className="text-white/70 text-[16px] leading-[1.95] whitespace-pre-line"
             >
               {para}
             </motion.p>

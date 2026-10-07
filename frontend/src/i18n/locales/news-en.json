@@ -34,7 +34,7 @@
       },
       {
         "q": "What are NFAs, NFCs, and NFTs?",
-        "a": "NFAs/NFCs/NFTs are Hyper Tek’s digital artworks. NFAs and NFCs carry in-game bonuses and a Programmatic Trade-In Value.\n\nNon-Fungible Assets (NFAs) are the rarest tier in the Hyper Tek ecosystem. These NFAs are architect-created artworks with the biggest in-game bonuses of any artwork tier. They are released at random when players buy packages and may be awarded as exclusive rewards during major in-game events.\n\nNon-Fungible Collectables (NFCs) also carry in-game bonuses and can be created by both the game architects and by players who follow specific parameters. NFCs open the door for the community to contribute creativity while still gaining gameplay advantages.\n\nNon-Fungible Tokens (NFTs) are fully player-created artworks. While they do not carry direct in-game bonuses, they can be collected and used to decorate a player’s base or spaceship, and that customisation may contribute to an overall power level bonus."
+        "a": "NFAs/NFCs/NFTs are Hyper Tek’s digital artworks. NFAs and NFCs carry in-game bonuses and a Programmatic Trade-In Value.\n\nNon-Fungible Articles (NFAs) are the rarest tier in the Hyper Tek ecosystem. These NFAs are architect-created artworks with the biggest in-game bonuses of any artwork tier. They are released at random when players buy packages and may be awarded as exclusive rewards during major in-game events.\n\nNon-Fungible Collectables (NFCs) also carry in-game bonuses and can be created by both the game architects and by players who follow specific parameters. NFCs open the door for the community to contribute creativity while still gaining gameplay advantages.\n\nNon-Fungible Tokens (NFTs) are fully player-created artworks. While they do not carry direct in-game bonuses, they can be collected and used to decorate a player’s base or spaceship, and that customisation may contribute to an overall power level bonus."
       },
       {
         "q": "How does the Programmatic Trade-In Value work?",
@@ -53,16 +53,16 @@
         "a": "VR and AR support is part of Hyper Tek's design and will become part of the gaming experience as the platform develops. The goal is full cross-platform play, so VR headset, AR, mobile, and traditional players can eventually join the same missions and battles together, from any device.\n\nOnce available, we expect the VR/AR layer to open up entirely new ways to experience the Hyper Tek universe."
       },
       {
-        "q": "What is a Hyper Tek \"Phygital\" Asset Certificate?",
+        "q": "What is a Hyper Tek \"Phygital\" Certificate?",
         "a": "A Phygital Certificate is a planned bridge between your in-game items and a physical collectible, and may be available if the games are launched. When you buy or mint a premium item on the blockchain, you may be able to use our on-demand printing service to order a high-quality collectible card for that item. For space sectors, you may also be able to order a physical Space Certificate shipped to your home address.\n\nEach card or certificate is planned to carry a gold seal, the item's Base blockchain Token ID, and the item's details from the game database, as a physical keepsake of the item you own."
       },
       {
         "q": "If an item is sold on the marketplace, what happens to the physical certificate?",
-        "a": "True ownership resides immutably on the Base blockchain, which acts as the ultimate source of truth. Because third-party buyers and sellers can be lazy, players do not need to physically mail cards or paper documents to each other when an asset changes hands. The moment an item transitions to a new owner on the Base network ledger, the previous physical certificate simply becomes a historical collector's item. The new owner listed on the Base blockchain instantly unlocks the programmatic right to log into their Hyper Tek profile and order their own freshly generated, custom physical certificate or deed directly from our fulfillment engine to match their live Base chain asset."
+        "a": "True ownership resides immutably on the Base blockchain, which acts as the ultimate source of truth. Because third-party buyers and sellers can be lazy, players do not need to physically mail cards or paper documents to each other when an item changes hands. The moment an item transitions to a new owner on the Base network ledger, the previous physical certificate simply becomes a historical collector's item. The new owner listed on the Base blockchain instantly unlocks the programmatic right to log into their Hyper Tek profile and order their own freshly generated, custom physical certificate directly from our fulfillment engine to match their live Base chain item."
       },
       {
         "q": "Can I order more than one physical certificate for an item I own on the chain?",
-        "a": "Yes, absolutely. You hold absolute sovereignty over your property on the Base blockchain. If your profile is verified as the current on-chain owner of the asset on Base Mainnet, our system allows you to order as many physical cards or deeds for that specific item as you want. There are no limits."
+        "a": "Yes, absolutely. You hold absolute sovereignty over your property on the Base blockchain. If your profile is verified as the current on-chain owner of the item on Base Mainnet, our system allows you to order as many physical cards or certificates for that specific item as you want. There are no limits."
       },
       {
         "q": "Why would a player order multiple physical matching items?",

@@ -11,7 +11,7 @@
       "executive-summary": "01  Executive Summary",
       "three-worlds": "02  The Three Worlds",
       "technology": "03  Technology",
-      "nfa": "04  Non-Fungible Assets",
+      "nfa": "04  Non-Fungible Articles",
       "hyperbucks": "05  Gems",
       "marketplace": "06  Marketplace",
       "roadmap": "07  Roadmap",
@@ -215,7 +215,7 @@
     "signUpBtn": "Sign Up",
     "walletReady": "Your Wallet is Ready",
     "walletReadyDesc": "A secure embedded wallet has been created for your account.",
-    "walletWarning": "⚠️ Never share your private key with anyone. Anyone with your private key has full control of your wallet and assets.",
+    "walletWarning": "⚠️ Never share your private key with anyone. Anyone with your private key has full control of your wallet and items.",
     "walletAddress": "Your Wallet Address",
     "walletKeyNote": "This wallet belongs to you. Your address is always available in your Profile, where you can also export your private key if you ever need it. Never share that key with anyone.",
     "walletCreating": "Creating your secure wallet...",
@@ -355,7 +355,7 @@
       "colTimeActive": "Time Active",
       "colAssignedTo": "Assigned To",
       "inGame": "In-game",
-      "earned": "Earned",
+      "earned": "Gained",
       "statusOpen": "Open"
     },
     "listings": {
@@ -402,7 +402,7 @@
       "transactions": "Transactions",
       "offers": "Offers",
       "hyperBucks": "Gems",
-      "earnings": "Earnings",
+      "earnings": "Sale Proceeds",
       "support": "Support",
       "signOut": "Sign Out"
     },
@@ -497,12 +497,12 @@
       "send": "Send"
     },
     "withdraw": {
-      "title": "Marketplace Earnings",
-      "subtitle": "Claim USDC earned from NFT sales and creator royalties.",
-      "connectWallet": "Connect your wallet to view marketplace earnings.",
-      "noEarnings": "No marketplace earnings to claim yet.",
-      "noEarningsHint": "Earnings from NFT sales will appear here.",
-      "sellerEarnings": "Seller Earnings",
+      "title": "Marketplace Sale Proceeds",
+      "subtitle": "Claim USDC from your NFT sales and creator royalties.",
+      "connectWallet": "Connect your wallet to view your marketplace sale proceeds.",
+      "noEarnings": "No marketplace sale proceeds to claim yet.",
+      "noEarningsHint": "Proceeds from NFT sales will appear here.",
+      "sellerEarnings": "Seller Proceeds",
       "creatorRoyalties": "Creator Royalties",
       "claim": "Claim"
     },
@@ -520,7 +520,7 @@
       "descPlaceholder": "Describe your item...",
       "storageBox": "Storage Box (Category)",
       "storageBoxHint": "Item is placed into this storage box until listed on the marketplace.",
-      "assetType": "Asset Type",
+      "assetType": "Item Type",
       "nfcSoon": "Soon",
       "nfcHint": "NFC creation requires a license — coming in a future update.",
       "blockchain": "Blockchain",

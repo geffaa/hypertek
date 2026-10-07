@@ -67,10 +67,10 @@
       "features": [
         {
           "label": "NFAs / NFCs / NFTs",
-          "tagline": "New to Web3.5 assets? Start here",
+          "tagline": "New to Web3.5 items? Start here",
           "intro": "NFAs/NFCs/NFTs are digital artworks. NFAs and NFCs carry in-game bonuses and a Programmatic Trade-In Value.",
           "details": [
-            "**NFAs** (Non-Fungible Assets) are Hyper Tek-issued items.",
+            "**NFAs** (Non-Fungible Articles) are Hyper Tek-issued items.",
             "**NFCs** (Non-Fungible Collectables) are licensed player and Hyper Tek-issued items.",
             "**NFTs** (Non-Fungible Tokens) are user-created items."
           ],
@@ -78,7 +78,7 @@
         },
         {
           "label": "The Marketplace",
-          "tagline": "Buy & sell in-game assets instantly",
+          "tagline": "Buy & sell digital items instantly",
           "details": [
             "Browse a wide catalog of NFAs, NFCs, and NFTs: skins, weapons, specialists, spaceships, and more.",
             "Filter by category, rarity, or price range to find exactly what you need.",
@@ -90,7 +90,7 @@
           "label": "Auctions",
           "tagline": "Compete for exclusive limited-edition items",
           "details": [
-            "Bid on rare assets that are only available through time-limited auctions.",
+            "Bid on rare items that are only available through time-limited auctions.",
             "A live countdown shows exactly how much time is left, every second counts.",
             "Outbid others to secure legendary items that can't be bought any other way."
           ],
@@ -98,9 +98,9 @@
         },
         {
           "label": "Trades",
-          "tagline": "Swap assets peer-to-peer, no middleman",
+          "tagline": "Swap items peer-to-peer, no middleman",
           "details": [
-            "Propose or accept direct asset trades with other players which are fully on-chain.",
+            "Propose or accept direct item trades with other players which are fully on-chain.",
             "Set the terms yourself: choose what you offer and what you want in return.",
             "Browse open trade offers or post your own to find the perfect deal."
           ],
@@ -108,10 +108,10 @@
         },
         {
           "label": "Quests",
-          "tagline": "Complete missions, earn exclusive rewards",
+          "tagline": "Proposed missions with in-game rewards",
           "details": [
-            "Take on quests to earn exclusive rewards and rare in-game assets.",
-            "Each quest has unique objectives which are explore, battle, or build your way to victory.",
+            "Proposed quests may offer exclusive in-game rewards and rare in-game items.",
+            "Each quest is planned to have unique objectives: explore, battle, or build your way to victory.",
             "Build your collection strategically through skill, not just spending."
           ],
           "cta": "Explore Quests"
@@ -120,9 +120,9 @@
           "label": "To Let",
           "tagline": "Let out your items for in-game rewards",
           "details": [
-            "Rent powerful specialists or gear for a single mission without buying outright.",
+            "Players may be able to take powerful specialists or gear on let for a single mission without buying outright.",
             "Players may be able to let out idle items to other players for in-game rewards they negotiate between themselves.",
-            "Flexible durations: hourly, daily, or per-mission agreements."
+            "Proposed flexible durations: hourly, daily, or per-mission agreements."
           ],
           "cta": "Browse To Let"
         },
@@ -130,9 +130,9 @@
           "label": "Bounty",
           "tagline": "Hunt targets, claim rewards, top the leaderboard",
           "details": [
-            "Accept bounties posted by other players or the system to earn crypto rewards.",
+            "Players may be able to accept bounties posted by other players or the system for in-game rewards.",
             "Climb the bounty leaderboard to unlock exclusive titles and in-game rewards.",
-            "Post your own bounties to recruit skilled players for your objectives."
+            "Players may be able to post their own bounties to find skilled players for their objectives."
           ],
           "cta": "View Bounties"
         }
@@ -184,7 +184,7 @@
     "nfa101": {
       "sectionLabel": "Education",
       "heading": "NFAs / NFCs / NFTs 101",
-      "subtitle": "New to NFTs and Web3.5? Explore our articles to understand blockchain assets, wallets, security, and the Hyper Tek ecosystem.",
+      "subtitle": "New to NFTs and Web3.5? Explore our articles to understand blockchain items, wallets, security, and the Hyper Tek ecosystem.",
       "minRead": "min read",
       "filterAll": "All"
     },
@@ -373,7 +373,7 @@
       "noQuests": "No {{filter}} quests",
       "inGameFeature": "In-Game Feature",
       "inGameDesc": "Quests are auto-generated when sellers choose a reduced commission. Players can complete up to 5 quests per day. The commission pool is split between the buyer discount, the player reward, and the platform.",
-      "earnFromQuests": "Want to earn from quests? Play the game →",
+      "earnFromQuests": "Want in-game rewards from quests? Try the game interface →",
       "moneyQuests": "Money Quests (11% pool)",
       "resourceQuests": "Resource Quests (20% pool)",
       "footerNote1": "# Quests with combined payloads use the separate table rewards.",
@@ -404,7 +404,7 @@
       },
       "comingSoon": {
         "title": "Coming Soon",
-        "desc": "The in-game quest feature is currently under development. Stay tuned — you'll be able to earn rewards directly from the game.",
+        "desc": "The proposed in-game quest feature is under development and may offer in-game rewards, subject to the final game rules.",
         "gotIt": "Got it"
       },
       "pagination": {
