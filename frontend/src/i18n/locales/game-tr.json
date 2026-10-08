@@ -5,16 +5,16 @@
     "racing": {
       "label": "YARIŞ",
       "heading": "Hiper Yarış",
-      "subtitle": "Galaksinin en yoğun uçan araç yarışı deneyimi,\nbecerinin karşılığını aldığı ve şampiyonların yaratıldığı yer.",
+      "subtitle": "Galaksinin en yoğun uçan araç yarışı deneyimi,\nburada beceri hüküm sürer ve şampiyonlar doğar.",
       "intro": [
-        "Hyper Racing, oyuncuların galaksideki en tehlikeli devrelerden bazılarında tamamen özelleştirilebilir uçan yarış araçlarını inşa ettiği, yükselttiği ve pilotluk yaptığı, yabancı dünyalarda geçen yüksek oktanlı, rekabetçi bir yarış oyunudur. Yüzen kaya oluşumlarından volkanik lav tüplerine, çöl arazilerinden dağ geçitlerine kadar her yarış bir hazırlık, refleks ve strateji sınavıdır.",
-        "Hyper Racing rekabetçi bir platform olarak planlanıyor. En iyi performans gösterenler, oyun içi ödüllerin söz konusu olduğu dereceli etkinliklere ve turnuvalara katılabilir. İster sıralamada zafer peşinde ol ister bir yarış imparatorluğu kur, Hyper Racing'de yaptığın her şey seni ileri taşımak için tasarlandı.",
-        "Yarış araçlarını burnundan kuyruğuna kadar yükselt. Pit ekibini topla ve seviyesini artır. Yarış felsefene uyan bir pit yöneticisi al. Ardından becerilerini pistin ötesine taşı: yarış garajın aynı zamanda kişisel uzay geminin hangarıdır ve geliştirdiğin her yetenek Hyper Quest ile Overlord of the 7 Realms'teki uzay savaşlarına taşınır."
+        "Hyper Racing, yabancı dünyalarda geçen, geliştirilmekte olan planlanan, enerji dolu bir rekabetçi yarış oyunudur; oyuncular galaksinin en tehlikeli pistlerinden bazılarında tamamen özelleştirilebilir uçan yarış araçları inşa edebilir, geliştirebilir ve uçurabilir. Planlanan süzülen kaya oluşumlarından ve volkanik lav tüplerinden çöllere ve dağ geçitlerine kadar her planlanan yarış, hazırlığın, reflekslerin ve stratejinin testi olarak tasarlanmıştır.",
+        "Hyper Racing rekabetçi bir platform olarak planlanıyor. En iyi oyuncular, oyun içi ödüllerin ortaya konduğu sıralamalı etkinliklere ve turnuvalara girebilir. İster lider tablosu zaferinin peşinde ol ister bir yarış imparatorluğu kur, Hyper Racing'de yaptığın her şey seni ileri taşıyabilir.",
+        "Geliştirilmekte olan planlanan oyunda şunları yapabilirsin:\n• Yarış aracını baştan sona geliştirmek\n• Pit ekibini edinmek ve seviye atlatmak\n• Yarış felsefene uyan pit yöneticileri edinmek\n• Becerilerini pistin ötesine taşımak; aynı zamanda özel uzay gemisi hangarın olan bir yarış garajı ile\n• Geliştirdiğin yetenekleri Hyper Quest ve Overlord of the 7 Realms'teki uzay savaşlarına taşımak"
       ],
-      "introClose": "Oyunun nasıl çalıştığını, neler kazanabileceğinizi ve yarış kariyerinizin tüm ilerleme evrenini nasıl beslediğini keşfetmek için okumaya devam edin.",
-      "calloutLine1": "Kazanmak için Yarışın. Yükseltmek için kazanın.",
+      "introClose": "Planlanan oyunun nasıl çalışması amaçlandığını, hangi oyun içi ödülleri sunabileceğini ve yarış kariyerinin tüm ilerleme evrenini nasıl besleyebileceğini görmek için okumaya devam et. Hepsi oyunun tamamlanmasına ve nihai oyun kurallarına tabidir.",
+      "calloutLine1": "Yükselmek için yarış. Yarışmak için yükselt.",
       "calloutLine2": "Hakim olmak için yükseltin.",
-      "howItWorksTitle": "Hiper Yarış Nasıl Çalışır?",
+      "howItWorksTitle": "Geliştirilmekte olan planlanan Hyper Tek yarış oyununun nasıl çalışması amaçlandığı: aşağıda bir genel bakış var, oyunun tamamlanmasına ve nihai oyun kurallarına tabi olarak.",
       "howItWorks": [
         {
           "num": "01",
@@ -24,7 +24,7 @@
         {
           "num": "02",
           "title": "Ekibinizi Oluşturun",
-          "body": "Yarış bir takım sporudur. Benzersiz bonuslar getiren pit ekibi uzmanları al: daha hızlı yakıt ikmali, gerçek zamanlı teşhis, yarış ortasında acil gövde onarımı ve turlar arasında performans ayarları. Her ekip üyesi deneyimle seviye atlar ve araç yükseltmelerinin üzerine güçlü yetenekler ekler. Ardından operasyonları koordine edecek, yarış stratejisini belirleyecek ve tüm sezon boyunca katlanarak artan, takım genelindeki performans artışlarının kilidini açacak bir pit yöneticisi al."
+          "body": "Yarış bir takım sporudur. Benzersiz bonuslar, daha hızlı yakıt ikmali, gerçek zamanlı tanılama, yarışın ortasında acil gövde onarımları ve turlar arası performans ayarları sağlayan pit uzmanları edin. Her ekip üyesi deneyimle seviye atlar, araç geliştirmelerinin üzerine güçlü yetenekler ekler. Ardından operasyonları koordine eden, yarış stratejisini belirleyen ve tüm sezon boyunca birikerek artan takım genelinde performans geliştirmelerinin kilidini açan pit yöneticileri edin."
         },
         {
           "num": "03",
@@ -34,213 +34,209 @@
         {
           "num": "04",
           "title": "Sıralamalarda Tırman",
-          "body": "Zafer, lider puanları kazandırır, uzak dünyalarda yeni devrelerin kilidini açar ve daha yüksek seviyeli yarışmaların kapısını açar. Ne kadar derine inerseniz, rakipler o kadar şiddetli olur ve riskler de o kadar büyük olur. Kendinizi her gezegende kanıtlayın ve küresel sıralamada yükselin."
+          "body": "Zaferler sıralama puanı kazandırır, uzak dünyalarda yeni pistlerin kilidini açar ve daha üst seviye yarışmalara kapı aralar. Ne kadar derine inersen rakipler o kadar acımasızlaşır ve riskler o kadar büyür. Her gezegende kendini kanıtla ve küresel sıralamada yüksel."
         }
       ],
-      "rewardsTitle": "Büyük Kazanın; Önemli Olan Ödüller!",
+      "rewardsTitle": "Anlamlı Oyun İçi Ödüller",
       "rewards": [
         {
-          "title": "Oyun İçi Ödüller",
-          "body": "Bitirdiğin her yarış seni oyun içinde ödüllendirmek için tasarlandı. Kazanırsan ödüller katlanabilir. Yarış galibiyetleri premium araç bileşenlerinin, nadir yükseltme malzemelerinin, özel ekip alım jetonlarının ve bir sonraki yapın için kredilerin kilidini açabilir. Araçlarını yükselt, diğer oyuncularla takas et ve her podyumla yarış imparatorluğunun büyümesini izle."
+          "title": "Oyun İçi Eşyalarla Oyun İçi Ödüller",
+          "body": "Tamamladığın her yarışın sana oyun içi ödüller kazandırması planlanıyor. Kazan, oyun içi ödüllerin katlanabilir. Yarış zaferleri premium araç parçalarının, nadir geliştirme malzemelerinin, özel oyun içi ekip jetonlarının ve bir sonraki yapı için oyun içi kredilerin kilidini açabilir. Araçları geliştirip diğer oyuncularla takas edebilirsin, nihai oyun kurallarına tabi olarak."
         },
         {
           "title": "Dereceli Etkinlikler",
-          "body": "Hyper Racing, dereceli etkinlikler ve turnuvalar etrafında tasarlandı. Beceriye dayalı yarışmalar, oyun içi ödüller, unvanlar ve sıralama yeri için galaksinin en iyi pilotlarına karşı yeteneğini kanıtlamana olanak tanıyabilir. Haftalık dereceli mücadelelerden sezonluk şampiyonalara, en iyiler öne çıkmak için pek çok fırsat bulabilir."
+          "body": "Hyper Racing, sıralamalı etkinlikler ve turnuvalar etrafında planlanıyor. Planlanan beceri tabanlı yarışmalar, oyun içi ödüller, unvanlar ve lider tablosu konumları için galaksinin en iyi pilotlarına karşı yeteneğini kanıtlamana izin verebilir. Haftalık sıralama meydan okumalarından sezonluk şampiyonalara kadar en iyi oyuncular parlamak için pek çok fırsat bulabilir."
         },
         {
-          "title": "Ödül Etkinlikleri Nasıl İşler?",
-          "body": "Oyuncular, performans eşiklerini karşılayarak dereceli oyun yoluyla hak kazanabilir. Etkinlikler adil eşleştirme etrafında planlanıyor, böylece her yarışmacı benzer beceri düzeyindeki rakiplerle karşılaşır. Etkinlik kurallarının ve oyun içi ödüllerin, sen katılmadan önce açıkça gösterilmesi amaçlanıyor."
+          "title": "Oyun İçi Ödül Etkinlikleri Nasıl Çalışabilir",
+          "body": "Oyuncular performans eşiklerine ulaşarak sıralamalı oyun yoluyla hak kazanabilir. Etkinlikler adil eşleştirme etrafında planlanıyor, böylece her katılımcı benzer becerideki rakiplerle karşılaşır. Etkinlik kuralları ve oyun içi ödüllerin, sen katılmadan önce açıkça gösterilmesi amaçlanıyor, nihai oyun kurallarına tabi olarak."
         },
         {
           "title": "Pist Ötesinde İlerleme",
-          "body": "Yarış yoluyla kazanılan ödüller doğrudan daha geniş ilerlemenizi besler. Yarış araçlarınızı yükseltin, pit ekibinizi güçlendirin ve kazançlarınızı ana uzay geminizi geliştirmeye aktarın. Yarış garajınız o geminin hangar alanıdır, dolayısıyla yarış operasyonunuzdaki her gelişme aynı zamanda dünyalar arasında uçtuğunuz gemiye güç verir ve Hyper Quest ve Overlord of the 7 Realms boyunca uzay savaşına girer."
+          "body": "Yarışla kazanılan oyun içi ödüllerin daha geniş ilerlemene akması planlanıyor. Yarış araçlarını geliştirebilir, pit ekibini güçlendirebilir ve ana uzay gemini geliştirmek için oyun içi ödülleri yönlendirebilirsin. Yarış garajın uzay gemisinin hangarı olarak tasarlandı, bu yüzden yarış operasyonundaki geliştirmeler Hyper Quest ve Overlord of the 7 Realms'te dünyalar arasında uçurduğun gemiyi de güçlendirebilir."
         }
       ],
       "upgradesTitle": "İki Makine, Bir Görev... Her Şeyi Yükseltin",
       "upgrades": [
         {
           "title": "Yarış Aracı Yükseltmeleri",
-          "body": "Yarış aracın tamamen modüler bir makinedir. Her bileşen değiştirilebilir, ayarlanabilir ve yükseltilebilir: gövdeler, iticiler, kalkanlar, dış kabuklar, motorlar, dengeleyiciler, soğutma sistemleri ve aerodinamik yüzeyler. Hafif kompozitler saf hız sağlar; ağır zırh seni acımasız atmosfer koşullarında hayatta tutar. Yükseltme yolu derindir ve yaptığın seçimler yarış kimliğini belirler. Yeni araçlar topla, onları şampiyonluk adayına dönüştür, zafere taşı ve bir sonraki mücadeleye hazır olduğunda diğer oyuncularla takas et."
+          "body": "Geliştirilmekte olan planlanan yarış araçları tamamen modüler makineler olarak tasarlanmıştır. Her bileşen değiştirilebilir, ayarlanabilir ve geliştirilebilir: gövde, iticiler, kalkanlar, dış kabuk, motorlar, dengeleyiciler, soğutma sistemleri ve aerodinamik yüzeyler. Hafif kompozitler saf hız sağlar; ağır zırh acımasız atmosfer koşullarında seni hayatta tutar. Geliştirme yolları derindir ve seçimlerin yarış kimliğini tanımlar. Yeni araçlar topla, onları şampiyonluk adaylarına dönüştür, zaferlere taşı ve bir sonraki meydan okumaya hazır olduğunda diğer oyuncularla takas et, hepsi nihai oyun kurallarına tabidir."
         },
         {
           "title": "Ana Uzay Gemisi Yükseltmeleri",
-          "body": "Yarış garajınız yalnızca bir atölye değildir; kişisel uzay geminizin hangar bölmesidir. Pistte kazandığınız kaynakların, kredilerin ve malzemelerin aynıları ana geminizi geliştirmek için kullanılabilir. Gezegenler arası seyahat için daha iyi motorlar, uzay savaşı için daha güçlü silah sistemleri, yeni yarış dünyalarını keşfetmek için gelişmiş navigasyon ve geçiş sırasında düşmanca karşılaşmalardan kurtulmak için güçlendirilmiş gövdeler. Uzay geminiz ana üssünüz, ulaşım aracınız ve savaş geminizdir ve yarışmak onu daha da güçlendirir."
+          "body": "Planlanan yarış garajın bir atölyeden fazlası olabilir. Özel uzay gemisi hangarın olarak tasarlandı. Pistte kazandığın kaynaklar, krediler ve malzemeler ana gemini geliştirmek için kullanılabilir. Gezegenler arası seyahat için daha iyi motorlar, uzay savaşı için daha güçlü silah sistemleri, yeni yarış dünyaları bulmak için daha iyi seyrüsefer ve geçiş sırasındaki düşmanca karşılaşmalardan sağ çıkmak için güçlendirilmiş gövdeler. Uzay gemin üssün, ulaşımın ve savaş gemindir; yarış onu daha güçlü kılar, hepsi nihai oyun kurallarına tabidir."
         },
         {
           "title": "Yükseltme Döngüsü",
-          "body": "Ödül toplamak için yarış, ödülleri yükseltme için kullan, daha büyük oyun içi ödüllü daha büyük yarışlara girmek için yükselt. Bu ödülleri hem yarış araçlarına hem de uzay gemine aktar. Gemin ne kadar iyiyse o kadar uzağa gidersin ve pistler o kadar tehlikeli ve tatmin edici hale gelir. Bu, her seviyede emeği ve beceriyi ödüllendiren bir ilerleme döngüsüdür."
+          "body": "Daha büyük oyun içi ödüllü daha büyük yarışlara girmek için geliştirmelere yol açabilecek planlanan oyun içi ödülleri topla. Bunları yarış araçlarına ve uzay gemine yönlendir. Geminin ne kadar iyiyse o kadar uzağa gidersin ve pistler o kadar tehlikeli ve ödüllendirici olur. Bu, her seviyede özveriyi ve beceriyi ödüllendiren planlanan bir ilerleme döngüsüdür, hepsi nihai oyun kurallarına tabidir."
         },
         {
           "title": "Oyunlar Arası Etki",
-          "body": "Pistte geliştirdiğiniz her pilot becerisi ve uzay geminize yüklediğiniz her yükseltme, doğrudan Hyper Quest ve Overlord of the 7 Realms'e aktarılır. Tek evren, birden fazla oyun, kesintisiz ilerleme. Hyper Racing'de oluşturduğunuz şey diğer her şeye güç verir."
+          "body": "Pistte geliştirdiğin her planlanan pilot becerisi ve uzay gemine taktığın her geliştirme doğrudan Hyper Quest ve Overlord of the 7 Realms'e taşınır. Tek evren, birçok oyun, kesintisiz ilerleme. Hyper Racing'de inşa ettiğin her şey diğer her şeyi besler, hepsi nihai oyun kurallarına tabidir."
         }
       ],
       "faqTitle": "Hiper Yarış — Sıkça Sorulan Sorular",
       "faq": [
         {
           "q": "Hiper Yarış Nedir?",
-          "a": "Yabancı dünyalarda geçen, yüksek tempolu bir uçan araç yarışı oyunu. Oyun içi ödüller için yarışırken tamamen özelleştirilebilir araçlar inşa et, yükselt ve tehlikeli bilim kurgu pistlerinde yarıştır."
+          "a": "Yabancı dünyalarda geçen, geliştirilmekte olan planlanan yüksek yoğunluklu bir uçan araç yarış oyunu. Oyuncular, oyun içi ödüller için yarışırken tehlikeli bilim kurgu pistlerinde tamamen özelleştirilebilir araçlar inşa edebilir, geliştirebilir ve yarıştırabilir."
         },
         {
           "q": "Yarış aracımı yükseltebilir miyim?",
-          "a": "Her bileşen yükseltilebilir: gövdeler, iticiler, kalkanlar, dış kabuklar, motorlar, dengeleyiciler, soğutma sistemleri ve aerodinamik yüzeyler. Her yükseltme, aracınızın farklı parkurları ve koşulları nasıl idare ettiğini değiştirir."
+          "a": "Her bileşenin geliştirilebilir olması planlanıyor: gövde, iticiler, kalkanlar, dış kabuk, motorlar, dengeleyiciler, soğutma sistemleri ve aerodinamik yüzeyler. Her geliştirme, aracının farklı pistlerde ve koşullarda nasıl tepki verdiğini değiştirebilir."
         },
         {
           "q": "Pit ekibi ne yapar?",
-          "a": "Pit mürettebatı üyeleri benzersiz bonuslar sağlar: daha hızlı yakıt ikmali, gövde teşhisi, acil onarımlar ve turlar arasında performans ayarlamaları. Zamanla seviye atlayarak araç yükseltmeleriyle birlikte daha güçlü yeteneklerin kilidini açarlar."
+          "a": "Planlanan pit ekibi üyeleri benzersiz bonuslar sağlayabilir: daha hızlı yakıt ikmali, gövde tanılama, acil onarımlar ve turlar arası performans ayarları. Zamanla seviye atlamaları, araç geliştirmeleriyle birikerek artan daha güçlü yeteneklerin kilidini açmaları planlanıyor."
         },
         {
           "q": "Pit yöneticisi nasıl çalışır?",
-          "a": "Pit yöneticisi mürettebat operasyonlarını koordine eder, yarış stratejisini belirler ve takım çapındaki performans artışlarının kilidini açar. Savunma yöneticileri aracınızı zorlu koşullarda korur; Agresif yöneticiler her sistemi maksimum hıza zorlar."
+          "a": "Planlanan pit yöneticileri ekip operasyonlarını koordine edebilir, yarış stratejisi belirleyebilir ve takım genelinde performans geliştirmelerinin kilidini açabilir. Savunmacı yöneticiler aracını zorlu koşullarda koruyabilir; saldırgan yöneticiler her sistemi maksimum hıza itebilir."
         },
         {
           "q": "Dereceli etkinliklerde ödül var mı?",
-          "a": "Dereceli etkinliklerin ve turnuvaların oyun içi ödüller, unvanlar ve sıralama yeri sunması planlanıyor. Nakit veya para ödülü sunmazlar."
+          "a": "Planlanan sıralamalı etkinlikler ve turnuvalar oyun içi ödüller, unvanlar ve lider tablosu konumları sunmak üzere tasarlanmıştır. Nakit ödül veya para sunmazlar."
         },
         {
           "q": "Yarış ödülleri nasıl çalışır?",
-          "a": "Her yarış oyun içinde kredi, yükseltme malzemesi ve ekip jetonu ile ödüllendirmek için tasarlandı. Galibiyetler ödüllerini katlayabilir. Araç topla, onları yarış makinelerine yükselt, yarışları kazan ve yeni geliştirmeler ile uzay gemisi yükseltmeleri için çalışırken diğer oyuncularla takas et."
+          "a": "Her yarışın oyun içi ödüller vermesi planlanıyor: oyun içi krediler, geliştirme malzemeleri ve oyun içi ekip jetonları. Zaferler oyun içi ödüllerini katlayabilir. Bunlar planlanan özelliklerdir, nihai oyun kurallarına tabi olarak."
         },
         {
           "q": "Ana uzay gemimi de yükseltebilir miyim?",
-          "a": "Kesinlikle. Yarış garajınız uzay geminizin hangar alanıdır. Yarış kazançları, ana geminizdeki motorlara, silahlara, navigasyona ve gövde takviyesine yönelik yükseltmeleri finanse ederek gezegenler arası seyahati ve uzay savaşını güçlendirir."
+          "a": "Plan bu. Yarış garajın uzay gemisi hangarın olarak tasarlandı. Yarışlardan gelen oyun içi ödüller, ana gemindeki motor, silah, seyrüsefer ve gövde güçlendirme geliştirmelerine yardımcı olabilir."
         },
         {
           "q": "İlerleme diğer oyunlara da yansıyor mu?",
-          "a": "Her pilot becerisi ve uzay gemisi yükseltmesi doğrudan Hyper Quest'e ve Overlord of the 7 Realms'a aktarılır. Tek evren, birden fazla oyun, kesintisiz ilerleme. Hyper Racing'de oluşturduğunuz şey diğer her şeye güç verir."
+          "a": "Planlanan pilot becerileri ve uzay gemisi geliştirmeleri Hyper Quest ve Overlord of the 7 Realms'e taşınabilir. Tek evren, planlanan birkaç oyun, ortak ilerleme, nihai oyun kurallarına tabi olarak."
         },
         {
           "q": "Hangi yarış ortamları var?",
-          "a": "Devreler, yabancı dünyalardaki yüzen kaya oluşumlarını, lav tüplerini, çöl ovalarını ve dağ sıralarını kapsıyor. Atmosferik tehlikeler arasında asit yağmuru, radyoaktif atmosferler, değişken yerçekimi ve türbülanslı rüzgarlar bulunur. Her devre farklı araç ayarları gerektirir."
+          "a": "Planlanan pistler, yabancı dünyalarda süzülen kaya oluşumlarını, lav tüplerini, çöl ovalarını ve dağ geçitlerini içerir. Planlanan atmosferik tehlikeler asit yağmuru, radyoaktif atmosferler, değişen yerçekimi ve çalkantılı rüzgarları içerir. Her pist farklı bir araç kurulumu gerektirebilir."
         }
       ]
     },
     "quest": {
       "label": "GÖREV",
       "heading": "Hiper Görev",
-      "subtitle": "Senin galaksin. Sizin kurallarınız. Senin şansın.",
+      "subtitle": "Senin galaksin. Senin kuralların. Senin hikayen.",
       "intro": [
-        "Hyper Quest, geniş ve tehlikeli bir galakside tamamen yükseltilebilir kendi uzay geminiz Quest Racer'ı komuta ettiğiniz bir açık dünya uzay macerasıdır. Yıllar önce güç, zenginlik ve şöhret arayışı içinde ev uygarlığınızı terk ettiniz. Artık tüm evren sizin oyun alanınız ve tamamladığınız her görev sizi galaktik hakimiyete daha da yaklaştırıyor.",
-        "Hyper Quest bir oyundan fazlası olarak planlanıyor: görevleri tamamla, zorlukların üstesinden gel ve oyun içi ödüller topla. Dakikalar süren hızlı görevlerden günlerce süren destansı seferlere, zorluk ne kadar büyükse oyun içi ödül de o kadar büyük olur.",
-        "Uzay geminizi gövdeden kokpite yükseltin. Onu yıkıcı silah sistemleriyle donatın. Geminizin performansına ve güç seviyesine güçlü bonuslar yükleyen uzmanları işe alın. Asteroitleri kazın, tehlikeli kargoları taşıyın, gizli hazineleri avlayın, yüksek değerli hedefleri kaçırın veya kiralık silah olun. Evreni nasıl yöneteceğiniz tamamen sizin seçiminizdir.",
-        "Hyper Quest'te oluşturduğunuz her şey doğrudan Hyper Racing'e ve 7 Diyarın Overlord'una beslenir. Tek evren, kesintisiz ilerleme, sınırsız potansiyel. Araştırmanın nasıl çalıştığını, neler kazanabileceğinizi ve sizin ve uzay geminizin nasıl galaksideki en korkulan gemi haline geldiğinizi keşfetmek için okumaya devam edin."
+        "Hyper Quest, kendi tamamen geliştirilebilir uzay gemin Quest Racer'ı geniş ve tehlikeli bir galakside komuta edebileceğin, planlanan açık dünya bir uzay macerasıdır. Yıllar önce güç ve şöhret aramak için kendi uygarlığından ayrıldın. Şimdi tüm evren senin oyun alanın ve tamamladığın her quest seni galaktik hakimiyete yaklaştırabilir, nihai oyun geliştirmesine ve oyun kurallarına tabi olarak.",
+        "Hyper Quest, bir oyundan fazlası olarak planlanıyor: quest'leri tamamla, meydan okumaları fethet ve oyun içi ödüller topla. Dakikalar süren hızlı görevlerden günler süren epik seferlere kadar, meydan okuma ne kadar zorsa kazanabileceğin oyun içi ödüller o kadar büyük olabilir, nihai oyun geliştirmesine ve oyun kurallarına tabi olarak.",
+        "Planlanan oyunda gemini gövdeden kokpite kadar geliştirebilir, yıkıcı silah sistemleriyle silahlandırabilir ve geminin performansına ve güç seviyesine güçlü bonuslar ekleyen uzmanlar edinebilirsin. Planlanan etkinlikler arasında asteroit madenciliği, tehlikeli kargo taşıma, gizli hazine avı, yüksek değerli hedefleri izleme veya paralı asker olma yer alır. Evreni nasıl domine edeceğin senin seçimin olarak planlanıyor, nihai oyun geliştirmesine ve oyun kurallarına tabi olarak.",
+        "Hyper Quest'te inşa ettiğin her şeyin Hyper Racing ve Overlord of the 7 Realms'e akması planlanıyor. Tek evren, kesintisiz ilerleme, sınırsız potansiyel. Planlanan quest'lerin nasıl çalışabileceğini, hangi oyun içi ödülleri kazanabileceğini ve senin ile geminin galaksinin en korkulan gemisi nasıl olabileceğinizi görmek için okumaya devam et, hepsi nihai oyun geliştirmesine ve oyun kurallarına tabidir."
       ],
-      "calloutLine1": "Kazanma Arayışı. Yükseltmek için kazanın.",
+      "calloutLine1": "Kazanmak için quest yap. Geliştirmek için kazan.",
       "calloutLine2": "Conquer'a yükseltin.",
-      "howItWorksTitle": "Hyper Quest Nasıl Çalışır?",
+      "howItWorksTitle": "Planlanan Hyper Quest Nasıl Çalışabilir, Nihai Oyun Geliştirmesine ve Oyun Kurallarına Tabi Olarak",
       "howItWorks": [
         {
           "num": "01",
           "title": "Görev Kurulundan Görevleri Kabul Edin",
-          "body": "Oyun içi görev tahtası maceraya açılan kapınızdır. Sadece birkaç dakika süren hızlı kargo seferlerinden, keşfedilmemiş uzayın derinliklerine doğru çok günlük destansı keşif gezilerine kadar uzanan mevcut görevlere göz atın. Her görev net hedefler, tehlike derecelendirmeleri ve ödül kademeleriyle birlikte gelir. Tehlikeli kargo taşımak, gizli hazineleri avlamak, asteroit alanlarında madencilik yapmak veya kayıp eserleri kurtarmak için gizli göreve gitmek gibi oyun tarzınıza uygun görevleri seçin."
+          "body": "Görevler, planlanan oyun içi quest panolarından kabul edilebilir. Planlanan görevler yalnızca birkaç dakikalık hızlı kargo teslimatlarından keşfedilmemiş uzayın derinliklerine uzanan epik çok günlük seferlere kadar uzanır. Her quest'in net bir hedef, tehlike seviyesi ve oyun içi ödül seviyesiyle gelmesi planlanıyor. Oyun tarzına uyan görevleri seçebilirsin: tehlikeli kargo taşımak, gizli hazineleri avlamak, asteroit alanlarında madencilik yapmak ya da kayıp eserleri geri almak için gizlice sızmak olsun."
         },
         {
           "num": "02",
           "title": "Galaksiyi keşfedin",
-          "body": "Portallardan geçerek her biri benzersiz ortamlara, değerli malzemelere ve yeni yarış pistlerine sahip uzak gezegenlere yolculuk et. Keşfedilmemiş bölgelerin haritasını çıkarmak için galaktik haritaları takip et ve ilk keşfettiğin gezegenlere ad verme hakkını kazan. Asteroit alanlarından kaynak çıkar, antik kalıntılardan ve terk edilmiş gemilerden parça kurtar ve yıldızlara dağılmış gizli hazinelere götüren ipuçlarını topla."
+          "body": "Her biri planlanan benzersiz ortamlara, oyun içi malzemelere ve yeni yarış pistlerine sahip uzak gezegenlere portallar aracılığıyla seyahat edebilirsin. Planlanan galaksi haritaları, keşfedilmemiş bölgeleri haritalandırmana ve ilk keşfettiğin gezegenlerin isimlendirme haklarını kazanmana izin verebilir. Asteroit alanlarından oyun içi kaynaklar çıkarabilir, antik kalıntılardan ve terk edilmiş gemilerden parçalar kurtarabilir ve yıldızlar arasına dağılmış gizli oyun içi eşyalara götüren ipuçları toplayabilirsin."
         },
         {
           "num": "03",
           "title": "İmparatorluğunuzu Geminizin İçinden İnşa Edin",
-          "body": "Quest Racer'ınız ulaşımdan daha fazlasıdır. Hidroponik koylarda yiyecek yetiştirin, uzak gezegenlerden çıkarılan malzemeleri arıtın ve klonlama laboratuvarlarınızdan ordular inşa edin. Birliklerinizi ve silahlarını geliştirin, kendinizi korsanlara karşı savunun ve tamamladığınız her görevle daha da güçlenen, kendi kendini idame ettiren bir mobil üssü yönetin."
+          "body": "Planlanan Quest Racer'ının yalnızca ulaşımdan fazlası olması için tasarlandı. Hidroponik alanlarda yiyecek yetiştirebilir, uzak gezegenlerden çıkarılan malzemeleri rafine edebilir ve klonlama laboratuvarından ordular kurabilirsin. Planlanan kendi kendine yeten bir mobil üs, tamamladığın her görevle daha güçlü hale gelebilir."
         },
         {
           "num": "04",
           "title": "Dilediğiniz Gibi Oynayın",
-          "body": "Hakimiyete giden tek bir yol yoktur. Korkulan bir ödül avcısı, kurnaz bir kaçakçı, usta bir madenci veya efsanevi bir kaşif olun. Yüksek değerli hedefleri kaçırın, kiralık silah olun veya tüm sektörleri kontrol etmek için ittifaklar kurun. Galaksi sizin isteğinize göre şekilleniyor ve her karar itibarınızı ve servetinizi şekillendiriyor."
+          "body": "Hakimiyete giden tek bir planlanan yol yok. Korkulan bir ödül avcısı, kurnaz bir kaçakçı, usta bir madenci ya da efsanevi bir kaşif olabilir ya da tüm sektörleri kontrol etmek için ittifaklar kurabilirsin. Her karar itibarını şekillendirebilir, nihai oyun kurallarına tabi olarak."
         }
       ],
-      "rewardsTitle": "Görev Ödülleri; Oynamak İçin Para Kazanın!",
+      "rewardsTitle": "Planlanan Quest Oyun İçi Ödülleri ve Nasıl Çalışabilecekleri",
       "rewards": [
         {
           "title": "Oyun İçi Ödüller",
-          "body": "Tamamladığın her görev seni oyun içinde ödüllendirmek için tasarlandı. Krediler, yükseltme malzemeleri, nadir bileşenler, uzman alım jetonları ve özel öğeler her başarılı görevle envanterine akar. Görev ne kadar zorsa ganimet o kadar zengin olur. Uzak gezegenlerde nadir malzemeler keşfet, antik kalıntılardan değerli parçalar kurtar ve galaktik üstünlüğe yükselişini besleyen kaynakları biriktir."
+          "body": "Tamamladığın her quest'in sana oyun içi ödüller kazandırması planlanıyor. Oyun içi krediler, geliştirme malzemeleri, nadir bileşenler, oyun içi uzman jetonları ve özel oyun içi eşyalar her başarılı görevle envanterine akabilir. Quest ne kadar zorsa kazanabileceğin oyun içi ödüller o kadar büyük olabilir."
         },
         {
-          "title": "Şampiyona Ödülleri",
-          "body": "Bazı görevler ve dereceli mücadeleler premium oyun içi ödüller sunabilir. Üst kademe görevler, sıralama etkinlikleri ve sezonluk görev şampiyonaları planlanıyor; ne kadar becerikli ve cesur olursan oyun içi ödüller o kadar iyi olabilir."
+          "title": "Şampiyona Oyun İçi Ödülleri",
+          "body": "Belirli planlanan quest'ler ve sıralama meydan okumaları premium oyun içi ödüller sunabilir. Üst seviye görevler, lider tablosu etkinlikleri ve sezonluk quest şampiyonaları planlanıyor; ne kadar yetenekli ve cesursan kazanabileceğin oyun içi ödüller o kadar iyi olabilir."
         },
         {
-          "title": "Görev Ödülleri Nasıl Çalışır",
-          "body": "Oyuncular, itibarlarını artırarak ve performans eşiklerini karşılayarak premium görevlere hak kazanabilir. Görevin zorluğu, süresi ve tehlike seviyesi oyun içi ödülü belirler; bu ödülün, herhangi bir görevi kabul etmeden önce gösterilmesi amaçlanıyor. İster on dakikalık bir kargo seferi yap ister bir hafta süren derin uzay seferine çık, ödüller riske uygun olacak şekilde tasarlandı."
+          "title": "Quest Oyun İçi Ödülleri Nasıl Çalışabilir",
+          "body": "Oyuncular itibar kazanarak ve performans eşiklerine ulaşarak premium quest'lere hak kazanabilir. Quest zorluğu, süresi ve tehlike seviyesinin oyun içi ödülleri belirlemesi planlanıyor; bunların, herhangi bir görevi kabul etmeden önce gösterilmesi amaçlanıyor. İster on dakikalık bir kargo taşıması ister bir haftalık uzay seferi yap, oyun içi ödüller riskle orantılı olacak şekilde tasarlanmıştır."
         },
         {
-          "title": "İleriye Dönük Kazanç Sağlayan İlerleme",
-          "body": "Görev ödülleri doğrudan gemi yükseltmelerine, silah sistemlerine ve uzman alımına aktarılır. Her ödül seni güçlendirir, bu da daha zor görevlerin kilidini açar. İlerlemenin Hyper Racing ve Overlord of the 7 Realms'e de taşınması planlanıyor."
+          "title": "İleriye Taşınan İlerleme",
+          "body": "Quest oyun içi ödülleri gemi geliştirmelerine, silah sistemlerine ve uzmanlarına akabilir. Her oyun içi ödül seni daha güçlü yapabilir, bu da daha zor quest'lerin kilidini açabilir. İlerlemenin ayrıca Hyper Racing ve Overlord of the 7 Realms'e taşınması planlanıyor, nihai oyun kurallarına tabi olarak."
         }
       ],
-      "upgradesTitle": "Geminizi Yükseltin, Cephaneliğinizi Silahlandırın, Mürettebatınızı İşe Alın",
+      "upgradesTitle": "Geminizi Geliştirin, Cephaneliğinizi Silahlandırın, Ekibinizi Kurun",
       "upgrades": [
         {
-          "title": "Uzay Gemisi Yükseltmeleri",
-          "body": "Quest Racer'ınız motor bölmesinden kokpite kadar tamamen modülerdir. Maksimum dayanıklılık için gövdeyi yükseltin, düşman ortamlarına dayanacak şekilde dış kabuğu güçlendirin, savaşta hayatta kalabilmek için kalkan jeneratörlerini güçlendirin ve en yüksek performans için güç sistemlerini elden geçirin. Daha iyi motorlar, gezegenler arası seyahatin daha hızlı olması anlamına gelir. Daha güçlü navigasyon sistemleri gizli rotaları ve keşfedilmemiş dünyaları ortaya çıkarır. Her yükseltme, geminizi daha güçlü, daha korkulan bir gemiye dönüştürür."
+          "title": "Planlanan Uzay Gemisi Geliştirmeleri",
+          "body": "Planlanan Quest Racer'ın makine dairesinden kokpite kadar tamamen modüler olacak şekilde tasarlandı. Dayanıklılık için gövdeyi geliştirebilir, düşmanca ortamlara karşı dış kabuğu güçlendirebilir, savaştan sağ çıkmak için kalkan jeneratörlerini sağlamlaştırabilir ve tepe performans için güç sistemlerini elden geçirebilirsin. Daha iyi motorlar daha hızlı gezegenler arası seyahat anlamına gelebilir, daha güçlü seyrüsefer sistemleri gizli rotaları ve keşfedilmemiş dünyaları ortaya çıkarabilir."
         },
         {
-          "title": "Silah Sistemleri",
-          "body": "Galaksi tehlikelidir ve sizin daha tehlikeli olmanız gerekir. Kendinizi korsanlara, rakip oyunculara ve düşman güçlerine karşı korumak için silah sistemlerinizi yükseltin ve iyileştirin. Sizi en kötü durumlarda hayatta tutan savunma konfigürasyonları veya maksimum hasar verecek şekilde tasarlanmış saldırı teçhizatları arasında seçim yapın. Yükseltme ağacında ilerledikçe lazer dizileri, füze bataryaları, plazma topları ve deneysel enerji silahlarının tümü mevcut olacak."
+          "title": "Planlanan Silah Sistemleri",
+          "body": "Planlanan galaksi tehlikelidir. Korsanlara, rakip oyunculara ve düşman güçlere karşı kendini korumak için silah sistemlerini geliştirip ince ayar yapabilir, savunma yapılandırmaları ile saldırı ekipmanı arasında seçim yapabilirsin. Geliştirme ağacında ilerledikçe lazer dizileri, füze bataryaları, plazma topları ve deneysel enerji silahlarının hepsi planlanıyor."
         },
         {
-          "title": "İşe Alma Uzmanları",
-          "body": "Uzmanlar oyunun kurallarını değiştiren kişilerdir. Her biri, geminizin genel performansına ve güç seviyesine güçlü bonuslar ekleyen benzersiz beceriler getirir. Navigasyon uzmanları gizli yolları ortaya çıkarır ve seyahat süresini azaltır. Savaş uzmanları silahın doğruluğunu ve hasar çıktısını artırır. Mühendislik uzmanları gövde bütünlüğünü ve onarım hızını artırır. Bilim uzmanları kaynak çıkarımını ve malzeme iyileştirmeyi geliştiriyor. Geminizin etkinliğini katlayacak yıkıcı kombinasyonlar oluşturmak için birden fazla uzmanı bir araya getirin."
+          "title": "Uzman Edinme",
+          "body": "Planlanan uzmanların her biri geminin genel performansına ve güç seviyesine bonus ekleyen benzersiz beceriler sağlayabilir. Seyrüsefer uzmanları gizli yolları ortaya çıkarabilir ve seyahat süresini azaltabilir. Savaş uzmanları silah isabetini ve hasarını artırabilir. Mühendislik uzmanları gövde bütünlüğünü ve onarım hızını artırabilir. Bilim uzmanları kaynak çıkarımını ve malzeme rafinajını artırabilir. Birden fazla uzmanın birikmesi planlanıyor, nihai oyun kurallarına tabi olarak."
         },
         {
-          "title": "Güç Döngüsü",
-          "body": "Kazanma arayışı, yükseltmek için kazanın ve daha büyük ödüllerle daha zorlu görevlerin üstesinden gelmek için yükseltin. Geminizdeki her sistemi güçlendirmek için uzmanları işe alın. Ne kadar güçlenirseniz galaksi o kadar geniş bir alana açılır ve sizi bekleyen servet de o kadar büyük olur. Gemi yükseltmeleri ve uzmanlık bonusları, Hyper Racing geçişi sırasında doğrudan uzay savaşına ve 7 Diyarın Overlord'unda yapılan savaşlara da aktarılıyor."
+          "title": "Planlanan Güç Döngüsü",
+          "body": "Kazanmak için quest yap, geliştirmek için kazan ve daha büyük oyun içi ödüllü daha zor quest'lere girişmek için geliştir. Planlanan uzmanlar geminin her sistemini güçlendirebilir. Ne kadar güçlenirsen galaksinin o kadar çok bölümü açılabilir. Gemi geliştirmeleri ve uzman bonuslarının ayrıca Hyper Racing ve Overlord of the 7 Realms'e taşınması planlanıyor, nihai geliştirmeye ve oyun kurallarına tabi olarak."
         }
       ],
       "faqTitle": "Hyper Quest — Sıkça Sorulan Sorular",
       "faq": [
         {
           "q": "Hyper Quest nedir?",
-          "a": "Uçsuz bucaksız bir galakside tamamen yükseltilebilir bir uzay gemisine komuta ettiğin açık dünya uzay macerası. Görevleri tamamla, yabancı dünyaları keşfet, gemini yükselt, uzmanlar al ve oyun içi ödüller topla."
+          "a": "Geliştirilmekte olan, tamamen geliştirilebilir bir uzay gemisini geniş bir galakside komuta edebileceğin planlanan açık dünya uzay macerası. Planlanan etkinlikler arasında quest'leri tamamlamak, yabancı dünyaları keşfetmek, gemini geliştirmek, uzmanlar edinmek ve oyun içi ödüller toplamak yer alır."
         },
         {
           "q": "Görevler nasıl çalışır?",
-          "a": "Oyun içi görev panosundaki görevleri kabul edin. Görevler, yalnızca birkaç dakika süren hızlı kargo seferlerinden, keşfedilmemiş uzayın derinliklerine uzanan çok günlük destansı keşif gezilerine kadar çeşitlilik gösterir. Her görevin açık hedefleri, tehlike dereceleri ve ödül aşamaları siz kabul etmeden önce görüntülenir."
+          "a": "Görevler, planlanan oyun içi quest panolarından kabul edilebilir. Planlanan quest'ler yalnızca birkaç dakikalık hızlı kargo teslimatlarından keşfedilmemiş uzayın derinliklerine uzanan epik çok günlük seferlere kadar uzanır. Her quest'in, sen kabul etmeden önce hedefi, tehlike seviyesini ve oyun içi ödül seviyesini göstermesi planlanıyor."
         },
         {
-          "q": "Görevlerden para kazanabilir miyim?",
-          "a": "Hayır. Görevlerin, dereceli mücadelelerin ve sezonluk şampiyonaların nakit veya para değil, yalnızca oyun içi ödüller sunması planlanıyor."
+          "q": "Quest'ler hangi oyun içi ödülleri sunabilir?",
+          "a": "Tamamlanan her quest'in oyun içi ödüller veya eşyalar vermesi planlanıyor: oyun içi krediler, geliştirme malzemeleri, nadir bileşenler, oyun içi uzman jetonları ve özel oyun içi eşyalar. Daha zor ve daha uzun quest'ler daha büyük oyun içi ödüller sunabilir."
         },
         {
-          "q": "Hangi oyun içi ödülleri kazanabilirim?",
-          "a": "Tamamlanan her görev kredi, yükseltme malzemesi, nadir bileşen, uzman alım jetonu ve özel öğelerle ödüllendirmek için tasarlandı. Görev ne kadar zor ve uzunsa ödüller o kadar zengin olur. Uzak gezegenlerde nadir malzemeler keşfet ve antik kalıntılardan değerli parçalar kurtar."
-        },
-        {
-          "q": "Uzay gemimi yükseltebilir miyim?",
-          "a": "Her sistem yükseltilebilir: gövde, dış kabuk, kalkan jeneratörleri, güç sistemleri, motorlar, kokpit ve navigasyon. Daha iyi motorlar daha hızlı seyahat anlamına gelir, daha güçlü gövdeler düşmanca karşılaşmalardan sağ çıkar ve gelişmiş navigasyon, gizli rotaları ve keşfedilmemiş dünyaları ortaya çıkarır."
+          "q": "Uzay gemimi geliştirebilir miyim?",
+          "a": "Her sistemin geliştirilebilir olması planlanıyor: gövde, dış kabuk, kalkan jeneratörleri, güç sistemleri, motorlar, kokpit ve seyrüsefer. Daha iyi motorlar daha hızlı seyahat anlamına gelebilir, geliştirilmiş seyrüsefer gizli rotaları ve keşfedilmemiş dünyaları ortaya çıkarabilir."
         },
         {
           "q": "Hangi silahlar mevcut?",
-          "a": "Lazer dizileri, füze bataryaları, plazma topları ve deneysel enerji silahları dahil olmak üzere silah sistemlerini yükseltin ve iyileştirin. Korsanlara, rakiplere ve düşman güçlerine karşı maksimum hasar için hayatta kalmak için savunma konfigürasyonlarını veya saldırı teçhizatlarını seçin."
+          "a": "Planlanan silah sistemleri lazer dizileri, füze bataryaları, plazma topları ve deneysel enerji silahlarını içerir. Hayatta kalmak için savunma yapılandırmalarını ya da korsanlara, rakiplere ve düşman güçlere karşı saldırı ekipmanını seçebilirsin."
         },
         {
           "q": "Uzmanlar nasıl çalışır?",
-          "a": "Geminizin performansına ve güç seviyesine güçlü bonuslar ekleyen benzersiz becerilere sahip uzmanları işe alın. Navigasyon uzmanları gizli yolları açığa çıkarıyor, savaş uzmanları silah hasarını artırıyor, mühendislik uzmanları gövde bütünlüğünü artırıyor ve bilim uzmanları kaynak çıkarımını geliştiriyor. Yıkıcı kombinasyonlar için birden fazla uzmanı bir araya getirin."
+          "a": "Planlanan uzmanlar edinilebilir veya kazanılabilir; her birinin geminin performansına ve güç seviyesine bonus ekleyen benzersiz becerileri vardır. Seyrüsefer uzmanları gizli yolları ortaya çıkarabilir, savaş uzmanları silah hasarını artırabilir, mühendislik uzmanları gövde bütünlüğünü artırabilir ve bilim uzmanları kaynak çıkarımını artırabilir."
         },
         {
-          "q": "Ne tür görevler mevcut?",
-          "a": "Kargo taşımacılığı, asteroit madenciliği, hazine avı, bounty avı, eser kurtarma, gizli operasyonlar, gezegen keşfi, korsanlara karşı savunma, kurtarma görevleri ve daha fazlası. Görevler on dakikalık hızlı seferlerden günlerce süren derin uzay seferlerine kadar uzanır."
+          "q": "Hangi quest türleri mevcut?",
+          "a": "Planlanan quest türleri kargo taşımacılığı, asteroit madenciliği, hazine avı, ödül avı, eser kurtarma, gizli operasyonlar, gezegen keşfi, korsanlara karşı savunma ve kurtarma görevlerini içerir. Quest'lerin on dakikalık hızlı yolculuklardan günler süren derin uzay seferlerine kadar uzanması planlanıyor."
         },
         {
           "q": "Yeni gezegenler keşfedebilir miyim?",
-          "a": "Evet. Bilinmeyen bölgelere doğru galaktik haritaları takip edin ve yeni dünyaları keşfedin. İlk keşfedenler buldukları gezegenlere isim verme hakkı kazanırlar. Yeni dünyalar, daha önce hiçbir oyuncunun erişmediği benzersiz malzemeler, ortamlar ve yarış pistleri sunuyor."
+          "a": "Planlanıyor. Galaksi haritaları seni keşfedilmemiş bölgelere ve yeni dünyalara götürebilir, ilk keşfedenler buldukları gezegenlerin isimlendirme haklarını kazanabilir. Yeni dünyaların benzersiz oyun içi malzemeler, ortamlar ve yarış pistleri sunması planlanıyor."
         },
         {
-          "q": "Gemimin içinde ne yapabilirim?",
-          "a": "Quest Racer'ınız mobil bir tabandır. Hidroponik koylarda yiyecek yetiştirin, uzak gezegenlerden çıkarılan malzemeleri iyileştirin, klonlama laboratuvarlarında ordular inşa edip eğitin, silahları ve savunmaları yükseltin ve her görevde daha da güçlenen, kendi kendini idame ettiren bir operasyonu yönetin."
+          "q": "Geminin içinde ne yapabilirim?",
+          "a": "Planlanan Quest Racer'ın mobil bir üs olarak tasarlandı. Hidroponik alanlarda yiyecek yetiştirebilir, uzak gezegenlerden çıkarılan malzemeleri rafine edebilir, klonlama laboratuvarlarında ordular kurup eğitebilir ve silahları ile savunmayı geliştirebilirsin."
         },
         {
-          "q": "Galaktik harita nasıl çalışır?",
-          "a": "Galaktik harita evrendeki keşiflerinize rehberlik eder. Yeni sektörleri, portal konumlarını ve gizli görev bölgelerini ortaya çıkarmak için haritanızı yükseltin. Siz daha fazlasını keşfettikçe harita genişleyerek uzayın giderek daha tehlikeli ve ödüllendirici bölgelerinin kilidini açar."
+          "q": "Galaksi haritası nasıl çalışır?",
+          "a": "Planlanan galaksi haritası keşfine rehberlik etmek üzere tasarlandı. Haritaları geliştirerek yeni sektörleri, portal konumlarını ve gizli quest bölgelerini ortaya çıkarabilir, daha uzağa keşfettikçe daha tehlikeli uzay bölgelerinin kilidini açabilirsin."
         },
         {
-          "q": "İlerlemem diğer oyunlara da yansıyor mu?",
-          "a": "Hyper Quest'te oluşturduğunuz her şey doğrudan Hyper Racing'e ve 7 Diyarın Overlord'una beslenir. Gemi yükseltmeleri, uzmanlık bonusları, savaş becerileri ve kaynakların tümü sorunsuz bir şekilde aktarılır. Tek evren, birden fazla oyun, sınırsız ilerleme."
+          "q": "İlerlemem diğer oyunlara taşınır mı?",
+          "a": "Hyper Quest'te inşa ettiğin her şeyin Hyper Racing ve Overlord of the 7 Realms'e taşınması planlanıyor. Gemi geliştirmeleri, uzman bonusları, savaş becerileri ve oyun içi kaynakların hepsi aktarılabilir, nihai geliştirmeye ve oyun kurallarına tabi olarak."
         },
         {
-          "q": "Kötü adam olarak oynayabilir miyim?",
-          "a": "Kesinlikle. Gizli göreve gidin, yüksek değerli hedefleri kaçırın, kiralık silah olun, tehlikeli kargo kaçakçılığı yapın veya diğer oyunculara baskın yapın. Hakimiyete giden tek bir yol yoktur. Galaksiyi nasıl yöneteceğiniz tamamen sizin seçiminizdir ve her karar itibarınızı şekillendirir."
+          "q": "Haydut olarak oynayabilir miyim?",
+          "a": "Planlanıyor. Gizlice sızabilir, yüksek değerli hedefleri izleyebilir, tehlikeli kargo kaçırabilir ya da diğer oyuncuları yağmalayabilirsin. Hakimiyete giden tek bir planlanan yol yok ve her karar itibarını şekillendirebilir."
         }
       ]
     },
@@ -249,148 +245,148 @@
       "heading": "7 Diyarın Efendisi",
       "subtitle": "Çarpışma arazisi. Yeniden inşa et. Fethetmek. Derebeyi ol.",
       "intro": [
-        "Overlord of the 7 Realms, oyun dünyasındaki hiçbir şeye benzemeyen üç seviyeli bir savaş strateji oyunudur. Paralel bir evrene giden bir portaldan geçme cesaretini gösterdiniz ve düşmanca bir uzaylı gezegene zorunlu iniş yaptınız. Geminiz mahvoldu, sistemleriniz çöküyor ve gezegenin yaratıkları zaten yaklaşıyor. Hayatta kalmak sadece bir başlangıç. Hakimiyet amaçtır.",
-        "Geminizi enkazdan yeniden inşa edin. Orduları yerleşik laboratuvarlarınızda klonlayın ve eğitin. Yıkıcı atlı süvariler oluşturmak için gezegenin vahşi yaşamını evcilleştirin. Ardından savaşı üç savaş boyutuna taşıyın: canavarlara ve rakip oyunculara karşı yerden yere mücadele, yörünge veya yer hedeflerine yönelik yerden uzaya saldırılar ve gezegenin yörüngesinde dönen devasa Battle Ring'de uzaydan uzaya savaş.",
-        "Bu sıradan bir strateji oyunu değil. Hyper Racing ve Hyper Quest gibi Overlord da gerçek zamanlı VR etkileşimi ve etkinlikleri, görevleri ve var olan en güçlü uzaylı tür olan korkunç Hammerong'ların iki haftada bir gerçekleşen istilalarını tamamlama karşılığında oyun içi ödüller sunar. Her iki haftada bir gezegenin kaynaklarını sömürmeye gelirler ve her iki haftada bir cesur oyuncular devasa bonuslar ve efsanevi ödüller için onlara meydan okuyabilir.",
-        "Uzay geminizi yükseltin, onu yıkıcı silahlarla donatın, güç seviyenizi yükseltecek uzmanları işe alın ve tüm bölgeleri kontrol etmek için ittifaklar kurun. Oluşturduğunuz her şey, paylaşılan Hyper Tek ekosistemi aracılığıyla doğrudan Hyper Racing ve Hyper Quest'e bağlanır. Tek evren, üç oyun, sınırsız savaş. Savaş sisteminin nasıl çalıştığını ve Overlord'un neden her şeyi değiştirdiğini keşfetmek için okumaya devam edin."
+        "Overlord of the 7 Realms, geliştirilmekte olan planlanan üç katmanlı bir savaş strateji oyunudur. Planlanan hikayede bir portaldan paralel bir evrene geçer ve düşmanca bir yabancı gezegene zorunlu iniş yaparsın. Geminin parçalanmış, sistemlerin arızalanmış ve gezegenin yaratıkları zaten yaklaşıyor. Hayatta kalmak yalnızca başlangıç. Hedef hakimiyet.",
+        "Planlanan oyunda enkazdan bir gemiyi yeniden inşa edebilir, gemideki bir laboratuvarda orduları klonlayıp eğitebilir ve binek süvarisi oluşturmak için gezegenin yaban hayatını evcilleştirebilirsin. Planlanan savaşlar üç savaş boyutunda gerçekleşir: canavarlara ve rakip oyunculara karşı yer-yer çatışması, yörüngedeki veya yerdeki hedeflere karşı yer-uzay saldırıları ve gezegenin etrafında dönen dev bir Battle Ring üzerinde uzay-uzay savaşı.",
+        "Hyper Racing ve Hyper Quest gibi Overlord'un da gerçek zamanlı VR etkileşimine ve hikayedeki en güçlü yabancı tür olan korkulan Hammerong'un planlanan iki haftalık istilalarını, etkinlikleri ve quest'leri tamamlamak için oyun içi ödüllere sahip olması planlanıyor. Her iki haftada bir gezegeni sömürmeye gelmeleri planlanıyor ve her iki haftada bir cesur oyuncular oyun içi bonuslar ve efsanevi oyun içi ödüller için onlara meydan okuyabilir.",
+        "Uzay gemilerini geliştirebilir, silahlandırabilir, güç seviyeni artıran uzmanlar edinebilir ve tüm bölgeleri kontrol etmek için ittifaklar kurabilirsin. İnşa ettiğin şeyin ortak Hyper Tek ekosistemi aracılığıyla Hyper Racing ve Hyper Quest ile bağlantılı olması planlanıyor. Tek evren, planlanan üç oyun, sınırsız savaş. Planlanan savaş sisteminin nasıl çalışabileceğini ve Overlord'un neden her şeyi değiştirebileceğini görmek için okumaya devam et, hepsi nihai geliştirmeye ve oyun kurallarına tabidir."
       ],
       "calloutLine1": "Hayatta Kalmak Sadece Başlangıçtır.",
       "calloutLine2": "Hakimiyet Hedeftir.",
-      "howItWorksTitle": "Üç Seviyeli Savaş Sistemi; Savaşın Üç Boyutu",
+      "howItWorksTitle": "Planlanan Üç Katmanlı Savaş Sistemi; Savaşın Üç Boyutu",
       "howItWorks": [
         {
           "num": "01",
           "title": "Karadan Karaya Savaş",
-          "body": "Gezegenin yüzeyi bir savaş bölgesidir. Klonlanmış ordularınızı düşman uzaylı yaratıklara, korkunç canavarlara ve bölge ve kaynaklar için savaşan rakip oyunculara karşı konuşlandırın. Kara kuvvetlerinize yıkıcı bir üstünlük sağlayan atlı süvari birimleri oluşturmak için gezegenin vahşi yaşamını evcilleştirin ve eğitin. Kara savaşı ham, taktiksel ve acımasızdır. Kazandığınız her savaş kaynak, bölge ve itibar kazandırır."
+          "body": "Gezegen yüzeyi bir savaş bölgesi olarak planlanıyor. Klon ordularını, oyun içi toprak ve kaynaklar için savaşan düşman yabancı yaratıklara, canavar hayvanlara ve rakip oyunculara karşı konuşlandırabilirsin. Gezegenin yaban hayatını evcilleştirmek ve eğitmek, kara kuvvetlerine avantaj sağlayabilecek binek süvari birlikleri oluşturabilir. Kara savaşının ham, taktiksel ve acımasız olması planlanıyor ve kazandığın savaşlar oyun içi kaynaklar, toprak ve itibar sağlayabilir, nihai geliştirmeye ve oyun kurallarına tabi olarak."
         },
         {
           "num": "02",
           "title": "Yerden Uzaya Saldırılar",
-          "body": "Overlord'un başka hiçbir oyunun sunmadığı veya neredeyse hiç sunmadığı bir boyutu eklediği yer burasıdır. Gezegenin yüzeyi ile yörüngedeki Savaş Yüzüğü arasında saldırılar başlatmak için tasarlanmış özel birlik grupları oluşturun. Uzayda bulunan gemilere yer konumunuzdan saldırın veya düşmanları aynı anda yukarıdan ve aşağıdan vuran birleşik saldırıları koordine edin. Bu dikey savaş katmanı, standart stratejiyi hem zeminde hem de uzayda konumlandırmanın zaferi belirlediği çok boyutlu bir satranç maçına dönüştürür."
+          "body": "Bu, çok az başka oyunun sunduğu planlanan bir boyuttur. Gezegen yüzeyi ile yörüngedeki Battle Ring arasında saldırılar başlatmak için tasarlanmış özel kuvvet grupları oluşturabilir, kara konumundan uzaya yerleştirilmiş gemilere saldırabilir veya düşmana aynı anda yukarıdan ve aşağıdan vuran birleşik saldırıları koordine edebilirsin. Bu planlanan dikey savaş katmanının, standart stratejiyi kara ve uzaydaki konuşlanmanın zaferi belirleyebildiği çok boyutlu bir satranca dönüştürmesi amaçlanıyor, nihai geliştirmeye ve oyun kurallarına tabi olarak."
         },
         {
           "num": "03",
           "title": "Uzaydan Uzaya Savaş",
-          "body": "Geminizi yörüngeye taşıyın ve gezegeni çevreleyen devasa bir yörünge yapısı olan Battle Ring'e inin. Buradan korumasız gemileri ve savunmasız hedefleri avlayın. Özel olarak geliştirilmiş biniş saldırılarını kullanarak maksimum dahili hasar vermek için birliklerinizi uzaydan doğrudan düşman gemilerine ışınlayın. Uzay savaşı ödülleri oyundaki en yüksek ödüller arasındadır ve yörünge bölgesini kontrol etmek size yalnızca karada oynayan hiçbir oyuncunun eşleşemeyeceği stratejik bir avantaj sağlar."
+          "body": "Gemileri yörüngeye çıkarabilir ve gezegeni çevreleyen, planlanan devasa bir yörünge yapısı olan Battle Ring'e inebilirsin. Oradan kalkansız gemileri ve savunmasız hedefleri avlayabilir, özel geliştirilmiş akın saldırılarıyla birlikleri uzay boyunca doğrudan düşman gemilerine taşıyabilirsin. Uzay savaşının oyun içi en büyük ödüllerden bazılarını sunması planlanıyor ve yörünge bölgesini kontrol etmek, yalnızca karadaki oyuncuların eşleşemeyeceği stratejik avantajlar sağlayabilir, nihai geliştirmeye ve oyun kurallarına tabi olarak."
         },
         {
           "num": "04",
-          "title": "Neden Üç Seviye Her Şeyi Değiştiriyor?",
-          "body": "Çoğu strateji oyunu tek bir düzlemde çalışır. Overlord üçte çalışıyor. Yerden yere, yerden uzaya ve uzaydan uzaya saldırı yeteneği, eşsiz taktiksel derinliğe sahip bir savaş alanı yaratır. Beceri her şeydir. Tek başına kaba kuvvet seni Derebeyi yapmaz. Her üç seviyedeki stratejik ustalık, baskın olanı mağlup olandan ayıran şeydir."
+          "title": "Üç Katman Neden Her Şeyi Değiştirebilir",
+          "body": "Çoğu strateji oyunu tek bir düzlemde işler. Overlord'un üçünde işlemesi planlanıyor. Yerden yere, yerden uzaya ve uzaydan uzaya saldırabilme yeteneğinin gerçek taktiksel derinliğe sahip bir savaş alanı yaratması amaçlanıyor. Becerinin her şey olması planlanıyor: ham güç tek başına seni Overlord yapmamalı ve üç katmanın hepsinde stratejik ustalık, baskın olanlarla yenilenler arasındaki fark olabilir, nihai geliştirmeye ve oyun kurallarına tabi olarak."
         }
       ],
       "extraSection": {
-        "title": "Savaş Yüzüğü ve VR Etkileşimi",
+        "title": "Planlanan Battle Ring ve VR Etkileşimi",
         "items": [
           {
             "title": "Savaş Yüzüğüne İniş",
-            "body": "Savaş Yüzüğü, gezegenin sistemini çevreleyen devasa bir yörünge yapısıdır. Geminizi uzaya taşıdığınızda, büyük bir stratejik avantaj elde etmek için Battle Ring'e yanaşabilirsiniz. Bu yüksek konumdan, korumasız gemileri avlayabilir, rakip gemilere binme ekipleri gönderebilir ve aşağıdaki yer hedeflerine yönelik yıkıcı saldırıları koordine edebilirsiniz. Battle Ring'e iniş, çoğu strateji oyununun sunmadığı tamamen yeni bir oyun boyutu açar ve Overlord'a piyasadaki diğer oyunlara karşı taktiksel bir üstünlük sağlar."
+            "body": "Battle Ring, bir gezegen sistemini çevreleyen planlanan devasa bir yörünge yapısıdır. Gemilerini uzaya çıkardığında stratejik avantaj elde etmek için Battle Ring'e yanaşabilirsin. Bu yüksek konumdan kalkansız gemileri avlayabilir, rakip gemilere akıncı kuvvetler yerleştirebilir ve aşağıdaki kara hedeflerine yönelik saldırıları koordine edebilirsin. Battle Ring'e inmenin, çoğu strateji oyununun sunmadığı yeni bir oyun boyutu açması planlanıyor, nihai geliştirmeye ve oyun kurallarına tabi olarak."
           },
           {
             "title": "Savaş Yüzüğü'nün İçinde",
-            "body": "Battle Ring sadece bir yerleştirme platformu değil. İçine nasıl gireceğinizi çözebilirseniz içeride gizli görevler, ekstra bonuslar ve özel ödüller sizi bekliyor. Yüzüğün içi koridorlardan, odalardan ve antik teknolojiden oluşan bir labirenttir. Halkanın içinde görevler gerçekleştirin ve avlanma görevlerini gerçekleştirin, yüzeye çıkan hiçbir oyuncunun asla erişemeyeceği sırları keşfedin. Savaş Yüzüğü cesurları, kurnazları ve acımasızları ödüllendirir."
+            "body": "Battle Ring'in yalnızca bir yanaşma platformundan fazlası olması planlanıyor. İç kısmına nasıl gireceğini bulabilirsen, gizli quest'ler, ek oyun içi bonuslar ve özel oyun içi ödüller içeride seni bekliyor olabilir. Halkanın iç kısmı, halkanın içinde planlanan quest'ler ve av görevleriyle koridorlar, odalar ve antik teknolojiden oluşan bir labirent olarak ve yüzeye bağlı oyuncuların asla erişemeyeceği sırlarla planlanıyor. Hepsi nihai geliştirmeye ve oyun kurallarına tabidir."
           },
           {
             "title": "Gerçek Zamanlı VR Etkileşimi",
-            "body": "Tüm Hyper Tek oyun serisi gibi Overlord of the 7 Realms de gerçek zamanlı olarak tam VR etkileşimini destekler. Geminize adım atın, Battle Ring'in koridorlarında yürüyün, birliklerinizi kara savaşına yönlendirin ve geminizin kokpitinden uzay savaşını deneyimleyin. VR, Overlord'u bir strateji oyunundan tamamen sürükleyici bir savaş alanı deneyimine dönüştürüyor. Kuvvetlerinize komuta edin, uzaylı bölgelerini keşfedin ve düz ekran oyunların taklit edemeyeceği düzeyde bir varlık ve yoğunlukla savaşa katılın."
+            "body": "Planlanan tüm Hyper Tek oyunları gibi Overlord'un da gerçek zamanlı VR etkileşimini desteklemesi planlanıyor. Geminin içine adım atabilir, Battle Ring koridorlarında yürüyebilir, birlikleri kara savaşına yönlendirebilir ve uzay savaşını geminin kokpitinden deneyimleyebilirsin. VR'nin Overlord'u bir strateji oyunundan, orduları yönetebileceğin, yabancı araziyi keşfedebileceğin ve düz ekran oyunlarının yeniden üretemeyebileceği bir varlıkla savaşabileceğin sürükleyici bir savaş alanı deneyimine dönüştürmesi amaçlanıyor. Nihai geliştirmeye ve oyun kurallarına tabi olarak."
           },
           {
-            "title": "Diğer Oyunlara Göre Avantajı",
-            "body": "Başka hiçbir oyun üç seviyeli savaşı, keşfedilebilir bir yörünge savaş istasyonunu, gerçek zamanlı VR'ı ve oyun içi ödülleri tek bir deneyimde birleştirmez. Battle Ring tek başına rakiplerin yetişemeyeceği bir oynanış boyutu ekler. Buna kara savaşını, uzay savaşını, VR sürükleyiciliğini ve birbirine bağlı Hyper Tek ekosistemini eklediğinde Overlord kendi kategorisinde yer alır."
+            "title": "Diğer Oyunlara Karşı Planlanan Üstünlük",
+            "body": "Overlord, üç katmanlı savaşı, keşfedilebilir yörünge savaş istasyonlarını, gerçek zamanlı VR'yi ve oyun içi ödülleri tek bir deneyimde birleştirmeyi hedefler. Yalnızca Battle Ring'in, rakiplerin eşleşemeyeceği bir oyun boyutu eklemesi planlanıyor. Kara savaşı, uzay savaşı, VR sürükleyiciliği ve planlanan birbirine bağlı Hyper Tek ekosistemiyle birleştiğinde, geliştirdiğimiz deneyim budur, nihai geliştirmeye ve oyun kurallarına tabi olarak."
           }
         ]
       },
-      "upgradesTitle": "Yeniden İnşa Et, Yeniden Silahlandır, Üye Al; Savaş için Güçlendirme",
+      "upgradesTitle": "Yeniden İnşa Et, Yeniden Silahlan, Edin; Savaşa Hazırlan",
       "upgrades": [
         {
-          "title": "Uzay Gemisi Yükseltmeleri",
-          "body": "Kaza yapan geminiz her şeyin başladığı yerdir. Motor bölmesinden komuta güvertesine kadar sistem sistem yeniden oluşturun. Her bileşen tamamen yükseltilebilir: gövde takviyesi, yapısal bütünlük, dış kabuk bileşimi, kalkan jeneratörleri, güç sistemleri ve navigasyon dizileri. Overlord'da hız için değil savaş için inşa edersiniz. Tamamen yükseltilmiş bir savaş gemisi her başarılı harekatın temelidir ve ne kadar derin yatırım yaparsanız geminiz o kadar zorlu hale gelir."
+          "title": "Planlanan Uzay Gemisi Geliştirmeleri",
+          "body": "Düşen geminin her şeyin başlaması planlanan yerdir. Onu makine dairesinden komuta güvertesine kadar sistem sistem yeniden inşa edebilirsin. Her bileşenin geliştirilebilir olması planlanıyor: gövde takviyesi, yapısal bütünlük, dış kabuk bileşimi, kalkan jeneratörleri, güç sistemleri ve seyrüsefer dizileri. Overlord'da hız için değil, savaş için inşa edersin. Tamamen geliştirilmiş bir savaş gemisinin her kampanyanın temeli olması planlanıyor ve gemiyi ne kadar geliştirirsen o kadar dayanıklı olabilir, nihai geliştirmeye ve oyun kurallarına tabi olarak."
         },
         {
-          "title": "Silah Sistemleri ve Teknoloji Seviyeleri",
-          "body": "Üç savaş seviyesinin tamamında üstünlük sağlamak için silahlarınızı, becerilerinizi ve teknoloji seviyelerinizi yükseltin ve geliştirin. Gezegensel savaş için karaya konuşlu toplar, yerden uzaya saldırılar için anti-yörünge bataryaları ve uzaydan uzaya savaşlar için gemiye monteli silah dizileri. Her silah sistemi belirli taktiksel roller için geliştirilebilir. İster uzun menzilli bombardımanda, ister yakın mesafeden biniş eylemlerinde, ister savunma karşı önlemlerinde uzmanlaşın, silah teçhizatınız savaş kimliğinizi tanımlar."
+          "title": "Planlanan Silah Sistemleri ve Teknoloji Seviyeleri",
+          "body": "Üç savaş katmanının hepsinde silahları, becerileri ve teknoloji seviyelerini geliştirip ince ayar yapabilirsin: gezegen savaşı için kara topçusu, yer-uzay saldırıları için anti-yörünge bataryaları ve uzay-uzay savaşı için gemiye monte silah dizileri. Planlanan her silah sistemi belirli taktik roller için ince ayarlanabilir. İster uzun menzilli bombardıman, ister yakın menzilli akın eylemi, ister savunma karşı önlemleri konusunda uzmanlaş, silah ekipmanının savaş kimliğini tanımlaması planlanıyor, nihai geliştirmeye ve oyun kurallarına tabi olarak."
         },
         {
-          "title": "İşe Alma Uzmanları",
-          "body": "Uzmanlar güç çarpanıdır ve beceriyle birleştiğinde iyi oyuncuları Overlord'lardan ayıran şey onlardır. Geminin genel performansına ve güç seviyesine güçlü bonuslar getiren benzersiz uzmanlar edin. Taktik uzmanları birlik konuşlandırma verimliliğini artırır, mühendislik uzmanları gemi onarımlarını ve yükseltmelerini hızlandırır, silah uzmanları tüm sistemlerde hasarı artırır, istihbarat uzmanları ise düşman mevzilerini ve zayıflıklarını ortaya çıkarır. Operasyonunun her yönünü güçlendiren yıkıcı ve uyumlu bir güç oluşturmak için birden fazla uzmanı bir araya getir. Yine de para harcamayan oyuncular içini rahat tutabilir: Hyper Tek, oyun dünyasındaki sorunları çözmek için yaratıldı. Birden fazla bonusu üst üste eklemek mümkün olsa da adil oyun mekanikleri bunun basit bir puana puan sistemi olmamasını sağlar. Bunun yerine kayan bir ölçekle çalışır, böylece ham güç becerinin önemini gölgede bırakmaz. Bu oyun şansa değil, hem güce hem de beceriye önem verir!"
+          "title": "Uzman Edinme",
+          "body": "Planlanan uzmanlar güç çarpanları olarak tasarlandı ve beceriyle birleştiğinde iyi bir Overlord oyuncusu ile harika bir oyuncu arasındaki fark olabilir. Geminin genel performansına ve güç seviyesine bonus getiren benzersiz uzmanlar edinebilirsin. Taktik uzmanlar birlik konuşlandırma verimliliğini artırabilir, mühendislik uzmanları gemi onarımlarını ve geliştirmelerini hızlandırabilir, silah uzmanları tüm sistemlerde hasarı artırabilir ve istihbarat uzmanları düşman konumlarını ve zayıflıklarını ortaya çıkarabilir. Birden fazla uzmanın birikmesi, operasyonlarının her yönünü güçlendiren birleşik bir çaba yaratabilir. Para harcamayan oyuncular rahat olabilir: Hyper Tek oyun dünyasındaki sorunları ele almak için yapıldı. Biriktirme planlansa da, planlanan oyunun mekanikleri biriktirmenin basit bir puana puan sistemi olmaması için tasarlandı. Sistemin, ham gücün becerinin önemini gölgelememesi için kayan bir ölçekte çalışması planlanıyor. Oyunun hem güce hem beceriye vurgu yapması, şansa güvenmemesi planlanıyor. Hepsi nihai geliştirmeye ve oyun kurallarına tabidir."
         },
         {
           "title": "Ordularınızı Oluşturun",
-          "body": "Geminizin yerleşik klonlama laboratuvarlarında birlikleri klonlayın, ardından savaşa hazır olana kadar onları ve silahlarını yükseltin ve iyileştirin. Ancak tek başına asker yeterli değildir. Klonlanamayan veya üretilemeyen ve beceri ve sabırla kazanılması gereken bir güç olan binekli canavar süvarilerini yaratmak için gezegenin vahşi yaratıklarını evcilleştirin ve eğitin. Hakimiyetinizi belirleyen şey karadaki, havadaki ve uzaydaki ordu kompozisyonunuzdur."
+          "body": "Geminin içindeki klonlama laboratuvarında birlikleri klonlayabilir, ardından onları ve silahlarını savaşa hazır olana kadar geliştirip ince ayar yapabilirsin. Ancak tek başına birlikler yeterli olmayabilir. Gezegenin vahşi yaratıklarını evcilleştirmek ve eğitmek, klonlanamayan veya üretilemeyen, beceri ve sabırla edinilmesi gereken planlanan birlikler olan binek hayvan süvarisi oluşturabilir. Karada, havada ve uzayda birlik bileşimin hakimiyetini belirlemesi planlanıyor, nihai geliştirmeye ve oyun kurallarına tabi olarak."
         }
       ],
-      "rewardsTitle": "Hammerong'lar, Ödüller ve Hyper Tek Ekosistemi",
+      "rewardsTitle": "Hammerong, Oyun İçi Ödüller ve Hyper Tek Ekosistemi",
       "rewards": [
         {
-          "title": "Hammeronglar: Var Olan En Güçlü Türler",
-          "body": "Her iki haftada bir, merkez arenanın güç alanları düşüyor ve Hammerong'lar geliyor. Onlar, oyuncuların sahip olduğu her şeyin çok ötesinde ileri teknolojiyle donatılmış, evrendeki en güçlü uzaylı türleridir. Gezegenin kaynaklarını çıkarmaya geliyorlar ve arenayı tam ve ezici bir güçle savunuyorlar. Hammerong'lara saldırmak Overlord'daki en tehlikeli mücadeledir, ancak başarılı olanlar devasa bonuslar, efsanevi ganimetler, nadir yükseltme malzemeleri ve başka hiçbir şekilde elde edilemeyecek özel ödüllerle ödüllendirilir. İki haftada bir yapılan Hammerong istilası, gücünüzün nihai sınavıdır."
+          "title": "Hammerong: Hikayenin En Güçlü Türü",
+          "body": "Her iki haftada bir merkezi arenanın kuvvet alanının çökmesi planlanıyor ve Hammerong geliyor. Hikayede onlar, oyuncuların sahip olduğunun çok ötesinde gelişmiş teknolojiyle silahlanmış, evrendeki en güçlü yabancı türdür. Gezegenin kaynaklarını sömürmeye gelir ve arenayı ezici bir güçle savunurlar. Hammerong'a saldırmanın Overlord'daki en tehlikeli meydan okuma olması planlanıyor ve başarılı olanlar oyun içi bonuslar, efsanevi oyun içi ganimet, nadir geliştirme malzemeleri ve başka şekilde elde edilemeyen özel oyun içi ödüller alabilir. Planlanan iki haftalık Hammerong istilalarının gücünün nihai testi olması amaçlanıyor, nihai geliştirmeye ve oyun kurallarına tabi olarak."
         },
         {
-          "title": "Günlük Etkinlikler, Görevler ve Savaş Ödülleri",
-          "body": "Overlord sürekli olarak ödüller verir. Kredi, yükseltme malzemeleri ve ilerleme bonusları kazanmak için günlük görevleri tamamlayın. Premium ödüller için özel etkinliklere katılın. Özel ganimetler için gezegenin yüzeyinde ve Savaş Yüzüğü'nde görevler gerçekleştirin. Kaynakları depolamak için canavarlara, uzaylı yaratıklara ve rakip oyunculara karşı savaşlar kazanın. Gizli eserleri ve hazineleri keşfetmek için yüzeyi keşfedin. Ödül yapısı, yaptığınız her eylemin sizi sunucunun nihai Overlord'u olmaya yaklaştıracağı şekilde tasarlanmıştır."
+          "title": "Günlük Etkinlikler, Quest'ler ve Savaş Oyun İçi Ödülleri",
+          "body": "Overlord'un düzenli olarak oyun içi ödüller vermesi planlanıyor. Planlanan günlük görevler oyun içi krediler, geliştirme malzemeleri ve ilerleme bonusları verebilir. Özel etkinlikler premium oyun içi ödüller sunabilir. Gezegen yüzeyindeki ve Battle Ring içindeki quest'ler özel oyun içi ganimet verebilir. Canavarlara, yabancı yaratıklara ve rakip oyunculara karşı savaşları kazanmak oyun içi kaynaklarını artırabilir, yüzeyi keşfetmek gizli eserleri ve oyun içi eşyaları ortaya çıkarabilir. Oyun içi ödül yapısı, yaptığın her eylemin seni sunucunun üstün Overlord'u olmaya yaklaştırabileceği şekilde planlanıyor, nihai geliştirmeye ve oyun kurallarına tabi olarak."
         },
         {
           "title": "Hyper Tek Ekosistemine Bağlı",
-          "body": "Overlord of the 7 Realms tek başına var olmaz. Hyper Racing ve Hyper Quest ile birlikte Hyper Tek evrenine tamamen entegredir. Overlord'da kazanılan kaynaklar üç oyunun hepsinde kullanılabilir. Gemi yükseltmeleri, uzman bonusları, savaş becerileri ve malzemeler oyunlar arasında sorunsuzca akar. Hyper Racing'de kazanılan yarış yetenekleri, Overlord uzay savaşlarındaki pilotluk becerilerini geliştirir. Hyper Quest'te toplanan malzemeler gezegendeki yükseltmelerini besler. Hyper Tek pazar yeri her şeyi birbirine bağlar ve bir oyundaki ilerlemenin üçünde de gelişimi beslediği tek bir bağlantılı evren yaratır."
+          "body": "Overlord of the 7 Realms'in tek başına durması planlanmıyor. Hyper Racing ve Hyper Quest ile birlikte Hyper Tek evrenine entegre olması planlanıyor. Overlord'da kazanılan oyun içi kaynaklar planlanan üç oyunda da kullanılabilir. Gemi geliştirmeleri, uzman bonusları, savaş becerileri ve malzemeler başlıklar arasında akabilir. Hyper Racing'de kazanılan yarış yetenekleri Overlord'un uzay savaşlarındaki pilot becerilerini geliştirebilir, Hyper Quest'te toplanan malzemeler gezegendeki geliştirmelerini besleyebilir. Hyper Tek pazar yerinin her şeyi birbirine bağlaması, bir oyundaki ilerlemenin üçünde de ilerlemeyi sürükleyebileceği tek bir bağlantılı evren yaratması planlanıyor, nihai geliştirmeye ve oyun kurallarına tabi olarak."
         },
         {
-          "title": "Tek Evren, Üç Oyun, Sınırsız Güç",
-          "body": "Üç Hyper Tek oyununun tamamına katılan oyuncular daha hızlı güç kazanır, özel oyunlar arası ödüllere erişir ve tek oyun oyuncularının karşılayamayacağı çok çeşitli beceri ve kaynaklara hakim olur. Birbirine bağlı ekosistem nihai rekabet avantajıdır."
+          "title": "Tek Evren, Planlanan Üç Oyun",
+          "body": "Planlanan üç Hyper Tek oyununun hepsine katılan oyuncular, tek oyunluk oyuncuların sahip olmayabileceği çeşitli beceri ve oyun içi kaynaklardan yararlanarak daha hızlı güç biriktirebilir ve oyunlar arası oyun içi ödüllere erişebilir. Bunların hepsi planlanmıştır ve nihai geliştirmeye ve oyun kurallarına tabidir."
         }
       ],
       "faqTitle": "7 Diyarın Efendisi — Sıkça Sorulan Sorular",
       "faq": [
         {
           "q": "7 Diyarın Derebeyi nedir?",
-          "a": "Yabancı bir gezegene zorunlu iniş yaptığın, gemini yeniden inşa ettiğin, ordular klonladığın ve üç boyutta savaştığın üç seviyeli bir savaş strateji oyunu: karadan karaya, karadan uzaya ve uzaydan uzaya. Planlanan özellikler arasında VR etkileşimi, oyun içi ödüller ve iki haftada bir Hammerong istilaları yer alıyor."
+          "a": "Geliştirilmekte olan, yabancı bir gezegene zorunlu iniş yaptığın, geminin yeniden inşa ettiğin, orduları klonladığın ve üç boyutta savaştığın planlanan üç katmanlı bir savaş strateji oyunu: yer-yer, yer-uzay ve uzay-uzay. Planlanan özellikler VR etkileşimi, oyun içi ödüller ve iki haftalık Hammerong istilalarını içerir."
         },
         {
           "q": "Üç seviyeli savaş sistemi nedir?",
-          "a": "Savaş üç seviyede gerçekleşir: canavarlara ve rakip oyunculara karşı yerden yere, yörünge gemilerini hedef alan yerden uzaya saldırılar ve Battle Ring'de uzaydan uzaya savaş. Bu çok boyutlu yaklaşım, hiçbir tek düzlemli strateji oyununun eşleşemeyeceği taktiksel derinlik yaratır."
+          "a": "Savaşın üç katmanda gerçekleşmesi planlanıyor: canavarlara ve rakip oyunculara karşı yer-yer, yörüngedeki gemilere karşı yer-uzay saldırıları ve Battle Ring'de uzay-uzay savaşı. Bu planlanan çok boyutlu yaklaşımın taktiksel derinlik yaratması amaçlanıyor, nihai geliştirmeye ve oyun kurallarına tabi olarak."
         },
         {
           "q": "Savaş Yüzüğü nedir?",
-          "a": "Gezegeni çevreleyen devasa bir yörünge yapısı. Kalkansız hedefleri avlamak, düşman gemilerine binmek için ekipler göndermek ve içindeki gizli görevlere erişmek için geminizi gemiye indirin. Battle Ring'i kontrol etmek size yalnızca karadaki oyunculara göre stratejik bir avantaj sağlar."
+          "a": "Gezegeni çevreleyen planlanan devasa bir yörünge yapısı. Kalkansız hedefleri avlamak, düşman gemilerine akıncı kuvvetler yerleştirmek ve iç kısmındaki gizli quest'lere erişmek için oraya gemi indirebilirsin. Battle Ring'i kontrol etmek, yalnızca karadaki oyunculara karşı stratejik avantajlar sağlayabilir."
         },
         {
           "q": "Uzay gemimi yükseltebilir miyim?",
-          "a": "Motor bölmesinden komuta güvertesine kadar her sistem yükseltilebilir: gövde, yapı, dış kabuk, kalkan jeneratörleri, güç sistemleri ve navigasyon. Overlord'da hız için değil savaş için inşa edersiniz. Tamamen yükseltilmiş bir savaş gemisi her harekatın temelidir."
+          "a": "Her sistemin makine dairesinden komuta güvertesine kadar geliştirilebilir olması planlanıyor: gövde, yapı, dış kabuk, kalkan jeneratörleri, güç sistemleri ve seyrüsefer. Overlord'da hız için değil, savaş için inşa etmen planlanıyor. Tamamen geliştirilmiş bir savaş gemisinin her kampanyanın temeli olması planlanıyor."
         },
         {
           "q": "Uzmanlar nasıl çalışır?",
-          "a": "Geminizin performansına ve güç seviyesine güçlü bonuslar ekleyen benzersiz uzmanları işe alın. Taktik, mühendislik, silah ve istihbarat uzmanlarının her biri farklı sistemleri güçlendirir. Tüm savaş seviyelerinde yıkıcı sinerjiler için birden fazla uzmanı bir araya getirin."
+          "a": "Planlanan uzmanlar edinilebilir ve geminin performansına ve güç seviyesine bonus ekler. Taktik, mühendislik, silah ve istihbarat uzmanları her biri farklı sistemleri güçlendirebilir ve birden fazla uzmanın birikmesi tüm savaş katmanlarında güçlü sinerjiler yaratabilir, nihai geliştirmeye ve oyun kurallarına tabi olarak."
         },
         {
           "q": "Hammerong'lar kimlerdir?",
-          "a": "Var olan en güçlü uzaylı türü. Her iki haftada bir, gezegenin ezici güç ve ileri teknolojiyle korunan kaynaklarını çıkarmak için merkez arenaya geliyorlar. Onlara saldırmak son derece tehlikelidir ancak oyuncuları büyük bonuslar ve efsanevi ganimetlerle ödüllendirir."
+          "a": "Hikayedeki en güçlü yabancı tür. Her iki haftada bir gezegen kaynaklarını sömürmek için merkezi arenaya gelmeleri planlanıyor; ezici güç ve gelişmiş teknolojiyle savunuluyorlar. Onlara saldırmanın son derece tehlikeli olması planlanıyor ve başarılı olan oyuncular oyun içi bonuslar ve efsanevi oyun içi ganimet alabilir."
         },
         {
-          "q": "Hangi ödülleri kazanabilirim?",
-          "a": "Günlük görevler, görevler, savaşlar ve etkinlikler kredi, yükseltme malzemesi ve ilerleme bonuslarıyla ödüllendirmek için tasarlandı. Özel etkinlikler ve Hammerong istilaları premium ve özel oyun içi ödüller sunabilir. Daha yüksek zorluktaki mücadelelerin ve dereceli yarışmaların daha büyük oyun içi ödüller sunması planlanıyor."
+          "q": "Hangi oyun içi ödüller sunulabilir?",
+          "a": "Planlanan günlük görevler, quest'ler, savaşlar ve etkinlikler oyun içi krediler, geliştirme malzemeleri ve ilerleme bonusları vermek üzere tasarlanmıştır. Özel etkinlikler ve Hammerong istilaları premium ve özel oyun içi ödüller sunabilir. Daha yüksek zorluktaki meydan okumaların ve sıralamalı yarışmaların daha büyük oyun içi ödüller sunması planlanıyor."
         },
         {
           "q": "Overlord VR'yi destekliyor mu?",
-          "a": "Evet. Tam gerçek zamanlı VR etkileşimi, geminizin koridorlarında yürümenize, Battle Ring'in içini keşfetmenize, birliklerinizi kara savaşına yönlendirmenize ve uzay savaşında geminize pilotluk etmenize olanak tanır. VR, Overlord'u stratejiden tamamen sürükleyici bir savaş alanı deneyimine dönüştürüyor."
+          "a": "VR planlanıyor. Gerçek zamanlı VR etkileşimi, gemi koridorlarında yürümene, Battle Ring'in iç kısmını keşfetmene, birlikleri kara savaşına yönlendirmene ve uzay savaşında geminle uçmana izin verebilir, nihai geliştirmeye ve oyun kurallarına tabi olarak."
         },
         {
           "q": "Ordumu nasıl kurarım?",
-          "a": "Geminizin yerleşik laboratuvarlarında birlikleri klonlayın, ardından onları ve silahlarını yükseltin ve iyileştirin. Atlı süvariler için, hayvanlar klonlanamayacağından gezegenin vahşi yaratıklarını evcilleştirmeli ve eğitmelisiniz. Kara, hava ve uzaydaki ordu kompozisyonu hakimiyetinizi belirler."
+          "a": "Planlanan oyunda geminin içindeki laboratuvarda birlikleri klonlayabilir, ardından onları ve silahlarını geliştirip ince ayar yapabilirsin. Binek süvarisi için plan, hayvanlar klonlanamadığından gezegenin vahşi yaratıklarını evcilleştirip eğitmendir. Karada, havada ve uzayda birlik bileşimin hakimiyetini belirlemesi planlanıyor."
         },
         {
           "q": "Bir ittifaka katılabilir miyim?",
-          "a": "Evet. Tek başına ilerleyin veya gücünüzü artıran ve büyümenize yardımcı olan bir ittifaka katılın. İttifaklar paylaşılan kaynaklar, koordineli saldırılar ve toplu savunma sunar. Hem geminizi hem de ittifakın ortak varlıklarını yükseltmek için günlük görevleri tamamlayın."
+          "a": "İttifaklar planlanıyor. Tek başına oynayabilir ya da gücünü artırabilecek ve büyümene yardımcı olabilecek bir ittifaka katılabilirsin. Planlanan ittifak özellikleri ortak oyun içi kaynakları, koordineli saldırıları ve toplu savunmayı içerir; günlük görevleri tamamlamak hem geminin hem de ittifakla paylaşılan eşyaların geliştirilmesine yardımcı olabilir."
         },
         {
           "q": "Overlord diğer Hyper Tek oyunlarıyla bağlantılı mı?",
-          "a": "Tamamen entegre. Kaynakların, gemi yükseltmelerinin, uzman bonuslarının ve savaş becerilerinin Overlord, Hyper Racing ve Hyper Quest arasında akması planlanıyor. Yarış yetenekleri uzay savaşlarını geliştirir, Quest malzemeleri yükseltmelerini besler ve Hyper Tek pazar yeri üç oyunu birbirine bağlar."
+          "a": "Planlanıyor. Oyun içi kaynaklar, gemi geliştirmeleri, uzman bonusları ve savaş becerilerinin Overlord, Hyper Racing ve Hyper Quest arasında akması planlanıyor. Yarış yetenekleri uzay savaşlarını geliştirebilir, Quest malzemeleri geliştirmelerini besleyebilir ve Hyper Tek pazar yerinin üç oyunu birbirine bağlaması planlanıyor, nihai geliştirmeye ve oyun kurallarına tabi olarak."
         },
         {
           "q": "Hangi silahlar mevcut?",
-          "a": "Kara konuşlu toplar, yörünge karşıtı bataryalar, gemiye monteli silah dizileri ve özel biniş ekipmanı. Her sistem, uzun menzilli bombardıman, yakın mesafe muharebesi ve savunma karşı önlemleri dahil olmak üzere belirli taktiksel roller için geliştirilebilir."
+          "a": "Planlanan silahlar kara topçusunu, anti-yörünge bataryalarını, gemiye monte silah dizilerini ve akın eylemleri için özel ekipmanı içerir. Her sistem, uzun menzilli bombardıman, yakın dövüş ve savunma karşı önlemleri dahil belirli taktik roller için ince ayarlanabilir."
         },
         {
           "q": "Gezegenin yüzeyini keşfedebilir miyim?",
-          "a": "Evet. Gezegen gizli ödüller, eserler, kaynaklar ve evcilleştirilmesi gereken tehlikeli yaban hayatı açısından zengindir. Hazineleri bulmak için yüzeyi keşfedin, uzaylı yaratıklar ve canavarlarla savaşın ve Overlord hakimiyeti kampanyanızı güçlendirecek stratejik avantajları keşfedin."
+          "a": "Planlanıyor. Planlanan gezegenlerde gizli oyun içi ödüller, eserler, oyun içi kaynaklar ve evcilleştirilecek tehlikeli yaban hayatı, savaşılacak yabancı yaratıklar ve canavarlar ile kampanyanı güçlendirebilecek keşfedilecek stratejik avantajlar bulunuyor, nihai geliştirmeye ve oyun kurallarına tabi olarak."
         }
       ]
     }
@@ -496,7 +492,7 @@
       "sd": "Batı sınırı için ana lojistik merkez. Acil durum erzak rezervlerini korur.",
       "res": "Yabancı biyoloji ve derin uzay malzemeleri laboratuvarı. 40 yerleşik bilim insanı barındırır.",
       "agri": "Hidroponik tarım kompleksi. Batı sektörleri için birincil gıda kaynağı.",
-      "trade": "Serbest ticaret bölgesi. 200'den fazla kayıtlı tüccar. Para birimi: Evrensel Krediler.",
+      "trade": "Serbest ticaret bölgesi. 200'den fazla kayıtlı tüccar. Oyun içi kredi: Universal Credits.",
       "fuel": "Yüksek kapasiteli yakıt deposu. İyon tahrik sistemlerini, plazma çekirdeklerini ve karanlık madde hücrelerini destekler.",
       "ship": "Filo bakım ve montaj istasyonu. Kapasite: 18 gemi.",
       "ind": "Ağır imalat bölgesi. Atmosfer temizleyiciler gerekli. Çıktı: 8.4 bin birim/döngü.",
@@ -861,11 +857,11 @@
       },
       "stables_ss": {
         "title": "Ahır SS",
-        "desc": "Sancak biyolojik varlık körfezi. Gezegensel yüzey operasyonlarında kullanılan yabancı binek hayvanlarını ve biyomühendislik yaratıklarını barındırır."
+        "desc": "Geminin sağ biyolojik bölmesi. Gezegen yüzeyi operasyonlarında kullanılan yabancı binek hayvanlarını ve biyomühendislik ürünü yaratıkları barındırır."
       },
       "stable_ps": {
         "title": "Ahır PS",
-        "desc": "İskele biyolojik varlık körfezi. Dengeli yaratık yükü ve simetrik ağırlık dağılımı için SS ahırlarını yansıtır."
+        "desc": "Geminin sol biyolojik bölmesi. Dengeli yaratık yükü ve simetrik ağırlık dağılımı için SS ahırını yansıtır."
       },
       "transporter": {
         "title": "Taşıyıcı Körfezi",
@@ -1165,7 +1161,7 @@
       "ggLastRace": "Son yarışta GG, harika hız",
       "tradingPlasma": "Plazma çubuklarını teknik kitaplarla takas ediyorum",
       "needHelpAsteroid": "Asteroid misyonunda yardıma ihtiyacım var",
-      "allianceRecruiting": "İttifakımız üye arıyor, bana DM at",
+      "allianceRecruiting": "İttifakımız üye arıyor, DM gönder",
       "donationGoalsPlasma": "Katkı hedefleri: plazma çubukları gerekiyor!",
       "warStarts2Hours": "Savaş 2 saat sonra başlıyor, hazırlanın",
       "handleMedicalSupport": "Tıbbi desteği ben üstleniyorum",

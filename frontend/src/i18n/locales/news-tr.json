@@ -30,7 +30,7 @@
       },
       {
         "q": "NFA'lar, NFC'ler ve NFT'ler nelerdir?",
-        "a": "NFA'lar/NFC'ler/NFT'ler Hyper Tek'in dijital sanat eserleridir. NFA'lar ve NFC'ler oyun içi bonuslar ve bir Programmatic Trade-In Value taşır.\n\nNon-Fungible Articles (NFA'lar), Hyper Tek ekosistemindeki en nadir kademedir. Bu NFA'lar, tüm kademeler arasında en büyük oyun içi bonuslara sahip, oyun mimarları tarafından oluşturulmuş sanat eserleridir. Oyuncular paket satın aldığında rastgele dağıtılırlar ve büyük oyun içi etkinliklerde özel ödül olarak verilebilirler.\n\nNon-Fungible Collectables (NFC'ler) de oyun içi bonuslar taşır ve hem oyun mimarları hem de belirli parametrelere uyan oyuncular tarafından oluşturulabilir. NFC'ler, topluluğun oynanış avantajları kazanırken yaratıcılığıyla katkıda bulunmasının kapısını açar.\n\nNon-Fungible Tokens (NFT'ler) tamamen oyuncular tarafından oluşturulan sanat eserleridir. Doğrudan oyun içi bonus taşımasalar da toplanabilir ve bir oyuncunun üssünü veya uzay gemisini süslemek için kullanılabilirler; bu özelleştirme genel güç seviyesi bonusuna katkıda bulunabilir."
+        "a": "NFA/NFC/NFT, Hyper Tek'in dijital sanat eserleridir. NFA ve NFC oyun içi bonuslar ve Programmatic Trade-In Value taşır.\n\nNon-Fungible Articles (NFA), Hyper Tek ekosistemindeki en nadir seviyedir. Bu NFA'lar, tüm sanat eseri seviyeleri arasında en büyük oyun içi bonuslara sahip, mimarlar tarafından yaratılmış sanat eserleridir. Oyuncular paket satın aldığında rastgele çıkarılırlar ve büyük oyun içi etkinliklerde özel ödüller olarak verilebilirler.\n\nNon-Fungible Collectables (NFC) de oyun içi bonuslar taşır ve oyun mimarları veya belirli parametreleri izleyen oyuncular tarafından yaratılabilir. NFC'ler, topluluğun yaratıcılık katkısı sunarken oyun avantajı da elde etmesine kapı açar.\n\nNon-Fungible Tokens (NFT), tamamen oyuncu yapımı sanat eserleridir. Doğrudan oyun içi bonus taşımasalar da toplanabilir ve bir oyuncunun üssünü veya uzay gemisini dekore etmek için kullanılabilirler; bu özelleştirme genel güç seviyesi bonusuna katkıda bulunabilir."
       },
       {
         "q": "Programmatic Trade-In Value nasıl çalışır?",
@@ -49,16 +49,16 @@
         "a": "VR ve AR desteği Hyper Tek'in tasarımının bir parçasıdır ve platform geliştikçe oyun deneyiminin bir parçası haline gelecektir. Amaç, VR kulaklık, AR, mobil ve geleneksel oyuncuların herhangi bir cihazdan sonunda aynı görevlere ve savaşlara birlikte katılabilmesi için tam platformlar arası oyundur.\n\nKullanılabilir hale geldiğinde, VR/AR katmanının Hyper Tek evrenini deneyimlemenin tamamen yeni yollarını açmasını bekliyoruz."
       },
       {
-        "q": "Hyper Tek \"Fijital\" Varlık Sertifikası nedir?",
+        "q": "Hyper Tek «Phygital» Sertifikası Nedir?",
         "a": "Phygital Certificate, oyun içi öğelerin ile fiziksel bir koleksiyon öğesi arasında planlanan bir köprüdür ve oyunlar yayınlanırsa sunulabilir. Blok zincirinde premium bir öğe satın aldığında veya bastığında, o öğe için yüksek kaliteli bir koleksiyon kartı sipariş etmek üzere talep üzerine baskı hizmetimizi kullanabilirsin. Uzay sektörleri için ayrıca ev adresine gönderilen fiziksel bir Space Certificate sipariş edebilirsin.\n\nHer kartın veya sertifikanın, sahip olduğun öğenin fiziksel bir hatırası olarak altın bir mühür, öğenin Base blok zincirindeki Token ID'si ve oyun veritabanındaki öğe bilgilerini taşıması planlanıyor."
       },
       {
         "q": "Bir ürün pazar yerinde satılırsa, fiziksel sertifikaya ne olur?",
-        "a": "Gerçek mülkiyet, nihai gerçeklik kaynağı olarak işlev gören Base blockchain üzerinde değişmez bir şekilde bulunur. Üçüncü taraf alıcılar ve satıcılar tembel olabileceğinden, bir varlık el değiştirdiğinde oyuncuların birbirlerine fiziksel olarak kart veya kağıt belge göndermesine gerek yoktur. Bir ürün Base ağı defterinde yeni bir sahibe geçtiği anda, önceki fiziksel sertifika basitçe tarihi bir koleksiyon parçası haline gelir. Base blockchain'de listelenen yeni sahip, Hyper Tek profiline giriş yapma ve canlı Base zincir varlığıyla eşleşmesi için doğrudan yerine getirme motorumuzdan kendi yeni oluşturulmuş, özel fiziksel sertifikasını veya tapusunu sipariş etme programatik hakkını anında açar."
+        "a": "Gerçek sahiplik, nihai hakikat kaynağı olarak hizmet eden Base blokzincirinde kalıcı olarak bulunur. Üçüncü taraf alıcılar ve satıcılar tembel olabileceğinden, bir eşya el değiştirdiğinde oyuncuların birbirine fiziksel olarak kart veya kağıt belge göndermesine gerek yoktur. Bir eşya Base ağının defterinde yeni bir sahibe geçtiğinde önceki fiziksel sertifika yalnızca tarihi bir koleksiyon eşyası olur. Base blokzincirinde kayıtlı yeni sahip, Hyper Tek profiline giriş yapma ve mevcut Base zinciri eşyasına karşılık gelen, yeni basılmış kendi özel fiziksel sertifikasını doğrudan sipariş karşılama motorumuzdan sipariş etme hakkını programatik olarak anında kazanır."
       },
       {
         "q": "Zincirde sahip olduğum bir ürün için birden fazla fiziksel sertifika sipariş edebilir miyim?",
-        "a": "Evet, kesinlikle. Base blockchain üzerindeki mülkünüz üzerinde tam egemenliğe sahipsiniz. Profiliniz Base Mainnet üzerindeki varlığın mevcut zincir üzeri sahibi olarak doğrulanırsa, sistemimiz o belirli ürün için istediğiniz kadar fiziksel kart veya tapu sipariş etmenize izin verir. Herhangi bir sınır yoktur."
+        "a": "Evet, kesinlikle. Base blokzincirindeki mülkün üzerinde tam egemenliğe sahipsin. Profilin Base Mainnet'teki bir eşyanın mevcut zincir üstü sahibi olarak doğrulanmışsa, sistemimiz o eşya için istediğin kadar fiziksel kart veya sertifika sipariş etmene olanak tanır. Sınır yoktur."
       },
       {
         "q": "Bir oyuncu neden birden fazla eşleşen fiziksel ürün sipariş etsin?",

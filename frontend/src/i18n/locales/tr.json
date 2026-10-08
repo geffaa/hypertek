@@ -17,7 +17,7 @@
     "shop": {
       "overview": "Genel Bakis",
       "overviewDesc": "Genel pazar ozeti",
-      "myAssets": "Varliklarim",
+      "myAssets": "Eşyalarım",
       "myAssetsDesc": "Sahip olduklarinizin tumunu takip edin ve yonetin",
       "theMarketplace": "Pazar Yeri",
       "theMarketplaceDesc": "Tum NFT, NFA ve NFC koleksiyonlarina goz atin",
@@ -69,8 +69,8 @@
         "description": "En sevdiginiz NFT'leri satin alin ve profilinizde istediginiz zaman sergileyin ya da takas edin."
       },
       {
-        "title": "Kazan ve Buyut",
-        "description": "Koleksiyonlarinizi satarak veya NFT alaninda populerlik kazanarak kazanin."
+        "title": "Topla & Gelişim Göster",
+        "description": "Koleksiyonunu büyüt ya da kendi yarattıklarını pazar yerinde diğer oyunculara sun."
       }
     ]
   },
@@ -93,15 +93,15 @@
       },
       {
         "label": "Gercek Sahiplik",
-        "desc": "Programmatic Trade-In Value içeren NFA/NFC/NFT'ler"
+        "desc": "Planlanan Programmatic Trade-In Value içeren NFA/NFC/NFT"
       },
       {
         "label": "Play-to-Own",
-        "desc": "Topladığın her öğe senindir ve zincir üzerinde kayıtlıdır"
+        "desc": "Toplayıp sahip olman için planlanan, Base zincirine kaydedilmiş eşyalar"
       },
       {
         "label": "Item Loyalty Program",
-        "desc": "Bir öğeyi ne kadar uzun süre tutarsan takas kademesi o kadar yükselir, ancak her zaman öğeye ayrılan tutarın altında kalır"
+        "desc": "Belirtilen şartlara göre artabilecek planlanan sadakat değeri"
       },
       {
         "label": "Bagli Ilerleme",
@@ -109,7 +109,7 @@
       },
       {
         "label": "VR/AR Entegrasyonu",
-        "desc": "VR/AR oyuncular gercek zamanli gorevlere ve epik savaslaга katilabilir"
+        "desc": "Oyuncuların gerçek zamanlı epik görevlere ve savaşlara katılabilmesi için planlanan VR/AR"
       }
     ]
   },
@@ -169,10 +169,10 @@
       "uiPageSubtitle": "Tam kapsamlı oyun panosu.",
       "uiPageSubtitleSpan": "Üç mod. Bir sürükleyici deneyim.",
       "uiHeroLabel": "Etkileşimli Önizleme",
-      "uiHeroDesc": "Tam Hyper Tek 100 panosuna girin. Racing, Quest ve Overlord modları arasında geçiş yapın. Her birinin kendi pazaryeri, varlık envanteri ve gerçek zamanlı kazanç görünümü vardır.",
+      "uiHeroDesc": "Tam Hyper Tek 100 paneline gir. Her biri kendi pazar yerine ve eşya envanterine sahip Racing, Quest ve Overlord modları arasında geçiş yap.",
       "uiStat1": "3 Oyun Modu",
       "uiStat2": "Tam Pano",
-      "uiStat3": "Varlık Envanteri",
+      "uiStat3": "Eşya Envanteri",
       "uiStat4": "Canlı Pazar",
       "uiLaunchBtn": "Arayüzü Başlat",
       "aboutPageSubtitle": "Ekip, misyon ve vizyon.",
@@ -181,9 +181,9 @@
       "aboutHeroTitle2": "Web3.5 ile Güçlendirilmiş.",
       "aboutHeroDesc": "Hyper Tek 100, her öğenin zincir üzerinde kaydedildiği ve oyuncusuna ait olduğu, geliştirme aşamasındaki bir oyun projesidir. Tek bir ortak ilerleme sistemiyle birbirine bağlı üç oyun planlanıyor.",
       "pillar1Title": "Web3.5 Teknolojisi",
-      "pillar1Desc": "On-chain varlıklar, gerçek sahiplik ve Base üzerine kurulu şeffaf bir pazar.",
-      "pillar2Title": "Gerçek Varlık Değeri",
-      "pillar2Desc": "Her oyun içi öğe işlem yapılabilir bir varlıktır. Oyna, kazan ve ilerlemenin sahibi ol.",
+      "pillar1Desc": "Zincir üstü eşyalar, gerçek sahiplik ve Base üzerinde kurulu şeffaf bir pazar yeri.",
+      "pillar2Title": "Gerçek Eşya Sahipliği",
+      "pillar2Desc": "Oyundaki uygun her eşyanın alınıp satılabilir olması planlanıyor. Oyna, topla ve eşyalarının sahibi ol.",
       "pillar3Title": "Adil Ekosistem",
       "pillar3Desc": "Şeffaf komisyon paylaşımı ve uygun her öğeye yerleşik bir Programmatic Trade-In Value.",
       "pillar4Title": "Katıl",
@@ -198,21 +198,21 @@
     "tryGaming": "Oyun arayüzünü deneyin",
     "badge": "SINIRLI SAYIDA NFA'LAR VE OYUN PAKETLERİ, STOKLAR TÜKENENE KADAR",
     "intro1": "Hyper Tek 100, sektörün en acil sorunlarından bazılarını ele almayı hedefleyen, geliştirme aşamasındaki bir oyun projesidir. Web sitesi, pazar yeri ve öğe sistemi hazır; birbirine bağlı üç oyun planlanıyor. Oyunlardan önce, evrene erkenden katılmak isteyen oyuncular ve koleksiyoncular için sınırlı sayıda öğe ve paket yayınlıyoruz.",
-    "intro2": "Az sayıda 1. Aşama Non-Fungible Article (NFA) öğesi yayınlıyoruz. Her biri, oyunlar yayınlanırsa geçerli olabilecek oyun içi bonusları listeler ve 1. Aşama bonus seviyelerinin tekrarlanması planlanmıyor. Arz kesin olarak sınırlıdır: bu öğeler tükendiğinde, basılmamış kalan sınırlı sayıdaki NFA'lar web sitesinden kaldırılacaktır.",
-    "intro3": "Uygun Hyper Tek öğeleri, zincir üzerindeki bir emanet (escrow) hesabında tutulan bir Programmatic Trade-In Value taşır. Bu sınırlı sayıdaki NFA'lar ayrıca, oyunlar yayınlanırsa nihai oyun kurallarına bağlı olarak geçerli olabilecek oyun içi bonusları da listeler.",
+    "intro2": "Aşama 1 Non-Fungible Article (NFA) eşyalarından az sayıda çıkarıyoruz. Her biri, oyunlar tamamlanırsa geçerli olabilecek planlanan oyun içi bonusları listeler ve Aşama 1 bonus seviyelerinin tekrarlanması planlanmıyor. Arz kesin olarak sınırlıdır: bu eşyalar tükendiğinde, basılmamış kalan sınırlı sayıdaki NFA'lar web sitesinden kaldırılacaktır.",
+    "intro3": "Uygun Hyper Tek eşyaları, zincir üstü emanette tutulan bir Programmatic Trade-In Value taşır. Bu sınırlı sayıdaki NFA'lar ayrıca, oyunlar tamamlanırsa nihai oyun kurallarına tabi olarak geçerli olabilecek planlanan oyun içi bonusları da listeler.",
     "intro4": "Hyper Tek Projesi'nde gördüklerini beğendiysen ve bu sınırlı öğelerden birine sahip olmak istiyorsan şimdi tam zamanı. Arz sınırlıdır ve bir öğe tükendiğinde yeniden basılmayacaktır.",
     "intro5": "İkinci yayınımız, doğrudan kendi web sitemizde satılan ve daha sonra başka yerlerde sunulabilecekleri fiyattan %10 daha düşük fiyatlı özel oyun paketlerinden oluşuyor. Bu fiyat yalnızca sınırlı bir süre için geçerlidir.",
     "keyPointsTitle": "Hatırlanması Gereken Önemli Noktalar:",
-    "intro6": "Hyper Tek Non-Fungible Articles (HT NFA'lar), Hyper Tek ürün yelpazesindeki en büyük oyun içi bonuslara sahip dijital koleksiyon öğeleridir; bu bonuslar oyunlar yayınlanırsa geçerli olabilir ve ayrıca bir Programmatic Trade-In Value içerirler. Yalnızca stoklar tükenene kadar mevcuttur.",
-    "intro7": "Hyper Tek, Play-to-Own olarak tasarlandı: topladığın öğeler senindir, zincir üzerinde kayıtlıdır ve planlanan oyunlarda geçerli olabilecek oyun içi faydaya sahiptir. Öğeler para kazanma yolu olarak değil, dijital koleksiyon öğesi olarak satılır.",
+    "intro6": "Hyper Tek Non-Fungible Articles (HT NFA), oyunlar tamamlanırsa geçerli olabilecek, Hyper Tek serisindeki en büyük planlanan oyun içi bonuslara sahip dijital koleksiyon eşyalarıdır ve ayrıca Programmatic Trade-In Value içerir. Yalnızca stoklarla sınırlı olarak mevcuttur.",
+    "intro7": "Hyper Tek, Play-to-Own olarak kurulmuştur: topladığın eşyalar sana aittir, zincir üstünde kayıtlıdır ve planlanan oyunlarda geçerli olabilecek planlanan oyun içi işlevselliğe sahiptir. Eşyalar para kazanma yolu olarak değil, dijital koleksiyon eşyaları olarak satılır.",
     "collectionsLabel": "Koleksiyonlar",
     "sectionTitle": "Sınırlı Sayıda Oyun Paketleri",
     "discount": "Listelenen fiyatlardan %10 tasarruf edin",
     "donationTierLabel": "Paket Kademesi",
     "donationTierPrefix": "Paket Kademesi:",
-    "rewardsTitle": "Oyunların yayınlanmasına ve nihai oyun şartlarına bağlıdır:",
+    "rewardsTitle": "Oyun çıkışına ve nihai oyun şartlarına tabi olarak:",
     "specialConditionTitle": "Ozel Kosul",
-    "specialCondition": "NOT: Oyun içi satın alımlar için dahil edilen Gems dışında, bonuslar ve indirimler başka hiçbir promosyonla birleştirilemez. Oyunlar yayınlanırsa her paket, oyunların kapanış jeneriğinde adının yer almasını içerir.\n\nÖğeler olduğu gibi satılır. Bir pakette listelenen oyun içi bonuslar, indirimler ve Gems yalnızca oyunlar yayınlanırsa geçerli olabilir ve nihai oyun kurallarına tabidir. Hiçbir kâr, ödeme veya finansal getiri vaat edilmez.",
+    "specialCondition": "Oyun içi satın alımlar için dahil edilen Gems dışında, bonuslar ve indirimler başka hiçbir promosyonla birleştirilemez. Her paket, oyun jeneriğinin sonunda bir isim kredisi içerir, **oyun çıkışına tabi olarak**.\n\nEşyalar olduğu gibi satılır. Bir pakette listelenen oyun içi bonuslar, indirimler ve Gems yalnızca **oyun çıkışına ve nihai oyun şartlarına tabi olarak** geçerli olabilir. Hiçbir kâr, ödeme veya finansal getiri vaat edilmez.",
     "imageComing": "Gorsel yakinda geliyor",
     "close": "Kapat"
   },

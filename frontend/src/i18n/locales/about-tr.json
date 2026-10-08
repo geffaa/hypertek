@@ -12,13 +12,13 @@
         "l": "Programmatic Trade-In Value"
       },
       {
-        "v": "P2E",
-        "l": "Play-to-Own"
+        "v": "P2O",
+        "l": "Play-To-Own"
       }
     ],
     "subtitle": [
-      "Hyper Tek misyonu, oyun sektoru icindeki birden fazla sorunu ele almak ve oyun ekosistemlerinin nasil isletildigini yeniden tanimlamakti; oyuncularin tek bir oyun stiliyle sinirli olmadigi birbirine bagli bir evren yaratmak. Birden fazla turu tek bir ilerleme sisteminde birlestirerek Hyper Tek projesi, oyuncularin birlesik bir dunya icinde kesfedebilecegi, rekabet edebilecegi ve buyuyebilecegi dinamik bir ortam sunmaktadir.",
-      "Amacı, oyunculara dijital öğelerinin gerçek sahipliğini vermektir; her öğe oyun içi fayda ve bir Programmatic Trade-In Value taşır ve bunların tümü oyuncuların şekillendirmeye yardım ettiği bir ekosistemde yer alır.",
+      "Hyper Tek'in misyonu, oyun endüstrisindeki birçok sorunu ele almak ve oyuncuların tek bir oyun tarzıyla sınırlı kalmadığı, planlanan birbirine bağlı bir oyun evreni yaratarak oyun ekosistemlerinin nasıl çalıştığını yeniden tanımlamaktır. Birden fazla türü tek bir ilerleme sisteminde birleştirerek Hyper Tek projesi, oyuncuların birleşik bir dünyada keşfedebileceği, rekabet edebileceği ve büyüyebileceği dinamik bir ortam sunmayı hedefler.",
+      "Hyper Tek projesi, oyunculara dijital eşyalarının gerçek sahipliğini, her biri oyun içi işlevsellik ve Programmatic Trade-In Value ile birlikte, oyuncuların birlikte şekillendirmeye yardım ettiği bir ekosistemde sunmayı hedefler.",
       "Proje, oyunculari ilerleme ve odulleri uzerinde anlamli sahiplik vererek guclendirmeyi, yaraticilik, isbirligi ve rekabeti tesvik etmeyi amaclamaktadir.",
       "Hyper Tek'in uzun vadeli hedefi, birden fazla oyunun ve topluluğun birbirine bağlı tek bir platformda bir arada var olabileceği dijital bir evren inşa etmektir."
     ],
@@ -27,7 +27,7 @@
       "heading1": "Oyunun Ne",
       "heading2": "Olabilecegini Yeniden Tanimlamak",
       "paras": [
-        "Hyper Tek Projesi, birden fazla turun tek bir ilerleme sistemi icerisinde bir arada var olabilecegi bir oyun ortamini hayal eden Don Bennett tarafindan kuruldu. Oyunculari tek bir oyun dongusuyle kalmaya zorlamak yerine Hyper Tek, karakter, kaynaklar ve itibarlarini tum ekosistem genelinde insa ederken, ilerleme, materyaller, oduller ve basarilarin tum oyunlar arasinda kusursuz sekilde akmasiyla farkli aktiviteleri kesfetmelerine olanak tanir.",
+        "Hyper Tek projesi, birden fazla türün tek bir ilerleme sisteminde bir arada var olabildiği bir oyun ortamı hayal eden eski bir havacılık teknisyeni Don Bennett tarafından kuruldu. Oyuncuları tek bir oyun döngüsünde kalmaya zorlamak yerine Hyper Tek, onların ekosistem genelinde karakterler, kaynaklar ve itibar inşa ederken birçok etkinliği keşfetmesine izin vermek üzere planlanıyor; ilerleme, malzemeler, ödüller ve başarılar tüm oyunlar arasında sorunsuz akıyor.",
         "Proje üç oyun ortamı planlıyor: Hyper Racing, Hyper Quest ve Overlord of the Seven Realms. Her oyun farklı bir oynanış tarzı sunar, ancak hepsi aynı evrende var olacak ve aynı oyuncu ilerlemesini paylaşacak şekilde tasarlanmıştır. Bu tasarımın amacı, oyuncuların daha büyük bir ekosistemin parçası olmaya devam ederken en sevdikleri oynanışa odaklanabilmesidir; hedef, geleneksel bağımsız oyunlardan daha derin ve daha sürükleyici oyun ortamlarıdır."
       ]
     },
@@ -46,7 +46,7 @@
         "quote": "...oyun sektoru icerisindeki birden fazla sorunu ele almak ve oyun ekosistemlerinin nasil isletildigini yeniden tanimlamak...",
         "paras": [
           "Hyper Tek misyonu, oyun sektoru icerisindeki birden fazla sorunu ele almak ve oyuncularin tek bir oyun stiliyle sinirli olmadigi birbirine bagli bir evren yaratarak oyun ekosistemlerinin nasil isletildigini yeniden tanimlamakti.",
-          "Birden fazla türü tek bir ilerleme sisteminde birleştirerek hedeflenen, oyuncuların birleşik bir dünyada keşfedebileceği, rekabet edebileceği ve gelişebileceği dinamik bir ortamdır; dijital öğelerinin gerçek sahipliği ve uygun NFA'larda bir Programmatic Trade-In Value ile birlikte.",
+          "Birden fazla türü tek bir ilerleme sisteminde birleştirerek hedef, oyuncuların birleşik bir dünyada keşfedebileceği, rekabet edebileceği ve büyüyebileceği, dijital eşyalarının gerçek sahipliğine ve uygun eşyalarda Programmatic Trade-In Value'ya sahip dinamik bir ortamdır.",
           "Birden fazla oyunun ve topluluğun birbirine bağlı tek bir platformda bir arada var olduğu dijital bir evren. Hyper Tek, çevrimiçi ve sanal gerçeklik oyun deneyimlerini birbirinden yalıtmak yerine, oyuncuların eylemlerinin ve etkileşimlerinin çevrelerindeki dünyayı etkileyebileceği ortak bir ekosistem kurmayı amaçlıyor."
         ]
       }
@@ -77,8 +77,8 @@
     },
     "section04": {
       "label": "Mantarlanmaz Dijital Sanat Eserleri",
-      "heading": "Oyun İçi Faydası Olan Dijital Sanat",
-      "subtitle": "60 Saniyelik Ozet",
+      "heading": "Planlanan Oyun İçi İşlevli Dijital Sanat",
+      "subtitle": "NFA, Non-Fungible Articles. Bunlar DNA anahtarı olmayan ve herhangi bir tür tarafından kullanılabilen Eşyalar veya Uzmanlardır",
       "quote": "Tek Evren. Üç Oyun. Gerçek Sahiplik. Dijital Sahipliğin Geleceği Hyper Tek ile Başlıyor.",
       "cards": [
         {
@@ -87,37 +87,37 @@
           "items": [
             {
               "label": "NFA'lar...",
-              "desc": "Mimar tarafindan olusturulmus, en yuksek oyun ici bonuslar, yarı ila ultra nadir"
+              "desc": "Mimarlar tarafından yaratıldı, planlanan en yüksek oyun içi bonuslar, yarı nadirden ultra nadire"
             },
             {
               "label": "NFC'ler...",
-              "desc": "Oyun ici bonuslu koleksiyonlar, oyuncu tarafindan olusturulabilir"
+              "desc": "Oyun içi bonuslu planlanan koleksiyon eşyaları, oyuncular tarafından yaratılabilir"
             },
             {
               "label": "NFT'ler...",
-              "desc": "Tamamen oyuncu yapimi, ussu guc bonuslari icin dekorasyon yapimi"
+              "desc": "Tamamen oyuncu yapımı, planlanan oyun içi güç bonusları/ödülleri için üssünü dekore et"
             }
           ]
         },
         {
-          "title": "Neden Degerlerini Korurlar",
+          "title": "Geri Dönüştürülebilir Zincir Üstü Eşyalar",
           "bullets": [
-            "Uygun her sanat eserinde Programmatic Trade-In Value",
-            "Her yeniden satış, öğenin takas tahsisine eklenir",
-            "Yilda iki kez enflasyona endeksli",
+            "Uygun her sanat eserinde planlanan Programmatic Trade-In Value",
+            "Her yeniden satış, eşyanın trade-in payını nihai şartlara göre artırır",
             "Degeriniz her zaman buyur, hicbir zaman kuculmez"
           ]
         },
         {
           "title": "Tasarim Gereği Adil",
-          "body": "Her satışın komisyonunun büyük kısmı Hyper Tek 100'de kalmaz. Ekosisteme geri döner: o öğenin emanette tutulan kendi takas tahsisine ve sanatçı telif ücretlerine. Görev yayınlayan alıcılar komisyonlarını indirim olarak düşürebilir, görevleri tamamlayan oyuncular ise oyun içi ödüller alır."
+          "body": "Komisyonun büyük kısmının ekosisteme geri dönmesi planlanıyor: quest yayınlayan alıcılar komisyonlarını indirim olarak düşürebilir, quest'i tamamlayan oyuncular ise oyun içi ödüller alır."
         },
         {
           "title": "Simdi Dahil Olun",
-          "body": "Her sanat eseri sınırlı sayıdadır: arzı tükendiğinde bir daha gelmez. Arz sınırlı olduğu için her eser nadir kalır. Oyunlar yayınlanırsa geçerli olabilecek oyun içi faydaya sahip koleksiyonluk sanata sahip ol.",
-          "link": "[www.hypertek.com] — Goz At. Satin Al. Olustur. Gelecege Sahip Ol."
+          "body": "Altyapı kuruldu ve pazar yeri canlı. Oyunları geliştirmeye devam ederken, normalden daha yüksek planlanan oyun içi bonuslara sahip ve tekrarlanmayacak sınırlı sayıda sınırlı sürüm eşya çıkarıyoruz.",
+          "link": "[www.hypertek.com] — Keşfet. Satın Al. Yarat. Eşyalarının Sahibi Ol."
         }
-      ]
+      ],
+      "pageHeading": "Oyun İçi İşlevli Dijital Sanat"
     },
     "section05": {
       "label": "Erken Erişim — Sınırlı Sayıda Öğeler",
@@ -155,11 +155,11 @@
       "helpItems": [
         {
           "bold": "Bir NFA, NFC veya NFT Satin Alin",
-          "text": "Oyunlar yayınlanırsa geçerli olabilecek oyun içi bonuslara ve bir Programmatic Trade-In Value'ya sahip dijital sanat eserlerini keşfet. Stoklar tükenene kadar mevcut."
+          "text": "Programmatic Trade-In Value ve oyunlar tamamlanırsa geçerli olabilecek planlanan oyun içi bonuslara sahip dijital sanat eserlerini keşfet."
         },
         {
           "bold": "Kendi NFT'nizi Olusturun",
-          "text": "— pazar yerinde içerik üreticisi ol ve kendi sanat eserlerini diğer oyunculara sun"
+          "text": "— pazar yerinde yaratıcı ol ve kendi sanat eserlerini hemen başkalarına sun"
         },
         {
           "bold": "Paylasin ve Haberi Yayın",
@@ -174,25 +174,25 @@
       "subtitle": "Sürükleyici oyunlar, oyuncuların yönlendirdiği dijital bir pazar yeri ve koleksiyon yapan oyuncular arasında köprü kuruyoruz.",
       "cards": [
         {
-          "label": "Somut Oduller ve Girisimcilik",
+          "label": "Eşya Sahipliği",
           "bullets": [
-            "Programmatic Trade-In Value ile gerçek NFA/NFC/NFT sahipliği",
+            "Planlanan Programmatic Trade-In Value ile NFA/NFC/NFT'lerin gerçek sahipliği",
             "Pazar yerinde oyuncudan oyuncuya ticaret",
-            "Planlanan oyunlarda geçerli olabilecek oyun içi fayda",
+            "Planlanan oyunlarda geçerli olabilecek oyun içi bonuslar",
             "Play-to-Own öğe tasarımı"
           ]
         },
         {
           "label": "Item Loyalty Program",
-          "body": "Uygun bir öğeyi daha uzun süre tut, takas kademesi Tiered Loyalty Return Schedule kapsamında yükselsin: birinci yılda tahsisin %80'inden beşinci yıldan sonra %97'sine. İade edilen tutar her zaman tahsis edilen tutardan azdır; yani bu bir ürün özelliğidir, para kazanma yolu değildir."
+          "body": "Uygun eşyaları daha uzun süre tut, trade-in oranı Tiered Loyalty Return Schedule'a göre artar: payının ilk yıl %80'inden beşinci yıldan sonra %97'sine. İade edilen tutar her zaman tahsis edilen tutardan azdır, dolayısıyla bu bir ürün geri dönüşüm özelliğidir, para kazanma yolu değil."
         },
         {
           "label": "Birbirine Bagli Dunyalarda Sonsuz Oyunculuk",
           "bullets": [
-            "Tek bir birlesik evren icinde uc benzersiz oyun turu",
-            "Tum oyunlarda paylasimli ilerleme, oduller ve basarilar",
-            "Her seçimin tum evreni etkiledigi yasayan bir ekosistem",
-            "VR/AR oyuncular gercek zamanli gorevlere ve epik savaslaра katilabilir"
+            "Tek bir birleşik evrende planlanan üç benzersiz oyun türü",
+            "Oyunlar arasında önerilen ödüller ve başarılar dahil planlanan ortak ilerleme",
+            "Her seçimin tüm evreni etkilediği planlanan yaşayan bir ekosistem",
+            "VR planlanıyor ve oyuncuların gerçek zamanlı epik görevlere ve savaşlara katılmasına izin verebilir"
           ]
         }
       ]

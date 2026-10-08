@@ -11,7 +11,7 @@
       "executive-summary": "01  Yönetici Özeti",
       "three-worlds": "02  Üç Dünya",
       "technology": "03  Teknoloji",
-      "nfa": "04  Değiştirilemez Varlıklar",
+      "nfa": "04  Non-Fungible Articles",
       "hyperbucks": "05  Gems",
       "marketplace": "06  Pazar Yeri",
       "roadmap": "07  Yol Haritası",
@@ -215,7 +215,7 @@
     "signUpBtn": "Kayıt Ol",
     "walletReady": "Cüzdanınız Hazır",
     "walletReadyDesc": "Hesabınız için güvenli bir gömülü cüzdan oluşturuldu.",
-    "walletWarning": "⚠️ Özel anahtarınızı asla kimseyle paylaşmayın. Özel anahtarınıza sahip olan kişi cüzdanınız ve varlıklarınız üzerinde tam kontrole sahiptir.",
+    "walletWarning": "⚠️ Özel anahtarını asla kimseyle paylaşma. Özel anahtarına sahip olan herkes cüzdanın ve eşyaların üzerinde tam kontrole sahiptir.",
     "walletAddress": "Cüzdan Adresiniz",
     "enterPasswordReveal": "Özel anahtarı görmek için şifrenizi girin:",
     "reEnterPassword": "Şifreyi tekrar girin",
@@ -371,7 +371,7 @@
       "colTimeActive": "\nAktif Zaman\n",
       "colAssignedTo": "\nAtanan Kişi\n",
       "inGame": "\nOyun içi\n",
-      "earned": "\nKazanılan\n",
+      "earned": "Kazanılan",
       "statusOpen": "\nAçık\n"
     },
     "listings": {
@@ -402,7 +402,7 @@
       "transactions": "İşlemler",
       "offers": "Teklifler",
       "hyperBucks": "Gems",
-      "earnings": "Kazançlar",
+      "earnings": "Satış Gelirleri",
       "support": "Destek",
       "signOut": "Çıkış Yap"
     },
@@ -497,12 +497,12 @@
       "send": "Gönder"
     },
     "withdraw": {
-      "title": "Marketplace Kazançları",
-      "subtitle": "Şu kaynaktan kazanılan USDC'yi talep edin: NFT satışları ve içerik oluşturucu telif hakları.",
-      "connectWallet": "Market kazançlarını görüntülemek için cüzdanınızı bağlayın.",
-      "noEarnings": "Henüz talep edilecek pazaryeri kazancı yok.",
-      "noEarningsHint": "NFT satışlarından elde edilen kazançlar burada görünecek.",
-      "sellerEarnings": "Satıcı Kazançları",
+      "title": "Pazar Yeri Satış Gelirleri",
+      "subtitle": "NFT satışlarından ve yaratıcı telif ücretlerinden USDC talep et.",
+      "connectWallet": "Pazar yeri satış gelirlerini görmek için cüzdanını bağla.",
+      "noEarnings": "Talep edilecek pazar yeri satış geliri henüz yok.",
+      "noEarningsHint": "NFT satış gelirleri burada görünecek.",
+      "sellerEarnings": "Satıcı Gelirleri",
       "creatorRoyalties": "Yaratıcı Telif Ücretleri",
       "claim": "Talep"
     },
@@ -520,7 +520,7 @@
       "descPlaceholder": " Öğenizi tanımlayın... ",
       "storageBox": " Saklama Kutusu (Kategori) ",
       "storageBoxHint": " Öğe, pazarda listelenene kadar bu saklama kutusuna yerleştirilir. ",
-      "assetType": " Varlık Türü ",
+      "assetType": "Eşya Türü",
       "nfcSoon": " Yakında ",
       "nfcHint": " NFC oluşturma lisans gerektiriyor; gelecekteki bir güncellemeyle gelecek. ",
       "blockchain": " Blockchain ",
