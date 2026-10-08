@@ -17,7 +17,7 @@
     "shop": {
       "overview": "Gambaran Keseluruhan",
       "overviewDesc": "Gambaran keseluruhan pasaran umum",
-      "myAssets": "Aset Saya",
+      "myAssets": "Item Saya",
       "myAssetsDesc": "Pantau dan urus semua yang anda miliki",
       "theMarketplace": "Pasaran",
       "theMarketplaceDesc": "Semak imbas semua kolektif NFT, NFA & NFC",
@@ -69,8 +69,8 @@
         "description": "Beli NFT kegemaran anda dan pamerkan atau dagangkannya di profil anda bila-bila masa."
       },
       {
-        "title": "Jana & Kembangkan",
-        "description": "Jana pendapatan dengan menjual koleksi anda atau meningkatkan populariti dalam ruang NFT."
+        "title": "Kumpul & Berkembang",
+        "description": "Kembangkan koleksi anda, atau tawarkan ciptaan anda sendiri kepada pemain lain di pasaran."
       }
     ]
   },
@@ -93,15 +93,15 @@
       },
       {
         "label": "Pemilikan Sebenar",
-        "desc": "NFA/NFC/NFT dengan Programmatic Trade-In Value"
+        "desc": "NFA/NFC/NFT dengan Programmatic Trade-In Value yang dirancang"
       },
       {
         "label": "Play-to-Own",
-        "desc": "Setiap item yang anda kumpul adalah milik anda, direkodkan di blockchain"
+        "desc": "Item yang dirancang untuk anda kumpul dan miliki, direkodkan pada rantaian Base"
       },
       {
         "label": "Item Loyalty Program",
-        "desc": "Semakin lama anda menyimpan sesuatu item, semakin tinggi peringkat tukar belinya, sentiasa di bawah jumlah yang diperuntukkan kepadanya"
+        "desc": "Nilai kesetiaan yang dirancang yang boleh meningkat mengikut terma yang dinyatakan"
       },
       {
         "label": "Kemajuan Berpaut",
@@ -109,7 +109,7 @@
       },
       {
         "label": "Integrasi VR/AR",
-        "desc": "Pemain VR/AR boleh menyertai misi dan pertempuran epik secara masa nyata"
+        "desc": "VR/AR yang dirancang supaya pemain boleh menyertai misi dan pertempuran epik secara masa nyata"
       }
     ]
   },
@@ -169,10 +169,10 @@
       "uiPageSubtitle": "Papan pemuka gaming yang lengkap.",
       "uiPageSubtitleSpan": "Tiga mod. Satu pengalaman imersif.",
       "uiHeroLabel": "Pratonton Interaktif",
-      "uiHeroDesc": "Masuki papan pemuka Hyper Tek 100 yang lengkap. Tukar antara mod Racing, Quest, dan Overlord. Setiap satu dengan pasaran, inventori aset, dan pandangan pendapatan masa nyata tersendiri.",
+      "uiHeroDesc": "Masuk ke papan pemuka penuh Hyper Tek 100. Tukar antara mod Racing, Quest dan Overlord, masing-masing dengan pasaran dan inventori itemnya sendiri.",
       "uiStat1": "3 Mod Permainan",
       "uiStat2": "Papan Pemuka Lengkap",
-      "uiStat3": "Inventori Aset",
+      "uiStat3": "Inventori Item",
       "uiStat4": "Pasaran Langsung",
       "uiLaunchBtn": "Lancar Antara Muka",
       "aboutPageSubtitle": "Pasukan, misi, dan visi.",
@@ -181,9 +181,9 @@
       "aboutHeroTitle2": "Dikuasakan oleh Web3.5.",
       "aboutHeroDesc": "Hyper Tek 100 ialah projek permainan yang sedang dibangunkan, di mana setiap item direkodkan di blockchain dan dimiliki oleh pemainnya. Tiga permainan yang saling berhubung dirancang, dengan satu sistem kemajuan yang dikongsi.",
       "pillar1Title": "Teknologi Web3.5",
-      "pillar1Desc": "Aset on-chain, pemilikan nyata, dan pasaran telus yang dibina di Base.",
-      "pillar2Title": "Nilai Aset Sebenar",
-      "pillar2Desc": "Setiap item dalam permainan adalah aset yang boleh diperdagangkan. Main, jana, dan miliki kemajuan anda.",
+      "pillar1Desc": "Item on-chain, pemilikan sebenar dan pasaran telus yang dibina di Base.",
+      "pillar2Title": "Pemilikan Item yang Sebenar",
+      "pillar2Desc": "Setiap item dalam permainan yang layak dirancang untuk boleh didagangkan. Mainkan, kumpul dan miliki item anda.",
       "pillar3Title": "Ekosistem Adil",
       "pillar3Desc": "Pembahagian komisen yang telus dan Programmatic Trade-In Value yang terbina dalam setiap item yang layak.",
       "pillar4Title": "Sertai",
@@ -198,21 +198,21 @@
     "tryGaming": "Cuba antara muka permainan",
     "badge": "NFA EDISI TERHAD DAN PAKEJ PERMAINAN, TERSEDIA SELAGI STOK MASIH ADA",
     "intro1": "Hyper Tek 100 ialah projek permainan yang sedang dibangunkan untuk menangani beberapa cabaran paling mendesak dalam industri ini. Laman web, marketplace dan sistem item telah dibina, dan tiga permainan yang saling berkait sedang dirancang. Sebelum permainan tiba, kami mengeluarkan item dan pakej dalam jumlah terhad untuk pemain dan pengumpul yang mahu menyertai alam semesta ini lebih awal.",
-    "intro2": "Kami mengeluarkan sebilangan kecil item Non-Fungible Article (NFA) Peringkat 1. Setiap satu menyenaraikan bonus dalam permainan yang mungkin terpakai jika permainan dilancarkan, dan tahap bonus Peringkat 1 tidak dirancang untuk diulang. Bekalan mempunyai had tetap: sebaik sahaja item ini habis dijual, baki NFA edisi terhad yang belum dicetak akan dikeluarkan daripada laman web.",
-    "intro3": "Item Hyper Tek yang layak mempunyai Programmatic Trade-In Value, yang disimpan dalam escrow di blockchain. NFA edisi terhad ini juga menyenaraikan bonus dalam permainan yang mungkin terpakai, tertakluk kepada peraturan akhir permainan, jika permainan dilancarkan.",
+    "intro2": "Kami melancarkan sejumlah kecil item Non-Fungible Article (NFA) Peringkat 1. Setiap satu menyenaraikan bonus dalam permainan yang dirancang dan boleh terpakai jika permainan siap, dan tahap bonus Peringkat 1 tidak dirancang untuk diulang. Bekalan dihadkan dengan ketat: apabila item ini habis dijual, NFA edisi terhad yang belum dicetak akan dialihkan daripada laman web.",
+    "intro3": "Item Hyper Tek yang layak membawa Programmatic Trade-In Value yang disimpan dalam escrow on-chain. NFA edisi terhad ini juga menyenaraikan bonus dalam permainan yang dirancang dan boleh terpakai, tertakluk kepada peraturan akhir permainan, jika permainan siap.",
     "intro4": "Jika anda suka apa yang anda lihat tentang Projek Hyper Tek dan ingin memiliki salah satu item terhad ini, inilah masanya. Bekalan adalah terhad, dan sebaik sahaja sesuatu item habis, ia tidak akan dicetak lagi.",
     "intro5": "Keluaran kedua kami ialah satu set pakej permainan eksklusif yang dijual terus di laman web kami sendiri, pada harga 10% lebih rendah daripada harga yang mungkin ditawarkan di tempat lain kemudian. Harga ini hanya tersedia untuk tempoh terhad.",
     "keyPointsTitle": "Perkara Penting untuk Diingati:",
-    "intro6": "Hyper Tek Non-Fungible Articles (HT NFA) ialah koleksi digital dengan bonus dalam permainan terbesar dalam rangkaian Hyper Tek, yang mungkin terpakai jika permainan dilancarkan, serta Programmatic Trade-In Value. Hanya tersedia selagi stok masih ada.",
-    "intro7": "Hyper Tek dibina sebagai Play-to-Own: item yang anda kumpul adalah milik anda, direkodkan di blockchain, dengan kegunaan dalam permainan yang mungkin terpakai merentas permainan yang dirancang. Item dijual sebagai koleksi digital, bukan sebagai cara untuk menjana wang.",
+    "intro6": "Hyper Tek Non-Fungible Articles (HT NFA) ialah barang koleksi digital dengan bonus dalam permainan terbesar yang dirancang dalam barisan Hyper Tek, yang boleh terpakai jika permainan siap, ditambah Programmatic Trade-In Value. Tersedia hanya selagi stok masih ada.",
+    "intro7": "Hyper Tek dibina sebagai Play-to-Own: item yang anda kumpul adalah milik anda, direkodkan on-chain, dengan fungsi dalam permainan yang dirancang dan boleh terpakai merentasi permainan yang dirancang. Item dijual sebagai barang koleksi digital, bukan sebagai cara untuk menjana wang.",
     "collectionsLabel": "Koleksi",
     "sectionTitle": "Pakej Permainan Edisi Terhad",
     "discount": "Jimat 10% daripada harga yang disenaraikan",
     "donationTierLabel": "Peringkat Pakej",
     "donationTierPrefix": "Peringkat Pakej:",
-    "rewardsTitle": "Tertakluk pada pelancaran permainan dan terma akhir permainan:",
+    "rewardsTitle": "Tertakluk kepada pelancaran permainan dan terma akhir permainan:",
     "specialConditionTitle": "Syarat Khas",
-    "specialCondition": "NOTA: Selain Gems yang disertakan untuk pembelian dalam permainan, bonus dan diskaun tidak boleh digabungkan dengan promosi lain. Setiap pakej menyertakan nama anda dalam kredit akhir permainan, jika permainan dilancarkan.\n\nItem dijual seadanya. Bonus dalam permainan, diskaun dan Gems yang disenaraikan dalam pakej hanya mungkin terpakai jika permainan dilancarkan, dan tertakluk kepada peraturan akhir permainan. Tiada keuntungan, bayaran atau pulangan kewangan dijanjikan.",
+    "specialCondition": "Selain Gems yang disertakan untuk pembelian dalam permainan, bonus dan diskaun tidak boleh digabungkan dengan sebarang promosi lain. Setiap pakej termasuk kredit nama pada penghujung kredit permainan, **tertakluk kepada pelancaran permainan**.\n\nItem dijual seadanya. Bonus dalam permainan, diskaun dan Gems yang disenaraikan dalam pakej hanya boleh terpakai **tertakluk kepada pelancaran permainan dan terma akhir permainan**. Tiada keuntungan, bayaran atau pulangan kewangan dijanjikan.",
     "imageComing": "Gambar akan datang",
     "close": "Tutup"
   },

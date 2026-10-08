@@ -11,7 +11,7 @@
       "executive-summary": "01  Ringkasan Eksekutif",
       "three-worlds": "02  Tiga Dunia",
       "technology": "03  Teknologi",
-      "nfa": "04  Aset Tidak Boleh Ganti",
+      "nfa": "04  Non-Fungible Articles",
       "hyperbucks": "05  Gems",
       "marketplace": "06  Marketplace",
       "roadmap": "07  Peta Jalan",
@@ -215,7 +215,7 @@
     "signUpBtn": "Daftar",
     "walletReady": "Dompet Anda Sedia",
     "walletReadyDesc": "Dompet tertanam yang selamat telah dicipta untuk akaun anda.",
-    "walletWarning": "⚠️ Jangan sekali-kali berkongsi kunci peribadi anda dengan sesiapa. Sesiapa yang mempunyai kunci peribadi anda mempunyai kawalan penuh ke atas dompet dan aset anda.",
+    "walletWarning": "⚠️ Jangan sekali-kali berkongsi kunci peribadi anda dengan sesiapa pun. Sesiapa yang mempunyai kunci peribadi anda mempunyai kawalan penuh ke atas dompet dan item anda.",
     "walletAddress": "Alamat Dompet Anda",
     "enterPasswordReveal": "Masukkan kata laluan anda untuk mendedahkan kunci peribadi:",
     "reEnterPassword": "Masukkan semula kata laluan anda",
@@ -371,7 +371,7 @@
       "colTimeActive": "\nMasa Aktif\n",
       "colAssignedTo": "\nDitugaskan Kepada\n",
       "inGame": "\nDalam permainan\n",
-      "earned": "\nDiperolehi\n",
+      "earned": "Diperoleh",
       "statusOpen": "\nBuka\n"
     },
     "listings": {
@@ -402,7 +402,7 @@
       "transactions": "Transaksi",
       "offers": "Tawaran",
       "hyperBucks": "Gems",
-      "earnings": "Pendapatan",
+      "earnings": "Hasil Jualan",
       "support": "Sokongan",
       "signOut": "Log Keluar"
     },
@@ -497,12 +497,12 @@
       "send": "Hantar"
     },
     "withdraw": {
-      "title": "Pendapatan Pasaran",
-      "subtitle": "Tuntut USDC yang diperoleh daripada jualan NFT dan royalti pencipta.",
-      "connectWallet": "Sambungkan dompet anda untuk melihat pendapatan pasaran.",
-      "noEarnings": "Tiada pendapatan pasaran untuk dituntut lagi.",
-      "noEarningsHint": "Pendapatan daripada jualan NFT akan dipaparkan di sini.",
-      "sellerEarnings": "Pendapatan Penjual",
+      "title": "Hasil Jualan Pasaran",
+      "subtitle": "Tuntut USDC daripada jualan NFT dan royalti pencipta anda.",
+      "connectWallet": "Sambungkan dompet anda untuk melihat hasil jualan pasaran anda.",
+      "noEarnings": "Belum ada hasil jualan pasaran untuk dituntut.",
+      "noEarningsHint": "Hasil jualan NFT akan dipaparkan di sini.",
+      "sellerEarnings": "Hasil Penjual",
       "creatorRoyalties": "Royalti Pencipta",
       "claim": "Tuntutan"
     },
@@ -520,7 +520,7 @@
       "descPlaceholder": "Terangkan item anda...",
       "storageBox": "Kotak Storan (Kategori)",
       "storageBoxHint": "Item diletakkan ke dalam kotak storan ini sehingga disenaraikan di pasaran.",
-      "assetType": "Jenis Aset",
+      "assetType": "Jenis Item",
       "nfcSoon": "Tidak lama lagi",
       "nfcHint": "Penciptaan NFC memerlukan lesen — akan datang dalam kemas kini masa hadapan.",
       "blockchain": "Rantaian sekat",
