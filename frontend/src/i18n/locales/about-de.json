@@ -12,13 +12,13 @@
         "l": "Programmatic Trade-In Value"
       },
       {
-        "v": "P2E",
-        "l": "Play-to-Own"
+        "v": "P2O",
+        "l": "Play-To-Own"
       }
     ],
     "subtitle": [
-      "Die Mission von Hyper Tek war es, mehrere Probleme in der Gaming-Industrie anzugehen und neu zu definieren, wie Gaming-Ökosysteme funktionieren, indem ein miteinander verbundenes Universum geschaffen wird, in dem Spieler nicht auf einen einzigen Spielstil beschränkt sind. Durch die Kombination mehrerer Genres in einem einzigen Fortschrittssystem bietet das Hyper Tek-Projekt eine dynamische Umgebung, in der Spieler in einer vereinten Welt erkunden, konkurrieren und wachsen können.",
-      "Ziel ist es, den Spielern innerhalb eines Ökosystems, das die Spieler mitgestalten, echtes Eigentum an ihren digitalen Gegenständen zu geben, jeweils mit Spielnutzen und einer Programmatic Trade-In Value.\n\nDas langfristige Ziel von",
+      "Die Mission von Hyper Tek war es, mehrere Probleme der Spielebranche anzugehen und neu zu definieren, wie Gaming-Ökosysteme funktionieren, indem ein geplantes, vernetztes Gaming-Universum geschaffen wird, in dem Spieler nicht auf einen einzigen Spielstil beschränkt sind. Durch die Kombination mehrerer Genres in einem Fortschrittssystem soll das Hyper Tek Projekt eine dynamische Umgebung bieten, in der Spieler in einer einheitlichen Welt erkunden, konkurrieren und wachsen können.",
+      "Das Hyper Tek Projekt will Spielern echten Besitz an ihren digitalen Items geben, jedes mit In-Game-Funktionalität und einer Programmatic Trade-In Value, innerhalb eines Ökosystems, das die Spieler mitgestalten.",
       "Das Projekt zielt darauf ab, Spieler zu befähigen, indem es ihnen ein sinnvolles Eigentum über ihren Fortschritt und ihre Belohnungen gibt und gleichzeitig Kreativität, Zusammenarbeit und Wettbewerb fördert.",
       "Hyper Tek besteht darin, ein digitales Universum aufzubauen, in dem mehrere Spiele und Communities auf einer einzigen miteinander verbundenen Plattform koexistieren können."
     ],
@@ -27,7 +27,7 @@
       "heading1": "Neu definieren, was",
       "heading2": "Gaming sein kann",
       "paras": [
-        "Das Hyper Tek-Projekt wurde von Don Bennett gegründet, der sich eine Spielumgebung vorstellte, in der mehrere Genres in einem einzigen Fortschrittssystem koexistieren könnten. Anstatt Spieler in einer einzigen Gameplay-Schleife zu halten, ermöglicht Hyper Tek es ihnen, verschiedene Aktivitäten zu erkunden und dabei ihren Charakter, ihre Ressourcen und ihren Ruf im gesamten Ökosystem aufzubauen, wobei Fortschritt, Materialien, Belohnungen und Erfolge nahtlos durch alle Spiele fließen.",
+        "Das Hyper Tek Projekt wurde von Don Bennett gegründet, einem ehemaligen Luft- und Raumfahrttechniker, der sich eine Spielumgebung vorstellte, in der mehrere Genres innerhalb eines einzigen Fortschrittssystems nebeneinander bestehen können. Statt Spieler in einer einzigen Spielschleife zu halten, soll Hyper Tek es ihnen ermöglichen, verschiedene Aktivitäten zu erkunden und dabei Charakter, Ressourcen und Ansehen im gesamten Ökosystem aufzubauen, wobei Fortschritt, Materialien, Belohnungen und Erfolge nahtlos über alle Spiele hinweg fließen.",
         "Das Projekt plant drei Spielumgebungen: Hyper Racing, Hyper Quest und Overlord of the Seven Realms. Jedes Spiel bietet einen anderen Spielstil, doch alle sind so konzipiert, dass sie im selben Universum existieren und den gleichen Spielerfortschritt aufweisen. Dieses Design soll es den Spielern ermöglichen, sich an dem Gameplay zu beteiligen, das ihnen am meisten Spaß macht, und gleichzeitig Teil eines größeren Ökosystems zu sein, mit dem Ziel, Spielumgebungen zu schaffen, die tiefer und immersiver sind als herkömmliche eigenständige Spiele."
       ]
     },
@@ -46,7 +46,7 @@
         "quote": "...mehrere Probleme in der Gaming-Industrie anzugehen und neu zu definieren, wie Gaming-Ökosysteme funktionieren...",
         "paras": [
           "Die Mission von Hyper Tek war es, mehrere Probleme in der Gaming-Industrie anzugehen und neu zu definieren, wie Gaming-Ökosysteme funktionieren, indem ein miteinander verbundenes Universum geschaffen wird, in dem Spieler nicht auf einen einzigen Spielstil beschränkt sind.",
-          "Durch die Kombination mehrerer Genres in einem Fortschrittssystem ist das Ziel eine dynamische Umgebung, in der Spieler eine einheitliche Welt erkunden, konkurrieren und wachsen können, mit echtem Eigentum an ihren digitalen Gegenständen und einem Programmatic Trade-In Value auf berechtigten NFAs.",
+          "Durch die Kombination mehrerer Genres in einem Fortschrittssystem ist das Ziel eine dynamische Umgebung, in der Spieler in einer einheitlichen Welt erkunden, konkurrieren und wachsen können, mit echtem Besitz an ihren digitalen Items und einer Programmatic Trade-In Value auf berechtigten Items.",
           "Ein digitales Universum, in dem mehrere Spiele und Communities auf einer miteinander verbundenen Plattform koexistieren. Anstatt Online- und Virtual-Reality-Spielerlebnisse zu isolieren, zielt Hyper Tek darauf ab, ein gemeinsames Ökosystem zu schaffen, in dem die Aktionen und Interaktionen der Spieler die Welt um sie herum beeinflussen können."
         ]
       }
@@ -77,8 +77,8 @@
     },
     "section04": {
       "label": "Non-Fungible Digital Artworks",
-      "heading": "Digitale Kunst mit In-Game-Utility",
-      "subtitle": "Die 60-Sekunden-Zusammenfassung",
+      "heading": "Digitale Kunst mit geplanter In-Game-Funktion",
+      "subtitle": "NFA, Non-Fungible Articles. Das sind Items oder Spezialisten, die keine DNA-Sperre haben und von jeder Spezies genutzt werden können",
       "quote": "Ein Universum. Drei Spiele. Wahres Eigentum. Die Zukunft des digitalen Eigentums beginnt mit Hyper Tek.",
       "cards": [
         {
@@ -87,37 +87,37 @@
           "items": [
             {
               "label": "NFAs...",
-              "desc": "Von Architekten erstellt, höchste spielinterne Boni, semi bis ultra-selten"
+              "desc": "Von Architekten erschaffen, geplante höchste In-Game-Boni, halbselten bis ultraselten"
             },
             {
               "label": "NFCs...",
-              "desc": "Sammlerstücke mit spielinternen Boni, von Spielern erstellbar"
+              "desc": "Geplante Sammlerstücke mit In-Game-Boni, von Spielern erstellbar"
             },
             {
               "label": "NFTs...",
-              "desc": "Vollständig von Spielern erstellt, dekoriere deine Basis für Machtboni"
+              "desc": "Vollständig von Spielern gemacht, schmücke deine Basis für geplante In-Game-Boni/Belohnungen"
             }
           ]
         },
         {
-          "title": "Warum sie ihren Wert behalten",
+          "title": "Recycelbare On-Chain-Items",
           "bullets": [
-            "Programmatic Trade-In Value für jedes teilnahmeberechtigte Kunstwerk",
-            "Jeder Weiterverkauf erhöht das Eintauschkontingent des Artikels",
-            "Zweimal jährlich inflationsindexiert",
+            "Geplante Programmatic Trade-In Value auf jedem berechtigten Kunstwerk",
+            "Jeder Weiterverkauf erhöht die Trade-In-Zuteilung des Items gemäß den endgültigen Bedingungen",
             "Dein Wert wächst immer, schrumpft nie"
           ]
         },
         {
           "title": "Fair durch Design",
-          "body": "Der Großteil der Provision für jeden Verkauf bleibt nicht bei Hyper Tek 100. Sie fließt zurück in das Ökosystem: in die eigene Inzahlungnahmezuteilung dieses Artikels, die treuhänderisch verwahrt wird, und in Künstler-Tantiemen. Käufer, die Quests veröffentlichen, können ihre Provision als Rabatt senken, während Spieler, die Quests abschließen, Belohnungen im Spiel erhalten."
+          "body": "Der Großteil der Provision soll zurück ins Ökosystem fließen: Käufer, die Quests einstellen, können ihre Provision als Rabatt senken, während Spieler, die Quests abschließen, In-Game-Belohnungen erhalten."
         },
         {
           "title": "Jetzt mitmachen",
-          "body": "Jedes Kunstwerk ist eine limitierte Auflage: Sobald der Vorrat aufgebraucht ist, ist es für immer verschwunden. Da das Angebot begrenzt ist, bleibt jedes Stück knapp. Eigene Sammlerkunst mit In-Game-Utility, die bei Veröffentlichung der Spiele zum Einsatz kommen kann.",
-          "link": "[www.hypertek.com] — Stöbern. Kaufen. Erstellen. Die Zukunft besitzen."
+          "body": "Die Infrastruktur steht und der Marktplatz ist live. Während wir die Spiele weiterentwickeln, veröffentlichen wir begrenzte Mengen von Items in limitierter Auflage mit geplanten, höheren als üblichen In-Game-Boni, die nicht wiederholt werden.",
+          "link": "[www.hypertek.com] — Stöbern. Kaufen. Erschaffen. Besitze deine Items."
         }
-      ]
+      ],
+      "pageHeading": "Digitale Kunst mit In-Game-Funktionalität"
     },
     "section05": {
       "label": "Early Access – Artikel in limitierter Auflage",
@@ -155,11 +155,11 @@
       "helpItems": [
         {
           "bold": "Kaufe ein NFA, NFC oder NFT",
-          "text": "Entdecken Sie digitale Kunstwerke mit In-Game-Boni, die bei Veröffentlichung der Spiele gelten können, plus einer Programmatic Trade-In Value. Verfügbar solange der Vorrat reicht."
+          "text": "Entdecke digitale Kunstwerke mit einer Programmatic Trade-In Value und geplanten In-Game-Boni, die gelten können, wenn die Spiele fertiggestellt werden."
         },
         {
           "bold": "Erstelle dein eigenes NFT",
-          "text": "— werde Creator auf dem Marktplatz und biete anderen Spielern deine eigenen Kunstwerke an"
+          "text": "— werde Creator auf dem Marktplatz und biete deine eigenen Kunstwerke jetzt anderen an"
         },
         {
           "bold": "Teile und verbreite die Botschaft",
@@ -174,25 +174,25 @@
       "subtitle": "Überbrückung der Lücken zwischen immersivem Gaming, einem spielergesteuerten digitalen Marktplatz und den Spielern, die sammeln.",
       "cards": [
         {
-          "label": "Greifbare Belohnungen & Unternehmertum",
+          "label": "Item-Besitz",
           "bullets": [
-            "Echter NFA/NFC/NFT-Eigentum mit einem Programmatic Trade-In Value",
+            "Echter NFA/NFC/NFT-Besitz mit einer geplanten Programmatic Trade-In Value",
             "Spieler-zu-Spieler-Handel auf dem Marktplatz",
-            "In-Game-Dienstprogramm, das für alle geplanten Spiele gelten kann",
+            "In-Game-Boni, die in den geplanten Spielen gelten können",
             "Play-to-Own Artikeldesign"
           ]
         },
         {
           "label": "Item Loyalty Program",
-          "body": "Behalten Sie einen berechtigten Artikel länger bei und seine Eintauschstufe steigt unter Tiered Loyalty Return Schedule, von 80 % seiner Zuteilung im ersten Jahr auf 97 % nach dem fünften Jahr. Der zurückgegebene Betrag ist immer geringer als der zugewiesene Betrag, es handelt sich also um eine Produktfunktion und nicht um eine Möglichkeit, Geld zu verdienen."
+          "body": "Behalte ein berechtigtes Item länger, und seine Trade-In-Stufe steigt gemäß dem Tiered Loyalty Return Schedule von 80 % seiner Zuteilung im ersten Jahr auf 97 % nach dem fünften Jahr. Der zurückgegebene Betrag liegt immer unter dem zugeteilten Betrag, daher ist dies eine Produktfunktion zum Recycling, keine Möglichkeit, Geld zu verdienen."
         },
         {
           "label": "Unendliches Gameplay in miteinander verbundenen Welten",
           "bullets": [
-            "Drei einzigartige Spielgenres in einem vereinten Universum",
-            "Gemeinsamer Fortschritt, Belohnungen und Erfolge in allen Spielen",
-            "Ein lebendiges Ökosystem, in dem jede Entscheidung das gesamte Universum beeinflusst",
-            "VR/AR-Spieler können in Echtzeit an Missionen und epischen Schlachten teilnehmen"
+            "Drei einzigartige Spielgenres, geplant innerhalb eines einheitlichen Universums",
+            "Geplanter gemeinsamer Fortschritt, einschließlich Belohnungen und Erfolgen, über alle Spiele hinweg vorgeschlagen",
+            "Ein geplantes lebendiges Ökosystem, in dem jede Entscheidung das gesamte Universum beeinflusst",
+            "VR ist geplant und kann Spielern ermöglichen, in Echtzeit an Missionen und epischen Schlachten teilzunehmen"
           ]
         }
       ]

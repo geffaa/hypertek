@@ -215,7 +215,7 @@
     "signUpBtn": "Registrieren",
     "walletReady": "Deine Wallet ist bereit",
     "walletReadyDesc": "Eine sichere eingebettete Wallet wurde für dein Konto erstellt.",
-    "walletWarning": "⚠️ Teile deinen privaten Schlüssel niemals mit jemandem. Jeder mit deinem privaten Schlüssel hat die volle Kontrolle über deine Wallet und Assets.",
+    "walletWarning": "⚠️ Gib deinen privaten Schlüssel niemals an andere weiter. Jeder, der deinen privaten Schlüssel besitzt, hat die volle Kontrolle über deine Wallet und deine Items.",
     "walletAddress": "Deine Wallet-Adresse",
     "enterPasswordReveal": "Gib dein Passwort ein, um deinen privaten Schlüssel anzuzeigen:",
     "reEnterPassword": "Passwort erneut eingeben",
@@ -371,7 +371,7 @@
       "colTimeActive": "\nZeit aktiv\n",
       "colAssignedTo": "\nZugewiesen an\n",
       "inGame": "\nIm Spiel\n",
-      "earned": "\nVerdient\n",
+      "earned": "Erhalten",
       "statusOpen": "\nOffen\n"
     },
     "listings": {
@@ -402,7 +402,7 @@
       "transactions": "Transaktionen",
       "offers": "Angebote",
       "hyperBucks": "Gems",
-      "earnings": "Einnahmen",
+      "earnings": "Verkaufserlöse",
       "support": "Unterstützung",
       "signOut": "Signieren Abmelden"
     },
@@ -497,12 +497,12 @@
       "send": "Senden"
     },
     "withdraw": {
-      "title": "Marktplatzeinnahmen",
-      "subtitle": "Fordern Sie USDC an, die Sie durch NFT-Verkäufe und -Ersteller verdient haben Lizenzgebühren.",
-      "connectWallet": "Verbinden Sie Ihr Wallet, um Marktplatzeinnahmen anzuzeigen.",
-      "noEarnings": "Noch keine Marktplatzeinnahmen einzufordern.",
-      "noEarningsHint": "Einnahmen aus NFT-Verkäufen werden hier angezeigt.",
-      "sellerEarnings": "Verkäufereinnahmen",
+      "title": "Marktplatz-Verkaufserlöse",
+      "subtitle": "Fordere USDC aus deinen NFT-Verkäufen und Creator-Tantiemen an.",
+      "connectWallet": "Verbinde deine Wallet, um deine Marktplatz-Verkaufserlöse zu sehen.",
+      "noEarnings": "Noch keine Marktplatz-Verkaufserlöse zum Anfordern.",
+      "noEarningsHint": "Erlöse aus NFT-Verkäufen erscheinen hier.",
+      "sellerEarnings": "Verkäufer-Erlöse",
       "creatorRoyalties": "Ersteller-Lizenzgebühren",
       "claim": "Einfordern"
     },
@@ -520,7 +520,7 @@
       "descPlaceholder": " Beschreiben Sie Ihren Artikel ... ",
       "storageBox": " Aufbewahrungsbox (Kategorie) ",
       "storageBoxHint": " Der Artikel wird in diese Aufbewahrungsbox gelegt, bis er auf dem Marktplatz gelistet wird. ",
-      "assetType": " Asset-Typ ",
+      "assetType": "Item-Typ",
       "nfcSoon": " Bald ",
       "nfcHint": " Für die NFC-Erstellung ist eine Lizenz erforderlich – kommt in einem zukünftigen Update. ",
       "blockchain": " Blockchain ",

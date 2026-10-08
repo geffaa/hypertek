@@ -61,9 +61,9 @@
       "features": [
         {
           "label": "NFAs / NFCs / NFTs",
-          "tagline": "Neu in Web3.5-Assets? Fang hier an",
+          "tagline": "Neu bei Web3.5-Items? Starte hier",
           "details": [
-            "NFAs (Non-Fungible Articles) sind von Hypertek ausgegebene Artikel mit einem plattformgarantierten Rückkaufpreis.",
+            "**NFAs** (Non-Fungible Articles) sind von Hyper Tek ausgegebene Items.",
             "NFCs (Non-Fungible Characters) sind lizenzierte Spielerartikel mit spielinternen Boni und Rückkauf.",
             "NFTs (Non-Fungible Tokens) sind von Nutzern erstellte Sammlerstücke — Skins, Waffen und mehr."
           ],
@@ -72,7 +72,7 @@
         },
         {
           "label": "Der Marktplatz",
-          "tagline": "Kaufe und verkaufe spielinterne Assets sofort",
+          "tagline": "Digitale Items sofort kaufen & verkaufen",
           "details": [
             "Durchsuche einen umfangreichen Katalog von NFAs, NFCs und NFTs — Skins, Waffen, Spezialisten, Raumschiffe und mehr.",
             "Filtere nach Kategorie, Seltenheit oder Preisbereich, um genau das zu finden, was du brauchst.",
@@ -84,7 +84,7 @@
           "label": "Auktionen",
           "tagline": "Konkurriere um exklusive Artikel in limitierter Auflage",
           "details": [
-            "Biete auf seltene Assets, die nur durch zeitlich begrenzte Auktionen verfügbar sind.",
+            "Biete auf seltene Items, die nur über zeitlich begrenzte Auktionen erhältlich sind.",
             "Ein Live-Countdown zeigt genau, wie viel Zeit noch bleibt — jede Sekunde zählt.",
             "Überbiete andere, um legendäre Artikel zu sichern, die auf anderem Weg nicht erhältlich sind."
           ],
@@ -92,9 +92,9 @@
         },
         {
           "label": "Tauschhandel",
-          "tagline": "Tausche Assets direkt, ohne Mittelsmann",
+          "tagline": "Items direkt zwischen Spielern tauschen, ohne Zwischenhändler",
           "details": [
-            "Schlage direkte Asset-Tausche mit anderen Spielern vor oder akzeptiere sie — vollständig on-chain.",
+            "Schlage direkte Item-Tausche mit anderen Spielern vor oder nimm sie an, die vollständig On-Chain abgewickelt werden.",
             "Lege die Bedingungen selbst fest: Wähle, was du anbietest und was du im Gegenzug möchtest.",
             "Durchsuche offene Tauschangebote oder poste dein eigenes, um den perfekten Deal zu finden."
           ],
@@ -102,10 +102,10 @@
         },
         {
           "label": "Quests",
-          "tagline": "Erfülle Missionen, verdiene exklusive Belohnungen",
+          "tagline": "Geplante Missionen mit In-Game-Belohnungen",
           "details": [
-            "Nimm Quests an, um exklusive Belohnungen und seltene spielinterne Assets zu verdienen.",
-            "Jede Quest hat einzigartige Ziele — erkunde, kämpfe oder baue deinen Weg zum Sieg.",
+            "Geplante Quests können exklusive In-Game-Belohnungen und seltene In-Game-Items bieten.",
+            "Jede Quest soll einzigartige Ziele haben: erkunde, kämpfe oder baue dich zum Sieg.",
             "Baue deine Sammlung strategisch durch Geschick auf, nicht nur durch Ausgaben."
           ],
           "cta": "Quests erkunden"
@@ -114,9 +114,9 @@
           "label": "Zu vermieten",
           "tagline": "Geben Sie Ihre Gegenstände heraus, um Belohnungen im Spiel zu erhalten",
           "details": [
-            "Miete mächtige Spezialisten oder Ausrüstung für eine einzelne Mission, ohne zu kaufen.",
+            "Spieler können möglicherweise leistungsstarke Spezialisten oder Ausrüstung für eine einzelne Mission zur Miete nehmen, ohne sie direkt zu kaufen.",
             "Spieler können möglicherweise ungenutzte Gegenstände an andere Spieler weitergeben, um Belohnungen im Spiel zu erhalten, die sie untereinander aushandeln.",
-            "Flexible Laufzeiten — stündlich, täglich oder per-Mission-Vereinbarungen."
+            "Geplante flexible Laufzeiten: stündliche, tägliche oder missionsbezogene Vereinbarungen."
           ],
           "cta": "Durchsuchen, um zu vermieten"
         },
@@ -124,9 +124,9 @@
           "label": "Kopfgeld",
           "tagline": "Jage Ziele, beanspruche Belohnungen, führe die Bestenliste an",
           "details": [
-            "Nimm Kopfgelder an, die von anderen Spielern oder dem System gepostet werden, um Krypto-Belohnungen zu verdienen.",
+            "Spieler können möglicherweise Kopfgelder annehmen, die von anderen Spielern oder vom System für In-Game-Belohnungen ausgeschrieben werden.",
             "Erklimme die Kopfgeld-Rangliste, um exklusive Titel und In-Game-Belohnungen freizuschalten.",
-            "Poste deine eigenen Kopfgelder, um qualifizierte Spieler für deine Ziele zu rekrutieren."
+            "Spieler können möglicherweise eigene Kopfgelder ausschreiben, um erfahrene Spieler für ihre Ziele zu finden."
           ],
           "cta": "Kopfgelder ansehen"
         }
@@ -178,7 +178,7 @@
     "nfa101": {
       "sectionLabel": "Bildung",
       "heading": "NFAs / NFCs / NFTs 101",
-      "subtitle": "Neu bei NFTs und Web3.5? Erkunde unsere Artikel, um Blockchain-Assets, Wallets, Sicherheit und das HyperTek-Ökosystem zu verstehen.",
+      "subtitle": "Neu bei NFTs und Web3.5? Lies unsere Artikel, um Blockchain-Items, Wallets, Sicherheit und das Hyper Tek Ökosystem zu verstehen.",
       "minRead": "Min. Lesezeit",
       "filterAll": "Alle"
     },
@@ -367,7 +367,7 @@
       "noQuests": "Keine {{filter}} Quests",
       "inGameFeature": "Spielinterne Funktion",
       "inGameDesc": "Quests werden automatisch generiert, wenn Verkäufer eine reduzierte Provision wählen. Spieler können bis zu 5 Quests pro Tag erfüllen. Der Provisionspool wird zwischen dem Käuferrabatt, der Spielerbelohnung und der Plattform aufgeteilt.",
-      "earnFromQuests": "Möchtest du mit Quests verdienen? Spiele das Spiel →",
+      "earnFromQuests": "Möchtest du In-Game-Belohnungen aus Quests? Probiere die Spieloberfläche →",
       "moneyQuests": "Geld-Quests (11% Pool)",
       "resourceQuests": "Ressourcen-Quests (20% Pool)",
       "footerNote1": "# Quests mit kombinierten Nutzlasten verwenden die separaten Tabellenbelohnungen.",
@@ -385,7 +385,7 @@
       },
       "comingSoon": {
         "title": "Demnächst verfügbar",
-        "desc": "Die spielinterne Quest-Funktion befindet sich derzeit in der Entwicklung. Bleib dran — du wirst direkt aus dem Spiel Belohnungen verdienen können.",
+        "desc": "Die geplante In-Game-Quest-Funktion befindet sich in Entwicklung und kann In-Game-Belohnungen bieten, vorbehaltlich der endgültigen Spielregeln.",
         "gotIt": "Verstanden"
       },
       "pagination": {
