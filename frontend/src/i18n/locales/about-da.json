@@ -12,13 +12,13 @@
         "l": "Programmatic Trade-In Value"
       },
       {
-        "v": "P2E",
-        "l": "Play-to-Own"
+        "v": "P2O",
+        "l": "Play-To-Own"
       }
     ],
     "subtitle": [
-      "Hyper Tek-missionen var at adressere flere problemer i spilindustrien og omdefinere, hvordan gaming-økosystemer fungerer, ved at skabe et sammenkoblet univers, hvor spillere ikke er begrænset til en enkelt gameplay-stil. Ved at kombinere flere genrer i ét progressionssystem giver Hyper Tek-projektet et dynamisk miljø, hvor spillere kan udforske, konkurrere og vokse inden for en samlet verden.",
-      "Målet er at give spillere reelt ejerskab over deres digitale genstande, hver med nytte i spillet og en Programmatic Trade-In Value, i et økosystem, som spillerne er med til at forme.",
+      "Hyper Teks mission er at tackle flere problemer i spilbranchen og omdefinere, hvordan spiløkosystemer fungerer, ved at skabe et planlagt sammenkoblet spilunivers, hvor spillere ikke er begrænset til én enkelt spilstil. Ved at kombinere flere genrer i ét progressionssystem sigter Hyper Tek-projektet mod at tilbyde et dynamisk miljø, hvor spillere kan udforske, konkurrere og vokse i en samlet verden.",
+      "Hyper Tek-projektet sigter mod at give spillere ægte ejerskab af deres digitale genstande, hver med funktionalitet i spillet og Programmatic Trade-In Value, i et økosystem, som spillerne selv er med til at forme.",
       "Projektet sigter mod at styrke spillere ved at give dem meningsfuldt ejerskab over deres fremgang og belønninger, mens det fremmer kreativitet, samarbejde og konkurrence.",
       "Hyper Teks langsigtede mål er at bygge et digitalt univers, hvor flere spil og fællesskaber kan eksistere side om side på én forbundet platform."
     ],
@@ -27,7 +27,7 @@
       "heading1": "Omdefinering af Hvad",
       "heading2": "Gaming Kan Vaere",
       "paras": [
-        "Hyper Tek-projektet blev grundlagt af Don Bennett, som forestillede sig et gaming-miljø, hvor flere genrer kunne sameksistere inden for et enkelt progressionssystem. I stedet for at tvinge spillere til at forblive i ét gameplay-loop giver Hyper Tek dem mulighed for at udforske forskellige aktiviteter, mens de opbygger deres karakter, ressourcer og ry på tværs af hele økosystemet, med progression, materialer, belønninger og resultater der flyder problemfrit på tværs af alle spillene.",
+        "Hyper Tek-projektet blev grundlagt af Don Bennett, en tidligere flyteknisk tekniker, som forestillede sig et spilmiljø, hvor flere genrer kan eksistere side om side i ét progressionssystem. I stedet for at tvinge spillere til at blive i én enkelt spilloop er Hyper Tek planlagt til at lade dem udforske mange aktiviteter, mens de opbygger karakterer, ressourcer og omdømme på tværs af økosystemet, med progression, materialer, belønninger og præstationer, der flyder jævnt mellem alle spil.",
         "Projektet planlægger tre spilmiljøer: Hyper Racing, Hyper Quest og Overlord of the Seven Realms. Hvert spil tilbyder en forskellig spillestil, men alle er designet til at eksistere i samme univers og dele samme spillerprogression. Tanken er, at spillere kan dyrke den spillestil, de bedst kan lide, og stadig være en del af et større økosystem, med spilmiljøer, der er dybere og mere medrivende end traditionelle enkeltstående spil."
       ]
     },
@@ -46,7 +46,7 @@
         "quote": "...at adressere flere problemer i spilindustrien og omdefinere, hvordan gaming-økosystemer fungerer...",
         "paras": [
           "Hyper Tek-missionen var at adressere flere problemer i spilindustrien og omdefinere, hvordan gaming-økosystemer fungerer, ved at skabe et sammenkoblet univers, hvor spillere ikke er begrænset til en enkelt gameplay-stil.",
-          "Ved at kombinere flere genrer i ét progressionssystem er målet et dynamisk miljø, hvor spillere kan udforske, konkurrere og vokse i en samlet verden, med reelt ejerskab over deres digitale genstande og en Programmatic Trade-In Value på kvalificerede NFA'er.",
+          "Ved at kombinere flere genrer i ét progressionssystem er målet et dynamisk miljø, hvor spillere kan udforske, konkurrere og vokse i en samlet verden, med ægte ejerskab af deres digitale genstande og Programmatic Trade-In Value på kvalificerede genstande.",
           "Et digitalt univers, hvor flere spil og fællesskaber eksisterer side om side på én forbundet platform. I stedet for at isolere spiloplevelser online og i virtual reality vil Hyper Tek etablere et fælles økosystem, hvor spillernes handlinger og interaktioner kan påvirke verden omkring dem."
         ]
       }
@@ -77,8 +77,8 @@
     },
     "section04": {
       "label": "Non-Fungible Digitale Kunstværker",
-      "heading": "Digital kunst med nytte i spillet",
-      "subtitle": "60-Sekunders Resumeet",
+      "heading": "Digital kunst med planlagt funktion i spillet",
+      "subtitle": "NFA, Non-Fungible Articles. Det er genstande eller specialister, der ikke har nogen DNA-nøgle og kan bruges af enhver art",
       "quote": "Ét univers. Tre spil. Reelt ejerskab. Fremtiden for digitalt ejerskab starter med Hyper Tek.",
       "cards": [
         {
@@ -87,37 +87,37 @@
           "items": [
             {
               "label": "NFA'er...",
-              "desc": "Arkitektskabte, højeste spilinterne bonusser, semi til ultrasjaeldne"
+              "desc": "Skabt af arkitekter, højeste planlagte bonusser i spillet, semi- til ultrasjældne"
             },
             {
               "label": "NFC'er...",
-              "desc": "Samlerobjekter med spilinterne bonusser, kan skabes af spillere"
+              "desc": "Planlagte samlerobjekter med bonusser i spillet, kan laves af spillere"
             },
             {
               "label": "NFT'er...",
-              "desc": "Fuldt spillerskabte, dekorér din base for magtbonusser"
+              "desc": "Fuldt spillerskabt, dekorer din base for planlagte kraftbonusser/belønninger i spillet"
             }
           ]
         },
         {
-          "title": "Hvorfor De Holder Vaerdi",
+          "title": "Genanvendelige on-chain-genstande",
           "bullets": [
-            "Programmatic Trade-In Value på hvert kvalificeret kunstværk",
-            "Hvert videresalg øger genstandens indbytningstildeling",
-            "Inflationsindekseret to gange om året",
+            "Planlagt Programmatic Trade-In Value på hvert kvalificeret kunstværk",
+            "Hvert videresalg øger genstandens trade-in-tildeling i henhold til de endelige vilkår",
             "Din vaerdi vokser altid, falder aldrig"
           ]
         },
         {
           "title": "Fair af Design",
-          "body": "Det meste af kommissionen fra hvert salg bliver ikke hos Hyper Tek 100. Den går tilbage til økosystemet: til genstandens egen indbytningstildeling, som opbevares i escrow, og til royalties til kunstnere. Købere, der opretter missioner, kan sænke deres kommission som rabat, mens spillere, der gennemfører missioner, modtager belønninger i spillet."
+          "body": "Hovedparten af provisionen er planlagt til at gå tilbage til økosystemet: købere, der opslår quests, kan sænke deres provision som rabat, mens spillere, der gennemfører quests, modtager belønninger i spillet."
         },
         {
           "title": "Kom Med Nu",
-          "body": "Hvert kunstværk er et begrænset oplag: når udbuddet er væk, er det væk for altid. Fordi udbuddet er begrænset, forbliver hvert værk sjældent. Ej samlekunst med nytte i spillet, som kan gælde, hvis spillene udgives.",
-          "link": "[www.hypertek.com] — Gennemse. Køb. Skab. Ej Fremtiden."
+          "body": "Infrastrukturen er bygget, og markedspladsen er i drift. Mens vi fortsætter med at udvikle spillene, udgiver vi genstande i begrænset oplag i begrænsede mængder med planlagte bonusser i spillet, der er højere end normalt, og som ikke vil blive gentaget.",
+          "link": "[www.hypertek.com] — Udforsk. Køb. Skab. Ej dine genstande."
         }
-      ]
+      ],
+      "pageHeading": "Digital kunst med funktionalitet i spillet"
     },
     "section05": {
       "label": "Tidlig adgang — Genstande i begrænset oplag",
@@ -155,11 +155,11 @@
       "helpItems": [
         {
           "bold": "Køb et NFA, NFC eller NFT",
-          "text": "Opdag digital kunst med bonusser i spillet, som kan gælde, hvis spillene udgives, plus en Programmatic Trade-In Value. Tilgængelig så længe lager haves."
+          "text": "Opdag digitale kunstværker med Programmatic Trade-In Value og planlagte bonusser i spillet, som kan gælde, hvis spillene gøres færdige."
         },
         {
           "bold": "Skab dit eget NFT",
-          "text": "— bliv skaber på markedspladsen og tilbyd dine egne kunstværker til andre spillere"
+          "text": "— bliv skaber på markedspladsen og tilbyd dine egne kunstværker til andre allerede nu"
         },
         {
           "bold": "Del og spred budskabet",
@@ -174,25 +174,25 @@
       "subtitle": "Bygger bro mellem medrivende spil, en spillerdrevet digital markedsplads og de spillere, der samler.",
       "cards": [
         {
-          "label": "Håndgribelige Belønninger og Ivaerksetteri",
+          "label": "Ejerskab af genstande",
           "bullets": [
-            "Reelt ejerskab af NFA/NFC/NFT med en Programmatic Trade-In Value",
+            "Ægte ejerskab af NFA/NFC/NFT med planlagt Programmatic Trade-In Value",
             "Handel mellem spillere på markedspladsen",
-            "Nytte i spillet, som kan gælde på tværs af de planlagte spil",
+            "Bonusser i spillet, der kan gælde på tværs af de planlagte spil",
             "Genstandsdesign efter Play-to-Own"
           ]
         },
         {
           "label": "Item Loyalty Program",
-          "body": "Behold en kvalificeret genstand længere, så stiger dens indbytningsniveau efter Tiered Loyalty Return Schedule, fra 80 % af tildelingen i år ét til 97 % efter år fem. Det beløb, der returneres, er altid lavere end det tildelte beløb, så det er en produktegenskab, ikke en måde at tjene penge på."
+          "body": "Behold kvalificerede genstande længere, og trade-in-satsen stiger i henhold til Tiered Loyalty Return Schedule, fra 80 % af tildelingen i år ét til 97 % efter år fem. Det tilbagebetalte beløb er altid mindre end det tildelte beløb, så dette er en produktgenbrugsfunktion, ikke en måde at tjene penge på."
         },
         {
           "label": "Uendelig Gameplay på Tvaers af Sammenkoblede Verdener",
           "bullets": [
-            "Tre unikke spillegenrer inden for ét forenet univers",
-            "Delt progression, belønninger og resultater på tvaers af alle spil",
-            "Et levende økosystem, hvor hvert valg påvirker hele universet",
-            "VR/AR-spillere kan deltage i missioner og episke slag i realtid"
+            "Tre unikke spilgenrer planlagt i ét samlet univers",
+            "Planlagt delt progression, herunder foreslåede belønninger og præstationer på tværs af spillene",
+            "Et planlagt levende økosystem, hvor hvert valg påvirker hele universet",
+            "VR er planlagt og kan lade spillere deltage i episke missioner og kampe i realtid"
           ]
         }
       ]

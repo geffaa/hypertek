@@ -61,9 +61,9 @@
       "features": [
         {
           "label": "NFA'er / NFC'er / NFT'er",
-          "tagline": "Ny til Web3.5-aktiver? Start her",
+          "tagline": "Ny med Web3.5-genstande? Start her",
           "details": [
-            "NFA'er (Non-Fungible Articles) er Hypertek-udstedte genstande med en platform-garanteret tilbagekøbspris.",
+            "**NFA** (Non-Fungible Articles) er genstande udgivet af Hyper Tek.",
             "NFC'er (Non-Fungible Characters) er licenserede spillergenstande med spilinterne bonusser og tilbagekøb.",
             "NFT'er (Non-Fungible Tokens) er brugerskabte samlerobjekter — skins, vaaben og mere."
           ],
@@ -72,7 +72,7 @@
         },
         {
           "label": "Markedspladsen",
-          "tagline": "Køb og saelg spilinterne aktiver øjeblikkeligt",
+          "tagline": "Køb & sælg digitale genstande med det samme",
           "details": [
             "Gennemse et bredt katalog af NFA'er, NFC'er og NFT'er — skins, vaaben, specialister, rumskibe og mere.",
             "Filtrer efter kategori, sjaeldenhed eller prisinterval for at finde praecis hvad du har brug for.",
@@ -84,7 +84,7 @@
           "label": "Auktioner",
           "tagline": "Konkurrér om eksklusive limited-edition genstande",
           "details": [
-            "Byd paa sjældne aktiver, der kun er tilgaengelige via tidsbegnaesede auktioner.",
+            "Byd på sjældne genstande, der kun er tilgængelige gennem tidsbegrænsede auktioner.",
             "En live nedtaelling viser praecis, hvor meget tid der er tilbage — hvert sekund tæller.",
             "Overbyd andre for at sikre dig legendariske genstande, der ikke kan købes paa anden maade."
           ],
@@ -92,9 +92,9 @@
         },
         {
           "label": "Handler",
-          "tagline": "Byt aktiver peer-to-peer, ingen mellemmand",
+          "tagline": "Byt genstande mellem spillere, uden mellemled",
           "details": [
-            "Foreslaag eller acceptér direkte aktivhandler med andre spillere — fuldt on-chain.",
+            "Foreslå eller acceptér direkte genstandsbytter med andre spillere, helt on-chain.",
             "Saet betingelserne selv: vaelg hvad du tilbyder og hvad du ønsker til gengaeld.",
             "Gennemse aabne handelstilbud eller opret dit eget for at finde den perfekte aftale."
           ],
@@ -102,10 +102,10 @@
         },
         {
           "label": "Quests",
-          "tagline": "Gennemfør missioner, tjen eksklusive belønninger",
+          "tagline": "Planlagte missioner med belønninger i spillet",
           "details": [
-            "Tag paa quests for at tjene eksklusive belønninger og sjeldne spilinterne aktiver.",
-            "Hver quest har unikke maal — udforsk, kaemp, eller byg din vej til sejr.",
+            "Planlagte quests kan tilbyde eksklusive belønninger i spillet og sjældne genstande i spillet.",
+            "Hver quest er planlagt til at have et unikt mål: udforsk, kæmp eller byg din vej til sejr.",
             "Byg din samling strategisk gennem faerdigheder, ikke kun forbrug."
           ],
           "cta": "Udforsk Quests"
@@ -114,9 +114,9 @@
           "label": "Til leje",
           "tagline": "Udlej dine genstande mod belønninger i spillet",
           "details": [
-            "Lej magtfulde specialister eller udstyr til en enkelt mission uden at købe.",
+            "Spillere kan måske udleje stærke specialister eller udstyr til en enkelt mission uden at købe dem direkte.",
             "Spillere kan muligvis udleje ubrugte genstande til andre spillere mod belønninger i spillet, som de aftaler indbyrdes.",
-            "Fleksible varighed — time-, dags- eller pr.-missionsaftaler."
+            "Planlagte fleksible varigheder: aftaler pr. time, pr. dag eller pr. mission."
           ],
           "cta": "Se Til leje"
         },
@@ -124,9 +124,9 @@
           "label": "Dusørdoption",
           "tagline": "Jagt maal, gør krav paa belønninger, topper ranglisten",
           "details": [
-            "Acceptér dusører opslaaet af andre spillere eller systemet for at tjene kryptorealiserede belønninger.",
+            "Spillere kan måske acceptere bounties, der er opslået af andre spillere eller systemet, for belønninger i spillet.",
             "Kravl op ad bounty-ranglisten for at låse op for eksklusive titler og belønninger i spillet.",
-            "Opslaa dine egne dusører for at rekruttere dygtige spillere til dine maal."
+            "Spillere kan måske opslå deres egne bounties for at finde dygtige spillere til deres mål."
           ],
           "cta": "Se Dusører"
         }
@@ -178,7 +178,7 @@
     "nfa101": {
       "sectionLabel": "Uddannelse",
       "heading": "NFA'er / NFC'er / NFT'er 101",
-      "subtitle": "Ny til NFT'er og Web3.5? Udforsk vores artikler for at forstaae blockchain-aktiver, punge, sikkerhed og HyperTek-økosystemet.",
+      "subtitle": "Ny med NFT og Web3.5? Udforsk vores artikler for at forstå blockchain-genstande, wallets, sikkerhed og Hyper Tek-økosystemet.",
       "minRead": "min laesning",
       "filterAll": "Alle"
     },
@@ -367,7 +367,7 @@
       "noQuests": "Ingen {{filter}} quests",
       "inGameFeature": "Spilfunktion",
       "inGameDesc": "Quests genereres automatisk, naarr saelgere vaelger en reduceret kommission. Spillere kan gennemføre op til 5 quests om dagen. Kommissionspuljen deles mellem køberrabatten, spillerbelønningen og platformen.",
-      "earnFromQuests": "Vil du tjene fra quests? Spil spillet →",
+      "earnFromQuests": "Vil du have belønninger i spillet fra quests? Prøv spilgrænsefladen →",
       "moneyQuests": "Pengequests (11% pulje)",
       "resourceQuests": "Ressourcequests (20% pulje)",
       "footerNote1": "# Missioner med kombinerede laster bruger belønningerne i den separate tabel.",
@@ -385,7 +385,7 @@
       },
       "comingSoon": {
         "title": "Kommer Snart",
-        "desc": "Quest-funktionen i spillet er i øjeblikket under udvikling. Følg med — du vil vaere i stand til at tjene belønninger direkte fra spillet.",
+        "desc": "Planlagte quest-funktioner i spillet er under udvikling og kan tilbyde belønninger i spillet, med forbehold for spillets endelige regler.",
         "gotIt": "Forstaaet"
       },
       "pagination": {

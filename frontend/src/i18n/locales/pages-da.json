@@ -215,7 +215,7 @@
     "signUpBtn": "Tilmeld dig",
     "walletReady": "Din pung er klar",
     "walletReadyDesc": "En sikker indlejret pung er oprettet til din konto.",
-    "walletWarning": "⚠️ Del aldrig din private nøgle med nogen. Den der har din private nøgle har fuld kontrol over din pung og aktiver.",
+    "walletWarning": "⚠️ Del aldrig din private nøgle med nogen. Alle, der har din private nøgle, har fuld kontrol over din wallet og dine genstande.",
     "walletAddress": "Din pung-adresse",
     "enterPasswordReveal": "Indtast din adgangskode for at afsløre din private nøgle:",
     "reEnterPassword": "Gentag din adgangskode",
@@ -371,7 +371,7 @@
       "colTimeActive": "\nTid aktiv\n",
       "colAssignedTo": "\nTildelt til\n",
       "inGame": "\nI spillet\n",
-      "earned": "\nOptjent\n",
+      "earned": "Optjent",
       "statusOpen": "\nÅbn\n"
     },
     "listings": {
@@ -402,7 +402,7 @@
       "transactions": "Transaktioner",
       "offers": "Tilbud",
       "hyperBucks": "Gems",
-      "earnings": "Indtjening",
+      "earnings": "Salgsindtægter",
       "support": "Støtte",
       "signOut": "Log ud"
     },
@@ -497,12 +497,12 @@
       "send": "Sende"
     },
     "withdraw": {
-      "title": "Markedspladsindtjening",
-      "subtitle": "Gør krav på USDC optjent fra NFT-salg og royalties.",
-      "connectWallet": "Tilslut din tegnebog for at se markedspladsindtjening.",
-      "noEarnings": "Ingen markedspladsindtjening at gøre krav på endnu.",
-      "noEarningsHint": "Indtjening fra NFT-salg vises her.",
-      "sellerEarnings": "Sælgers indtjening",
+      "title": "Indtægter fra markedspladssalg",
+      "subtitle": "Hent USDC fra dine NFT-salg og skaberroyalties.",
+      "connectWallet": "Forbind din wallet for at se dine indtægter fra markedspladssalg.",
+      "noEarnings": "Ingen indtægter fra markedspladssalg at hente endnu.",
+      "noEarningsHint": "Indtægter fra NFT-salg vises her.",
+      "sellerEarnings": "Sælgerindtægter",
       "creatorRoyalties": "Creator royalties",
       "claim": "Påstand"
     },
@@ -520,7 +520,7 @@
       "descPlaceholder": "Beskriv din vare...",
       "storageBox": "Opbevaringsboks (Kategori)",
       "storageBoxHint": "Varen anbringes i denne opbevaringsboks, indtil den er listet på markedspladsen.",
-      "assetType": "Aktivtype",
+      "assetType": "Genstandstype",
       "nfcSoon": "Snart",
       "nfcHint": "NFC-oprettelse kræver en licens - kommer i en fremtidig opdatering.",
       "blockchain": "Blockchain",

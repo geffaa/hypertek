@@ -5,16 +5,16 @@
     "racing": {
       "label": "RACING",
       "heading": "Hyper Racing",
-      "subtitle": "Galaksens mest intense flyvende køretøjsraceroplevelse,\nhvor dygtighed betaler sig, og mestre bliver gjort.",
+      "subtitle": "Galaksens mest intense racingoplevelse med flyvende køretøjer,\nhvor færdigheder hersker, og mestre fødes.",
       "intro": [
-        "Hyper Racing er et højoktan konkurrencedygtigt racerspil, der foregår på tværs af fremmede verdener, hvor spillere bygger, opgraderer og piloterer fuldt tilpassede flyvende racerkøretøjer gennem nogle af de farligste kredsløb i galaksen. Fra flydende klippeformationer og vulkanske lavarør til øde ørkener og bjergpas er hvert løb en test af forberedelse, reflekser og strategi.",
-        "Hyper Racing er planlagt som en konkurrenceplatform. De bedste kan muligvis deltage i rangerede events og turneringer med belønninger i spillet på spil. Uanset om du jagter hæder på ranglisten eller bygger et racerimperium, er alt, hvad du gør i Hyper Racing, designet til at bringe dig fremad.",
-        "Opgrader dine racerkøretøjer fra næse til hale. Rekruttér dit pitmandskab og hæv dets niveau. Rekruttér en pitchef, der passer til din racerfilosofi. Tag derefter dine evner med ud over banen: din racergarage er også hangaren til dit personlige rumskib, og hver evne, du udvikler, følger med ind i rumkampene i Hyper Quest og Overlord of the 7 Realms."
+        "Hyper Racing er et planlagt, energifyldt konkurrenceracingspil under udvikling, der foregår i fremmede verdener, hvor spillere måske kan bygge, opgradere og flyve fuldt tilpasselige flyvende racerkøretøjer gennem nogle af galaksens farligste baner. Fra planlagte svævende klippeformationer og vulkanske lavatunneller til ørkener og bjergpas er hvert planlagt løb designet som en prøve på forberedelse, reflekser og strategi.",
+        "Hyper Racing er planlagt som en konkurrenceplatform. De bedste spillere kan måske deltage i rangerede begivenheder og turneringer med belønninger i spillet på spil. Uanset om du jagter ære på ranglisten eller bygger et racingimperium, kan alt, hvad du gør i Hyper Racing, føre dig fremad.",
+        "I det planlagte spil under udvikling kan du måske:\n• Opgradere dit racerkøretøj fra for til agter\n• Få og levle dit pit-mandskab op\n• Erhverve pit-chefer, der matcher din racingfilosofi\n• Tage dine færdigheder ud over banen, med en racinggarage, der også er dit private rumskibshangar\n• Tage de evner, du udvikler, med til rumkampe i Hyper Quest og Overlord of the 7 Realms"
       ],
-      "introClose": "Læs videre for at opdage, hvordan spillet fungerer, hvad du kan vinde, og hvordan din racerkarriere giver næring til et helt univers af progression.",
-      "calloutLine1": "Race for at tjene. Tjen for at opgradere.",
+      "introClose": "Læs videre for at se, hvordan det planlagte spil er tænkt til at fungere, hvilke belønninger i spillet det kan tilbyde, og hvordan din racerkarriere kan drive hele progressionsuniverset. Alt med forbehold for spillets færdiggørelse og endelige spilregler.",
+      "calloutLine1": "Race for at opgradere. Opgradér for at avancere.",
       "calloutLine2": "Opgrader til Dominate.",
-      "howItWorksTitle": "Sådan fungerer Hyper Racing",
+      "howItWorksTitle": "Hvordan Hyper Teks planlagte racingspil under udvikling er tænkt til at fungere: en oversigt findes nedenfor, med forbehold for spillets færdiggørelse og endelige spilregler.",
       "howItWorks": [
         {
           "num": "01",
@@ -24,7 +24,7 @@
         {
           "num": "02",
           "title": "Byg dit team",
-          "body": "Racerløb er en holdsport. Rekruttér pitspecialister, der giver unikke bonusser: hurtigere tankning, diagnostik i realtid, nødreparationer af skroget midt i løbet og præstationsjusteringer mellem omgangene. Hvert mandskabsmedlem stiger i niveau med erfaring og lægger kraftfulde evner oven på dine køretøjsopgraderinger. Rekruttér derefter en pitchef til at koordinere arbejdet, lægge løbsstrategien og låse op for præstationsforbedringer for hele holdet, som bygger sig op over en hel sæson."
+          "body": "Racing er en holdsport. Få pit-specialister, der giver unikke bonusser, hurtigere optankning, realtidsdiagnostik, nødreparationer af skroget midt i løbet og præstationsjusteringer mellem omgangene. Hvert mandskabsmedlem levler op med erfaring og stabler kraftfulde evner oven på dine køretøjsopgraderinger. Få derefter pit-chefer, der koordinerer driften, fastlægger racingstrategien og låser op for holdomfattende præstationsopgraderinger, der bygger op gennem en hel sæson."
         },
         {
           "num": "03",
@@ -34,213 +34,209 @@
         {
           "num": "04",
           "title": "Klatre op i graderne",
-          "body": "Sejr optjener lederpoint, låser op for nye kredsløb i fjerne verdener og åbner døren til konkurrencer på højere niveau. Jo dybere du går, jo hårdere er modstanderne og jo større indsats. Bevis dig selv på tværs af alle planeter, og stig dig gennem de globale ranglister."
+          "body": "Sejre giver rangeringspoint, låser op for nye baner i fjerne verdener og åbner døren til konkurrencer på højere niveau. Jo dybere du går, jo hårdere bliver modstanderne, og jo højere bliver indsatsen. Bevis dig selv på hver planet, og stig på den globale rangliste."
         }
       ],
-      "rewardsTitle": "Vind stort; Belønninger, der betyder noget!",
+      "rewardsTitle": "Meningsfulde belønninger i spillet",
       "rewards": [
         {
-          "title": "Belønninger i spillet",
-          "body": "Hvert løb, du gennemfører, er designet til at belønne dig i spillet. Vinder du, kan belønningerne blive mangedoblet. Sejre kan låse op for premiumkomponenter til køretøjer, sjældne opgraderingsmaterialer, eksklusive poletter til rekruttering af mandskab og credits til dit næste byggeri. Opgrader dine køretøjer, byt dem med andre spillere, og se dit racerimperium vokse med hver podieplads."
+          "title": "Belønninger i spillet med genstande i spillet",
+          "body": "Hvert løb, du gennemfører, er planlagt til at give dig belønninger i spillet. Vind, og belønningerne i spillet kan blive multipliceret. Løbssejre kan låse op for premium køretøjskomponenter, sjældne opgraderingsmaterialer, eksklusive mandskabsmærker i spillet og kreditter i spillet til dit næste byg. Du kan måske opgradere køretøjer og bytte dem med andre spillere, med forbehold for spillets endelige regler."
         },
         {
           "title": "Rangerede events",
-          "body": "Hyper Racing er designet omkring rangerede events og turneringer. Færdighedsbaserede konkurrencer kan lade dig bevise dine evner mod galaksens bedste piloter for belønninger i spillet, titler og placering på ranglisten. Fra ugentlige rangerede udfordringer til sæsonmesterskaber kan de bedste få masser af chancer for at skille sig ud."
+          "body": "Hyper Racing er planlagt omkring rangerede begivenheder og turneringer. Planlagte færdighedsbaserede konkurrencer kan lade dig bevise dine evner mod galaksens bedste piloter for belønninger i spillet, titler og placeringer på ranglisten. Fra ugentlige rangeringsudfordringer til sæsonmesterskaber kan de bedste spillere finde masser af muligheder for at brillere."
         },
         {
-          "title": "Sådan fungerer præmiebegivenheder",
-          "body": "Spillere kan muligvis kvalificere sig gennem rangeret spil ved at nå præstationstærskler. Events er planlagt omkring fair matchmaking, så hver deltager møder modstandere på lignende niveau. Eventregler og belønninger i spillet er tiltænkt at blive vist tydeligt, før du forpligter dig."
+          "title": "Hvordan begivenheder med belønninger i spillet kan fungere",
+          "body": "Spillere kan kvalificere sig gennem rangeret spil ved at nå præstationstærskler. Begivenheder er planlagt omkring fair matchmaking, så hver deltager møder modstandere med lignende evner. Begivenhedsregler og belønninger i spillet er tænkt til at blive vist tydeligt, før du tilmelder dig, med forbehold for spillets endelige regler."
         },
         {
           "title": "Progression Beyond the Track",
-          "body": "Belønninger optjent gennem racing foder direkte ind i din bredere progression. Opgrader dine racerkøretøjer, styrk dit pitbesætning, og tragt gevinster til at opgradere dit vigtigste rumskib. Din racergarage er hangarbugten på det skib, så enhver forbedring af din kapsejladsdrift styrker også fartøjet, du flyver mellem verdener og ind i rumkampe på tværs af Hyper Quest og Overlord of the 7 Realms."
+          "body": "Belønninger i spillet, der tjenes gennem racing, er planlagt til at flyde ind i din bredere progression. Du kan måske opgradere racerkøretøjer, styrke dit pit-mandskab og kanalisere belønninger i spillet til at opgradere dit hovedrumskib. Din racinggarage er designet som rumskibets hangar, så opgraderinger af din racingvirksomhed kan også styrke det skib, du flyver mellem verdener i Hyper Quest og Overlord of the 7 Realms."
         }
       ],
       "upgradesTitle": "To maskiner, én mission... Opgrader alt",
       "upgrades": [
         {
           "title": "Opgraderinger til racerbiler",
-          "body": "Dit racerkøretøj er en fuldt modulær maskine. Hver komponent kan udskiftes, justeres og opgraderes: skrog, raketmotorer, skjolde, yderskaller, motorer, stabilisatorer, kølesystemer og aerodynamiske flader. Lette kompositter giver ren fart; kraftigt panser holder dig i live under brutale atmosfæriske forhold. Opgraderingsvejen er dyb, og dine valg former din raceridentitet. Saml nye køretøjer, byg dem op til mesterskabskandidater, kør dem til sejr, og byt dem med andre spillere, når du er klar til den næste udfordring."
+          "body": "De planlagte racerkøretøjer under udvikling er designet som fuldt modulære maskiner. Hver komponent kan skiftes, trimmes og opgraderes: skrog, thrustere, skjolde, ydre skal, motorer, stabilisatorer, kølesystemer og aerodynamiske flader. Lette kompositmaterialer giver ren fart; tung panser holder dig i live i brutale atmosfæriske forhold. Opgraderingsstierne er dybe, og dine valg definerer din racingidentitet. Saml nye køretøjer, byg dem til mesterudfordrere, kør sejre hjem og byt dem med andre spillere, når du er klar til den næste udfordring, alt med forbehold for spillets endelige regler."
         },
         {
           "title": "Vigtigste rumskibsopgraderinger",
-          "body": "Din racergarage er ikke bare et værksted; det er hangarbugten til dit personlige rumskib. De samme ressourcer, kreditter og materialer, som du tjener på banen, kan investeres i at opgradere dit hovedfartøj. Bedre motorer til interplanetariske rejser, stærkere våbensystemer til rumkamp, ​​forbedret navigation til at opdage nye racerverdener og forstærkede skrog til at overleve fjendtlige møder under transit. Dit rumskib er din hjemmebase, din transport og dit slagskib, og kapsejlads gør det stærkere."
+          "body": "Din planlagte racinggarage er måske mere end et værksted. Den er designet som dit private rumskibshangar. Ressourcer, kreditter og materialer, du tjener på banen, kan bruges til at opgradere dit hovedskib. Bedre motorer til rejser mellem planeter, stærkere våbensystemer til rumkamp, bedre navigation til at finde nye racingverdener og forstærkede skrog til at overleve fjendtlige møder under transit. Dit rumskib er din base, dit transportmiddel og dit kampskib, og racing gør det stærkere, alt med forbehold for spillets endelige regler."
         },
         {
           "title": "Opgraderingsløkken",
-          "body": "Kør løb for at samle belønninger, brug belønningerne til at opgradere, og opgrader for at deltage i større løb med større belønninger i spillet. Brug belønningerne på både dine racerkøretøjer og dit rumskib. Jo bedre dit skib er, desto længere rejser du, og desto farligere og mere givende bliver banerne. Det er et progressionsloop, der belønner engagement og færdigheder på alle niveauer."
+          "body": "Saml planlagte belønninger i spillet, som kan føre til opgraderinger, så du kan deltage i større løb med større belønninger i spillet. Kanalisér dem ind i dine racerkøretøjer og dit rumskib. Jo bedre dit skib er, jo længere kommer du, og jo farligere og mere givende bliver banerne. Det er en planlagt progressionscyklus, der belønner dedikation og færdigheder på hvert niveau, alt med forbehold for spillets endelige regler."
         },
         {
           "title": "Indvirkning på tværs af spil",
-          "body": "Hver pilotfærdighed, du udvikler på banen, og hver opgradering, du installerer på dit rumskib, overføres direkte til Hyper Quest og Overlord of the 7 Realms. Ét univers, flere spil, problemfri progression. Det, du bygger i Hyper Racing, driver alt andet."
+          "body": "Enhver planlagt pilotfærdighed, du udvikler på banen, og enhver opgradering, du monterer på dit rumskib, overføres direkte til Hyper Quest og Overlord of the 7 Realms. Ét univers, mange spil, sømløs progression. Det, du bygger i Hyper Racing, driver alt andet, alt med forbehold for spillets endelige regler."
         }
       ],
       "faqTitle": "Hyper Racing — ofte stillede spørgsmål",
       "faq": [
         {
           "q": "Hvad er Hyper Racing?",
-          "a": "Et intenst racerspil med flyvende køretøjer på fremmede verdener. Byg, opgrader og kør fuldt tilpasselige køretøjer gennem farlige sci-fi-baner, mens du konkurrerer om belønninger i spillet."
+          "a": "Et planlagt, højintensivt racingspil med flyvende køretøjer under udvikling, der foregår i fremmede verdener. Spillere kan måske bygge, opgradere og race fuldt tilpasselige køretøjer gennem farlige sci-fi-baner, mens de konkurrerer om belønninger i spillet."
         },
         {
           "q": "Kan jeg opgradere mit racerkøretøj?",
-          "a": "Hver komponent kan opgraderes: skrog, thrustere, skjolde, ydre skaller, motorer, stabilisatorer, kølesystemer og aerodynamiske overflader. Hver opgradering ændrer, hvordan dit køretøj håndterer forskellige spor og forhold."
+          "a": "Hver komponent er planlagt til at kunne opgraderes: skrog, thrustere, skjolde, ydre skal, motorer, stabilisatorer, kølesystemer og aerodynamiske flader. Hver opgradering kan ændre, hvordan dit køretøj reagerer på forskellige baner og forhold."
         },
         {
           "q": "Hvad laver pitbesætningen?",
-          "a": "Pit-besætningsmedlemmer giver unikke bonusser: hurtigere tankning, skrogdiagnostik, nødreparationer og ydelsesjusteringer mellem omgange. De stiger over tid og låser op for stærkere evner, der stables med køretøjsopgraderinger."
+          "a": "Planlagte pit-mandskabsmedlemmer kan give unikke bonusser: hurtigere optankning, skrogdiagnostik, nødreparationer og præstationsjusteringer mellem omgangene. De er planlagt til at levle op over tid og låse op for kraftigere evner, der stables med køretøjsopgraderinger."
         },
         {
           "q": "Hvordan fungerer pit manageren?",
-          "a": "Pitmanageren koordinerer besætningens operationer, kalder løbsstrategi og låser op for team-dækkende præstationsløft. Defensive ledere beskytter dit køretøj under barske forhold; aggressive ledere presser ethvert system for maksimal hastighed."
+          "a": "Planlagte pit-chefer kan koordinere mandskabets drift, fastlægge racingstrategi og låse op for holdomfattende præstationsopgraderinger. Defensive chefer kan beskytte dit køretøj under hårde forhold; aggressive chefer kan presse hvert system til maksimal fart."
         },
         {
           "q": "Er der præmier i rangerede events?",
-          "a": "Rangerede events og turneringer er planlagt til at tilbyde belønninger i spillet, titler og placering på ranglisten. De tilbyder ikke kontant- eller pengepræmier."
+          "a": "Planlagte rangerede begivenheder og turneringer er designet til at tilbyde belønninger i spillet, titler og placeringer på ranglisten. De tilbyder ingen kontantpræmier eller penge."
         },
         {
           "q": "Hvordan fungerer løbsbelønninger?",
-          "a": "Hvert løb er designet til at give credits, opgraderingsmaterialer og mandskabspoletter i spillet. Sejre kan mangedoble dine belønninger. Saml køretøjer, opgrader dem til racermaskiner, vind løb, og byt dem med andre spillere, mens du arbejder hen imod flere forbedringer og opgraderinger af rumskibet."
+          "a": "Hvert løb er planlagt til at give belønninger i spillet: kreditter i spillet, opgraderingsmaterialer og mandskabsmærker i spillet. Sejre kan multiplicere dine belønninger i spillet. Det er planlagte funktioner, med forbehold for spillets endelige regler."
         },
         {
           "q": "Kan jeg også opgradere mit primære rumskib?",
-          "a": "Absolut. Din racergarage er hangarbugten på dit rumskib. Race-gevinstfondens opgraderinger til motorer, våben, navigation og skrogforstærkning på dit hovedfartøj, hvilket styrker interplanetariske rejser og rumkampe."
+          "a": "Det er planen. Din racinggarage er designet som dit rumskibshangar. Belønninger i spillet fra racing kan hjælpe med opgraderinger af motor, våben, navigation og skrogforstærkning på dit hovedskib."
         },
         {
           "q": "Går fremskridt til andre spil?",
-          "a": "Hver pilotfærdighed og rumskibsopgradering overføres direkte til Hyper Quest og Overlord of the 7 Realms. Ét univers, flere spil, problemfri progression. Det, du bygger i Hyper Racing, driver alt andet."
+          "a": "Planlagte pilotfærdigheder og rumskibsopgraderinger kan overføres til Hyper Quest og Overlord of the 7 Realms. Ét univers, flere planlagte spil, delt progression, med forbehold for spillets endelige regler."
         },
         {
           "q": "Hvilke racermiljøer er der?",
-          "a": "Kredsløb spænder over flydende klippeformationer, lavarør, ørkensletter og bjergkæder på tværs af fremmede verdener. Atmosfæriske farer omfatter sur regn, radioaktive atmosfærer, variabel tyngdekraft og turbulente vinde. Hvert kredsløb kræver forskellige køretøjsopsætninger."
+          "a": "Planlagte baner omfatter svævende klippeformationer, lavatunneller, ørkenslætterne og bjergpas i fremmede verdener. Planlagte atmosfæriske farer omfatter syreregn, radioaktive atmosfærer, skiftende tyngdekraft og turbulent vind. Hver bane kan kræve en forskellig køretøjsopsætning."
         }
       ]
     },
     "quest": {
       "label": "SØGGEN",
       "heading": "Hyper Quest",
-      "subtitle": "Din galakse. Dine regler. Din formue.",
+      "subtitle": "Din galakse. Dine regler. Din historie.",
       "intro": [
-        "Hyper Quest er et rumeventyr i åben verden, hvor du kommanderer dit eget fuldt opgraderbare rumskib, Quest Racer, på tværs af en enorm og farlig galakse. Du forlod dit hjem civilisation for år siden på jagt efter magt, rigdom og berømmelse. Nu er hele universet din legeplads, og hver opgave, du gennemfører, bringer dig tættere på galaktisk dominans.",
-        "Hyper Quest er planlagt som mere end et spil: gennemfør missioner, overvind udfordringer og saml belønninger i spillet. Fra hurtige missioner på få minutter til episke ekspeditioner over flere dage: jo sværere udfordringen er, desto større er belønningen i spillet.",
-        "Opgrader dit rumskib fra skrog til cockpit. Bevæbn den med ødelæggende våbensystemer. Rekrutter specialister, der stabler kraftfulde bonusser på dit skibs ydeevne og kraftniveau. Mine asteroider, slæb farlig last, jagt skjulte skatte, kidnap værdifulde mål, eller bliv en lejet pistol. Hvordan du styrer universet er helt dit valg.",
-        "Alt, hvad du bygger i Hyper Quest, strømmer direkte ind i Hyper Racing og Overlord of the 7 Realms. Ét univers, problemfri progression, ubegrænset potentiale. Læs videre for at opdage, hvordan questing fungerer, hvad du kan tjene, og hvordan du og dit rumskib bliver det mest frygtede fartøj i galaksen."
+        "Hyper Quest er et planlagt rumeventyr i åben verden, hvor du måske kan kommandere dit eget fuldt opgraderbare rumskib, Quest Racer, på tværs af en enorm og farlig galakse. Du forlod din hjemlige civilisation for år siden for at søge magt og berømmelse. Nu er hele universet din legeplads, og hver quest, du gennemfører, kan bringe dig tættere på galaktisk dominans, med forbehold for spillets endelige udvikling og spilregler.",
+        "Hyper Quest er planlagt som mere end bare et spil: gennemfør quests, erobr udfordringer og saml belønninger i spillet. Fra hurtige missioner på få minutter til episke ekspeditioner over flere dage, jo sværere udfordringen er, jo større belønninger i spillet kan du få, med forbehold for spillets endelige udvikling og spilregler.",
+        "I det planlagte spil kan du måske opgradere dit skib fra skrog til cockpit, bevæbne det med ødelæggende våbensystemer og skaffe specialister, der stabler kraftfulde bonusser på dit skibs præstation og kraftniveau. Planlagte aktiviteter omfatter at udvinde asteroider, fragte farlig last, jagte skjulte skatte, spore højt værdsatte mål eller blive lejesoldat. Hvordan du dominerer universet, er planlagt til at være dit valg, med forbehold for spillets endelige udvikling og spilregler.",
+        "Alt, hvad du bygger i Hyper Quest, er planlagt til at flyde ind i Hyper Racing og Overlord of the 7 Realms. Ét univers, sømløs progression, ubegrænset potentiale. Læs videre for at se, hvordan planlagte quests kan fungere, hvilke belønninger i spillet du kan få, og hvordan du og dit skib kan blive galaksens mest frygtede skib, alt med forbehold for spillets endelige udvikling og spilregler."
       ],
-      "calloutLine1": "Quest to Earn. Tjen for at opgradere.",
+      "calloutLine1": "Quest for at tjene. Tjen for at opgradere.",
       "calloutLine2": "Opgrader til Conquer.",
-      "howItWorksTitle": "Sådan fungerer Hyper Quest",
+      "howItWorksTitle": "Hvordan det planlagte Hyper Quest kan fungere, med forbehold for spillets endelige udvikling og spilregler",
       "howItWorks": [
         {
           "num": "01",
           "title": "Accepter opgaver fra Mission Board",
-          "body": "Spillebrættet er din gateway til eventyr. Gennemse tilgængelige missioner lige fra hurtige fragtkørsler, der tager kun få minutter, til episke flerdages ekspeditioner dybt ind i ukendt rum. Hver quest kommer med klare mål, farevurderinger og belønningsniveauer. Vælg de missioner, der matcher din spillestil, uanset om det er at slæbe farlig last, jage skjulte skatte, udvinde asteroidefelter eller gå undercover for at genvinde tabte artefakter."
+          "body": "Missioner kan accepteres fra planlagte quest-tavler i spillet. Planlagte missioner spænder fra hurtige lastleverancer på blot få minutter til episke flerdages ekspeditioner langt ud i uudforsket rum. Hver quest er planlagt til at komme med et klart mål, faresniveau og belønningsniveau i spillet. Du kan måske vælge missioner, der passer til din spillestil, uanset om det er at fragte farlig last, jagte skjulte skatte, udvinde asteroidefelter eller snige dig ind for at genvinde tabte artefakter."
         },
         {
           "num": "02",
           "title": "Udforsk galaksen",
-          "body": "Rejs gennem portaler til fjerne planeter, hver med unikke miljøer, værdifulde materialer og nye racerbaner. Følg galaktiske kort for at kortlægge uudforskede områder og gør dig fortjent til retten til at navngive planeter, du opdager først. Udvind ressourcer fra asteroidefelter, bjærg dele fra ældgamle relikvier og forladte skibe, og saml spor, der fører til skjulte skatte spredt blandt stjernerne."
+          "body": "Du kan måske rejse gennem portaler til fjerne planeter, hver med planlagte unikke miljøer, materialer i spillet og nye racingbaner. Planlagte galakse-kort kan lade dig kortlægge uudforskede regioner og få navngivningsrettigheder til planeter, du opdager først. Du kan måske udvinde ressourcer i spillet fra asteroidefelter, bjerge dele fra ældgamle levn og forladte skibe og samle spor, der fører til skjulte genstande i spillet spredt blandt stjernerne."
         },
         {
           "num": "03",
           "title": "Byg dit imperium inde fra dit skib",
-          "body": "Din Quest Racer er mere end transport. Dyrk mad i hydroponiske bugter, forfin materialer udvundet fra fjerne planeter, og byg hære inde fra dine kloningslaboratorier. Forfin dine tropper og deres våben, forsvar dig selv mod pirater, og administrer en selvbærende mobil base, der bliver stærkere for hver mission, du fuldfører."
+          "body": "Din planlagte Quest Racer er designet til at være mere end bare transport. Du kan måske dyrke mad i hydroponiske rum, raffinere materialer udvundet fra fjerne planeter og bygge hære fra dit kloningslaboratorium. En planlagt selvforsynende mobil base kan blive stærkere for hver mission, du gennemfører."
         },
         {
           "num": "04",
           "title": "Spil på din måde",
-          "body": "Der er ingen enkelt vej til dominans. Bliv en frygtet dusørjæger, en snedig smugler, en mesterminearbejder eller en legendarisk opdagelsesrejsende. Kidnap værdifulde mål, bliv en lejet pistol, eller skab alliancer for at kontrollere hele sektorer. Galaksen bøjer sig efter din vilje, og hver beslutning former dit omdømme og din formue."
+          "body": "Der er ingen enkelt planlagt vej til dominans. Du kan måske blive en frygtet dusørjæger, en snedig smugler, en dygtig minearbejder eller en legendarisk opdagelsesrejsende, eller smede alliancer for at kontrollere hele sektorer. Hver beslutning kan forme dit omdømme, med forbehold for spillets endelige regler."
         }
       ],
-      "rewardsTitle": "Quest-belønninger; Få betalt for at spille!",
+      "rewardsTitle": "Planlagte quest-belønninger i spillet og hvordan de kan fungere",
       "rewards": [
         {
           "title": "Belønninger i spillet",
-          "body": "Hver mission, du gennemfører, er designet til at belønne dig i spillet. Credits, opgraderingsmaterialer, sjældne komponenter, rekrutteringspoletter til specialister og eksklusive genstande lander i dit lager efter hver vellykket mission. Jo sværere missionen er, desto rigere er udbyttet. Opdag sjældne materialer på fjerne planeter, bjærg værdifulde dele fra ældgamle relikvier og opbyg et lager af ressourcer, der driver din vej mod galaktisk overherredømme."
+          "body": "Hver quest, du gennemfører, er planlagt til at give dig belønninger i spillet. Kreditter i spillet, opgraderingsmaterialer, sjældne komponenter, specialistmærker i spillet og eksklusive genstande i spillet kan flyde ind i dit lager med hver vellykket mission. Jo sværere quest, jo større belønninger i spillet kan du få."
         },
         {
-          "title": "Mesterskabsbelønninger",
-          "body": "Visse missioner og rangerede udfordringer kan tilbyde premiumbelønninger i spillet. Missioner på højt niveau, ranglisteevents og sæsonmesterskaber i missioner er planlagt, og jo dygtigere og dristigere du bliver, desto bedre kan belønningerne i spillet blive."
+          "title": "Mesterskabsbelønninger i spillet",
+          "body": "Visse planlagte quests og rangeringsudfordringer kan tilbyde premium belønninger i spillet. Missioner på højt niveau, begivenheder på ranglisten og sæsonbestemte quest-mesterskaber er planlagt, og jo dygtigere og modigere du er, jo bedre belønninger i spillet kan du få."
         },
         {
-          "title": "Sådan fungerer missionsbelønninger",
-          "body": "Spillere kan muligvis kvalificere sig til premiummissioner ved at opbygge deres omdømme og nå præstationstærskler. Missionens sværhedsgrad, varighed og fareniveau afgør belønningen i spillet, som er tiltænkt at blive vist, før du accepterer en mission. Uanset om du kører en fragttur på ti minutter eller en ugelang ekspedition i det ydre rum, er belønningerne designet til at svare til risikoen."
+          "title": "Hvordan quest-belønninger i spillet kan fungere",
+          "body": "Spillere kan kvalificere sig til premium-quests ved at opbygge omdømme og nå præstationstærskler. Questens sværhedsgrad, varighed og faresniveau er planlagt til at afgøre belønningerne i spillet, som er tænkt til at blive vist, før du accepterer nogen mission. Uanset om du kører en ti minutters lasttransport eller en ugelang rumekspedition, er belønningerne i spillet designet til at stå i forhold til risikoen."
         },
         {
-          "title": "Fremskridt, der betaler sig",
-          "body": "Missionsbelønninger går direkte ind i dine skibsopgraderinger, våbensystemer og rekruttering af specialister. Hver belønning gør dig stærkere, hvilket låser op for sværere missioner. Det er også planlagt, at fremskridt følger med over i Hyper Racing og Overlord of the 7 Realms."
+          "title": "Progression, der følger med",
+          "body": "Quest-belønninger i spillet kan flyde ind i skibsopgraderinger, våbensystemer og dine specialister. Hver belønning i spillet kan gøre dig stærkere, hvilket kan låse op for sværere quests. Progression er også planlagt til at overføres til Hyper Racing og Overlord of the 7 Realms, med forbehold for spillets endelige regler."
         }
       ],
-      "upgradesTitle": "Opgrader dit skib, bevæbn dit arsenal, rekrutter dit mandskab",
+      "upgradesTitle": "Opgradér dit skib, bevæbn dit arsenal, byg dit mandskab",
       "upgrades": [
         {
-          "title": "Rumskibsopgraderinger",
-          "body": "Din Quest Racer er fuldt modulopbygget fra motorrum til cockpit. Opgrader skroget for maksimal holdbarhed, forstærk den ydre skal til at modstå fjendtlige miljøer, boost skjoldgeneratorer til kampoverlevelse, og overhal kraftsystemer for at opnå maksimal ydeevne. Bedre motorer betyder hurtigere interplanetarisk rejse. Stærkere navigationssystemer afslører skjulte ruter og ukendte verdener. Hver opgradering forvandler dit skib til et mere kraftfuldt, mere frygtet fartøj."
+          "title": "Planlagte rumskibsopgraderinger",
+          "body": "Din planlagte Quest Racer er designet som fuldt modulær, fra maskinrum til cockpit. Du kan måske opgradere skroget for holdbarhed, forstærke det ydre skal mod fjendtlige miljøer, styrke skjoldgeneratorer for at overleve kamp og overhale kraftsystemer for topydelse. Bedre motorer kan betyde hurtigere rejser mellem planeter, og kraftigere navigationssystemer kan afsløre skjulte ruter og uudforskede verdener."
         },
         {
-          "title": "våbensystemer",
-          "body": "Galaksen er farlig, og du skal være mere farlig. Opgrader og forfin dine våbensystemer for at beskytte dig selv mod pirater, rivaliserende spillere og fjendtlige styrker. Vælg mellem defensive konfigurationer, der holder dig i live i de værste situationer eller offensive loadouts designet til at påføre maksimal skade. Laser-arrays, missilbatterier, plasmakanoner og eksperimentelle energivåben er alle tilgængelige, mens du går gennem opgraderingstræet."
+          "title": "Planlagte våbensystemer",
+          "body": "Den planlagte galakse er farlig. Du kan måske opgradere og finjustere våbensystemer for at beskytte dig mod pirater, rivaliserende spillere og fjendtlige styrker og vælge mellem defensive konfigurationer og offensivt udstyr. Laserbatterier, missilbatterier, plasmakanoner og eksperimentelle energivåben er alle planlagt, efterhånden som du avancerer i opgraderingstræet."
         },
         {
-          "title": "Rekrutér specialister",
-          "body": "Specialister er game-changers. Hver af dem bringer unikke færdigheder, der tilføjer kraftfulde bonusser til dit skibs overordnede ydeevne og kraftniveau. Navigationsspecialister afslører skjulte stier og reducerer rejsetiden. Kampspecialister øger våbennøjagtigheden og skader output. Ingeniørspecialister øger skrogets integritet og reparationshastighed. Videnskabsspecialister forbedrer ressourceudvinding og materialeforfining. Stable flere specialister for at skabe ødelæggende kombinationer, der multiplicerer dit skibs effektivitet."
+          "title": "Skaffe specialister",
+          "body": "Planlagte specialister kan hver give unikke færdigheder, der tilføjer bonusser til dit skibs samlede præstation og kraftniveau. Navigationsspecialister kan afsløre skjulte stier og reducere rejsetid. Kampspecialister kan forbedre våbnenes præcision og skade. Ingeniørspecialister kan forbedre skrogets integritet og reparationshastighed. Videnskabsspecialister kan forbedre ressourceudvinding og materialeraffinering. At stable flere specialister er planlagt, med forbehold for spillets endelige regler."
         },
         {
-          "title": "Power Loop",
-          "body": "Quest for at tjene, tjen for at opgradere, og opgrader for at erobre sværere quests med større belønninger. Rekrutér specialister til at forstærke alle systemer på dit skib. Jo stærkere du bliver, jo mere af galaksen åbner sig, og jo større formue venter der. Skibsopgraderinger og specialistbonusser fører også direkte ind i rumkampe under Hyper Racing-transit og kampe på tværs af Overlord of the 7 Realms."
+          "title": "Den planlagte kraftcyklus",
+          "body": "Quest for at tjene, tjen for at opgradere, og opgradér for at tage fat på sværere quests med større belønninger i spillet. Planlagte specialister kan forstærke hvert system på dit skib. Jo kraftigere du bliver, jo flere dele af galaksen kan åbne sig. Skibsopgraderinger og specialistbonusser er også planlagt til at overføres til Hyper Racing og Overlord of the 7 Realms, med forbehold for endelig udvikling og spilregler."
         }
       ],
       "faqTitle": "Hyper Quest — ofte stillede spørgsmål",
       "faq": [
         {
           "q": "Hvad er Hyper Quest?",
-          "a": "Et rumeventyr i en åben verden, hvor du styrer et fuldt opgraderbart rumskib gennem en enorm galakse. Gennemfør missioner, udforsk fremmede verdener, opgrader dit skib, rekruttér specialister og saml belønninger i spillet."
+          "a": "Et planlagt rumeventyr i åben verden under udvikling, hvor du måske kan kommandere et fuldt opgraderbart rumskib på tværs af en enorm galakse. Planlagte aktiviteter omfatter at gennemføre quests, udforske fremmede verdener, opgradere dit skib, skaffe specialister og samle belønninger i spillet."
         },
         {
           "q": "Hvordan fungerer quests?",
-          "a": "Accepter missioner fra søgebrættet i spillet. Quests spænder fra hurtige fragtkørsler, der tager kun få minutter, til episke flerdages ekspeditioner dybt ind i ukendt rum. Hver quest har klare mål, farevurderinger og belønningsniveauer, der vises, før du accepterer."
+          "a": "Missioner kan accepteres fra planlagte quest-tavler i spillet. Planlagte quests spænder fra hurtige lastleverancer på blot få minutter til episke flerdages ekspeditioner langt ud i uudforsket rum. Hver quest er planlagt til at vise mål, faresniveau og belønningsniveau i spillet, før du accepterer."
         },
         {
-          "q": "Kan jeg tjene penge på missioner?",
-          "a": "Nej. Missioner, rangerede udfordringer og sæsonmesterskaber er planlagt til kun at tilbyde belønninger i spillet, ikke kontanter eller penge."
-        },
-        {
-          "q": "Hvilke belønninger i spillet kan jeg tjene?",
-          "a": "Hver gennemført mission er designet til at belønne med credits, opgraderingsmaterialer, sjældne komponenter, rekrutteringspoletter til specialister og eksklusive genstande. Jo sværere og længere missionen er, desto rigere er belønningerne. Opdag sjældne materialer på fjerne planeter og bjærg værdifulde dele fra ældgamle relikvier."
+          "q": "Hvilke belønninger i spillet kan quests tilbyde?",
+          "a": "Hver gennemført quest er planlagt til at give belønninger eller genstande i spillet: kreditter i spillet, opgraderingsmaterialer, sjældne komponenter, specialistmærker i spillet og eksklusive genstande i spillet. Sværere og længere quests kan tilbyde større belønninger i spillet."
         },
         {
           "q": "Kan jeg opgradere mit rumskib?",
-          "a": "Hvert system kan opgraderes: skrog, ydre skal, skjoldgeneratorer, kraftsystemer, motorer, cockpit og navigation. Bedre motorer betyder hurtigere rejse, stærkere skrog overlever fjendtlige møder, og opgraderet navigation afslører skjulte ruter og ukendte verdener."
+          "a": "Hvert system er planlagt til at kunne opgraderes: skrog, ydre skal, skjoldgeneratorer, kraftsystemer, motorer, cockpit og navigation. Bedre motorer kan betyde hurtigere rejser, og opgraderet navigation kan afsløre skjulte ruter og uudforskede verdener."
         },
         {
           "q": "Hvilke våben er tilgængelige?",
-          "a": "Opgrader og forfin våbensystemer inklusive laserarrays, missilbatterier, plasmakanoner og eksperimentelle energivåben. Vælg defensive konfigurationer for overlevelse eller offensive loadouts for maksimal skade mod pirater, rivaler og fjendtlige styrker."
+          "a": "Planlagte våbensystemer omfatter laserbatterier, missilbatterier, plasmakanoner og eksperimentelle energivåben. Du kan måske vælge defensive konfigurationer for at overleve eller offensivt udstyr mod pirater, rivaler og fjendtlige styrker."
         },
         {
-          "q": "Hvordan arbejder specialister?",
-          "a": "Rekrutter specialister med unikke færdigheder, der tilføjer kraftfulde bonusser til dit skibs ydeevne og kraftniveau. Navigationsspecialister afslører skjulte stier, kampspecialister øger våbenskader, ingeniørspecialister øger skrogets integritet, og videnskabsspecialister forbedrer ressourceudvindingen. Stable flere specialister til ødelæggende kombinationer."
+          "q": "Hvordan fungerer specialister?",
+          "a": "Planlagte specialister kan skaffes eller erhverves, hver med unikke færdigheder, der tilføjer bonusser til dit skibs præstation og kraftniveau. Navigationsspecialister kan afsløre skjulte stier, kampspecialister kan forbedre våbenskade, ingeniørspecialister kan forbedre skrogets integritet, og videnskabsspecialister kan forbedre ressourceudvinding."
         },
         {
-          "q": "Hvilke typer quests er tilgængelige?",
-          "a": "Fragttransport, asteroideminedrift, skattejagt, bountyjagt, bjærgning af artefakter, hemmelige operationer, planetudforskning, forsvar mod pirater, bjærgningsmissioner og mere. Missionerne spænder fra hurtige ture på ti minutter til ekspeditioner over flere dage i det ydre rum."
+          "q": "Hvilke typer quests findes der?",
+          "a": "Planlagte questtyper omfatter lasttransport, asteroideudvinding, skattejagt, dusørjagt, artefaktgenvinding, snigoperationer, planetudforskning, forsvar mod pirater og redningsmissioner. Quests er planlagt til at spænde fra hurtige ti minutters ture til dybe rumekspeditioner over flere dage."
         },
         {
           "q": "Kan jeg opdage nye planeter?",
-          "a": "Ja. Følg galaktiske kort ind i ukendte områder og opdag nye verdener. De første opdagere får navnerettigheder til de planeter, de finder. Nye verdener tilbyder unikke materialer, miljøer og racerbaner, som ingen andre spillere har haft adgang til før."
+          "a": "Det er planlagt. Galakse-kort kan føre dig til uudforskede regioner og nye verdener, og førstegangsopdagere kan få navngivningsrettigheder til planeter, de finder. Nye verdener er planlagt til at tilbyde unikke materialer, miljøer og racingbaner i spillet."
         },
         {
           "q": "Hvad kan jeg gøre inde i mit skib?",
-          "a": "Din Quest Racer er en mobil base. Dyrk mad i hydroponiske bugter, forfin materialer udvundet fra fjerne planeter, byg og træne hære i kloningslaboratorier, opgrader våben og forsvar, og administrer en selvopretholdende operation, der bliver mere kraftfuld for hver mission."
+          "a": "Din planlagte Quest Racer er designet som en mobil base. Du kan måske dyrke mad i hydroponiske rum, raffinere materialer udvundet fra fjerne planeter, bygge og træne hære i kloningslaboratorier og opgradere våben og forsvar."
         },
         {
-          "q": "Hvordan fungerer det galaktiske kort?",
-          "a": "Det galaktiske kort guider din udforskning på tværs af universet. Opgrader dit kort for at afsløre nye sektorer, portalplaceringer og skjulte missionszoner. Efterhånden som du udforsker yderligere, udvides kortet og låser op for stadigt farligere og givende områder af rummet."
+          "q": "Hvordan fungerer galakse-kortet?",
+          "a": "Det planlagte galakse-kort er designet til at guide din udforskning. Du kan måske opgradere kort for at afsløre nye sektorer, portalplaceringer og skjulte quest-zoner og låse op for farligere rumregioner, efterhånden som du udforsker længere."
         },
         {
-          "q": "Går mine fremskridt videre til andre spil?",
-          "a": "Alt, hvad du bygger i Hyper Quest, strømmer direkte ind i Hyper Racing og Overlord of the 7 Realms. Skibsopgraderinger, specialistbonusser, kampfærdigheder og ressourcer overføres alle problemfrit. Et univers, flere spil, ubegrænset progression."
+          "q": "Følger mine fremskridt med til andre spil?",
+          "a": "Det, du bygger i Hyper Quest, er planlagt til at overføres til Hyper Racing og Overlord of the 7 Realms. Skibsopgraderinger, specialistbonusser, kampfærdigheder og ressourcer i spillet kan alle overføres, med forbehold for endelig udvikling og spilregler."
         },
         {
           "q": "Kan jeg spille som skurk?",
-          "a": "Absolut. Gå undercover, kidnap værdifulde mål, bliv en lejet pistol, smugler farlig last, eller raid andre spillere. Der er ingen enkelt vej til dominans. Hvordan du styrer galaksen er helt dit valg, og hver beslutning former dit omdømme."
+          "a": "Det er planlagt. Du kan måske snige dig, spore højt værdsatte mål, smugle farlig last eller plyndre andre spillere. Der er ingen enkelt planlagt vej til dominans, og hver beslutning kan forme dit omdømme."
         }
       ]
     },
@@ -249,148 +245,148 @@
       "heading": "Herre over de 7 riger",
       "subtitle": "Crash-land. Genopbygge. Erobre. Bliv Overlord.",
       "intro": [
-        "Overlord of the 7 Realms er et kampstrategispil på tre niveauer, der er ulig noget andet inden for spil. Du vovede dig gennem en portal ind i et parallelt univers og styrtede ned på en fjendtlig fremmed planet. Dit skib er ødelagt, dine systemer svigter, og planetens skabninger nærmer sig allerede. Overlevelse er kun begyndelsen. Dominans er målet.",
-        "Genopbyg dit skib fra vraget og op. Klon og træne hære i dine laboratorier ombord. Tæm planetens dyreliv for at skabe ødelæggende bereden kavaleri. Tag derefter kampen på tværs af tre kampdimensioner: jord-til-jord-kamp mod monstre og rivaliserende spillere, jord-til-rum-angreb på orbitale eller jordmål og rum-til-rum-krigsførelse ombord på den massive Battle Ring, der kredser om planeten.",
-        "Dette er ikke bare endnu et strategispil. Ligesom Hyper Racing og Hyper Quest har Overlord VR-interaktion i realtid og belønninger i spillet for at gennemføre events, missioner og invasioner hver fjortende dag fra de frygtede Hammeronger, den mægtigste fremmede art, der findes. Hver fjortende dag ankommer de for at tømme planeten for ressourcer, og hver fjortende dag kan modige spillere udfordre dem for enorme bonusser og legendariske belønninger.",
-        "Opgrader dit rumskib, bevæbn det med ødelæggende våben, rekrutter specialister, der forstærker dit magtniveau, og smed alliancer for at kontrollere hele regioner. Alt, hvad du bygger, forbindes direkte med Hyper Racing og Hyper Quest gennem det delte Hyper Tek-økosystem. Et univers, tre spil, ubegrænset krigsførelse. Læs videre for at finde ud af, hvordan kampsystemet fungerer, og hvorfor Overlord ændrer alt."
+        "Overlord of the 7 Realms er et planlagt strategispil med kampe på tre niveauer under udvikling. I den planlagte historie går du gennem en portal til et parallelt univers og nødlander på en fjendtlig fremmed planet. Dit skib er ødelagt, dine systemer er svigtet, og planetens skabninger nærmer sig allerede. At overleve er kun begyndelsen. Dominans er målet.",
+        "I det planlagte spil kan du måske genopbygge et skib fra vraget, klone og træne hære i et laboratorium om bord og tæmme planetens dyreliv for at skabe ridekavaleri. Planlagte kampe foregår i tre kampdimensioner: jord-mod-jord-kamp mod monstre og rivaliserende spillere, jord-mod-rum-angreb mod mål i kredsløb eller på jorden og rum-mod-rum-krigsførelse over en gigantisk Battle Ring, der kredser om planeten.",
+        "Ligesom Hyper Racing og Hyper Quest er Overlord planlagt til at have VR-interaktion i realtid og belønninger i spillet for at gennemføre begivenheder, quests og de planlagte invasioner hver anden uge fra de frygtede Hammerong, den mægtigste fremmede art i historien. Hver fjortende dag er de planlagt til at komme for at dræne planeten, og hver fjortende dag kan modige spillere måske udfordre dem for bonusser i spillet og legendariske belønninger i spillet.",
+        "Du kan måske opgradere rumskibe, bevæbne dem, skaffe specialister, der forstærker dit kraftniveau, og smede alliancer for at kontrollere hele regioner. Det, du bygger, er planlagt til at hænge sammen med Hyper Racing og Hyper Quest gennem det fælles Hyper Tek-økosystem. Ét univers, tre planlagte spil, krigsførelse uden grænser. Læs videre for at se, hvordan det planlagte kampsystem kan fungere, og hvorfor Overlord kan ændre alt, alt med forbehold for endelig udvikling og spilregler."
       ],
       "calloutLine1": "Overlevelse er kun begyndelsen.",
       "calloutLine2": "Dominans er målet.",
-      "howItWorksTitle": "Tri-Level Battle System; Tre dimensioner af krig",
+      "howItWorksTitle": "Det planlagte kampsystem på tre niveauer; tre dimensioner af krig",
       "howItWorks": [
         {
           "num": "01",
           "title": "Jord-til-jord kamp",
-          "body": "Planetens overflade er en krigszone. Indsæt dine klonede hære mod fjendtlige fremmede væsner, monstrøse bæster og rivaliserende spillere, der kæmper om territorium og ressourcer. Tæm og træne planetens dyreliv for at skabe monterede kavalerienheder, der giver dine jordstyrker en ødelæggende kant. Jordkrigsførelse er rå, taktisk og ubarmhjertig. Hver kamp, ​​du vinder, tjener ressourcer, territorium og omdømme."
+          "body": "Planetoverfladen er planlagt som en krigszone. Du kan måske sætte dine klonhære ind mod fjendtlige fremmede skabninger, monsterdyr og rivaliserende spillere, der kæmper om territorium og ressourcer i spillet. At tæmme og træne planetens dyreliv kan skabe ridende kavaleriforbund, som kan give dine jordstyrker en fordel. Jordkrigsførelse er planlagt til at være rå, taktisk og nådesløs, og de kampe, du vinder, kan give ressourcer i spillet, territorium og omdømme, med forbehold for endelig udvikling og spilregler."
         },
         {
           "num": "02",
           "title": "Jord-til-rum-angreb",
-          "body": "Det er her Overlord tilføjer en dimension, som ingen, eller næsten ingen, andre spil tilbyder. Opret specialiserede troppegrupper designet til at iværksætte angreb mellem planetens overflade og den orbitale Battle Ring. Slå mod skibe, der er stationeret i rummet fra din jordposition, eller koordiner kombinerede angreb, der rammer fjender fra oven og nedefra samtidigt. Dette lodrette kamplag forvandler standardstrategi til en multidimensionel skakkamp, ​​hvor placering på tværs af både jorden og rummet bestemmer sejren."
+          "body": "Dette er en planlagt dimension, som få andre spil tilbyder. Du kan måske oprette specialstyrkegrupper, der er designet til at iværksætte angreb mellem planetoverfladen og den kredsende Battle Ring, ramme skibe stationeret i rummet fra din jordposition eller koordinere kombinerede angreb, der rammer fjenden ovenfra og nedefra samtidig. Dette planlagte lodrette kamplag er tænkt til at gøre standardstrategi til flerdimensionelt skak, hvor placering på jorden og i rummet kan afgøre sejren, med forbehold for endelig udvikling og spilregler."
         },
         {
           "num": "03",
           "title": "Rum-til-rum-krigsførelse",
-          "body": "Port dit skib i kredsløb, og land på Battle Ring, en massiv orbital struktur, der kredser om planeten. Herfra gå på jagt efter uafskærmede skibe og sårbare mål. Teleporter tropper gennem rummet og direkte ind i fjendtlige fartøjer for at påføre maksimal intern skade ved hjælp af specialudviklede boardingangreb. Rumkampbelønninger er blandt de højeste i spillet, og at kontrollere orbitalt territorium giver dig en strategisk fordel, som ingen spillere på jorden kan matche."
+          "body": "Du kan måske tage skibe i kredsløb og lande på Battle Ring, en planlagt massiv orbitalstruktur, der omgiver planeten. Derfra kan du jagte skjoldløse skibe og sårbare mål og transportere tropper gennem rummet direkte ind i fjendens skibe med specialudviklede enteringsangreb. Rumkamp er planlagt til at tilbyde nogle af de største belønninger i spillet, og at kontrollere territorium i kredsløb kan give strategiske fordele, som spillere på jorden ikke kan matche, med forbehold for endelig udvikling og spilregler."
         },
         {
           "num": "04",
-          "title": "Hvorfor Tri-Level ændrer alt",
-          "body": "De fleste strategispil fungerer på et enkelt plan. Overlord opererer på tre. Evnen til at angribe fra jord til jord, jord til rum og rum til rum skaber en slagmark med uovertruffen taktisk dybde. Færdighed er alt. Brud magt alene vil ikke gøre dig til Overlord. Strategisk beherskelse på tværs af alle tre niveauer er det, der adskiller den dominerende fra den besejrede."
+          "title": "Hvorfor tre niveauer kan ændre alt",
+          "body": "De fleste strategispil opererer på ét plan. Overlord er planlagt til at operere på tre. Den planlagte evne til at slå fra jord til jord, jord til rum og rum til rum er tænkt til at skabe en slagmark med ægte taktisk dybde. Færdigheder er planlagt til at være alt: rå styrke alene skal ikke gøre dig til en Overlord, og strategisk mesterskab på alle tre niveauer kan blive forskellen mellem de dominerende og de besejrede, med forbehold for endelig udvikling og spilregler."
         }
       ],
       "extraSection": {
-        "title": "Battle Ring og VR Interaction",
+        "title": "Den planlagte Battle Ring og VR-interaktion",
         "items": [
           {
             "title": "Lander på Battle Ring",
-            "body": "Battle Ring er en kolossal orbital struktur, der kredser om planetens system. Når du porterer dit skib ud i rummet, kan du lægge til kaj på Battle Ring for at opnå en enorm strategisk fordel. Fra denne høje position kan du gå på jagt efter uafskærmede skibe, sende boardingpartier ind i rivaliserende fartøjer og koordinere ødelæggende angreb på jordmål nedenfor. Landing on the Battle Ring åbner en helt ny dimension af gameplay, som de fleste strategispil simpelthen ikke tilbyder, hvilket giver Overlord en taktisk fordel i forhold til alt andet på markedet."
+            "body": "Battle Ring er en planlagt kolossal orbitalstruktur, der omgiver et planetsystem. Når du tager dine skibe ud i rummet, kan du måske lægge til ved Battle Ring for at få en strategisk fordel. Fra denne høje position kan du jagte skjoldløse skibe, sætte enteringsstyrker ind på rivalers skibe og koordinere angreb mod jordmål nedenfor. At lande på Battle Ring er planlagt til at åbne en ny spildimension, som de fleste strategispil ikke tilbyder, med forbehold for endelig udvikling og spilregler."
           },
           {
             "title": "Inde i Battle Ring",
-            "body": "Battle Ring er ikke kun en dockingplatform. Hvis du kan finde ud af, hvordan du kan bryde dens indre, venter skjulte quests, ekstra bonusser og eksklusive belønninger indeni. Ringens indre er en labyrint af korridorer, kamre og gammel teknologi. Udfør quests og jagtmissioner i selve ringen, og opdag hemmeligheder, som ingen overfladebundet spiller nogensinde vil få adgang til. Kampringen belønner de dristige, de udspekulerede og de ubarmhjertige."
+            "body": "Battle Ring er planlagt til at være mere end bare en dokningsplatform. Hvis du kan finde ud af, hvordan du kommer ind i dens indre, kan skjulte quests, ekstra bonusser i spillet og eksklusive belønninger i spillet vente derinde. Ringens indre er planlagt som en labyrint af korridorer, kamre og ældgammel teknologi, med planlagte quests og jagtmissioner inde i selve ringen og hemmeligheder, som jordbundne spillere aldrig får adgang til. Alt med forbehold for endelig udvikling og spilregler."
           },
           {
             "title": "Real-time VR-interaktion",
-            "body": "Som alle Hyper Tek-serien af spil understøtter Overlord of the 7 Realms fuld VR-interaktion i realtid. Træd ind i dit skib, gå gennem kampringens korridorer, led dine tropper ind i kamp på jorden, og oplev rumkrigsførelse fra dit fartøjs cockpit. VR forvandler Overlord fra et strategispil til en fuldstændig fordybende slagmarksoplevelse. Styr dine styrker, udforsk fremmed terræn, og deltag i kamp med et niveau af tilstedeværelse og intensitet, som fladskærmsspil ikke kan kopiere."
+            "body": "Ligesom alle planlagte Hyper Tek-spil er Overlord planlagt til at understøtte VR-interaktion i realtid. Du kan måske træde ind i dit skib, gå i Battle Ring-korridorerne, lede tropper i jordkamp og opleve rumkrig fra dit skibs cockpit. VR er tænkt til at forvandle Overlord fra et strategispil til en opslugende slagmarksoplevelse, hvor du kan lede hære, udforske fremmed terræn og kæmpe med en tilstedeværelse, som spil på flade skærme måske ikke kan gengive. Med forbehold for endelig udvikling og spilregler."
           },
           {
-            "title": "Fordelen i forhold til andre spil",
-            "body": "Intet andet spil kombinerer krigsførelse i tre niveauer, en udforskelig kampstation i kredsløb, VR i realtid og belønninger i spillet i én oplevelse. Battle Ring alene tilføjer en spildimension, som konkurrenterne ikke kan matche. Læg dertil landkamp, rumkrig, VR-indlevelse og det forbundne Hyper Tek-økosystem, så står Overlord i en kategori for sig."
+            "title": "Den planlagte fordel i forhold til andre spil",
+            "body": "Overlord sigter mod at kombinere krigsførelse på tre niveauer, udforskelige orbitale kampstationer, VR i realtid og belønninger i spillet i én oplevelse. Battle Ring alene er planlagt til at tilføje en spildimension, som konkurrenter måske ikke kan matche. Kombineret med jordkamp, rumkrig, VR-indlevelse og det planlagte sammenkoblede Hyper Tek-økosystem er dette den oplevelse, vi udvikler, med forbehold for endelig udvikling og spilregler."
           }
         ]
       },
-      "upgradesTitle": "Genopbygge, genopruste, rekruttere; Power Up for War",
+      "upgradesTitle": "Genopbyg, genbevæbn, skaf; gør dig klar til krig",
       "upgrades": [
         {
-          "title": "Rumskibsopgraderinger",
-          "body": "Dit styrtede skib er der, hvor det hele begynder. Genopbyg det system for system, fra motorrummet til kommandodækket. Hver komponent kan opgraderes fuldt ud: skrogforstærkning, strukturel integritet, ydre skalsammensætning, skjoldgeneratorer, strømsystemer og navigationssystemer. I Overlord bygger du ikke for fart, men for kamp. Et fuldt opgraderet krigsskib er grundlaget for enhver succesfuld kampagne, og jo dybere du investerer, jo mere formidabelt bliver dit fartøj."
+          "title": "Planlagte rumskibsopgraderinger",
+          "body": "Dit havarerede skib er der, hvor alt er planlagt til at begynde. Du kan måske genopbygge det system for system, fra maskinrummet til kommandodækket. Hver komponent er planlagt til at kunne opgraderes: skrogforstærkning, strukturel integritet, sammensætning af ydre skal, skjoldgeneratorer, kraftsystemer og navigationsarrays. I Overlord bygger du ikke for fart, men for kamp. Et fuldt opgraderet krigsskib er planlagt til at blive fundamentet for hver kampagne, og jo mere du udvikler skibet, jo mere sejt kan det blive, med forbehold for endelig udvikling og spilregler."
         },
         {
-          "title": "Våbensystemer og tekniske niveauer",
-          "body": "Opgrader og forfin dine våben, færdigheder og tekniske niveauer for at dominere på tværs af alle tre kampniveauer. Jordbaseret artilleri til planetarisk krigsførelse, anti-orbital-batterier til jord-til-rum-angreb og skibsmonterede våbenarrays til rum-til-rum-kamp. Hvert våbensystem kan raffineres til specifikke taktiske roller. Uanset om du er specialiseret i langdistancebombardement, boardinghandlinger på nært hold eller defensive modforanstaltninger, definerer dine våbenladninger din kampidentitet."
+          "title": "Planlagte våbensystemer og teknologiniveauer",
+          "body": "Du kan måske opgradere og finjustere våben, færdigheder og teknologiniveauer på alle tre kampniveauer: jordartilleri til planetkrig, anti-orbitale batterier til jord-mod-rum-angreb og skibsmonterede våbenarrays til rum-mod-rum-kamp. Hvert planlagt våbensystem kan finjusteres til specifikke taktiske roller. Uanset om du specialiserer dig i langdistancebombardement, nærkamp med entring eller defensive modforanstaltninger, er dit våbenudstyr planlagt til at definere din kampidentitet, med forbehold for endelig udvikling og spilregler."
         },
         {
-          "title": "Rekrutér specialister",
-          "body": "Specialister er styrkeforstærkeren og, kombineret med færdigheder, det, der adskiller gode spillere fra Overlords. Skaf unikke specialister, der giver kraftfulde bonusser til dit skibs samlede ydeevne og kraftniveau. Taktiske specialister forbedrer effektiviteten ved udsendelse af tropper, ingeniørspecialister fremskynder reparationer og opgraderinger af skibet, våbenspecialister øger skaden i alle systemer, og efterretningsspecialister afslører fjendens positioner og svagheder. Kombinér flere specialister for at skabe en knusende samlet indsats, der forstærker alle dele af din operation. Spillere, der ikke bruger penge, kan dog være trygge: Hyper Tek blev skabt for at tage fat på problemer i spilverdenen. Selvom det er muligt at kombinere flere, sikrer de fair spilmekanikker, at det ikke er et simpelt point-for-point-system. Det fungerer i stedet med en glidende skala, så rå kraft ikke overskygger betydningen af færdigheder. Dette spil lægger vægt på både kraft og færdigheder frem for tilfældigheder!"
+          "title": "Skaffe specialister",
+          "body": "Planlagte specialister er designet som kraftmultiplikatorer og kan, kombineret med færdigheder, blive forskellen mellem en god Overlord-spiller og en stor. Du kan måske skaffe unikke specialister, der giver bonusser til dit skibs samlede præstation og kraftniveau. Taktiske specialister kan forbedre effektiviteten ved troppeudsendelse, ingeniørspecialister kan fremskynde skibsreparationer og opgraderinger, våbenspecialister kan øge skaden på tværs af alle systemer, og efterretningsspecialister kan afsløre fjendens positioner og svagheder. At stable flere specialister kan skabe en samlet indsats, der styrker alle aspekter af din drift. Spillere, der ikke bruger penge, kan være rolige: Hyper Tek er skabt til at tackle problemer i spilverdenen. Selvom stabling er planlagt, er det planlagte spils mekanik designet, så stabling ikke er et simpelt system point for point. Systemet er planlagt til at operere på en glidende skala, så rå kraft ikke overskygger betydningen af færdigheder. Spillet er planlagt til at lægge vægt på både styrke og færdigheder, ikke stole på held. Alt med forbehold for endelig udvikling og spilregler."
         },
         {
           "title": "Byg dine hære",
-          "body": "Klon tropper i dit skibs indbyggede kloningslaboratorier, opgrader og forfin dem og deres våben, indtil de er kampklare. Men tropper alene er ikke nok. Tæm og træn planetens vilde væsner til at skabe monteret bæstkavaleri, en styrke, der ikke kan klones eller fremstilles, og som skal tjenes gennem dygtighed og tålmodighed. Din hærsammensætning på tværs af jord, luft og rum er det, der bestemmer din dominans."
+          "body": "Du kan måske klone tropper i kloningslaboratoriet om bord på dit skib og derefter opgradere og finjustere dem og deres våben, indtil de er klar til kamp. Men tropper alene er måske ikke nok. At tæmme og træne planetens vilde skabninger kan skabe kavaleri af ridedyr, planlagte tropper, der ikke kan klones eller produceres, og som skal erhverves gennem færdigheder og tålmodighed. Din troppesammensætning på jorden, i luften og i rummet er planlagt til at afgøre din dominans, med forbehold for endelig udvikling og spilregler."
         }
       ],
-      "rewardsTitle": "Hammerongs, Rewards og Hyper Tek Ecosystem",
+      "rewardsTitle": "Hammerong, belønninger i spillet og Hyper Tek-økosystemet",
       "rewards": [
         {
-          "title": "Hammerongerne: Den mest magtfulde art, der findes",
-          "body": "Hver anden uge falder centerarenas styrkefelter, og Hammerongs ankommer. De er den stærkeste fremmede art i universet, bevæbnet med avanceret teknologi langt ud over noget, spillere besidder. De kommer for at udvinde planetens ressourcer, og de forsvarer arenaen med fuld, overvældende kraft. At angribe Hammerongs er den farligste udfordring i Overlord, men dem, der lykkes, bliver belønnet med enorme bonusser, legendarisk bytte, sjældne opgraderingsmaterialer og eksklusive belønninger, der ikke kan opnås på anden måde. Den hver fjortende dag Hammerong-invasion er den ultimative test af din magt."
+          "title": "Hammerong: Historiens mægtigste art",
+          "body": "Hver fjortende dag er den centrale arenas kraftfelt planlagt til at falde, og Hammerong ankommer. I historien er de universets mægtigste fremmede art, bevæbnet med avanceret teknologi langt ud over, hvad spillere har. De kommer for at dræne planetens ressourcer og forsvarer arenaen med overvældende styrke. At angribe Hammerong er planlagt til at være den farligste udfordring i Overlord, og dem, der lykkes, kan modtage bonusser i spillet, legendarisk bytte i spillet, sjældne opgraderingsmaterialer og eksklusive belønninger i spillet, som ikke kan opnås på andre måder. De planlagte Hammerong-invasioner hver anden uge er tænkt som den ultimative prøve på din styrke, med forbehold for endelig udvikling og spilregler."
         },
         {
-          "title": "Daglige begivenheder, quests og kampbelønninger",
-          "body": "Overlord giver konstant belønninger. Udfør daglige opgaver for at optjene kreditter, opgradere materialer og progressionsbonusser. Deltag i særlige begivenheder for premium-belønninger. Udfør quests på tværs af planetens overflade og i Battle Ring for eksklusivt bytte. Vind kampe mod monstre, fremmede væsner og rivaliserende spillere for at samle ressourcer. Udforsk overfladen for at opdage skjulte artefakter og skatte. Belønningsstrukturen er designet, så hver handling, du foretager, flytter dig tættere på at blive serverens ultimative Overlord."
+          "title": "Daglige begivenheder, quests og belønninger i spillet for kamp",
+          "body": "Overlord er planlagt til at give belønninger i spillet regelmæssigt. Planlagte daglige opgaver kan give kreditter i spillet, opgraderingsmaterialer og progressionsbonusser. Specialbegivenheder kan tilbyde premium belønninger i spillet. Quests på planetoverfladen og inde i Battle Ring kan give eksklusivt bytte i spillet. At vinde kampe mod monstre, fremmede skabninger og rivaliserende spillere kan øge dine ressourcer i spillet, og at udforske overfladen kan afsløre skjulte artefakter og genstande i spillet. Strukturen for belønninger i spillet er planlagt, så hver handling kan bringe dig tættere på at blive serverens øverste Overlord, med forbehold for endelig udvikling og spilregler."
         },
         {
           "title": "Forbundet til Hyper Tek Ecosystem",
-          "body": "Overlord of the 7 Realms eksisterer ikke isoleret. Det er fuldt integreret i Hyper Tek-universet sammen med Hyper Racing og Hyper Quest. Ressourcer, du optjener i Overlord, kan bruges i alle tre spil. Skibsopgraderinger, specialistbonusser, kampfærdigheder og materialer flyder gnidningsfrit mellem titlerne. Racerevner fra Hyper Racing forbedrer dine pilotfærdigheder i rumkampene i Overlord. Materialer indsamlet i Hyper Quest driver dine opgraderinger på planeten. Hyper Tek-markedspladsen forbinder det hele og skaber ét forbundet univers, hvor fremskridt i ét spil driver udviklingen i alle tre."
+          "body": "Overlord of the 7 Realms er ikke planlagt til at stå alene. Det er planlagt integreret i Hyper Tek-universet sammen med Hyper Racing og Hyper Quest. Ressourcer i spillet, der tjenes i Overlord, kan bruges i alle tre planlagte spil. Skibsopgraderinger, specialistbonusser, kampfærdigheder og materialer kan flyde mellem titlerne. Racingevner, der tjenes i Hyper Racing, kan forbedre dine pilotfærdigheder i Overlords rumkampe, og materialer samlet i Hyper Quest kan drive dine opgraderinger på planeten. Hyper Tek-markedspladsen er planlagt til at knytte det hele sammen og skabe ét sammenkoblet univers, hvor fremskridt i ét spil kan drive fremskridt i alle tre, med forbehold for endelig udvikling og spilregler."
         },
         {
-          "title": "Et univers, tre spil, ubegrænset kraft",
-          "body": "Spillere, der engagerer sig på tværs af alle tre Hyper Tek-spil, opbygger kraft hurtigere, får adgang til eksklusive belønninger på tværs af spil og dominerer gennem en bredde af færdigheder og ressourcer, som enkeltspilsspillere ikke kan matche. Det indbyrdes forbundne økosystem er den ultimative konkurrencefordel."
+          "title": "Ét univers, tre planlagte spil",
+          "body": "Spillere, der deltager i alle tre planlagte Hyper Tek-spil, kan opbygge kraft hurtigere og kan få adgang til belønninger i spillet på tværs af spillene ved at udnytte en mangfoldighed af færdigheder og ressourcer i spillet, som spillere i kun ét spil måske ikke har. Alt dette er planlagt og med forbehold for endelig udvikling og spilregler."
         }
       ],
       "faqTitle": "Overlord of the 7 Realms - Ofte stillede spørgsmål",
       "faq": [
         {
           "q": "Hvad er Overlord of the 7 Realms?",
-          "a": "Et strategispil med kampe i tre niveauer, hvor du nødlander på en fremmed planet, genopbygger dit skib, kloner hære og kæmper i tre dimensioner: jord mod jord, jord mod rum og rum mod rum. Planlagte funktioner omfatter VR-interaktion, belønninger i spillet og Hammerong-invasioner hver fjortende dag."
+          "a": "Et planlagt strategispil med kampe på tre niveauer under udvikling, hvor du nødlander på en fremmed planet, genopbygger dit skib, kloner hære og kæmper i tre dimensioner: jord-mod-jord, jord-mod-rum og rum-mod-rum. Planlagte funktioner omfatter VR-interaktion, belønninger i spillet og Hammerong-invasioner hver anden uge."
         },
         {
           "q": "Hvad er tri-level kampsystemet?",
-          "a": "Kamp fungerer på tværs af tre niveauer: jord-til-jord mod monstre og rivaliserende spillere, jord-til-rum-angreb rettet mod orbitale skibe og rum-til-rum-krigsførelse på Battle Ring. Denne multi-dimensionelle tilgang skaber taktisk dybde, som intet enkeltplans strategispil kan matche."
+          "a": "Kamp er planlagt til at foregå på tre niveauer: jord-mod-jord mod monstre og rivaliserende spillere, jord-mod-rum-angreb mod skibe i kredsløb og rum-mod-rum-krigsførelse ved Battle Ring. Denne planlagte flerdimensionelle tilgang er tænkt til at skabe taktisk dybde, med forbehold for endelig udvikling og spilregler."
         },
         {
           "q": "Hvad er Battle Ring?",
-          "a": "En massiv orbital struktur, der kredser om planeten. Land dit skib på det for at jage uafskærmede mål, starte boardingpartier ind i fjendtlige fartøjer og få adgang til skjulte quests inde i dets indre. At kontrollere Battle Ring giver dig en strategisk fordel i forhold til spillere, der kun er på jorden."
+          "a": "En planlagt massiv orbitalstruktur, der omgiver planeten. Du kan måske lande skibe der for at jagte skjoldløse mål, sætte enteringsstyrker ind på fjendens skibe og få adgang til skjulte quests i dens indre. At kontrollere Battle Ring kan give strategiske fordele i forhold til spillere, der kun er på jorden."
         },
         {
           "q": "Kan jeg opgradere mit rumskib?",
-          "a": "Hvert system kan opgraderes fra motorrum til kommandodæk: skrog, struktur, ydre skal, skjoldgeneratorer, strømsystemer og navigation. I Overlord bygger du til kamp, ​​ikke fart. Et fuldt opgraderet krigsskib er grundlaget for hver kampagne."
+          "a": "Hvert system er planlagt til at kunne opgraderes fra maskinrum til kommandodæk: skrog, struktur, ydre skal, skjoldgeneratorer, kraftsystemer og navigation. I Overlord er du planlagt til at bygge til kamp, ikke fart. Et fuldt opgraderet krigsskib er planlagt til at blive fundamentet for hver kampagne."
         },
         {
           "q": "Hvordan arbejder specialister?",
-          "a": "Rekrutter unikke specialister, der tilføjer kraftfulde bonusser til dit skibs ydeevne og kraftniveau. Taktiske, ingeniør-, våben- og efterretningsspecialister booster hver især forskellige systemer. Stable flere specialister for ødelæggende synergier på tværs af alle kampniveauer."
+          "a": "Planlagte specialister kan skaffes og tilføjer bonusser til dit skibs præstation og kraftniveau. Taktiske specialister, ingeniører, våbenspecialister og efterretningsspecialister kan hver forstærke forskellige systemer, og at stable flere specialister kan skabe stærke synergier på alle kampniveauer, med forbehold for endelig udvikling og spilregler."
         },
         {
           "q": "Hvem er Hammerongs?",
-          "a": "Den mest magtfulde fremmede art, der findes. Hver fjortende dag ankommer de til den midterste arena for at udvinde planetens ressourcer, forsvaret af overvældende kraft og avanceret teknologi. At angribe dem er ekstremt farligt, men belønner spillere med enorme bonusser og legendarisk bytte."
+          "a": "Historiens mægtigste fremmede art. Hver fjortende dag er de planlagt til at ankomme til den centrale arena for at dræne planetens ressourcer, forsvaret af overvældende styrke og avanceret teknologi. At angribe dem er planlagt til at være ekstremt farligt, og spillere, der lykkes, kan modtage bonusser i spillet og legendarisk bytte i spillet."
         },
         {
-          "q": "Hvilke belønninger kan jeg tjene?",
-          "a": "Daglige opgaver, missioner, kampe og events er designet til at belønne med credits, opgraderingsmaterialer og progressionsbonusser. Særlige events og Hammerong-invasioner kan tilbyde eksklusive premiumbelønninger i spillet. Sværere udfordringer og rangerede konkurrencer er planlagt til at tilbyde større belønninger i spillet."
+          "q": "Hvilke belønninger i spillet kan tilbydes?",
+          "a": "Planlagte daglige opgaver, quests, kampe og begivenheder er designet til at give kreditter i spillet, opgraderingsmaterialer og progressionsbonusser. Specialbegivenheder og Hammerong-invasioner kan tilbyde premium og eksklusive belønninger i spillet. Udfordringer med højere sværhedsgrad og rangerede konkurrencer er planlagt til at tilbyde større belønninger i spillet."
         },
         {
           "q": "Understøtter Overlord VR?",
-          "a": "Ja. Fuld VR-interaktion i realtid giver dig mulighed for at gå gennem dit skibs korridorer, udforske Battle Ring-interiøret, føre tropper ind i kamp på jorden og styre dit fartøj i rumkrigsførelse. VR forvandler Overlord fra strategi til en fuldstændig fordybende slagmarksoplevelse."
+          "a": "VR er planlagt. VR-interaktion i realtid kan lade dig gå i skibets korridorer, udforske det indre af Battle Ring, lede tropper i jordkamp og flyve dit skib i rumkrig, med forbehold for endelig udvikling og spilregler."
         },
         {
           "q": "Hvordan bygger jeg min hær?",
-          "a": "Klon tropper i dit skibs laboratorier ombord, opgrader og forfin dem og deres våben. For ridende kavaleri skal du tæmme og træne planetens vilde væsner, da dyr ikke kan klones. Hærens sammensætning på tværs af jorden, luften og rummet bestemmer din dominans."
+          "a": "I det planlagte spil kan du måske klone tropper i kloningslaboratoriet om bord på dit skib og derefter opgradere og finjustere dem og deres våben. Til ridekavaleri er planen, at du tæmmer og træner planetens vilde skabninger, fordi dyr ikke kan klones. Din troppesammensætning på jorden, i luften og i rummet er planlagt til at afgøre din dominans."
         },
         {
           "q": "Kan jeg tilslutte mig en alliance?",
-          "a": "Ja. Gå alene, eller deltag i en alliance, der øger din magt og hjælper dig med at vokse. Alliancer tilbyder delte ressourcer, koordinerede angreb og kollektivt forsvar. Gennemfør daglige opgaver for at opgradere både dit skib og alliancens delte aktiver."
+          "a": "Alliancer er planlagt. Du kan spille alene eller deltage i en alliance, som kan øge din kraft og hjælpe dig med at vokse. Planlagte alliancefunktioner omfatter delte ressourcer i spillet, koordinerede angreb og kollektivt forsvar, og at gennemføre daglige opgaver kan hjælpe med at opgradere både dit skib og alliancedelte genstande."
         },
         {
           "q": "Er Overlord knyttet til andre Hyper Tek-spil?",
-          "a": "Fuldt integreret. Ressourcer, skibsopgraderinger, specialistbonusser og kampfærdigheder er planlagt til at flyde mellem Overlord, Hyper Racing og Hyper Quest. Racerevner forbedrer dine rumkampe, materialer fra Quest driver dine opgraderinger, og Hyper Tek-markedspladsen forbinder alle tre spil."
+          "a": "Det er planlagt. Ressourcer i spillet, skibsopgraderinger, specialistbonusser og kampfærdigheder er planlagt til at flyde mellem Overlord, Hyper Racing og Hyper Quest. Racingevner kan forbedre dine rumkampe, Quest-materialer kan drive dine opgraderinger, og Hyper Tek-markedspladsen er planlagt til at forbinde alle tre spil, med forbehold for endelig udvikling og spilregler."
         },
         {
           "q": "Hvilke våben er tilgængelige?",
-          "a": "Jordbaseret artilleri, anti-orbital-batterier, skibsmonterede våbenarrays og specialiseret boarding-aktionsudstyr. Hvert system kan raffineres til specifikke taktiske roller, herunder langdistancebombardement, tætte kampe og defensive modforanstaltninger."
+          "a": "Planlagte våben omfatter jordartilleri, anti-orbitale batterier, skibsmonterede våbenarrays og specialudstyr til enteringsaktioner. Hvert system kan finjusteres til specifikke taktiske roller, herunder langdistancebombardement, nærkamp og defensive modforanstaltninger."
         },
         {
           "q": "Kan jeg udforske planetens overflade?",
-          "a": "Ja. Planeten er rig på skjulte belønninger, artefakter, ressourcer og farligt dyreliv at tæmme. Udforsk overfladen for at finde skatte, bekæmp fremmede væsner og monstre, og opdag strategiske fordele, der styrker din kampagne for Overlord-dominans."
+          "a": "Det er planlagt. Planlagte planeter har skjulte belønninger i spillet, artefakter, ressourcer i spillet og farligt dyreliv at tæmme, med fremmede skabninger og monstre at kæmpe mod og strategiske fordele at opdage, som kan styrke din kampagne, med forbehold for endelig udvikling og spilregler."
         }
       ]
     }
@@ -496,7 +492,7 @@
       "sd": "Primær logistikknudepunkt for den vestlige grænse. Opretholder nødforsyningsreserver.",
       "res": "Xenobiologi og dybrumsmaterialelaboratorium. Huser 40 fastboende forskere.",
       "agri": "Hydroponisk landbrugskompleks. Primær madkilde for vestlige sektorer.",
-      "trade": "Frihandelszone. Over 200 registrerede handlende. Valuta: Universelle Kreditter.",
+      "trade": "Frihandelszone. Over 200 registrerede handlende. Kredit i spillet: Universal Credits.",
       "fuel": "Højkapacitets brændstofsdepot. Understøtter iondrift, plasmakerner og mørkt stof-celler.",
       "ship": "Flådevedligeholdelse og monteringsstation. Kapacitet: 18 fartøjer.",
       "ind": "Tung produktionszone. Atmosfæriske skrubbere påkrævet. Produktion: 8,4k enheder/cyklus.",
@@ -861,11 +857,11 @@
       },
       "stables_ss": {
         "title": "Stalde SS",
-        "desc": "Styrbords biologisk anlægsbay. Huser fremmed ridedyr og bioteknisk udviklede væsener brugt i planetoverfladeoperationer."
+        "desc": "Skibets højre biologiske kammer. Rummer fremmede ridedyr og bioudviklede skabninger, der bruges i operationer på planetoverfladen."
       },
       "stable_ps": {
         "title": "Stald PS",
-        "desc": "Bagbords biologisk anlægsbay. Spejler SS-staldene for afbalanceret dyrebelastning og symmetrisk vægtfordeling."
+        "desc": "Skibets venstre biologiske kammer. Spejler SS-boksen for balanceret skabningsbelastning og symmetrisk vægtfordeling."
       },
       "transporter": {
         "title": "Transportbay",
@@ -1165,7 +1161,7 @@
       "ggLastRace": "GG i det sidste løb, fantastisk hastighed",
       "tradingPlasma": "Bytter plasmastaве mod teknikbøger",
       "needHelpAsteroid": "Har brug for hjælp til asteroidemissionen",
-      "allianceRecruiting": "Vores alliance rekrutterer, send DM",
+      "allianceRecruiting": "Vores alliance søger medlemmer, send DM",
       "donationGoalsPlasma": "Bidragsmål: plasmastave søges!",
       "warStarts2Hours": "Krig begynder om 2 timer, forbered jer",
       "handleMedicalSupport": "Jeg tager mig af medicinsk support",
