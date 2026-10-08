@@ -37,12 +37,12 @@ const reveal = (index) => ({
   viewport: { once: true },
 });
 
-// Leadership: name and role on top, then the bio set in two columns on wide
-// screens. A long bio and a shorter one both fill their card without leaving
-// a blank side.
+// Leadership: name and role on top, then the bio in one column. The cards are
+// capped in width and centred so the lines stay readable and a short bio does
+// not leave one side of a wide card empty.
 function LeaderRow({ member, accent, index }) {
   return (
-    <motion.article className="rounded-2xl flex flex-col gap-5" style={cardStyle(accent, "28px")} {...reveal(index)}>
+    <motion.article className="rounded-2xl flex flex-col gap-5 w-full max-w-5xl mx-auto" style={cardStyle(accent, "28px")} {...reveal(index)}>
       <header className="flex items-center gap-4">
         <Avatar member={member} accent={accent} size={72} />
         <div className="min-w-0">
@@ -50,7 +50,7 @@ function LeaderRow({ member, accent, index }) {
           <p className="text-[13px] font-semibold leading-snug mt-1" style={{ color: accent.c }}>{member.role}</p>
         </div>
       </header>
-      <p className="text-white/70 text-[14px] leading-[1.9] text-left lg:columns-2 lg:gap-12">{member.bio}</p>
+      <p className="text-white/70 text-[15px] leading-[1.9] text-left">{member.bio}</p>
     </motion.article>
   );
 }
