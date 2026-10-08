@@ -420,7 +420,7 @@ function Crowdfunding2() {
                         {card.label}
                       </h3>
                       {card.body && (
-                        <p className="text-white/75 text-[13px] md:text-[14px] leading-relaxed">{card.body}</p>
+                        <p className="text-white/70 text-[13px] leading-relaxed">{card.body}</p>
                       )}
                       {bullets.length > 0 && (
                         <ul className="flex flex-col gap-2.5">
