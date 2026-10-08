@@ -11,7 +11,7 @@
       "executive-summary": "01  Sumário Executivo",
       "three-worlds": "02  Os Três Mundos",
       "technology": "03  Tecnologia",
-      "nfa": "04  Ativos Não-Fungíveis",
+      "nfa": "04  Non-Fungible Articles",
       "hyperbucks": "05  Gems",
       "marketplace": "06  Mercado",
       "roadmap": "07  Roteiro",
@@ -215,7 +215,7 @@
     "signUpBtn": "Cadastrar",
     "walletReady": "Sua Carteira Está Pronta",
     "walletReadyDesc": "Uma carteira incorporada segura foi criada para sua conta.",
-    "walletWarning": "⚠️ Nunca compartilhe sua chave privada com ninguém. Quem tiver sua chave privada tem controle total sobre sua carteira e ativos.",
+    "walletWarning": "⚠️ Nunca compartilhe sua chave privada com ninguém. Quem tiver sua chave privada tem controle total da sua carteira e dos seus itens.",
     "walletAddress": "Seu Endereço de Carteira",
     "enterPasswordReveal": "Digite sua senha para revelar sua chave privada:",
     "reEnterPassword": "Digite a senha novamente",
@@ -371,7 +371,7 @@
       "colTimeActive": "\nTempo ativo\n",
       "colAssignedTo": "\nAtribuído a\n",
       "inGame": "\nNo jogo\n",
-      "earned": "\nGanhou\n",
+      "earned": "Obtido",
       "statusOpen": "\nAbrir\n"
     },
     "listings": {
@@ -402,7 +402,7 @@
       "transactions": "Transações",
       "offers": "Ofertas",
       "hyperBucks": "Gems",
-      "earnings": "Ganhos",
+      "earnings": "Receitas de vendas",
       "support": "Apoiar",
       "signOut": "Sair"
     },
@@ -497,12 +497,12 @@
       "send": "Enviar"
     },
     "withdraw": {
-      "title": "Ganhos do mercado",
-      "subtitle": "Reivindique USDC obtido com vendas de NFT e royalties de criadores.",
-      "connectWallet": "Conecte sua carteira para ver os ganhos do mercado.",
-      "noEarnings": "Ainda não há ganhos de mercado para reivindicar.",
-      "noEarningsHint": "Os ganhos das vendas de NFT aparecerão aqui.",
-      "sellerEarnings": "Ganhos do vendedor",
+      "title": "Receitas de vendas do marketplace",
+      "subtitle": "Resgate USDC das suas vendas de NFT e royalties de criador.",
+      "connectWallet": "Conecte sua carteira para ver as receitas de vendas do seu marketplace.",
+      "noEarnings": "Ainda não há receitas de vendas do marketplace para resgatar.",
+      "noEarningsHint": "As receitas de vendas de NFT aparecerão aqui.",
+      "sellerEarnings": "Receitas do vendedor",
       "creatorRoyalties": "Royalties do Criador",
       "claim": "Alegar"
     },
@@ -520,7 +520,7 @@
       "descPlaceholder": " Descreva seu item... ",
       "storageBox": " Caixa de Armazenamento (Categoria) ",
       "storageBoxHint": " O item é colocado nesta caixa de armazenamento até ser listado no mercado. ",
-      "assetType": " Tipo de ativo ",
+      "assetType": "Tipo de item",
       "nfcSoon": " Em breve ",
       "nfcHint": " A criação de NFC requer uma licença – em uma atualização futura. ",
       "blockchain": " Blockchain ",

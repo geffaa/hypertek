@@ -61,9 +61,9 @@
       "features": [
         {
           "label": "NFAs / NFCs / NFTs",
-          "tagline": "Novo nos ativos Web3.5? Comece aqui",
+          "tagline": "Novo nos itens Web3.5? Comece aqui",
           "details": [
-            "NFAs (Non-Fungible Articles) são itens emitidos pela Hypertek com preço de recompra garantido pela plataforma.",
+            "Os **NFAs** (Non-Fungible Articles) são itens emitidos pela Hyper Tek.",
             "NFCs (Non-Fungible Characters) são itens de jogadores licenciados com bônus no jogo e recompra.",
             "NFTs (Non-Fungible Tokens) são colecionáveis criados pelo usuário — skins, armas e mais."
           ],
@@ -72,7 +72,7 @@
         },
         {
           "label": "O Mercado",
-          "tagline": "Compre e venda ativos do jogo instantaneamente",
+          "tagline": "Compre e venda itens digitais instantaneamente",
           "details": [
             "Navegue por um amplo catálogo de NFAs, NFCs e NFTs — skins, armas, especialistas, naves espaciais e mais.",
             "Filtre por categoria, raridade ou faixa de preço para encontrar exatamente o que precisa.",
@@ -84,7 +84,7 @@
           "label": "Leilões",
           "tagline": "Compita por itens exclusivos de edição limitada",
           "details": [
-            "Lance em ativos raros disponíveis apenas através de leilões por tempo limitado.",
+            "Dê lances em itens raros disponíveis apenas em leilões por tempo limitado.",
             "Uma contagem regressiva ao vivo mostra exatamente quanto tempo resta — cada segundo conta.",
             "Supere os outros para garantir itens lendários que não podem ser comprados de outra forma."
           ],
@@ -92,9 +92,9 @@
         },
         {
           "label": "Trocas",
-          "tagline": "Troque ativos peer-to-peer, sem intermediários",
+          "tagline": "Troque itens entre jogadores, sem intermediários",
           "details": [
-            "Proponha ou aceite trocas diretas de ativos com outros jogadores — totalmente on-chain.",
+            "Proponha ou aceite trocas diretas de itens com outros jogadores, totalmente on-chain.",
             "Defina os termos você mesmo: escolha o que oferece e o que quer em troca.",
             "Navegue por ofertas de troca abertas ou poste a sua para encontrar o negócio perfeito."
           ],
@@ -102,10 +102,10 @@
         },
         {
           "label": "Missões",
-          "tagline": "Complete missões, ganhe recompensas exclusivas",
+          "tagline": "Missões previstas com recompensas no jogo",
           "details": [
-            "Aceite missões para ganhar recompensas exclusivas e ativos raros do jogo.",
-            "Cada missão tem objetivos únicos — explore, batalhe ou construa seu caminho para a vitória.",
+            "As missões previstas podem oferecer recompensas exclusivas no jogo e itens raros no jogo.",
+            "Cada missão está prevista para ter objetivos únicos: explore, lute ou construa seu caminho até a vitória.",
             "Construa sua coleção estrategicamente através de habilidade, não apenas gastos."
           ],
           "cta": "Explorar Missões"
@@ -114,9 +114,9 @@
           "label": "Para alugar",
           "tagline": "Alugue seus itens em troca de recompensas no jogo",
           "details": [
-            "Alugue especialistas ou equipamentos poderosos para uma única missão sem comprar.",
+            "Os jogadores poderão alugar especialistas ou equipamentos poderosos para uma única missão sem comprá-los.",
             "Os jogadores poderão alugar itens ociosos para outros jogadores em troca de recompensas no jogo que negociarem entre si.",
-            "Durações flexíveis — acordos por hora, diários ou por missão."
+            "Durações flexíveis previstas: acordos por hora, por dia ou por missão."
           ],
           "cta": "Ver Para alugar"
         },
@@ -124,9 +124,9 @@
           "label": "Recompensas",
           "tagline": "Caçe alvos, reivindique recompensas, lidere o ranking",
           "details": [
-            "Aceite recompensas postadas por outros jogadores ou pelo sistema para ganhar criptomoedas.",
+            "Os jogadores poderão aceitar recompensas por captura publicadas por outros jogadores ou pelo sistema em troca de recompensas no jogo.",
             "Suba no ranking de caçadas para desbloquear títulos exclusivos e recompensas no jogo.",
-            "Poste suas próprias recompensas para recrutar jogadores habilidosos para seus objetivos."
+            "Os jogadores poderão publicar suas próprias recompensas por captura para encontrar jogadores habilidosos para seus objetivos."
           ],
           "cta": "Ver Recompensas"
         }
@@ -178,7 +178,7 @@
     "nfa101": {
       "sectionLabel": "Educação",
       "heading": "NFAs / NFCs / NFTs 101",
-      "subtitle": "Novo em NFTs e Web3.5? Explore nossos artigos para entender ativos blockchain, carteiras, segurança e o ecossistema HyperTek.",
+      "subtitle": "Novo nos NFTs e na Web3.5? Explore nossos artigos para entender itens blockchain, carteiras, segurança e o ecossistema Hyper Tek.",
       "minRead": "min de leitura",
       "filterAll": "Todos"
     },
@@ -367,7 +367,7 @@
       "noQuests": "Nenhuma missão {{filter}}",
       "inGameFeature": "Recurso do Jogo",
       "inGameDesc": "As missões são geradas automaticamente quando os vendedores escolhem comissão reduzida. Jogadores podem completar até 5 missões por dia. O pool de comissão é dividido entre o desconto do comprador, a recompensa do jogador e a plataforma.",
-      "earnFromQuests": "Quer ganhar com missões? Jogue →",
+      "earnFromQuests": "Quer recompensas no jogo com as missões? Experimente a interface do jogo →",
       "moneyQuests": "Missões Monetárias (pool de 11%)",
       "resourceQuests": "Missões de Recursos (pool de 20%)",
       "footerNote1": "# Missões com cargas combinadas usam as recompensas da tabela separada.",
@@ -385,7 +385,7 @@
       },
       "comingSoon": {
         "title": "Em Breve",
-        "desc": "O recurso de missões no jogo está atualmente em desenvolvimento. Fique ligado — você poderá ganhar recompensas diretamente do jogo.",
+        "desc": "O recurso de missões no jogo previsto está em desenvolvimento e pode oferecer recompensas no jogo, sujeito às regras finais do jogo.",
         "gotIt": "Entendido"
       },
       "pagination": {
