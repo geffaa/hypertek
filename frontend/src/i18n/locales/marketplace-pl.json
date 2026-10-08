@@ -61,9 +61,9 @@
       "features": [
         {
           "label": "NFA / NFC / NFT",
-          "tagline": "Nowy w aktywach Web3.5? Zacznij tutaj",
+          "tagline": "Nowy w przedmiotach Web3.5? Zacznij tutaj",
           "details": [
-            "NFA (Non-Fungible Articles) to przedmioty wydawane przez Hypertek z gwarantowaną przez platformę ceną odkupu.",
+            "**NFA** (Non-Fungible Articles) to przedmioty wydawane przez Hyper Tek.",
             "NFC (Non-Fungible Characters) to przedmioty licencjonowanych graczy z bonusami w grze i odkupem.",
             "NFT (Non-Fungible Tokens) to kolekcjonerskie przedmioty tworzone przez użytkowników — skórki, broń i więcej."
           ],
@@ -72,7 +72,7 @@
         },
         {
           "label": "Rynek",
-          "tagline": "Kupuj i sprzedawaj aktywa w grze natychmiast",
+          "tagline": "Kupuj & sprzedawaj cyfrowe przedmioty natychmiast",
           "details": [
             "Przeglądaj szeroki katalog NFA, NFC i NFT — skórki, broń, specjalistów, statki kosmiczne i więcej.",
             "Filtruj według kategorii, rzadkości lub zakresu cen, aby znaleźć dokładnie to, czego potrzebujesz.",
@@ -84,7 +84,7 @@
           "label": "Aukcje",
           "tagline": "Rywalizuj o ekskluzywne przedmioty limitowane",
           "details": [
-            "Licytuj rzadkie aktywa dostępne wyłącznie na aukcjach z ograniczonym czasem.",
+            "Licytuj rzadkie przedmioty dostępne tylko w aukcjach czasowych.",
             "Odliczanie na żywo pokazuje dokładnie, ile czasu pozostało — każda sekunda się liczy.",
             "Przebijaj innych, aby zdobyć legendarne przedmioty, których nie można kupić w inny sposób."
           ],
@@ -92,9 +92,9 @@
         },
         {
           "label": "Wymiany",
-          "tagline": "Wymieniaj aktywa peer-to-peer, bez pośredników",
+          "tagline": "Wymieniaj przedmioty między graczami, bez pośredników",
           "details": [
-            "Proponuj lub akceptuj bezpośrednie wymiany aktywami z innymi graczami — w pełni on-chain.",
+            "Proponuj lub przyjmuj bezpośrednie wymiany przedmiotów z innymi graczami, w pełni on-chain.",
             "Sam ustal warunki: wybierz, co oferujesz i co chcesz w zamian.",
             "Przeglądaj otwarte oferty wymiany lub opublikuj własną, aby znaleźć idealną transakcję."
           ],
@@ -102,10 +102,10 @@
         },
         {
           "label": "Misje",
-          "tagline": "Wypełniaj misje, zdobywaj ekskluzywne nagrody",
+          "tagline": "Planowane misje z nagrodami w grze",
           "details": [
-            "Podejmij misje, aby zdobyć ekskluzywne nagrody i rzadkie aktywa w grze.",
-            "Każda misja ma unikalne cele — eksploruj, walcz lub buduj swoją drogę do zwycięstwa.",
+            "Planowane questy mogą oferować ekskluzywne nagrody w grze i rzadkie przedmioty w grze.",
+            "Każdy quest ma mieć unikalny cel: eksploruj, walcz lub zbuduj swoją drogę do zwycięstwa.",
             "Strategicznie buduj kolekcję dzięki umiejętnościom, nie tylko wydatkom."
           ],
           "cta": "Przeglądaj misje"
@@ -114,9 +114,9 @@
           "label": "Do wynajęcia",
           "tagline": "Wynajmij swoje przedmioty za nagrody w grze",
           "details": [
-            "Wynajmij potężnych specjalistów lub sprzęt na jedną misję bez zakupu.",
+            "Gracze mogą mieć możliwość wynajęcia potężnych specjalistów lub sprzętu na jedną misję bez ich bezpośredniego kupowania.",
             "Gracze mogą mieć możliwość wynajmowania nieużywanych przedmiotów innym graczom za nagrody w grze, które uzgadniają między sobą.",
-            "Elastyczne czasy — godzinowo, dziennie lub na misję."
+            "Planowane elastyczne okresy: umowy godzinowe, dzienne lub za misję."
           ],
           "cta": "Przeglądaj Do wynajęcia"
         },
@@ -124,9 +124,9 @@
           "label": "Łowy",
           "tagline": "Poluj na cele, zgarniaj nagrody, bądź na szczycie",
           "details": [
-            "Przyjmuj łowy opublikowane przez innych graczy lub system, aby zdobyć kryptowaluty.",
+            "Gracze mogą mieć możliwość przyjmowania bounty opublikowanych przez innych graczy lub system za nagrody w grze.",
             "Wspinaj się w rankingu bounty, aby odblokować ekskluzywne tytuły i nagrody w grze.",
-            "Publikuj własne łowy, aby werbować wykwalifikowanych graczy do swoich celów."
+            "Gracze mogą mieć możliwość publikowania własnych bounty, aby znaleźć wykwalifikowanych graczy do swoich celów."
           ],
           "cta": "Zobacz łowy"
         }
@@ -178,7 +178,7 @@
     "nfa101": {
       "sectionLabel": "Edukacja",
       "heading": "NFA / NFC / NFT 101",
-      "subtitle": "Nowy w NFT i Web3.5? Przeglądaj nasze artykuły, aby zrozumieć zasoby blockchain, portfele, bezpieczeństwo i ekosystem HyperTek.",
+      "subtitle": "Nowy w NFT i Web3.5? Przeglądaj nasze artykuły, aby zrozumieć przedmioty blockchain, portfele, bezpieczeństwo i ekosystem Hyper Tek.",
       "minRead": "min czytania",
       "filterAll": "Wszystkie"
     },
@@ -367,7 +367,7 @@
       "noQuests": "Brak {{filter}} misji",
       "inGameFeature": "Funkcja w grze",
       "inGameDesc": "Misje są generowane automatycznie, gdy sprzedawcy wybierają obniżoną prowizję. Gracze mogą wykonywać do 5 misji dziennie. Pula prowizji jest podzielona między zniżkę dla kupującego, nagrodę gracza i platformę.",
-      "earnFromQuests": "Chcesz zarabiać na misjach? Graj →",
+      "earnFromQuests": "Chcesz nagród w grze za questy? Wypróbuj interfejs gry →",
       "moneyQuests": "Misje pieniężne (pula 11%)",
       "resourceQuests": "Misje zasobów (pula 20%)",
       "footerNote1": "# Misje z łączonymi ładunkami korzystają z nagród z osobnej tabeli.",
@@ -385,7 +385,7 @@
       },
       "comingSoon": {
         "title": "Wkrótce",
-        "desc": "Funkcja misji w grze jest obecnie rozwijana. Bądź na bieżąco — wkrótce będziesz mógł zdobywać nagrody bezpośrednio z gry.",
+        "desc": "Planowane funkcje questów w grze są w trakcie rozwoju i mogą oferować nagrody w grze, z zastrzeżeniem ostatecznych zasad gry.",
         "gotIt": "Rozumiem"
       },
       "pagination": {

@@ -215,7 +215,7 @@
     "signUpBtn": "Zarejestruj się",
     "walletReady": "Twój portfel jest gotowy",
     "walletReadyDesc": "Dla Twojego konta został utworzony bezpieczny wbudowany portfel.",
-    "walletWarning": "⚠️ Nigdy nie udostępniaj swojego klucza prywatnego nikomu. Każdy, kto ma Twój klucz prywatny, ma pełną kontrolę nad Twoim portfelem i aktywami.",
+    "walletWarning": "⚠️ Nigdy nie udostępniaj nikomu swojego klucza prywatnego. Każdy, kto ma Twój klucz prywatny, ma pełną kontrolę nad Twoim portfelem i przedmiotami.",
     "walletAddress": "Twój adres portfela",
     "enterPasswordReveal": "Wprowadź hasło, aby odsłonić swój klucz prywatny:",
     "reEnterPassword": "Wprowadź ponownie swoje hasło",
@@ -371,7 +371,7 @@
       "colTimeActive": "\nCzas aktywny\n",
       "colAssignedTo": "\nPrzypisany do\n",
       "inGame": "\nW grze\n",
-      "earned": "\nZdobyte\n",
+      "earned": "Zarobione",
       "statusOpen": "\nOtwórz\n"
     },
     "listings": {
@@ -402,7 +402,7 @@
       "transactions": "Transakcje",
       "offers": "Oferty",
       "hyperBucks": "Gems",
-      "earnings": "Zarobki",
+      "earnings": "Przychody ze sprzedaży",
       "support": "Wsparcie",
       "signOut": "Wyloguj się"
     },
@@ -497,12 +497,12 @@
       "send": "Wyślij"
     },
     "withdraw": {
-      "title": "Zarobki z Marketplace",
-      "subtitle": "Odbierz USDC uzyskane ze sprzedaży NFT i tantiem dla twórców.",
-      "connectWallet": "Podłącz swój portfel, aby zobaczyć zarobki na rynku.",
-      "noEarnings": "Nie ma jeszcze żadnych zarobków na rynku, do których można się zgłosić.",
-      "noEarningsHint": "Zarobki ze sprzedaży NFT pojawią się tutaj.",
-      "sellerEarnings": "Zarobki sprzedawcy",
+      "title": "Przychody ze sprzedaży na rynku",
+      "subtitle": "Odbierz USDC ze sprzedaży swoich NFT i tantiem twórcy.",
+      "connectWallet": "Połącz portfel, aby zobaczyć przychody ze sprzedaży na rynku.",
+      "noEarnings": "Nie ma jeszcze przychodów ze sprzedaży na rynku do odebrania.",
+      "noEarningsHint": "Przychody ze sprzedaży NFT pojawią się tutaj.",
+      "sellerEarnings": "Przychody sprzedawcy",
       "creatorRoyalties": "tantiemy twórcy",
       "claim": "Odbierz"
     },
@@ -520,7 +520,7 @@
       "descPlaceholder": " Opisz swój przedmiot... ",
       "storageBox": " Pudełko do przechowywania (kategoria) ",
       "storageBoxHint": " Przedmiot jest umieszczany w tym pudełku do czasu wystawienia go na rynku. ",
-      "assetType": " Typ zasobu ",
+      "assetType": "Typ przedmiotu",
       "nfcSoon": " Wkrótce ",
       "nfcHint": " Tworzenie NFC wymaga licencji — pojawi się w przyszłej aktualizacji. ",
       "blockchain": " Blockchain ",
