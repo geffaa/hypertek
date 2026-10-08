@@ -1,3 +1,4 @@
+import { EARLY_ACCESS } from "../data/earlyAccess";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -118,17 +119,6 @@ const MILESTONES = [
   },
 ];
 
-const EARLY_ACCESS = {
-  eyebrow: "LIMITED-TIME OPPORTUNITY",
-  heading: "Don't Miss the Early-Access Window",
-  bullets: [
-    "Limited-edition NFAs and discounted packages are available now, only while early access stays open.",
-    "This discounted price is available for a limited time only.",
-    "Limited-edition items are hard-capped in supply. Once they're gone, they will not be minted again.",
-  ],
-  cta: "Secure Your Place Today",
-  note: "Watch for updates and read the White Paper. Items are sold as is; in-game bonuses may apply only if the games are released.",
-};
 
 const WEB3_CARD_ACCENTS = [
   { accent: "#22c55e", bg: "#0d1f12", border: "rgba(34,197,94,0.30)", borderTop: "rgba(34,197,94,0.7)" },

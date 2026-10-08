@@ -7,6 +7,7 @@ import { getImageUrl } from "../Config";
 import LazyImage from "../Components/Common/LazyImage";
 import GlowingOrb from "../Components/Common/BgColoring";
 import { useTranslation } from "react-i18next";
+import { EARLY_ACCESS } from "../data/earlyAccess";
 import TeamSection from "../Components/about/TeamSection";
 
 import aboutBg from "../assets/images/aboutpage/about_bg.webp";
@@ -428,7 +429,7 @@ function About({ isPreview = false }) {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-10">
             <SectionLabel number="04" label={sec04.label || "Non-Fungible Digital Artworks"} />
             <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[36px] text-white leading-tight">
-              {sec04.heading || "Digital Art With In-Game Utility"}
+              {sec04.pageHeading || sec04.heading || "Digital Art With In-Game Functionality"}
             </h2>
             <p className="text-white/45 text-[12px] mt-2 tracking-[0.2em] uppercase" style={{ fontFamily: "Orbitron, sans-serif" }}>
               {sec04.subtitle}
@@ -541,22 +542,18 @@ function About({ isPreview = false }) {
               <div className="flex items-center justify-center gap-4 mb-6">
                 <div className="w-12 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
                 <span className="text-amber-300 text-[13px] md:text-[15px] font-bold uppercase tracking-[0.3em]" style={{ fontFamily: "Orbitron, sans-serif" }}>
-                  LIMITED-TIME OPPORTUNITY
+                  {EARLY_ACCESS.eyebrow}
                 </span>
                 <div className="w-12 h-px" style={{ background: "rgba(251,191,36,0.6)" }} />
               </div>
 
-              <h3 className="font-[Goldman] font-bold text-white text-3xl md:text-[44px] leading-tight mb-5 text-center">
-                Don&apos;t Miss the Early-Access Window
+              <h3 className="font-[Goldman] font-bold text-white text-2xl sm:text-3xl md:text-[36px] leading-tight mb-5 text-center">
+                {EARLY_ACCESS.heading}
               </h3>
               <div className="w-20 h-[3px] rounded-full mx-auto mb-10" style={{ background: "linear-gradient(90deg,#fbbf24,#f59e0b)" }} />
 
               <ul className="flex flex-col gap-5 mb-9 text-left">
-                {[
-                  "Limited-edition NFAs and discounted packages are available now – only while early access stays open.",
-                  "This discounted price is available for a limited time only.",
-                  "Limited-edition items remain only until our funding target is reached – then they're gone for good.",
-                ].map((b, i) => (
+                {EARLY_ACCESS.bullets.map((b, i) => (
                   <li key={i} className="flex gap-4 items-start">
                     <ArrowRight size={20} color="#fbbf24" strokeWidth={2} className="mt-[3px] flex-shrink-0" />
                     <span className="text-white/80 text-[17px] md:text-[19px] leading-relaxed">{b}</span>
@@ -578,8 +575,8 @@ function About({ isPreview = false }) {
                 </div>
               )}
 
-              <p className="text-white/60 text-[15px] md:text-[16px] leading-relaxed max-w-lg mx-auto text-center">
-                Watch for updates, read the White Paper, and lock in early pricing before the crowd arrives.
+              <p className="font-[Goldman] font-bold text-white text-lg md:text-2xl leading-snug text-center">
+                {EARLY_ACCESS.slogan}
               </p>
             </div>
           </div>
