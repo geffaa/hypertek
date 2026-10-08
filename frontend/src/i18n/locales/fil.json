@@ -17,7 +17,7 @@
     "shop": {
       "overview": "Pangkalahatang-tanaw",
       "overviewDesc": "Pangkalahatang-tanaw ng merkado",
-      "myAssets": "Aking mga Asset",
+      "myAssets": "Aking mga Item",
       "myAssetsDesc": "Subaybayan at pamahalaan ang lahat ng iyong pag-aari",
       "theMarketplace": "Ang Marketplace",
       "theMarketplaceDesc": "I-browse ang lahat ng NFT, NFA at NFC na kolektib",
@@ -69,8 +69,8 @@
         "description": "Bilhin ang iyong mga paboritong NFT at ipakita o i-trade ang mga ito sa iyong profile anumang oras."
       },
       {
-        "title": "Kumita at Lumago",
-        "description": "Kumita sa pamamagitan ng pagbebenta ng iyong mga koleksyon o pagtaas ng katanyagan sa espasyo ng NFT."
+        "title": "Mangolekta & Umunlad",
+        "description": "Palaguin ang iyong koleksyon, o ialok ang sarili mong mga likha sa ibang manlalaro sa marketplace."
       }
     ]
   },
@@ -93,15 +93,15 @@
       },
       {
         "label": "Tunay na Pagmamay-ari",
-        "desc": "Mga NFA/NFC/NFT na may Programmatic Trade-In Value"
+        "desc": "NFA/NFC/NFT na may planong Programmatic Trade-In Value"
       },
       {
         "label": "Play-to-Own",
-        "desc": "Sa iyo ang bawat item na kinokolekta mo, nakatala on-chain"
+        "desc": "Mga item na planong kolektahin at pagmamay-arian mo, nakatala sa Base chain"
       },
       {
         "label": "Item Loyalty Program",
-        "desc": "Habang mas matagal mong hawak ang isang item, mas tumataas ang trade-in tier nito, palaging mas mababa sa halagang nakalaan dito"
+        "desc": "Planong halaga ng loyalty na maaaring tumaas ayon sa mga nakasaad na tuntunin"
       },
       {
         "label": "Linked na Pag-unlad",
@@ -109,7 +109,7 @@
       },
       {
         "label": "Integrasyon ng VR/AR",
-        "desc": "Ang mga manlalaro ng VR/AR ay maaaring sumali sa mga misyon at epikong labanan sa real-time"
+        "desc": "Planong VR/AR para makasali ang mga manlalaro sa mga epikong misyon at laban nang real-time"
       }
     ]
   },
@@ -169,10 +169,10 @@
       "uiPageSubtitle": "Ang kumpletong gaming dashboard.",
       "uiPageSubtitleSpan": "Tatlong mode. Isang nakakaengganyong karanasan.",
       "uiHeroLabel": "Interactive na Preview",
-      "uiHeroDesc": "Pumasok sa kumpletong Hyper Tek 100 dashboard. Lumipat sa pagitan ng Racing, Quest, at Overlord na mga mode. Bawat isa ay may sariling marketplace, imbentaryo ng asset, at real-time na kita.",
+      "uiHeroDesc": "Pumasok sa buong Hyper Tek 100 dashboard. Lumipat sa pagitan ng mga mode na Racing, Quest, at Overlord, bawat isa ay may sariling marketplace at imbentaryo ng item.",
       "uiStat1": "3 Game Mode",
       "uiStat2": "Kumpletong Dashboard",
-      "uiStat3": "Imbentaryo ng Asset",
+      "uiStat3": "Imbentaryo ng Item",
       "uiStat4": "Live Marketplace",
       "uiLaunchBtn": "Ilunsad ang Interface",
       "aboutPageSubtitle": "Ang koponan, misyon, at bisyon.",
@@ -181,9 +181,9 @@
       "aboutHeroTitle2": "Pinapatakbo ng Web3.5.",
       "aboutHeroDesc": "Ang Hyper Tek 100 ay isang gaming project na kasalukuyang dine-develop kung saan ang bawat item ay nakatala on-chain at pag-aari ng player nito. Tatlong magkakaugnay na laro ang nakaplano, na may iisang shared na progression system.",
       "pillar1Title": "Teknolohiya ng Web3.5",
-      "pillar1Desc": "Mga on-chain na asset, tunay na pagmamay-ari, at transparent na marketplace na itinayo sa Base.",
-      "pillar2Title": "Tunay na Halaga ng Asset",
-      "pillar2Desc": "Ang bawat in-game na item ay isang tradeable na asset. Maglaro, kumita, at pagmamay-ari ang iyong pag-unlad.",
+      "pillar1Desc": "Mga item na on-chain, tunay na pagmamay-ari, at isang malinaw na marketplace na itinayo sa Base.",
+      "pillar2Title": "Tunay na Pagmamay-ari ng Item",
+      "pillar2Desc": "Ang bawat kwalipikadong in-game na item ay planong maipagpalit. Maglaro, mangolekta, at pagmamay-arian ang iyong mga item.",
       "pillar3Title": "Makatarungang Ecosystem",
       "pillar3Desc": "Malinaw na hatian ng komisyon at Programmatic Trade-In Value na nakapaloob sa bawat kwalipikadong item.",
       "pillar4Title": "Sumali",
@@ -198,21 +198,21 @@
     "tryGaming": "Subukan ang gaming interface",
     "badge": "MGA LIMITED EDITION NA NFA AT GAMING PACKAGE, AVAILABLE HABANG MAY SUPPLY",
     "intro1": "Ang Hyper Tek 100 ay isang gaming project na kasalukuyang dine-develop na naglalayong tugunan ang ilan sa pinakamabibigat na hamon ng industriya. Nabuo na ang website, marketplace at item system, at tatlong magkakaugnay na laro ang nakaplano. Bago ang mga laro, naglalabas kami ng limitadong bilang ng mga item at package para sa mga player at kolektor na gustong sumali nang maaga sa universe.",
-    "intro2": "Maglalabas kami ng kaunting bilang ng Stage 1 Non-Fungible Article (NFA) na item. Bawat isa ay naglilista ng mga in-game bonus na maaaring umiral kung mailabas ang mga laro, at hindi nakaplanong ulitin ang mga antas ng bonus ng Stage 1. Mahigpit na limitado ang supply: kapag naubos na ang mga item na ito, aalisin sa website ang anumang natitirang limited-edition na NFA na hindi pa na-mint.",
-    "intro3": "Ang mga kwalipikadong Hyper Tek item ay may Programmatic Trade-In Value, na nakatago sa isang on-chain escrow. Ang mga limited edition na NFA na ito ay naglilista rin ng mga in-game bonus na maaaring umiral, alinsunod sa pinal na mga patakaran ng laro, kung mailabas ang mga laro.",
+    "intro2": "Naglalabas kami ng kaunting bilang ng mga item na Non-Fungible Article (NFA) sa Phase 1. Inililista ng bawat isa ang mga planong in-game na bonus na maaaring umiral kapag natapos ang mga laro, at ang mga antas ng bonus ng Phase 1 ay hindi planong ulitin. Mahigpit na limitado ang suplay: kapag naubos na ang mga item na ito, aalisin sa website ang natitirang hindi pa na-mint na limited-edition na NFA.",
+    "intro3": "Ang mga kwalipikadong Hyper Tek na item ay may Programmatic Trade-In Value na hawak sa on-chain escrow. Inililista rin ng mga limited-edition na NFA na ito ang mga planong in-game na bonus na maaaring umiral, ayon sa pinal na tuntunin ng laro, kapag natapos ang mga laro.",
     "intro4": "Kung nagustuhan mo ang nakita mo sa Hyper Tek Project at gusto mong magkaroon ng isa sa mga limitadong item na ito, ngayon na ang panahon. Limitado ang supply, at kapag naubos na ang isang item ay hindi na ito imi-mint muli.",
     "intro5": "Ang ikalawa naming release ay isang set ng mga eksklusibong gaming package na direktang ibinebenta sa sarili naming website, sa presyong 10% na mas mababa kaysa sa maaaring ialok sa ibang lugar sa hinaharap. Limitado lang ang panahon ng presyong ito.",
     "keyPointsTitle": "Mahahalagang Puntong Dapat Tandaan:",
-    "intro6": "Ang Hyper Tek Non-Fungible Articles (HT NFA) ay mga digital collectible na may pinakamalalaking in-game bonus sa hanay ng Hyper Tek, na maaaring umiral kung mailabas ang mga laro, at may Programmatic Trade-In Value. Available lang habang may supply.",
-    "intro7": "Ginawa ang Hyper Tek bilang Play-to-Own: sa iyo ang mga item na kinokolekta mo, nakatala on-chain, na may in-game utility na maaaring umiral sa mga nakaplanong laro. Ibinebenta ang mga item bilang digital collectible, hindi bilang paraan para kumita ng pera.",
+    "intro6": "Ang Hyper Tek Non-Fungible Articles (HT NFA) ay mga digital na collectible na may pinakamalalaking planong in-game na bonus sa hanay ng Hyper Tek, na maaaring umiral kapag natapos ang mga laro, kasama ang Programmatic Trade-In Value. Magagamit lamang habang may suplay.",
+    "intro7": "Ang Hyper Tek ay itinayo bilang Play-to-Own: ang mga item na kinokolekta mo ay iyo, nakatala on-chain, na may planong in-game na functionality na maaaring umiral sa mga planong laro. Ang mga item ay ibinebenta bilang mga digital na collectible, hindi bilang paraan ng pagkita ng pera.",
     "collectionsLabel": "Mga Koleksyon",
     "sectionTitle": "Mga Limited Edition na Gaming Package",
     "discount": "Makatipid ng 10% mula sa mga nakalistan na presyo",
     "donationTierLabel": "Tier ng Package",
     "donationTierPrefix": "Tier ng Package:",
-    "rewardsTitle": "Nakadepende sa paglabas ng mga laro at sa pinal na mga tuntunin ng laro:",
+    "rewardsTitle": "Alinsunod sa paglabas ng laro at pinal na tuntunin ng laro:",
     "specialConditionTitle": "Espesyal na Kondisyon",
-    "specialCondition": "PAALALA: Maliban sa Gems na kasama para sa mga in-game na pagbili, hindi maaaring pagsamahin ang mga bonus at diskwento sa anumang ibang promosyon. Kasama sa bawat package ang pagbanggit ng pangalan mo sa end credits ng mga laro, kung mailabas ang mga laro.\n\nIbinebenta ang mga item nang as is. Ang mga in-game bonus, diskwento at Gems na nakalista sa isang package ay maaari lang umiral kung mailabas ang mga laro, at sakop ng pinal na mga patakaran ng laro. Walang ipinapangakong tubo, bayad o pinansyal na balik.",
+    "specialCondition": "Maliban sa mga Gems na kasama para sa mga in-game na pagbili, ang mga bonus at diskwento ay hindi maaaring isama sa iba pang promosyon. Bawat package ay may kasamang name credit sa dulo ng credits ng laro, **alinsunod sa paglabas ng laro**.\n\nAng mga item ay ibinebenta kung ano sila. Ang mga in-game na bonus, diskwento, at Gems na nakalista sa isang package ay maaari lamang umiral **alinsunod sa paglabas ng laro at pinal na tuntunin ng laro**. Walang ipinapangakong kita, bayad, o pinansyal na kita.",
     "imageComing": "Larawang paparating",
     "close": "Isara"
   },

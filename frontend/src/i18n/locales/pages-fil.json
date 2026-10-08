@@ -11,7 +11,7 @@
       "executive-summary": "01  Buod ng Ehekutibo",
       "three-worlds": "02  Ang Tatlong Mundo",
       "technology": "03  Teknolohiya",
-      "nfa": "04  Mga Non-Fungible Article",
+      "nfa": "04  Non-Fungible Articles",
       "hyperbucks": "05  Gems",
       "marketplace": "06  Marketplace",
       "roadmap": "07  Roadmap",
@@ -215,7 +215,7 @@
     "signUpBtn": "Mag-sign Up",
     "walletReady": "Handa na ang Iyong Wallet",
     "walletReadyDesc": "Isang ligtas na embedded wallet ang nagawa para sa iyong account.",
-    "walletWarning": "⚠️ Huwag kailanman ibahagi ang iyong private key sa kahit sino. Ang sinumang may hawak ng iyong private key ay may ganap na kontrol ng iyong wallet at mga asset.",
+    "walletWarning": "⚠️ Huwag kailanman ibahagi ang iyong private key sa sinuman. Ang sinumang may hawak ng iyong private key ay may ganap na kontrol sa iyong wallet at mga item.",
     "walletAddress": "Ang Iyong Wallet Address",
     "enterPasswordReveal": "Ilagay ang iyong password upang ipakita ang iyong private key:",
     "reEnterPassword": "Ilagay muli ang iyong password",
@@ -371,7 +371,7 @@
       "colTimeActive": "\nAktibo sa Oras\n",
       "colAssignedTo": "\nNakatalaga kay\n",
       "inGame": "\nIn-game\n",
-      "earned": "\nNakuha\n",
+      "earned": "Kinita",
       "statusOpen": "\nBukas\n"
     },
     "listings": {
@@ -402,7 +402,7 @@
       "transactions": "Mga transaksyon",
       "offers": "Mga alok",
       "hyperBucks": "Gems",
-      "earnings": "Mga kita",
+      "earnings": "Kita sa Benta",
       "support": "Suporta",
       "signOut": "Mag-sign Out"
     },
@@ -497,12 +497,12 @@
       "send": "Ipadala"
     },
     "withdraw": {
-      "title": "Mga Kita sa Marketplace",
-      "subtitle": "I-claim ang USDC na kinita mula sa NFT sales at creator royalties.",
-      "connectWallet": "Ikonekta ang iyong wallet upang tingnan ang mga kita sa marketplace.",
-      "noEarnings": "Wala pang kita sa marketplace na i-claim.",
-      "noEarningsHint": "Lalabas dito ang mga kita mula sa NFT sales.",
-      "sellerEarnings": "Mga Kita ng Nagbebenta",
+      "title": "Kita sa Benta sa Marketplace",
+      "subtitle": "I-claim ang USDC mula sa iyong mga benta ng NFT at royalty ng lumikha.",
+      "connectWallet": "Ikonekta ang iyong wallet para makita ang iyong kita sa benta sa marketplace.",
+      "noEarnings": "Wala pang kita sa benta sa marketplace na i-cla-claim.",
+      "noEarningsHint": "Lalabas dito ang kita sa benta ng NFT.",
+      "sellerEarnings": "Kita ng Nagbebenta",
       "creatorRoyalties": "Mga Royalty ng Lumikha",
       "claim": "Claim"
     },
@@ -520,7 +520,7 @@
       "descPlaceholder": "Ilarawan ang iyong item...",
       "storageBox": "Storage Box (Kategorya)",
       "storageBoxHint": "Ang item ay inilalagay sa storage box na ito hanggang sa nakalista sa marketplace.",
-      "assetType": "Uri ng Asset",
+      "assetType": "Uri ng Item",
       "nfcSoon": "Malapit na",
       "nfcHint": "Nangangailangan ng lisensya ang paglikha ng NFC — darating sa hinaharap na update.",
       "blockchain": "Blockchain",

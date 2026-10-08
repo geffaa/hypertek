@@ -12,13 +12,13 @@
         "l": "Programmatic Trade-In Value"
       },
       {
-        "v": "P2E",
-        "l": "Play-to-Own"
+        "v": "P2O",
+        "l": "Play-To-Own"
       }
     ],
     "subtitle": [
-      "Ang misyon ng Hyper Tek ay tugunan ang maraming isyu sa loob ng industriya ng gaming at muling tukuyin kung paano gumagana ang mga gaming ecosystem sa pamamagitan ng paglikha ng isang magkakaugnay na universe kung saan ang mga manlalaro ay hindi limitado sa isang estilo ng gameplay. Sa pamamagitan ng pagsasama ng maraming genre sa isang sistema ng pag-unlad, ang proyekto ng Hyper Tek ay nagbibigay ng dinamikong kapaligiran kung saan ang mga manlalaro ay maaaring magsaliksik, makipagkumpitensya, at lumago sa loob ng isang pinag-isang mundo.",
-      "Layunin nitong bigyan ang mga player ng tunay na pagmamay-ari sa kanilang mga digital na item, bawat isa ay may in-game utility at Programmatic Trade-In Value, sa loob ng isang ecosystem na tinutulungang hubugin ng mga player.",
+      "Ang misyon ng Hyper Tek ay tugunan ang maraming isyu sa industriya ng laro at muling bigyang-kahulugan kung paano gumagana ang mga ecosystem ng laro sa pamamagitan ng paglikha ng planong magkakaugnay na uniberso ng laro kung saan hindi limitado ang mga manlalaro sa iisang istilo ng paglalaro. Sa pagsasama ng maraming genre sa iisang progression system, layunin ng proyektong Hyper Tek na magbigay ng dinamikong kapaligiran kung saan maaaring mag-explore, makipagkumpetensya, at lumago ang mga manlalaro sa isang pinag-isang mundo.",
+      "Layunin ng proyektong Hyper Tek na bigyan ang mga manlalaro ng tunay na pagmamay-ari ng kanilang mga digital na item, bawat isa ay may in-game na functionality at Programmatic Trade-In Value, sa isang ecosystem na tinutulungan ding hubugin ng mga manlalaro.",
       "Layunin ng proyekto na bigyan ng kapangyarihan ang mga manlalaro sa pamamagitan ng pagbibigay sa kanila ng makabuluhang pagmamay-ari sa kanilang pag-unlad at mga gantimpala habang hinihikayat ang pagkamalikhain, pakikipagtulungan, at kumpetisyon.",
       "Ang pangmatagalang layunin ng Hyper Tek ay bumuo ng isang digital universe kung saan maaaring magsama-sama ang maraming laro at komunidad sa iisang magkakaugnay na platform."
     ],
@@ -27,7 +27,7 @@
       "heading1": "Muling Tukuyin Kung Ano",
       "heading2": "Ang Maaaring Maging Gaming",
       "paras": [
-        "Ang Proyekto ng Hyper Tek ay itinatag ni Don Bennett, na nag-isip ng isang kapaligiran ng gaming kung saan ang maraming genre ay maaaring magkasamang mabuhay sa loob ng isang sistema ng pag-unlad. Sa halip na pilitin ang mga manlalaro na manatili sa isang gameplay loop, pinapayagan ng Hyper Tek ang mga ito na mag-explore ng iba't ibang aktibidad habang binubuo ang kanilang karakter, mga mapagkukunan, at reputasyon sa buong ecosystem, na may pag-unlad, mga materyales, gantimpala, at mga nagawa na umaagos nang maayos sa lahat ng mga laro.",
+        "Ang proyektong Hyper Tek ay itinatag ni Don Bennett, isang dating aerospace technician, na naglarawan ng isang kapaligiran ng laro kung saan maaaring magkasama ang maraming genre sa iisang progression system. Sa halip na pilitin ang mga manlalarong manatili sa iisang gameplay loop, planong hayaan ng Hyper Tek silang mag-explore ng maraming aktibidad habang bumubuo ng mga karakter, resources, at reputasyon sa buong ecosystem, na may progression, mga materyales, gantimpala, at tagumpay na maayos na dumadaloy sa lahat ng laro.",
         "Nagpaplano ang proyekto ng tatlong game environment: Hyper Racing, Hyper Quest, at Overlord of the Seven Realms. Iba-iba ang istilo ng gameplay ng bawat laro, pero lahat ay dinisenyo para umiral sa iisang universe at magbahagi ng iisang player progression. Layunin ng disenyong ito na hayaan ang mga player na gawin ang gameplay na pinakagusto nila habang bahagi pa rin ng mas malaking ecosystem, na may mga gaming environment na mas malalim at mas nakaka-engganyo kaysa sa tradisyonal na standalone na mga laro."
       ]
     },
@@ -46,7 +46,7 @@
         "quote": "...tugunan ang maraming isyu sa loob ng industriya ng gaming at muling tukuyin kung paano gumagana ang mga gaming ecosystem...",
         "paras": [
           "Ang misyon ng Hyper Tek ay tugunan ang maraming isyu sa loob ng industriya ng gaming at muling tukuyin kung paano gumagana ang mga gaming ecosystem sa pamamagitan ng paglikha ng isang magkakaugnay na universe kung saan ang mga manlalaro ay hindi limitado sa isang estilo ng gameplay.",
-          "Sa pagsasama ng maraming genre sa iisang progression system, ang layunin ay isang dynamic na environment kung saan maaaring mag-explore, makipagkumpitensya, at umunlad ang mga player sa loob ng isang pinag-isang mundo, na may tunay na pagmamay-ari sa kanilang mga digital na item at Programmatic Trade-In Value sa mga kwalipikadong NFA.",
+          "Sa pagsasama ng maraming genre sa iisang progression system, ang layunin ay isang dinamikong kapaligiran kung saan maaaring mag-explore, makipagkumpetensya, at lumago ang mga manlalaro sa isang pinag-isang mundo, na may tunay na pagmamay-ari ng kanilang mga digital na item at Programmatic Trade-In Value sa mga kwalipikadong item.",
           "Isang digital universe kung saan maraming laro at komunidad ang nagsasama-sama sa iisang magkakaugnay na platform. Sa halip na ihiwalay ang online at virtual reality na mga karanasan sa gaming, layunin ng Hyper Tek na magtatag ng shared ecosystem kung saan maaaring makaimpluwensya ang mga aksyon at interaksyon ng mga player sa mundong nakapaligid sa kanila."
         ]
       }
@@ -77,8 +77,8 @@
     },
     "section04": {
       "label": "Mga Non-Fungible Digital Artworks",
-      "heading": "Digital Art na May In-Game Utility",
-      "subtitle": "Ang 60-Segundong Buod",
+      "heading": "Digital na Sining na may Planong In-Game na Function",
+      "subtitle": "NFA, Non-Fungible Articles. Ito ang mga Item o Espesyalista na walang DNA key at magagamit ng alinmang species",
       "quote": "Iisang Universe. Tatlong Laro. Tunay na Pagmamay-ari. Nagsisimula sa Hyper Tek ang Kinabukasan ng Digital na Pagmamay-ari.",
       "cards": [
         {
@@ -87,37 +87,37 @@
           "items": [
             {
               "label": "NFA...",
-              "desc": "Nilikha ng arkitekto, pinakamataas na bonus sa laro, semi hanggang ultra-bihira"
+              "desc": "Ginawa ng mga arkitekto, pinakamataas na planong in-game na bonus, semi hanggang ultra rare"
             },
             {
               "label": "NFC...",
-              "desc": "Mga collectible na may bonus sa laro, maaaring likhain ng manlalaro"
+              "desc": "Mga planong collectible na may in-game na bonus, maaaring gawin ng mga manlalaro"
             },
             {
               "label": "NFT...",
-              "desc": "Ganap na ginawa ng manlalaro, palamutian ang iyong base para sa mga bonus sa kapangyarihan"
+              "desc": "Ganap na gawa ng manlalaro, palamutian ang iyong base para sa planong in-game na power bonus/gantimpala"
             }
           ]
         },
         {
-          "title": "Bakit Napanatili ang Kanilang Halaga",
+          "title": "Mga Recyclable na On-Chain na Item",
           "bullets": [
-            "Programmatic Trade-In Value sa bawat kwalipikadong artwork",
-            "Bawat resale ay nagdaragdag sa trade-in allocation ng item",
-            "Na-index ng inflation nang dalawang beses sa isang taon",
+            "Planong Programmatic Trade-In Value sa bawat kwalipikadong likhang sining",
+            "Bawat muling pagbebenta ay nagdaragdag sa trade-in allocation ng item ayon sa pinal na tuntunin",
             "Ang iyong halaga ay palaging lumalaki, hindi kailanman bumababa"
           ]
         },
         {
           "title": "Patas sa Pamamagitan ng Disenyo",
-          "body": "Karamihan sa komisyon ng bawat benta ay hindi nananatili sa Hyper Tek 100. Bumabalik ito sa ecosystem: sa sariling trade-in allocation ng item na iyon, na nakatago sa escrow, at sa royalty ng mga artist. Maaaring babaan ng mga buyer na nagpo-post ng quest ang kanilang komisyon bilang diskwento, habang ang mga player na nakakatapos ng quest ay tumatanggap ng mga in-game reward."
+          "body": "Ang malaking bahagi ng komisyon ay planong bumalik sa ecosystem: ang mga mamimiling nagpo-post ng mga quest ay maaaring ibaba ang kanilang komisyon bilang diskwento, habang ang mga manlalarong tumatapos ng mga quest ay tumatanggap ng in-game na gantimpala."
         },
         {
           "title": "Makisali Ngayon",
-          "body": "Bawat artwork ay limited edition: kapag naubos na ang supply nito, wala na talaga. Dahil limitado ang supply, nananatiling bihira ang bawat piraso. Magmay-ari ng collectible art na may in-game utility na maaaring umiral kung mailabas ang mga laro.",
-          "link": "[www.hypertek.com] — Mag-browse. Bumili. Lumikha. Angkinin ang Hinaharap."
+          "body": "Naitayo na ang imprastraktura at buhay na ang marketplace. Habang patuloy naming binubuo ang mga laro, naglalabas kami ng mga limited-edition na item sa limitadong dami na may planong in-game na bonus na mas mataas kaysa karaniwan at hindi na uulitin.",
+          "link": "[www.hypertek.com] — Mag-explore. Bumili. Lumikha. Pagmamay-arian ang Iyong mga Item."
         }
-      ]
+      ],
+      "pageHeading": "Digital na Sining na may In-Game na Functionality"
     },
     "section05": {
       "label": "Early Access — Mga Limited Edition na Item",
@@ -155,11 +155,11 @@
       "helpItems": [
         {
           "bold": "Bumili ng NFA, NFC, o NFT",
-          "text": "Tuklasin ang digital artwork na may mga in-game bonus na maaaring umiral kung mailabas ang mga laro, at may Programmatic Trade-In Value. Available habang may supply."
+          "text": "Tuklasin ang mga digital na likhang sining na may Programmatic Trade-In Value at planong in-game na bonus na maaaring umiral kapag natapos ang mga laro."
         },
         {
           "bold": "Lumikha ng iyong sariling NFT",
-          "text": "— maging creator sa marketplace at ialok ang sarili mong artwork sa ibang player"
+          "text": "— maging lumikha sa marketplace at ialok na ngayon ang sarili mong mga likhang sining sa iba"
         },
         {
           "bold": "Ibahagi at ikalat ang balita",
@@ -174,25 +174,25 @@
       "subtitle": "Pinagdurugtong ang immersive gaming, isang digital marketplace na pinapatakbo ng mga player, at ang mga player na nangongolekta.",
       "cards": [
         {
-          "label": "Mga Tunay na Gantimpala at Entrepreneurship",
+          "label": "Pagmamay-ari ng Item",
           "bullets": [
-            "Tunay na pagmamay-ari ng NFA/NFC/NFT na may Programmatic Trade-In Value",
+            "Tunay na pagmamay-ari ng NFA/NFC/NFT na may planong Programmatic Trade-In Value",
             "Player-to-player na trading sa marketplace",
-            "In-game utility na maaaring umiral sa mga nakaplanong laro",
+            "Mga in-game na bonus na maaaring umiral sa mga planong laro",
             "Play-to-Own na disenyo ng item"
           ]
         },
         {
           "label": "Item Loyalty Program",
-          "body": "Hawakan nang mas matagal ang isang kwalipikadong item at tataas ang trade-in tier nito sa ilalim ng Tiered Loyalty Return Schedule, mula 80% ng allocation nito sa unang taon hanggang 97% pagkatapos ng ikalimang taon. Palaging mas mababa ang halagang ibinabalik kaysa sa halagang nakalaan, kaya isa itong feature ng produkto, hindi paraan para kumita ng pera."
+          "body": "Panatilihin nang mas matagal ang mga kwalipikadong item at tataas ang trade-in rate ayon sa Tiered Loyalty Return Schedule, mula 80% ng alokasyon nito sa unang taon hanggang 97% pagkatapos ng ikalimang taon. Ang ibinabalik na halaga ay laging mas mababa kaysa sa inilaang halaga, kaya ito ay isang tampok na pag-recycle ng produkto, hindi paraan ng pagkita ng pera."
         },
         {
           "label": "Walang Katapusang Gameplay Sa Mga Magkakaugnay na Mundo",
           "bullets": [
-            "Tatlong natatanging genre ng laro sa loob ng isang pinag-isang universe",
-            "Magkasamang pag-unlad, gantimpala, at mga nagawa sa lahat ng laro",
-            "Isang buhay na ecosystem kung saan bawat pagpili ay nakakaimpluwensya sa buong universe",
-            "Ang mga manlalaro ng VR/AR ay maaaring sumali sa mga misyon at epic na labanan sa real-time"
+            "Tatlong natatanging genre ng laro na planado sa iisang pinag-isang uniberso",
+            "Planong shared progression, kasama ang mga iminumungkahing gantimpala at tagumpay sa lahat ng laro",
+            "Isang planong buhay na ecosystem kung saan ang bawat pagpili ay nakakaapekto sa buong uniberso",
+            "Planado ang VR at maaaring hayaan ang mga manlalarong sumali sa mga epikong misyon at laban nang real-time"
           ]
         }
       ]
