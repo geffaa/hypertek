@@ -5,16 +5,16 @@
     "racing": {
       "label": "CORSA",
       "heading": "Corsa iper",
-      "subtitle": "L'esperienza di corsa di veicoli volanti più intensa della galassia,\ndove l'abilità paga e nascono i campioni.",
+      "subtitle": "L'esperienza di corse con veicoli volanti più intensa della galassia,\ndove comanda l'abilità e si forgiano i campioni.",
       "intro": [
-        "Hyper Racing è un gioco di corse competitivo ad alto numero di ottani ambientato in mondi alieni, in cui i giocatori costruiscono, aggiornano e pilotano veicoli da corsa volanti completamente personalizzabili attraverso alcuni dei circuiti più pericolosi della galassia. Dalle formazioni rocciose galleggianti ai tubi di lava vulcanica, alle terre desolate e ai passi di montagna, ogni gara è una prova di preparazione, riflessi e strategia.",
-        "Hyper Racing è pensato come una piattaforma competitiva. I migliori potrebbero partecipare a eventi classificati e tornei con ricompense di gioco in palio. Che tu insegua la gloria in classifica o costruisca un impero delle corse, tutto ciò che fai in Hyper Racing è pensato per farti avanzare.",
-        "Potenzia i tuoi veicoli da corsa dalla punta alla coda. Recluta e fai salire di livello la tua squadra ai box. Recluta un responsabile dei box in linea con la tua filosofia di gara. Poi porta le tue abilità oltre la pista: il tuo garage da corsa è anche l'hangar della tua astronave personale, e ogni abilità che sviluppi si trasferisce nel combattimento spaziale di Hyper Quest e Overlord of the 7 Realms."
+        "Hyper Racing è un gioco di corse competitivo e ad alta energia previsto, in sviluppo e ambientato in mondi alieni, in cui i giocatori potrebbero costruire, potenziare e pilotare veicoli da corsa volanti completamente personalizzabili attraverso alcuni dei circuiti più pericolosi della galassia. Dalle formazioni rocciose fluttuanti e dai tunnel di lava vulcanici previsti ai deserti e ai passi di montagna, ogni corsa prevista è pensata come una prova di preparazione, riflessi e strategia.",
+        "Hyper Racing è previsto come piattaforma competitiva. I migliori giocatori potrebbero partecipare a eventi classificati e tornei con ricompense di gioco in palio. Che tu insegua la gloria in classifica o costruisca un impero delle corse, tutto ciò che fai in Hyper Racing potrebbe farti avanzare.",
+        "Nei giochi previsti in sviluppo, potresti:\n• Potenziare i tuoi veicoli da corsa da cima a fondo\n• Ottenere e far salire di livello la tua squadra ai box\n• Acquisire un capo box che corrisponda alla tua filosofia di corsa\n• Portare le tue abilità oltre la pista, con un garage da corsa che fa anche da hangar alla tua astronave personale\n• Portare le abilità che sviluppi nel combattimento spaziale in Hyper Quest e Overlord of the 7 Realms"
       ],
-      "introClose": "Continua a leggere per scoprire come funziona il gioco, cosa puoi vincere e come la tua carriera agonistica alimenta un intero universo di progressione.",
-      "calloutLine1": "Gara per guadagnare. Guadagna per aggiornare.",
+      "introClose": "Continua a leggere per scoprire come il gioco previsto dovrebbe funzionare, le ricompense di gioco che potrebbe offrire e come la tua carriera di pilota potrebbe alimentare un intero universo di progressione. Tutto soggetto alla finalizzazione dei giochi e alle regole finali del gioco.",
+      "calloutLine1": "Corri per migliorare. Migliora per evolverti.",
       "calloutLine2": "Migliora per dominare.",
-      "howItWorksTitle": "Come funziona l'Hyper Racing",
+      "howItWorksTitle": "Come dovrebbero funzionare i giochi di corse Hyper Tek previsti e in sviluppo: la panoramica è qui sotto, soggetta alla finalizzazione dei giochi e alle regole finali del gioco.",
       "howItWorks": [
         {
           "num": "01",
@@ -24,7 +24,7 @@
         {
           "num": "02",
           "title": "Costruisci la tua squadra",
-          "body": "Le corse sono uno sport di squadra. Recluta specialisti dei box che portano bonus unici: rifornimento più rapido, diagnostica in tempo reale, riparazioni d'emergenza dello scafo a gara in corso e regolazioni delle prestazioni tra un giro e l'altro. Ogni membro della squadra sale di livello con l'esperienza, sommando abilità potenti ai potenziamenti del tuo veicolo. Poi recluta un responsabile dei box per coordinare le operazioni, decidere la strategia di gara e sbloccare incrementi di prestazioni per tutta la squadra che si accumulano nell'arco di un'intera stagione."
+          "body": "Le corse sono uno sport di squadra. Ottieni specialisti della squadra ai box che portano bonus unici, rifornimento più rapido, diagnostica in tempo reale, riparazioni d'emergenza dello scafo a metà gara e regolazioni delle prestazioni tra un giro e l'altro. Ogni membro dell'equipaggio sale di livello con l'esperienza, sommando potenti abilità ai potenziamenti del tuo veicolo. Poi ottieni un capo box che coordini le operazioni, detti la strategia di gara e sblocchi miglioramenti di prestazioni per tutta la squadra che si accumulano nell'arco di un'intera stagione."
         },
         {
           "num": "03",
@@ -34,213 +34,209 @@
         {
           "num": "04",
           "title": "Scalare le classifiche",
-          "body": "La vittoria fa guadagnare punti leader, sblocca nuovi circuiti su mondi lontani e apre le porte a competizioni di livello superiore. Più vai in profondità, più feroci saranno gli avversari e maggiore sarà la posta in gioco. Mettiti alla prova su ogni pianeta e scala le classifiche globali."
+          "body": "La vittoria dà punti classifica, sblocca nuovi circuiti su mondi lontani e apre la porta a competizioni di livello superiore. Più vai a fondo, più feroci sono gli avversari e maggiore è la posta in gioco. Dimostra il tuo valore su ogni pianeta e sali nella classifica globale."
         }
       ],
-      "rewardsTitle": "Vinci alla grande; I premi che contano!",
+      "rewardsTitle": "Ricompense di gioco che contano",
       "rewards": [
         {
-          "title": "Premi di gioco",
-          "body": "Ogni gara che concludi è pensata per ricompensarti nel gioco. Vinci, e le ricompense possono moltiplicarsi. Le vittorie possono sbloccare componenti premium per i veicoli, materiali di potenziamento rari, gettoni esclusivi per il reclutamento della squadra e crediti per la tua prossima costruzione. Potenzia i tuoi veicoli, scambiali con altri giocatori e guarda il tuo impero delle corse crescere a ogni podio."
+          "title": "Ricompense di gioco con oggetti di gioco",
+          "body": "Ogni gara che termini è prevista per darti ricompense di gioco. Vinci, e le ricompense di gioco potrebbero moltiplicarsi. Le vittorie in gara potrebbero sbloccare componenti premium per veicoli, materiali di potenziamento rari, gettoni squadra esclusivi di gioco e crediti di gioco per la tua prossima costruzione. Potresti potenziare i tuoi veicoli e scambiarli con altri giocatori, soggetto alle regole finali del gioco."
         },
         {
           "title": "Eventi classificati",
-          "body": "Hyper Racing è costruito attorno a eventi classificati e tornei. Le competizioni basate sull'abilità potrebbero permetterti di dimostrare il tuo valore contro i migliori piloti della galassia per ricompense di gioco, titoli e posizione in classifica. Dalle sfide classificate settimanali ai campionati stagionali, i migliori potrebbero trovare molte occasioni per distinguersi."
+          "body": "Hyper Racing è previsto attorno a eventi classificati e tornei. Le competizioni basate sull'abilità previste potrebbero permetterti di dimostrare il tuo valore contro i migliori piloti della galassia per ricompense di gioco, titoli e posizione in classifica. Dalle sfide classificate settimanali ai campionati stagionali, i migliori potrebbero trovare molte occasioni per distinguersi."
         },
         {
-          "title": "Come funzionano gli eventi a premio",
-          "body": "I giocatori potrebbero qualificarsi tramite il gioco classificato raggiungendo determinate soglie di prestazione. Gli eventi sono pensati con un matchmaking equo, così che ogni concorrente affronti avversari di livello simile. Le regole degli eventi e le ricompense di gioco sono pensate per essere mostrate chiaramente prima che tu ti impegni."
+          "title": "Come potrebbero funzionare gli eventi con ricompense di gioco",
+          "body": "I giocatori potrebbero qualificarsi attraverso il gioco classificato raggiungendo soglie di prestazione. Gli eventi sono previsti attorno a un matchmaking equo, in modo che ogni concorrente possa affrontare avversari di abilità simile. Le regole degli eventi e le ricompense di gioco sono destinate a essere mostrate chiaramente prima che tu ti impegni, soggette alle regole finali del gioco."
         },
         {
           "title": "Progressione oltre la pista",
-          "body": "I premi guadagnati attraverso le corse contribuiscono direttamente ai tuoi progressi più ampi. Migliora i tuoi veicoli da corsa, rafforza la tua squadra ai box e incanala le vincite nel potenziamento della tua astronave principale. Il tuo garage da corsa è l'hangar di quella nave, quindi ogni miglioramento alle tue operazioni di corsa potenzia anche la nave con cui voli tra i mondi e nei combattimenti spaziali attraverso Hyper Quest e Overlord of the 7 Realms."
+          "body": "Le ricompense di gioco ottenute con le corse sono previste per alimentare la tua progressione complessiva. Potresti potenziare i tuoi veicoli da corsa, rafforzare la squadra ai box e destinare ricompense di gioco al potenziamento della tua astronave principale. Il tuo garage da corsa è pensato come l'hangar di quella nave, quindi i miglioramenti alla tua attività di corse potrebbero anche potenziare la nave con cui voli tra i mondi in Hyper Quest e Overlord of the 7 Realms."
         }
       ],
       "upgradesTitle": "Due macchine, una missione... Aggiorna tutto",
       "upgrades": [
         {
           "title": "Aggiornamenti dei veicoli da corsa",
-          "body": "Il tuo veicolo da corsa è una macchina completamente modulare. Ogni componente può essere sostituito, messo a punto e potenziato: scafi, propulsori, scudi, carrozzerie, motori, stabilizzatori, sistemi di raffreddamento e superfici aerodinamiche. I compositi leggeri offrono velocità pura; la corazza pesante ti tiene in vita in condizioni atmosferiche brutali. Il percorso di potenziamento è profondo e le tue scelte definiscono la tua identità di pilota. Colleziona nuovi veicoli, trasformali in pretendenti al titolo, portali alla vittoria e scambiali con altri giocatori quando sei pronto per la prossima sfida."
+          "body": "I veicoli da corsa previsti in sviluppo sono pensati come macchine completamente modulari. Ogni componente può essere sostituito, messo a punto e potenziato: scafi, propulsori, scudi, gusci esterni, motori, stabilizzatori, sistemi di raffreddamento e superfici aerodinamiche. I compositi leggeri offrono velocità pura; la corazza pesante ti tiene in vita in condizioni atmosferiche brutali. Il percorso di potenziamento è profondo e le tue scelte definiscono la tua identità di pilota. Colleziona nuovi veicoli, trasformali in contendenti al campionato, portali alla vittoria e scambiali con altri giocatori quando sei pronto per la prossima sfida, tutto soggetto alle regole finali del gioco."
         },
         {
           "title": "Principali aggiornamenti dell'astronave",
-          "body": "Il tuo garage da corsa non è solo un'officina; è l'hangar della tua astronave personale. Le stesse risorse, crediti e materiali che guadagni sul percorso possono essere investiti nel potenziamento della tua nave principale. Motori migliori per i viaggi interplanetari, sistemi d'arma più potenti per il combattimento spaziale, navigazione migliorata per scoprire nuovi mondi da corsa e scafi rinforzati per sopravvivere agli incontri ostili durante il transito. La tua astronave è la tua base di partenza, il tuo mezzo di trasporto e la tua corazzata, e le corse la rendono più forte."
+          "body": "Il tuo garage da corsa previsto potrebbe non essere solo un'officina. È pensato come l'hangar della tua astronave personale. Le risorse, i crediti e i materiali che guadagni in pista possono essere usati per potenziare la tua nave principale. Motori migliori per i viaggi interplanetari, sistemi d'arma più forti per il combattimento spaziale, navigazione migliorata per scoprire nuovi mondi da corsa e scafi rinforzati per sopravvivere a incontri ostili in transito. La tua astronave è la tua base, il tuo trasporto, la tua nave da battaglia, e le corse la rendono più forte, tutto soggetto alle regole finali del gioco."
         },
         {
           "title": "Il ciclo di aggiornamento",
-          "body": "Corri per ottenere ricompense, usa le ricompense per potenziare e potenzia per entrare in gare più grandi con ricompense di gioco maggiori. Destina queste ricompense sia ai tuoi veicoli da corsa sia alla tua astronave. Più la tua nave è valida, più lontano viaggi e più pericolosi e gratificanti diventano i circuiti. È un ciclo di progressione che premia dedizione e abilità a ogni livello."
+          "body": "Raccogli ricompense di gioco previste, che potrebbero portare a potenziamenti per entrare in gare più grandi con maggiori ricompense di gioco. Destina quelle ricompense sia ai tuoi veicoli da corsa sia alla tua astronave. Migliore è la tua nave, più lontano viaggi e più pericolosi e gratificanti diventano i circuiti. È un ciclo di progressione previsto che premia dedizione e abilità a ogni livello, tutto soggetto alle regole finali del gioco."
         },
         {
           "title": "Impatto tra i giochi",
-          "body": "Ogni abilità di pilota che sviluppi in pista e ogni aggiornamento che installi sulla tua astronave viene trasferito direttamente in Hyper Quest e Overlord of the 7 Realms. Un universo, più giochi, progressione senza soluzione di continuità. Ciò che costruisci in Hyper Racing alimenta tutto il resto."
+          "body": "Ogni abilità di pilota prevista che sviluppi in pista e ogni potenziamento che installi sulla tua astronave passa direttamente in Hyper Quest e Overlord of the 7 Realms. Un universo, più giochi, progressione fluida. Ciò che costruisci in Hyper Racing alimenta tutto il resto, tutto soggetto alle regole finali del gioco."
         }
       ],
       "faqTitle": "Hyper Racing: domande frequenti",
       "faq": [
         {
           "q": "Cos'è l'Hyper Racing?",
-          "a": "Un gioco di corse ad alta intensità con veicoli volanti ambientato su mondi alieni. Costruisci, potenzia e guida veicoli completamente personalizzabili su pericolosi circuiti fantascientifici mentre competi per ricompense di gioco."
+          "a": "Un gioco di corse con veicoli volanti ad alta intensità previsto, in sviluppo e ambientato in mondi alieni. I giocatori potrebbero costruire, potenziare e far correre veicoli completamente personalizzabili attraverso pericolosi circuiti fantascientifici mentre gareggiano per ricompense di gioco."
         },
         {
           "q": "Posso aggiornare il mio veicolo da corsa?",
-          "a": "Ogni componente è aggiornabile: scafi, propulsori, scudi, gusci esterni, motori, stabilizzatori, sistemi di raffreddamento e superfici aerodinamiche. Ogni aggiornamento cambia il modo in cui il tuo veicolo gestisce diversi tracciati e condizioni."
+          "a": "Ogni componente è previsto come potenziabile: scafi, propulsori, scudi, gusci esterni, motori, stabilizzatori, sistemi di raffreddamento e superfici aerodinamiche. Ogni potenziamento potrebbe cambiare il comportamento del tuo veicolo su piste e condizioni diverse."
         },
         {
           "q": "Cosa fa la squadra ai box?",
-          "a": "I membri dell'equipaggio ai box forniscono bonus unici: rifornimento più rapido, diagnostica dello scafo, riparazioni di emergenza e modifiche alle prestazioni tra un giro e l'altro. Salgono di livello nel tempo, sbloccando abilità più forti che si accumulano con gli aggiornamenti dei veicoli."
+          "a": "I membri previsti della squadra ai box potrebbero offrire bonus unici: rifornimento più rapido, diagnostica dello scafo, riparazioni d'emergenza e regolazioni delle prestazioni tra i giri. Sono previsti salire di livello nel tempo, sbloccando abilità più forti che si sommano ai potenziamenti del veicolo."
         },
         {
           "q": "Come funziona il pit manager?",
-          "a": "Il pit manager coordina le operazioni dell'equipaggio, definisce la strategia di gara e sblocca miglioramenti delle prestazioni a livello di squadra. I gestori difensivi proteggono il tuo veicolo in condizioni difficili; i manager aggressivi spingono ogni sistema per la massima velocità."
+          "a": "Il capo box previsto potrebbe coordinare le operazioni dell'equipaggio, dettare la strategia di gara e sbloccare miglioramenti di prestazioni per tutta la squadra. I capi difensivi potrebbero proteggere il tuo veicolo in condizioni difficili; quelli aggressivi potrebbero spingere ogni sistema alla velocità massima."
         },
         {
           "q": "Ci sono premi per gli eventi classificati?",
-          "a": "Gli eventi classificati e i tornei sono pensati per offrire ricompense di gioco, titoli e posizione in classifica. Non offrono premi in contanti o in denaro."
+          "a": "Gli eventi classificati e i tornei previsti sono pensati per offrire ricompense di gioco, titoli e posizione in classifica. Non offrono premi in contanti o in denaro."
         },
         {
           "q": "Come funzionano i premi di gara?",
-          "a": "Ogni gara è pensata per ricompensare nel gioco con crediti, materiali di potenziamento e gettoni squadra. Le vittorie possono moltiplicare le tue ricompense. Colleziona veicoli, trasformali in macchine da corsa, vinci le gare e scambiali con altri giocatori mentre lavori a ulteriori miglioramenti e potenziamenti dell'astronave."
+          "a": "Ogni gara è prevista per premiare con ricompense di gioco: crediti di gioco, materiali di potenziamento e gettoni squadra di gioco. Le vittorie potrebbero moltiplicare le tue ricompense di gioco. Questa è una funzione prevista soggetta alle regole finali del gioco."
         },
         {
           "q": "Posso aggiornare anche la mia astronave principale?",
-          "a": "Assolutamente. Il tuo garage da corsa è l'hangar della tua astronave. Le vincite delle gare finanziano potenziamenti a motori, armi, navigazione e rinforzi dello scafo sulla tua nave principale, potenziando i viaggi interplanetari e il combattimento spaziale."
+          "a": "Questo è il piano. Il tuo garage da corsa è pensato come l'hangar della tua astronave. Le ricompense di gioco delle corse potrebbero aiutare i potenziamenti di motori, armi, navigazione e rinforzo dello scafo della tua nave principale."
         },
         {
           "q": "I progressi si trasferiscono ad altri giochi?",
-          "a": "Ogni abilità di pilotaggio e potenziamento dell'astronave viene trasferito direttamente in Hyper Quest e Overlord of the 7 Realms. Un universo, più giochi, progressione senza soluzione di continuità. Ciò che costruisci in Hyper Racing alimenta tutto il resto."
+          "a": "Le abilità di pilota e i potenziamenti dell'astronave previsti potrebbero passare in Hyper Quest e Overlord of the 7 Realms. Un universo, più giochi previsti, progressione condivisa, soggetto alle regole finali del gioco."
         },
         {
           "q": "Quali ambienti di gara ci sono?",
-          "a": "I circuiti abbracciano formazioni rocciose fluttuanti, tubi di lava, pianure deserte e catene montuose attraverso mondi alieni. I rischi atmosferici includono piogge acide, atmosfere radioattive, gravità variabile e venti turbolenti. Ogni circuito richiede diverse configurazioni del veicolo."
+          "a": "I circuiti previsti comprendono formazioni rocciose fluttuanti, tunnel di lava, pianure desertiche e catene montuose su mondi alieni. I pericoli atmosferici previsti includono pioggia acida, atmosfere radioattive, gravità variabile e venti turbolenti. Ogni circuito potrebbe richiedere un assetto del veicolo diverso."
         }
       ]
     },
     "quest": {
       "label": "RICERCA",
       "heading": "Iper-ricerca",
-      "subtitle": "La tua galassia. Le tue regole. La tua fortuna.",
+      "subtitle": "La tua galassia. Le tue regole. La tua storia.",
       "intro": [
-        "Hyper Quest è un'avventura spaziale a mondo aperto in cui comandi la tua astronave completamente aggiornabile, Quest Racer, attraverso una galassia vasta e pericolosa. Hai lasciato la tua civiltà natale anni fa in cerca di potere, ricchezza e fama. Ora l'intero universo è il tuo parco giochi e ogni missione che completi ti avvicina al dominio galattico.",
-        "Hyper Quest è pensato come più di un gioco: completa missioni, supera sfide e raccogli ricompense di gioco. Dalle missioni rapide di pochi minuti alle spedizioni epiche di più giorni, più dura è la sfida, maggiore è la ricompensa di gioco.",
-        "Aggiorna la tua astronave dallo scafo alla cabina di pilotaggio. Armalo con sistemi d'arma devastanti. Recluta specialisti che accumulano potenti bonus sulle prestazioni e sul livello di potenza della tua nave. Estrai asteroidi, trasporta carichi pericolosi, caccia tesori nascosti, rapisci bersagli di alto valore o diventa un sicario. Il modo in cui governi l'universo è interamente una tua scelta.",
-        "Tutto ciò che costruisci in Hyper Quest alimenta direttamente Hyper Racing e Overlord of the 7 Realms. Un universo, progressione senza soluzione di continuità, potenziale illimitato. Continua a leggere per scoprire come funzionano le missioni, cosa puoi guadagnare e come tu e la tua astronave diventate la nave più temuta della galassia."
+        "Hyper Quest è un'avventura spaziale open world prevista in cui potresti comandare la tua astronave completamente potenziabile, il Quest Racer, attraverso una galassia vasta e pericolosa. Hai lasciato anni fa la tua civiltà d'origine in cerca di potere e fama. Ora l'intero universo è il tuo terreno di gioco, e ogni missione che completi potrebbe avvicinarti al dominio galattico, soggetto allo sviluppo finale del gioco e alle regole del gioco.",
+        "Hyper Quest è previsto come più di un gioco: completa missioni, vinci sfide e raccogli ricompense di gioco. Da missioni rapide di pochi minuti a epiche spedizioni di più giorni, più dura è la sfida, maggiore potrebbe essere la ricompensa di gioco, soggetto allo sviluppo finale del gioco e alle regole del gioco.",
+        "Nel gioco previsto potresti potenziare la tua astronave dallo scafo alla cabina, armarla con devastanti sistemi d'arma e acquisire specialisti che sommano potenti bonus alle prestazioni e al livello di potenza della tua nave. Le attività previste includono estrarre asteroidi, trasportare carichi pericolosi, cercare tesori nascosti, inseguire bersagli di alto valore o diventare mercenario. Come governi l'universo è previsto sia una tua scelta, soggetto allo sviluppo finale del gioco e alle regole del gioco.",
+        "Tutto ciò che costruisci in Hyper Quest è previsto per alimentare Hyper Racing e Overlord of the 7 Realms. Un universo, progressione fluida, potenziale illimitato. Continua a leggere per scoprire come potrebbero funzionare le missioni previste, quali ricompense di gioco potresti ottenere e come tu e la tua astronave potreste diventare la nave più temuta della galassia, tutto soggetto allo sviluppo finale del gioco e alle regole del gioco."
       ],
-      "calloutLine1": "Missione per guadagnare. Guadagna per aggiornare.",
+      "calloutLine1": "Missioni per guadagnare. Guadagna per potenziare.",
       "calloutLine2": "Aggiorna a Conquista.",
-      "howItWorksTitle": "Come funziona Hyper Quest",
+      "howItWorksTitle": "Come potrebbero funzionare le missioni previste di Hyper Quest, soggette allo sviluppo finale del gioco e alle regole del gioco",
       "howItWorks": [
         {
           "num": "01",
           "title": "Accetta le missioni dalla Mission Board",
-          "body": "Il tabellone delle missioni nel gioco è la tua porta d'accesso all'avventura. Sfoglia le missioni disponibili che vanno dalle rapide corse cargo che richiedono solo pochi minuti alle epiche spedizioni di più giorni nelle profondità dello spazio inesplorato. Ogni missione ha obiettivi chiari, valutazioni di pericolo e livelli di ricompensa. Scegli le missioni che si adattano al tuo stile di gioco, che si tratti di trasportare carichi pericolosi, cacciare tesori nascosti, estrarre campi di asteroidi o andare sotto copertura per recuperare manufatti perduti."
+          "body": "Le missioni potrebbero essere accettate dalla bacheca missioni di gioco prevista. Le missioni previste vanno da rapide consegne di carico di pochi minuti a epiche spedizioni di più giorni nelle profondità dello spazio inesplorato. Ogni missione è prevista con obiettivi chiari, livelli di pericolo e livelli di ricompensa di gioco. Potresti scegliere le missioni adatte al tuo stile di gioco, che si tratti di trasportare carichi pericolosi, cercare tesori nascosti, estrarre da campi di asteroidi o agire sotto copertura per recuperare manufatti perduti."
         },
         {
           "num": "02",
           "title": "Esplora la Galassia",
-          "body": "Viaggia attraverso portali verso pianeti lontani, ognuno con ambienti unici, materiali preziosi e nuovi circuiti di gara. Segui le mappe galattiche per tracciare regioni inesplorate e guadagnati il diritto di dare un nome ai pianeti che scopri per primo. Estrai risorse dai campi di asteroidi, recupera parti da antiche reliquie e navi abbandonate e raccogli indizi che portano a tesori nascosti sparsi tra le stelle."
+          "body": "Potresti viaggiare attraverso portali verso pianeti lontani, ciascuno con ambienti unici previsti, materiali di gioco e nuovi circuiti da corsa. Le mappe galattiche previste potrebbero permetterti di tracciare regioni inesplorate e ottenere i diritti di denominazione dei pianeti che scopri per primo. Potresti estrarre risorse di gioco dai campi di asteroidi, recuperare pezzi da antiche reliquie e navi abbandonate e raccogliere indizi che portano a oggetti di gioco nascosti sparsi tra le stelle."
         },
         {
           "num": "03",
           "title": "Costruisci il tuo impero dall'interno della tua nave",
-          "body": "Il tuo Quest Racer è più di un semplice trasporto. Coltiva cibo in bacini idroponici, perfeziona materiali estratti da pianeti lontani e costruisci eserciti dai tuoi laboratori di clonazione. Affina le tue truppe e le loro armi, difenditi dai pirati e gestisci una base mobile autosufficiente che diventa sempre più potente ad ogni missione completata."
+          "body": "Il tuo Quest Racer previsto è pensato per essere più di un semplice trasporto. Potresti coltivare cibo in baie idroponiche, raffinare materiali estratti da pianeti lontani e creare eserciti dai tuoi laboratori di clonazione. È prevista una base mobile autosufficiente che potrebbe diventare più potente a ogni missione completata."
         },
         {
           "num": "04",
           "title": "Gioca a modo tuo",
-          "body": "Non esiste un unico percorso verso il dominio. Diventa un temuto cacciatore di taglie, un astuto contrabbandiere, un maestro minatore o un leggendario esploratore. Rapisci obiettivi di alto valore, diventa un sicario o stringi alleanze per controllare interi settori. La galassia si piega alla tua volontà e ogni decisione modella la tua reputazione e la tua fortuna."
+          "body": "Non c'è un unico percorso previsto verso il dominio. Potresti diventare un temuto cacciatore di taglie, un astuto contrabbandiere, un maestro minatore o un esploratore leggendario, oppure stringere alleanze per controllare interi settori. Ogni decisione potrebbe plasmare la tua reputazione, soggetto alle regole finali del gioco."
         }
       ],
-      "rewardsTitle": "Premi missione; Fatti pagare per giocare!",
+      "rewardsTitle": "Ricompense di gioco previste delle missioni e come potrebbero funzionare",
       "rewards": [
         {
           "title": "Premi di gioco",
-          "body": "Ogni missione che completi è pensata per ricompensarti nel gioco. Crediti, materiali di potenziamento, componenti rari, gettoni di reclutamento degli specialisti e oggetti esclusivi arrivano nel tuo inventario a ogni missione riuscita. Più dura è la missione, più ricco è il bottino. Scopri materiali rari su pianeti lontani, recupera parti di grande valore da antiche reliquie e accumula risorse che alimentano la tua ascesa alla supremazia galattica."
+          "body": "Ogni missione che completi è prevista per darti ricompense di gioco. Crediti di gioco, materiali di potenziamento, componenti rari, gettoni specialista di gioco e oggetti di gioco esclusivi potrebbero arrivare nel tuo inventario a ogni missione riuscita. Più difficile è la missione, maggiori potrebbero essere le ricompense di gioco."
         },
         {
-          "title": "Ricompense di campionato",
-          "body": "Alcune missioni e sfide classificate potrebbero offrire ricompense di gioco premium. Sono previste missioni di alto livello, eventi di classifica e campionati stagionali di missioni, e più diventi abile e audace, migliori potrebbero essere le ricompense di gioco."
+          "title": "Ricompense di gioco dei campionati",
+          "body": "Alcune missioni previste e sfide classificate potrebbero offrire ricompense di gioco premium. Sono previste missioni di alto livello, eventi di classifica e campionati stagionali di missioni, e più diventi abile e audace, migliori potrebbero essere le ricompense di gioco."
         },
         {
-          "title": "Come funzionano le ricompense delle missioni",
-          "body": "I giocatori potrebbero accedere alle missioni premium costruendo la propria reputazione e raggiungendo determinate soglie di prestazione. Difficoltà, durata e livello di pericolo della missione determinano la ricompensa di gioco, che è pensata per essere mostrata prima che tu accetti una missione. Che si tratti di un trasporto merci di dieci minuti o di una spedizione di una settimana nello spazio profondo, le ricompense sono pensate per essere all'altezza del rischio."
+          "title": "Come potrebbero funzionare le ricompense di gioco delle missioni",
+          "body": "I giocatori potrebbero qualificarsi per missioni premium costruendo la propria reputazione e raggiungendo soglie di prestazione. Difficoltà, durata e livello di pericolo della missione sono previsti per determinare la ricompensa di gioco, che è destinata a essere mostrata prima di accettare qualsiasi missione. Che tu stia facendo un trasporto di dieci minuti o una spedizione di una settimana nello spazio profondo, le ricompense di gioco sono pensate per corrispondere al rischio."
         },
         {
-          "title": "Progressione che ripaga",
-          "body": "Le ricompense delle missioni confluiscono direttamente nei potenziamenti della tua nave, nei sistemi d'arma e nel reclutamento degli specialisti. Ogni ricompensa ti rende più forte, sbloccando missioni più difficili. È previsto che i progressi si trasferiscano anche in Hyper Racing e Overlord of the 7 Realms."
+          "title": "Una progressione che si trasmette",
+          "body": "Le ricompense di gioco delle missioni potrebbero alimentare i potenziamenti della tua nave, i sistemi d'arma e gli specialisti. Ogni ricompensa di gioco potrebbe renderti più forte, il che potrebbe sbloccare missioni più difficili. Anche il progresso è previsto passare in Hyper Racing e Overlord of the 7 Realms, soggetto alle regole finali del gioco."
         }
       ],
-      "upgradesTitle": "Migliora la tua nave, arma il tuo arsenale, recluta il tuo equipaggio",
+      "upgradesTitle": "Potenzia la tua nave, arma il tuo arsenale, forma il tuo equipaggio",
       "upgrades": [
         {
-          "title": "Aggiornamenti dell'astronave",
-          "body": "Il tuo Quest Racer è completamente modulare dal vano motore alla cabina di pilotaggio. Migliora lo scafo per la massima durata, rinforza il guscio esterno per resistere ad ambienti ostili, potenzia i generatori di scudi per la sopravvivenza in combattimento e revisiona i sistemi di alimentazione per le massime prestazioni. Motori migliori significano viaggi interplanetari più veloci. Sistemi di navigazione più potenti rivelano rotte nascoste e mondi inesplorati. Ogni aggiornamento trasforma la tua nave in una nave più potente e più temuta."
+          "title": "Potenziamenti dell'astronave previsti",
+          "body": "Il tuo Quest Racer previsto è pensato completamente modulare, dalla sala motori alla cabina. Potresti potenziare lo scafo per la durabilità, rinforzare il guscio esterno per resistere ad ambienti ostili, potenziare i generatori di scudo per sopravvivere in combattimento e rivedere i sistemi di energia per prestazioni di picco. Motori migliori potrebbero significare viaggi interplanetari più rapidi, e sistemi di navigazione più forti potrebbero rivelare rotte nascoste e mondi inesplorati."
         },
         {
-          "title": "Sistemi d'arma",
-          "body": "La galassia è pericolosa e tu devi essere ancora più pericoloso. Aggiorna e perfeziona i tuoi sistemi d'arma per proteggerti da pirati, giocatori rivali e forze ostili. Scegli tra configurazioni difensive che ti mantengono in vita nelle situazioni peggiori o equipaggiamenti offensivi progettati per infliggere il massimo danno. Schermi laser, batterie missilistiche, cannoni al plasma e armi energetiche sperimentali sono tutti disponibili man mano che avanzi nell'albero degli aggiornamenti."
+          "title": "Sistemi d'arma previsti",
+          "body": "La galassia prevista è pericolosa. Potresti potenziare e affinare i tuoi sistemi d'arma per proteggerti da pirati, giocatori rivali e forze ostili, scegliendo tra configurazioni difensive e dotazioni offensive. Matrici laser, batterie missilistiche, cannoni al plasma e armi a energia sperimentali sono tutti previsti man mano che avanzi nell'albero dei potenziamenti."
         },
         {
-          "title": "Recluta specialisti",
-          "body": "Gli specialisti cambiano le regole del gioco. Ognuno porta abilità uniche che aggiungono potenti bonus alle prestazioni generali e al livello di potenza della tua nave. Gli specialisti della navigazione rivelano percorsi nascosti e riducono i tempi di viaggio. Gli specialisti del combattimento aumentano la precisione delle armi e i danni inflitti. Gli specialisti di ingegneria aumentano l'integrità dello scafo e la velocità di riparazione. Gli specialisti scientifici migliorano l’estrazione delle risorse e il perfezionamento dei materiali. Impila più specialisti per creare combinazioni devastanti che moltiplicano l'efficacia della tua nave."
+          "title": "Acquisire specialisti",
+          "body": "Gli specialisti previsti potrebbero portare ciascuno abilità uniche che sommano bonus alle prestazioni complessive e al livello di potenza della tua nave. Gli specialisti di navigazione potrebbero rivelare percorsi nascosti e ridurre i tempi di viaggio. Gli specialisti di combattimento potrebbero aumentare precisione e danno delle armi. Gli specialisti di ingegneria potrebbero aumentare l'integrità dello scafo e la velocità di riparazione. Gli specialisti di scienza potrebbero migliorare l'estrazione di risorse e la raffinazione dei materiali. È previsto sommare più specialisti, soggetto alle regole finali del gioco."
         },
         {
-          "title": "Il circuito di potere",
-          "body": "Missione per guadagnare, guadagna per aggiornare ed esegui l'upgrade per conquistare missioni più difficili con ricompense più grandi. Recluta specialisti per amplificare ogni sistema sulla tua nave. Più forte diventerai, più spazio si aprirà alla galassia e maggiore sarà la fortuna che ti attende. I potenziamenti delle navi e i bonus specialistici vengono applicati direttamente anche ai combattimenti spaziali durante il transito Hyper Racing e alle battaglie in Overlord of the 7 Realms."
+          "title": "Il ciclo di potenza previsto",
+          "body": "Missioni per guadagnare, guadagna per potenziare e potenzia per affrontare missioni più difficili con maggiori ricompense di gioco. Gli specialisti previsti potrebbero amplificare ogni sistema della tua nave. Più diventi forte, più la galassia potrebbe aprirsi. I potenziamenti della nave e i bonus degli specialisti sono previsti passare anche in Hyper Racing e Overlord of the 7 Realms, soggetto allo sviluppo finale e alle regole del gioco."
         }
       ],
       "faqTitle": "Hyper Quest: domande frequenti",
       "faq": [
         {
           "q": "Cos'è HyperQuest?",
-          "a": "Un'avventura spaziale open world in cui comandi un'astronave completamente potenziabile attraverso una vasta galassia. Completa missioni, esplora mondi alieni, potenzia la tua nave, recluta specialisti e raccogli ricompense di gioco."
+          "a": "Un'avventura spaziale open world prevista, in sviluppo, in cui potresti comandare un'astronave completamente potenziabile attraverso una vasta galassia. Le attività previste includono completare missioni, esplorare mondi alieni, potenziare la tua nave, acquisire specialisti e raccogliere ricompense di gioco."
         },
         {
           "q": "Come funzionano le quest?",
-          "a": "Accetta missioni dal tabellone delle missioni nel gioco. Le missioni spaziano da veloci viaggi cargo che richiedono solo pochi minuti a epiche spedizioni di più giorni nelle profondità dello spazio inesplorato. Ogni missione ha obiettivi chiari, valutazioni di pericolo e livelli di ricompensa visualizzati prima di accettarla."
+          "a": "Le missioni potrebbero essere accettate dalla bacheca missioni di gioco prevista. Le missioni previste vanno da rapide consegne di carico di pochi minuti a epiche spedizioni di più giorni nelle profondità dello spazio inesplorato. Ogni missione è prevista mostrare obiettivi, livello di pericolo e livello di ricompensa di gioco prima che tu accetti."
         },
         {
-          "q": "Posso guadagnare denaro con le missioni?",
-          "a": "No. Missioni, sfide classificate e campionati stagionali sono pensati per offrire solo ricompense di gioco, non contanti o denaro."
+          "q": "Quali ricompense di gioco potrebbero offrire le missioni?",
+          "a": "Ogni missione completata è prevista dare ricompense o oggetti di gioco: crediti di gioco, materiali di potenziamento, componenti rari, gettoni specialista di gioco e oggetti di gioco esclusivi. Missioni più difficili e più lunghe potrebbero offrire maggiori ricompense di gioco."
         },
         {
-          "q": "Quali premi di gioco posso guadagnare?",
-          "a": "Ogni missione completata è pensata per ricompensare con crediti, materiali di potenziamento, componenti rari, gettoni di reclutamento degli specialisti e oggetti esclusivi. Più la missione è dura e lunga, più ricche sono le ricompense. Scopri materiali rari su pianeti lontani e recupera parti di grande valore da antiche reliquie."
-        },
-        {
-          "q": "Posso aggiornare la mia astronave?",
-          "a": "Ogni sistema è aggiornabile: scafo, guscio esterno, generatori di scudi, sistemi di alimentazione, motori, cabina di pilotaggio e navigazione. Motori migliori significano viaggi più veloci, scafi più forti sopravvivono agli incontri ostili e una navigazione migliorata rivela rotte nascoste e mondi inesplorati."
+          "q": "Posso potenziare la mia astronave?",
+          "a": "Ogni sistema è previsto come potenziabile: scafo, guscio esterno, generatori di scudo, sistemi di energia, motori, cabina e navigazione. Motori migliori potrebbero significare viaggi più rapidi, e una navigazione potenziata potrebbe rivelare rotte nascoste e mondi inesplorati."
         },
         {
           "q": "Quali armi sono disponibili?",
-          "a": "Aggiorna e perfeziona i sistemi d'arma tra cui sistemi laser, batterie missilistiche, cannoni al plasma e armi energetiche sperimentali. Scegli configurazioni difensive per la sopravvivenza o equipaggiamenti offensivi per il massimo danno contro pirati, rivali e forze ostili."
+          "a": "I sistemi d'arma previsti includono matrici laser, batterie missilistiche, cannoni al plasma e armi a energia sperimentali. Potresti scegliere configurazioni difensive per sopravvivere o dotazioni offensive contro pirati, rivali e forze ostili."
         },
         {
-          "q": "Come lavorano gli specialisti?",
-          "a": "Recluta specialisti con abilità uniche che aggiungono potenti bonus alle prestazioni e al livello di potenza della tua nave. Gli specialisti della navigazione rivelano percorsi nascosti, gli specialisti del combattimento aumentano i danni delle armi, gli specialisti dell'ingegneria aumentano l'integrità dello scafo e gli specialisti della scienza migliorano l'estrazione delle risorse. Impila più specialisti per combinazioni devastanti."
+          "q": "Come funzionano gli specialisti?",
+          "a": "Gli specialisti previsti potrebbero essere ottenuti o acquisiti, ciascuno con abilità uniche che sommano bonus alle prestazioni e al livello di potenza della tua nave. Gli specialisti di navigazione potrebbero rivelare percorsi nascosti, quelli di combattimento potrebbero aumentare il danno delle armi, quelli di ingegneria potrebbero aumentare l'integrità dello scafo e quelli di scienza potrebbero migliorare l'estrazione di risorse."
         },
         {
-          "q": "Quali tipi di missioni sono disponibili?",
-          "a": "Trasporto merci, estrazione dagli asteroidi, caccia al tesoro, caccia alle taglie, recupero di manufatti, operazioni sotto copertura, esplorazione planetaria, difesa dai pirati, missioni di recupero e altro ancora. Le missioni vanno da rapide corse di dieci minuti a spedizioni di più giorni nello spazio profondo."
+          "q": "Che tipi di missioni sono disponibili?",
+          "a": "I tipi di missione previsti includono trasporto di carichi, estrazione di asteroidi, caccia al tesoro, caccia alle taglie, recupero di manufatti, operazioni sotto copertura, esplorazione planetaria, difesa dai pirati e missioni di recupero. Le missioni sono previste dalle rapide corse di dieci minuti alle spedizioni di più giorni nello spazio profondo."
         },
         {
           "q": "Posso scoprire nuovi pianeti?",
-          "a": "Sì. Segui le mappe galattiche in regioni inesplorate e scopri nuovi mondi. I primi scopritori guadagnano i diritti di denominazione per i pianeti che trovano. Nuovi mondi offrono materiali, ambienti e circuiti da corsa unici a cui nessun altro giocatore ha avuto accesso prima."
+          "a": "È previsto. Le mappe galattiche potrebbero portarti in regioni inesplorate e mondi nuovi, e i primi scopritori potrebbero ottenere i diritti di denominazione dei pianeti che trovano. I nuovi mondi sono previsti offrire materiali, ambienti e circuiti da corsa unici di gioco."
         },
         {
-          "q": "Cosa posso fare all'interno della mia nave?",
-          "a": "Il tuo Quest Racer è una base mobile. Coltiva cibo in baie idroponiche, raffina materiali estratti da pianeti lontani, costruisci e addestra eserciti in laboratori di clonazione, potenzia armi e difese e gestisci un'operazione autosufficiente che diventa più potente ad ogni missione."
+          "q": "Cosa posso fare dentro la mia nave?",
+          "a": "Il tuo Quest Racer previsto è pensato come una base mobile. Potresti coltivare cibo in baie idroponiche, raffinare materiali estratti da pianeti lontani, costruire e addestrare eserciti nei laboratori di clonazione e potenziare armi e difese."
         },
         {
           "q": "Come funziona la mappa galattica?",
-          "a": "La mappa galattica guida la tua esplorazione attraverso l'universo. Aggiorna la tua mappa per rivelare nuovi settori, posizioni di portali e zone di missione nascoste. Man mano che esplori ulteriormente, la mappa si espande, sbloccando regioni dello spazio sempre più pericolose e gratificanti."
+          "a": "La mappa galattica prevista dovrebbe guidare la tua esplorazione. Potresti potenziare la mappa per rivelare nuovi settori, posizioni di portali e zone di missioni nascoste, sbloccando regioni dello spazio più pericolose man mano che esplori più lontano."
         },
         {
-          "q": "I miei progressi vengono trasferiti ad altri giochi?",
-          "a": "Tutto ciò che costruisci in Hyper Quest alimenta direttamente Hyper Racing e Overlord of the 7 Realms. I potenziamenti della nave, i bonus specialistici, le abilità di combattimento e le risorse vengono trasferiti senza problemi. Un universo, più giochi, progressione illimitata."
+          "q": "I miei progressi passano agli altri giochi?",
+          "a": "Ciò che costruisci in Hyper Quest è previsto passare in Hyper Racing e Overlord of the 7 Realms. Potenziamenti della nave, bonus degli specialisti, abilità di combattimento e risorse di gioco potrebbero tutti trasferirsi, soggetto allo sviluppo finale e alle regole del gioco."
         },
         {
-          "q": "Posso giocare come cattivo?",
-          "a": "Assolutamente. Vai sotto copertura, rapisci obiettivi di alto valore, diventa un mercenario, contrabbanda merci pericolose o fai irruzione in altri giocatori. Non esiste un unico percorso verso il dominio. Il modo in cui governi la galassia è interamente una tua scelta e ogni decisione modella la tua reputazione."
+          "q": "Posso giocare da cattivo?",
+          "a": "È previsto. Potresti agire sotto copertura, inseguire bersagli di alto valore, contrabbandare carichi pericolosi o razziare altri giocatori. Non c'è un unico percorso previsto verso il dominio, e ogni decisione potrebbe plasmare la tua reputazione."
         }
       ]
     },
@@ -249,148 +245,148 @@
       "heading": "Signore Supremo dei 7 Regni",
       "subtitle": "Terra di schianto. Ricostruire. Conquistare. Diventa il Signore Supremo.",
       "intro": [
-        "Overlord of the 7 Realms è un gioco di strategia di battaglia a tre livelli diverso da qualsiasi altro gioco. Ti sei avventurato attraverso un portale in un universo parallelo e sei precipitato su un pianeta alieno ostile. La tua nave è distrutta, i tuoi sistemi stanno fallendo e le creature del pianeta si stanno già avvicinando. La sopravvivenza è solo l'inizio. Il dominio è l'obiettivo.",
-        "Ricostruisci la tua nave dai rottami. Clona e addestra eserciti nei tuoi laboratori di bordo. Doma la fauna selvatica del pianeta per creare una devastante cavalleria a cavallo. Quindi combatti in tre dimensioni di battaglia: combattimento terra-terra contro mostri e giocatori rivali, assalti terra-spazio contro bersagli orbitali o terrestri e guerra spazio-spazio a bordo dell'enorme Battle Ring che orbita attorno al pianeta.",
-        "Non è il solito gioco di strategia. Come Hyper Racing e Hyper Quest, Overlord offre interazione in realtà virtuale in tempo reale e ricompense di gioco per il completamento di eventi, missioni e delle invasioni quindicinali dei temibili Hammerong, la specie aliena più potente che esista. Ogni due settimane arrivano per sfruttare il pianeta a cielo aperto, e ogni due settimane i giocatori coraggiosi possono sfidarli per bonus enormi e ricompense leggendarie.",
-        "Migliora la tua astronave, armala con armi devastanti, recluta specialisti che amplificano il tuo livello di potere e stringi alleanze per controllare intere regioni. Tutto ciò che costruisci si collega direttamente a Hyper Racing e Hyper Quest attraverso l'ecosistema Hyper Tek condiviso. Un universo, tre giochi, guerra illimitata. Continua a leggere per scoprire come funziona il sistema di battaglia e perché Overlord cambia tutto."
+        "Overlord of the 7 Realms è un gioco di strategia di battaglia a tre livelli previsto, in sviluppo. Nella storia prevista attraversi un portale verso un universo parallelo e precipiti su un pianeta alieno ostile. La tua nave è distrutta, i sistemi cedono e le creature del pianeta si stanno già avvicinando. Sopravvivere è solo l'inizio. Il dominio è l'obiettivo.",
+        "Nel gioco previsto potresti ricostruire la tua nave dai relitti, clonare e addestrare eserciti nei laboratori di bordo e domare la fauna del pianeta per creare cavalleria montata. Il combattimento previsto si svolge su tre dimensioni di battaglia: combattimento terra-terra contro mostri e giocatori rivali, assalti terra-spazio contro bersagli orbitali o terrestri e guerra spazio-spazio a bordo dell'enorme Battle Ring che orbita attorno al pianeta.",
+        "Come Hyper Racing e Hyper Quest, Overlord è previsto con interazione VR in tempo reale e ricompense di gioco per aver completato eventi, missioni e le invasioni quindicinali previste dei temibili Hammerongs, la specie aliena più potente della storia. Ogni due settimane è previsto che arrivino per sfruttare il pianeta, e ogni due settimane i giocatori coraggiosi potrebbero sfidarli per bonus di gioco e ricompense di gioco leggendarie.",
+        "Potresti potenziare la tua astronave, armarla, acquisire specialisti che amplificano il tuo livello di potenza e stringere alleanze per controllare intere regioni. Ciò che costruisci è previsto collegarsi a Hyper Racing e Hyper Quest tramite l'ecosistema Hyper Tek condiviso. Un universo, tre giochi previsti, guerra illimitata. Continua a leggere per scoprire come potrebbe funzionare il sistema di battaglia previsto e perché Overlord potrebbe cambiare tutto, tutto soggetto allo sviluppo finale e alle regole del gioco."
       ],
       "calloutLine1": "La sopravvivenza è solo l'inizio.",
       "calloutLine2": "Il dominio è l'obiettivo.",
-      "howItWorksTitle": "Il sistema di battaglia a tre livelli; Tre dimensioni della guerra",
+      "howItWorksTitle": "Il sistema di battaglia a tre livelli previsto; tre dimensioni della guerra",
       "howItWorks": [
         {
           "num": "01",
           "title": "Combattimento terra-terra",
-          "body": "La superficie del pianeta è una zona di guerra. Schiera i tuoi eserciti clonati contro creature aliene ostili, bestie mostruose e giocatori rivali che combattono per territorio e risorse. Doma e addestra la fauna selvatica del pianeta per creare unità di cavalleria a cavallo che danno alle tue forze di terra un vantaggio devastante. La guerra di terra è cruda, tattica e implacabile. Ogni battaglia che vinci guadagna risorse, territorio e reputazione."
+          "body": "La superficie del pianeta è prevista come zona di guerra. Potresti schierare i tuoi eserciti clonati contro creature aliene ostili, bestie mostruose e giocatori rivali che combattono per territorio e risorse di gioco. Domare e addestrare la fauna del pianeta potrebbe creare unità di cavalleria montata che potrebbero dare un vantaggio alle tue forze di terra. La guerra terrestre è prevista cruda, tattica e implacabile, e le battaglie che vinci potrebbero darti risorse di gioco, territorio e reputazione, soggetto allo sviluppo finale e alle regole del gioco."
         },
         {
           "num": "02",
           "title": "Assalti terra-spazio",
-          "body": "È qui che Overlord aggiunge una dimensione che nessun altro gioco, o quasi, offre. Crea gruppi di truppe specializzati progettati per lanciare attacchi tra la superficie del pianeta e l'Anello di Battaglia orbitale. Colpisci le navi stazionate nello spazio dalla tua posizione a terra o coordina assalti combinati che colpiscono i nemici dall'alto e dal basso contemporaneamente. Questo livello di battaglia verticale trasforma la strategia standard in una partita a scacchi multidimensionale in cui il posizionamento sia sul terreno che nello spazio determina la vittoria."
+          "body": "Questa è una dimensione prevista che pochi altri giochi offrono. Potresti creare gruppi di truppe specializzati progettati per lanciare attacchi tra la superficie del pianeta e il Battle Ring orbitale, colpendo navi stazionate nello spazio dalla tua posizione a terra o coordinando assalti combinati che colpiscono i nemici da sopra e da sotto allo stesso tempo. Questo livello di battaglia verticale previsto è pensato per trasformare la strategia standard in una partita a scacchi multidimensionale in cui il posizionamento a terra e nello spazio potrebbe decidere la vittoria, soggetto allo sviluppo finale e alle regole del gioco."
         },
         {
           "num": "03",
           "title": "Guerra spazio-spazio",
-          "body": "Porta la tua nave in orbita e atterra sul Battle Ring, un'enorme struttura orbitale che circonda il pianeta. Da qui, vai a caccia di navi non protette e bersagli vulnerabili. Teletrasporta le truppe attraverso lo spazio e direttamente sulle navi nemiche per infliggere il massimo danno interno utilizzando attacchi di abbordaggio appositamente sviluppati. Le ricompense del combattimento spaziale sono tra le più alte del gioco e il controllo del territorio orbitale ti offre un vantaggio strategico che nessun giocatore solo terrestre può eguagliare."
+          "body": "Potresti portare la tua nave in orbita e atterrare sul Battle Ring, un'enorme struttura orbitale prevista che circonda il pianeta. Da lì potresti dare la caccia a navi senza scudi e bersagli vulnerabili e teletrasportare truppe attraverso lo spazio direttamente dentro le navi nemiche con attacchi di abbordaggio sviluppati appositamente. Il combattimento spaziale è previsto offrire alcune delle più grandi ricompense di gioco, e controllare il territorio orbitale potrebbe dare un vantaggio strategico che i giocatori solo terrestri non potrebbero eguagliare, soggetto allo sviluppo finale e alle regole del gioco."
         },
         {
           "num": "04",
-          "title": "Perché il Tri-Level cambia tutto",
-          "body": "La maggior parte dei giochi di strategia opera su un unico piano. Overlord opera su tre. La capacità di attaccare da terra a terra, da terra a spazio e da spazio a spazio crea un campo di battaglia con una profondità tattica senza pari. L'abilità è tutto. La sola forza bruta non ti renderà l'Overlord. La maestria strategica su tutti e tre i livelli è ciò che separa il dominante dallo sconfitto."
+          "title": "Perché i tre livelli potrebbero cambiare tutto",
+          "body": "La maggior parte dei giochi di strategia opera su un solo piano. Overlord è previsto operare su tre. La capacità prevista di attaccare da terra a terra, da terra a spazio e da spazio a spazio è pensata per creare un campo di battaglia con vera profondità tattica. L'abilità è prevista essere tutto: la sola forza bruta non dovrebbe farti diventare Overlord, e la padronanza strategica su tutti e tre i livelli potrebbe essere ciò che separa i dominanti dagli sconfitti, soggetto allo sviluppo finale e alle regole del gioco."
         }
       ],
       "extraSection": {
-        "title": "L'Anello della Battaglia e l'Interazione VR",
+        "title": "Il Battle Ring previsto e l'interazione VR",
         "items": [
           {
             "title": "Atterraggio sull'Anello della Battaglia",
-            "body": "L'Anello della Battaglia è una colossale struttura orbitale che circonda il sistema del pianeta. Quando porti la tua nave nello spazio, puoi attraccare sul Battle Ring per ottenere un enorme vantaggio strategico. Da questa posizione elevata puoi dare la caccia a navi non protette, lanciare gruppi di abbordaggio contro le navi rivali e coordinare attacchi devastanti contro bersagli terrestri sottostanti. L'atterraggio sul Battle Ring apre una dimensione di gioco completamente nuova che la maggior parte dei giochi di strategia semplicemente non offre, dando a Overlord un vantaggio tattico rispetto a qualsiasi altra cosa sul mercato."
+            "body": "Il Battle Ring è una colossale struttura orbitale prevista che circonda il sistema del pianeta. Quando porti la tua nave nello spazio, potresti attraccare al Battle Ring per ottenere un vantaggio strategico. Da questa posizione elevata potresti dare la caccia a navi senza scudi, lanciare squadre d'abbordaggio su navi rivali e coordinare attacchi a bersagli a terra sottostanti. Atterrare sul Battle Ring è previsto aprire una nuova dimensione di gioco che la maggior parte dei giochi di strategia non offre, soggetto allo sviluppo finale e alle regole del gioco."
           },
           {
             "title": "All'interno dell'Anello della Battaglia",
-            "body": "Il Battle Ring non è solo una piattaforma di attracco. Se riesci a capire come violare il suo interno, al suo interno ti aspettano missioni nascoste, bonus extra e ricompense esclusive. L'interno dell'anello è un labirinto di corridoi, camere e tecnologia antica. Esegui missioni e missioni di caccia all'interno del ring stesso, scoprendo segreti a cui nessun giocatore legato alla superficie potrà mai accedere. L'Anello della Battaglia premia gli audaci, gli astuti e gli implacabili."
+            "body": "Il Battle Ring è previsto essere più di una piattaforma di attracco. Se scopri come violarne l'interno, missioni nascoste, bonus di gioco extra e ricompense di gioco esclusive potrebbero attenderti all'interno. L'interno dell'anello è previsto come un labirinto di corridoi, camere e tecnologia antica, con missioni e cacce previste all'interno dell'anello stesso, e segreti a cui nessun giocatore legato alla superficie potrebbe mai accedere. Tutto soggetto allo sviluppo finale e alle regole del gioco."
           },
           {
             "title": "Interazione VR in tempo reale",
-            "body": "Come tutta la gamma di giochi Hyper Tek, Overlord of the 7 Realms supporta la completa interazione VR in tempo reale. Entra nella tua nave, percorri i corridoi dell'Anello di Battaglia, guida le tue truppe in combattimenti terrestri e sperimenta la guerra spaziale dalla cabina di pilotaggio della tua nave. La realtà virtuale trasforma Overlord da un gioco di strategia in un'esperienza di battaglia completamente coinvolgente. Comanda le tue forze, esplora terreni alieni e combatti con un livello di presenza e intensità che i giochi a schermo piatto non possono replicare."
+            "body": "Come tutti i giochi Hyper Tek previsti, Overlord of the 7 Realms è previsto supportare l'interazione VR in tempo reale. Potresti entrare nella tua nave, percorrere i corridoi del Battle Ring, guidare le tue truppe nel combattimento terrestre e vivere la guerra spaziale dalla cabina della tua nave. La VR è pensata per trasformare Overlord da gioco di strategia a esperienza immersiva di campo di battaglia, in cui potresti comandare le tue forze, esplorare terreno alieno e combattere con una presenza che il gioco su schermo piatto potrebbe non replicare. Soggetto allo sviluppo finale e alle regole del gioco."
           },
           {
-            "title": "Il vantaggio rispetto ad altri giochi",
-            "body": "Nessun altro gioco unisce guerra su tre livelli, una stazione da battaglia orbitale esplorabile, realtà virtuale in tempo reale e ricompense di gioco in un'unica esperienza. Il Battle Ring da solo aggiunge una dimensione di gioco che i concorrenti non possono eguagliare. Aggiungendo il combattimento a terra, la guerra spaziale, l'immersione in realtà virtuale e l'ecosistema interconnesso Hyper Tek, Overlord è una categoria a sé."
+            "title": "Il vantaggio previsto rispetto ad altri giochi",
+            "body": "Overlord si propone di combinare guerra a tre livelli, una stazione di battaglia orbitale esplorabile, VR in tempo reale e ricompense di gioco in un'unica esperienza. Il solo Battle Ring è previsto aggiungere una dimensione di gioco che i concorrenti potrebbero non eguagliare. Insieme a combattimento terrestre, guerra spaziale, immersione VR e all'ecosistema interconnesso Hyper Tek previsto, questa è l'esperienza che stiamo sviluppando, soggetto allo sviluppo finale e alle regole del gioco."
           }
         ]
       },
-      "upgradesTitle": "Ricostruisci, riarma, recluta; Potenziati per la guerra",
+      "upgradesTitle": "Ricostruisci, riarma, acquisisci; preparati alla guerra",
       "upgrades": [
         {
-          "title": "Aggiornamenti dell'astronave",
-          "body": "La tua nave precipitata è dove tutto ha inizio. Ricostruiscilo sistema per sistema, dal vano motore al ponte di comando. Ogni componente è completamente aggiornabile: rinforzo dello scafo, integrità strutturale, composizione del guscio esterno, generatori di scudi, sistemi di alimentazione e apparati di navigazione. In Overlord, non costruisci per la velocità ma per la battaglia. Una nave da guerra completamente potenziata è la base di ogni campagna di successo e più investi investi, più formidabile diventa la tua nave."
+          "title": "Potenziamenti dell'astronave previsti",
+          "body": "La tua nave schiantata è il punto in cui tutto è previsto iniziare. Potresti ricostruirla sistema per sistema, dalla sala motori al ponte di comando. Ogni componente è previsto come potenziabile: rinforzo dello scafo, integrità strutturale, composizione del guscio esterno, generatori di scudo, sistemi di energia e array di navigazione. In Overlord costruiresti non per la velocità ma per la battaglia. Una nave da guerra completamente potenziata è prevista come fondamento di ogni campagna, e più sviluppi la tua nave, più formidabile potrebbe diventare, soggetto allo sviluppo finale e alle regole del gioco."
         },
         {
-          "title": "Sistemi d'arma e livelli tecnologici",
-          "body": "Migliora e perfeziona le tue armi, abilità e livelli tecnologici per dominare tutti e tre i livelli di battaglia. Artiglieria terrestre per la guerra planetaria, batterie antiorbitali per assalti terra-spazio e sistemi di armi montati su navi per combattimenti spazio-spazio. Ogni sistema d'arma può essere perfezionato per ruoli tattici specifici. Che tu sia specializzato in bombardamenti a lungo raggio, abbordaggi ravvicinati o contromisure difensive, il tuo carico di armi definisce la tua identità di combattimento."
+          "title": "Sistemi d'arma e livelli tecnologici previsti",
+          "body": "Potresti potenziare e affinare le tue armi, abilità e livelli tecnologici su tutti e tre i livelli di battaglia: artiglieria terrestre per la guerra planetaria, batterie anti-orbitali per gli assalti terra-spazio e array di armi montati sulla nave per il combattimento spazio-spazio. Ogni sistema d'arma previsto potrebbe essere affinato per ruoli tattici specifici. Che tu ti specializzi in bombardamento a lungo raggio, azioni di abbordaggio ravvicinato o contromisure difensive, la tua dotazione di armi è prevista definire la tua identità di combattimento, soggetto allo sviluppo finale e alle regole del gioco."
         },
         {
-          "title": "Recluta specialisti",
-          "body": "Gli specialisti sono il moltiplicatore di forza e, insieme all'abilità, sono ciò che distingue i buoni giocatori dagli Overlord. Ottieni specialisti unici che portano potenti bonus alle prestazioni complessive e al livello di potenza della tua nave. Gli specialisti tattici migliorano l'efficienza dello schieramento delle truppe, quelli di ingegneria accelerano riparazioni e potenziamenti della nave, quelli d'armamento aumentano i danni di tutti i sistemi e quelli d'intelligence rivelano posizioni e punti deboli del nemico. Combina più specialisti per creare uno sforzo congiunto devastante che amplifica ogni aspetto della tua operazione. Chi non spende può comunque stare tranquillo: Hyper Tek è nato per affrontare i problemi del gaming. Anche se è possibile combinare più specialisti, le meccaniche di gioco eque fanno sì che l'accumulo non sia un semplice sistema punto per punto. Funziona invece su una scala decrescente, così che la potenza bruta non metta in ombra l'importanza dell'abilità. Questo gioco valorizza sia la potenza sia l'abilità, anziché affidarsi al caso!"
+          "title": "Acquisire specialisti",
+          "body": "Gli specialisti previsti sono pensati come moltiplicatore di forza e, combinati con l'abilità, potrebbero essere ciò che separa i buoni giocatori dagli Overlord. Potresti acquisire specialisti unici che portano bonus alle prestazioni complessive e al livello di potenza della tua nave. Gli specialisti tattici potrebbero migliorare l'efficienza dello schieramento delle truppe, gli specialisti di ingegneria potrebbero accelerare riparazioni e potenziamenti della nave, gli specialisti d'armi potrebbero aumentare il danno su tutti i sistemi e gli specialisti dell'intelligence potrebbero rivelare posizioni e debolezze nemiche. Sommare più specialisti potrebbe creare uno sforzo concertato che amplifica ogni aspetto della tua operazione. I giocatori che non spendono possono stare tranquilli: Hyper Tek è stato creato per affrontare i problemi del gaming. Sebbene sommare sia previsto, le meccaniche di gioco previste sono pensate perché sommare non sia un semplice sistema punto per punto. È previsto operare su una scala scorrevole in modo che la forza bruta non oscuri l'importanza dell'abilità. Questo gioco è previsto enfatizzare sia potenza sia abilità, invece di affidarsi al caso. Tutto soggetto allo sviluppo finale e alle regole del gioco."
         },
         {
           "title": "Costruisci i tuoi eserciti",
-          "body": "Clona le truppe nei laboratori di clonazione a bordo della tua nave, quindi potenziale e perfezionale insieme alle loro armi finché non saranno pronte per la battaglia. Ma le truppe da sole non bastano. Doma e addestra le creature selvagge del pianeta per creare una cavalleria a cavallo, una forza che non può essere clonata o prodotta e deve essere guadagnata attraverso abilità e pazienza. La composizione del tuo esercito su terra, aria e spazio è ciò che determina il tuo dominio."
+          "body": "Potresti clonare truppe nei laboratori di clonazione di bordo della tua nave, poi potenziarle e affinarle insieme alle loro armi finché non sono pronte alla battaglia. Ma le sole truppe potrebbero non bastare. Domare e addestrare le creature selvagge del pianeta potrebbe creare cavalleria di bestie montate, una forza prevista che non può essere clonata né fabbricata e deve essere guadagnata con abilità e pazienza. La composizione del tuo esercito a terra, in aria e nello spazio è prevista determinare il tuo dominio, soggetto allo sviluppo finale e alle regole del gioco."
         }
       ],
-      "rewardsTitle": "Gli Hammerong, i premi e l'ecosistema Hyper Tek",
+      "rewardsTitle": "Gli Hammerongs, le ricompense di gioco e l'ecosistema Hyper Tek",
       "rewards": [
         {
-          "title": "Gli Hammerong: la specie più potente esistente",
-          "body": "Ogni due settimane, i campi di forza dell'arena centrale diminuiscono e arrivano gli Hammerong. Sono le specie aliene più forti dell'universo, dotate di una tecnologia avanzata ben oltre ciò che i giocatori possiedono. Vengono per saccheggiare le risorse del pianeta e difendono l'arena con una forza totale e travolgente. Attaccare gli Hammerong è la sfida più pericolosa in Overlord, ma chi ci riesce viene ricompensato con enormi bonus, bottini leggendari, materiali di potenziamento rari e ricompense esclusive che non possono essere ottenute in nessun altro modo. L'invasione quindicinale dell'Hammerong è la prova definitiva del tuo potere."
+          "title": "Gli Hammerongs: la specie più potente della storia",
+          "body": "Ogni due settimane i campi di forza dell'arena centrale sono previsti cadere e arrivano gli Hammerongs. Nella storia sono la specie aliena più forte dell'universo, armata di tecnologia avanzata ben oltre ciò che possiedono i giocatori. Vengono a sfruttare le risorse del pianeta e difendono l'arena con forza totale e schiacciante. Attaccare gli Hammerongs è previsto come la sfida più pericolosa di Overlord, e chi ci riesce potrebbe ricevere bonus di gioco, bottino di gioco leggendario, materiali di potenziamento rari e ricompense di gioco esclusive che non si potrebbero ottenere in altro modo. L'invasione quindicinale degli Hammerongs è prevista come la prova definitiva della tua potenza, soggetto allo sviluppo finale e alle regole del gioco."
         },
         {
-          "title": "Eventi giornalieri, missioni e ricompense di battaglia",
-          "body": "Overlord offre ricompense costantemente. Completa le attività quotidiane per guadagnare crediti, materiali di aggiornamento e bonus di progressione. Partecipa a eventi speciali per premi premium. Esegui missioni sulla superficie del pianeta e all'interno dell'Anello di battaglia per un bottino esclusivo. Vinci battaglie contro mostri, creature aliene e giocatori rivali per accumulare risorse. Esplora la superficie per scoprire manufatti e tesori nascosti. La struttura delle ricompense è progettata in modo tale che ogni azione che intraprendi ti avvicini a diventare l'ultimo Overlord del server."
+          "title": "Eventi giornalieri, missioni e ricompense di gioco delle battaglie",
+          "body": "Overlord è previsto offrire regolarmente ricompense di gioco. Le attività giornaliere previste potrebbero dare crediti di gioco, materiali di potenziamento e bonus di progressione. Gli eventi speciali potrebbero offrire ricompense di gioco premium. Le missioni sulla superficie del pianeta e dentro il Battle Ring potrebbero dare bottino di gioco esclusivo. Vincere battaglie contro mostri, creature aliene e giocatori rivali potrebbe aumentare le tue risorse di gioco, ed esplorare la superficie potrebbe rivelare manufatti nascosti e oggetti di gioco. La struttura delle ricompense di gioco è prevista in modo che ogni tua azione possa avvicinarti a diventare l'Overlord supremo del server, soggetto allo sviluppo finale e alle regole del gioco."
         },
         {
           "title": "Connesso all'ecosistema Hyper Tek",
-          "body": "Overlord of the 7 Realms non esiste in isolamento. È pienamente integrato nell'universo Hyper Tek insieme a Hyper Racing e Hyper Quest. Le risorse ottenute in Overlord possono essere usate in tutti e tre i giochi. Potenziamenti della nave, bonus degli specialisti, abilità di combattimento e materiali passano senza interruzioni da un titolo all'altro. Le abilità di gara acquisite in Hyper Racing migliorano le tue doti di pilota nel combattimento spaziale di Overlord. I materiali raccolti in Hyper Quest alimentano i tuoi potenziamenti sul pianeta. Il marketplace Hyper Tek collega tutto, creando un universo connesso in cui i progressi in un gioco spingono l'avanzamento in tutti e tre."
+          "body": "Overlord of the 7 Realms non è previsto esistere in isolamento. È previsto integrato nell'universo Hyper Tek accanto a Hyper Racing e Hyper Quest. Le risorse di gioco ottenute in Overlord potrebbero essere utilizzabili in tutti e tre i giochi previsti. Potenziamenti della nave, bonus degli specialisti, abilità di combattimento e materiali potrebbero fluire tra i titoli. Le abilità di corsa acquisite in Hyper Racing potrebbero migliorare le tue abilità di pilota nel combattimento spaziale di Overlord, e i materiali raccolti in Hyper Quest potrebbero alimentare i tuoi potenziamenti sul pianeta. Il marketplace Hyper Tek è previsto collegare tutto, creando un universo connesso in cui il progresso in un gioco potrebbe alimentare l'avanzamento in tutti e tre, soggetto allo sviluppo finale e alle regole del gioco."
         },
         {
-          "title": "Un universo, tre giochi, potenza illimitata",
-          "body": "I giocatori che si impegnano in tutti e tre i giochi Hyper Tek acquisiscono potere più velocemente, accedono a premi esclusivi tra giochi e dominano attraverso un'ampia gamma di abilità e risorse che i giocatori di un singolo gioco non possono eguagliare. L’ecosistema interconnesso è il massimo vantaggio competitivo."
+          "title": "Un universo, tre giochi previsti",
+          "body": "I giocatori che partecipano a tutti e tre i giochi Hyper Tek previsti potrebbero accumulare potenza più in fretta e accedere a ricompense di gioco tra i giochi, attingendo a un'ampiezza di abilità e risorse di gioco che i giocatori di un solo gioco potrebbero non avere. Tutto questo è previsto e soggetto allo sviluppo finale e alle regole del gioco."
         }
       ],
       "faqTitle": "Signore Supremo dei 7 Regni – Domande frequenti",
       "faq": [
         {
           "q": "Cos'è Overlord of the 7 Realms?",
-          "a": "Un gioco di strategia bellica su tre livelli in cui ti schianti su un pianeta alieno, ricostruisci la tua nave, cloni eserciti e combatti su tre dimensioni: terra-terra, terra-spazio e spazio-spazio. Le funzionalità previste includono interazione in realtà virtuale, ricompense di gioco e invasioni quindicinali degli Hammerong."
+          "a": "Un gioco di strategia di battaglia a tre livelli previsto, in sviluppo, in cui precipiti su un pianeta alieno, ricostruisci la tua nave, cloni eserciti e combatti su tre dimensioni: terra-terra, terra-spazio e spazio-spazio. Le funzioni previste includono interazione VR, ricompense di gioco e invasioni quindicinali degli Hammerongs."
         },
         {
           "q": "Cos'è il sistema di battaglia a tre livelli?",
-          "a": "Il combattimento si svolge su tre livelli: terra-terra contro mostri e giocatori rivali, assalti terra-spazio contro navi orbitali e guerra spazio-spazio sul Battle Ring. Questo approccio multidimensionale crea una profondità tattica che nessun gioco di strategia a piano singolo può eguagliare."
+          "a": "Il combattimento è previsto su tre livelli: terra-terra contro mostri e giocatori rivali, assalti terra-spazio contro navi orbitali e guerra spazio-spazio sul Battle Ring. Questo approccio multidimensionale previsto è pensato per creare profondità tattica, soggetto allo sviluppo finale e alle regole del gioco."
         },
         {
           "q": "Cos'è l'Anello della Battaglia?",
-          "a": "Un'enorme struttura orbitale che circonda il pianeta. Fai atterrare la tua nave su di esso per dare la caccia a bersagli non protetti, lanciare gruppi di abbordaggio contro le navi nemiche e accedere a missioni nascoste al suo interno. Controllare l'Anello di Battaglia ti dà un vantaggio strategico rispetto ai giocatori solo di terra."
+          "a": "Un'enorme struttura orbitale prevista che circonda il pianeta. Potresti farvi atterrare la tua nave per dare la caccia a bersagli senza scudi, lanciare squadre d'abbordaggio su navi nemiche e accedere a missioni nascoste al suo interno. Controllare il Battle Ring potrebbe dare un vantaggio strategico sui giocatori solo terrestri."
         },
         {
           "q": "Posso aggiornare la mia astronave?",
-          "a": "Ogni sistema è aggiornabile dal vano motore al ponte di comando: scafo, struttura, guscio esterno, generatori di scudi, sistemi di alimentazione e navigazione. In Overlord costruisci per la battaglia, non per la velocità. Una nave da guerra completamente potenziata è il fondamento di ogni campagna."
+          "a": "Ogni sistema è previsto come potenziabile dalla sala motori al ponte di comando: scafo, struttura, guscio esterno, generatori di scudo, sistemi di energia e navigazione. In Overlord è previsto che tu costruisca per la battaglia, non per la velocità. Una nave da guerra completamente potenziata è prevista come fondamento di ogni campagna."
         },
         {
           "q": "Come lavorano gli specialisti?",
-          "a": "Recluta specialisti unici che aggiungono potenti bonus alle prestazioni e al livello di potenza della tua nave. Specialisti di tattica, ingegneria, armi e intelligence potenziano ciascuno sistemi diversi. Impila più specialisti per ottenere sinergie devastanti in tutti i livelli di battaglia."
+          "a": "Gli specialisti previsti potrebbero essere acquisiti, sommando bonus alle prestazioni e al livello di potenza della tua nave. Gli specialisti tattici, di ingegneria, d'armi e di intelligence potrebbero ciascuno potenziare sistemi diversi, e sommare più specialisti potrebbe creare potenti sinergie su tutti i livelli di battaglia, soggetto allo sviluppo finale e alle regole del gioco."
         },
         {
           "q": "Chi sono gli Hammerong?",
-          "a": "La specie aliena più potente esistente. Ogni due settimane arrivano nell'arena centrale per saccheggiare le risorse del pianeta, difese da una forza schiacciante e da una tecnologia avanzata. Attaccarli è estremamente pericoloso ma ricompensa i giocatori con enormi bonus e bottini leggendari."
+          "a": "La specie aliena più potente della storia. Ogni due settimane sono previsti arrivare nell'arena centrale per sfruttare le risorse del pianeta, difesi da una forza schiacciante e da tecnologia avanzata. Attaccarli è previsto come estremamente pericoloso, e i giocatori che ci riescono potrebbero ricevere bonus di gioco e bottino di gioco leggendario."
         },
         {
-          "q": "Quali premi posso guadagnare?",
-          "a": "Compiti giornalieri, missioni, battaglie ed eventi sono pensati per ricompensare con crediti, materiali di potenziamento e bonus di progressione. Gli eventi speciali e le invasioni degli Hammerong potrebbero offrire ricompense di gioco premium ed esclusive. Le sfide più difficili e le competizioni classificate sono pensate per offrire ricompense di gioco maggiori."
+          "q": "Quali ricompense di gioco potrebbero essere offerte?",
+          "a": "Le attività giornaliere, le missioni, le battaglie e gli eventi previsti sono previsti dare crediti di gioco, materiali di potenziamento e bonus di progressione. Gli eventi speciali e le invasioni degli Hammerongs potrebbero offrire ricompense di gioco premium ed esclusive. Le sfide di difficoltà maggiore e le competizioni classificate sono previste offrire maggiori ricompense di gioco."
         },
         {
           "q": "Overlord supporta la realtà virtuale?",
-          "a": "Sì. L'interazione VR completa in tempo reale ti consente di percorrere i corridoi della tua nave, esplorare l'interno dell'Anello di battaglia, guidare le truppe in combattimenti terrestri e pilotare la tua nave nella guerra spaziale. La realtà virtuale trasforma Overlord da strategia a un'esperienza di battaglia completamente coinvolgente."
+          "a": "La VR è prevista. L'interazione VR in tempo reale potrebbe permetterti di percorrere i corridoi della tua nave, esplorare l'interno del Battle Ring, guidare le truppe nel combattimento terrestre e pilotare la tua nave nella guerra spaziale, soggetto allo sviluppo finale e alle regole del gioco."
         },
         {
           "q": "Come costruisco il mio esercito?",
-          "a": "Clona le truppe nei laboratori di bordo della tua nave, quindi potenziale e perfezionale insieme alle loro armi. Per quanto riguarda la cavalleria a cavallo, devi domare e addestrare le creature selvagge del pianeta, poiché gli animali non possono essere clonati. La composizione dell'esercito su terra, aria e spazio determina il tuo dominio."
+          "a": "Nel gioco previsto potresti clonare truppe nei laboratori di bordo della tua nave, poi potenziarle e affinarle insieme alle loro armi. Per la cavalleria montata, il piano è che tu domi e addestri le creature selvagge del pianeta, poiché gli animali non possono essere clonati. La composizione del tuo esercito a terra, in aria e nello spazio è prevista determinare il tuo dominio."
         },
         {
           "q": "Posso unirmi ad un'alleanza?",
-          "a": "Sì. Vai da solo o unisciti a un'alleanza che aumenta il tuo potere e ti aiuta a crescere. Le alleanze offrono risorse condivise, attacchi coordinati e difesa collettiva. Completa le attività quotidiane per potenziare sia la tua nave che le risorse condivise dell'alleanza."
+          "a": "Le alleanze sono previste. Potresti giocare da solo o unirti a un'alleanza che potrebbe aumentare la tua potenza e aiutarti a crescere. Le funzioni di alleanza previste includono risorse di gioco condivise, attacchi coordinati e difesa collettiva, e completare le attività giornaliere potrebbe aiutare a potenziare sia la tua nave sia gli oggetti condivisi dell'alleanza."
         },
         {
           "q": "Overlord è collegato ad altri giochi Hyper Tek?",
-          "a": "Pienamente integrato. È previsto che risorse, potenziamenti della nave, bonus degli specialisti e abilità di combattimento passino tra Overlord, Hyper Racing e Hyper Quest. Le abilità di gara migliorano il tuo combattimento spaziale, i materiali di Quest alimentano i tuoi potenziamenti e il marketplace Hyper Tek collega tutti e tre i giochi."
+          "a": "È previsto. Risorse di gioco, potenziamenti della nave, bonus degli specialisti e abilità di combattimento sono previsti fluire tra Overlord, Hyper Racing e Hyper Quest. Le abilità di corsa potrebbero migliorare il tuo combattimento spaziale, i materiali di Quest potrebbero alimentare i tuoi potenziamenti, e il marketplace Hyper Tek è previsto collegare tutti e tre i giochi, soggetto allo sviluppo finale e alle regole del gioco."
         },
         {
           "q": "Quali armi sono disponibili?",
-          "a": "Artiglieria terrestre, batterie antiorbitali, schieramenti di armi montati su navi ed equipaggiamenti specializzati per l'abbordaggio. Ogni sistema può essere perfezionato per ruoli tattici specifici tra cui bombardamento a lungo raggio, combattimento ravvicinato e contromisure difensive."
+          "a": "Le armi previste includono artiglieria terrestre, batterie anti-orbitali, array di armi montati sulla nave e equipaggiamento specializzato per azioni di abbordaggio. Ogni sistema potrebbe essere affinato per ruoli tattici specifici, inclusi bombardamento a lungo raggio, combattimento ravvicinato e contromisure difensive."
         },
         {
           "q": "Posso esplorare la superficie del pianeta?",
-          "a": "Sì. Il pianeta è ricco di ricompense nascoste, manufatti, risorse e fauna selvatica pericolosa da domare. Esplora la superficie per trovare tesori, combattere creature aliene e mostri e scoprire vantaggi strategici che rafforzano la tua campagna per il dominio di Overlord."
+          "a": "È previsto. Il pianeta previsto ha ricompense di gioco nascoste, manufatti, risorse di gioco e fauna pericolosa da domare, con creature aliene e mostri da combattere, e vantaggi strategici da scoprire che potrebbero rafforzare la tua campagna, soggetto allo sviluppo finale e alle regole del gioco."
         }
       ]
     }
@@ -496,7 +492,7 @@
       "sd": "Principale hub logistico della frontiera occidentale. Mantiene riserve di razioni di emergenza.",
       "res": "Laboratorio di xenobiologia e materiali dello spazio profondo. Ospita 40 scienziati residenti.",
       "agri": "Complesso agricolo idroponico. Principale fonte alimentare per i settori occidentali.",
-      "trade": "Zona di libero scambio. Oltre 200 commercianti registrati. Valuta: Crediti Universali.",
+      "trade": "Zona di libero scambio. Oltre 200 mercanti registrati. Crediti di gioco: Universal Credits.",
       "fuel": "Deposito carburante ad alta capacità. Supporta propulsori ionici, nuclei al plasma e celle di materia oscura.",
       "ship": "Stazione di manutenzione e assemblaggio della flotta. Capacità: 18 navi.",
       "ind": "Zona di produzione pesante. Filtri atmosferici necessari. Produzione: 8.400 unità/ciclo.",
@@ -861,11 +857,11 @@
       },
       "stables_ss": {
         "title": "Stables SS",
-        "desc": "Baia asset biologici di dritta. Ospita cavalcature aliene e creature bio-ingegnerizzate utilizzate nelle operazioni sulla superficie planetaria."
+        "desc": "Baia biologica di dritta. Ospita cavalcature aliene e creature bioingegnerizzate usate nelle operazioni sulla superficie planetaria."
       },
       "stable_ps": {
         "title": "Stable PS",
-        "desc": "Baia asset biologici di sinistra. Specchia le stalle SS per un carico equilibrato delle creature e una distribuzione simmetrica del peso."
+        "desc": "Baia biologica di sinistra. Rispecchia le stalle SS per un carico equilibrato di creature e una distribuzione simmetrica del peso."
       },
       "transporter": {
         "title": "Baia Teletrasporto",
@@ -1165,7 +1161,7 @@
       "ggLastRace": "GG nell'ultima gara, ottima velocità",
       "tradingPlasma": "Scambio barre al plasma con libri tecnici",
       "needHelpAsteroid": "Ho bisogno di aiuto con la missione asteroide",
-      "allianceRecruiting": "La nostra alleanza sta reclutando, scrivimi",
+      "allianceRecruiting": "La nostra alleanza cerca membri, scrivimi in DM",
       "donationGoalsPlasma": "Obiettivi di contributo: servono barre di plasma!",
       "warStarts2Hours": "La guerra inizia tra 2 ore, preparatevi",
       "handleMedicalSupport": "Mi occupo del supporto medico",

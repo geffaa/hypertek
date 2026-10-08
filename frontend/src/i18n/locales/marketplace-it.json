@@ -61,9 +61,9 @@
       "features": [
         {
           "label": "NFAs / NFCs / NFTs",
-          "tagline": "Nuovo agli asset Web3.5? Inizia qui",
+          "tagline": "Nuovo agli oggetti Web3.5? Inizia da qui",
           "details": [
-            "Gli NFAs (Non-Fungible Articles) sono articoli emessi da Hypertek con un prezzo di riacquisto garantito dalla piattaforma.",
+            "Gli **NFA** (Non-Fungible Articles) sono oggetti emessi da Hyper Tek.",
             "Gli NFCs (Non-Fungible Characters) sono articoli di giocatori con licenza con bonus in gioco e riacquisto.",
             "Gli NFTs (Non-Fungible Tokens) sono oggetti da collezione creati dagli utenti — skin, armi e altro."
           ],
@@ -72,7 +72,7 @@
         },
         {
           "label": "Il Marketplace",
-          "tagline": "Compra e vendi asset di gioco istantaneamente",
+          "tagline": "Compra e vendi oggetti digitali all'istante",
           "details": [
             "Sfoglia un ampio catalogo di NFAs, NFCs e NFTs — skin, armi, specialisti, astronavi e altro.",
             "Filtra per categoria, rarità o fascia di prezzo per trovare esattamente ciò di cui hai bisogno.",
@@ -84,7 +84,7 @@
           "label": "Aste",
           "tagline": "Compete per articoli esclusivi in edizione limitata",
           "details": [
-            "Fai offerte su asset rari disponibili solo attraverso aste a tempo limitato.",
+            "Fai offerte su oggetti rari disponibili solo tramite aste a tempo limitato.",
             "Un conto alla rovescia in tempo reale mostra esattamente quanto tempo rimane — ogni secondo conta.",
             "Supera le offerte degli altri per assicurarti oggetti leggendari che non possono essere acquistati in altro modo."
           ],
@@ -92,9 +92,9 @@
         },
         {
           "label": "Scambi",
-          "tagline": "Scambia asset direttamente, senza intermediari",
+          "tagline": "Scambia oggetti tra giocatori, senza intermediari",
           "details": [
-            "Proponi o accetta scambi diretti di asset con altri giocatori — completamente on-chain.",
+            "Proponi o accetta scambi diretti di oggetti con altri giocatori, interamente on-chain.",
             "Imposta tu stesso i termini: scegli cosa offri e cosa vuoi in cambio.",
             "Sfoglia le offerte di scambio aperte o pubblica la tua per trovare l'accordo perfetto."
           ],
@@ -102,10 +102,10 @@
         },
         {
           "label": "Missioni",
-          "tagline": "Completa missioni, guadagna ricompense esclusive",
+          "tagline": "Missioni previste con ricompense di gioco",
           "details": [
-            "Intraprendi missioni per guadagnare ricompense esclusive e asset di gioco rari.",
-            "Ogni missione ha obiettivi unici — esplora, combatti o costruisci il tuo percorso verso la vittoria.",
+            "Le missioni previste potrebbero offrire ricompense di gioco esclusive e oggetti di gioco rari.",
+            "Ogni missione è prevista con obiettivi unici: esplora, combatti o costruisci la tua strada verso la vittoria.",
             "Costruisci la tua collezione strategicamente attraverso l'abilità, non solo la spesa."
           ],
           "cta": "Esplora le missioni"
@@ -114,9 +114,9 @@
           "label": "In affitto",
           "tagline": "Affitta i tuoi oggetti in cambio di ricompense di gioco",
           "details": [
-            "Noleggia specialisti o equipaggiamento potenti per una singola missione senza acquistare.",
+            "I giocatori potrebbero prendere in affitto specialisti o attrezzature potenti per una singola missione senza acquistarli.",
             "I giocatori potrebbero affittare gli oggetti inutilizzati ad altri giocatori in cambio di ricompense di gioco concordate tra loro.",
-            "Durate flessibili — orario, giornaliero o per accordi per missione."
+            "Durate flessibili previste: accordi a ore, a giorni o per missione."
           ],
           "cta": "Sfoglia In affitto"
         },
@@ -124,9 +124,9 @@
           "label": "Taglie",
           "tagline": "Caccia obiettivi, reclama ricompense, guida la classifica",
           "details": [
-            "Accetta taglie pubblicate da altri giocatori o dal sistema per guadagnare ricompense crypto.",
+            "I giocatori potrebbero accettare taglie pubblicate da altri giocatori o dal sistema in cambio di ricompense di gioco.",
             "Scala la classifica delle taglie per sbloccare titoli esclusivi e ricompense di gioco.",
-            "Pubblica le tue taglie per reclutare giocatori esperti per i tuoi obiettivi."
+            "I giocatori potrebbero pubblicare le proprie taglie per trovare giocatori abili per i loro obiettivi."
           ],
           "cta": "Vedi le taglie"
         }
@@ -178,7 +178,7 @@
     "nfa101": {
       "sectionLabel": "Educazione",
       "heading": "NFAs / NFCs / NFTs 101",
-      "subtitle": "Nuovo agli NFT e al Web3.5? Esplora i nostri articoli per comprendere gli asset blockchain, i portafogli, la sicurezza e l'ecosistema HyperTek.",
+      "subtitle": "Nuovo agli NFT e al Web3.5? Esplora i nostri articoli per capire oggetti blockchain, wallet, sicurezza e l'ecosistema Hyper Tek.",
       "minRead": "min di lettura",
       "filterAll": "Tutto"
     },
@@ -367,7 +367,7 @@
       "noQuests": "Nessuna missione {{filter}}",
       "inGameFeature": "Funzione in gioco",
       "inGameDesc": "Le missioni vengono generate automaticamente quando i venditori scelgono una commissione ridotta. I giocatori possono completare fino a 5 missioni al giorno. Il pool di commissioni è diviso tra lo sconto per l'acquirente, la ricompensa del giocatore e la piattaforma.",
-      "earnFromQuests": "Vuoi guadagnare dalle missioni? Gioca →",
+      "earnFromQuests": "Vuoi ricompense di gioco dalle missioni? Prova l'interfaccia di gioco →",
       "moneyQuests": "Missioni denaro (pool dell'11%)",
       "resourceQuests": "Missioni risorse (pool del 20%)",
       "footerNote1": "# Le missioni con carichi combinati usano le ricompense della tabella separata.",
@@ -385,7 +385,7 @@
       },
       "comingSoon": {
         "title": "Prossimamente",
-        "desc": "La funzione di missione in gioco è attualmente in sviluppo. Resta sintonizzato — potrai guadagnare ricompense direttamente dal gioco.",
+        "desc": "La funzione di missioni di gioco prevista è in sviluppo e potrebbe offrire ricompense di gioco, soggette alle regole finali del gioco.",
         "gotIt": "Capito"
       },
       "pagination": {
