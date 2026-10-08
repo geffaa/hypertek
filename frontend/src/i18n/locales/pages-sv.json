@@ -215,7 +215,7 @@
     "signUpBtn": "Registrera dig",
     "walletReady": "Din plånbok är redo",
     "walletReadyDesc": "En säker inbäddad plånbok har skapats för ditt konto.",
-    "walletWarning": "⚠️ Dela aldrig din privata nyckel med någon. Den som har din privata nyckel har fullständig kontroll över din plånbok och dina tillgångar.",
+    "walletWarning": "⚠️ Dela aldrig din privata nyckel med någon. Den som har din privata nyckel har full kontroll över din plånbok och dina föremål.",
     "walletAddress": "Din plånboksadress",
     "enterPasswordReveal": "Ange ditt lösenord för att visa din privata nyckel:",
     "reEnterPassword": "Ange lösenordet igen",
@@ -371,7 +371,7 @@
       "colTimeActive": "\nTid aktiv\n",
       "colAssignedTo": "\nTilldelad till\n",
       "inGame": "\nI spelet\n",
-      "earned": "\nFörtjänt\n",
+      "earned": "Intjänat",
       "statusOpen": "\nÖppna\n"
     },
     "listings": {
@@ -402,7 +402,7 @@
       "transactions": "Transaktioner",
       "offers": "Erbjudanden",
       "hyperBucks": "Gems",
-      "earnings": "Förtjänst",
+      "earnings": "Försäljningsintäkter",
       "support": "Stöd",
       "signOut": "Logga ut"
     },
@@ -497,12 +497,12 @@
       "send": "Skicka"
     },
     "withdraw": {
-      "title": "Marknadsintäkter",
-      "subtitle": "Anspråk på USDC som tjänats in från NFT-försäljning och royalties för skapare.",
-      "connectWallet": "Anslut din plånbok för att se marknadsplatsintäkter.",
-      "noEarnings": "Inga marknadsplatsintäkter att göra anspråk på ännu.",
+      "title": "Intäkter från marknadsplatsförsäljning",
+      "subtitle": "Hämta USDC från dina NFT-försäljningar och skaparroyalties.",
+      "connectWallet": "Anslut din plånbok för att se dina intäkter från marknadsplatsförsäljning.",
+      "noEarnings": "Inga intäkter från marknadsplatsförsäljning att hämta ännu.",
       "noEarningsHint": "Intäkter från NFT-försäljning visas här.",
-      "sellerEarnings": "Säljarens intäkter",
+      "sellerEarnings": "Säljarintäkter",
       "creatorRoyalties": "Creator royalties",
       "claim": "Krav"
     },
@@ -520,7 +520,7 @@
       "descPlaceholder": "Beskriv ditt föremål...",
       "storageBox": "Förvaringslåda (kategori)",
       "storageBoxHint": "Föremålet placeras i denna förvaringslåda tills det listas på marknadsplatsen.",
-      "assetType": "Tillgångstyp",
+      "assetType": "Föremålstyp",
       "nfcSoon": "Snart",
       "nfcHint": "Skapande av NFC kräver en licens – kommer i en framtida uppdatering.",
       "blockchain": "Blockchain",

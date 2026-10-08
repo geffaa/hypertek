@@ -17,7 +17,7 @@
     "shop": {
       "overview": "Översikt",
       "overviewDesc": "Allmän marknadsöversikt",
-      "myAssets": "Mina tillgångar",
+      "myAssets": "Mina föremål",
       "myAssetsDesc": "Spåra och hantera allt du äger",
       "theMarketplace": "Marknadsplatsen",
       "theMarketplaceDesc": "Bläddra bland alla NFT-, NFA- och NFC-samlingar",
@@ -69,8 +69,8 @@
         "description": "Köp dina favorit-NFT och visa upp eller handla med dem i din profil när som helst."
       },
       {
-        "title": "Tjäna och väx",
-        "description": "Tjäna pengar genom att sälja dina samlingar eller vinna popularitet i NFT-världen."
+        "title": "Samla & utvecklas",
+        "description": "Bygg ut din samling, eller erbjud dina egna skapelser till andra spelare på marknadsplatsen."
       }
     ]
   },
@@ -93,15 +93,15 @@
       },
       {
         "label": "Äkta ägande",
-        "desc": "NFA/NFC/NFT:er med ett Programmatic Trade-In Value"
+        "desc": "NFA/NFC/NFT med planerat Programmatic Trade-In Value"
       },
       {
         "label": "Play-to-Own",
-        "desc": "Varje föremål du samlar är ditt, registrerat på blockkedjan"
+        "desc": "Föremål som planeras för dig att samla och äga, registrerade på Base-kedjan"
       },
       {
         "label": "Item Loyalty Program",
-        "desc": "Ju längre du behåller ett föremål, desto högre blir dess inbytesnivå, alltid under det belopp som har tilldelats det"
+        "desc": "Planerat lojalitetsvärde som kan öka enligt angivna villkor"
       },
       {
         "label": "Länkad progression",
@@ -109,7 +109,7 @@
       },
       {
         "label": "VR/AR-integration",
-        "desc": "VR/AR-spelare kan delta i uppdrag och episka slag i realtid"
+        "desc": "Planerad VR/AR så att spelare kan delta i episka uppdrag och strider i realtid"
       }
     ]
   },
@@ -169,10 +169,10 @@
       "uiPageSubtitle": "Det fullständiga gaming-instrumentpanelen.",
       "uiPageSubtitleSpan": "Tre lägen. En uppslukande upplevelse.",
       "uiHeroLabel": "Interaktiv Förhandsvisning",
-      "uiHeroDesc": "Gå in i den fullständiga Hyper Tek 100-instrumentpanelen. Växla mellan Racing-, Quest- och Overlord-lägen. Varje med sin egen marknadsplats, tillgångsinventar och intäkter i realtid.",
+      "uiHeroDesc": "Gå in på den kompletta Hyper Tek 100-instrumentpanelen. Växla mellan lägena Racing, Quest och Overlord, vart och ett med egen marknadsplats och eget föremålsförråd.",
       "uiStat1": "3 Spellägen",
       "uiStat2": "Fullständig Instrumentpanel",
-      "uiStat3": "Tillgångsinventar",
+      "uiStat3": "Föremålsförråd",
       "uiStat4": "Live Marknadsplats",
       "uiLaunchBtn": "Starta Interface",
       "aboutPageSubtitle": "Teamet, uppdraget och visionen.",
@@ -181,9 +181,9 @@
       "aboutHeroTitle2": "Drivs av Web3.5.",
       "aboutHeroDesc": "Hyper Tek 100 är ett spelprojekt under utveckling där varje föremål registreras på blockkedjan och ägs av sin spelare. Tre sammankopplade spel planeras, med ett gemensamt progressionssystem.",
       "pillar1Title": "Web3.5-teknologi",
-      "pillar1Desc": "On-chain-tillgångar, verkligt ägande och en transparent marknadsplats byggd på Base.",
-      "pillar2Title": "Verkligt Tillgångsvärde",
-      "pillar2Desc": "Varje föremål i spelet är en omsättbar tillgång. Spela, tjäna och äg din framsteg.",
+      "pillar1Desc": "Föremål on-chain, verkligt ägande och en transparent marknadsplats byggd på Base.",
+      "pillar2Title": "Verkligt föremålsägande",
+      "pillar2Desc": "Varje kvalificerat föremål i spelet planeras vara handlingsbart. Spela, samla och äg dina föremål.",
       "pillar3Title": "Rättvist Ekosystem",
       "pillar3Desc": "Transparent fördelning av provision och ett Programmatic Trade-In Value inbyggt i varje berättigat föremål.",
       "pillar4Title": "Delta",
@@ -198,21 +198,21 @@
     "tryGaming": "Prova spelgränssnittet",
     "badge": "NFA:ER I BEGRÄNSAD UPPLAGA OCH SPELPAKET, TILLGÄNGLIGA SÅ LÅNGT LAGRET RÄCKER",
     "intro1": "Hyper Tek 100 är ett spelprojekt under utveckling som vill ta sig an några av branschens mest akuta utmaningar. Webbplatsen, marknadsplatsen och föremålssystemet är byggda, och tre sammankopplade spel är planerade. Inför spelen släpper vi ett begränsat antal föremål och paket för spelare och samlare som vill gå med i universumet tidigt.",
-    "intro2": "Vi släpper ett litet antal Non-Fungible Article (NFA)-föremål i Steg 1. Vart och ett anger bonusar i spelet som kan gälla om spelen släpps, och bonusnivåerna i Steg 1 planeras inte att upprepas. Utbudet har ett fast tak: när dessa föremål är slutsålda tas kvarvarande opräglade NFA:er i begränsad upplaga bort från webbplatsen.",
-    "intro3": "Berättigade Hyper Tek-föremål har ett Programmatic Trade-In Value, som förvaras i en escrow på blockkedjan. Dessa NFA:er i begränsad upplaga anger också bonusar i spelet som kan gälla, enligt de slutliga spelreglerna, om spelen släpps.",
+    "intro2": "Vi lanserar ett litet antal Non-Fungible Article-föremål (NFA) i Fas 1. Varje föremål anger planerade bonusar i spelet som kan gälla om spelen slutförs, och bonusnivåerna i Fas 1 planeras inte upprepas. Utbudet är strikt begränsat: när dessa föremål är sålda tas återstående ej präglade NFA i begränsad upplaga bort från webbplatsen.",
+    "intro3": "Kvalificerade Hyper Tek-föremål har ett Programmatic Trade-In Value som hålls i on-chain-escrow. Dessa NFA i begränsad upplaga anger också planerade bonusar i spelet som kan gälla, med förbehåll för spelets slutliga regler, om spelen slutförs.",
     "intro4": "Om du gillar det du har sett av Hyper Tek-projektet och vill äga ett av dessa begränsade föremål är det dags nu. Utbudet är begränsat, och när ett föremål är slut präglas det inte igen.",
     "intro5": "Vår andra lansering är en uppsättning exklusiva spelpaket som säljs direkt på vår egen webbplats, till ett pris som är 10 % lägre än vad de senare kan erbjudas för på andra håll. Det här priset gäller endast under en begränsad tid.",
     "keyPointsTitle": "Viktiga punkter att komma ihåg:",
-    "intro6": "Hyper Tek Non-Fungible Articles (HT NFA:er) är digitala samlarobjekt med de största bonusarna i spelet i Hyper Tek-sortimentet, som kan gälla om spelen släpps, samt ett Programmatic Trade-In Value. Endast tillgängliga så långt lagret räcker.",
-    "intro7": "Hyper Tek är byggt som Play-to-Own: föremålen du samlar är dina, registrerade på blockkedjan, med nytta i spelet som kan gälla i de planerade spelen. Föremål säljs som digitala samlarobjekt, inte som ett sätt att tjäna pengar.",
+    "intro6": "Hyper Tek Non-Fungible Articles (HT NFA) är digitala samlarföremål med de största planerade bonusarna i spelet i Hyper Teks sortiment, som kan gälla om spelen slutförs, plus Programmatic Trade-In Value. Tillgängliga så länge lagret räcker.",
+    "intro7": "Hyper Tek är byggt som Play-to-Own: föremålen du samlar är dina, registrerade on-chain, med planerad funktionalitet i spelet som kan gälla i de planerade spelen. Föremålen säljs som digitala samlarföremål, inte som ett sätt att tjäna pengar.",
     "collectionsLabel": "Samlingar",
     "sectionTitle": "Spelpaket i begränsad upplaga",
     "discount": "Spara 10% från listade priser",
     "donationTierLabel": "Paketnivå",
     "donationTierPrefix": "Paketnivå:",
-    "rewardsTitle": "Med förbehåll för att spelen släpps och för de slutliga spelvillkoren:",
+    "rewardsTitle": "Med förbehåll för spellansering och slutliga spelvillkor:",
     "specialConditionTitle": "Specialvillkor",
-    "specialCondition": "OBS: Förutom de Gems som ingår för köp i spelet kan bonusar och rabatter inte kombineras med andra kampanjer. Varje paket innehåller ditt namn i spelens eftertexter, om spelen släpps.\n\nFöremål säljs i befintligt skick. Bonusar i spelet, rabatter och Gems som anges i ett paket kan bara gälla om spelen släpps och omfattas av de slutliga spelreglerna. Ingen vinst, betalning eller ekonomisk avkastning utlovas.",
+    "specialCondition": "Förutom de Gems som ingår för köp i spelet kan bonusar och rabatter inte kombineras med några andra kampanjer. Varje paket innehåller ett namnkredit i slutet av spelets eftertexter, **med förbehåll för spellansering**.\n\nFöremål säljs i befintligt skick. Bonusar i spelet, rabatter och Gems som anges i ett paket kan endast gälla **med förbehåll för spellansering och slutliga spelvillkor**. Ingen vinst, utbetalning eller ekonomisk avkastning utlovas.",
     "imageComing": "Bild kommer snart",
     "close": "Stäng"
   },

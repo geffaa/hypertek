@@ -61,9 +61,9 @@
       "features": [
         {
           "label": "NFA / NFC / NFT",
-          "tagline": "Ny på Web3.5-tillgångar? Börja här",
+          "tagline": "Ny till Web3.5-föremål? Börja här",
           "details": [
-            "NFA (Non-Fungible Articles) är Hypertek-utgivna föremål med en plattformsgaranterad återköpspris.",
+            "**NFA** (Non-Fungible Articles) är föremål utgivna av Hyper Tek.",
             "NFC (Non-Fungible Characters) är licensierade spelarföremål med spelbonus och återköp.",
             "NFT (Non-Fungible Tokens) är användarskapade samlarföremål — utseenden, vapen och mer."
           ],
@@ -72,7 +72,7 @@
         },
         {
           "label": "Marknadsplatsen",
-          "tagline": "Köp och sälj speltillgångar direkt",
+          "tagline": "Köp & sälj digitala föremål direkt",
           "details": [
             "Bläddra igenom ett brett urval av NFA, NFC och NFT — utseenden, vapen, specialister, rymdskepp och mer.",
             "Filtrera efter kategori, sällsynthet eller prisintervall för att hitta exakt vad du behöver.",
@@ -84,7 +84,7 @@
           "label": "Auktioner",
           "tagline": "Tävla om exklusiva limiterade föremål",
           "details": [
-            "Bjud på sällsynta tillgångar som bara är tillgängliga via tidsbegränsade auktioner.",
+            "Lägg bud på sällsynta föremål som bara finns via tidsbegränsade auktioner.",
             "En live-nedräkning visar exakt hur mycket tid som återstår — varje sekund räknas.",
             "Överbjud andra för att säkra legendariska föremål som inte kan köpas på något annat sätt."
           ],
@@ -92,9 +92,9 @@
         },
         {
           "label": "Byten",
-          "tagline": "Byt tillgångar direkt, utan mellanhänder",
+          "tagline": "Byt föremål mellan spelare, utan mellanhänder",
           "details": [
-            "Föreslå eller acceptera direkta tillgångsbyten med andra spelare — helt på kedjan.",
+            "Föreslå eller ta emot direkta föremålsbyten med andra spelare, helt on-chain.",
             "Sätt villkoren själv: välj vad du erbjuder och vad du vill ha i gengäld.",
             "Bläddra bland öppna byteserbjudanden eller lägg upp ditt eget för att hitta den perfekta affären."
           ],
@@ -102,10 +102,10 @@
         },
         {
           "label": "Uppdrag",
-          "tagline": "Slutför uppdrag, tjäna exklusiva belöningar",
+          "tagline": "Planerade uppdrag med belöningar i spelet",
           "details": [
-            "Ta på dig uppdrag för att tjäna exklusiva belöningar och sällsynta speltillgångar.",
-            "Varje uppdrag har unika mål — utforska, kämpa eller bygg din väg till seger.",
+            "Planerade quests kan erbjuda exklusiva belöningar i spelet och sällsynta föremål i spelet.",
+            "Varje quest planeras ha ett unikt mål: utforska, strida eller bygg din väg till seger.",
             "Bygg din samling strategiskt genom skicklighet, inte bara utgifter."
           ],
           "cta": "Utforska uppdrag"
@@ -114,9 +114,9 @@
           "label": "Uthyres",
           "tagline": "Hyr ut dina föremål mot belöningar i spelet",
           "details": [
-            "Hyr kraftfulla specialister eller utrustning för ett enda uppdrag utan att köpa direkt.",
+            "Spelare kan eventuellt hyra ut kraftfulla specialister eller utrustning för ett enda uppdrag utan att köpa dem direkt.",
             "Spelare kan komma att kunna hyra ut oanvända föremål till andra spelare mot belöningar i spelet som de förhandlar sinsemellan.",
-            "Flexibla varaktigheter — timvis, dagligen eller per uppdrag."
+            "Planerade flexibla varaktigheter: avtal per timme, per dag eller per uppdrag."
           ],
           "cta": "Bläddra bland Uthyres"
         },
@@ -124,9 +124,9 @@
           "label": "Dusör",
           "tagline": "Jaga mål, gör anspråk på belöningar, toppa listan",
           "details": [
-            "Acceptera dusörer som publicerats av andra spelare eller systemet för att tjäna kryptobelöningar.",
+            "Spelare kan eventuellt acceptera bounties som andra spelare eller systemet lagt upp för belöningar i spelet.",
             "Klättra på bounty-topplistan för att låsa upp exklusiva titlar och belöningar i spelet.",
-            "Lägg ut egna dusörer för att rekrytera skickliga spelare för dina mål."
+            "Spelare kan eventuellt lägga upp egna bounties för att hitta skickliga spelare till sina mål."
           ],
           "cta": "Visa dusörer"
         }
@@ -178,7 +178,7 @@
     "nfa101": {
       "sectionLabel": "Utbildning",
       "heading": "NFA / NFC / NFT 101",
-      "subtitle": "Ny på NFT och Web3.5? Utforska våra artiklar för att förstå blockchain-tillgångar, plånböcker, säkerhet och HyperTek-ekosystemet.",
+      "subtitle": "Ny till NFT och Web3.5? Utforska våra artiklar för att förstå blockkedjeföremål, plånböcker, säkerhet och Hyper Tek-ekosystemet.",
       "minRead": "min läsning",
       "filterAll": "Alla"
     },
@@ -367,7 +367,7 @@
       "noQuests": "Inga {{filter}}-uppdrag",
       "inGameFeature": "Spelfunktion",
       "inGameDesc": "Uppdrag genereras automatiskt när säljare väljer reducerad provision. Spelare kan slutföra upp till 5 uppdrag per dag. Provisionspotten delas mellan köparrabatt, spelarbelöning och plattformen.",
-      "earnFromQuests": "Vill du tjäna på uppdrag? Spela spelet →",
+      "earnFromQuests": "Vill du ha belöningar i spelet från quests? Prova spelgränssnittet →",
       "moneyQuests": "Pengauppdrag (11% pool)",
       "resourceQuests": "Resursuppdrag (20% pool)",
       "footerNote1": "# Uppdrag med kombinerade laster använder belöningarna i den separata tabellen.",
@@ -385,7 +385,7 @@
       },
       "comingSoon": {
         "title": "Kommer snart",
-        "desc": "Uppdragsfunktionen i spelet är för närvarande under utveckling. Håll utkik — du kommer att kunna tjäna belöningar direkt från spelet.",
+        "desc": "Planerade quest-funktioner i spelet är under utveckling och kan erbjuda belöningar i spelet, med förbehåll för spelets slutliga regler.",
         "gotIt": "Förstår"
       },
       "pagination": {
