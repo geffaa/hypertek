@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import { TEAM_GROUPS } from "../../data/team";
 
 // One accent per group so the three tiers read as different areas of the page.
@@ -43,13 +44,9 @@ function Avatar({ member, accent, size }) {
   );
 }
 
-function MemberCard({ member, accent, featured, index }) {
-  const [open, setOpen] = useState(false);
-  const lines = featured ? 7 : 4;
-  const clamp = open
-    ? {}
-    : { display: "-webkit-box", WebkitLineClamp: lines, WebkitBoxOrient: "vertical", overflow: "hidden" };
-
+// Cards never change size: the full bio opens in a dialog, so neighbouring
+// cards in the same row stay put.
+function MemberCard({ member, accent, featured, index, onOpen }) {
   return (
     <motion.article
       className="rounded-2xl flex flex-col gap-4 h-full"
@@ -78,25 +75,110 @@ function MemberCard({ member, accent, featured, index }) {
 
       <p
         className={`text-white/65 leading-[1.8] text-left ${featured ? "text-[14px]" : "text-[13px]"}`}
-        style={clamp}
+        style={{ display: "-webkit-box", WebkitLineClamp: featured ? 7 : 4, WebkitBoxOrient: "vertical", overflow: "hidden" }}
       >
         {member.bio}
       </p>
 
       <button
         type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
+        onClick={(e) => onOpen(member, accent, e.currentTarget)}
+        aria-haspopup="dialog"
         className="mt-auto self-start text-[11px] font-bold uppercase tracking-[0.18em] transition-opacity hover:opacity-80"
         style={{ color: accent.c }}
       >
-        {open ? "Show less" : "Read full bio"}
+        Read full bio
       </button>
     </motion.article>
   );
 }
 
+function BioDialog({ selected, onClose }) {
+  const closeRef = useRef(null);
+
+  useEffect(() => {
+    if (!selected) return undefined;
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    closeRef.current?.focus();
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [selected, onClose]);
+
+  return createPortal(
+    <AnimatePresence>
+      {selected && (
+        <motion.div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+          style={{ background: "rgba(3,6,18,0.78)", backdropFilter: "blur(6px)" }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+        >
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="team-bio-name"
+            className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-2xl p-6 sm:p-8 flex flex-col gap-5"
+            style={{
+              background: "linear-gradient(160deg, #0b1226 0%, #070a16 100%)",
+              border: `1px solid ${selected.accent.line}`,
+              borderTop: `3px solid ${selected.accent.c}`,
+            }}
+            initial={{ opacity: 0, y: 24, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 24, scale: 0.97 }}
+            transition={{ duration: 0.22 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              ref={closeRef}
+              type="button"
+              onClick={onClose}
+              aria-label="Close"
+              className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-white/60 hover:text-white transition-colors"
+              style={{ background: "rgba(255,255,255,0.08)" }}
+            >
+              ✕
+            </button>
+            <header className="flex items-center gap-4 pr-10">
+              <Avatar member={selected.member} accent={selected.accent} size={72} />
+              <div className="min-w-0">
+                <h4 id="team-bio-name" className="text-white font-[Goldman] font-bold text-xl leading-tight">
+                  {selected.member.name}
+                </h4>
+                <p className="text-[13px] font-semibold mt-1" style={{ color: selected.accent.c }}>
+                  {selected.member.role}
+                </p>
+              </div>
+            </header>
+            <p className="text-white/75 text-[14px] leading-[1.9] text-left">{selected.member.bio}</p>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>,
+    document.body
+  );
+}
+
 export default function TeamSection() {
+  const [selected, setSelected] = useState(null);
+  const triggerRef = useRef(null);
+
+  const open = (member, accent, trigger) => {
+    triggerRef.current = trigger;
+    setSelected({ member, accent });
+  };
+  const close = () => {
+    setSelected(null);
+    triggerRef.current?.focus();
+  };
+
   return (
     <section id="team" className="relative w-full px-6 md:px-12 xl:px-20 pt-12 pb-6">
       <div className="max-w-[1400px] mx-auto">
@@ -129,7 +211,7 @@ export default function TeamSection() {
                 </div>
                 <div className={`grid gap-5 ${cols}`}>
                   {group.members.map((m, i) => (
-                    <MemberCard key={m.name} member={m} accent={accent} featured={featured} index={i} />
+                    <MemberCard key={m.name} member={m} accent={accent} featured={featured} index={i} onOpen={open} />
                   ))}
                 </div>
               </div>
@@ -137,6 +219,8 @@ export default function TeamSection() {
           })}
         </div>
       </div>
+
+      <BioDialog selected={selected} onClose={close} />
     </section>
   );
 }
