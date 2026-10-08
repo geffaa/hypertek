@@ -12,13 +12,13 @@
         "l": "Programmatic Trade-In Value"
       },
       {
-        "v": "P2E",
-        "l": "Play-to-Own"
+        "v": "P2O",
+        "l": "Play-To-Own"
       }
     ],
     "subtitle": [
-      "Misiunea Hyper Tek a fost să abordeze mai multe probleme din industria jocurilor și să redefinească modul în care funcționează ecosistemele de jocuri, creând un univers interconectat unde jucătorii nu sunt limitați la un singur stil de joc. Combinând mai multe genuri într-un singur sistem de progresie, proiectul Hyper Tek oferă un mediu dinamic unde jucătorii pot explora, concura și crește într-o lume unificată.",
-      "Își propune să ofere jucătorilor proprietatea reală asupra obiectelor lor digitale, fiecare cu utilitate în joc și o Programmatic Trade-In Value, într-un ecosistem pe care jucătorii îl ajută să prindă formă.",
+      "Misiunea Hyper Tek este de a aborda mai multe probleme din industria jocurilor și de a redefini modul în care funcționează ecosistemele de jocuri, creând un univers de jocuri conectat planificat, în care jucătorii nu sunt limitați la un singur stil de joc. Prin combinarea mai multor genuri într-un singur sistem de progresie, proiectul Hyper Tek urmărește să ofere un mediu dinamic în care jucătorii pot explora, concura și crește într-o lume unificată.",
+      "Proiectul Hyper Tek urmărește să ofere jucătorilor proprietate reală asupra obiectelor lor digitale, fiecare cu funcționalitate în joc și Programmatic Trade-In Value, într-un ecosistem pe care jucătorii înșiși îl ajută să-l modeleze.",
       "Proiectul urmărește să împuternicească jucătorii oferindu-le proprietate semnificativă asupra progresului și recompenselor lor, încurajând în același timp creativitatea, colaborarea și competiția.",
       "Obiectivul pe termen lung al Hyper Tek este să construiască un univers digital în care mai multe jocuri și comunități pot coexista pe o singură platformă interconectată."
     ],
@@ -27,7 +27,7 @@
       "heading1": "Redefinind ce",
       "heading2": "poate fi jocul",
       "paras": [
-        "Proiectul Hyper Tek a fost fondat de Don Bennett, care a imaginat un mediu de jocuri unde mai multe genuri puteau coexista într-un singur sistem de progresie. În loc să forțeze jucătorii să rămână într-o singură buclă de joc, Hyper Tek le permite să exploreze diferite activități în timp ce își construiesc personajul, resursele și reputația în întreg ecosistemul, cu progres, materiale, recompense și realizări care curg fără probleme prin toate jocurile.",
+        "Proiectul Hyper Tek a fost fondat de Don Bennett, un fost tehnician aerospațial, care a imaginat un mediu de joc în care mai multe genuri pot coexista într-un singur sistem de progresie. În loc să forțeze jucătorii să rămână într-o singură buclă de joc, Hyper Tek este planificat să îi lase să exploreze multe activități în timp ce construiesc personaje, resurse și reputație în întregul ecosistem, cu progresie, materiale, recompense și realizări care curg fluid între toate jocurile.",
         "Proiectul planifică trei medii de joc: Hyper Racing, Hyper Quest și Overlord of the Seven Realms. Fiecare joc oferă un stil diferit de gameplay, dar toate sunt concepute să existe în același univers și să împartă aceeași progresie a jucătorului. Acest design este menit să le permită jucătorilor să se bucure de gameplay-ul preferat, rămânând parte dintr-un ecosistem mai mare, cu medii de joc mai profunde și mai captivante decât jocurile tradiționale de sine stătătoare."
       ]
     },
@@ -46,7 +46,7 @@
         "quote": "...să abordeze mai multe probleme din industria jocurilor și să redefinească modul în care funcționează ecosistemele de jocuri...",
         "paras": [
           "Misiunea Hyper Tek a fost să abordeze mai multe probleme din industria jocurilor și să redefinească modul în care funcționează ecosistemele de jocuri, creând un univers interconectat unde jucătorii nu sunt limitați la un singur stil de joc.",
-          "Prin combinarea mai multor genuri într-un singur sistem de progresie, scopul este un mediu dinamic în care jucătorii pot explora, concura și evolua într-o lume unificată, cu proprietate reală asupra obiectelor lor digitale și o Programmatic Trade-In Value pentru NFA-urile eligibile.",
+          "Prin combinarea mai multor genuri într-un singur sistem de progresie, scopul este un mediu dinamic în care jucătorii pot explora, concura și crește într-o lume unificată, cu proprietate reală asupra obiectelor lor digitale și Programmatic Trade-In Value pe obiectele eligibile.",
           "Un univers digital în care mai multe jocuri și comunități coexistă pe o singură platformă interconectată. În loc să izoleze experiențele de joc online și de realitate virtuală, Hyper Tek își propune să creeze un ecosistem comun în care acțiunile și interacțiunile jucătorilor pot influența lumea din jurul lor."
         ]
       }
@@ -77,8 +77,8 @@
     },
     "section04": {
       "label": "Opere de artă digitale non-fungibile",
-      "heading": "Artă digitală cu utilitate în joc",
-      "subtitle": "Rezumatul de 60 de secunde",
+      "heading": "Artă digitală cu funcție planificată în joc",
+      "subtitle": "NFA, Non-Fungible Articles. Acestea sunt Obiecte sau Specialiști care nu au cheie ADN și pot fi folosiți de orice specie",
       "quote": "Un singur univers. Trei jocuri. Proprietate reală. Viitorul proprietății digitale începe cu Hyper Tek.",
       "cards": [
         {
@@ -87,37 +87,37 @@
           "items": [
             {
               "label": "NFA...",
-              "desc": "Create de arhitecți, cele mai mari bonusuri în joc, de la semi la ultra-rare"
+              "desc": "Create de arhitecți, cele mai mari bonusuri planificate în joc, semi- până la ultra rare"
             },
             {
               "label": "NFC...",
-              "desc": "Colecționabile cu bonusuri în joc, pot fi create de jucători"
+              "desc": "Obiecte de colecție planificate cu bonusuri în joc, pot fi create de jucători"
             },
             {
               "label": "NFT...",
-              "desc": "Complet create de jucători, decorează-ți baza pentru bonusuri de putere"
+              "desc": "Create integral de jucători, decorează-ți baza pentru bonusuri/recompense de putere planificate în joc"
             }
           ]
         },
         {
-          "title": "De ce își păstrează valoarea",
+          "title": "Obiecte on-chain reciclabile",
           "bullets": [
-            "Programmatic Trade-In Value pentru fiecare operă eligibilă",
-            "Fiecare revânzare adaugă la alocarea de schimb a obiectului",
-            "Indexată față de inflație de două ori pe an",
+            "Programmatic Trade-In Value planificată pe fiecare operă de artă eligibilă",
+            "Fiecare revânzare crește alocarea de trade-in a obiectului conform termenilor finali",
             "Valoarea ta crește mereu, niciodată nu scade"
           ]
         },
         {
           "title": "Echitabil prin design",
-          "body": "Cea mai mare parte a comisionului fiecărei vânzări nu rămâne la Hyper Tek 100. Se întoarce în ecosistem: în alocarea de schimb proprie a obiectului, păstrată în escrow, și în redevențele artiștilor. Cumpărătorii care publică misiuni își pot reduce comisionul sub formă de discount, iar jucătorii care finalizează misiuni primesc recompense în joc."
+          "body": "Cea mai mare parte a comisionului este planificată să se întoarcă în ecosistem: cumpărătorii care postează quest-uri își pot reduce comisionul sub formă de reducere, în timp ce jucătorii care finalizează quest-uri primesc recompense în joc."
         },
         {
           "title": "Implică-te acum",
-          "body": "Fiecare operă este o ediție limitată: odată ce stocul s-a terminat, s-a terminat definitiv. Pentru că stocul este limitat, fiecare piesă rămâne rară. Deține artă de colecție cu utilitate în joc care se poate aplica dacă jocurile sunt lansate.",
-          "link": "[www.hypertek.com] — Explorează. Cumpără. Creează. Deține viitorul."
+          "body": "Infrastructura este construită, iar piața este activă. Pe măsură ce continuăm să dezvoltăm jocurile, lansăm obiecte în ediție limitată în cantități limitate, cu bonusuri planificate în joc mai mari decât de obicei și care nu vor fi repetate.",
+          "link": "[www.hypertek.com] — Explorează. Cumpără. Creează. Deține-ți obiectele."
         }
-      ]
+      ],
+      "pageHeading": "Artă digitală cu funcționalitate în joc"
     },
     "section05": {
       "label": "Acces timpuriu — Obiecte în ediție limitată",
@@ -155,11 +155,11 @@
       "helpItems": [
         {
           "bold": "Cumpără un NFA, NFC sau NFT",
-          "text": "Descoperă artă digitală cu bonusuri în joc care se pot aplica dacă jocurile sunt lansate, plus o Programmatic Trade-In Value. Disponibilă în limita stocului."
+          "text": "Descoperă opere de artă digitale cu Programmatic Trade-In Value și bonusuri planificate în joc care pot fi aplicabile dacă jocurile sunt finalizate."
         },
         {
           "bold": "Creează-ți propriul NFT",
-          "text": "— devino creator în marketplace și oferă propriile opere altor jucători"
+          "text": "— devino creator pe piață și oferă-ți acum propriile opere de artă altora"
         },
         {
           "bold": "Distribuie și răspândește vestea",
@@ -174,25 +174,25 @@
       "subtitle": "Facem legătura între jocurile captivante, un marketplace digital condus de jucători și jucătorii care colecționează.",
       "cards": [
         {
-          "label": "Recompense tangibile și antreprenoriat",
+          "label": "Proprietatea asupra obiectelor",
           "bullets": [
-            "Proprietate reală asupra NFA/NFC/NFT cu Programmatic Trade-In Value",
+            "Proprietate reală asupra NFA/NFC/NFT cu Programmatic Trade-In Value planificată",
             "Tranzacționare între jucători pe marketplace",
-            "Utilitate în joc care se poate aplica în jocurile planificate",
+            "Bonusuri în joc care pot fi aplicabile în jocurile planificate",
             "Design de obiecte Play-to-Own"
           ]
         },
         {
           "label": "Item Loyalty Program",
-          "body": "Păstrează mai mult un obiect eligibil și nivelul său de schimb crește conform Tiered Loyalty Return Schedule, de la 80% din alocare în primul an la 97% după al cincilea an. Suma returnată este întotdeauna mai mică decât suma alocată, deci este o caracteristică a produsului, nu o modalitate de a câștiga bani."
+          "body": "Păstrează obiectele eligibile mai mult timp, iar rata de trade-in crește conform Tiered Loyalty Return Schedule, de la 80% din alocare în primul an la 97% după al cincilea an. Suma returnată este întotdeauna mai mică decât suma alocată, deci aceasta este o funcție de reciclare a produsului, nu un mod de a câștiga bani."
         },
         {
           "label": "Joc infinit în lumi interconectate",
           "bullets": [
-            "Trei genuri de joc unice într-un singur univers unificat",
-            "Progresie, recompense și realizări comune în toate jocurile",
-            "Un ecosistem viu unde fiecare alegere influențează întreg universul",
-            "Jucătorii VR/AR pot participa la misiuni și bătălii epice în timp real"
+            "Trei genuri de joc unice planificate într-un univers unificat",
+            "Progresie comună planificată, inclusiv recompense și realizări propuse în toate jocurile",
+            "Un ecosistem viu planificat în care fiecare alegere afectează întregul univers",
+            "VR este planificat și poate permite jucătorilor să se alăture unor misiuni și bătălii epice în timp real"
           ]
         }
       ]

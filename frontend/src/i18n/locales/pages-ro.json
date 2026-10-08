@@ -215,7 +215,7 @@
     "signUpBtn": "Înregistrare",
     "walletReady": "Portofelul tău este gata",
     "walletReadyDesc": "Un portofel integrat securizat a fost creat pentru contul tău.",
-    "walletWarning": "⚠️ Nu partaja niciodată cheia privată cu nimeni. Oricine are cheia ta privată are control complet asupra portofelului și activelor tale.",
+    "walletWarning": "⚠️ Nu împărtăși niciodată cheia ta privată cu nimeni. Oricine are cheia ta privată are control deplin asupra portofelului și obiectelor tale.",
     "walletAddress": "Adresa portofelului tău",
     "enterPasswordReveal": "Introdu parola pentru a dezvălui cheia privată:",
     "reEnterPassword": "Re-introdu parola",
@@ -371,7 +371,7 @@
       "colTimeActive": "\nTimp activ\n",
       "colAssignedTo": "\nAtribuit la\n",
       "inGame": "\nÎn joc\n",
-      "earned": "\nCâștigat\n",
+      "earned": "Câștigat",
       "statusOpen": "\nDeschide\n"
     },
     "listings": {
@@ -402,7 +402,7 @@
       "transactions": "Tranzacții",
       "offers": "Oferte",
       "hyperBucks": "Gems",
-      "earnings": "Câștiguri",
+      "earnings": "Încasări din vânzări",
       "support": "Sprijin",
       "signOut": "Sign out"
     },
@@ -497,12 +497,12 @@
       "send": "Trimite"
     },
     "withdraw": {
-      "title": "Câștigurile pieței",
-      "subtitle": "Revendicați USDC câștigat din vânzările NFT și din redevențele creatorilor.",
-      "connectWallet": "Conectați-vă portofelul pentru a vedea câștigurile pieței.",
-      "noEarnings": "Nu există încă venituri de pe piață de revendicat.",
-      "noEarningsHint": "Câștigurile din vânzările NFT vor apărea aici.",
-      "sellerEarnings": "Câștigurile vânzătorului",
+      "title": "Încasări din vânzările pe piață",
+      "subtitle": "Revendică USDC din vânzările tale NFT și redevențele de creator.",
+      "connectWallet": "Conectează-ți portofelul pentru a vedea încasările din vânzările tale pe piață.",
+      "noEarnings": "Nu există încă încasări din vânzări pe piață de revendicat.",
+      "noEarningsHint": "Încasările din vânzările NFT vor apărea aici.",
+      "sellerEarnings": "Încasările vânzătorului",
       "creatorRoyalties": "Redevențe pentru creatori",
       "claim": "Revendicare"
     },
@@ -520,7 +520,7 @@
       "descPlaceholder": " Descrieți-vă articolul... ",
       "storageBox": " Cutie de depozitare (categorie) ",
       "storageBoxHint": " Articolul este plasat în această cutie de depozitare până când este listat pe piață. ",
-      "assetType": " Tip de material ",
+      "assetType": "Tip de obiect",
       "nfcSoon": " În curând ",
       "nfcHint": " Crearea NFC necesită o licență — care urmează într-o actualizare viitoare. ",
       "blockchain": " Blockchain ",

@@ -61,9 +61,9 @@
       "features": [
         {
           "label": "NFAs / NFCs / NFTs",
-          "tagline": "Nou în activele Web3.5? Începe aici",
+          "tagline": "Nou în obiectele Web3.5? Începe aici",
           "details": [
-            "NFAs sunt articole emise de Hypertek cu preț garantat de răscumpărare.",
+            "**NFA** (Non-Fungible Articles) sunt obiecte emise de Hyper Tek.",
             "NFCs sunt articole de jucători licențiați cu bonusuri în joc.",
             "NFTs sunt colecționare create de utilizatori."
           ],
@@ -72,7 +72,7 @@
         },
         {
           "label": "Piața",
-          "tagline": "Cumpără și vinde active de joc instant",
+          "tagline": "Cumpără & vinde obiecte digitale instant",
           "details": [
             "Răsfoiți un catalog larg de NFAs, NFCs și NFTs.",
             "Filtrați după categorie, raritate sau interval de prețuri.",
@@ -84,7 +84,7 @@
           "label": "Licitații",
           "tagline": "Concurați pentru articole exclusive",
           "details": [
-            "Licitați pentru active rare disponibile numai prin licitații limitate în timp.",
+            "Licitează pentru obiecte rare disponibile doar prin licitații limitate în timp.",
             "Un cronometru live arată exact cât timp a mai rămas.",
             "Depășiți-i pe alții pentru a asigura articole legendare."
           ],
@@ -92,9 +92,9 @@
         },
         {
           "label": "Schimburi",
-          "tagline": "Schimbați active peer-to-peer, fără intermediar",
+          "tagline": "Schimbă obiecte între jucători, fără intermediari",
           "details": [
-            "Propuneți sau acceptați schimburi directe de active cu alți jucători.",
+            "Propune sau acceptă schimburi directe de obiecte cu alți jucători, complet on-chain.",
             "Stabiliți singur termenii.",
             "Răsfoiți oferte deschise sau publicați-vă propria ofertă."
           ],
@@ -102,10 +102,10 @@
         },
         {
           "label": "Misiuni",
-          "tagline": "Completați misiuni, câștigați recompense exclusive",
+          "tagline": "Misiuni planificate cu recompense în joc",
           "details": [
-            "Preluați misiuni pentru a câștiga recompense exclusive.",
-            "Fiecare misiune are obiective unice.",
+            "Quest-urile planificate pot oferi recompense exclusive în joc și obiecte rare în joc.",
+            "Fiecare quest este planificat să aibă un obiectiv unic: explorează, luptă sau construiește-ți drumul spre victorie.",
             "Construiți-vă colecția strategic."
           ],
           "cta": "Explorați Misiuni"
@@ -114,9 +114,9 @@
           "label": "De închiriat",
           "tagline": "Dă-ți obiectele în chirie pentru recompense în joc",
           "details": [
-            "Închiriați specialiști puternici pentru o singură misiune.",
+            "Jucătorii ar putea închiria specialiști sau echipament puternic pentru o singură misiune, fără a le cumpăra direct.",
             "Jucătorii ar putea să dea în chirie obiectele nefolosite altor jucători pentru recompense în joc pe care le negociază între ei.",
-            "Durate flexibile — orar, zilnic sau per misiune."
+            "Durate flexibile planificate: înțelegeri pe oră, pe zi sau pe misiune."
           ],
           "cta": "Vezi De închiriat"
         },
@@ -124,9 +124,9 @@
           "label": "Recompense",
           "tagline": "Vânați ținte, revendicați recompense",
           "details": [
-            "Acceptați recompense postate de alți jucători sau sistem.",
+            "Jucătorii ar putea accepta bounty-uri postate de alți jucători sau de sistem pentru recompense în joc.",
             "Urcă în clasamentul bounty pentru a debloca titluri exclusive și recompense în joc.",
-            "Postați propriile recompense pentru a recruta jucători."
+            "Jucătorii ar putea posta propriile bounty-uri pentru a găsi jucători pricepuți pentru obiectivele lor."
           ],
           "cta": "Vezi Recompense"
         }
@@ -178,7 +178,7 @@
     "nfa101": {
       "sectionLabel": "Educație",
       "heading": "NFAs / NFCs / NFTs 101",
-      "subtitle": "Nou în NFT-uri și Web3.5? Explorați articolele noastre.",
+      "subtitle": "Nou în NFT și Web3.5? Explorează articolele noastre pentru a înțelege obiectele blockchain, portofelele, securitatea și ecosistemul Hyper Tek.",
       "minRead": "min citire",
       "filterAll": "Toate"
     },
@@ -367,7 +367,7 @@
       "noQuests": "Nicio misiune {{filter}}",
       "inGameFeature": "Funcție În Joc",
       "inGameDesc": "Misiunile sunt generate automat când vânzătorii aleg un comision redus. Jucătorii pot finaliza până la 5 misiuni pe zi.",
-      "earnFromQuests": "Vrei să câștigi din misiuni? Joacă →",
+      "earnFromQuests": "Vrei recompense în joc din quest-uri? Încearcă interfața jocului →",
       "moneyQuests": "Misiuni Bani (pool 11%)",
       "resourceQuests": "Misiuni Resurse (pool 20%)",
       "footerNote1": "# Misiunile cu încărcături combinate folosesc recompensele din tabelul separat.",
@@ -385,7 +385,7 @@
       },
       "comingSoon": {
         "title": "În Curând",
-        "desc": "Funcția de misiuni în joc este în prezent în dezvoltare.",
+        "desc": "Funcțiile planificate de quest din joc sunt în dezvoltare și pot oferi recompense în joc, sub rezerva regulilor finale ale jocului.",
         "gotIt": "Am înțeles"
       },
       "pagination": {
