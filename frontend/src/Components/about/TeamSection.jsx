@@ -35,15 +35,15 @@ function MemberCard({ member, accent, index }) {
             style={{ border: `2px solid ${accent.c}` }}
           />
         )}
-        <h4 className="text-white font-[Goldman] font-bold text-xl leading-tight">{member.name}</h4>
-        <p className="text-[12px] font-semibold leading-snug uppercase tracking-[0.12em]" style={{ color: accent.c }}>
+        <h4 className="text-white font-[Goldman] font-bold text-2xl leading-tight">{member.name}</h4>
+        <p className="text-[13px] font-bold leading-snug uppercase tracking-[0.12em]" style={{ color: accent.c }}>
           {member.role}
         </p>
       </header>
 
       <div className="flex flex-col gap-3">
-        <p className="text-white text-[15.5px] leading-[1.7] text-left">{lede}</p>
-        {rest && <p className="text-white/60 text-[13.5px] leading-[1.85] text-left">{rest}</p>}
+        <p className="text-white text-[16px] font-medium leading-[1.7] text-left">{lede}</p>
+        {rest && <p className="text-white/90 text-[14px] leading-[1.85] text-left">{rest}</p>}
       </div>
     </motion.article>
   );
@@ -78,10 +78,11 @@ export default function TeamSection() {
             return (
               <div key={group.title} className="flex flex-col gap-5">
                 <div className="flex items-center gap-4">
-                  <h3 className="text-xs font-bold uppercase tracking-[0.28em]" style={{ color: accent.c }}>
+                  <span className="w-1.5 h-8 rounded-full flex-shrink-0" style={{ background: accent.c }} />
+                  <h3 className="font-[Goldman] font-bold text-white text-lg md:text-2xl uppercase tracking-[0.08em]">
                     {group.title}
                   </h3>
-                  <div className="h-px flex-1" style={{ background: `linear-gradient(90deg, ${accent.line}, transparent)` }} />
+                  <div className="h-px flex-1" style={{ background: `linear-gradient(90deg, ${accent.c}99, transparent)` }} />
                 </div>
                 <div className={`grid gap-5 ${GRID[gi] || GRID[1]}`}>
                   {group.members.map((m, i) => (
