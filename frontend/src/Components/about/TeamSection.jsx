@@ -1,6 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { TEAM_GROUPS } from "../../data/team";
 
 // One accent per group so the three tiers read as different areas of the page.
@@ -12,8 +10,8 @@ const ACCENTS = [
 
 const initials = (name) => name.split(" ").map((w) => w[0]).filter(Boolean).slice(0, 2).join("");
 
-// Photo when one is supplied, otherwise a monogram ring that keeps the header
-// the same height, so cards line up whether or not a photo exists yet.
+// Photo when one is supplied, otherwise a monogram ring of the same size, so
+// the layout does not change when photos are added later.
 function Avatar({ member, accent, size }) {
   const box = { width: size, height: size };
   if (member.photo) {
@@ -44,141 +42,62 @@ function Avatar({ member, accent, size }) {
   );
 }
 
-// Cards never change size: the full bio opens in a dialog, so neighbouring
-// cards in the same row stay put.
-function MemberCard({ member, accent, featured, index, onOpen }) {
+const cardStyle = (accent, pad) => ({
+  padding: pad,
+  background: accent.soft,
+  border: `1px solid ${accent.line}`,
+  borderLeft: `3px solid ${accent.c}`,
+});
+
+const reveal = (index) => ({
+  initial: { opacity: 0, y: 18 },
+  whileInView: { opacity: 1, y: 0 },
+  transition: { duration: 0.45, delay: Math.min(index, 3) * 0.06 },
+  viewport: { once: true },
+});
+
+// Leadership: a full-width row. Identity sits in a fixed column on the left and
+// the bio gets the rest of the width, so a long bio and a shorter one both
+// look finished instead of one card leaving blank space under the other.
+function LeaderRow({ member, accent, index }) {
   return (
     <motion.article
-      className="rounded-2xl flex flex-col gap-4 h-full"
-      style={{
-        padding: featured ? "28px" : "20px",
-        background: accent.soft,
-        border: `1px solid ${accent.line}`,
-        borderLeft: `3px solid ${accent.c}`,
-      }}
-      initial={{ opacity: 0, y: 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.45, delay: Math.min(index, 3) * 0.06 }}
-      viewport={{ once: true }}
+      className="rounded-2xl flex flex-col md:flex-row gap-5 md:gap-8"
+      style={cardStyle(accent, "28px")}
+      {...reveal(index)}
     >
-      <header className="flex items-center gap-4">
-        <Avatar member={member} accent={accent} size={featured ? 68 : 48} />
+      <header className="flex md:flex-col items-center md:items-start gap-4 md:w-60 flex-shrink-0">
+        <Avatar member={member} accent={accent} size={84} />
         <div className="min-w-0">
-          <h4 className={`text-white font-[Goldman] font-bold leading-tight ${featured ? "text-xl" : "text-base"}`}>
-            {member.name}
-          </h4>
-          <p className="text-[12px] font-semibold leading-snug mt-0.5" style={{ color: accent.c }}>
-            {member.role}
-          </p>
+          <h4 className="text-white font-[Goldman] font-bold text-xl leading-tight">{member.name}</h4>
+          <p className="text-[13px] font-semibold leading-snug mt-1" style={{ color: accent.c }}>{member.role}</p>
         </div>
       </header>
-
-      <p
-        className={`text-white/65 leading-[1.8] text-left ${featured ? "text-[14px]" : "text-[13px]"}`}
-        style={{ display: "-webkit-box", WebkitLineClamp: featured ? 7 : 4, WebkitBoxOrient: "vertical", overflow: "hidden" }}
-      >
+      <p className="text-white/70 text-[14px] leading-[1.9] text-left md:border-l md:pl-8" style={{ borderColor: accent.line }}>
         {member.bio}
       </p>
-
-      <button
-        type="button"
-        onClick={(e) => onOpen(member, accent, e.currentTarget)}
-        aria-haspopup="dialog"
-        className="mt-auto self-start text-[11px] font-bold uppercase tracking-[0.18em] transition-opacity hover:opacity-80"
-        style={{ color: accent.c }}
-      >
-        Read full bio
-      </button>
     </motion.article>
   );
 }
 
-function BioDialog({ selected, onClose }) {
-  const closeRef = useRef(null);
-
-  useEffect(() => {
-    if (!selected) return undefined;
-    const onKey = (e) => { if (e.key === "Escape") onClose(); };
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", onKey);
-    closeRef.current?.focus();
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prevOverflow;
-    };
-  }, [selected, onClose]);
-
-  return createPortal(
-    <AnimatePresence>
-      {selected && (
-        <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
-          style={{ background: "rgba(3,6,18,0.78)", backdropFilter: "blur(6px)" }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={onClose}
-        >
-          <motion.div
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="team-bio-name"
-            className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-2xl p-6 sm:p-8 flex flex-col gap-5"
-            style={{
-              background: "linear-gradient(160deg, #0b1226 0%, #070a16 100%)",
-              border: `1px solid ${selected.accent.line}`,
-              borderTop: `3px solid ${selected.accent.c}`,
-            }}
-            initial={{ opacity: 0, y: 24, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 24, scale: 0.97 }}
-            transition={{ duration: 0.22 }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              ref={closeRef}
-              type="button"
-              onClick={onClose}
-              aria-label="Close"
-              className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-white/60 hover:text-white transition-colors"
-              style={{ background: "rgba(255,255,255,0.08)" }}
-            >
-              ✕
-            </button>
-            <header className="flex items-center gap-4 pr-10">
-              <Avatar member={selected.member} accent={selected.accent} size={72} />
-              <div className="min-w-0">
-                <h4 id="team-bio-name" className="text-white font-[Goldman] font-bold text-xl leading-tight">
-                  {selected.member.name}
-                </h4>
-                <p className="text-[13px] font-semibold mt-1" style={{ color: selected.accent.c }}>
-                  {selected.member.role}
-                </p>
-              </div>
-            </header>
-            <p className="text-white/75 text-[14px] leading-[1.9] text-left">{selected.member.bio}</p>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>,
-    document.body
+// Other groups: bios are all roughly the same length, so equal-height cards
+// in a grid stay balanced.
+function MemberCard({ member, accent, index }) {
+  return (
+    <motion.article className="rounded-2xl flex flex-col gap-4 h-full" style={cardStyle(accent, "20px")} {...reveal(index)}>
+      <header className="flex items-center gap-4">
+        <Avatar member={member} accent={accent} size={48} />
+        <div className="min-w-0">
+          <h4 className="text-white font-[Goldman] font-bold text-base leading-tight">{member.name}</h4>
+          <p className="text-[12px] font-semibold leading-snug mt-0.5" style={{ color: accent.c }}>{member.role}</p>
+        </div>
+      </header>
+      <p className="text-white/65 text-[13px] leading-[1.8] text-left">{member.bio}</p>
+    </motion.article>
   );
 }
 
 export default function TeamSection() {
-  const [selected, setSelected] = useState(null);
-  const triggerRef = useRef(null);
-
-  const open = (member, accent, trigger) => {
-    triggerRef.current = trigger;
-    setSelected({ member, accent });
-  };
-  const close = () => {
-    setSelected(null);
-    triggerRef.current?.focus();
-  };
-
   return (
     <section id="team" className="relative w-full px-6 md:px-12 xl:px-20 pt-12 pb-6">
       <div className="max-w-[1400px] mx-auto">
@@ -195,12 +114,10 @@ export default function TeamSection() {
         <div className="flex flex-col gap-12">
           {TEAM_GROUPS.map((group, gi) => {
             const accent = ACCENTS[gi % ACCENTS.length];
-            const featured = gi === 0;
-            const cols = featured
-              ? "grid-cols-1 lg:grid-cols-2"
-              : group.members.length > 3
-                ? "grid-cols-1 sm:grid-cols-2 xl:grid-cols-4"
-                : "grid-cols-1 md:grid-cols-3";
+            const leaders = gi === 0;
+            const cols = group.members.length > 3
+              ? "grid-cols-1 sm:grid-cols-2 xl:grid-cols-4"
+              : "grid-cols-1 md:grid-cols-3";
             return (
               <div key={group.title} className="flex flex-col gap-5">
                 <div className="flex items-center gap-4">
@@ -209,18 +126,20 @@ export default function TeamSection() {
                   </h3>
                   <div className="h-px flex-1" style={{ background: `linear-gradient(90deg, ${accent.line}, transparent)` }} />
                 </div>
-                <div className={`grid gap-5 ${cols}`}>
-                  {group.members.map((m, i) => (
-                    <MemberCard key={m.name} member={m} accent={accent} featured={featured} index={i} onOpen={open} />
-                  ))}
-                </div>
+                {leaders ? (
+                  <div className="flex flex-col gap-5">
+                    {group.members.map((m, i) => <LeaderRow key={m.name} member={m} accent={accent} index={i} />)}
+                  </div>
+                ) : (
+                  <div className={`grid gap-5 ${cols}`}>
+                    {group.members.map((m, i) => <MemberCard key={m.name} member={m} accent={accent} index={i} />)}
+                  </div>
+                )}
               </div>
             );
           })}
         </div>
       </div>
-
-      <BioDialog selected={selected} onClose={close} />
     </section>
   );
 }
