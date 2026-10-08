@@ -17,7 +17,7 @@
     "shop": {
       "overview": "Aperçu",
       "overviewDesc": "Aperçu général du marché",
-      "myAssets": "Mes actifs",
+      "myAssets": "Mes objets",
       "myAssetsDesc": "Suivez et gérez tout ce que vous possédez",
       "theMarketplace": "La Marketplace",
       "theMarketplaceDesc": "Parcourez tous les collectibles NFT, NFA et NFC",
@@ -69,8 +69,8 @@
         "description": "Achetez vos NFT préférés et exposez-les ou échangez-les sur votre profil à tout moment."
       },
       {
-        "title": "Gagner et grandir",
-        "description": "Gagnez en vendant vos collections ou en gagnant en popularité dans l'espace NFT."
+        "title": "Collectionner et progresser",
+        "description": "Enrichissez votre collection, ou proposez vos propres créations aux autres joueurs sur la marketplace."
       }
     ]
   },
@@ -93,15 +93,15 @@
       },
       {
         "label": "Vraie propriété",
-        "desc": "NFA/NFC/NFT avec une Programmatic Trade-In Value"
+        "desc": "NFA/NFC/NFT avec Programmatic Trade-In Value envisagée"
       },
       {
         "label": "Play-to-Own",
-        "desc": "Chaque objet que vous collectionnez vous appartient, enregistré sur la blockchain"
+        "desc": "Objets envisagés que vous pouvez collectionner et posséder, enregistrés sur la chaîne Base"
       },
       {
         "label": "Item Loyalty Program",
-        "desc": "Plus vous conservez un objet longtemps, plus son palier de reprise est élevé, toujours en dessous du montant qui lui est alloué"
+        "desc": "Valeur de fidélité envisagée, susceptible d'augmenter selon les conditions indiquées"
       },
       {
         "label": "Progression liée",
@@ -109,7 +109,7 @@
       },
       {
         "label": "Intégration VR/AR",
-        "desc": "Les joueurs VR/AR peuvent rejoindre des missions et des batailles épiques en temps réel"
+        "desc": "VR/AR envisagée pour que les joueurs puissent rejoindre des missions et des batailles épiques en temps réel"
       }
     ]
   },
@@ -169,10 +169,10 @@
       "uiPageSubtitle": "Le tableau de bord gaming complet.",
       "uiPageSubtitleSpan": "Trois modes. Une expérience immersive.",
       "uiHeroLabel": "Aperçu Interactif",
-      "uiHeroDesc": "Entrez dans le tableau de bord complet Hyper Tek 100. Passez entre les modes Racing, Quest et Overlord. Chacun avec sa propre place de marché, inventaire d'actifs et gains en temps réel.",
+      "uiHeroDesc": "Entrez dans le tableau de bord complet de Hyper Tek 100. Passez d'un mode à l'autre, Racing, Quest et Overlord, chacun avec sa propre marketplace et son propre inventaire d'objets.",
       "uiStat1": "3 Modes de Jeu",
       "uiStat2": "Tableau de Bord Complet",
-      "uiStat3": "Inventaire d'Actifs",
+      "uiStat3": "Inventaire d'objets",
       "uiStat4": "Marché en Direct",
       "uiLaunchBtn": "Lancer l'Interface",
       "aboutPageSubtitle": "L'équipe, la mission et la vision.",
@@ -181,9 +181,9 @@
       "aboutHeroTitle2": "Propulsé par Web3.5.",
       "aboutHeroDesc": "Hyper Tek 100 est un projet de jeu en développement où chaque objet est enregistré sur la blockchain et appartient à son joueur. Trois jeux interconnectés sont prévus, avec un seul système de progression partagé.",
       "pillar1Title": "Technologie Web3.5",
-      "pillar1Desc": "Actifs on-chain, propriété réelle et place de marché transparente construite sur Base.",
-      "pillar2Title": "Valeur Réelle des Actifs",
-      "pillar2Desc": "Chaque élément du jeu est un actif négociable. Jouez, gagnez et possédez votre progression.",
+      "pillar1Desc": "Objets on-chain, véritable propriété et marketplace transparente construite sur Base.",
+      "pillar2Title": "Véritable propriété des objets",
+      "pillar2Desc": "Chaque objet éligible du jeu est prévu comme échangeable. Jouez, collectionnez et possédez vos objets.",
       "pillar3Title": "Écosystème Équitable",
       "pillar3Desc": "Une répartition transparente des commissions et une Programmatic Trade-In Value intégrée à chaque objet éligible.",
       "pillar4Title": "Rejoignez-nous",
@@ -198,13 +198,13 @@
     "tryGaming": "Essayez l'interface de jeu",
     "badge": "NFA EN ÉDITION LIMITÉE ET PACKS DE JEU, DISPONIBLES DANS LA LIMITE DES STOCKS",
     "intro1": "Hyper Tek 100 est un projet de jeu en développement qui entend s'attaquer à certains des défis les plus pressants du secteur. Le site web, la marketplace et le système d'objets sont construits, et trois jeux interconnectés sont prévus. Avant les jeux, nous proposons un nombre limité d'objets et de packs aux joueurs et collectionneurs qui souhaitent rejoindre l'univers en avance.",
-    "intro2": "Nous proposons un petit nombre d'objets Non-Fungible Article (NFA) de Phase 1. Chacun indique des bonus en jeu qui pourraient s'appliquer si les jeux sont lancés, et il n'est pas prévu de reproduire les niveaux de bonus de la Phase 1. L'offre est strictement plafonnée : une fois ces objets épuisés, les NFA en édition limitée restants non émis seront retirés du site.",
-    "intro3": "Les objets Hyper Tek éligibles possèdent une Programmatic Trade-In Value, conservée dans un séquestre sur la blockchain. Ces NFA en édition limitée indiquent aussi des bonus en jeu qui pourraient s'appliquer, sous réserve des règles définitives du jeu, si les jeux sont lancés.",
+    "intro2": "Nous mettons en circulation un petit nombre d'objets Non-Fungible Article (NFA) de l'Étape 1. Chacun indique des bonus en jeu envisagés qui pourraient s'appliquer si les jeux sont finalisés, et les niveaux de bonus de l'Étape 1 ne sont pas destinés à être reproduits. L'offre est strictement plafonnée : une fois ces objets épuisés, les NFA en édition limitée restants non frappés seront retirés du site web.",
+    "intro3": "Les objets Hyper Tek éligibles portent une Programmatic Trade-In Value, conservée dans un escrow on-chain. Ces NFA en édition limitée indiquent aussi des bonus en jeu envisagés qui pourraient s'appliquer, sous réserve des règles finales du jeu, si les jeux sont finalisés.",
     "intro4": "Si vous aimez ce que vous avez vu du projet Hyper Tek et souhaitez posséder l'un de ces objets limités, c'est le moment. L'offre est plafonnée et, une fois un objet épuisé, il ne sera plus émis.",
     "intro5": "Notre deuxième sortie est un ensemble de packs de jeu exclusifs vendus directement sur notre propre site, à un prix inférieur de 10 % à celui auquel ils pourraient être proposés ailleurs plus tard. Ce prix n'est disponible que pour une durée limitée.",
     "keyPointsTitle": "Points clés à retenir :",
-    "intro6": "Les Hyper Tek Non-Fungible Articles (HT NFA) sont des objets de collection numériques dotés des bonus en jeu les plus importants de la gamme Hyper Tek, qui pourraient s'appliquer si les jeux sont lancés, ainsi que d'une Programmatic Trade-In Value. Disponibles uniquement dans la limite des stocks.",
-    "intro7": "Hyper Tek est conçu comme un Play-to-Own : les objets que vous collectionnez vous appartiennent, sont enregistrés sur la blockchain et ont une utilité en jeu qui pourrait s'appliquer dans les jeux prévus. Les objets sont vendus comme des objets de collection numériques, pas comme un moyen de gagner de l'argent.",
+    "intro6": "Les Hyper Tek Non-Fungible Articles (HT NFA) sont des objets de collection numériques avec les plus gros bonus en jeu envisagés de la gamme Hyper Tek, qui pourraient s'appliquer si les jeux sont finalisés, plus une Programmatic Trade-In Value. Disponibles uniquement dans la limite des stocks.",
+    "intro7": "Hyper Tek est conçu comme du Play-to-Own : les objets que vous collectionnez sont à vous, enregistrés on-chain, avec une fonctionnalité en jeu envisagée qui pourrait s'appliquer dans les jeux prévus. Les objets sont vendus comme objets de collection numériques, pas comme un moyen de gagner de l'argent.",
     "collectionsLabel": "Collections",
     "sectionTitle": "Packs de jeu en édition limitée",
     "discount": "Économisez 10 % sur les prix affichés",
@@ -212,7 +212,7 @@
     "donationTierPrefix": "Niveau de pack :",
     "rewardsTitle": "Sous réserve de la sortie des jeux et des conditions de jeu finales :",
     "specialConditionTitle": "Condition spéciale",
-    "specialCondition": "REMARQUE : à l'exception des Gems incluses pour les achats en jeu, les bonus et réductions ne peuvent être cumulés avec aucune autre promotion. Chaque pack inclut votre nom au générique de fin des jeux, si les jeux sont lancés.\n\nLes objets sont vendus en l'état. Les bonus en jeu, réductions et Gems indiqués dans un pack ne pourraient s'appliquer que si les jeux sont lancés, et sont soumis aux règles définitives du jeu. Aucun profit, paiement ni rendement financier n'est promis.",
+    "specialCondition": "Hormis les Gems inclus pour les achats en jeu, les bonus et remises ne peuvent pas être combinés avec une autre promotion. Chaque pack inclut un crédit à votre nom dans le générique de fin des jeux, **sous réserve de la sortie des jeux**.\n\nLes objets sont vendus en l'état. Les bonus en jeu, remises et Gems indiqués dans un pack ne peuvent s'appliquer que **sous réserve de la sortie des jeux et des conditions de jeu finales**. Aucun profit, paiement ni rendement financier n'est promis.",
     "imageComing": "Image à venir",
     "close": "Fermer"
   },

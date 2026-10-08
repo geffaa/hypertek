@@ -11,7 +11,7 @@
       "executive-summary": "01  Résumé exécutif",
       "three-worlds": "02  Les trois mondes",
       "technology": "03  Technologie",
-      "nfa": "04  Actifs non fongibles",
+      "nfa": "04  Non-Fungible Articles",
       "hyperbucks": "05  Gems",
       "marketplace": "06  Marketplace",
       "roadmap": "07  Feuille de route",
@@ -215,7 +215,7 @@
     "signUpBtn": "S'inscrire",
     "walletReady": "Votre portefeuille est prêt",
     "walletReadyDesc": "Un portefeuille intégré sécurisé a été créé pour votre compte.",
-    "walletWarning": "⚠️ Ne partagez jamais votre clé privée avec quiconque. Toute personne ayant votre clé privée a le contrôle total de votre portefeuille et de vos actifs.",
+    "walletWarning": "⚠️ Ne partagez jamais votre clé privée avec qui que ce soit. Toute personne disposant de votre clé privée a le contrôle total de votre portefeuille et de vos objets.",
     "walletAddress": "Votre adresse de portefeuille",
     "enterPasswordReveal": "Entrez votre mot de passe pour révéler votre clé privée :",
     "reEnterPassword": "Ressaisissez votre mot de passe",
@@ -371,7 +371,7 @@
       "colTimeActive": "\nTemps d'activité\n",
       "colAssignedTo": "\nAttribué à\n",
       "inGame": "\nEn jeu\n",
-      "earned": "\nGagné\n",
+      "earned": "Obtenu",
       "statusOpen": "\nOuvert\n"
     },
     "listings": {
@@ -402,7 +402,7 @@
       "transactions": "Transactions",
       "offers": "Offres",
       "hyperBucks": "Gems",
-      "earnings": "Gains",
+      "earnings": "Produits des ventes",
       "support": "Support",
       "signOut": "Sign Sortie"
     },
@@ -497,12 +497,12 @@
       "send": "Envoyer"
     },
     "withdraw": {
-      "title": "Revenus du marché",
-      "subtitle": "Réclamez l'USDC gagné grâce aux ventes NFT et redevances du créateur.",
-      "connectWallet": "Connectez votre portefeuille pour afficher les revenus du marché.",
-      "noEarnings": "Aucun revenu du marché à réclamer pour l'instant.",
-      "noEarningsHint": "Les revenus des ventes NFT apparaîtront ici.",
-      "sellerEarnings": "Revenus du vendeur",
+      "title": "Produits des ventes de la marketplace",
+      "subtitle": "Réclamez les USDC de vos ventes de NFT et de vos redevances de créateur.",
+      "connectWallet": "Connectez votre portefeuille pour voir vos produits de ventes de la marketplace.",
+      "noEarnings": "Aucun produit de vente de la marketplace à réclamer pour le moment.",
+      "noEarningsHint": "Les produits des ventes de NFT apparaîtront ici.",
+      "sellerEarnings": "Produits du vendeur",
       "creatorRoyalties": "Redevances du créateur",
       "claim": "Réclamation"
     },
@@ -520,7 +520,7 @@
       "descPlaceholder": " Décrivez votre article... ",
       "storageBox": " Boîte de rangement (catégorie) ",
       "storageBoxHint": " L'article est placé dans cette boîte de stockage jusqu'à ce qu'il soit répertorié sur le marché. ",
-      "assetType": " Type d'actif ",
+      "assetType": "Type d'objet",
       "nfcSoon": " Bientôt ",
       "nfcHint": " La création NFC nécessite une licence – à venir dans une prochaine mise à jour. ",
       "blockchain": " Blockchain ",

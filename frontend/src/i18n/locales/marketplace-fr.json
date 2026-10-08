@@ -61,9 +61,9 @@
       "features": [
         {
           "label": "NFAs / NFCs / NFTs",
-          "tagline": "Nouveau dans le Web3.5 ? Commencez ici",
+          "tagline": "Nouveau avec les objets Web3.5 ? Commencez ici",
           "details": [
-            "Les NFAs (Non-Fungible Articles) sont des objets émis par Hypertek avec un prix de rachat garanti par la plateforme.",
+            "Les **NFA** (Non-Fungible Articles) sont des objets émis par Hyper Tek.",
             "Les NFCs (Non-Fungible Characters) sont des objets de joueurs sous licence avec des bonus en jeu et un rachat garanti.",
             "Les NFTs (Non-Fungible Tokens) sont des objets de collection créés par les utilisateurs — skins, armes et plus."
           ],
@@ -72,7 +72,7 @@
         },
         {
           "label": "La Marketplace",
-          "tagline": "Achetez et vendez des actifs en jeu instantanément",
+          "tagline": "Achetez et vendez des objets numériques instantanément",
           "details": [
             "Parcourez un vaste catalogue de NFAs, NFCs et NFTs — skins, armes, spécialistes, vaisseaux spatiaux et plus.",
             "Filtrez par catégorie, rareté ou fourchette de prix pour trouver exactement ce dont vous avez besoin.",
@@ -84,7 +84,7 @@
           "label": "Enchères",
           "tagline": "Concourez pour des objets en édition limitée exclusifs",
           "details": [
-            "Enchérissez sur des actifs rares disponibles uniquement par des enchères à durée limitée.",
+            "Enchérissez sur des objets rares disponibles uniquement via des enchères à durée limitée.",
             "Un compte à rebours en direct montre exactement le temps restant — chaque seconde compte.",
             "Surenchérissez les autres pour obtenir des objets légendaires qui ne peuvent s'acheter autrement."
           ],
@@ -92,9 +92,9 @@
         },
         {
           "label": "Échanges",
-          "tagline": "Échangez des actifs de pair à pair, sans intermédiaire",
+          "tagline": "Échangez des objets de joueur à joueur, sans intermédiaire",
           "details": [
-            "Proposez ou acceptez des échanges directs d'actifs avec d'autres joueurs — entièrement on-chain.",
+            "Proposez ou acceptez des échanges d'objets directs avec d'autres joueurs, entièrement on-chain.",
             "Fixez vous-même les termes : choisissez ce que vous offrez et ce que vous voulez en retour.",
             "Parcourez les offres d'échange ouvertes ou publiez la vôtre pour trouver le deal parfait."
           ],
@@ -102,10 +102,10 @@
         },
         {
           "label": "Quêtes",
-          "tagline": "Accomplissez des missions, gagnez des récompenses exclusives",
+          "tagline": "Missions envisagées avec récompenses en jeu",
           "details": [
-            "Accomplissez des quêtes pour gagner des récompenses exclusives et des actifs rares en jeu.",
-            "Chaque quête a des objectifs uniques — explorez, combattez ou construisez votre chemin vers la victoire.",
+            "Les quêtes envisagées pourraient offrir des récompenses en jeu exclusives et des objets en jeu rares.",
+            "Chaque quête est prévue avec des objectifs uniques : explorez, combattez ou construisez votre chemin vers la victoire.",
             "Construisez votre collection de manière stratégique grâce aux compétences, pas seulement aux dépenses."
           ],
           "cta": "Explorer les quêtes"
@@ -114,9 +114,9 @@
           "label": "À louer",
           "tagline": "Louez vos objets contre des récompenses en jeu",
           "details": [
-            "Louez des spécialistes ou équipements puissants pour une seule mission sans acheter.",
+            "Les joueurs pourraient prendre en location des spécialistes ou de l'équipement puissants pour une seule mission sans les acheter.",
             "Les joueurs pourraient louer leurs objets inutilisés à d'autres joueurs contre des récompenses en jeu qu'ils négocient entre eux.",
-            "Durées flexibles — horaire, journalière ou par accord de mission."
+            "Durées flexibles envisagées : accords à l'heure, à la journée ou par mission."
           ],
           "cta": "Parcourir À louer"
         },
@@ -124,9 +124,9 @@
           "label": "Prime",
           "tagline": "Chassez des cibles, réclamez des récompenses, dominez le classement",
           "details": [
-            "Acceptez des primes publiées par d'autres joueurs ou le système pour gagner des récompenses crypto.",
+            "Les joueurs pourraient accepter des primes publiées par d'autres joueurs ou par le système en échange de récompenses en jeu.",
             "Grimpez dans le classement des primes pour débloquer des titres exclusifs et des récompenses en jeu.",
-            "Publiez vos propres primes pour recruter des joueurs qualifiés pour vos objectifs."
+            "Les joueurs pourraient publier leurs propres primes pour trouver des joueurs compétents pour leurs objectifs."
           ],
           "cta": "Voir les primes"
         }
@@ -178,7 +178,7 @@
     "nfa101": {
       "sectionLabel": "Éducation",
       "heading": "NFAs / NFCs / NFTs 101",
-      "subtitle": "Nouveau dans les NFT et le Web3.5 ? Explorez nos articles pour comprendre les actifs blockchain, les portefeuilles, la sécurité et l'écosystème HyperTek.",
+      "subtitle": "Nouveau avec les NFT et le Web3.5 ? Parcourez nos articles pour comprendre les objets blockchain, les portefeuilles, la sécurité et l'écosystème Hyper Tek.",
       "minRead": "min de lecture",
       "filterAll": "Tout"
     },
@@ -367,7 +367,7 @@
       "noQuests": "Aucune quête {{filter}}",
       "inGameFeature": "Fonctionnalité en jeu",
       "inGameDesc": "Les quêtes sont générées automatiquement lorsque les vendeurs choisissent une commission réduite. Les joueurs peuvent accomplir jusqu'à 5 quêtes par jour. Le pool de commissions est réparti entre la remise acheteur, la récompense joueur et la plateforme.",
-      "earnFromQuests": "Vous voulez gagner des quêtes ? Jouez au jeu →",
+      "earnFromQuests": "Vous voulez des récompenses en jeu grâce aux quêtes ? Essayez l'interface de jeu →",
       "moneyQuests": "Quêtes argent (pool de 11%)",
       "resourceQuests": "Quêtes ressources (pool de 20%)",
       "footerNote1": "# Les quêtes à chargements combinés utilisent les récompenses du tableau séparé.",
@@ -385,7 +385,7 @@
       },
       "comingSoon": {
         "title": "Bientôt disponible",
-        "desc": "La fonctionnalité de quête en jeu est actuellement en développement. Restez à l'écoute — vous pourrez gagner des récompenses directement depuis le jeu.",
+        "desc": "La fonctionnalité de quêtes en jeu envisagée est en développement et pourrait offrir des récompenses en jeu, sous réserve des règles finales du jeu.",
         "gotIt": "Compris"
       },
       "pagination": {
