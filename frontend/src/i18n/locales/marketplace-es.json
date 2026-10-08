@@ -61,9 +61,9 @@
       "features": [
         {
           "label": "NFAs / NFCs / NFTs",
-          "tagline": "¿Nuevo en los activos Web3.5? Empieza aquí",
+          "tagline": "¿Nuevo en los objetos Web3.5? Empieza aquí",
           "details": [
-            "Los NFAs (Activos No Fungibles) son artículos emitidos por Hypertek con un precio de recompra garantizado por la plataforma.",
+            "Los **NFA** (Non-Fungible Articles) son objetos emitidos por Hyper Tek.",
             "Los NFCs (Personajes No Fungibles) son artículos de jugadores licenciados con bonificaciones en el juego y recompra.",
             "Los NFTs (Tokens No Fungibles) son coleccionables creados por usuarios — skins, armas y más."
           ],
@@ -72,7 +72,7 @@
         },
         {
           "label": "El Mercado",
-          "tagline": "Compra y vende activos del juego al instante",
+          "tagline": "Compra y vende objetos digitales al instante",
           "details": [
             "Navega por un amplio catálogo de NFAs, NFCs y NFTs — skins, armas, especialistas, naves espaciales y más.",
             "Filtra por categoría, rareza o rango de precios para encontrar exactamente lo que necesitas.",
@@ -84,7 +84,7 @@
           "label": "Subastas",
           "tagline": "Compite por artículos exclusivos de edición limitada",
           "details": [
-            "Puja por activos raros que solo están disponibles a través de subastas de tiempo limitado.",
+            "Puja por objetos raros que solo están disponibles mediante subastas de tiempo limitado.",
             "Una cuenta regresiva en vivo muestra exactamente cuánto tiempo queda — cada segundo cuenta.",
             "Supera las ofertas de otros para asegurar artículos legendarios que no se pueden comprar de otra manera."
           ],
@@ -92,9 +92,9 @@
         },
         {
           "label": "Intercambios",
-          "tagline": "Intercambia activos entre pares, sin intermediarios",
+          "tagline": "Intercambia objetos entre jugadores, sin intermediarios",
           "details": [
-            "Propón o acepta intercambios directos de activos con otros jugadores — totalmente en cadena.",
+            "Propón o acepta intercambios directos de objetos con otros jugadores, totalmente on-chain.",
             "Establece los términos tú mismo: elige lo que ofreces y lo que quieres a cambio.",
             "Navega por ofertas de intercambio abiertas o publica las tuyas para encontrar el trato perfecto."
           ],
@@ -102,10 +102,10 @@
         },
         {
           "label": "Misiones",
-          "tagline": "Completa misiones, gana recompensas exclusivas",
+          "tagline": "Misiones previstas con recompensas dentro del juego",
           "details": [
-            "Acepta misiones para ganar recompensas exclusivas y activos raros del juego.",
-            "Cada misión tiene objetivos únicos — explora, batalla o construye tu camino hacia la victoria.",
+            "Las misiones previstas podrían ofrecer recompensas exclusivas dentro del juego y objetos raros dentro del juego.",
+            "Se prevé que cada misión tenga objetivos únicos: explora, combate o construye tu camino hacia la victoria.",
             "Construye tu colección estratégicamente a través de habilidad, no solo gastando."
           ],
           "cta": "Explorar Misiones"
@@ -114,9 +114,9 @@
           "label": "En alquiler",
           "tagline": "Alquila tus objetos a cambio de recompensas dentro del juego",
           "details": [
-            "Alquila especialistas o equipo poderoso para una sola misión sin comprar directamente.",
+            "Los jugadores podrían tomar en alquiler especialistas o equipo potentes para una sola misión sin comprarlos directamente.",
             "Los jugadores podrían alquilar objetos que no usan a otros jugadores a cambio de recompensas dentro del juego que negocian entre ellos.",
-            "Duraciones flexibles — acuerdos por hora, día o por misión."
+            "Duraciones flexibles previstas: acuerdos por hora, por día o por misión."
           ],
           "cta": "Ver En alquiler"
         },
@@ -124,9 +124,9 @@
           "label": "Recompensas",
           "tagline": "Caza objetivos, reclama recompensas, lidera el marcador",
           "details": [
-            "Acepta recompensas publicadas por otros jugadores o el sistema para ganar recompensas cripto.",
+            "Los jugadores podrían aceptar recompensas por captura publicadas por otros jugadores o por el sistema a cambio de recompensas dentro del juego.",
             "Sube en la clasificación de recompensas para desbloquear títulos exclusivos y recompensas dentro del juego.",
-            "Publica tus propias recompensas para reclutar jugadores habilidosos para tus objetivos."
+            "Los jugadores podrían publicar sus propias recompensas por captura para encontrar jugadores hábiles para sus objetivos."
           ],
           "cta": "Ver Recompensas"
         }
@@ -178,7 +178,7 @@
     "nfa101": {
       "sectionLabel": "Educación",
       "heading": "NFAs / NFCs / NFTs 101",
-      "subtitle": "¿Nuevo en NFTs y Web3.5? Explora nuestros artículos para entender los activos blockchain, carteras, seguridad y el ecosistema HyperTek.",
+      "subtitle": "¿Nuevo en los NFT y Web3.5? Explora nuestros artículos para entender los objetos blockchain, las carteras, la seguridad y el ecosistema Hyper Tek.",
       "minRead": "min de lectura",
       "filterAll": "Todo"
     },
@@ -367,7 +367,7 @@
       "noQuests": "No hay misiones {{filter}}",
       "inGameFeature": "Función en el Juego",
       "inGameDesc": "Las misiones se generan automáticamente cuando los vendedores eligen una comisión reducida. Los jugadores pueden completar hasta 5 misiones por día. El fondo de comisión se divide entre el descuento del comprador, la recompensa del jugador y la plataforma.",
-      "earnFromQuests": "¿Quieres ganar de las misiones? Juega →",
+      "earnFromQuests": "¿Quieres recompensas dentro del juego por las misiones? Prueba la interfaz del juego →",
       "moneyQuests": "Misiones de Dinero (fondo 11%)",
       "resourceQuests": "Misiones de Recursos (fondo 20%)",
       "footerNote1": "# Las misiones con cargas combinadas usan las recompensas de la tabla correspondiente.",
@@ -385,7 +385,7 @@
       },
       "comingSoon": {
         "title": "Próximamente",
-        "desc": "La función de misiones en el juego está actualmente en desarrollo. Mantente atento — podrás ganar recompensas directamente del juego.",
+        "desc": "La función de misiones dentro del juego prevista está en desarrollo y podría ofrecer recompensas dentro del juego, sujetas a las reglas finales del juego.",
         "gotIt": "Entendido"
       },
       "pagination": {

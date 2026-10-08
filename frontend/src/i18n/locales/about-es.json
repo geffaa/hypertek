@@ -12,13 +12,13 @@
         "l": "Programmatic Trade-In Value"
       },
       {
-        "v": "P2E",
-        "l": "Play-to-Own"
+        "v": "P2O",
+        "l": "Play-To-Own"
       }
     ],
     "subtitle": [
-      "La misión de Hyper Tek era abordar múltiples problemas dentro de la industria del gaming y redefinir cómo funcionan los ecosistemas de juego creando un universo interconectado donde los jugadores no están limitados a un solo estilo de juego. Al combinar múltiples géneros en un solo sistema de progresión, el proyecto Hyper Tek proporciona un entorno dinámico donde los jugadores pueden explorar, competir y crecer dentro de un mundo unificado.",
-      "Busca dar a los jugadores la verdadera propiedad de sus objetos digitales, cada uno con utilidad dentro del juego y un Programmatic Trade-In Value, dentro de un ecosistema que los propios jugadores ayudan a construir.",
+      "La misión de Hyper Tek era abordar varios problemas de la industria del videojuego y redefinir cómo funcionan los ecosistemas de juego creando un universo de juegos interconectado y previsto donde los jugadores no estén limitados a un único estilo de juego. Al combinar varios géneros en un sistema de progresión, el proyecto Hyper Tek pretende ofrecer un entorno dinámico donde los jugadores puedan explorar, competir y crecer dentro de un mundo unificado.",
+      "El Proyecto Hyper Tek se propone dar a los jugadores la verdadera propiedad de sus objetos digitales, cada uno con funcionalidad dentro del juego y una Programmatic Trade-In Value, dentro de un ecosistema que los jugadores ayudan a moldear.",
       "El proyecto busca empoderar a los jugadores dándoles una propiedad significativa sobre su progreso y recompensas mientras fomenta la creatividad, la colaboración y la competición.",
       "El objetivo a largo plazo de Hyper Tek es construir un universo digital donde varios juegos y comunidades puedan coexistir en una única plataforma interconectada."
     ],
@@ -27,7 +27,7 @@
       "heading1": "Redefinir lo que",
       "heading2": "el gaming puede ser",
       "paras": [
-        "El proyecto Hyper Tek fue fundado por Don Bennett, quien imaginó un entorno de juego donde múltiples géneros pudieran coexistir dentro de un único sistema de progresión. En lugar de obligar a los jugadores a permanecer en un solo bucle de juego, Hyper Tek les permite explorar diferentes actividades mientras construyen su personaje, recursos y reputación en todo el ecosistema, con progresión, materiales, recompensas y logros fluyendo sin problemas a través de todos los juegos.",
+        "El Proyecto Hyper Tek fue fundado por Don Bennett, un antiguo técnico aeroespacial, que imaginó un entorno de juego donde varios géneros pudieran coexistir dentro de un único sistema de progresión. En lugar de obligar a los jugadores a permanecer en un solo bucle de juego, se prevé que Hyper Tek les permita explorar distintas actividades mientras construyen su personaje, recursos y reputación en todo el ecosistema, con progresión, materiales, recompensas y logros fluyendo sin interrupciones entre todos los juegos.",
         "El proyecto prevé tres entornos de juego: Hyper Racing, Hyper Quest y Overlord of the Seven Realms. Cada juego ofrece un estilo de juego distinto, pero todos están diseñados para existir en el mismo universo y compartir la misma progresión del jugador. Este diseño busca que los jugadores disfruten del estilo de juego que prefieran sin dejar de formar parte de un ecosistema mayor, con entornos de juego más profundos e inmersivos que los juegos independientes tradicionales."
       ]
     },
@@ -46,7 +46,7 @@
         "quote": "...abordar múltiples problemas dentro de la industria del gaming y redefinir cómo funcionan los ecosistemas de juego...",
         "paras": [
           "La misión de Hyper Tek era abordar múltiples problemas dentro de la industria del gaming y redefinir cómo funcionan los ecosistemas de juego creando un universo interconectado donde los jugadores no están limitados a un solo estilo de juego.",
-          "Al combinar varios géneros en un único sistema de progresión, el objetivo es un entorno dinámico en el que los jugadores puedan explorar, competir y crecer dentro de un mundo unificado, con la verdadera propiedad de sus objetos digitales y un Programmatic Trade-In Value en los NFAs elegibles.",
+          "Al combinar varios géneros en un sistema de progresión, el objetivo es un entorno dinámico donde los jugadores puedan explorar, competir y crecer dentro de un mundo unificado, con verdadera propiedad de sus objetos digitales y una Programmatic Trade-In Value en los objetos elegibles.",
           "Un universo digital en el que varios juegos y comunidades coexisten en una única plataforma interconectada. En lugar de aislar las experiencias de juego en línea y de realidad virtual, Hyper Tek busca crear un ecosistema compartido en el que las acciones e interacciones de los jugadores puedan influir en el mundo que los rodea."
         ]
       }
@@ -77,8 +77,8 @@
     },
     "section04": {
       "label": "Obras de arte digitales no fungibles",
-      "heading": "Arte digital con utilidad dentro del juego",
-      "subtitle": "El resumen de 60 segundos",
+      "heading": "Arte digital con función prevista dentro del juego",
+      "subtitle": "NFA, Non-Fungible Articles. Son objetos o especialistas que no tienen bloqueo de ADN y pueden ser usados por cualquier especie",
       "quote": "Un universo. Tres juegos. Propiedad real. El futuro de la propiedad digital empieza con Hyper Tek.",
       "cards": [
         {
@@ -87,37 +87,37 @@
           "items": [
             {
               "label": "NFAs...",
-              "desc": "Creados por arquitectos, mayores bonificaciones en el juego, de semi a ultra raros"
+              "desc": "Creados por arquitectos, con las mayores bonificaciones previstas dentro del juego, de semiraros a ultrarraros"
             },
             {
               "label": "NFCs...",
-              "desc": "Coleccionables con bonificaciones en el juego, creables por jugadores"
+              "desc": "Coleccionables previstos con bonificaciones dentro del juego, creables por los jugadores"
             },
             {
               "label": "NFTs...",
-              "desc": "Completamente creados por jugadores, decora tu base para bonificaciones de poder"
+              "desc": "Hechos totalmente por jugadores, decora tu base para obtener bonificaciones/recompensas de poder previstas dentro del juego"
             }
           ]
         },
         {
-          "title": "Por qué retienen su valor",
+          "title": "Objetos on-chain reciclables",
           "bullets": [
-            "Programmatic Trade-In Value en cada obra elegible",
-            "Cada reventa se suma a la asignación de canje del objeto",
-            "Indexado a la inflación dos veces al año",
+            "Programmatic Trade-In Value prevista en cada obra elegible",
+            "Cada reventa suma a la asignación de trade-in del objeto según las condiciones finales",
             "Tu valor siempre crece, nunca disminuye"
           ]
         },
         {
           "title": "Equitativo por diseño",
-          "body": "La mayor parte de la comisión de cada venta no se queda en Hyper Tek 100. Vuelve al ecosistema: a la asignación de canje propia de ese objeto, depositada en escrow, y a las regalías del artista. Los compradores que publican misiones pueden reducir su comisión como descuento, mientras que los jugadores que completan misiones reciben recompensas dentro del juego."
+          "body": "Se prevé que la mayor parte de la comisión vuelva al ecosistema: los compradores que publican misiones pueden reducir su comisión como descuento, mientras que los jugadores que completan misiones reciben recompensas dentro del juego."
         },
         {
           "title": "Participa ahora",
-          "body": "Cada obra es una edición limitada: cuando se agota, desaparece para siempre. Como la oferta está limitada, cada pieza sigue siendo escasa. Ten arte coleccionable con utilidad dentro del juego que puede aplicarse si los juegos se lanzan.",
-          "link": "[www.hypertek.com] — Explora. Compra. Crea. Posee el futuro."
+          "body": "La infraestructura está construida y el marketplace está activo. A medida que seguimos desarrollando los juegos, lanzaremos cantidades limitadas de objetos de edición limitada con bonificaciones previstas dentro del juego superiores a lo normal, que no se repetirán.",
+          "link": "[www.hypertek.com] — Explora. Compra. Crea. Posee tus objetos."
         }
-      ]
+      ],
+      "pageHeading": "Arte digital con funcionalidad dentro del juego"
     },
     "section05": {
       "label": "Acceso anticipado — Objetos de edición limitada",
@@ -155,11 +155,11 @@
       "helpItems": [
         {
           "bold": "Compra un NFA, NFC o NFT",
-          "text": "Descubre arte digital con bonificaciones dentro del juego que pueden aplicarse si los juegos se lanzan, además de un Programmatic Trade-In Value. Disponible hasta agotar existencias."
+          "text": "Descubre obras de arte digital con una Programmatic Trade-In Value y bonificaciones previstas dentro del juego que podrían aplicarse si los juegos se finalizan."
         },
         {
           "bold": "Crea tu propio NFT",
-          "text": "— conviértete en creador del marketplace y ofrece tus propias obras a otros jugadores"
+          "text": "— conviértete en creador del marketplace y ofrece tus propias obras a otros ahora mismo"
         },
         {
           "bold": "Comparte y corre la voz",
@@ -174,25 +174,25 @@
       "subtitle": "Uniendo el juego inmersivo, un marketplace digital impulsado por los jugadores y los jugadores que coleccionan.",
       "cards": [
         {
-          "label": "Recompensas tangibles y emprendimiento",
+          "label": "Propiedad de objetos",
           "bullets": [
-            "Propiedad real de NFA/NFC/NFT con un Programmatic Trade-In Value",
+            "Verdadera propiedad de NFA/NFC/NFT con una Programmatic Trade-In Value prevista",
             "Intercambio entre jugadores en el marketplace",
-            "Utilidad dentro del juego que puede aplicarse en los juegos previstos",
+            "Bonificaciones dentro del juego que podrían aplicarse en los juegos planificados",
             "Diseño de objetos Play-to-Own"
           ]
         },
         {
           "label": "Item Loyalty Program",
-          "body": "Si conservas un objeto elegible durante más tiempo, su nivel de canje sube según el Tiered Loyalty Return Schedule, del 80 % de su asignación en el primer año al 97 % a partir del quinto año. El importe devuelto siempre es inferior al importe asignado, así que es una característica del producto, no una forma de ganar dinero."
+          "body": "Conserva un objeto elegible más tiempo y su nivel de trade-in sube según el Tiered Loyalty Return Schedule, del 80 % de su asignación en el primer año al 97 % después del quinto año. La cantidad devuelta siempre es menor que la asignada, por lo que es una función de reciclaje del producto, no una forma de ganar dinero."
         },
         {
           "label": "Gameplay infinito en mundos interconectados",
           "bullets": [
-            "Tres géneros de juego únicos dentro de un universo unificado",
-            "Progresión, recompensas y logros compartidos en todos los juegos",
-            "Un ecosistema viviente donde cada elección impacta en todo el universo",
-            "Los jugadores VR/AR pueden unirse a misiones y batallas épicas en tiempo real"
+            "Tres géneros de juego únicos previstos dentro de un universo unificado",
+            "Progresión compartida prevista, con recompensas y logros propuestos en todos los juegos",
+            "Un ecosistema vivo previsto donde cada decisión afecta a todo el universo",
+            "La VR está prevista y podría permitir a los jugadores unirse a misiones y batallas épicas en tiempo real"
           ]
         }
       ]
