@@ -17,7 +17,7 @@
     "shop": {
       "overview": "Tong quan",
       "overviewDesc": "Tong quan thi truong chung",
-      "myAssets": "Tai san cua toi",
+      "myAssets": "Vật phẩm của tôi",
       "myAssetsDesc": "Theo doi va quan ly moi thu ban so huu",
       "theMarketplace": "Cho",
       "theMarketplaceDesc": "Duyet tat ca do suu tam NFT, NFA & NFC",
@@ -69,8 +69,8 @@
         "description": "Mua NFT yeu thich cua ban va trung bay hoac giao dich chung tren ho so bat cu luc nao."
       },
       {
-        "title": "Kiem tien & Phat trien",
-        "description": "Kiem tien bang cach ban cac bo suu tap cua ban hoac nhan duoc su noi tieng trong khong gian NFT."
+        "title": "Sưu tầm & Phát triển",
+        "description": "Mở rộng bộ sưu tập của bạn, hoặc chào bán sáng tạo của chính bạn cho người chơi khác trên chợ."
       }
     ]
   },
@@ -93,15 +93,15 @@
       },
       {
         "label": "So huu that su",
-        "desc": "NFA/NFC/NFT có Programmatic Trade-In Value"
+        "desc": "NFA/NFC/NFT với Programmatic Trade-In Value dự kiến"
       },
       {
         "label": "Play-to-Own",
-        "desc": "Mọi vật phẩm bạn sưu tầm đều là của bạn, được ghi nhận trên chuỗi"
+        "desc": "Các vật phẩm dự kiến để bạn sưu tầm và sở hữu, được ghi lại trên chuỗi Base"
       },
       {
         "label": "Item Loyalty Program",
-        "desc": "Bạn giữ vật phẩm càng lâu, bậc đổi trả của nó càng cao, nhưng luôn thấp hơn số tiền được phân bổ cho vật phẩm đó"
+        "desc": "Giá trị gắn bó dự kiến có thể tăng theo các điều khoản đã nêu"
       },
       {
         "label": "Tien trinh lien ket",
@@ -109,7 +109,7 @@
       },
       {
         "label": "Tich hop VR/AR",
-        "desc": "Nguoi choi VR/AR co the tham gia nhiem vu va cac tran chien su thi trong thoi gian thuc"
+        "desc": "VR/AR dự kiến để người chơi có thể tham gia các nhiệm vụ và trận chiến hoành tráng theo thời gian thực"
       }
     ]
   },
@@ -169,10 +169,10 @@
       "uiPageSubtitle": "Bảng điều khiển gaming đầy đủ.",
       "uiPageSubtitleSpan": "Ba chế độ. Một trải nghiệm đắm chìm.",
       "uiHeroLabel": "Xem trước Tương tác",
-      "uiHeroDesc": "Bước vào bảng điều khiển đầy đủ của Hyper Tek 100. Chuyển đổi giữa các chế độ Racing, Quest và Overlord. Mỗi chế độ có thị trường, kho tài sản và doanh thu thời gian thực riêng.",
+      "uiHeroDesc": "Vào bảng điều khiển Hyper Tek 100 đầy đủ. Chuyển đổi giữa các chế độ Racing, Quest và Overlord, mỗi chế độ có chợ và kho vật phẩm riêng.",
       "uiStat1": "3 Chế độ Game",
       "uiStat2": "Bảng Điều Khiển Đầy Đủ",
-      "uiStat3": "Kho Tài Sản",
+      "uiStat3": "Kho vật phẩm",
       "uiStat4": "Chợ Trực Tiếp",
       "uiLaunchBtn": "Khởi chạy Giao diện",
       "aboutPageSubtitle": "Đội ngũ, sứ mệnh và tầm nhìn.",
@@ -181,9 +181,9 @@
       "aboutHeroTitle2": "Được Tăng Cường bởi Web3.5.",
       "aboutHeroDesc": "Hyper Tek 100 là một dự án game đang được phát triển, nơi mọi vật phẩm đều được ghi nhận trên chuỗi và thuộc về người chơi. Ba trò chơi liên kết với nhau đang được lên kế hoạch, với một hệ thống tiến trình chung.",
       "pillar1Title": "Công nghệ Web3.5",
-      "pillar1Desc": "Tài sản on-chain, quyền sở hữu thực sự và thị trường minh bạch được xây dựng trên Base.",
-      "pillar2Title": "Giá trị Tài sản Thực",
-      "pillar2Desc": "Mỗi vật phẩm trong game là tài sản có thể giao dịch. Chơi, kiếm tiền và sở hữu tiến trình của bạn.",
+      "pillar1Desc": "Vật phẩm on-chain, quyền sở hữu thực sự và một chợ minh bạch được xây dựng trên Base.",
+      "pillar2Title": "Quyền sở hữu vật phẩm thực sự",
+      "pillar2Desc": "Mọi vật phẩm trong game đủ điều kiện đều dự kiến có thể giao dịch. Chơi, sưu tầm và sở hữu vật phẩm của bạn.",
       "pillar3Title": "Hệ sinh thái Công bằng",
       "pillar3Desc": "Phân chia hoa hồng minh bạch và Programmatic Trade-In Value được tích hợp sẵn trong mỗi vật phẩm đủ điều kiện.",
       "pillar4Title": "Tham gia",
@@ -198,21 +198,21 @@
     "tryGaming": "Thử giao diện trò chơi",
     "badge": "NFA PHIÊN BẢN GIỚI HẠN VÀ CÁC GÓI GAME, CÓ SẴN CHO ĐẾN KHI HẾT HÀNG",
     "intro1": "Hyper Tek 100 là một dự án game đang được phát triển, hướng tới giải quyết một số thách thức cấp bách nhất của ngành. Trang web, marketplace và hệ thống vật phẩm đã được xây dựng, và ba trò chơi liên kết đang được lên kế hoạch. Trước khi các trò chơi ra mắt, chúng tôi phát hành một số lượng giới hạn vật phẩm và gói cho người chơi và nhà sưu tầm muốn tham gia vũ trụ từ sớm.",
-    "intro2": "Chúng tôi phát hành một số lượng nhỏ vật phẩm Non-Fungible Article (NFA) Giai đoạn 1. Mỗi vật phẩm liệt kê các phần thưởng thêm trong game có thể được áp dụng nếu các trò chơi được phát hành, và các mức thưởng của Giai đoạn 1 không có kế hoạch lặp lại. Nguồn cung bị giới hạn cứng: khi các vật phẩm này bán hết, mọi NFA phiên bản giới hạn chưa được mint còn lại sẽ bị gỡ khỏi trang web.",
-    "intro3": "Các vật phẩm Hyper Tek đủ điều kiện có Programmatic Trade-In Value, được giữ trong một tài khoản ký quỹ (escrow) trên chuỗi. Các NFA phiên bản giới hạn này cũng liệt kê các phần thưởng thêm trong game có thể được áp dụng, tùy theo luật chơi cuối cùng, nếu các trò chơi được phát hành.",
+    "intro2": "Chúng tôi phát hành một số ít vật phẩm Non-Fungible Article (NFA) Giai đoạn 1. Mỗi vật phẩm liệt kê các phần thưởng cộng thêm trong game dự kiến có thể áp dụng nếu các game được hoàn thành, và mức thưởng của Giai đoạn 1 không dự kiến được lặp lại. Nguồn cung bị giới hạn nghiêm ngặt: khi những vật phẩm này bán hết, các NFA phiên bản giới hạn còn lại chưa được đúc sẽ bị gỡ khỏi trang web.",
+    "intro3": "Các vật phẩm Hyper Tek đủ điều kiện mang Programmatic Trade-In Value được giữ trong escrow on-chain. Các NFA phiên bản giới hạn này cũng liệt kê các phần thưởng cộng thêm trong game dự kiến có thể áp dụng, theo quy tắc cuối cùng của game, nếu các game được hoàn thành.",
     "intro4": "Nếu bạn thích những gì đã thấy về Dự án Hyper Tek và muốn sở hữu một trong những vật phẩm giới hạn này, thì bây giờ là lúc. Nguồn cung có giới hạn, và một khi vật phẩm đã hết thì sẽ không được mint lại.",
     "intro5": "Đợt phát hành thứ hai của chúng tôi là một bộ các gói game độc quyền được bán trực tiếp trên trang web của chúng tôi, với giá thấp hơn 10% so với mức giá mà sau này chúng có thể được chào bán ở nơi khác. Mức giá này chỉ áp dụng trong thời gian giới hạn.",
     "keyPointsTitle": "Những điểm chính cần ghi nhớ:",
-    "intro6": "Hyper Tek Non-Fungible Articles (HT NFA) là các vật phẩm sưu tầm kỹ thuật số có phần thưởng thêm trong game lớn nhất trong dòng Hyper Tek, có thể được áp dụng nếu các trò chơi được phát hành, cùng với Programmatic Trade-In Value. Chỉ có sẵn cho đến khi hết hàng.",
-    "intro7": "Hyper Tek được xây dựng theo mô hình Play-to-Own: các vật phẩm bạn sưu tầm là của bạn, được ghi nhận trên chuỗi, với tiện ích trong game có thể được áp dụng trong các trò chơi đã lên kế hoạch. Vật phẩm được bán như đồ sưu tầm kỹ thuật số, không phải như một cách để kiếm tiền.",
+    "intro6": "Hyper Tek Non-Fungible Articles (HT NFA) là vật phẩm sưu tầm kỹ thuật số với các phần thưởng cộng thêm trong game dự kiến lớn nhất trong dòng Hyper Tek, có thể áp dụng nếu các game được hoàn thành, cộng với Programmatic Trade-In Value. Chỉ có sẵn khi còn hàng.",
+    "intro7": "Hyper Tek được xây dựng theo mô hình Play-to-Own: những vật phẩm bạn sưu tầm là của bạn, được ghi lại on-chain, với chức năng trong game dự kiến có thể áp dụng trong các game dự kiến. Vật phẩm được bán như đồ sưu tầm kỹ thuật số, không phải là cách để kiếm tiền.",
     "collectionsLabel": "Bo suu tap",
     "sectionTitle": "Các gói game phiên bản giới hạn",
     "discount": "Tiet kiem 10% so voi gia niem yet",
     "donationTierLabel": "Bậc gói",
     "donationTierPrefix": "Bậc gói:",
-    "rewardsTitle": "Tùy thuộc vào việc phát hành trò chơi và điều khoản trò chơi cuối cùng:",
+    "rewardsTitle": "Tùy thuộc vào việc phát hành game và các điều khoản cuối cùng của game:",
     "specialConditionTitle": "Dieu kien dac biet",
-    "specialCondition": "LƯU Ý: Ngoài Gems được tặng kèm để mua hàng trong game, phần thưởng thêm và ưu đãi giảm giá không thể kết hợp với bất kỳ khuyến mãi nào khác. Mỗi gói bao gồm việc ghi tên bạn trong phần danh đề cuối của các trò chơi, nếu các trò chơi được phát hành.\n\nVật phẩm được bán nguyên trạng. Phần thưởng thêm trong game, ưu đãi giảm giá và Gems được liệt kê trong gói chỉ có thể được áp dụng nếu các trò chơi được phát hành, và phải tuân theo luật chơi cuối cùng. Không có cam kết nào về lợi nhuận, khoản thanh toán hay lợi tức tài chính.",
+    "specialCondition": "Ngoài Gems đi kèm cho các giao dịch mua trong game, phần thưởng cộng thêm và giảm giá không thể kết hợp với bất kỳ khuyến mãi nào khác. Mỗi gói bao gồm một dòng ghi tên ở cuối phần credit của game, **tùy thuộc vào việc phát hành game**.\n\nVật phẩm được bán nguyên trạng. Phần thưởng cộng thêm trong game, giảm giá và Gems được liệt kê trong gói chỉ có thể áp dụng **tùy thuộc vào việc phát hành game và các điều khoản cuối cùng của game**. Không có lợi nhuận, khoản thanh toán hay lợi tức tài chính nào được hứa hẹn.",
     "imageComing": "Hinh anh sap ra mat",
     "close": "Dong"
   },

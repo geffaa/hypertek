@@ -11,7 +11,7 @@
       "executive-summary": "01  Tóm Tắt Điều Hành",
       "three-worlds": "02  Ba Thế Giới",
       "technology": "03  Công Nghệ",
-      "nfa": "04  Tài Sản Không Thể Thay Thế",
+      "nfa": "04  Non-Fungible Articles",
       "hyperbucks": "05  Gems",
       "marketplace": "06  Thị Trường",
       "roadmap": "07  Lộ Trình",
@@ -215,7 +215,7 @@
     "signUpBtn": "Đăng Ký",
     "walletReady": "Ví Của Bạn Đã Sẵn Sàng",
     "walletReadyDesc": "Một ví nhúng bảo mật đã được tạo cho tài khoản của bạn.",
-    "walletWarning": "⚠️ Không bao giờ chia sẻ khóa riêng tư của bạn với bất kỳ ai. Bất kỳ ai có khóa riêng tư của bạn đều có toàn quyền kiểm soát ví và tài sản của bạn.",
+    "walletWarning": "⚠️ Không bao giờ chia sẻ khóa riêng của bạn với bất kỳ ai. Bất kỳ ai có khóa riêng của bạn đều có toàn quyền kiểm soát ví và vật phẩm của bạn.",
     "walletAddress": "Địa Chỉ Ví Của Bạn",
     "enterPasswordReveal": "Nhập mật khẩu của bạn để hiển thị khóa riêng tư:",
     "reEnterPassword": "Nhập lại mật khẩu của bạn",
@@ -371,7 +371,7 @@
       "colTimeActive": "\nThời gian hoạt động\n",
       "colAssignedTo": "\nĐược giao cho\n",
       "inGame": "\nTrong trò chơi\n",
-      "earned": "\nkiếm được\n",
+      "earned": "Đã kiếm được",
       "statusOpen": "\nMở\n"
     },
     "listings": {
@@ -402,7 +402,7 @@
       "transactions": "Giao dịch",
       "offers": "Ưu đãi",
       "hyperBucks": "Gems",
-      "earnings": "Thu nhập",
+      "earnings": "Doanh thu bán hàng",
       "support": "Hỗ trợ",
       "signOut": "Ký tên Out"
     },
@@ -497,12 +497,12 @@
       "send": "Gửi"
     },
     "withdraw": {
-      "title": "Thu nhập trên thị trường",
-      "subtitle": "Nhận USDC kiếm được từ việc bán và người sáng tạo NFT tiền bản quyền.",
-      "connectWallet": "Kết nối ví của bạn để xem thu nhập trên thị trường.",
-      "noEarnings": "Chưa có thu nhập trên thị trường nào để yêu cầu.",
-      "noEarningsHint": "Thu nhập từ việc bán NFT sẽ xuất hiện ở đây.",
-      "sellerEarnings": "Thu nhập của người bán",
+      "title": "Doanh thu bán hàng trên chợ",
+      "subtitle": "Nhận USDC từ doanh số NFT và tiền bản quyền người sáng tạo của bạn.",
+      "connectWallet": "Kết nối ví của bạn để xem doanh thu bán hàng trên chợ.",
+      "noEarnings": "Chưa có doanh thu bán hàng trên chợ để nhận.",
+      "noEarningsHint": "Doanh thu bán NFT sẽ hiển thị ở đây.",
+      "sellerEarnings": "Doanh thu người bán",
       "creatorRoyalties": "Tiền bản quyền của người sáng tạo",
       "claim": "Yêu cầu"
     },
@@ -520,7 +520,7 @@
       "descPlaceholder": " Mô tả vật phẩm của bạn... ",
       "storageBox": " Hộp lưu trữ (Danh mục) ",
       "storageBoxHint": " Vật phẩm được đặt vào hộp lưu trữ này cho đến khi được liệt kê trên thị trường. ",
-      "assetType": " Loại nội dung ",
+      "assetType": "Loại vật phẩm",
       "nfcSoon": " Sẽ sớm có ",
       "nfcHint": " Việc tạo NFC yêu cầu giấy phép — sắp có bản cập nhật trong tương lai. ",
       "blockchain": " Blockchain ",

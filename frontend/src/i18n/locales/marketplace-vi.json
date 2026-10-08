@@ -61,9 +61,9 @@
       "features": [
         {
           "label": "NFA / NFC / NFT",
-          "tagline": "Mới với tài sản Web3.5? Bắt đầu tại đây",
+          "tagline": "Mới làm quen với vật phẩm Web3.5? Bắt đầu từ đây",
           "details": [
-            "NFA (Tài Sản Không Thể Thay Thế) là các mục do Hypertek phát hành với giá mua lại được nền tảng đảm bảo.",
+            "**NFA** (Non-Fungible Articles) là các vật phẩm do Hyper Tek phát hành.",
             "NFC (Nhân Vật Không Thể Thay Thế) là các mục người chơi được cấp phép với phần thưởng trong game và mua lại.",
             "NFT (Token Không Thể Thay Thế) là các vật phẩm sưu tập do người dùng tạo ra — giao diện, vũ khí và nhiều hơn nữa."
           ],
@@ -72,7 +72,7 @@
         },
         {
           "label": "Thị Trường",
-          "tagline": "Mua & bán tài sản trong game ngay lập tức",
+          "tagline": "Mua & bán vật phẩm kỹ thuật số ngay lập tức",
           "details": [
             "Duyệt qua danh mục rộng lớn của NFA, NFC và NFT — giao diện, vũ khí, chuyên gia, tàu vũ trụ và nhiều hơn nữa.",
             "Lọc theo danh mục, độ hiếm hoặc phạm vi giá để tìm chính xác những gì bạn cần.",
@@ -84,7 +84,7 @@
           "label": "Đấu Giá",
           "tagline": "Cạnh tranh để có các mục phiên bản giới hạn độc quyền",
           "details": [
-            "Đặt giá thầu cho các tài sản hiếm chỉ có thể mua qua đấu giá có thời hạn.",
+            "Đặt giá cho các vật phẩm hiếm chỉ có qua các cuộc đấu giá giới hạn thời gian.",
             "Đồng hồ đếm ngược trực tiếp hiển thị chính xác thời gian còn lại — mỗi giây đều quan trọng.",
             "Vượt giá người khác để bảo đảm các vật phẩm huyền thoại không thể mua theo cách nào khác."
           ],
@@ -92,9 +92,9 @@
         },
         {
           "label": "Giao Dịch",
-          "tagline": "Trao đổi tài sản ngang hàng, không có trung gian",
+          "tagline": "Trao đổi vật phẩm giữa người chơi, không qua trung gian",
           "details": [
-            "Đề xuất hoặc chấp nhận giao dịch tài sản trực tiếp với người chơi khác — hoàn toàn on-chain.",
+            "Đề xuất hoặc chấp nhận các giao dịch trao đổi vật phẩm trực tiếp với người chơi khác, hoàn toàn on-chain.",
             "Tự đặt điều khoản: chọn những gì bạn cung cấp và những gì bạn muốn nhận lại.",
             "Duyệt các đề nghị giao dịch mở hoặc đăng của riêng bạn để tìm thỏa thuận hoàn hảo."
           ],
@@ -102,10 +102,10 @@
         },
         {
           "label": "Nhiệm Vụ",
-          "tagline": "Hoàn thành nhiệm vụ, kiếm phần thưởng độc quyền",
+          "tagline": "Nhiệm vụ dự kiến với phần thưởng trong game",
           "details": [
-            "Đảm nhận nhiệm vụ để kiếm phần thưởng độc quyền và tài sản trong game hiếm.",
-            "Mỗi nhiệm vụ có mục tiêu độc đáo — khám phá, chiến đấu hoặc xây dựng con đường đến chiến thắng.",
+            "Các quest dự kiến có thể mang lại phần thưởng trong game độc quyền và vật phẩm hiếm trong game.",
+            "Mỗi quest dự kiến có một mục tiêu riêng: khám phá, chiến đấu hoặc xây dựng con đường đến chiến thắng của bạn.",
             "Xây dựng bộ sưu tập một cách chiến lược thông qua kỹ năng, không chỉ chi tiêu."
           ],
           "cta": "Khám Phá Nhiệm Vụ"
@@ -114,9 +114,9 @@
           "label": "Cho thuê",
           "tagline": "Cho thuê vật phẩm của bạn để nhận phần thưởng trong game",
           "details": [
-            "Thuê các chuyên gia hoặc thiết bị mạnh mẽ cho một nhiệm vụ duy nhất mà không cần mua.",
+            "Người chơi có thể cho thuê các chuyên gia hoặc trang bị mạnh cho một nhiệm vụ mà không cần mua trực tiếp.",
             "Người chơi có thể cho người chơi khác thuê các vật phẩm chưa dùng đến để nhận phần thưởng trong game do họ tự thỏa thuận với nhau.",
-            "Thời hạn linh hoạt — theo giờ, ngày hoặc theo nhiệm vụ."
+            "Thời hạn linh hoạt dự kiến: thỏa thuận theo giờ, theo ngày hoặc theo nhiệm vụ."
           ],
           "cta": "Xem mục Cho thuê"
         },
@@ -124,9 +124,9 @@
           "label": "Tiền Thưởng",
           "tagline": "Săn mục tiêu, nhận thưởng, đứng đầu bảng xếp hạng",
           "details": [
-            "Chấp nhận tiền thưởng do người chơi khác hoặc hệ thống đăng để kiếm phần thưởng tiền điện tử.",
+            "Người chơi có thể nhận các bounty do người chơi khác hoặc hệ thống đăng để lấy phần thưởng trong game.",
             "Leo bảng xếp hạng bounty để mở khóa danh hiệu độc quyền và phần thưởng trong game.",
-            "Đăng tiền thưởng của riêng bạn để tuyển dụng người chơi có kỹ năng cho mục tiêu của bạn."
+            "Người chơi có thể đăng bounty của riêng mình để tìm người chơi lành nghề cho mục tiêu của họ."
           ],
           "cta": "Xem Tiền Thưởng"
         }
@@ -178,7 +178,7 @@
     "nfa101": {
       "sectionLabel": "Giáo Dục",
       "heading": "NFA / NFC / NFT 101",
-      "subtitle": "Mới với NFT và Web3.5? Khám phá các bài viết của chúng tôi để hiểu tài sản blockchain, ví, bảo mật và hệ sinh thái HyperTek.",
+      "subtitle": "Mới làm quen với NFT và Web3.5? Hãy khám phá các bài viết của chúng tôi để hiểu về vật phẩm blockchain, ví, bảo mật và hệ sinh thái Hyper Tek.",
       "minRead": "phút đọc",
       "filterAll": "Tất Cả"
     },
@@ -367,7 +367,7 @@
       "noQuests": "Không có nhiệm vụ {{filter}}",
       "inGameFeature": "Tính Năng Trong Game",
       "inGameDesc": "Nhiệm vụ được tự động tạo ra khi người bán chọn hoa hồng giảm. Người chơi có thể hoàn thành tối đa 5 nhiệm vụ mỗi ngày. Kho hoa hồng được chia giữa giảm giá cho người mua, phần thưởng cho người chơi và nền tảng.",
-      "earnFromQuests": "Muốn kiếm tiền từ nhiệm vụ? Chơi trò chơi →",
+      "earnFromQuests": "Muốn phần thưởng trong game từ quest? Hãy thử giao diện game →",
       "moneyQuests": "Nhiệm Vụ Tiền (kho 11%)",
       "resourceQuests": "Nhiệm Vụ Tài Nguyên (kho 20%)",
       "footerNote1": "# Nhiệm vụ có hàng hóa kết hợp sử dụng phần thưởng trong bảng riêng.",
@@ -385,7 +385,7 @@
       },
       "comingSoon": {
         "title": "Sắp Ra Mắt",
-        "desc": "Tính năng nhiệm vụ trong game hiện đang được phát triển. Hãy chú ý — bạn sẽ có thể kiếm phần thưởng trực tiếp từ trò chơi.",
+        "desc": "Các tính năng quest trong game dự kiến đang được phát triển và có thể mang lại phần thưởng trong game, tùy thuộc vào quy tắc cuối cùng của game.",
         "gotIt": "Đã Hiểu"
       },
       "pagination": {
