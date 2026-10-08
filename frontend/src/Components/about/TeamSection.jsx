@@ -8,37 +8,18 @@ const ACCENTS = [
   { c: "#fbbf24", soft: "rgba(251,191,36,0.06)", line: "rgba(251,191,36,0.25)" },
 ];
 
-const initials = (name) => name.split(" ").map((w) => w[0]).filter(Boolean).slice(0, 2).join("");
-
-// Photo when one is supplied, otherwise a monogram ring of the same size, so
-// the layout does not change when photos are added later.
+// A photo is shown only when one has been supplied. Without it the card is
+// text only, so nothing looks like a missing picture.
 function Avatar({ member, accent, size }) {
-  const box = { width: size, height: size };
-  if (member.photo) {
-    return (
-      <img
-        src={member.photo}
-        alt={member.name}
-        loading="lazy"
-        className="rounded-full object-cover flex-shrink-0"
-        style={{ ...box, border: `2px solid ${accent.c}` }}
-      />
-    );
-  }
+  if (!member.photo) return null;
   return (
-    <div
-      className="rounded-full flex-shrink-0 flex items-center justify-center font-[Goldman] font-bold"
-      style={{
-        ...box,
-        color: accent.c,
-        fontSize: size * 0.34,
-        background: `radial-gradient(circle at 30% 25%, ${accent.soft}, rgba(255,255,255,0.02))`,
-        border: `1.5px solid ${accent.line}`,
-      }}
-      aria-hidden="true"
-    >
-      {initials(member.name)}
-    </div>
+    <img
+      src={member.photo}
+      alt={member.name}
+      loading="lazy"
+      className="rounded-full object-cover flex-shrink-0"
+      style={{ width: size, height: size, border: `2px solid ${accent.c}` }}
+    />
   );
 }
 
@@ -56,26 +37,20 @@ const reveal = (index) => ({
   viewport: { once: true },
 });
 
-// Leadership: a full-width row. Identity sits in a fixed column on the left and
-// the bio gets the rest of the width, so a long bio and a shorter one both
-// look finished instead of one card leaving blank space under the other.
+// Leadership: name and role on top, then the bio set in two columns on wide
+// screens. A long bio and a shorter one both fill their card without leaving
+// a blank side.
 function LeaderRow({ member, accent, index }) {
   return (
-    <motion.article
-      className="rounded-2xl flex flex-col md:flex-row gap-5 md:gap-8"
-      style={cardStyle(accent, "28px")}
-      {...reveal(index)}
-    >
-      <header className="flex md:flex-col items-center md:items-start gap-4 md:w-60 flex-shrink-0">
-        <Avatar member={member} accent={accent} size={84} />
+    <motion.article className="rounded-2xl flex flex-col gap-5" style={cardStyle(accent, "28px")} {...reveal(index)}>
+      <header className="flex items-center gap-4">
+        <Avatar member={member} accent={accent} size={72} />
         <div className="min-w-0">
           <h4 className="text-white font-[Goldman] font-bold text-xl leading-tight">{member.name}</h4>
           <p className="text-[13px] font-semibold leading-snug mt-1" style={{ color: accent.c }}>{member.role}</p>
         </div>
       </header>
-      <p className="text-white/70 text-[14px] leading-[1.9] text-left md:border-l md:pl-8" style={{ borderColor: accent.line }}>
-        {member.bio}
-      </p>
+      <p className="text-white/70 text-[14px] leading-[1.9] text-left lg:columns-2 lg:gap-12">{member.bio}</p>
     </motion.article>
   );
 }
@@ -86,7 +61,7 @@ function MemberCard({ member, accent, index }) {
   return (
     <motion.article className="rounded-2xl flex flex-col gap-4 h-full" style={cardStyle(accent, "20px")} {...reveal(index)}>
       <header className="flex items-center gap-4">
-        <Avatar member={member} accent={accent} size={48} />
+        <Avatar member={member} accent={accent} size={52} />
         <div className="min-w-0">
           <h4 className="text-white font-[Goldman] font-bold text-base leading-tight">{member.name}</h4>
           <p className="text-[12px] font-semibold leading-snug mt-0.5" style={{ color: accent.c }}>{member.role}</p>
