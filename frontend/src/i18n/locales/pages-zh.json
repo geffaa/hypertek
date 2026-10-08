@@ -11,7 +11,7 @@
       "executive-summary": "01  执行摘要",
       "three-worlds": "02  三个世界",
       "technology": "03  技术",
-      "nfa": "04  非同质资产",
+      "nfa": "04  Non-Fungible Articles",
       "hyperbucks": "05  Gems",
       "marketplace": "06  市场",
       "roadmap": "07  路线图",
@@ -215,7 +215,7 @@
     "signUpBtn": "注册",
     "walletReady": "您的钱包已就绪",
     "walletReadyDesc": "已为您的账户创建了安全的嵌入式钱包。",
-    "walletWarning": "⚠️ 切勿与任何人分享您的私钥。拥有您私钥的人可以完全控制您的钱包和资产。",
+    "walletWarning": "⚠️ 切勿与任何人分享你的私钥。任何拥有你私钥的人都对你的钱包和物品拥有完全控制权。",
     "walletAddress": "您的钱包地址",
     "enterPasswordReveal": "输入您的密码以显示私钥：",
     "reEnterPassword": "重新输入密码",
@@ -371,7 +371,7 @@
       "colTimeActive": "\n活跃时间\n",
       "colAssignedTo": "\n分配给\n",
       "inGame": "\n游戏内\n",
-      "earned": "\n赢得\n",
+      "earned": "已赚取",
       "statusOpen": "\n打开\n"
     },
     "listings": {
@@ -402,7 +402,7 @@
       "transactions": "交易",
       "offers": "优惠",
       "hyperBucks": "Gems",
-      "earnings": "收入",
+      "earnings": "销售收益",
       "support": "支持",
       "signOut": "签名退出"
     },
@@ -497,12 +497,12 @@
       "send": "发送"
     },
     "withdraw": {
-      "title": "市场收入",
-      "subtitle": "从 NFT 销售和创建者处领取 USDC版税。",
-      "connectWallet": "连接您的钱包以查看市场收入。",
-      "noEarnings": "尚无可领取的市场收入。",
-      "noEarningsHint": "NFT 销售收入将显示在此处。",
-      "sellerEarnings": "卖家收入",
+      "title": "市场销售收益",
+      "subtitle": "从你的 NFT 销售和创作者版税中领取 USDC。",
+      "connectWallet": "连接你的钱包以查看你的市场销售收益。",
+      "noEarnings": "暂无可领取的市场销售收益。",
+      "noEarningsHint": "NFT 销售收益将显示在这里。",
+      "sellerEarnings": "卖家收益",
       "creatorRoyalties": "创作者版税",
       "claim": "索赔"
     },
@@ -520,7 +520,7 @@
       "descPlaceholder": " 描述您的物品... ",
       "storageBox": " 储物盒（类别） ",
       "storageBoxHint": " 物品被放入此储物盒中，直到在市场上上市。 ",
-      "assetType": " 资产类型 ",
+      "assetType": "物品类型",
       "nfcSoon": " 很快 ",
       "nfcHint": " NFC 创建需要许可证 - 将在未来的更新中提供。 ",
       "blockchain": " 区块链 ",

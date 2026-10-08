@@ -17,7 +17,7 @@
     "shop": {
       "overview": "概览",
       "overviewDesc": "市场总体概况",
-      "myAssets": "我的资产",
+      "myAssets": "我的物品",
       "myAssetsDesc": "追踪并管理您拥有的一切",
       "theMarketplace": "市场广场",
       "theMarketplaceDesc": "浏览所有 NFT、NFA 和 NFC 收藏品",
@@ -69,8 +69,8 @@
         "description": "购买您喜欢的 NFT，随时在个人主页展示或交易。"
       },
       {
-        "title": "赚取与成长",
-        "description": "通过出售收藏品或在 NFT 领域获得人气来赚取收益。"
+        "title": "收集 & 成长",
+        "description": "扩充你的收藏，或在市场中向其他玩家提供你自己的创作。"
       }
     ]
   },
@@ -93,15 +93,15 @@
       },
       {
         "label": "真实所有权",
-        "desc": "带有 Programmatic Trade-In Value 的 NFA/NFC/NFT"
+        "desc": "带有计划中 Programmatic Trade-In Value 的 NFA/NFC/NFT"
       },
       {
         "label": "Play-to-Own",
-        "desc": "你收集的每件物品都属于你，并记录在链上"
+        "desc": "计划供你收集和拥有的物品，记录在 Base 链上"
       },
       {
         "label": "Item Loyalty Program",
-        "desc": "物品持有时间越长，其折换等级越高，但始终低于分配给该物品的金额"
+        "desc": "计划中的忠诚度价值，可能按所述条款增长"
       },
       {
         "label": "联动进阶",
@@ -109,7 +109,7 @@
       },
       {
         "label": "VR/AR 融合",
-        "desc": "VR/AR玩家可实时加入任务和史诗战斗"
+        "desc": "计划中的 VR/AR，让玩家能够实时参与史诗任务和战斗"
       }
     ]
   },
@@ -169,10 +169,10 @@
       "uiPageSubtitle": "全方位游戏仪表盘。",
       "uiPageSubtitleSpan": "三种模式。一次沉浸式体验。",
       "uiHeroLabel": "互动预览",
-      "uiHeroDesc": "进入完整的 Hyper Tek 100 仪表盘。在 Racing、Quest 和 Overlord 模式之间切换。每种模式都有自己的市场、资产库存和实时收益视图。",
+      "uiHeroDesc": "进入完整的 Hyper Tek 100 仪表盘。在 Racing、Quest 和 Overlord 模式之间切换，每个模式都有自己的市场和物品库存。",
       "uiStat1": "3 种游戏模式",
       "uiStat2": "完整仪表盘",
-      "uiStat3": "资产库存",
+      "uiStat3": "物品库存",
       "uiStat4": "实时市场",
       "uiLaunchBtn": "启动界面",
       "aboutPageSubtitle": "团队、使命与愿景。",
@@ -181,9 +181,9 @@
       "aboutHeroTitle2": "由 Web3.5 驱动。",
       "aboutHeroDesc": "Hyper Tek 100 是一个开发中的游戏项目，每件物品都记录在链上并归玩家所有。计划推出三款相互关联的游戏，共用一套进度系统。",
       "pillar1Title": "Web3.5 技术",
-      "pillar1Desc": "链上资产、真实所有权以及建立在 Base 上的透明市场。",
-      "pillar2Title": "真实资产价值",
-      "pillar2Desc": "每件游戏内物品都是可交易的资产。游戏、赚取并拥有您的进度。",
+      "pillar1Desc": "链上物品、真实所有权，以及构建在 Base 上的透明市场。",
+      "pillar2Title": "真实的物品所有权",
+      "pillar2Desc": "每件符合条件的游戏内物品都计划可交易。游玩、收集并拥有你的物品。",
       "pillar3Title": "公平生态系统",
       "pillar3Desc": "透明的佣金分配，以及内置于每件符合条件物品中的 Programmatic Trade-In Value。",
       "pillar4Title": "加入我们",
@@ -198,21 +198,21 @@
     "tryGaming": "试用游戏界面",
     "badge": "限量版 NFA 与游戏礼包，售完即止",
     "intro1": "Hyper Tek 100 是一个开发中的游戏项目，旨在解决行业中一些最紧迫的难题。网站、市场和物品系统已经建成，并计划推出三款相互关联的游戏。在游戏推出之前，我们为希望尽早加入这个宇宙的玩家和收藏者发行数量有限的物品和礼包。",
-    "intro2": "我们将发行少量第 1 阶段 Non-Fungible Article (NFA) 物品。每件物品都列出了游戏发布后可能适用的游戏内加成，第 1 阶段的加成等级不计划再次提供。供应量设有硬性上限：这些物品售罄后，任何剩余未铸造的限量版 NFA 将从网站下架。",
-    "intro3": "符合条件的 Hyper Tek 物品带有 Programmatic Trade-In Value，由链上托管合约保管。这些限量版 NFA 还列出了在游戏发布后，根据最终游戏规则可能适用的游戏内加成。",
+    "intro2": "我们发行少量第一阶段 Non-Fungible Article（NFA）物品。每件物品都列出了计划中的游戏内加成，若游戏完成，这些加成可能适用，且第一阶段的加成等级不计划重复。供应严格有限：这些物品售罄后，剩余未铸造的限量版 NFA 将从网站移除。",
+    "intro3": "符合条件的 Hyper Tek 物品带有存放在链上托管中的 Programmatic Trade-In Value。这些限量版 NFA 还列出了计划中的游戏内加成，若游戏完成，在游戏最终规则的约束下，这些加成可能适用。",
     "intro4": "如果你喜欢目前看到的 Hyper Tek 项目，并想拥有其中一件限量物品，现在正是时候。供应量有上限，物品售完后不会再次铸造。",
     "intro5": "我们的第二批发行是一组在我们自己的网站上直接销售的专属游戏礼包，价格比日后可能在其他渠道提供的价格低 10%。该价格仅限时提供。",
     "keyPointsTitle": "需要谨记的要点：",
-    "intro6": "Hyper Tek Non-Fungible Articles (HT NFA) 是 Hyper Tek 系列中游戏内加成最大的数字收藏品，这些加成在游戏发布后可能适用，同时带有 Programmatic Trade-In Value。售完即止。",
-    "intro7": "Hyper Tek 以 Play-to-Own 模式打造：你收集的物品属于你，记录在链上，并带有在计划中的游戏里可能适用的游戏内功用。物品作为数字收藏品出售，而不是赚钱的途径。",
+    "intro6": "Hyper Tek Non-Fungible Articles（HT NFA）是数字收藏品，拥有 Hyper Tek 阵容中最大的计划中游戏内加成（若游戏完成可能适用），外加 Programmatic Trade-In Value。仅限库存有限时购买。",
+    "intro7": "Hyper Tek 以 Play-to-Own 构建：你收集的物品归你所有，记录在链上，并带有计划中的游戏内功能，可能适用于计划中的游戏。物品作为数字收藏品出售，而不是赚钱的方式。",
     "collectionsLabel": "收藏品",
     "sectionTitle": "限量版游戏礼包",
     "discount": "比标价节省10%",
     "donationTierLabel": "礼包等级",
     "donationTierPrefix": "礼包等级：",
-    "rewardsTitle": "以游戏发布和最终游戏条款为准：",
+    "rewardsTitle": "以游戏发布和游戏最终条款为准：",
     "specialConditionTitle": "特别条件",
-    "specialCondition": "注意：除用于游戏内购买的随附 Gems 外，加成和折扣不可与任何其他促销叠加使用。 如果游戏发布，每个礼包都包含在游戏片尾字幕中署名。\n\n物品按现状出售。礼包中列出的游戏内加成、折扣和 Gems 仅在游戏发布后才可能适用，并以最终游戏规则为准。不承诺任何利润、付款或财务回报。",
+    "specialCondition": "除了为游戏内购买附带的 Gems 外，加成和折扣不能与任何其他促销叠加。每个套餐都包含游戏片尾的署名致谢，**以游戏发布为准**。\n\n物品按现状出售。套餐中列出的游戏内加成、折扣和 Gems 仅可能在**以游戏发布和游戏最终条款为准**的情况下适用。不承诺任何利润、付款或财务回报。",
     "imageComing": "图片即将上线",
     "close": "关闭"
   },
