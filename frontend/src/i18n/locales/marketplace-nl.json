@@ -61,9 +61,9 @@
       "features": [
         {
           "label": "NFAs / NFCs / NFTs",
-          "tagline": "Nieuw in Web3.5-bezittingen? Begin hier",
+          "tagline": "Nieuw met Web3.5 items? Begin hier",
           "details": [
-            "NFAs zijn door Hypertek uitgegeven items met een gegarandeerde terugkoopprijs.",
+            "**NFA's** (Non-Fungible Articles) zijn door Hyper Tek uitgegeven items.",
             "NFCs zijn gelicentieerde spelersitems met bonussen in het spel.",
             "NFTs zijn door gebruikers gemaakte verzamelobjecten."
           ],
@@ -72,7 +72,7 @@
         },
         {
           "label": "De Marktplaats",
-          "tagline": "Koop en verkoop spelassets direct",
+          "tagline": "Koop & verkoop digitale items direct",
           "details": [
             "Blader door een uitgebreide catalogus van NFAs, NFCs en NFTs.",
             "Filter op categorie, zeldzaamheid of prijsbereik.",
@@ -84,7 +84,7 @@
           "label": "Veilingen",
           "tagline": "Strijdt om exclusieve beperkte editie items",
           "details": [
-            "Bied op zeldzame bezittingen die alleen beschikbaar zijn via tijdelijke veilingen.",
+            "Bied op zeldzame items die alleen beschikbaar zijn via veilingen met een beperkte duur.",
             "Een live aftelling toont precies hoeveel tijd er nog over is.",
             "Overtrof anderen om legendarische items te bemachtigen."
           ],
@@ -92,9 +92,9 @@
         },
         {
           "label": "Ruilhandel",
-          "tagline": "Ruil bezittingen peer-to-peer, geen tussenpersoon",
+          "tagline": "Ruil items rechtstreeks tussen spelers, zonder tussenpersoon",
           "details": [
-            "Stel directe ruilhandel voor met andere spelers of accepteer ze — volledig on-chain.",
+            "Stel directe itemruilen met andere spelers voor of accepteer ze, volledig on-chain.",
             "Stel zelf de voorwaarden in.",
             "Blader door open ruilaanbiedingen of post je eigen."
           ],
@@ -102,10 +102,10 @@
         },
         {
           "label": "Quests",
-          "tagline": "Voltooi missies, verdien exclusieve beloningen",
+          "tagline": "Geplande missies met in-game beloningen",
           "details": [
-            "Neem quests aan om exclusieve beloningen te verdienen.",
-            "Elke quest heeft unieke doelstellingen.",
+            "Geplande quests kunnen exclusieve in-game beloningen en zeldzame in-game items bieden.",
+            "Elke quest is bedoeld om unieke doelen te hebben: verken, vecht of bouw je weg naar de overwinning.",
             "Bouw je collectie strategisch op."
           ],
           "cta": "Verken Quests"
@@ -114,9 +114,9 @@
           "label": "Te huur",
           "tagline": "Verhuur je items voor in-game beloningen",
           "details": [
-            "Huur krachtige specialisten of uitrusting voor één missie.",
+            "Spelers kunnen mogelijk krachtige specialisten of uitrusting voor één missie huren zonder ze direct te kopen.",
             "Spelers kunnen mogelijk ongebruikte items aan andere spelers verhuren voor in-game beloningen die ze onderling afspreken.",
-            "Flexibele duur — per uur, per dag of per missie."
+            "Geplande flexibele looptijden: afspraken per uur, per dag of per missie."
           ],
           "cta": "Bekijk Te huur"
         },
@@ -124,9 +124,9 @@
           "label": "Premies",
           "tagline": "Jaag op doelen, claim beloningen",
           "details": [
-            "Accepteer premies geplaatst door andere spelers of het systeem.",
+            "Spelers kunnen mogelijk premies accepteren die door andere spelers of het systeem zijn geplaatst voor in-game beloningen.",
             "Klim op de bounty-ranglijst om exclusieve titels en in-game beloningen vrij te spelen.",
-            "Post je eigen premies om bekwame spelers te werven."
+            "Spelers kunnen mogelijk hun eigen premies plaatsen om vaardige spelers voor hun doelen te vinden."
           ],
           "cta": "Bekijk Premies"
         }
@@ -178,7 +178,7 @@
     "nfa101": {
       "sectionLabel": "Onderwijs",
       "heading": "NFAs / NFCs / NFTs 101",
-      "subtitle": "Nieuw in NFTs en Web3.5? Verken onze artikelen.",
+      "subtitle": "Nieuw met NFT's en Web3.5? Lees onze artikelen om blockchain-items, wallets, beveiliging en het Hyper Tek ecosysteem te begrijpen.",
       "minRead": "min lezen",
       "filterAll": "Alles"
     },
@@ -367,7 +367,7 @@
       "noQuests": "Geen {{filter}} quests",
       "inGameFeature": "In-game Functie",
       "inGameDesc": "Quests worden automatisch gegenereerd wanneer verkopers kiezen voor een verlaagde commissie. Spelers kunnen tot 5 quests per dag voltooien.",
-      "earnFromQuests": "Wil je verdienen met quests? Speel het spel →",
+      "earnFromQuests": "Wil je in-game beloningen uit quests? Probeer de game-interface →",
       "moneyQuests": "Geldquests (pool 11%)",
       "resourceQuests": "Resourcequests (pool 20%)",
       "footerNote1": "# Quests met gecombineerde ladingen gebruiken de beloningen uit de aparte tabel.",
@@ -385,7 +385,7 @@
       },
       "comingSoon": {
         "title": "Binnenkort",
-        "desc": "De in-game questfunctie is momenteel in ontwikkeling.",
+        "desc": "De geplande in-game questfunctie is in ontwikkeling en kan in-game beloningen bieden, onder voorbehoud van de definitieve spelregels.",
         "gotIt": "Begrepen"
       },
       "pagination": {

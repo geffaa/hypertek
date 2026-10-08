@@ -5,16 +5,16 @@
     "racing": {
       "label": "RACEN",
       "heading": "Hyperracen",
-      "subtitle": "De meest intense race-ervaring met vliegende voertuigen in de Melkweg,\nwaar vaardigheid loont en kampioenen worden gemaakt.",
+      "subtitle": "De meest intense race-ervaring met vliegende voertuigen van de galaxy,\nwaar vaardigheid regeert en kampioenen worden gemaakt.",
       "intro": [
-        "Hyper Racing is een competitief racespel met een hoog octaangehalte dat zich afspeelt in buitenaardse werelden, waarin spelers volledig aanpasbare vliegende racevoertuigen bouwen, upgraden en besturen door enkele van de gevaarlijkste circuits in de Melkweg. Van drijvende rotsformaties en vulkanische lavabuizen tot woestijnwoestijnen en bergpassen: elke race is een test van voorbereiding, reflexen en strategie.",
-        "Hyper Racing is gepland als een competitief platform. Toppresteerders kunnen mogelijk deelnemen aan ranked evenementen en toernooien met in-game beloningen als inzet. Of je nu jaagt op roem op de ranglijst of een race-imperium opbouwt, alles wat je in Hyper Racing doet is ontworpen om je vooruit te helpen.",
-        "Upgrade je racevoertuigen van neus tot staart. Werf je pitcrew en laat die in level stijgen. Werf een pitmanager die past bij jouw racefilosofie. Neem je vaardigheden daarna mee voorbij de baan: je racegarage is ook de hangar van je persoonlijke ruimteschip, en elke vaardigheid die je ontwikkelt gaat mee naar ruimtegevechten in Hyper Quest en Overlord of the 7 Realms."
+        "Hyper Racing is een gepland, energiek competitief racespel in ontwikkeling, gesitueerd op buitenaardse werelden, waarin spelers mogelijk volledig aanpasbare vliegende racevoertuigen kunnen bouwen, upgraden en besturen over enkele van de gevaarlijkste circuits van de galaxy. Van geplande zwevende rotsformaties en vulkanische lavatunnels tot woestijnvlaktes en bergpassen: elke geplande race is bedoeld als een test van voorbereiding, reflexen en strategie.",
+        "Hyper Racing is gepland als een competitief platform. Topspelers kunnen mogelijk deelnemen aan gerangschikte evenementen en toernooien waarbij in-game beloningen op het spel staan. Of je nu streeft naar roem op het klassement of een raceimperium bouwt: alles wat je in Hyper Racing doet kan je vooruit helpen.",
+        "In de geplande games in ontwikkeling kun je mogelijk:\n• Je racevoertuigen van neus tot staart upgraden\n• Je pitcrew verwerven en laten levelen\n• Een pitmanager verwerven die bij je racefilosofie past\n• Je vaardigheden verder meenemen dan de baan, met een racegarage die ook de hangar van je persoonlijke ruimteschip is\n• De vaardigheden die je ontwikkelt meenemen naar de ruimtegevechten in Hyper Quest en Overlord of the 7 Realms"
       ],
-      "introClose": "Lees verder om te ontdekken hoe het spel werkt, wat je kunt winnen en hoe jouw racecarrière een heel universum van vooruitgang stimuleert.",
-      "calloutLine1": "Race om te verdienen. Verdien om te upgraden.",
+      "introClose": "Lees verder om te ontdekken hoe het geplande spel bedoeld is te werken, welke in-game beloningen het kan bieden en hoe je racecarrière een heel heelal aan voortgang kan voeden. Alles onder voorbehoud van het afronden van de games en de definitieve spelregels.",
+      "calloutLine1": "Race om te verbeteren. Verbeter om te upgraden.",
       "calloutLine2": "Upgrade naar Domineren.",
-      "howItWorksTitle": "Hoe hyperracen werkt",
+      "howItWorksTitle": "Hoe de geplande Hyper Tek racegames in ontwikkeling bedoeld zijn te werken: het overzicht staat hieronder, onder voorbehoud van het afronden van de games en de definitieve spelregels.",
       "howItWorks": [
         {
           "num": "01",
@@ -24,7 +24,7 @@
         {
           "num": "02",
           "title": "Bouw je team",
-          "body": "Racen is een teamsport. Werf pitcrew-specialisten die unieke bonussen meebrengen: sneller tanken, realtime diagnose, noodreparaties aan de romp tijdens de race en prestatie-afstellingen tussen de rondes. Elk crewlid stijgt in level met ervaring en stapelt krachtige vaardigheden boven op je voertuigupgrades. Werf daarna een pitmanager om de operatie te coördineren, de racestrategie te bepalen en teambrede prestatieboosts vrij te spelen die over een heel seizoen optellen."
+          "body": "Racen is een teamsport. Verwerf pitcrew-specialisten die unieke bonussen brengen, sneller tanken, realtime diagnostiek, noodreparaties aan de romp midden in de race en prestatie-aanpassingen tussen de rondes. Elk crewlid levelt met ervaring en stapelt krachtige vaardigheden bovenop je voertuigupgrades. Verwerf daarna een pitmanager die de operaties coördineert, de racestrategie bepaalt en teambrede prestatieboosts vrijspeelt die zich over een heel seizoen opbouwen."
         },
         {
           "num": "03",
@@ -34,213 +34,209 @@
         {
           "num": "04",
           "title": "Beklim de rangen",
-          "body": "Overwinning levert leiderspunten op, ontgrendelt nieuwe circuits op verre werelden en opent de deur naar competities op een hoger niveau. Hoe dieper je gaat, hoe heviger de tegenstanders en hoe groter de inzet. Bewijs jezelf op elke planeet en stijg op de mondiale ranglijst."
+          "body": "Winnen levert klassementspunten op, ontgrendelt nieuwe circuits op verre werelden en opent de deur naar competities van een hoger niveau. Hoe dieper je komt, hoe feller de tegenstanders en hoe hoger de inzet. Bewijs jezelf op elke planeet en stijg in het wereldwijde klassement."
         }
       ],
-      "rewardsTitle": "Win veel; Beloningen die ertoe doen!",
+      "rewardsTitle": "In-game beloningen die tellen",
       "rewards": [
         {
-          "title": "In-game beloningen",
-          "body": "Elke race die je uitrijdt, is ontworpen om je in de game te belonen. Win je, dan kunnen de beloningen zich vermenigvuldigen. Raceoverwinningen kunnen premium voertuigonderdelen, zeldzame upgradematerialen, exclusieve tokens voor het werven van crew en credits voor je volgende build vrijspelen. Upgrade je voertuigen, ruil ze met andere spelers en zie je race-imperium groeien met elke podiumplaats."
+          "title": "In-game beloningen met in-game items",
+          "body": "Elke race die je afrondt is bedoeld om je in-game beloningen te geven. Win, en de in-game beloningen kunnen zich vermenigvuldigen. Raceoverwinningen kunnen premium voertuigonderdelen, zeldzame upgradematerialen, exclusieve in-game crewtokens en in-game credits voor je volgende build vrijspelen. Je kunt mogelijk je voertuigen upgraden en met andere spelers ruilen, onder voorbehoud van de definitieve spelregels."
         },
         {
           "title": "Ranked evenementen",
-          "body": "Hyper Racing is ontworpen rond ranked evenementen en toernooien. Op vaardigheid gebaseerde wedstrijden kunnen je de kans geven je kunnen te bewijzen tegen de beste piloten van het sterrenstelsel, voor in-game beloningen, titels en een plek op de ranglijst. Van wekelijkse ranked uitdagingen tot seizoenskampioenschappen: toppresteerders kunnen volop kansen krijgen om op te vallen."
+          "body": "Hyper Racing is gepland rond gerangschikte evenementen en toernooien. Geplande vaardigheidsgebaseerde wedstrijden kunnen je laten bewijzen wat je kunt tegen de beste piloten van de galaxy voor in-game beloningen, titels en een plek in het klassement. Van wekelijkse gerangschikte uitdagingen tot seizoenskampioenschappen: topspelers kunnen veel kansen vinden om op te vallen."
         },
         {
-          "title": "Hoe prijsevenementen werken",
-          "body": "Spelers kunnen zich mogelijk kwalificeren via ranked play door prestatiedrempels te halen. Evenementen zijn gepland rond eerlijke matchmaking, zodat elke deelnemer het opneemt tegen tegenstanders van vergelijkbaar niveau. De regels van evenementen en de in-game beloningen horen duidelijk te worden getoond voordat je je vastlegt."
+          "title": "Hoe in-game beloningsevenementen kunnen werken",
+          "body": "Spelers kunnen zich kwalificeren via gerangschikt spelen door prestatiedrempels te halen. Evenementen zijn gepland rond eerlijke matchmaking, zodat elke deelnemer tegenstanders van vergelijkbaar niveau kan treffen. Evenementregels en in-game beloningen zijn bedoeld om duidelijk getoond te worden voordat je je aanmeldt, onder voorbehoud van de definitieve spelregels."
         },
         {
           "title": "Vooruitgang voorbij het circuit",
-          "body": "Beloningen die je via racen verdient, worden rechtstreeks in je bredere voortgang opgenomen. Upgrade je racevoertuigen, versterk je pitcrew en sluis je winst naar het upgraden van je hoofdruimteschip. Je racegarage is de hangar van dat schip, dus elke verbetering aan je race-operatie geeft ook een boost aan het schip waarmee je tussen werelden vliegt en ruimtegevechten voert over Hyper Quest en Overlord of the 7 Realms."
+          "body": "In-game beloningen uit races zijn bedoeld om je bredere voortgang te voeden. Je kunt mogelijk je racevoertuigen upgraden, je pitcrew versterken en in-game beloningen steken in het upgraden van je hoofdruimteschip. Je racegarage is bedoeld als de hangar van dat schip, dus verbeteringen aan je raceoperatie kunnen ook het schip versterken waarmee je tussen werelden vliegt in Hyper Quest en Overlord of the 7 Realms."
         }
       ],
       "upgradesTitle": "Twee machines, één missie... Upgrade alles",
       "upgrades": [
         {
           "title": "Upgrades van racevoertuigen",
-          "body": "Je racevoertuig is een volledig modulaire machine. Elk onderdeel kan worden verwisseld, afgesteld en geüpgraded: rompen, stuwraketten, schilden, buitenschalen, motoren, stabilisatoren, koelsystemen en aerodynamische oppervlakken. Lichte composieten leveren pure snelheid; zware bepantsering houdt je in leven onder barre atmosferische omstandigheden. Het upgradepad is diep en je keuzes bepalen je race-identiteit. Verzamel nieuwe voertuigen, bouw ze uit tot titelkandidaten, race ze naar de overwinning en ruil ze met andere spelers wanneer je klaar bent voor de volgende uitdaging."
+          "body": "De geplande racevoertuigen in ontwikkeling zijn bedoeld als volledig modulaire machines. Elk onderdeel kan worden verwisseld, afgesteld en geüpgraded: rompen, stuwraketten, schilden, buitenschalen, motoren, stabilisatoren, koelsystemen en aerodynamische vlakken. Lichte composieten leveren pure snelheid; zware bepantsering houdt je in leven onder brute atmosferische omstandigheden. Het upgradepad is diep en je keuzes bepalen je raceidentiteit. Verzamel nieuwe voertuigen, bouw ze uit tot kampioenschapskandidaten, race ze naar de overwinning en ruil ze met andere spelers wanneer je klaar bent voor de volgende uitdaging, alles onder voorbehoud van de definitieve spelregels."
         },
         {
           "title": "Belangrijkste upgrades van ruimteschepen",
-          "body": "Uw racegarage is niet zomaar een werkplaats; het is de hangarbaai van je persoonlijke ruimteschip. Dezelfde grondstoffen, credits en materialen die je op de baan verdient, kunnen worden geïnvesteerd in het upgraden van je hoofdschip. Betere motoren voor interplanetaire reizen, sterkere wapensystemen voor ruimtegevechten, verbeterde navigatie voor het ontdekken van nieuwe racewerelden en versterkte rompen om vijandige ontmoetingen tijdens het transport te overleven. Je ruimteschip is je thuisbasis, je transportmiddel en je slagschip, en racen maakt het sterker."
+          "body": "Je geplande racegarage is mogelijk niet zomaar een werkplaats. Ze is bedoeld als de hangar van je persoonlijke ruimteschip. De middelen, credits en materialen die je op de baan verdient, kunnen worden gebruikt om je hoofdschip te upgraden. Betere motoren voor interplanetaire reizen, sterkere wapensystemen voor ruimtegevechten, verbeterde navigatie om nieuwe raceplaneten te ontdekken en versterkte rompen om vijandige ontmoetingen onderweg te overleven. Je ruimteschip is je thuisbasis, je vervoer, je gevechtsschip, en racen maakt het sterker, alles onder voorbehoud van de definitieve spelregels."
         },
         {
           "title": "De upgradelus",
-          "body": "Race om beloningen te verzamelen, gebruik beloningen om te upgraden en upgrade om mee te doen aan grotere races met grotere beloningen in de game. Steek die beloningen in zowel je racevoertuigen als je ruimteschip. Hoe beter je schip, hoe verder je reist en hoe gevaarlijker en lonender de circuits worden. Het is een voortgangslus die toewijding en vaardigheid op elk niveau beloont."
+          "body": "Verzamel geplande in-game beloningen, die kunnen leiden tot upgrades om aan grotere races met grotere in-game beloningen deel te nemen. Steek die beloningen in zowel je racevoertuigen als je ruimteschip. Hoe beter je schip, hoe verder je reist en hoe gevaarlijker en lonender de circuits worden. Het is een geplande voortgangslus die toewijding en vaardigheid op elk niveau beloont, alles onder voorbehoud van de definitieve spelregels."
         },
         {
           "title": "Cross-game-impact",
-          "body": "Elke pilootvaardigheid die je op het circuit ontwikkelt en elke upgrade die je op je ruimteschip installeert, wordt rechtstreeks doorgevoerd in Hyper Quest en Overlord of the 7 Realms. Eén universum, meerdere games, naadloze progressie. Wat je in Hyper Racing bouwt, drijft al het andere aan."
+          "body": "Elke geplande pilootvaardigheid die je op de baan ontwikkelt en elke upgrade die je op je ruimteschip installeert, gaat rechtstreeks mee naar Hyper Quest en Overlord of the 7 Realms. Eén heelal, meerdere games, naadloze voortgang. Wat je in Hyper Racing bouwt, voedt al het andere, alles onder voorbehoud van de definitieve spelregels."
         }
       ],
       "faqTitle": "Hyperracen - Veelgestelde vragen",
       "faq": [
         {
           "q": "Wat is hyperracen?",
-          "a": "Een intens racespel met vliegende voertuigen op buitenaardse werelden. Bouw, upgrade en race met volledig aanpasbare voertuigen over gevaarlijke sciencefictioncircuits terwijl je strijdt om in-game beloningen."
+          "a": "Een gepland, zeer intens racespel met vliegende voertuigen in ontwikkeling, gesitueerd op buitenaardse werelden. Spelers kunnen mogelijk volledig aanpasbare voertuigen bouwen, upgraden en laten racen over gevaarlijke sciencefictioncircuits terwijl ze strijden om in-game beloningen."
         },
         {
           "q": "Kan ik mijn racevoertuig upgraden?",
-          "a": "Elk onderdeel kan worden geüpgraded: rompen, stuwraketten, schilden, buitenschalen, motoren, stabilisatoren, koelsystemen en aerodynamische oppervlakken. Elke upgrade verandert de manier waarop uw voertuig met verschillende circuits en omstandigheden omgaat."
+          "a": "Elk onderdeel is bedoeld om te upgraden: rompen, stuwraketten, schilden, buitenschalen, motoren, stabilisatoren, koelsystemen en aerodynamische vlakken. Elke upgrade kan veranderen hoe je voertuig zich gedraagt op verschillende banen en onder verschillende omstandigheden."
         },
         {
           "q": "Wat doet de pitcrew?",
-          "a": "Pitcrewleden bieden unieke bonussen: sneller tanken, rompdiagnostiek, noodreparaties en prestatieverbeteringen tussen de ronden door. Ze stijgen in de loop van de tijd, waardoor sterkere vaardigheden worden ontgrendeld die kunnen worden gecombineerd met voertuigupgrades."
+          "a": "Geplande pitcrewleden kunnen unieke bonussen bieden: sneller tanken, romdiagnostiek, noodreparaties en prestatie-aanpassingen tussen de rondes. Ze zijn bedoeld om na verloop van tijd te levelen en sterkere vaardigheden vrij te spelen die zich stapelen met voertuigupgrades."
         },
         {
           "q": "Hoe werkt de pitmanager?",
-          "a": "De pitmanager coördineert de operaties van de bemanning, roept de racestrategie op en ontgrendelt prestatieverbeteringen voor het hele team. Defensieve managers beschermen uw voertuig onder zware omstandigheden; agressieve managers pushen elk systeem voor maximale snelheid."
+          "a": "De geplande pitmanager kan crewoperaties coördineren, de racestrategie bepalen en teambrede prestatieboosts vrijspelen. Defensieve managers kunnen je voertuig beschermen onder zware omstandigheden; agressieve managers kunnen elk systeem naar maximale snelheid duwen."
         },
         {
           "q": "Zijn er prijzen bij ranked evenementen?",
-          "a": "Ranked evenementen en toernooien zijn gepland om in-game beloningen, titels en een plek op de ranglijst te bieden. Ze bieden geen geldprijzen."
+          "a": "Geplande gerangschikte evenementen en toernooien zijn bedoeld om in-game beloningen, titels en een plek in het klassement te bieden. Ze bieden geen geld- of contante prijzen."
         },
         {
           "q": "Hoe werken racebeloningen?",
-          "a": "Elke race is ontworpen om in de game credits, upgradematerialen en crewtokens op te leveren. Overwinningen kunnen je beloningen vermenigvuldigen. Verzamel voertuigen, upgrade ze tot racemachines, win races en ruil ze met andere spelers terwijl je toewerkt naar verdere verbeteringen en upgrades van je ruimteschip."
+          "a": "Elke race is bedoeld om te belonen met in-game beloningen: in-game credits, upgradematerialen en in-game crewtokens. Overwinningen kunnen je in-game beloningen vermenigvuldigen. Dit is een geplande functie, onder voorbehoud van de definitieve spelregels."
         },
         {
           "q": "Kan ik mijn hoofdruimteschip ook upgraden?",
-          "a": "Absoluut. Je racegarage is de hangar van je ruimteschip. Racewinsten financieren upgrades van motoren, wapens, navigatie en rompversterking op uw hoofdschip, waardoor interplanetaire reizen en ruimtegevechten mogelijk worden gemaakt."
+          "a": "Dat is het plan. Je racegarage is bedoeld als de hangar van je ruimteschip. In-game beloningen uit races kunnen helpen bij upgrades voor motoren, wapens, navigatie en rompversterking van je hoofdschip."
         },
         {
           "q": "Is de voortgang ook van toepassing op andere games?",
-          "a": "Elke upgrade van de vaardigheden van een piloot en ruimteschip wordt rechtstreeks overgedragen naar Hyper Quest en Overlord of the 7 Realms. Eén universum, meerdere games, naadloze progressie. Wat je in Hyper Racing bouwt, drijft al het andere aan."
+          "a": "Geplande pilootvaardigheden en ruimteschipupgrades kunnen overgaan naar Hyper Quest en Overlord of the 7 Realms. Eén heelal, meerdere geplande games, gedeelde voortgang, onder voorbehoud van de definitieve spelregels."
         },
         {
           "q": "Welke raceomgevingen zijn er?",
-          "a": "Circuits omvatten drijvende rotsformaties, lavabuizen, woestijnvlaktes en bergketens in buitenaardse werelden. Atmosferische gevaren zijn onder meer zure regen, radioactieve atmosferen, variabele zwaartekracht en turbulente wind. Elk circuit vereist verschillende voertuigopstellingen."
+          "a": "Geplande circuits omvatten zwevende rotsformaties, lavatunnels, woestijnvlaktes en bergketens op buitenaardse werelden. Geplande atmosferische gevaren zijn zure regen, radioactieve atmosferen, wisselende zwaartekracht en turbulente winden. Elk circuit kan een andere voertuigopstelling vragen."
         }
       ]
     },
     "quest": {
       "label": "ZOEKTOCHT",
       "heading": "Hyper zoektocht",
-      "subtitle": "Jouw sterrenstelsel. Jouw regels. Jouw fortuin.",
+      "subtitle": "Jouw galaxy. Jouw regels. Jouw verhaal.",
       "intro": [
-        "Hyper Quest is een ruimteavontuur in een open wereld waarin je het bevel voert over je eigen, volledig uitbreidbare ruimteschip, de Quest Racer, door een uitgestrekt en gevaarlijk sterrenstelsel. Je hebt jaren geleden je thuisbeschaving verlaten op zoek naar macht, rijkdom en roem. Nu is het hele universum jouw speeltuin, en elke zoektocht die je voltooit, brengt je dichter bij galactische dominantie.",
-        "Hyper Quest is gepland als meer dan een game: voltooi quests, overwin uitdagingen en verzamel in-game beloningen. Van korte missies van een paar minuten tot epische expedities van meerdere dagen: hoe zwaarder de uitdaging, hoe groter de in-game beloning.",
-        "Upgrade je ruimteschip van romp naar cockpit. Bewapen het met verwoestende wapensystemen. Rekruteer specialisten die krachtige bonussen op de prestaties en het krachtniveau van uw schip stapelen. Mijn asteroïden, vervoer gevaarlijke lading, jaag op verborgen schatten, ontvoer waardevolle doelen of word een ingehuurd wapen. Hoe jij het universum regeert, is geheel jouw keuze.",
-        "Alles wat je in Hyper Quest bouwt, wordt rechtstreeks in Hyper Racing en Overlord of the 7 Realms ingevoerd. Eén universum, naadloze progressie, onbeperkt potentieel. Lees verder en ontdek hoe speurtochten werken, wat je kunt verdienen en hoe jij en je ruimteschip het meest gevreesde schip in de Melkweg worden."
+        "Hyper Quest is een gepland open-wereld ruimteavontuur waarin je mogelijk je eigen volledig upgradebare ruimteschip, de Quest Racer, kunt besturen door een uitgestrekte en gevaarlijke galaxy. Je verliet jaren geleden je thuisbeschaving op zoek naar macht en roem. Nu is het hele heelal je speeltuin, en elke quest die je voltooit kan je dichter bij galactische dominantie brengen, onder voorbehoud van de definitieve gameontwikkeling en spelregels.",
+        "Hyper Quest is gepland als meer dan een spel: voltooi quests, overwin uitdagingen en verzamel in-game beloningen. Van snelle missies van enkele minuten tot epische expedities van meerdere dagen: hoe zwaarder de uitdaging, hoe groter de in-game beloning kan zijn, onder voorbehoud van de definitieve gameontwikkeling en spelregels.",
+        "In het geplande spel kun je mogelijk je ruimteschip van romp tot cockpit upgraden, het bewapenen met verwoestende wapensystemen en specialisten verwerven die krachtige bonussen op de prestaties en het krachtniveau van je schip stapelen. Geplande activiteiten zijn onder meer asteroïden delven, gevaarlijke lading vervoeren, verborgen schatten zoeken, waardevolle doelen opsporen of huurling worden. Hoe je het heelal regeert is bedoeld jouw keuze te zijn, onder voorbehoud van de definitieve gameontwikkeling en spelregels.",
+        "Alles wat je in Hyper Quest bouwt is bedoeld om door te stromen naar Hyper Racing en Overlord of the 7 Realms. Eén heelal, naadloze voortgang, onbegrensd potentieel. Lees verder om te ontdekken hoe de geplande quests kunnen werken, welke in-game beloningen je kunt behalen en hoe jij en je ruimteschip het meest gevreesde schip van de galaxy kunnen worden, alles onder voorbehoud van de definitieve gameontwikkeling en spelregels."
       ],
-      "calloutLine1": "Zoektocht om te verdienen. Verdien om te upgraden.",
+      "calloutLine1": "Quest om te winnen. Win om te upgraden.",
       "calloutLine2": "Upgrade naar Veroveren.",
-      "howItWorksTitle": "Hoe Hyper Quest werkt",
+      "howItWorksTitle": "Hoe de geplande Hyper Quests kunnen werken, onder voorbehoud van de definitieve gameontwikkeling en spelregels",
       "howItWorks": [
         {
           "num": "01",
           "title": "Accepteer missies van het missiebord",
-          "body": "Het in-game zoekbord is jouw toegangspoort tot avontuur. Blader door beschikbare missies, variërend van snelle vrachtvluchten die slechts enkele minuten duren tot epische meerdaagse expedities diep in de onbekende ruimte. Elke zoektocht wordt geleverd met duidelijke doelstellingen, gevarenbeoordelingen en beloningsniveaus. Kies de missies die bij jouw speelstijl passen, of het nu gaat om het vervoeren van gevaarlijke ladingen, het jagen op verborgen schatten, het delven van asteroïdenvelden of het undercover gaan om verloren artefacten terug te vinden."
+          "body": "Missies kunnen worden geaccepteerd via het geplande in-game questbord. Geplande missies variëren van snelle vrachtritten van slechts enkele minuten tot epische expedities van meerdere dagen diep in onontgonnen ruimte. Elke quest is bedoeld om duidelijke doelen, gevarenniveaus en in-game beloningsniveaus te hebben. Je kunt mogelijk de missies kiezen die bij je speelstijl passen, of dat nu gevaarlijke lading vervoeren is, verborgen schatten zoeken, asteroïdenvelden delven of undercover verloren artefacten terughalen."
         },
         {
           "num": "02",
           "title": "Verken de Melkweg",
-          "body": "Reis via portalen naar verre planeten, elk met unieke omgevingen, waardevolle materialen en nieuwe racecircuits. Volg galactische kaarten om onverkende gebieden in kaart te brengen en verdien het recht om planeten die je als eerste ontdekt een naam te geven. Win grondstoffen uit asteroïdenvelden, berg onderdelen uit oude relikwieën en verlaten schepen en verzamel aanwijzingen die leiden naar verborgen schatten tussen de sterren."
+          "body": "Je kunt mogelijk door portalen naar verre planeten reizen, elk met geplande unieke omgevingen, in-game materialen en nieuwe racecircuits. Geplande galactische kaarten kunnen je laten onontgonnen gebieden in kaart brengen en naamrechten verdienen voor planeten die je als eerste ontdekt. Je kunt in-game middelen delven in asteroïdenvelden, onderdelen terughalen uit oude relikwieën en verlaten schepen en aanwijzingen verzamelen die leiden naar verborgen in-game items verspreid over de sterren."
         },
         {
           "num": "03",
           "title": "Bouw je imperium op vanuit je schip",
-          "body": "Je Quest Racer is meer dan alleen transport. Verbouw voedsel in hydrocultuurbaaien, verfijn materialen die afkomstig zijn van verre planeten en bouw legers vanuit je kloonlaboratoria. Verfijn je troepen en hun wapens, verdedig jezelf tegen piraten en beheer een zichzelf onderhoudende mobiele basis die krachtiger wordt met elke missie die je voltooit."
+          "body": "Je geplande Quest Racer is bedoeld om meer te zijn dan vervoer. Je kunt mogelijk voedsel kweken in hydrocultuurruimtes, materialen raffineren die van verre planeten zijn gedolven en legers opbouwen vanuit je kloonlabs. Een zelfvoorzienende mobiele basis is gepland die met elke voltooide missie sterker kan worden."
         },
         {
           "num": "04",
           "title": "Speel op jouw manier",
-          "body": "Er is niet één pad naar dominantie. Word een gevreesde premiejager, een sluwe smokkelaar, een meestermijnwerker of een legendarische ontdekkingsreiziger. Ontvoer waardevolle doelen, word een ingehuurd wapen of smeed allianties om hele sectoren te controleren. De Melkweg buigt zich naar jouw wil, en elke beslissing vormt jouw reputatie en jouw fortuin."
+          "body": "Er is geen enkel gepland pad naar dominantie. Je kunt mogelijk een gevreesde premiejager, een sluwe smokkelaar, een meestermijnwerker of een legendarische ontdekkingsreiziger worden, of bondgenootschappen sluiten om hele sectoren te beheersen. Elke beslissing kan je reputatie vormen, onder voorbehoud van de definitieve spelregels."
         }
       ],
-      "rewardsTitle": "Quest-beloningen; Krijg betaald om te spelen!",
+      "rewardsTitle": "Geplande in-game quest-beloningen en hoe ze kunnen werken",
       "rewards": [
         {
           "title": "In-game beloningen",
-          "body": "Elke quest die je voltooit is ontworpen om je in-game te belonen. Credits, upgradematerialen, zeldzame onderdelen, wervingstokens voor specialisten en exclusieve items komen bij elke geslaagde missie in je inventaris. Hoe zwaarder de quest, hoe rijker de buit. Ontdek zeldzame materialen op verre planeten, berg waardevolle onderdelen uit oude relikwieën en leg een voorraad grondstoffen aan die je opmars naar galactische heerschappij voedt."
+          "body": "Elke quest die je voltooit is bedoeld om je in-game beloningen te geven. In-game credits, upgradematerialen, zeldzame onderdelen, in-game specialistentokens en exclusieve in-game items kunnen bij elke geslaagde missie in je inventaris terechtkomen. Hoe zwaarder de quest, hoe groter de in-game beloningen kunnen zijn."
         },
         {
-          "title": "Kampioenschapsbeloningen",
-          "body": "Bepaalde quests en ranked uitdagingen kunnen premium in-game beloningen bieden. Er zijn missies op hoog niveau, ranglijstevenementen en seizoenskampioenschappen voor quests gepland, en hoe vaardiger en gedurfder je wordt, hoe beter de in-game beloningen kunnen zijn."
+          "title": "Kampioenschaps-in-game-beloningen",
+          "body": "Bepaalde geplande quests en gerangschikte uitdagingen kunnen premium in-game beloningen bieden. Missies van hoog niveau, klassementsevenementen en seizoens-questkampioenschappen zijn gepland, en hoe vaardiger en gedurfder je wordt, hoe beter de in-game beloningen kunnen zijn."
         },
         {
-          "title": "Hoe questbeloningen werken",
-          "body": "Spelers kunnen zich mogelijk kwalificeren voor premium quests door hun reputatie op te bouwen en prestatiedrempels te halen. Moeilijkheid, duur en gevarenniveau van een quest bepalen de in-game beloning, die hoort te worden getoond voordat je een missie accepteert. Of je nu een vrachtrit van tien minuten doet of een expeditie van een week naar de diepe ruimte, de beloningen zijn ontworpen om bij het risico te passen."
+          "title": "Hoe quest-in-game-beloningen kunnen werken",
+          "body": "Spelers kunnen zich kwalificeren voor premium quests door hun reputatie op te bouwen en prestatiedrempels te halen. De moeilijkheid, duur en het gevarenniveau van de quest zijn bedoeld om de in-game beloning te bepalen, die bedoeld is om getoond te worden voordat je een missie accepteert. Of je nu een vrachtrit van tien minuten rijdt of een week durende expeditie in de diepe ruimte, de in-game beloningen zijn ontworpen om bij het risico te passen."
         },
         {
-          "title": "Vooruitgang die zich terugbetaalt",
-          "body": "Questbeloningen gaan rechtstreeks naar je scheepsupgrades, wapensystemen en de werving van specialisten. Elke beloning maakt je sterker, waardoor zwaardere quests vrijkomen. Het is ook de bedoeling dat voortgang meegaat naar Hyper Racing en Overlord of the 7 Realms."
+          "title": "Voortgang die doorwerkt",
+          "body": "Quest-in-game-beloningen kunnen je schipupgrades, wapensystemen en specialisten voeden. Elke in-game beloning kan je sterker maken, wat zwaardere quests kan vrijspelen. Voortgang is ook bedoeld om door te gaan naar Hyper Racing en Overlord of the 7 Realms, onder voorbehoud van de definitieve spelregels."
         }
       ],
-      "upgradesTitle": "Upgrade je schip, bewapen je arsenaal, rekruteer je bemanning",
+      "upgradesTitle": "Upgrade je schip, bewapen je arsenaal, bouw je crew",
       "upgrades": [
         {
-          "title": "Upgrades van ruimteschepen",
-          "body": "Je Quest Racer is volledig modulair, van motorruimte tot cockpit. Upgrade de romp voor maximale duurzaamheid, versterk de buitenschil om vijandige omgevingen te weerstaan, boost schildgeneratoren voor overlevingskansen in gevechten en revisie energiesystemen voor topprestaties. Betere motoren betekenen sneller interplanetair reizen. Sterkere navigatiesystemen onthullen verborgen routes en onbekende werelden. Elke upgrade verandert je schip in een krachtiger en gevreesder schip."
+          "title": "Geplande ruimteschipupgrades",
+          "body": "Je geplande Quest Racer is bedoeld om volledig modulair te zijn, van motorruimte tot cockpit. Je kunt mogelijk de romp upgraden voor duurzaamheid, de buitenschaal versterken om vijandige omgevingen te weerstaan, schildgeneratoren versterken voor overleving in gevechten en energiesystemen herzien voor topprestaties. Betere motoren kunnen snellere interplanetaire reizen betekenen, en sterkere navigatiesystemen kunnen verborgen routes en onontgonnen werelden onthullen."
         },
         {
-          "title": "Wapensystemen",
-          "body": "De Melkweg is gevaarlijk, en jij moet nog gevaarlijker zijn. Upgrade en verfijn je wapensystemen om jezelf te beschermen tegen piraten, rivaliserende spelers en vijandige krachten. Kies tussen defensieve configuraties die je in de ergste situaties in leven houden of offensieve uitrustingen die zijn ontworpen om maximale schade aan te richten. Laserarrays, raketbatterijen, plasmakanonnen en experimentele energiewapens zijn allemaal beschikbaar naarmate je verder komt in de upgradeboom."
+          "title": "Geplande wapensystemen",
+          "body": "De geplande galaxy is gevaarlijk. Je kunt mogelijk je wapensystemen upgraden en verfijnen om jezelf te beschermen tegen piraten, rivaliserende spelers en vijandige machten, met keuze tussen defensieve configuraties en offensieve uitrustingen. Laserbatterijen, raketlanceerders, plasmakanonnen en experimentele energiewapens zijn allemaal gepland naarmate je door de upgradeboom vordert."
         },
         {
-          "title": "Specialisten rekruteren",
-          "body": "Specialisten zijn gamechangers. Ze brengen allemaal unieke vaardigheden met zich mee die krachtige bonussen toevoegen aan de algehele prestaties en het krachtniveau van je schip. Navigatiespecialisten onthullen verborgen paden en verkorten de reistijd. Gevechtsspecialisten vergroten de wapennauwkeurigheid en de schade-output. Technische specialisten verhogen de integriteit van de romp en de reparatiesnelheid. Wetenschapsspecialisten verbeteren de winning van hulpbronnen en materiaalverfijning. Stapel meerdere specialisten op elkaar om verwoestende combinaties te creëren die de effectiviteit van uw schip vergroten."
+          "title": "Specialisten verwerven",
+          "body": "Geplande specialisten kunnen elk unieke vaardigheden brengen die bonussen toevoegen aan de totale prestaties en het krachtniveau van je schip. Navigatiespecialisten kunnen verborgen paden onthullen en reistijd verkorten. Gevechtsspecialisten kunnen wapennauwkeurigheid en schade verhogen. Technische specialisten kunnen rompintegriteit en reparatiesnelheid verhogen. Wetenschapsspecialisten kunnen grondstoffenwinning en materiaalverfijning verbeteren. Het stapelen van meerdere specialisten is gepland, onder voorbehoud van de definitieve spelregels."
         },
         {
-          "title": "De Powerloop",
-          "body": "Zoektocht om te verdienen, verdien om te upgraden en upgrade om moeilijkere missies met grotere beloningen te overwinnen. Rekruteer specialisten om elk systeem op uw schip te versterken. Hoe sterker je wordt, hoe meer van de Melkweg zich opent en hoe groter het fortuin dat je te wachten staat. Schipupgrades en specialistische bonussen zijn ook rechtstreeks van toepassing op ruimtegevechten tijdens Hyper Racing-transit en gevechten in Overlord of the 7 Realms."
+          "title": "De geplande krachtlus",
+          "body": "Quest om te winnen, win om te upgraden, en upgrade om zwaardere quests met grotere in-game beloningen aan te gaan. Geplande specialisten kunnen elk systeem op je schip versterken. Hoe sterker je wordt, hoe meer van de galaxy zich kan openen. Schipupgrades en specialistenbonussen zijn ook bedoeld om door te gaan naar Hyper Racing en Overlord of the 7 Realms, onder voorbehoud van de definitieve ontwikkeling en spelregels."
         }
       ],
       "faqTitle": "Hyper Quest – Veelgestelde vragen",
       "faq": [
         {
           "q": "Wat is HyperQuest?",
-          "a": "Een ruimteavontuur in een open wereld waarin je een volledig te upgraden ruimteschip door een enorm sterrenstelsel bestuurt. Voltooi quests, verken buitenaardse werelden, upgrade je schip, werf specialisten en verzamel in-game beloningen."
+          "a": "Een gepland open-wereld ruimteavontuur in ontwikkeling waarin je mogelijk een volledig upgradebaar ruimteschip kunt besturen door een uitgestrekte galaxy. Geplande activiteiten zijn onder meer quests voltooien, buitenaardse werelden verkennen, je schip upgraden, specialisten verwerven en in-game beloningen verzamelen."
         },
         {
           "q": "Hoe werken speurtochten?",
-          "a": "Accepteer missies van het in-game missiebord. Quests variëren van snelle vrachtvluchten die slechts enkele minuten duren tot epische meerdaagse expedities diep in onbekende ruimte. Elke zoektocht heeft duidelijke doelstellingen, gevarenbeoordelingen en beloningsniveaus die worden weergegeven voordat je deze accepteert."
+          "a": "Missies kunnen worden geaccepteerd via het geplande in-game questbord. Geplande quests variëren van snelle vrachtritten van slechts enkele minuten tot epische expedities van meerdere dagen diep in onontgonnen ruimte. Elke quest is bedoeld om zijn doelen, gevarenniveau en in-game beloningsniveau te tonen voordat je accepteert."
         },
         {
-          "q": "Kan ik geld verdienen met quests?",
-          "a": "Nee. Quests, ranked uitdagingen en seizoenskampioenschappen zijn gepland om alleen in-game beloningen te bieden, geen contant geld of geld."
-        },
-        {
-          "q": "Welke in-game beloningen kan ik verdienen?",
-          "a": "Elke voltooide quest is ontworpen om te belonen met credits, upgradematerialen, zeldzame onderdelen, wervingstokens voor specialisten en exclusieve items. Hoe zwaarder en langer de quest, hoe rijker de beloningen. Ontdek zeldzame materialen op verre planeten en berg waardevolle onderdelen uit oude relikwieën."
+          "q": "Welke in-game beloningen kunnen quests bieden?",
+          "a": "Elke voltooide quest is bedoeld om in-game beloningen of in-game items te geven: in-game credits, upgradematerialen, zeldzame onderdelen, in-game specialistentokens en exclusieve in-game items. Zwaardere en langere quests kunnen grotere in-game beloningen bieden."
         },
         {
           "q": "Kan ik mijn ruimteschip upgraden?",
-          "a": "Elk systeem kan worden geüpgraded: romp, buitenschaal, schildgeneratoren, voedingssystemen, motoren, cockpit en navigatie. Betere motoren betekenen sneller reizen, sterkere rompen overleven vijandige ontmoetingen en verbeterde navigatie onthult verborgen routes en onbekende werelden."
+          "a": "Elk systeem is bedoeld om te upgraden: romp, buitenschaal, schildgeneratoren, energiesystemen, motoren, cockpit en navigatie. Betere motoren kunnen sneller reizen betekenen, en verbeterde navigatie kan verborgen routes en onontgonnen werelden onthullen."
         },
         {
-          "q": "Welke wapens zijn beschikbaar?",
-          "a": "Upgrade en verfijn wapensystemen, waaronder laserarrays, raketbatterijen, plasmakanonnen en experimentele energiewapens. Kies defensieve configuraties om te overleven of offensieve uitrustingen voor maximale schade tegen piraten, rivalen en vijandige troepen."
+          "q": "Welke wapens zijn er?",
+          "a": "Geplande wapensystemen zijn onder meer laserbatterijen, raketlanceerders, plasmakanonnen en experimentele energiewapens. Je kunt mogelijk defensieve configuraties kiezen om te overleven of offensieve uitrustingen tegen piraten, rivalen en vijandige machten."
         },
         {
           "q": "Hoe werken specialisten?",
-          "a": "Rekruteer specialisten met unieke vaardigheden die krachtige bonussen toevoegen aan de prestaties en het krachtniveau van uw schip. Navigatiespecialisten onthullen verborgen paden, gevechtsspecialisten vergroten wapenschade, technische specialisten vergroten de rompintegriteit en wetenschapsspecialisten verbeteren de winning van hulpbronnen. Stapel meerdere specialisten op elkaar voor verwoestende combinaties."
+          "a": "Geplande specialisten kunnen worden behaald of verworven, elk met unieke vaardigheden die bonussen toevoegen aan de prestaties en het krachtniveau van je schip. Navigatiespecialisten kunnen verborgen paden onthullen, gevechtsspecialisten kunnen wapenschade verhogen, technische specialisten kunnen rompintegriteit verhogen en wetenschapsspecialisten kunnen grondstoffenwinning verbeteren."
         },
         {
-          "q": "Welke soorten speurtochten zijn beschikbaar?",
-          "a": "Vrachtvervoer, asteroïdenmijnbouw, schatzoeken, bountyjacht, het bergen van artefacten, undercoveroperaties, planeetverkenning, verdediging tegen piraten, bergingsmissies en meer. Quests variëren van korte ritten van tien minuten tot expedities van meerdere dagen naar de diepe ruimte."
+          "q": "Welke soorten quests zijn er?",
+          "a": "Geplande questsoorten zijn onder meer vrachtvervoer, asteroïdenwinning, schatzoeken, premiejacht, artefactherstel, undercoveroperaties, planeetverkenning, piratenverdediging en herstelmissies. Quests zijn bedoeld om te variëren van snelle ritten van tien minuten tot expedities van meerdere dagen in de diepe ruimte."
         },
         {
           "q": "Kan ik nieuwe planeten ontdekken?",
-          "a": "Ja. Volg galactische kaarten naar onbekende gebieden en ontdek nieuwe werelden. De eerste ontdekkers verdienen naamgevingsrechten voor de planeten die ze vinden. Nieuwe werelden bieden unieke materialen, omgevingen en racecircuits waar geen enkele andere speler eerder toegang toe heeft gehad."
+          "a": "Dat is gepland. Galactische kaarten kunnen je naar onontgonnen gebieden en nieuwe werelden leiden, en eerste ontdekkers kunnen naamrechten verdienen voor de planeten die ze vinden. Nieuwe werelden zijn bedoeld om unieke in-game materialen, omgevingen en racecircuits te bieden."
         },
         {
-          "q": "Wat kan ik in mijn schip doen?",
-          "a": "Je Quest Racer is een mobiele basis. Verbouw voedsel in hydrocultuurbaaien, verfijn materialen afkomstig van verre planeten, bouw en train legers in kloonlaboratoria, upgrade wapens en verdedigingswerken en beheer een zichzelf onderhoudende operatie die met elke missie krachtiger wordt."
+          "q": "Wat kan ik doen in mijn schip?",
+          "a": "Je geplande Quest Racer is bedoeld als mobiele basis. Je kunt mogelijk voedsel kweken in hydrocultuurruimtes, materialen raffineren die van verre planeten zijn gedolven, legers opbouwen en trainen in kloonlabs en wapens en verdediging upgraden."
         },
         {
           "q": "Hoe werkt de galactische kaart?",
-          "a": "De galactische kaart begeleidt je verkenning door het universum. Upgrade je kaart om nieuwe sectoren, portallocaties en verborgen zoektochtzones te onthullen. Naarmate je verder verkent, wordt de kaart groter, waardoor steeds gevaarlijkere en lonendere gebieden in de ruimte worden ontgrendeld."
+          "a": "De geplande galactische kaart is bedoeld om je verkenning te begeleiden. Je kunt mogelijk je kaart upgraden om nieuwe sectoren, portaallocaties en verborgen questzones te onthullen, waarbij gevaarlijkere regio's van de ruimte worden ontgrendeld naarmate je verder verkent."
         },
         {
-          "q": "Geldt mijn voortgang ook voor andere games?",
-          "a": "Alles wat je in Hyper Quest bouwt, wordt rechtstreeks in Hyper Racing en Overlord of the 7 Realms ingevoerd. Scheepsupgrades, specialistische bonussen, gevechtsvaardigheden en grondstoffen worden allemaal naadloos overgedragen. Eén universum, meerdere games, onbeperkte voortgang."
+          "q": "Gaat mijn voortgang mee naar andere games?",
+          "a": "Wat je in Hyper Quest bouwt is bedoeld om door te gaan naar Hyper Racing en Overlord of the 7 Realms. Schipupgrades, specialistenbonussen, gevechtsvaardigheden en in-game middelen kunnen allemaal worden overgedragen, onder voorbehoud van de definitieve ontwikkeling en spelregels."
         },
         {
-          "q": "Kan ik als slechterik spelen?",
-          "a": "Absoluut. Ga undercover, ontvoer waardevolle doelwitten, word een ingehuurd wapen, smokkel gevaarlijke lading of overval andere spelers. Er is niet één pad naar dominantie. Hoe jij de Melkweg bestuurt, is volledig jouw keuze, en elke beslissing bepaalt jouw reputatie."
+          "q": "Kan ik als schurk spelen?",
+          "a": "Dat is gepland. Je kunt mogelijk undercover gaan, waardevolle doelen opsporen, gevaarlijke lading smokkelen of andere spelers overvallen. Er is geen enkel gepland pad naar dominantie, en elke beslissing kan je reputatie vormen."
         }
       ]
     },
@@ -249,148 +245,148 @@
       "heading": "Opperheer van de 7 rijken",
       "subtitle": "Crash-land. Herbouwen. Veroveren. Word de Overlord.",
       "intro": [
-        "Overlord of the 7 Realms is een gevechtsstrategiespel met drie niveaus, anders dan al het andere in gaming. Je waagde je door een portaal naar een parallel universum en maakte een noodlanding op een vijandige buitenaardse planeet. Je schip is vergaan, je systemen falen en de wezens van de planeet komen al dichterbij. Overleven is nog maar het begin. Dominantie is het doel.",
-        "Herbouw je schip vanaf het wrak. Kloon en train legers in de laboratoria aan boord. Tem de wilde dieren op de planeet om verwoestende bereden cavalerie te creëren. Voer het gevecht vervolgens uit in drie gevechtsdimensies: grond-tot-grond-gevechten tegen monsters en rivaliserende spelers, grond-tot-ruimte-aanvallen op orbitale of gronddoelen, en ruimte-tot-ruimte-oorlogvoering aan boord van de enorme Battle Ring die in een baan om de planeet draait.",
-        "Dit is niet zomaar weer een strategiespel. Net als Hyper Racing en Hyper Quest biedt Overlord realtime VR-interactie en in-game beloningen voor het voltooien van evenementen, quests en tweewekelijkse invasies van de gevreesde Hammerongs, de machtigste buitenaardse soort die er bestaat. Elke twee weken komen ze de planeet leegroven, en elke twee weken kunnen dappere spelers hen uitdagen voor enorme bonussen en legendarische beloningen.",
-        "Upgrade je ruimteschip, bewapen het met verwoestende wapens, rekruteer specialisten die je machtsniveau vergroten en smeed allianties om hele regio's te controleren. Alles wat je bouwt, maakt rechtstreeks verbinding met Hyper Racing en Hyper Quest via het gedeelde Hyper Tek-ecosysteem. Eén universum, drie games, onbeperkte oorlogsvoering. Lees verder om te ontdekken hoe het vechtsysteem werkt en waarom Overlord alles verandert."
+        "Overlord of the 7 Realms is een gepland drielaags gevechtsstrategiespel in ontwikkeling. In het geplande verhaal reis je door een portaal naar een parallel heelal en maak je een noodlanding op een vijandige buitenaardse planeet. Je schip is vernield, je systemen vallen uit en de wezens van de planeet komen al dichterbij. Overleven is nog maar het begin. Dominantie is het doel.",
+        "In het geplande spel kun je mogelijk je schip herbouwen uit het wrak, legers klonen en trainen in je boordlabs en de dieren van de planeet temmen om bereden cavalerie te creëren. Het geplande gevecht vindt plaats over drie gevechtsdimensies: grond-tot-grond gevechten tegen monsters en rivaliserende spelers, grond-tot-ruimte aanvallen op orbitale of grondgebonden doelen en ruimte-tot-ruimte oorlogvoering aan boord van de enorme Battle Ring die om de planeet draait.",
+        "Net als Hyper Racing en Hyper Quest is Overlord bedoeld om realtime VR-interactie en in-game beloningen te bieden voor het voltooien van evenementen, quests en geplande tweewekelijkse invasies door de gevreesde Hammerongs, de machtigste buitenaardse soort in het verhaal. Elke twee weken zijn ze bedoeld om aan te komen om de planeet leeg te halen, en elke twee weken kunnen dappere spelers hen mogelijk uitdagen voor in-game bonussen en legendarische in-game beloningen.",
+        "Je kunt mogelijk je ruimteschip upgraden, bewapenen, specialisten verwerven die je krachtniveau versterken en bondgenootschappen sluiten om hele regio's te beheersen. Wat je bouwt is bedoeld om via het gedeelde Hyper Tek ecosysteem verbonden te worden met Hyper Racing en Hyper Quest. Eén heelal, drie geplande games, onbegrensde oorlogvoering. Lees verder om te ontdekken hoe het geplande gevechtssysteem kan werken en waarom Overlord alles zou kunnen veranderen, alles onder voorbehoud van de definitieve ontwikkeling en spelregels."
       ],
       "calloutLine1": "Overleven is nog maar het begin.",
       "calloutLine2": "Dominantie is het doel.",
-      "howItWorksTitle": "Het gevechtssysteem op drie niveaus; Drie dimensies van oorlog",
+      "howItWorksTitle": "Het geplande drielaagse gevechtssysteem; drie dimensies van oorlog",
       "howItWorks": [
         {
           "num": "01",
           "title": "Grond-tot-grond-gevechten",
-          "body": "Het oppervlak van de planeet is een oorlogsgebied. Zet je gekloonde legers in tegen vijandige buitenaardse wezens, monsterlijke beesten en rivaliserende spelers die vechten om territorium en grondstoffen. Tem en train de wilde dieren op de planeet om bereden cavalerie-eenheden te creëren die je grondtroepen een verwoestende voorsprong geven. Grondoorlog is rauw, tactisch en meedogenloos. Met elk gevecht dat je wint, verdien je grondstoffen, territorium en reputatie."
+          "body": "Het oppervlak van de planeet is gepland als oorlogsgebied. Je kunt mogelijk je gekloonde legers inzetten tegen vijandige buitenaardse wezens, monsterlijke beesten en rivaliserende spelers die strijden om territorium en in-game middelen. Het temmen en trainen van de dieren van de planeet kan bereden cavalerie-eenheden creëren die je grondtroepen een voorsprong kunnen geven. Grondoorlog is bedoeld rauw, tactisch en meedogenloos te zijn, en gewonnen gevechten kunnen je in-game middelen, territorium en reputatie opleveren, onder voorbehoud van de definitieve ontwikkeling en spelregels."
         },
         {
           "num": "02",
           "title": "Grond-naar-ruimte-aanvallen",
-          "body": "Dit is waar Overlord een dimensie toevoegt die geen, of bijna geen, andere game biedt. Creëer gespecialiseerde troepengroepen die zijn ontworpen om aanvallen uit te voeren tussen het oppervlak van de planeet en de orbitale Battle Ring. Val vanaf je grondpositie aan op schepen die in de ruimte zijn gestationeerd of coördineer gecombineerde aanvallen waarbij vijanden tegelijkertijd van boven en van onderen worden getroffen. Deze verticale gevechtslaag transformeert de standaardstrategie in een multidimensionale schaakwedstrijd waarbij positionering over zowel de grond als de ruimte de overwinning bepaalt."
+          "body": "Dit is een geplande dimensie die weinig andere games bieden. Je kunt mogelijk gespecialiseerde troepengroepen maken die aanvallen lanceren tussen het planeetoppervlak en de orbitale Battle Ring, schepen in de ruimte treffen vanaf je grondpositie of gecombineerde aanvallen coördineren die vijanden tegelijk van boven en onder raken. Deze geplande verticale gevechtslaag is bedoeld om standaardstrategie te veranderen in een multidimensionaal schaakspel waarin positionering op de grond en in de ruimte de overwinning kan bepalen, onder voorbehoud van de definitieve ontwikkeling en spelregels."
         },
         {
           "num": "03",
           "title": "Ruimte-tot-ruimteoorlog",
-          "body": "Breng je schip in een baan om de aarde en land op de Battle Ring, een enorme orbitale structuur die de planeet omcirkelt. Vanaf hier kun je op jacht naar onbeschermde schepen en kwetsbare doelen. Teleporteer troepen door de ruimte en rechtstreeks naar vijandelijke schepen om maximale interne schade toe te brengen met behulp van speciaal ontwikkelde boarding-aanvallen. De beloningen voor ruimtegevechten behoren tot de hoogste in het spel, en het beheersen van orbitaal gebied geeft je een strategisch voordeel dat geen enkele speler op de grond kan evenaren."
+          "body": "Je kunt mogelijk je schip in een baan brengen en landen op de Battle Ring, een geplande enorme orbitale structuur rond de planeet. Vanaf daar zou je schepen zonder schild en kwetsbare doelen kunnen opsporen en troepen door de ruimte rechtstreeks in vijandelijke schepen kunnen teleporteren met speciaal ontwikkelde enteraanvallen. Ruimtegevechten zijn bedoeld om enkele van de grootste in-game beloningen te bieden, en het beheersen van orbitaal territorium kan een strategisch voordeel geven dat spelers die alleen op de grond actief zijn niet kunnen evenaren, onder voorbehoud van de definitieve ontwikkeling en spelregels."
         },
         {
           "num": "04",
-          "title": "Waarom Tri-Level alles verandert",
-          "body": "De meeste strategiespellen opereren op één vlak. Overlord opereert op drie. Het vermogen om aan te vallen van grond tot grond, van grond tot ruimte en van ruimte tot ruimte creëert een slagveld met een ongeëvenaarde tactische diepgang. Vaardigheid is alles. Brute kracht alleen maakt je niet tot Overlord. Strategisch meesterschap op alle drie de niveaus is wat de dominante van de verslagene scheidt."
+          "title": "Waarom drie lagen alles kunnen veranderen",
+          "body": "De meeste strategiegames werken op één vlak. Overlord is gepland om op drie te werken. De geplande mogelijkheid om van grond tot grond, van grond tot ruimte en van ruimte tot ruimte aan te vallen is bedoeld om een slagveld met echte tactische diepte te creëren. Vaardigheid is bedoeld alles te zijn: brute kracht alleen zou je niet de Overlord moeten maken, en strategische beheersing over alle drie de niveaus kan datgene zijn wat de dominante spelers scheidt van de verslagenen, onder voorbehoud van de definitieve ontwikkeling en spelregels."
         }
       ],
       "extraSection": {
-        "title": "De Battle Ring en VR-interactie",
+        "title": "De geplande Battle Ring en VR-interactie",
         "items": [
           {
             "title": "Landing op de gevechtsring",
-            "body": "De Battle Ring is een kolossale orbitale structuur die het systeem van de planeet omcirkelt. Wanneer je je schip de ruimte in brengt, kun je aanmeren op de Battle Ring om een ​​enorm strategisch voordeel te behalen. Vanuit deze verhoogde positie kun je op jacht gaan naar niet-afgeschermde schepen, boardinggezelschappen op rivaliserende schepen lanceren en verwoestende aanvallen op gronddoelen hieronder coördineren. Door op de Battle Ring te landen, wordt een geheel nieuwe dimensie van gameplay geopend die de meeste strategiespellen simpelweg niet bieden, waardoor Overlord een tactische voorsprong krijgt op al het andere op de markt."
+            "body": "De Battle Ring is een geplande kolossale orbitale structuur die het stelsel van de planeet omringt. Wanneer je je schip de ruimte in brengt, kun je mogelijk aanmeren bij de Battle Ring voor een strategisch voordeel. Vanuit die verhoogde positie zou je schepen zonder schild kunnen opsporen, enterploegen naar rivaliserende schepen kunnen lanceren en aanvallen op grondgebonden doelen eronder kunnen coördineren. Landen op de Battle Ring is bedoeld om een nieuwe gamedimensie te openen die de meeste strategiegames niet bieden, onder voorbehoud van de definitieve ontwikkeling en spelregels."
           },
           {
             "title": "Binnen de gevechtsring",
-            "body": "De Battle Ring is niet alleen een dockingplatform. Als je weet hoe je het interieur kunt doorbreken, wachten er verborgen missies, extra bonussen en exclusieve beloningen binnenin. Het interieur van de ring is een labyrint van gangen, kamers en eeuwenoude technologie. Voer speurtochten en jachtmissies uit binnen de ring zelf en ontdek geheimen waar geen enkele speler aan de oppervlakte ooit toegang toe zal krijgen. De Battle Ring beloont de stoutmoedigen, de sluwe en de meedogenloze."
+            "body": "De Battle Ring is bedoeld om meer te zijn dan een aanmeerplatform. Als je kunt uitzoeken hoe je het interieur binnendringt, kunnen daarbinnen verborgen quests, extra in-game bonussen en exclusieve in-game beloningen wachten. Het interieur van de ring is gepland als een labyrint van gangen, kamers en oude technologie, met quests en jachtmissies gepland in de ring zelf, en geheimen waar geen aan het oppervlak gebonden speler ooit bij kan. Alles onder voorbehoud van de definitieve ontwikkeling en spelregels."
           },
           {
             "title": "Realtime VR-interactie",
-            "body": "Zoals alle games uit het Hyper Tek-assortiment ondersteunt Overlord of the 7 Realms volledige VR-interactie in realtime. Stap in je schip, loop door de gangen van de Battle Ring, leid je troepen naar grondgevechten en ervaar ruimteoorlogen vanuit de cockpit van je schip. VR transformeert Overlord van een strategiespel in een volledig meeslepende slagveldervaring. Voer het bevel over je strijdkrachten, verken buitenaards terrein en ga de strijd aan met een niveau van aanwezigheid en intensiteit dat bij flatscreen-gaming niet kan worden nagebootst."
+            "body": "Net als alle geplande Hyper Tek games is Overlord of the 7 Realms bedoeld om VR-interactie in realtime te ondersteunen. Je kunt mogelijk in je schip stappen, door de gangen van de Battle Ring lopen, je troepen aanvoeren in grondgevechten en ruimteoorlog beleven vanuit de cockpit van je schip. VR is bedoeld om Overlord van een strategiespel om te vormen tot een meeslepende slagveldervaring, waarin je je strijdkrachten zou kunnen aanvoeren, buitenaards terrein zou kunnen verkennen en zou kunnen vechten met een aanwezigheid die gamen op een plat scherm mogelijk niet kan evenaren. Onder voorbehoud van de definitieve ontwikkeling en spelregels."
           },
           {
-            "title": "Het voordeel ten opzichte van andere spellen",
-            "body": "Geen enkele andere game combineert oorlogvoering op drie niveaus, een verkenbaar orbitaal gevechtsstation, realtime VR en in-game beloningen in één ervaring. De Battle Ring alleen al voegt een gameplaydimensie toe die concurrenten niet kunnen evenaren. Tel daar grondgevechten, ruimteoorlog, VR-beleving en het onderling verbonden Hyper Tek-ecosysteem bij op, en Overlord staat in een eigen categorie."
+            "title": "Het geplande voordeel ten opzichte van andere games",
+            "body": "Overlord stelt voor om drielaagse oorlogvoering, een verkenbaar orbitaal gevechtsstation, realtime VR en in-game beloningen te combineren in één ervaring. De Battle Ring alleen is bedoeld om een gamedimensie toe te voegen die concurrenten mogelijk niet evenaren. Samen met grondgevechten, ruimteoorlog, VR-onderdompeling en het geplande, onderling verbonden Hyper Tek ecosysteem is dit de ervaring die we ontwikkelen, onder voorbehoud van de definitieve ontwikkeling en spelregels."
           }
         ]
       },
-      "upgradesTitle": "Herbouwen, herbewapenen, rekruteren; Power-up voor oorlog",
+      "upgradesTitle": "Herbouw, herbewapen, verwerf; maak je klaar voor oorlog",
       "upgrades": [
         {
-          "title": "Upgrades van ruimteschepen",
-          "body": "Je gecrashte schip is waar het allemaal begint. Bouw het systeem voor systeem opnieuw op, van de motorruimte tot het commandodek. Elk onderdeel is volledig uitbreidbaar: rompversterking, structurele integriteit, samenstelling van de buitenschil, schildgeneratoren, voedingssystemen en navigatie-arrays. In Overlord bouw je niet voor snelheid, maar voor de strijd. Een volledig geüpgraded oorlogsschip vormt de basis van elke succesvolle campagne, en hoe dieper je investeert, hoe formidabeler je schip wordt."
+          "title": "Geplande ruimteschipupgrades",
+          "body": "Je neergestorte schip is waar alles gepland begint. Je kunt het mogelijk systeem voor systeem herbouwen, van de motorruimte tot het commandodek. Elk onderdeel is bedoeld om te upgraden: rompversterking, structurele integriteit, samenstelling van de buitenschaal, schildgeneratoren, energiesystemen en navigatiearrays. In Overlord zou je niet voor snelheid bouwen, maar voor de strijd. Een volledig geüpgraded oorlogsschip is bedoeld als fundament van elke campagne, en hoe meer je je schip ontwikkelt, hoe indrukwekkender je vaartuig kan worden, onder voorbehoud van de definitieve ontwikkeling en spelregels."
         },
         {
-          "title": "Wapensystemen en technische niveaus",
-          "body": "Upgrade en verfijn je wapens, vaardigheden en technologieniveaus om te domineren op alle drie de gevechtsniveaus. Grondartillerie voor planetaire oorlogsvoering, anti-orbitale batterijen voor grond-naar-ruimte-aanvallen en op schepen gemonteerde wapenarrays voor ruimte-naar-ruimte-gevechten. Elk wapensysteem kan worden verfijnd voor specifieke tactische rollen. Of je nu gespecialiseerd bent in langeafstandsbombardementen, instapacties van dichtbij of defensieve tegenmaatregelen, je wapenuitrusting bepaalt je gevechtsidentiteit."
+          "title": "Geplande wapensystemen en techniekniveaus",
+          "body": "Je kunt mogelijk je wapens, vaardigheden en techniekniveaus upgraden en verfijnen op alle drie de gevechtsniveaus: grondartillerie voor planetaire oorlogvoering, anti-orbitale batterijen voor grond-tot-ruimte aanvallen en op het schip gemonteerde wapenarrays voor ruimte-tot-ruimte gevechten. Elk gepland wapensysteem kan worden verfijnd voor specifieke tactische rollen. Of je je nu specialiseert in beschietingen op lange afstand, enteracties van dichtbij of defensieve tegenmaatregelen, je wapenuitrusting is bedoeld om je gevechtsidentiteit te bepalen, onder voorbehoud van de definitieve ontwikkeling en spelregels."
         },
         {
-          "title": "Specialisten rekruteren",
-          "body": "Specialisten zijn de krachtvermenigvuldiger en vormen, samen met vaardigheid, het verschil tussen goede spelers en Overlords. Verwerf unieke specialisten die krachtige bonussen geven aan de algehele prestaties en het krachtniveau van je schip. Tactische specialisten verbeteren de efficiëntie van troepeninzet, technische specialisten versnellen reparaties en upgrades van het schip, wapenspecialisten verhogen de schade van alle systemen, en inlichtingenspecialisten onthullen posities en zwakke plekken van de vijand. Combineer meerdere specialisten voor een verwoestende gezamenlijke inspanning die elk aspect van je operatie versterkt. Spelers die niets uitgeven kunnen echter gerust zijn: Hyper Tek is opgezet om problemen in gaming aan te pakken. Stapelen is mogelijk, maar door de eerlijke spelmechanieken is het geen simpel punt-voor-punt-systeem. Het werkt met een glijdende schaal, zodat brute kracht het belang van vaardigheid niet overschaduwt. Deze game legt de nadruk op zowel kracht als vaardigheid, in plaats van op toeval!"
+          "title": "Specialisten verwerven",
+          "body": "Geplande specialisten zijn bedoeld als krachtvermenigvuldiger en kunnen, gecombineerd met vaardigheid, het verschil maken tussen goede spelers en Overlords. Je kunt mogelijk unieke specialisten verwerven die bonussen brengen aan de totale prestaties en het krachtniveau van je schip. Tactische specialisten kunnen de efficiëntie van troepeninzet verbeteren, technische specialisten kunnen scheepsreparaties en upgrades versnellen, wapenspecialisten kunnen de schade over alle systemen verhogen en inlichtingenspecialisten kunnen vijandelijke posities en zwaktes onthullen. Het stapelen van meerdere specialisten zou een gezamenlijke inspanning kunnen creëren die elk aspect van je operatie versterkt. Spelers die niets uitgeven kunnen gerustgesteld zijn: Hyper Tek is gemaakt om problemen in gaming aan te pakken. Hoewel stapelen gepland is, zijn de geplande spelmechanieken zo ontworpen dat stapelen geen eenvoudig punt-voor-punt-systeem is. Het is bedoeld om op een glijdende schaal te werken zodat ruwe kracht het belang van vaardigheid niet overschaduwt. Dit spel is bedoeld om zowel kracht als vaardigheid te benadrukken, in plaats van op toeval te vertrouwen. Alles onder voorbehoud van de definitieve ontwikkeling en spelregels."
         },
         {
           "title": "Bouw je legers",
-          "body": "Kloon troepen in de kloonlaboratoria aan boord van je schip, upgrade en verfijn ze en hun wapens totdat ze gevechtsklaar zijn. Maar troepen alleen zijn niet genoeg. Tem en train de wilde wezens van de planeet om bereden cavalerie te creëren, een strijdmacht die niet kan worden gekloond of vervaardigd en die moet worden verdiend door vaardigheid en geduld. De samenstelling van je leger op de grond, in de lucht en in de ruimte bepaalt je dominantie."
+          "body": "Je kunt mogelijk troepen klonen in de kloonlabs aan boord van je schip en ze, samen met hun wapens, upgraden en verfijnen tot ze gevechtsklaar zijn. Maar troepen alleen zijn misschien niet genoeg. Het temmen en trainen van de wilde wezens van de planeet kan bereden beestencavalerie creëren, een geplande macht die niet gekloond of gefabriceerd kan worden en met vaardigheid en geduld verdiend moet worden. Je legersamenstelling over grond, lucht en ruimte is bedoeld om je dominantie te bepalen, onder voorbehoud van de definitieve ontwikkeling en spelregels."
         }
       ],
-      "rewardsTitle": "De Hammerongs, beloningen en het Hyper Tek-ecosysteem",
+      "rewardsTitle": "De Hammerongs, in-game beloningen en het Hyper Tek ecosysteem",
       "rewards": [
         {
-          "title": "De Hammerongs: de krachtigste soort die er bestaat",
-          "body": "Elke twee weken vallen de krachtvelden van de centrale arena weg en arriveren de Hammerongs. Ze zijn de sterkste buitenaardse soort in het universum, gewapend met geavanceerde technologie die veel verder gaat dan alles wat spelers bezitten. Ze komen om de hulpbronnen van de planeet te ontginnen, en ze verdedigen de arena met volledige, overweldigende kracht. Het aanvallen van de Hammerongs is de gevaarlijkste uitdaging in Overlord, maar degenen die slagen worden beloond met enorme bonussen, legendarische buit, zeldzame upgradematerialen en exclusieve beloningen die op geen enkele andere manier kunnen worden verkregen. De tweewekelijkse Hammerong-invasie is de ultieme test van je kracht."
+          "title": "De Hammerongs: de machtigste soort in het verhaal",
+          "body": "Elke twee weken zijn de krachtvelden van de centrale arena bedoeld om uit te vallen, waarna de Hammerongs arriveren. In het verhaal zijn zij de sterkste buitenaardse soort in het heelal, bewapend met geavanceerde technologie ver voorbij wat spelers bezitten. Ze komen om de middelen van de planeet leeg te halen en verdedigen de arena met volledige, overweldigende kracht. Het aanvallen van de Hammerongs is gepland als de gevaarlijkste uitdaging in Overlord, en wie slaagt kan in-game bonussen, legendarische in-game buit, zeldzame upgradematerialen en exclusieve in-game beloningen ontvangen die op geen andere manier te krijgen zijn. De tweewekelijkse Hammerong-invasie is bedoeld als de ultieme test van je kracht, onder voorbehoud van de definitieve ontwikkeling en spelregels."
         },
         {
-          "title": "Dagelijkse evenementen, speurtochten en gevechtsbeloningen",
-          "body": "Overlord levert voortdurend beloningen op. Voltooi dagelijkse taken om credits te verdienen, materialen te upgraden en voortgangsbonussen. Doe mee aan speciale evenementen voor premiumbeloningen. Voer missies uit over het hele planeetoppervlak en binnen de Battle Ring voor exclusieve buit. Win gevechten tegen monsters, buitenaardse wezens en rivaliserende spelers om grondstoffen te verzamelen. Verken het oppervlak om verborgen artefacten en schatten te ontdekken. De beloningsstructuur is zo ontworpen dat elke actie die je onderneemt je dichter bij de ultieme Overlord van de server brengt."
+          "title": "Dagelijkse evenementen, quests en gevechts-in-game-beloningen",
+          "body": "Overlord is bedoeld om regelmatig in-game beloningen te leveren. Geplande dagelijkse taken kunnen in-game credits, upgradematerialen en voortgangsbonussen geven. Speciale evenementen kunnen premium in-game beloningen bieden. Quests op het oppervlak van de planeet en binnen de Battle Ring kunnen exclusieve in-game buit geven. Het winnen van gevechten tegen monsters, buitenaardse wezens en rivaliserende spelers kan je in-game middelen vergroten, en het verkennen van het oppervlak kan verborgen artefacten en in-game items onthullen. De structuur van in-game beloningen is bedoeld zodat elke actie je dichter kan brengen bij het worden van de ultieme Overlord van de server, onder voorbehoud van de definitieve ontwikkeling en spelregels."
         },
         {
           "title": "Verbonden met het Hyper Tek-ecosysteem",
-          "body": "Overlord of the 7 Realms staat niet op zichzelf. Het is volledig geïntegreerd in het Hyper Tek-universum, naast Hyper Racing en Hyper Quest. Grondstoffen die je in Overlord verdient, kun je in alle drie de games gebruiken. Scheepsupgrades, specialistbonussen, gevechtsvaardigheden en materialen gaan naadloos mee tussen de titels. Racevaardigheden uit Hyper Racing verbeteren je vliegkunsten in de ruimtegevechten van Overlord. Materialen die je in Hyper Quest verzamelt, voeden je upgrades op de planeet. De Hyper Tek-marktplaats verbindt alles, en creëert één verbonden universum waarin voortgang in één game de vooruitgang in alle drie aandrijft."
+          "body": "Overlord of the 7 Realms is niet bedoeld om geïsoleerd te bestaan. Het is gepland als geïntegreerd in het Hyper Tek heelal naast Hyper Racing en Hyper Quest. In-game middelen die je in Overlord behaalt, kunnen bruikbaar zijn in alle drie de geplande games. Schipupgrades, specialistenbonussen, gevechtsvaardigheden en materialen kunnen tussen titels stromen. Racevaardigheden uit Hyper Racing zouden je pilootvaardigheden in Overlord-ruimtegevechten kunnen verbeteren, en materialen verzameld in Hyper Quest zouden je upgrades op de planeet kunnen voeden. De Hyper Tek marktplaats is bedoeld om alles te verbinden en een verbonden heelal te creëren waarin voortgang in één game de vooruitgang in alle drie kan aandrijven, onder voorbehoud van de definitieve ontwikkeling en spelregels."
         },
         {
-          "title": "Eén universum, drie games, onbeperkte kracht",
-          "body": "Spelers die alle drie de Hyper Tek-games spelen, bouwen sneller kracht op, krijgen toegang tot exclusieve cross-game beloningen en domineren met een breed scala aan vaardigheden en middelen die spelers in één game niet kunnen evenaren. Het onderling verbonden ecosysteem is het ultieme concurrentievoordeel."
+          "title": "Eén heelal, drie geplande games",
+          "body": "Spelers die meedoen in alle drie de geplande Hyper Tek games kunnen sneller kracht opbouwen en toegang krijgen tot in-game beloningen tussen games, op basis van een breedte aan vaardigheden en in-game middelen die spelers van één game mogelijk niet hebben. Dit alles is gepland en onder voorbehoud van de definitieve ontwikkeling en spelregels."
         }
       ],
       "faqTitle": "Overlord van de 7 Rijken – Veelgestelde vragen",
       "faq": [
         {
           "q": "Wat is Overlord van de 7 Rijken?",
-          "a": "Een strategiespel met gevechten op drie niveaus waarin je neerstort op een buitenaardse planeet, je schip herbouwt, legers kloont en vecht in drie dimensies: grond-grond, grond-ruimte en ruimte-ruimte. Geplande functies zijn onder meer VR-interactie, in-game beloningen en tweewekelijkse invasies van de Hammerongs."
+          "a": "Een gepland drielaags gevechtsstrategiespel in ontwikkeling waarin je op een buitenaardse planeet neerstort, je schip herbouwt, legers kloont en vecht in drie dimensies: grond-tot-grond, grond-tot-ruimte en ruimte-tot-ruimte. Geplande functies zijn onder meer VR-interactie, in-game beloningen en tweewekelijkse Hammerong-invasies."
         },
         {
           "q": "Wat is het gevechtssysteem op drie niveaus?",
-          "a": "Gevechten vinden plaats op drie niveaus: grond-tot-grond tegen monsters en rivaliserende spelers, grond-tot-ruimte-aanvallen gericht op orbitale schepen en ruimte-tot-ruimte-oorlogsvoering op de Battle Ring. Deze multidimensionale aanpak creëert tactische diepgang die geen enkel strategiespel op één vlak kan evenaren."
+          "a": "Gevechten zijn bedoeld om op drie niveaus plaats te vinden: grond-tot-grond tegen monsters en rivaliserende spelers, grond-tot-ruimte aanvallen op orbitale schepen en ruimte-tot-ruimte oorlogvoering op de Battle Ring. Deze geplande multidimensionale aanpak is bedoeld om tactische diepte te creëren, onder voorbehoud van de definitieve ontwikkeling en spelregels."
         },
         {
           "q": "Wat is de gevechtsring?",
-          "a": "Een enorme orbitale structuur die de planeet omcirkelt. Laat je schip erop landen om op niet-afgeschermde doelen te jagen, boardinggezelschappen op vijandelijke schepen te lanceren en toegang te krijgen tot verborgen missies in het binnenland. Het besturen van de Battle Ring geeft je een strategisch voordeel ten opzichte van spelers die alleen op de grond spelen."
+          "a": "Een geplande enorme orbitale structuur rond de planeet. Je kunt mogelijk je schip erop laten landen om ongeschermde doelen op te sporen, enterploegen naar vijandelijke schepen te lanceren en verborgen quests in het interieur te bereiken. Het beheersen van de Battle Ring kan een strategisch voordeel geven ten opzichte van spelers die alleen op de grond actief zijn."
         },
         {
           "q": "Kan ik mijn ruimteschip upgraden?",
-          "a": "Elk systeem kan worden opgewaardeerd van motorruimte tot commandodek: romp, structuur, buitenschaal, schildgeneratoren, voedingssystemen en navigatie. In Overlord bouw je voor de strijd, niet voor snelheid. Een volledig geüpgraded oorlogsschip vormt de basis van elke campagne."
+          "a": "Elk systeem is bedoeld om te upgraden van motorruimte tot commandodek: romp, structuur, buitenschaal, schildgeneratoren, energiesystemen en navigatie. In Overlord is het de bedoeling dat je bouwt voor de strijd, niet voor snelheid. Een volledig geüpgraded oorlogsschip is gepland als fundament van elke campagne."
         },
         {
           "q": "Hoe werken specialisten?",
-          "a": "Rekruteer unieke specialisten die krachtige bonussen toevoegen aan de prestaties en het krachtniveau van uw schip. Tactische, technische, wapen- en inlichtingenspecialisten versterken elk verschillende systemen. Stapel meerdere specialisten op elkaar voor verwoestende synergieën op alle gevechtsniveaus."
+          "a": "Geplande specialisten kunnen worden verworven en bonussen toevoegen aan de prestaties en het krachtniveau van je schip. Tactische, technische, wapen- en inlichtingenspecialisten kunnen elk verschillende systemen versterken, en het stapelen van meerdere specialisten zou krachtige synergieën kunnen creëren over alle gevechtsniveaus, onder voorbehoud van de definitieve ontwikkeling en spelregels."
         },
         {
           "q": "Wie zijn de Hammerongs?",
-          "a": "De krachtigste buitenaardse soort die er bestaat. Elke veertien dagen arriveren ze in de centrale arena om de hulpbronnen van de planeet te ontginnen, verdedigd door overweldigende kracht en geavanceerde technologie. Ze aanvallen is extreem gevaarlijk, maar beloont spelers met enorme bonussen en legendarische buit."
+          "a": "De machtigste buitenaardse soort in het verhaal. Elke twee weken zijn ze bedoeld om in de centrale arena aan te komen om de middelen van de planeet leeg te halen, verdedigd door overweldigende kracht en geavanceerde technologie. Hen aanvallen is gepland als extreem gevaarlijk, en spelers die slagen kunnen in-game bonussen en legendarische in-game buit ontvangen."
         },
         {
-          "q": "Welke beloningen kan ik verdienen?",
-          "a": "Dagelijkse taken, quests, gevechten en evenementen zijn ontworpen om te belonen met credits, upgradematerialen en voortgangsbonussen. Speciale evenementen en invasies van de Hammerongs kunnen premium en exclusieve in-game beloningen bieden. Uitdagingen met een hogere moeilijkheidsgraad en ranked competities zijn gepland om grotere in-game beloningen te bieden."
+          "q": "Welke in-game beloningen kunnen worden geboden?",
+          "a": "Geplande dagelijkse taken, quests, gevechten en evenementen zijn bedoeld om in-game credits, upgradematerialen en voortgangsbonussen te geven. Speciale evenementen en Hammerong-invasies kunnen premium en exclusieve in-game beloningen bieden. Uitdagingen met een hogere moeilijkheidsgraad en gerangschikte competities zijn bedoeld om grotere in-game beloningen te bieden."
         },
         {
           "q": "Ondersteunt Overlord VR?",
-          "a": "Ja. Met volledige realtime VR-interactie kun je door de gangen van je schip lopen, het interieur van de Battle Ring verkennen, troepen naar grondgevechten leiden en je schip besturen in ruimteoorlogvoering. VR transformeert Overlord van strategie naar een volledig meeslepende slagveldervaring."
+          "a": "VR is gepland. Realtime VR-interactie kan je laten lopen door de gangen van je schip, het interieur van de Battle Ring verkennen, troepen aanvoeren in grondgevechten en je schip besturen in ruimteoorlog, onder voorbehoud van de definitieve ontwikkeling en spelregels."
         },
         {
           "q": "Hoe bouw ik mijn leger?",
-          "a": "Kloon troepen in de laboratoria aan boord van je schip, upgrade en verfijn ze en hun wapens. Voor bereden cavalerie moet je de wilde wezens van de planeet temmen en trainen, aangezien dieren niet kunnen worden gekloond. De samenstelling van het leger op de grond, in de lucht en in de ruimte bepaalt je dominantie."
+          "a": "In het geplande spel kun je mogelijk troepen klonen in de boordlabs van je schip en ze, samen met hun wapens, upgraden en verfijnen. Voor bereden cavalerie is het plan dat je de wilde wezens van de planeet temt en traint, omdat dieren niet gekloond kunnen worden. Je legersamenstelling over grond, lucht en ruimte is bedoeld om je dominantie te bepalen."
         },
         {
           "q": "Kan ik lid worden van een alliantie?",
-          "a": "Ja. Doe het alleen of sluit je aan bij een alliantie die je macht vergroot en je helpt groeien. Allianties bieden gedeelde middelen, gecoördineerde aanvallen en collectieve verdediging. Voltooi dagelijkse taken om zowel je schip als de gedeelde bezittingen van de alliantie te upgraden."
+          "a": "Bondgenootschappen zijn gepland. Je kunt alleen spelen of je aansluiten bij een bondgenootschap dat je kracht kan vergroten en je kan helpen groeien. Geplande bondgenootschapsfuncties zijn onder meer gedeelde in-game middelen, gecoördineerde aanvallen en collectieve verdediging, en het voltooien van dagelijkse taken kan helpen om zowel je schip als de gedeelde items van het bondgenootschap te upgraden."
         },
         {
           "q": "Is Overlord gekoppeld aan andere Hyper Tek-games?",
-          "a": "Volledig geïntegreerd. Het is de bedoeling dat grondstoffen, scheepsupgrades, specialistbonussen en gevechtsvaardigheden meegaan tussen Overlord, Hyper Racing en Hyper Quest. Racevaardigheden verbeteren je ruimtegevechten, materialen uit Quest voeden je upgrades, en de Hyper Tek-marktplaats verbindt alle drie de games."
+          "a": "Dat is gepland. In-game middelen, schipupgrades, specialistenbonussen en gevechtsvaardigheden zijn bedoeld om te stromen tussen Overlord, Hyper Racing en Hyper Quest. Racevaardigheden kunnen je ruimtegevechten verbeteren, Quest-materialen kunnen je upgrades voeden en de Hyper Tek marktplaats is bedoeld om alle drie de games te verbinden, onder voorbehoud van de definitieve ontwikkeling en spelregels."
         },
         {
           "q": "Welke wapens zijn beschikbaar?",
-          "a": "Grondartillerie, anti-orbitale batterijen, op schepen gemonteerde wapenarrays en gespecialiseerde instapapparatuur. Elk systeem kan worden verfijnd voor specifieke tactische rollen, waaronder langeafstandsbombardementen, gevechten van dichtbij en defensieve tegenmaatregelen."
+          "a": "Geplande wapens zijn onder meer grondartillerie, anti-orbitale batterijen, op het schip gemonteerde wapenarrays en gespecialiseerde uitrusting voor enteracties. Elk systeem kan worden verfijnd voor specifieke tactische rollen, waaronder beschietingen op lange afstand, gevechten van dichtbij en defensieve tegenmaatregelen."
         },
         {
           "q": "Kan ik het oppervlak van de planeet verkennen?",
-          "a": "Ja. De planeet is rijk aan verborgen beloningen, artefacten, hulpbronnen en gevaarlijke wilde dieren om te temmen. Verken het oppervlak om schatten te vinden, vecht tegen buitenaardse wezens en monsters en ontdek strategische voordelen die je campagne voor Overlord-dominantie versterken."
+          "a": "Dat is gepland. De geplande planeet heeft verborgen in-game beloningen, artefacten, in-game middelen en gevaarlijke dieren om te temmen, met buitenaardse wezens en monsters om tegen te vechten en strategische voordelen om te ontdekken die je campagne kunnen versterken, onder voorbehoud van de definitieve ontwikkeling en spelregels."
         }
       ]
     }
@@ -496,7 +492,7 @@
       "sd": "Primair logistiekknooppunt voor de westelijke grens. Onderhoudt noodvoorzieningsreserves.",
       "res": "Xenobiologie en diepe-ruimtematerialenlaboratorium. Huisvest 40 vaste wetenschappers.",
       "agri": "Hydroponisch landbouwcomplex. Primaire voedselbron voor westelijke sectoren.",
-      "trade": "Vrijhandelszone. Meer dan 200 geregistreerde handelaren. Valuta: Universele Kredieten.",
+      "trade": "Vrijhandelszone. Meer dan 200 geregistreerde handelaren. In-game credits: Universal Credits.",
       "fuel": "Hoge-capaciteits brandstofsdepot. Ondersteunt ionaandrijving, plasmakerncentra en donkere-materie-cellen.",
       "ship": "Vlootonderhoud en montagestation. Capaciteit: 18 vaartuigen.",
       "ind": "Zware productiezone. Atmosferische schrobbers vereist. Productie: 8,4k eenheden/cyclus.",
@@ -861,11 +857,11 @@
       },
       "stables_ss": {
         "title": "Stal SS",
-        "desc": "Stuurboord biologisch vermogensbay. Huisvest buitenaardse rijdieren en biotechnologisch ontwikkelde wezens voor planetaire oppervlakteoperaties."
+        "desc": "Biologische ruimte aan stuurboord. Herbergt buitenaardse rijdieren en bio-gemanipuleerde wezens die worden gebruikt bij operaties aan het planeetoppervlak."
       },
       "stable_ps": {
         "title": "Stal PS",
-        "desc": "Bakboord biologisch vermogensbay. Spiegelt de SS-stallen voor evenwichtige wezensbelasting en symmetrische gewichtsverdeling."
+        "desc": "Biologische ruimte aan bakboord. Spiegelt de SS-stallen voor een evenwichtige wezenslast en symmetrische gewichtsverdeling."
       },
       "transporter": {
         "title": "Transportbay",
@@ -1165,7 +1161,7 @@
       "ggLastRace": "GG bij de laatste race, geweldige snelheid",
       "tradingPlasma": "Ruil plasmastaaf voor techboeken",
       "needHelpAsteroid": "Hulp nodig bij de asteroïdemissie",
-      "allianceRecruiting": "Onze alliantie recruteert, stuur me een bericht",
+      "allianceRecruiting": "Onze alliantie zoekt leden, stuur me een DM",
       "donationGoalsPlasma": "Bijdragedoelen: plasmastaven nodig!",
       "warStarts2Hours": "Oorlog begint over 2 uur, bereid je voor",
       "handleMedicalSupport": "Ik neem de medische ondersteuning op me",

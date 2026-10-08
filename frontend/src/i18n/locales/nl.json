@@ -17,7 +17,7 @@
     "shop": {
       "overview": "Overzicht",
       "overviewDesc": "Algemeen marktoverzicht",
-      "myAssets": "Mijn bezittingen",
+      "myAssets": "Mijn items",
       "myAssetsDesc": "Volg en beheer alles wat je bezit",
       "theMarketplace": "De marktplaats",
       "theMarketplaceDesc": "Blader door alle NFT-, NFA- en NFC-collecties",
@@ -69,8 +69,8 @@
         "description": "Koop je favoriete NFT's en presenteer of verhandel ze op je profiel wanneer je maar wilt."
       },
       {
-        "title": "Verdienen en groeien",
-        "description": "Verdien door je collecties te verkopen of populairiteit te vergaren in de NFT-ruimte."
+        "title": "Verzamelen & groeien",
+        "description": "Breid je collectie uit of bied je eigen creaties aan andere spelers aan op de marktplaats."
       }
     ]
   },
@@ -93,15 +93,15 @@
       },
       {
         "label": "Echt eigendom",
-        "desc": "NFA/NFC/NFT's met een Programmatic Trade-In Value"
+        "desc": "NFA/NFC/NFT's met geplande Programmatic Trade-In Value"
       },
       {
         "label": "Play-to-Own",
-        "desc": "Elk item dat je verzamelt is van jou, vastgelegd op de blockchain"
+        "desc": "Geplande items die je kunt verzamelen en bezitten, vastgelegd op de Base-chain"
       },
       {
         "label": "Item Loyalty Program",
-        "desc": "Hoe langer je een item houdt, hoe hoger de inruiltrap, altijd lager dan het bedrag dat eraan is toegewezen"
+        "desc": "Geplande loyaliteitswaarde die onder de vermelde voorwaarden kan stijgen"
       },
       {
         "label": "Gekoppelde progressie",
@@ -109,7 +109,7 @@
       },
       {
         "label": "VR/AR-integratie",
-        "desc": "VR/AR-spelers kunnen in realtime deelnemen aan missies en epische gevechten"
+        "desc": "Geplande VR/AR zodat spelers in realtime kunnen meedoen aan missies en epische gevechten"
       }
     ]
   },
@@ -169,10 +169,10 @@
       "uiPageSubtitle": "Het volledige gaming-dashboard.",
       "uiPageSubtitleSpan": "Drie modi. Één meeslepende ervaring.",
       "uiHeroLabel": "Interactief Voorbeeld",
-      "uiHeroDesc": "Betreed het volledige Hyper Tek 100 dashboard. Schakel tussen Racing-, Quest- en Overlord-modi. Elk met zijn eigen marktplaats, asset-inventaris en realtime inkomsten.",
+      "uiHeroDesc": "Stap in het volledige Hyper Tek 100 dashboard. Wissel tussen de modi Racing, Quest en Overlord, elk met een eigen marktplaats en itemvoorraad.",
       "uiStat1": "3 Spelmodi",
       "uiStat2": "Volledig Dashboard",
-      "uiStat3": "Asset-inventaris",
+      "uiStat3": "Itemvoorraad",
       "uiStat4": "Live Marktplaats",
       "uiLaunchBtn": "Interface Starten",
       "aboutPageSubtitle": "Het team, de missie en de visie.",
@@ -181,9 +181,9 @@
       "aboutHeroTitle2": "Aangedreven door Web3.5.",
       "aboutHeroDesc": "Hyper Tek 100 is een gameproject in ontwikkeling waarin elk item op de blockchain is vastgelegd en eigendom is van de speler. Er zijn drie onderling verbonden games gepland, met één gedeeld voortgangssysteem.",
       "pillar1Title": "Web3.5-technologie",
-      "pillar1Desc": "On-chain assets, echt eigendom en een transparante marktplaats gebouwd op Base.",
-      "pillar2Title": "Echte Asset-waarde",
-      "pillar2Desc": "Elk in-game item is een verhandelbaar asset. Speel, verdien en bezit je voortgang.",
+      "pillar1Desc": "On-chain items, echt eigendom en een transparante marktplaats gebouwd op Base.",
+      "pillar2Title": "Echt itemeigendom",
+      "pillar2Desc": "Elk in aanmerking komend item in het spel is bedoeld om verhandelbaar te zijn. Speel, verzamel en bezit je items.",
       "pillar3Title": "Eerlijk Ecosysteem",
       "pillar3Desc": "Transparante commissieverdeling en een Programmatic Trade-In Value ingebouwd in elk in aanmerking komend item.",
       "pillar4Title": "Doe Mee",
@@ -198,13 +198,13 @@
     "tryGaming": "Probeer de game-interface",
     "badge": "NFA'S IN BEPERKTE OPLAGE EN GAMEPAKKETTEN, VERKRIJGBAAR ZOLANG DE VOORRAAD STREKT",
     "intro1": "Hyper Tek 100 is een gameproject in ontwikkeling dat enkele van de meest urgente uitdagingen in de sector wil aanpakken. De website, de marktplaats en het itemsysteem zijn gebouwd, en er zijn drie onderling verbonden games gepland. Voorafgaand aan de games brengen we een beperkt aantal items en pakketten uit voor spelers en verzamelaars die vroeg tot het universum willen toetreden.",
-    "intro2": "We brengen een klein aantal Non-Fungible Article (NFA)-items van Fase 1 uit. Elk item vermeldt in-game bonussen die kunnen gelden als de games worden uitgebracht, en het is niet de bedoeling de bonusniveaus van Fase 1 te herhalen. Het aanbod heeft een harde limiet: zodra deze items zijn uitverkocht, worden de resterende niet-gemunte NFA's in beperkte oplage van de website verwijderd.",
-    "intro3": "In aanmerking komende Hyper Tek-items hebben een Programmatic Trade-In Value, bewaard in een escrow op de blockchain. Deze NFA's in beperkte oplage vermelden ook in-game bonussen die kunnen gelden, volgens de definitieve spelregels, als de games worden uitgebracht.",
+    "intro2": "We brengen een klein aantal Non-Fungible Article (NFA) items van Fase 1 uit. Elk vermeldt geplande in-game bonussen die kunnen gelden als de games worden afgerond, en de bonusniveaus van Fase 1 zijn niet bedoeld om herhaald te worden. Het aanbod is strikt begrensd: zodra deze items uitverkocht zijn, worden alle resterende niet-geslagen NFA's in beperkte oplage van de website verwijderd.",
+    "intro3": "In aanmerking komende Hyper Tek items dragen een Programmatic Trade-In Value, bewaard in een on-chain escrow. Deze NFA's in beperkte oplage vermelden ook geplande in-game bonussen die kunnen gelden, onder voorbehoud van de definitieve spelregels, als de games worden afgerond.",
     "intro4": "Als je enthousiast bent over wat je van het Hyper Tek-project hebt gezien en een van deze beperkte items wilt bezitten, is dit het moment. Het aanbod is beperkt en zodra een item op is, wordt het niet opnieuw gemunt.",
     "intro5": "Onze tweede release is een set exclusieve gamepakketten die rechtstreeks op onze eigen website worden verkocht, voor een prijs die 10% lager ligt dan waarvoor ze later mogelijk elders worden aangeboden. Deze prijs geldt slechts voor een beperkte tijd.",
     "keyPointsTitle": "Belangrijke punten om te onthouden:",
-    "intro6": "Hyper Tek Non-Fungible Articles (HT NFA's) zijn digitale verzamelobjecten met de grootste in-game bonussen uit het Hyper Tek-assortiment, die kunnen gelden als de games worden uitgebracht, plus een Programmatic Trade-In Value. Alleen verkrijgbaar zolang de voorraad strekt.",
-    "intro7": "Hyper Tek is opgezet als Play-to-Own: de items die je verzamelt zijn van jou, vastgelegd op de blockchain, met in-game nut dat kan gelden in de geplande games. Items worden verkocht als digitale verzamelobjecten, niet als een manier om geld te verdienen.",
+    "intro6": "Hyper Tek Non-Fungible Articles (HT NFA's) zijn digitale verzamelobjecten met de geplande grootste in-game bonussen uit het Hyper Tek assortiment, die kunnen gelden als de games worden afgerond, plus een Programmatic Trade-In Value. Alleen beschikbaar zolang de voorraad strekt.",
+    "intro7": "Hyper Tek is gebouwd als Play-to-Own: de items die je verzamelt zijn van jou, on-chain vastgelegd, met geplande in-game functionaliteit die kan gelden in de geplande games. Items worden verkocht als digitale verzamelobjecten, niet als manier om geld te verdienen.",
     "collectionsLabel": "Collecties",
     "sectionTitle": "Gamepakketten in beperkte oplage",
     "discount": "Bespaar 10% op genoemde prijzen",
@@ -212,7 +212,7 @@
     "donationTierPrefix": "Pakketniveau:",
     "rewardsTitle": "Onder voorbehoud van de release van de games en de definitieve spelvoorwaarden:",
     "specialConditionTitle": "Bijzondere voorwaarde",
-    "specialCondition": "LET OP: behalve de Gems die zijn inbegrepen voor in-game aankopen, kunnen bonussen en kortingen niet worden gecombineerd met andere acties. Elk pakket bevat een naamsvermelding in de aftiteling van de games, als de games worden uitgebracht.\n\nItems worden verkocht zoals ze zijn. In-game bonussen, kortingen en Gems die in een pakket staan, kunnen alleen gelden als de games worden uitgebracht en vallen onder de definitieve spelregels. Er wordt geen winst, betaling of financieel rendement beloofd.",
+    "specialCondition": "Afgezien van de Gems die zijn inbegrepen voor aankopen in het spel, kunnen bonussen en kortingen niet met andere acties worden gecombineerd. Elk pakket bevat een naamvermelding in de aftiteling van de games, **onder voorbehoud van de release van de games**.\n\nItems worden verkocht zoals ze zijn. In-game bonussen, kortingen en Gems die in een pakket staan, kunnen alleen gelden **onder voorbehoud van de release van de games en de definitieve spelvoorwaarden**. Er wordt geen winst, betaling of financieel rendement beloofd.",
     "imageComing": "Afbeelding komt binnenkort",
     "close": "Sluiten"
   },

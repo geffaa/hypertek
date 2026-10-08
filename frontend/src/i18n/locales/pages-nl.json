@@ -215,7 +215,7 @@
     "signUpBtn": "Registreren",
     "walletReady": "Uw portemonnee is klaar",
     "walletReadyDesc": "Een beveiligde ingebedde portemonnee is aangemaakt voor uw account.",
-    "walletWarning": "⚠️ Deel nooit uw privésleutel met iemand. Iedereen met uw privésleutel heeft volledige controle over uw portemonnee en activa.",
+    "walletWarning": "⚠️ Deel je privésleutel nooit met anderen. Iedereen met je privésleutel heeft volledige controle over je wallet en items.",
     "walletAddress": "Uw portemonnee-adres",
     "enterPasswordReveal": "Voer uw wachtwoord in om uw privésleutel te tonen:",
     "reEnterPassword": "Voer uw wachtwoord opnieuw in",
@@ -371,7 +371,7 @@
       "colTimeActive": "\nTijd actief\n",
       "colAssignedTo": "\nToegewezen aan\n",
       "inGame": "\nIn het spel\n",
-      "earned": "\nVerdiend\n",
+      "earned": "Behaald",
       "statusOpen": "\nOpenen\n"
     },
     "listings": {
@@ -402,7 +402,7 @@
       "transactions": "Transacties",
       "offers": "Aanbiedingen",
       "hyperBucks": "Gems",
-      "earnings": "Inkomsten",
+      "earnings": "Verkoopopbrengsten",
       "support": "Ondersteuning",
       "signOut": "Afmelden"
     },
@@ -497,12 +497,12 @@
       "send": "Verzenden"
     },
     "withdraw": {
-      "title": "Marketplace-inkomsten",
-      "subtitle": "Claim USDC verdiend door NFT-verkoop en maker royalty's.",
-      "connectWallet": "Verbind uw portemonnee om marktplaatsinkomsten te bekijken.",
-      "noEarnings": "Nog geen marktplaatsinkomsten om te claimen.",
-      "noEarningsHint": "Inkomsten uit NFT-verkopen worden hier weergegeven.",
-      "sellerEarnings": "Verkopersinkomsten",
+      "title": "Marktplaats-verkoopopbrengsten",
+      "subtitle": "Claim USDC uit je NFT-verkopen en creatorroyalty's.",
+      "connectWallet": "Verbind je wallet om je marktplaats-verkoopopbrengsten te bekijken.",
+      "noEarnings": "Nog geen marktplaats-verkoopopbrengsten om te claimen.",
+      "noEarningsHint": "Opbrengsten uit NFT-verkopen verschijnen hier.",
+      "sellerEarnings": "Verkopersopbrengsten",
       "creatorRoyalties": "Creator-royalty's",
       "claim": "Claim"
     },
@@ -520,7 +520,7 @@
       "descPlaceholder": " Beschrijf uw artikel... ",
       "storageBox": " Opbergdoos (categorie) ",
       "storageBoxHint": " Het artikel wordt in deze opbergdoos geplaatst totdat het op de marktplaats wordt vermeld. ",
-      "assetType": " Assettype ",
+      "assetType": "Itemtype",
       "nfcSoon": " Binnenkort ",
       "nfcHint": " Voor het maken van NFC is een licentie vereist — komt in een toekomstige update. ",
       "blockchain": " Blockchain ",
