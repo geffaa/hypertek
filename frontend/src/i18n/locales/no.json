@@ -17,7 +17,7 @@
     "shop": {
       "overview": "Oversikt",
       "overviewDesc": "Generell markedsoversikt",
-      "myAssets": "Mine eiendeler",
+      "myAssets": "Mine gjenstander",
       "myAssetsDesc": "Spor og administrer alt du eier",
       "theMarketplace": "Markedsplassen",
       "theMarketplaceDesc": "Bla gjennom alle NFT-, NFA- og NFC-samleobjekter",
@@ -69,8 +69,8 @@
         "description": "Kjop dine favoritt-NFT-er og vis dem frem eller bytt dem pa profilen din nar som helst."
       },
       {
-        "title": "Tjen og voks",
-        "description": "Tjen penger ved a selge samlingene dine eller bli populaer i NFT-verdenen."
+        "title": "Samle & utvikle",
+        "description": "Bygg ut samlingen din, eller tilby dine egne skapelser til andre spillere på markedsplassen."
       }
     ]
   },
@@ -93,15 +93,15 @@
       },
       {
         "label": "Ekte eierskap",
-        "desc": "NFA/NFC/NFT-er med en Programmatic Trade-In Value"
+        "desc": "NFA/NFC/NFT med planlagt Programmatic Trade-In Value"
       },
       {
         "label": "Play-to-Own",
-        "desc": "Hver gjenstand du samler er din, registrert på blokkjeden"
+        "desc": "Gjenstander som er planlagt for deg å samle og eie, registrert på Base-kjeden"
       },
       {
         "label": "Item Loyalty Program",
-        "desc": "Jo lenger du beholder en gjenstand, desto høyere blir innbyttenivået, alltid under beløpet som er tildelt den"
+        "desc": "Planlagt lojalitetsverdi som kan øke i henhold til oppgitte vilkår"
       },
       {
         "label": "Koblet progresjon",
@@ -109,7 +109,7 @@
       },
       {
         "label": "VR/AR-integrasjon",
-        "desc": "VR/AR-spillere kan bli med pa oppdrag og episke slag i sanntid"
+        "desc": "Planlagt VR/AR slik at spillere kan delta i episke oppdrag og kamper i sanntid"
       }
     ]
   },
@@ -169,10 +169,10 @@
       "uiPageSubtitle": "Det fullstendige gaming-dashbordet.",
       "uiPageSubtitleSpan": "Tre modi. En oppslukende opplevelse.",
       "uiHeroLabel": "Interaktiv Forhåndsvisning",
-      "uiHeroDesc": "Gå inn i det fullstendige Hyper Tek 100-dashbordet. Bytt mellom Racing-, Quest- og Overlord-modi. Hver med sin egen markedsplass, aktivabeholdning og sanntidsinntekter.",
+      "uiHeroDesc": "Gå inn i det komplette Hyper Tek 100-dashbordet. Bytt mellom modusene Racing, Quest og Overlord, hver med egen markedsplass og eget gjenstandslager.",
       "uiStat1": "3 Spillmodi",
       "uiStat2": "Fullstendig Dashbord",
-      "uiStat3": "Aktivabeholdning",
+      "uiStat3": "Gjenstandslager",
       "uiStat4": "Live Markedsplass",
       "uiLaunchBtn": "Start Interface",
       "aboutPageSubtitle": "Teamet, oppdraget og visjonen.",
@@ -181,9 +181,9 @@
       "aboutHeroTitle2": "Drevet av Web3.5.",
       "aboutHeroDesc": "Hyper Tek 100 er et spillprosjekt under utvikling der hver gjenstand er registrert på blokkjeden og eies av spilleren. Tre sammenkoblede spill er planlagt, med ett felles progresjonssystem.",
       "pillar1Title": "Web3.5-teknologi",
-      "pillar1Desc": "On-chain-aktiva, ekte eierskap og en gjennomsiktig markedsplass bygget på Base.",
-      "pillar2Title": "Ekte Aktivaverdi",
-      "pillar2Desc": "Hvert element i spillet er et omsettelig aktivum. Spill, tjen og eie fremgangen din.",
+      "pillar1Desc": "Gjenstander on-chain, ekte eierskap og en åpen markedsplass bygget på Base.",
+      "pillar2Title": "Ekte eierskap til gjenstander",
+      "pillar2Desc": "Alle kvalifiserte gjenstander i spillet er planlagt å kunne handles. Spill, samle og eie gjenstandene dine.",
       "pillar3Title": "Rettferdig Økosystem",
       "pillar3Desc": "Åpen fordeling av provisjon og en Programmatic Trade-In Value innebygd i hver kvalifisert gjenstand.",
       "pillar4Title": "Bli Med",
@@ -198,21 +198,21 @@
     "tryGaming": "Prøv spillgrensesnittet",
     "badge": "NFA-ER I BEGRENSET OPPLAG OG SPILLPAKKER, TILGJENGELIG SÅ LENGE LAGERET REKKER",
     "intro1": "Hyper Tek 100 er et spillprosjekt under utvikling som vil ta tak i noen av bransjens mest presserende utfordringer. Nettstedet, markedsplassen og gjenstandssystemet er bygget, og tre sammenkoblede spill er planlagt. I forkant av spillene slipper vi et begrenset antall gjenstander og pakker for spillere og samlere som vil bli med i universet tidlig.",
-    "intro2": "Vi slipper et lite antall Non-Fungible Article (NFA)-gjenstander i Trinn 1. Hver av dem oppgir bonuser i spillet som kan gjelde hvis spillene lanseres, og bonusnivåene i Trinn 1 er ikke planlagt gjentatt. Tilbudet har et fast tak: når disse gjenstandene er utsolgt, fjernes gjenværende upregede NFA-er i begrenset opplag fra nettstedet.",
-    "intro3": "Kvalifiserte Hyper Tek-gjenstander har en Programmatic Trade-In Value, som oppbevares i en escrow på blokkjeden. Disse NFA-ene i begrenset opplag oppgir også bonuser i spillet som kan gjelde, i henhold til de endelige spillereglene, hvis spillene lanseres.",
+    "intro2": "Vi lanserer et lite antall Non-Fungible Article-gjenstander (NFA) i Fase 1. Hver av dem oppgir planlagte bonuser i spillet som kan gjelde hvis spillene ferdigstilles, og bonusnivåene i Fase 1 er ikke planlagt gjentatt. Tilgangen er strengt begrenset: når disse gjenstandene er solgt, fjernes gjenværende ikke-preget NFA i begrenset opplag fra nettstedet.",
+    "intro3": "Kvalifiserte Hyper Tek-gjenstander har en Programmatic Trade-In Value som holdes i on-chain-escrow. Disse NFA-ene i begrenset opplag oppgir også planlagte bonuser i spillet som kan gjelde, med forbehold om spillets endelige regler, hvis spillene ferdigstilles.",
     "intro4": "Hvis du liker det du har sett av Hyper Tek-prosjektet og vil eie en av disse begrensede gjenstandene, er tiden inne nå. Tilbudet er begrenset, og når en gjenstand er borte, blir den ikke preget på nytt.",
     "intro5": "Vår andre lansering er et sett med eksklusive spillpakker som selges direkte på vårt eget nettsted, til en pris som er 10 % lavere enn det de senere kan bli tilbudt for andre steder. Denne prisen gjelder bare i en begrenset periode.",
     "keyPointsTitle": "Viktige punkter å huske:",
-    "intro6": "Hyper Tek Non-Fungible Articles (HT NFA-er) er digitale samleobjekter med de største bonusene i spillet i Hyper Tek-serien, som kan gjelde hvis spillene lanseres, pluss en Programmatic Trade-In Value. Kun tilgjengelig så lenge lageret rekker.",
-    "intro7": "Hyper Tek er bygget som Play-to-Own: gjenstandene du samler er dine, registrert på blokkjeden, med nytte i spillet som kan gjelde i de planlagte spillene. Gjenstander selges som digitale samleobjekter, ikke som en måte å tjene penger på.",
+    "intro6": "Hyper Tek Non-Fungible Articles (HT NFA) er digitale samleobjekter med de største planlagte bonusene i spillet i Hyper Tek-sortimentet, som kan gjelde hvis spillene ferdigstilles, pluss Programmatic Trade-In Value. Tilgjengelig så lenge beholdningen rekker.",
+    "intro7": "Hyper Tek er bygget som Play-to-Own: gjenstandene du samler er dine, registrert on-chain, med planlagt funksjonalitet i spillet som kan gjelde i de planlagte spillene. Gjenstandene selges som digitale samleobjekter, ikke som en måte å tjene penger på.",
     "collectionsLabel": "Samlinger",
     "sectionTitle": "Spillpakker i begrenset opplag",
     "discount": "Spar 10% pa listede priser",
     "donationTierLabel": "Pakkenivå",
     "donationTierPrefix": "Pakkenivå:",
-    "rewardsTitle": "Med forbehold om at spillene lanseres og om de endelige spillvilkårene:",
+    "rewardsTitle": "Med forbehold om spillutgivelse og endelige spillvilkår:",
     "specialConditionTitle": "Spesiell betingelse",
-    "specialCondition": "MERK: Bortsett fra Gems som er inkludert for kjøp i spillet, kan bonuser og rabatter ikke kombineres med andre kampanjer. Hver pakke inkluderer navnet ditt i rulleteksten til spillene, hvis spillene lanseres.\n\nGjenstander selges som de er. Bonuser i spillet, rabatter og Gems som er oppført i en pakke, kan bare gjelde hvis spillene lanseres, og er underlagt de endelige spillereglene. Ingen fortjeneste, utbetaling eller økonomisk avkastning loves.",
+    "specialCondition": "Bortsett fra Gems som følger med for kjøp i spillet, kan bonuser og rabatter ikke kombineres med andre kampanjer. Hver pakke inkluderer en navnekreditering på slutten av spillets rulletekst, **med forbehold om spillutgivelse**.\n\nGjenstander selges som de er. Bonuser i spillet, rabatter og Gems som er oppført i en pakke kan bare gjelde **med forbehold om spillutgivelse og endelige spillvilkår**. Ingen fortjeneste, utbetaling eller økonomisk avkastning er lovet.",
     "imageComing": "Bilde kommer snart",
     "close": "Lukk"
   },

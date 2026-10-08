@@ -215,7 +215,7 @@
     "signUpBtn": "Registrer deg",
     "walletReady": "Lommeboken din er klar",
     "walletReadyDesc": "En sikker innebygd lommebok er opprettet for kontoen din.",
-    "walletWarning": "⚠️ Del aldri din private nøkkel med noen. Den som har din private nøkkel har full kontroll over lommeboken og eiendelene dine.",
+    "walletWarning": "⚠️ Del aldri din private nøkkel med noen. Den som har din private nøkkel, har full kontroll over lommeboken og gjenstandene dine.",
     "walletAddress": "Din lommebokadresse",
     "enterPasswordReveal": "Skriv inn passordet ditt for å avsløre den private nøkkelen din:",
     "reEnterPassword": "Skriv inn passordet ditt på nytt",
@@ -371,7 +371,7 @@
       "colTimeActive": "\nTid aktiv\n",
       "colAssignedTo": "\nTildelt til\n",
       "inGame": "\nI spillet\n",
-      "earned": "\nOpptjent\n",
+      "earned": "Opptjent",
       "statusOpen": "\nÅpne\n"
     },
     "listings": {
@@ -402,7 +402,7 @@
       "transactions": "Transaksjoner",
       "offers": "Tilbud",
       "hyperBucks": "Gems",
-      "earnings": "Inntekter",
+      "earnings": "Salgsinntekter",
       "support": "Støtte",
       "signOut": "Logg ut"
     },
@@ -497,11 +497,11 @@
       "send": "Sende"
     },
     "withdraw": {
-      "title": "Markedsplassinntekter",
-      "subtitle": "Gjør krav på USDC opptjent fra NFT-salg og royalties for skapere.",
-      "connectWallet": "Koble til lommeboken for å se markedsplassinntekter.",
-      "noEarnings": "Ingen markedsplassinntekter å kreve ennå.",
-      "noEarningsHint": "Inntekter fra NFT-salg vil vises her.",
+      "title": "Inntekter fra markedsplassalg",
+      "subtitle": "Hent USDC fra NFT-salgene dine og skaperroyalties.",
+      "connectWallet": "Koble til lommeboken din for å se inntektene dine fra markedsplassalg.",
+      "noEarnings": "Ingen inntekter fra markedsplassalg å hente ennå.",
+      "noEarningsHint": "Inntekter fra NFT-salg vises her.",
       "sellerEarnings": "Selgerinntekter",
       "creatorRoyalties": "Skaper royalties",
       "claim": "Krav"
@@ -520,7 +520,7 @@
       "descPlaceholder": "Beskriv varen din...",
       "storageBox": "Oppbevaringsboks (kategori)",
       "storageBoxHint": "Varen legges i denne oppbevaringsboksen til den er oppført på markedsplassen.",
-      "assetType": "Aktivatype",
+      "assetType": "Gjenstandstype",
       "nfcSoon": "Snart",
       "nfcHint": "NFC-oppretting krever lisens – kommer i en fremtidig oppdatering.",
       "blockchain": "Blockchain",

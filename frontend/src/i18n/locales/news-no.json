@@ -30,7 +30,7 @@
       },
       {
         "q": "Hva er NFA-er, NFC-er og NFT-er?",
-        "a": "NFA-er/NFC-er/NFT-er er Hyper Teks digitale kunstverk. NFA-er og NFC-er har bonuser i spillet og en Programmatic Trade-In Value.\n\nNon-Fungible Articles (NFA-er) er det sjeldneste nivået i Hyper Tek-økosystemet. Dette er kunstverk laget av spillets arkitekter, med de største bonusene i spillet av alle nivåer. De slippes tilfeldig når spillere kjøper pakker, og kan bli delt ut som eksklusive belønninger under store arrangementer i spillet.\n\nNon-Fungible Collectables (NFC-er) har også bonuser i spillet og kan lages både av spillets arkitekter og av spillere som følger bestemte parametere. NFC-er åpner for at fellesskapet kan bidra med kreativitet og likevel få spillfordeler.\n\nNon-Fungible Tokens (NFT-er) er kunstverk som er laget fullt og helt av spillere. De har ingen direkte bonuser i spillet, men kan samles og brukes til å dekorere en spillers base eller romskip, og den tilpasningen kan bidra til en samlet bonus på kraftnivået."
+        "a": "NFA/NFC/NFT er Hyper Teks digitale kunstverk. NFA og NFC har bonuser i spillet og Programmatic Trade-In Value.\n\nNon-Fungible Articles (NFA) er det sjeldneste nivået i Hyper Tek-økosystemet. Disse NFA-ene er arkitektskapte kunstverk med de største bonusene i spillet av alle kunstverksnivåer. De slippes tilfeldig når spillere kjøper pakker og kan deles ut som eksklusive belønninger under store arrangementer i spillet.\n\nNon-Fungible Collectables (NFC) har også bonuser i spillet og kan lages enten av spillets arkitekter eller av spillere som følger visse parametere. NFC åpner døren for at fellesskapet kan bidra med kreativitet samtidig som de får spillfordeler.\n\nNon-Fungible Tokens (NFT) er helt spillerskapte kunstverk. Selv om de ikke har direkte bonuser i spillet, kan de samles og brukes til å dekorere en spillers base eller romskip, og den tilpasningen kan bidra til den samlede kraftnivåbonusen."
       },
       {
         "q": "Hvordan fungerer Programmatic Trade-In Value?",
@@ -49,16 +49,16 @@
         "a": "VR- og AR-støtte er en del av Hyper Teks design og vil bli en del av spillopplevelsen etter hvert som plattformen utvikler seg. Målet er full plattformuavhengig spilling, slik at VR-headset-, AR-, mobil- og tradisjonelle spillere til slutt kan bli med på de samme oppdragene og kampene sammen, fra hvilken som helst enhet.\n\nNår det er tilgjengelig, forventer vi at VR/AR-laget vil åpne helt nye måter å oppleve Hyper Tek-universet på."
       },
       {
-        "q": "Hva er et Hyper Tek \"Phygital\"-eiendelssertifikat?",
+        "q": "Hva er et Hyper Tek «Phygital»-sertifikat?",
         "a": "Et Phygital Certificate er en planlagt bro mellom gjenstandene dine i spillet og et fysisk samleobjekt, og kan bli tilgjengelig hvis spillene lanseres. Når du kjøper eller preger en premiumgjenstand på blokkjeden, kan du komme til å kunne bruke tjenesten vår for utskrift på bestilling og bestille et samlekort av høy kvalitet for den gjenstanden. For romsektorer kan du også komme til å kunne bestille et fysisk Space Certificate som sendes til hjemmeadressen din.\n\nHvert kort eller sertifikat er planlagt å ha et gullsegl, gjenstandens Token ID på Base-blokkjeden og gjenstandens opplysninger fra spilldatabasen, som et fysisk minne om gjenstanden du eier."
       },
       {
         "q": "Hvis et element selges på markedsplassen, hva skjer med det fysiske sertifikatet?",
-        "a": "Ekte eierskap ligger uforanderlig på Base-blockchainen, som fungerer som den ultimate sannhetskilden. Fordi tredjeparts kjøpere og selgere kan være late, trenger ikke spillere fysisk å sende kort eller papirdokumenter til hverandre når en eiendel bytter eier. I det øyeblikket et element går over til en ny eier på Base-nettverksregisteret, blir det tidligere fysiske sertifikatet bare en historisk samlegjenstand. Den nye eieren oppført på Base-blockchainen låser umiddelbart opp den programmatiske retten til å logge inn på sin Hyper Tek-profil og bestille sitt eget nylig genererte, tilpassede fysiske sertifikat eller skjøte direkte fra vår oppfyllelsesmotor for å matche deres live Base-kjede-eiendel."
+        "a": "Ekte eierskap finnes permanent på Base-blokkjeden, som fungerer som den endelige sannhetskilden. Fordi tredjepartskjøpere og -selgere kan være late, trenger ikke spillere å fysisk sende kort eller papirdokumenter til hverandre når en gjenstand bytter hender. Når en gjenstand går over til en ny eier i Base-nettverkets hovedbok, blir det tidligere fysiske sertifikatet bare et historisk samleobjekt. Den nye eieren som er registrert på Base-blokkjeden, får umiddelbart den programmatiske retten til å logge inn på sin Hyper Tek-profil og bestille sitt eget nyprintede tilpassede fysiske sertifikat direkte fra vår ordrehåndteringsmotor, som samsvarer med deres nåværende Base-kjede-gjenstand."
       },
       {
         "q": "Kan jeg bestille mer enn ett fysisk sertifikat for et element jeg eier på kjeden?",
-        "a": "Ja, absolutt. Du har absolutt suverenitet over eiendommen din på Base-blockchainen. Hvis profilen din er verifisert som den nåværende on-chain-eieren av eiendelen på Base Mainnet, lar systemet vårt deg bestille så mange fysiske kort eller skjøter for det spesifikke elementet som du ønsker. Det er ingen grenser."
+        "a": "Ja, absolutt. Du har full suverenitet over eiendelene dine på Base-blokkjeden. Hvis profilen din er verifisert som nåværende on-chain-eier av en gjenstand på Base Mainnet, lar systemet vårt deg bestille så mange fysiske kort eller sertifikater du vil for den gjenstanden. Det er ingen grense."
       },
       {
         "q": "Hvorfor skulle en spiller bestille flere matchende fysiske elementer?",

@@ -61,9 +61,9 @@
       "features": [
         {
           "label": "NFA-er / NFC-er / NFT-er",
-          "tagline": "Ny pa Web3.5-eiendeler? Begynn her",
+          "tagline": "Ny til Web3.5-gjenstander? Start her",
           "details": [
-            "NFA-er (ikke-fungible eiendeler) er Hypertek-utstedte gjenstander med en plattformgarantert innkjopspris.",
+            "**NFA** (Non-Fungible Articles) er gjenstander utgitt av Hyper Tek.",
             "NFC-er (ikke-fungible karakterer) er lisensierte spillergjenstander med spillbonuser og innkjop.",
             "NFT-er (ikke-fungible tokens) er brukerskapte samleobjekter — skinn, vapen og mer."
           ],
@@ -72,7 +72,7 @@
         },
         {
           "label": "Markedsplassen",
-          "tagline": "Kjop og selg spilleiendeler umiddelbart",
+          "tagline": "Kjøp & selg digitale gjenstander umiddelbart",
           "details": [
             "Bla gjennom et bredt utvalg av NFA-er, NFC-er og NFT-er — skinn, vapen, spesialister, romskip og mer.",
             "Filtrer etter kategori, sjeldenhet eller prisinterval for a finne akkurat det du trenger.",
@@ -84,7 +84,7 @@
           "label": "Auksjoner",
           "tagline": "Konkurrer om eksklusive begrensede gjenstander",
           "details": [
-            "By pa sjeldne eiendeler som kun er tilgjengelige gjennom tidsbegrensede auksjoner.",
+            "By på sjeldne gjenstander som bare er tilgjengelige gjennom tidsbegrensede auksjoner.",
             "En live nedtelling viser akkurat hvor mye tid som er igjen — hvert sekund teller.",
             "Overd andre for a sikre legendariske gjenstander som ikke kan kjopes pa noen annen mate."
           ],
@@ -92,9 +92,9 @@
         },
         {
           "label": "Handler",
-          "tagline": "Bytt eiendeler mellom kollegaer, ingen mellommann",
+          "tagline": "Bytt gjenstander mellom spillere, uten mellomledd",
           "details": [
-            "Foresla eller aksepter direkte eiendelsbytter med andre spillere — fullt pa kjeden.",
+            "Foreslå eller godta direkte gjenstandsbytter med andre spillere, helt on-chain.",
             "Sett betingelsene selv: velg hva du tilbyr og hva du vil ha i retur.",
             "Bla gjennom apne handletilbud eller legg ut ditt eget for a finne den perfekte avtalen."
           ],
@@ -102,10 +102,10 @@
         },
         {
           "label": "Oppdrag",
-          "tagline": "Fulfor oppdrag, tjen eksklusive belonninger",
+          "tagline": "Planlagte oppdrag med belønninger i spillet",
           "details": [
-            "Ta pa deg oppdrag for a tjene eksklusive belonninger og sjeldne spilleiendeler.",
-            "Hvert oppdrag har unike mal — utforsk, kjemp eller bygg veien til seieren.",
+            "Planlagte quests kan tilby eksklusive belønninger i spillet og sjeldne gjenstander i spillet.",
+            "Hver quest er planlagt å ha et unikt mål: utforsk, kjemp eller bygg veien din til seier.",
             "Bygg samlingen din strategisk gjennom ferdighet, ikke bare pengebruk."
           ],
           "cta": "Utforsk oppdrag"
@@ -114,9 +114,9 @@
           "label": "Til leie",
           "tagline": "Lei ut gjenstandene dine mot belønninger i spillet",
           "details": [
-            "Lei kraftige spesialister eller utstyr for ett enkelt oppdrag uten a kjope direkte.",
+            "Spillere kan kanskje leie ut kraftige spesialister eller utstyr for ett enkelt oppdrag uten å kjøpe dem direkte.",
             "Spillere kan komme til å kunne leie ut ubrukte gjenstander til andre spillere mot belønninger i spillet som de avtaler seg imellom.",
-            "Fleksible varighet — timesvis, daglig eller per-oppdrags-avtaler."
+            "Planlagte fleksible varigheter: avtaler per time, per dag eller per oppdrag."
           ],
           "cta": "Se Til leie"
         },
@@ -124,9 +124,9 @@
           "label": "Dusjer",
           "tagline": "Jakt mal, krev belonninger, topp lederbordet",
           "details": [
-            "Aksepter dusjer publisert av andre spillere eller systemet for a tjene kryptobelonninger.",
+            "Spillere kan kanskje godta bounties lagt ut av andre spillere eller systemet for belønninger i spillet.",
             "Klatre på bounty-topplisten for å låse opp eksklusive titler og belønninger i spillet.",
-            "Legg ut dine egne dusjer for a rekruttere dyktige spillere til malene dine."
+            "Spillere kan kanskje legge ut egne bounties for å finne dyktige spillere til sine mål."
           ],
           "cta": "Se dusjer"
         }
@@ -178,7 +178,7 @@
     "nfa101": {
       "sectionLabel": "Opplaring",
       "heading": "NFA-er / NFC-er / NFT-er 101",
-      "subtitle": "Ny pa NFT-er og Web3.5? Utforsk artiklene vare for a forsta blokkjedeeiendeler, lommebokter, sikkerhet og HyperTek-okosystemet.",
+      "subtitle": "Ny til NFT og Web3.5? Utforsk artiklene våre for å forstå blokkjedegjenstander, lommebøker, sikkerhet og Hyper Tek-økosystemet.",
       "minRead": "min lesing",
       "filterAll": "Alle"
     },
@@ -367,7 +367,7 @@
       "noQuests": "Ingen {{filter}} oppdrag",
       "inGameFeature": "Spillfunksjon",
       "inGameDesc": "Oppdrag genereres automatisk nar selgere velger redusert provisjon. Spillere kan fullfore opptil 5 oppdrag per dag. Provisjonspoolen deles mellom kjoperrabatten, spillerbelonningen og plattformen.",
-      "earnFromQuests": "Vil du tjene pa oppdrag? Spill spillet →",
+      "earnFromQuests": "Vil du ha belønninger i spillet fra quests? Prøv spillgrensesnittet →",
       "moneyQuests": "Pengeopprag (11% pool)",
       "resourceQuests": "Ressursoppdrag (20% pool)",
       "footerNote1": "# Oppdrag med kombinerte laster bruker belønningene i den separate tabellen.",
@@ -385,7 +385,7 @@
       },
       "comingSoon": {
         "title": "Kommer snart",
-        "desc": "Spillets oppdragsfunksjon er for oyeblikket under utvikling. Hold deg oppdatert — du vil snart kunne tjene belonninger direkte fra spillet.",
+        "desc": "Planlagte quest-funksjoner i spillet er under utvikling og kan tilby belønninger i spillet, med forbehold om spillets endelige regler.",
         "gotIt": "Forst"
       },
       "pagination": {
