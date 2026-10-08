@@ -11,7 +11,7 @@
       "executive-summary": "01  סיכום מנהלים",
       "three-worlds": "02  שלושת העולמות",
       "technology": "03  טכנולוגיה",
-      "nfa": "04  נכסים בלתי ניתנים להחלפה",
+      "nfa": "04  Non-Fungible Articles",
       "hyperbucks": "05  Gems",
       "marketplace": "06  שוק",
       "roadmap": "07  מפת דרכים",
@@ -215,7 +215,7 @@
     "signUpBtn": "הרשמה",
     "walletReady": "הארנק שלך מוכן",
     "walletReadyDesc": "ארנק מוטמע מאובטח נוצר עבור חשבונך.",
-    "walletWarning": "⚠️ לעולם אל תשתף את המפתח הפרטי שלך עם אף אחד. מי שיש לו את המפתח הפרטי שלך שולט במלואו בארנק ובנכסים שלך.",
+    "walletWarning": "⚠️ לעולם אל תשתף את המפתח הפרטי שלך עם אף אחד. לכל מי שיש את המפתח הפרטי שלך יש שליטה מלאה בארנק ובפריטים שלך.",
     "walletAddress": "כתובת הארנק שלך",
     "enterPasswordReveal": "הזן את הסיסמה שלך לחשיפת המפתח הפרטי:",
     "reEnterPassword": "הזן שוב את הסיסמה",
@@ -371,7 +371,7 @@
       "colTimeActive": "\nזמן פעיל\n",
       "colAssignedTo": "\nהוקצה ל\n",
       "inGame": "\nבתוך המשחק\n",
-      "earned": "\nהרווח\n",
+      "earned": "הורווח",
       "statusOpen": "\nפתוח\n"
     },
     "listings": {
@@ -402,7 +402,7 @@
       "transactions": "עסקאות",
       "offers": "הצעות",
       "hyperBucks": "Gems",
-      "earnings": "רווחים",
+      "earnings": "הכנסות ממכירות",
       "support": "תְמִיכָה",
       "signOut": "צא"
     },
@@ -497,12 +497,12 @@
       "send": "לִשְׁלוֹחַ"
     },
     "withdraw": {
-      "title": "רווחי Marketplace",
-      "subtitle": "טען USDC שהרווח ממכירות NFT ותמלוגים ליוצרים.",
-      "connectWallet": "חבר את הארנק שלך כדי לראות את הרווחים בשוק.",
-      "noEarnings": "אין עדיין רווחים בשוק לתבוע.",
-      "noEarningsHint": "רווחים ממכירות NFT יופיעו כאן.",
-      "sellerEarnings": "רווחי מוכר",
+      "title": "הכנסות ממכירות בשוק",
+      "subtitle": "תבע USDC ממכירות ה-NFT שלך ומתמלוגי היוצר.",
+      "connectWallet": "חבר את הארנק שלך כדי לראות את ההכנסות ממכירות בשוק.",
+      "noEarnings": "עדיין אין הכנסות ממכירות בשוק לתביעה.",
+      "noEarningsHint": "הכנסות ממכירות NFT יופיעו כאן.",
+      "sellerEarnings": "הכנסות המוכר",
       "creatorRoyalties": "תמלוגים ליוצרים",
       "claim": "תְבִיעָה"
     },
@@ -520,7 +520,7 @@
       "descPlaceholder": "תאר את הפריט שלך...",
       "storageBox": "תיבת אחסון (קטגוריה)",
       "storageBoxHint": "הפריט מונח בקופסת אחסון זו עד לרישום בשוק.",
-      "assetType": "סוג נכס",
+      "assetType": "סוג פריט",
       "nfcSoon": "בְּקָרוּב",
       "nfcHint": "יצירת NFC דורשת רישיון - יגיע בעדכון עתידי.",
       "blockchain": "בלוקצ'יין",

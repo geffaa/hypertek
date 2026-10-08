@@ -11,7 +11,7 @@
       "executive-summary": "01  الملخص التنفيذي",
       "three-worlds": "02  العوالم الثلاثة",
       "technology": "03  التكنولوجيا",
-      "nfa": "04  الأصول غير القابلة للاستبدال",
+      "nfa": "04  Non-Fungible Articles",
       "hyperbucks": "05  Gems",
       "marketplace": "06  السوق",
       "roadmap": "07  خارطة الطريق",
@@ -215,7 +215,7 @@
     "signUpBtn": "إنشاء حساب",
     "walletReady": "محفظتك جاهزة",
     "walletReadyDesc": "تم إنشاء محفظة مدمجة آمنة لحسابك.",
-    "walletWarning": "⚠️ لا تشارك مفتاحك الخاص مع أي شخص أبدًا. أي شخص لديه مفتاحك الخاص يمتلك تحكمًا كاملًا في محفظتك وأصولك.",
+    "walletWarning": "⚠️ لا تشارك مفتاحك الخاص مع أي شخص أبداً. أي شخص يملك مفتاحك الخاص لديه سيطرة كاملة على محفظتك وعناصرك.",
     "walletAddress": "عنوان محفظتك",
     "enterPasswordReveal": "أدخل كلمة مرورك للكشف عن مفتاحك الخاص:",
     "reEnterPassword": "أعد إدخال كلمة مرورك",
@@ -371,7 +371,7 @@
       "colTimeActive": "\nالوقت النشط\n",
       "colAssignedTo": "\nتم تعيينه ل\n",
       "inGame": "\nداخل اللعبة\n",
-      "earned": "\nحصل\n",
+      "earned": "المكتسب",
       "statusOpen": "\nمفتوح\n"
     },
     "listings": {
@@ -402,7 +402,7 @@
       "transactions": "المعاملات",
       "offers": "العروض",
       "hyperBucks": "Gems",
-      "earnings": "الأرباح",
+      "earnings": "عائدات المبيعات",
       "support": "يدعم",
       "signOut": "تسجيل الخروج"
     },
@@ -497,12 +497,12 @@
       "send": "يرسل"
     },
     "withdraw": {
-      "title": "أرباح السوق",
-      "subtitle": "يمكنك المطالبة بـ USDC المكتسبة من مبيعات NFT وعائدات منشئ المحتوى.",
-      "connectWallet": "قم بتوصيل محفظتك لعرض أرباح السوق.",
-      "noEarnings": "لا توجد أرباح في السوق للمطالبة بها حتى الآن.",
-      "noEarningsHint": "ستظهر الأرباح من مبيعات NFT هنا.",
-      "sellerEarnings": "أرباح البائع",
+      "title": "عائدات مبيعات السوق",
+      "subtitle": "استلم USDC من مبيعات NFT وعوائد المبدع.",
+      "connectWallet": "اربط محفظتك لعرض عائدات مبيعات السوق الخاصة بك.",
+      "noEarnings": "لا توجد عائدات مبيعات سوق للاستلام بعد.",
+      "noEarningsHint": "ستظهر هنا عائدات مبيعات NFT.",
+      "sellerEarnings": "عائدات البائع",
       "creatorRoyalties": "إتاوات الخالق",
       "claim": "مطالبة"
     },
@@ -520,7 +520,7 @@
       "descPlaceholder": " قم بوصف العنصر الخاص بك... ",
       "storageBox": " صندوق التخزين (الفئة) ",
       "storageBoxHint": " يتم وضع العنصر في صندوق التخزين هذا حتى يتم إدراجه في السوق. ",
-      "assetType": " نوع الأصل ",
+      "assetType": "نوع العنصر",
       "nfcSoon": " قريبًا ",
       "nfcHint": " يتطلب إنشاء NFC ترخيصًا - سيأتي في تحديث مستقبلي. ",
       "blockchain": " Blockchain ",
