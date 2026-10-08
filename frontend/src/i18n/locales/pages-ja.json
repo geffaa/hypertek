@@ -11,7 +11,7 @@
       "executive-summary": "01  エグゼクティブサマリー",
       "three-worlds": "02  3つの世界",
       "technology": "03  テクノロジー",
-      "nfa": "04  非代替可能アセット",
+      "nfa": "04  Non-Fungible Articles",
       "hyperbucks": "05  Gems",
       "marketplace": "06  マーケットプレイス",
       "roadmap": "07  ロードマップ",
@@ -215,7 +215,7 @@
     "signUpBtn": "新規登録",
     "walletReady": "ウォレットが準備できました",
     "walletReadyDesc": "アカウント用の安全な組み込みウォレットが作成されました。",
-    "walletWarning": "⚠️ 秘密鍵を誰にも共有しないでください。秘密鍵を持つ人はウォレットと資産を完全に制御できます。",
+    "walletWarning": "⚠️ 秘密鍵は決して誰にも共有しないでください。秘密鍵を持つ人は誰でも、あなたのウォレットとアイテムを完全に支配できます。",
     "walletAddress": "ウォレットアドレス",
     "enterPasswordReveal": "秘密鍵を確認するにはパスワードを入力してください：",
     "reEnterPassword": "パスワードを再入力",
@@ -371,7 +371,7 @@
       "colTimeActive": "\nアクティブな時間\n",
       "colAssignedTo": "\n担当者\n",
       "inGame": "\nゲーム内\n",
-      "earned": "\n獲得した\n",
+      "earned": "獲得済み",
       "statusOpen": "\n開く\n"
     },
     "listings": {
@@ -402,7 +402,7 @@
       "transactions": "トランザクション",
       "offers": "オファー",
       "hyperBucks": "Gems",
-      "earnings": "収益",
+      "earnings": "販売収益",
       "support": "サポート",
       "signOut": "署名アウト"
     },
@@ -497,11 +497,11 @@
       "send": "送信"
     },
     "withdraw": {
-      "title": "マーケットプレイスの収益",
-      "subtitle": "NFT 販売から得た USDC を請求します",
-      "connectWallet": "ウォレットに接続して、マーケットプレイスの収益を表示します。",
-      "noEarnings": "まだ請求するマーケットプレイスの収益はありません。",
-      "noEarningsHint": "NFT 販売からの収益がここに表示されます。",
+      "title": "マーケットプレイス販売収益",
+      "subtitle": "NFT の販売とクリエイターロイヤルティから USDC を請求できます。",
+      "connectWallet": "ウォレットを接続して、マーケットプレイス販売収益を確認しましょう。",
+      "noEarnings": "請求できるマーケットプレイス販売収益はまだありません。",
+      "noEarningsHint": "NFT の販売収益はここに表示されます。",
       "sellerEarnings": "販売者の収益",
       "creatorRoyalties": "クリエイターのロイヤルティ",
       "claim": "請求する"
@@ -520,7 +520,7 @@
       "descPlaceholder": " 商品について説明してください... ",
       "storageBox": " 保管ボックス (カテゴリー) ",
       "storageBoxHint": " 商品は、マーケットプレイスに出品されるまでこの保管ボックスに入れられます。 ",
-      "assetType": " アセット タイプ ",
+      "assetType": "アイテムタイプ",
       "nfcSoon": " 近日中に ",
       "nfcHint": " NFC の作成にはライセンスが必要です。将来のアップデートで提供される予定です。 ",
       "blockchain": " ブロックチェーン ",
