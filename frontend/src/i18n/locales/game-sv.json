@@ -5,7 +5,7 @@
     "racing": {
       "label": "RACING",
       "heading": "Hyper Racing",
-      "subtitle": "Galaxens mest intensiva racingupplevelse med flygande fordon,\nder skicklighet regerar och mästare föds.",
+      "subtitle": "Galaxens mest intensiva racingupplevelse med flygande fordon,\ndär skicklighet regerar och mästare föds.",
       "intro": [
         "Hyper Racing är ett planerat, energifyllt tävlingsracingspel under utveckling som utspelar sig i främmande världar, där spelare eventuellt kan bygga, uppgradera och flyga fullt anpassningsbara flygande racerfordon genom några av galaxens farligaste banor. Från planerade svävande bergformationer och vulkaniska lavatunnlar till öknar och bergspass är varje planerat lopp utformat som ett test av förberedelse, reflexer och strategi.",
         "Hyper Racing planeras som en tävlingsplattform. De bästa spelarna kan eventuellt gå in i rankade evenemang och turneringar med belöningar i spelet på spel. Oavsett om du jagar topplistornas ära eller bygger ett racingimperium kan allt du gör i Hyper Racing föra dig framåt.",
@@ -246,7 +246,7 @@
       "subtitle": "Crash-land. Återuppbygga. Erövra. Bli Overlord.",
       "intro": [
         "Overlord of the 7 Realms är ett planerat strategispel med strider på tre nivåer under utveckling. I den planerade berättelsen går du genom en portal till ett parallellt universum och nödlandar på en fientlig främmande planet. Ditt skepp är förstört, dina system har havererat och planetens varelser närmar sig redan. Att överleva är bara början. Dominans är målet.",
-        "I det planerade spelet kan du eventuellt bygga om ett skepp från vraket, klona och träna arméer i ett labb ombord och tämja planetens djurliv för att skapa ridkavalleri. Planerade strider sker i tre stridsdimensioner: mark-mot-mark-strid mot monster och rivaliserande spelare, mark-mot-rymd-attacker mot omloppsbaneller marktmål, och rymd-mot-rymd-krigföring ovanför en gigantisk Battle Ring som kretsar kring planeten.",
+        "I det planerade spelet kan du eventuellt bygga om ett skepp från vraket, klona och träna arméer i ett labb ombord och tämja planetens djurliv för att skapa ridkavalleri. Planerade strider sker i tre stridsdimensioner: mark-mot-mark-strid mot monster och rivaliserande spelare, mark-mot-rymd-attacker mot omloppsbane- eller marktmål, och rymd-mot-rymd-krigföring ovanför en gigantisk Battle Ring som kretsar kring planeten.",
         "Liksom Hyper Racing och Hyper Quest planeras Overlord ha VR-interaktion i realtid och belöningar i spelet för att slutföra evenemang, quests och de planerade tvåveckorsinvasionerna av de fruktade Hammerong, den mäktigaste främmande arten i berättelsen. Var fjortonde dag planeras de komma för att dränera planeten, och var fjortonde dag kan modiga spelare eventuellt utmana dem för bonusar i spelet och legendariska belöningar i spelet.",
         "Du kan eventuellt uppgradera rymdskepp, beväpna dem, skaffa specialister som förstärker din kraftnivå och smida allianser för att kontrollera hela regioner. Det du bygger planeras kopplas till Hyper Racing och Hyper Quest genom det delade Hyper Tek-ekosystemet. Ett universum, tre planerade spel, krigföring utan gränser. Läs vidare för att se hur det planerade stridssystemet kan fungera och varför Overlord kan förändra allt, allt med förbehåll för slutlig utveckling och spelregler."
       ],
@@ -288,7 +288,7 @@
           },
           {
             "title": "Realtids VR-interaktion",
-            "body": "Liksom alla planerade Hyper Tek-spel planeras Overlord stödja VR-interaktion i realtid. Du kan eventuellt kliva in i ditt skepp, gå i Battle Rings korridorer, leda trupper i markstrid och uppleva rymdkrig från ditt skepps cockpit. VR är tänkt att förvandla Overlord från ett strategispel till en uppslukande slagfältsupplevelse, där du kan leda arméer, utforska främmande terräng och strida med en närvaro som spel på platta skärmar kanske inte kan återskapa. Med förbehåll för slutlig utveckling och spelregler."
+            "body": "Liksom alla planerade Hyper Tek-spel planeras Overlord stödja VR-interaktion i realtid. Du kan eventuellt kliva in i ditt skepp, gå i Battle Ring-korridorerna, leda trupper i markstrid och uppleva rymdkrig från ditt skepps cockpit. VR är tänkt att förvandla Overlord från ett strategispel till en uppslukande slagfältsupplevelse, där du kan leda arméer, utforska främmande terräng och strida med en närvaro som spel på platta skärmar kanske inte kan återskapa. Med förbehåll för slutlig utveckling och spelregler."
           },
           {
             "title": "Den planerade fördelen över andra spel",
@@ -342,7 +342,7 @@
         },
         {
           "q": "Vad är stridssystemet i tre nivåer?",
-          "a": "Strid planeras ske på tre nivåer: mark-mot-mark mot monster och rivaliserande spelare, mark-mot-rymd-attacker mot omloppsbaneskepp och rymd-mot-rymd-krigföring vid Battle Ring. Detta planerade flerdimensionella angreppssätt är tänkt att skapa taktiskt djup, med förbehåll för slutlig utveckling och spelregler."
+          "a": "Strid planeras ske på tre nivåer: mark-mot-mark mot monster och rivaliserande spelare, mark-mot-rymd-attacker mot skepp i omloppsbana och rymd-mot-rymd-krigföring vid Battle Ring. Detta planerade flerdimensionella angreppssätt är tänkt att skapa taktiskt djup, med förbehåll för slutlig utveckling och spelregler."
         },
         {
           "q": "Vad är Battle Ring?",
@@ -374,7 +374,7 @@
         },
         {
           "q": "Kan jag gå med i en allians?",
-          "a": "Allianser planeras. Du kan spela solo eller gå med i en allians som kan öka din kraft och hjälpa dig att växa. Planerade allianfunktioner inkluderar delade resurser i spelet, samordnade attacker och kollektivt försvar, och att slutföra dagliga uppgifter kan hjälpa till att uppgradera både ditt skepp och allianssdelade föremål."
+          "a": "Allianser planeras. Du kan spela solo eller gå med i en allians som kan öka din kraft och hjälpa dig att växa. Planerade alliansfunktioner inkluderar delade resurser i spelet, samordnade attacker och kollektivt försvar, och att slutföra dagliga uppgifter kan hjälpa till att uppgradera både ditt skepp och alliansdelade föremål."
         },
         {
           "q": "Är Overlord länkad till andra Hyper Tek-spel?",
