@@ -61,9 +61,9 @@
       "features": [
         {
           "label": "NFA / NFC / NFT",
-          "tagline": "Baru dengan aset Web3.5? Mulai di sini",
+          "tagline": "Baru mengenal item Web3.5? Mulai di sini",
           "details": [
-            "NFA (Aset Non-Fungible) adalah item yang diterbitkan Hypertek dengan harga buyback yang dijamin platform.",
+            "**NFA** (Non-Fungible Articles) adalah item yang diterbitkan Hyper Tek.",
             "NFC (Karakter Non-Fungible) adalah item pemain berlisensi dengan bonus dalam game dan buyback.",
             "NFT (Token Non-Fungible) adalah kolektibel buatan pengguna — skin, senjata, dan banyak lagi."
           ],
@@ -72,7 +72,7 @@
         },
         {
           "label": "Marketplace",
-          "tagline": "Beli & jual aset dalam game secara instan",
+          "tagline": "Beli & jual item digital secara instan",
           "details": [
             "Jelajahi katalog NFA, NFC, dan NFT yang luas — skin, senjata, spesialis, pesawat ruang angkasa, dan banyak lagi.",
             "Filter berdasarkan kategori, kelangkaan, atau rentang harga untuk menemukan tepat apa yang Anda butuhkan.",
@@ -84,7 +84,7 @@
           "label": "Lelang",
           "tagline": "Bersaing untuk item edisi terbatas eksklusif",
           "details": [
-            "Tawar aset langka yang hanya tersedia melalui lelang terbatas waktu.",
+            "Tawar item langka yang hanya tersedia melalui lelang terbatas waktu.",
             "Hitungan mundur langsung menunjukkan tepat berapa banyak waktu yang tersisa — setiap detik penting.",
             "Tawar lebih tinggi dari yang lain untuk mengamankan item legendaris yang tidak bisa dibeli dengan cara lain."
           ],
@@ -92,9 +92,9 @@
         },
         {
           "label": "Perdagangan",
-          "tagline": "Tukar aset peer-to-peer, tanpa perantara",
+          "tagline": "Tukar item antar pemain, tanpa perantara",
           "details": [
-            "Ajukan atau terima perdagangan aset langsung dengan pemain lain — sepenuhnya on-chain.",
+            "Usulkan atau terima perdagangan item langsung dengan pemain lain yang sepenuhnya on-chain.",
             "Tetapkan sendiri syaratnya: pilih apa yang Anda tawarkan dan apa yang Anda inginkan sebagai balasan.",
             "Telusuri penawaran perdagangan terbuka atau posting sendiri untuk menemukan kesepakatan sempurna."
           ],
@@ -102,10 +102,10 @@
         },
         {
           "label": "Misi",
-          "tagline": "Selesaikan misi, dapatkan hadiah eksklusif",
+          "tagline": "Misi yang direncanakan dengan hadiah dalam game",
           "details": [
-            "Ambil misi untuk mendapatkan hadiah eksklusif dan aset dalam game yang langka.",
-            "Setiap misi memiliki tujuan unik — jelajahi, bertarung, atau bangun jalan menuju kemenangan.",
+            "Quest yang direncanakan dapat menawarkan hadiah dalam game eksklusif dan item dalam game yang langka.",
+            "Setiap quest direncanakan memiliki tujuan unik: jelajahi, bertempur, atau bangun jalan Anda menuju kemenangan.",
             "Bangun koleksi Anda secara strategis melalui keahlian, bukan hanya pengeluaran."
           ],
           "cta": "Jelajahi Misi"
@@ -114,9 +114,9 @@
           "label": "Disewakan",
           "tagline": "Sewakan item Anda untuk hadiah dalam game",
           "details": [
-            "Sewa spesialis atau perlengkapan yang kuat untuk satu misi tanpa membelinya.",
+            "Pemain mungkin dapat menyewa spesialis atau perlengkapan yang kuat untuk satu misi tanpa membelinya langsung.",
             "Pemain mungkin dapat menyewakan item yang tidak terpakai kepada pemain lain untuk hadiah dalam game yang mereka sepakati sendiri.",
-            "Durasi fleksibel — per jam, harian, atau per kesepakatan misi."
+            "Durasi fleksibel yang direncanakan: kesepakatan per jam, per hari, atau per misi."
           ],
           "cta": "Lihat Disewakan"
         },
@@ -124,9 +124,9 @@
           "label": "Hadiah",
           "tagline": "Buru target, klaim hadiah, puncaki papan peringkat",
           "details": [
-            "Terima hadiah yang diposting oleh pemain lain atau sistem untuk mendapatkan hadiah kripto.",
+            "Pemain mungkin dapat menerima bounty yang diposting pemain lain atau sistem untuk hadiah dalam game.",
             "Naiki papan peringkat bounty untuk membuka gelar eksklusif dan hadiah dalam game.",
-            "Posting hadiah sendiri untuk merekrut pemain terampil untuk tujuan Anda."
+            "Pemain mungkin dapat memposting bounty mereka sendiri untuk menemukan pemain terampil bagi tujuan mereka."
           ],
           "cta": "Lihat Hadiah"
         }
@@ -178,7 +178,7 @@
     "nfa101": {
       "sectionLabel": "Edukasi",
       "heading": "NFA / NFC / NFT 101",
-      "subtitle": "Baru dengan NFT dan Web3.5? Jelajahi artikel kami untuk memahami aset blockchain, dompet, keamanan, dan ekosistem HyperTek.",
+      "subtitle": "Baru mengenal NFT dan Web3.5? Jelajahi artikel kami untuk memahami item blockchain, dompet, keamanan, dan ekosistem Hyper Tek.",
       "minRead": "menit membaca",
       "filterAll": "Semua"
     },
@@ -367,7 +367,7 @@
       "noQuests": "Tidak ada misi {{filter}}",
       "inGameFeature": "Fitur Dalam Game",
       "inGameDesc": "Misi dibuat secara otomatis saat penjual memilih komisi yang dikurangi. Pemain dapat menyelesaikan hingga 5 misi per hari. Pool komisi dibagi antara diskon pembeli, hadiah pemain, dan platform.",
-      "earnFromQuests": "Ingin menghasilkan dari misi? Mainkan gamenya →",
+      "earnFromQuests": "Ingin hadiah dalam game dari quest? Coba antarmuka game →",
       "moneyQuests": "Misi Uang (pool 11%)",
       "resourceQuests": "Misi Sumber Daya (pool 20%)",
       "footerNote1": "# Quest dengan muatan gabungan memakai hadiah dari tabel terpisah.",
@@ -385,7 +385,7 @@
       },
       "comingSoon": {
         "title": "Segera Hadir",
-        "desc": "Fitur misi dalam game sedang dalam pengembangan. Nantikan — Anda akan dapat menghasilkan hadiah langsung dari game.",
+        "desc": "Fitur quest dalam game yang direncanakan sedang dikembangkan dan dapat menawarkan hadiah dalam game, tunduk pada aturan akhir game.",
         "gotIt": "Mengerti"
       },
       "pagination": {

@@ -11,7 +11,7 @@
       "executive-summary": "01  Ringkasan Eksekutif",
       "three-worlds": "02  Tiga Dunia",
       "technology": "03  Teknologi",
-      "nfa": "04  Aset Non-Fungible",
+      "nfa": "04  Non-Fungible Articles",
       "hyperbucks": "05  Gems",
       "marketplace": "06  Marketplace",
       "roadmap": "07  Peta Jalan",
@@ -215,7 +215,7 @@
     "signUpBtn": "Daftar",
     "walletReady": "Dompet Anda Siap",
     "walletReadyDesc": "Dompet tertanam yang aman telah dibuat untuk akun Anda.",
-    "walletWarning": "⚠️ Jangan pernah bagikan kunci pribadi Anda kepada siapa pun. Siapa pun yang memiliki kunci pribadi Anda memiliki kontrol penuh atas dompet dan aset Anda.",
+    "walletWarning": "⚠️ Jangan pernah membagikan kunci privat Anda kepada siapa pun. Siapa pun yang memiliki kunci privat Anda memiliki kendali penuh atas dompet dan item Anda.",
     "walletAddress": "Alamat Dompet Anda",
     "enterPasswordReveal": "Masukkan kata sandi Anda untuk mengungkapkan kunci pribadi:",
     "reEnterPassword": "Masukkan kembali kata sandi Anda",
@@ -371,7 +371,7 @@
       "colTimeActive": "\nWaktu Aktif\n",
       "colAssignedTo": "\nDitugaskan Ke\n",
       "inGame": "\nDalam game\n",
-      "earned": "\nDiperoleh\n",
+      "earned": "Diperoleh",
       "statusOpen": "\nBuka\n"
     },
     "listings": {
@@ -402,7 +402,7 @@
       "transactions": "Transaksi",
       "offers": "Penawaran",
       "hyperBucks": "Gems",
-      "earnings": "Penghasilan",
+      "earnings": "Hasil Penjualan",
       "support": "Dukungan",
       "signOut": "Keluar"
     },
@@ -497,12 +497,12 @@
       "send": "Kirim"
     },
     "withdraw": {
-      "title": "Penghasilan Marketplace",
-      "subtitle": "Klaim USDC diperoleh dari NFT penjualan dan royalti pencipta.",
-      "connectWallet": "Hubungkan dompet Anda untuk melihat pendapatan pasar.",
-      "noEarnings": "Belum ada pendapatan pasar yang dapat diklaim.",
-      "noEarningsHint": "Penghasilan dari penjualan NFT akan muncul di sini.",
-      "sellerEarnings": "Penghasilan Penjual",
+      "title": "Hasil Penjualan Marketplace",
+      "subtitle": "Klaim USDC dari penjualan NFT dan royalti kreator Anda.",
+      "connectWallet": "Hubungkan dompet Anda untuk melihat hasil penjualan marketplace Anda.",
+      "noEarnings": "Belum ada hasil penjualan marketplace untuk diklaim.",
+      "noEarningsHint": "Hasil penjualan NFT akan muncul di sini.",
+      "sellerEarnings": "Hasil Penjual",
       "creatorRoyalties": " Royalti Pencipta",
       "claim": "Klaim"
     },
@@ -520,7 +520,7 @@
       "descPlaceholder": " Deskripsikan barangmu... ",
       "storageBox": " Kotak Penyimpanan (Kategori) ",
       "storageBoxHint": " Barang dimasukkan ke dalam kotak penyimpanan ini sampai terdaftar di pasar. ",
-      "assetType": " Jenis Aset ",
+      "assetType": "Tipe Item",
       "nfcSoon": " Segera ",
       "nfcHint": " Pembuatan NFC memerlukan lisensi — akan hadir dalam pembaruan mendatang. ",
       "blockchain": " Blockchain ",

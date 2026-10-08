@@ -5,16 +5,16 @@
     "racing": {
       "label": "BALAP",
       "heading": "Balap Hiper",
-      "subtitle": "Pengalaman balap kendaraan terbang paling intens di galaksi,\ndi mana keterampilan membuahkan hasil, dan juara tercipta.",
+      "subtitle": "Pengalaman balap kendaraan terbang paling intens di galaksi,\ndi mana keterampilan berkuasa dan juara dilahirkan.",
       "intro": [
-        "Hyper Racing adalah game balap kompetitif beroktan tinggi yang berlatar dunia asing, tempat pemain membangun, meningkatkan, dan mengemudikan kendaraan balap terbang yang dapat disesuaikan sepenuhnya melalui beberapa sirkuit paling berbahaya di galaksi. Dari formasi batuan terapung dan tabung lava vulkanik hingga gurun terlantar dan jalur pegunungan, setiap balapan adalah ujian persiapan, refleks, dan strategi.",
-        "Hyper Racing direncanakan sebagai platform kompetitif. Pemain terbaik mungkin dapat mengikuti acara berperingkat dan turnamen dengan hadiah dalam game sebagai taruhannya. Entah Anda mengejar kejayaan di papan peringkat atau membangun kerajaan balap, semua yang Anda lakukan di Hyper Racing dirancang untuk membawa Anda maju.",
-        "Tingkatkan kendaraan balap Anda dari ujung ke ujung. Rekrut dan naikkan level kru pit Anda. Rekrut manajer pit yang cocok dengan filosofi balap Anda. Lalu bawa keahlian Anda keluar lintasan: garasi balap Anda juga menjadi hanggar pesawat luar angkasa pribadi Anda, dan setiap kemampuan yang Anda kembangkan terbawa ke pertempuran luar angkasa di Hyper Quest dan Overlord of the 7 Realms."
+        "Hyper Racing adalah game balap kompetitif berenergi tinggi yang direncanakan, sedang dikembangkan dan berlatar dunia alien, di mana pemain mungkin dapat membangun, meningkatkan, dan menerbangkan kendaraan balap terbang yang dapat disesuaikan sepenuhnya melalui beberapa sirkuit paling berbahaya di galaksi. Dari formasi batuan melayang dan tabung lava vulkanik yang direncanakan hingga gurun dan jalur pegunungan, setiap balapan yang direncanakan dirancang sebagai ujian persiapan, refleks, dan strategi.",
+        "Hyper Racing direncanakan sebagai platform kompetitif. Pemain terbaik mungkin dapat mengikuti acara peringkat dan turnamen dengan hadiah dalam game dipertaruhkan. Baik Anda mengejar kejayaan papan peringkat atau membangun imperium balap, semua yang Anda lakukan di Hyper Racing dapat membawa Anda maju.",
+        "Dalam game yang direncanakan dan sedang dikembangkan, Anda mungkin dapat:\n• Meningkatkan kendaraan balap Anda dari ujung depan hingga belakang\n• Mendapatkan dan menaikkan level kru pit Anda\n• Memperoleh manajer pit yang sesuai dengan filosofi balap Anda\n• Membawa keterampilan Anda melampaui lintasan, dengan garasi balap yang juga menjadi hanggar pesawat luar angkasa pribadi Anda\n• Membawa kemampuan yang Anda kembangkan ke pertempuran luar angkasa di Hyper Quest dan Overlord of the 7 Realms"
       ],
-      "introClose": "Baca terus untuk mengetahui cara kerja game ini, apa yang bisa Anda menangkan, dan bagaimana karier balap Anda mendorong kemajuan secara keseluruhan.",
-      "calloutLine1": "Berlomba untuk Menghasilkan. Hasilkan untuk Meningkatkan.",
+      "introClose": "Baca terus untuk mengetahui bagaimana game yang direncanakan dirancang bekerja, hadiah dalam game yang dapat ditawarkannya, dan bagaimana karier balap Anda dapat menggerakkan seluruh semesta progresi. Semuanya tunduk pada penyelesaian game dan aturan akhir game.",
+      "calloutLine1": "Balap untuk meningkat. Tingkatkan untuk naik kelas.",
       "calloutLine2": "Tingkatkan ke Dominasi.",
-      "howItWorksTitle": "Cara Kerja Hyper Racing",
+      "howItWorksTitle": "Bagaimana game balap Hyper Tek yang direncanakan dan sedang dikembangkan dirancang bekerja: gambaran umum ada di bawah, tunduk pada penyelesaian game dan aturan akhir game.",
       "howItWorks": [
         {
           "num": "01",
@@ -24,7 +24,7 @@
         {
           "num": "02",
           "title": "Bangun Tim Anda",
-          "body": "Balapan adalah olahraga tim. Rekrut spesialis kru pit yang membawa bonus unik: pengisian bahan bakar lebih cepat, diagnostik waktu nyata, perbaikan darurat lambung di tengah balapan, dan penyetelan performa antarputaran. Setiap anggota kru naik level seiring pengalaman, menumpuk kemampuan kuat di atas peningkatan kendaraan Anda. Lalu rekrut manajer pit untuk mengoordinasikan operasi, menentukan strategi balapan, dan membuka peningkatan performa seluruh tim yang terus bertambah sepanjang satu musim."
+          "body": "Balap adalah olahraga tim. Dapatkan spesialis kru pit yang membawa bonus unik, pengisian bahan bakar lebih cepat, diagnostik real-time, perbaikan lambung darurat di tengah balapan, dan penyesuaian performa antar putaran. Setiap anggota kru naik level seiring pengalaman, menumpuk kemampuan kuat di atas peningkatan kendaraan Anda. Lalu dapatkan manajer pit untuk mengoordinasikan operasi, menentukan strategi balapan, dan membuka peningkatan performa seluruh tim yang menumpuk sepanjang satu musim penuh."
         },
         {
           "num": "03",
@@ -34,213 +34,209 @@
         {
           "num": "04",
           "title": "Naiki Peringkat",
-          "body": "Kemenangan menghasilkan poin pemimpin, membuka sirkuit baru di dunia yang jauh, dan membuka pintu ke kompetisi tingkat yang lebih tinggi. Semakin dalam Anda melangkah, semakin ganas lawannya dan semakin besar taruhannya. Buktikan diri Anda di setiap planet dan naik peringkat global."
+          "body": "Kemenangan memberi poin peringkat, membuka sirkuit baru di dunia yang jauh, dan membuka pintu ke kompetisi tingkat lebih tinggi. Semakin dalam Anda melangkah, semakin ganas lawannya dan semakin besar taruhannya. Buktikan diri Anda di setiap planet dan naiklah dalam peringkat global."
         }
       ],
-      "rewardsTitle": "Menang Besar; Imbalan Itu Penting!",
+      "rewardsTitle": "Hadiah dalam Game yang Berarti",
       "rewards": [
         {
-          "title": "Hadiah Dalam Game",
-          "body": "Setiap balapan yang Anda selesaikan dirancang untuk memberi Anda hadiah dalam game. Menangkan, dan hadiahnya bisa berlipat. Kemenangan balapan dapat membuka komponen kendaraan premium, material peningkatan langka, token perekrutan kru eksklusif, dan kredit untuk rakitan berikutnya. Tingkatkan kendaraan Anda, tukarkan dengan pemain lain, dan saksikan imperium balap Anda tumbuh di setiap podium."
+          "title": "Hadiah dalam Game dengan Item dalam Game",
+          "body": "Setiap balapan yang Anda selesaikan direncanakan memberi Anda hadiah dalam game. Menanglah, dan hadiah dalam game dapat berlipat. Kemenangan balapan dapat membuka komponen kendaraan premium, material peningkatan langka, token kru dalam game eksklusif, dan kredit dalam game untuk rakitan berikutnya. Anda mungkin dapat meningkatkan kendaraan dan menukarnya dengan pemain lain, tunduk pada aturan akhir game."
         },
         {
           "title": "Acara Berperingkat",
-          "body": "Hyper Racing dirancang di sekitar acara berperingkat dan turnamen. Kompetisi berbasis keahlian mungkin memungkinkan Anda membuktikan kemampuan melawan pilot terbaik di galaksi untuk hadiah dalam game, gelar, dan posisi di papan peringkat. Dari tantangan berperingkat mingguan hingga kejuaraan musiman, pemain terbaik mungkin menemukan banyak kesempatan untuk menonjol."
+          "body": "Hyper Racing direncanakan seputar acara peringkat dan turnamen. Kompetisi berbasis keterampilan yang direncanakan dapat membiarkan Anda membuktikan kemampuan melawan pilot terbaik di galaksi untuk hadiah dalam game, gelar, dan posisi papan peringkat. Dari tantangan peringkat mingguan hingga kejuaraan musiman, pemain terbaik mungkin menemukan banyak kesempatan untuk menonjol."
         },
         {
-          "title": "Cara Kerja Acara Berhadiah",
-          "body": "Pemain mungkin dapat lolos melalui permainan berperingkat dengan memenuhi ambang performa. Acara direncanakan dengan matchmaking yang adil, sehingga setiap peserta menghadapi lawan dengan kemampuan setara. Aturan acara dan hadiah dalam game dimaksudkan untuk ditampilkan dengan jelas sebelum Anda berkomitmen."
+          "title": "Bagaimana Acara Hadiah dalam Game Dapat Bekerja",
+          "body": "Pemain dapat lolos melalui permainan peringkat dengan memenuhi ambang performa. Acara direncanakan seputar matchmaking yang adil, sehingga setiap peserta dapat berhadapan dengan lawan berkemampuan serupa. Aturan acara dan hadiah dalam game dimaksudkan untuk ditampilkan dengan jelas sebelum Anda berkomitmen, tunduk pada aturan akhir game."
         },
         {
           "title": "Kemajuan Melampaui Lintasannya",
-          "body": "Hadiah yang diperoleh melalui balapan memberi masukan langsung ke perkembangan Anda yang lebih luas. Tingkatkan kendaraan balap Anda, perkuat kru pit Anda, dan salurkan kemenangan untuk meningkatkan pesawat ruang angkasa utama Anda. Garasi balap Anda adalah tempat hanggar kapal itu, jadi setiap peningkatan pada operasi balap Anda juga memperkuat kapal yang Anda terbang antar dunia dan memasuki pertempuran luar angkasa melintasi Hyper Quest dan Overlord of the 7 Realms."
+          "body": "Hadiah dalam game yang diperoleh lewat balapan direncanakan mengalir ke progresi Anda yang lebih luas. Anda mungkin dapat meningkatkan kendaraan balap, memperkuat kru pit, dan menyalurkan hadiah dalam game untuk meningkatkan pesawat luar angkasa utama Anda. Garasi balap Anda dirancang sebagai hanggar pesawat itu, sehingga peningkatan pada operasi balap Anda juga dapat memperkuat kapal yang Anda terbangkan antar dunia di Hyper Quest dan Overlord of the 7 Realms."
         }
       ],
       "upgradesTitle": "Dua Mesin, Satu Misi... Tingkatkan Segalanya",
       "upgrades": [
         {
           "title": "Peningkatan Kendaraan Balap",
-          "body": "Kendaraan balap Anda adalah mesin yang sepenuhnya modular. Setiap komponen dapat diganti, disetel, dan ditingkatkan: lambung, pendorong, perisai, cangkang luar, mesin, penstabil, sistem pendingin, dan permukaan aerodinamis. Komposit ringan memberi kecepatan murni; lapis baja tugas berat menjaga Anda tetap hidup dalam kondisi atmosfer yang brutal. Jalur peningkatannya dalam, dan pilihan Anda menentukan identitas balap Anda. Koleksi kendaraan baru, bangun menjadi penantang juara, bawa ke kemenangan, dan tukarkan dengan pemain lain saat Anda siap untuk tantangan berikutnya."
+          "body": "Kendaraan balap yang direncanakan dan sedang dikembangkan dirancang sebagai mesin modular sepenuhnya. Setiap komponen dapat ditukar, disetel, dan ditingkatkan: lambung, pendorong, perisai, cangkang luar, mesin, penstabil, sistem pendingin, dan permukaan aerodinamis. Komposit ringan memberi kecepatan murni; lapis baja berat menjaga Anda tetap hidup dalam kondisi atmosfer yang brutal. Jalur peningkatannya dalam, dan pilihan Anda menentukan identitas balap Anda. Koleksi kendaraan baru, bangun menjadi penantang juara, bawa ke kemenangan, dan tukarkan dengan pemain lain saat Anda siap untuk tantangan berikutnya, semuanya tunduk pada aturan akhir game."
         },
         {
           "title": "Peningkatan Pesawat Luar Angkasa Utama",
-          "body": "Garasi balap Anda bukan sekadar bengkel; itu adalah tempat hangar pesawat ruang angkasa pribadi Anda. Sumber daya, kredit, dan material yang sama yang Anda peroleh di lintasan dapat diinvestasikan untuk meningkatkan kapal utama Anda. Mesin yang lebih baik untuk perjalanan antarplanet, sistem senjata yang lebih kuat untuk pertempuran luar angkasa, navigasi yang lebih baik untuk menemukan dunia balap baru, dan lambung yang diperkuat untuk bertahan dari pertemuan musuh selama transit. Pesawat luar angkasa Anda adalah markas Anda, transportasi Anda, dan kapal perang Anda, dan balap menjadikannya lebih kuat."
+          "body": "Garasi balap Anda yang direncanakan mungkin bukan sekadar bengkel. Garasi ini dirancang menjadi hanggar pesawat luar angkasa pribadi Anda. Sumber daya, kredit, dan material yang Anda peroleh di lintasan dapat digunakan untuk meningkatkan kapal utama Anda. Mesin lebih baik untuk perjalanan antarplanet, sistem senjata lebih kuat untuk pertempuran luar angkasa, navigasi yang lebih baik untuk menemukan dunia balap baru, dan lambung yang diperkuat untuk bertahan dari pertemuan bermusuhan saat transit. Pesawat luar angkasa Anda adalah basis, transportasi, dan kapal tempur Anda, dan balapan membuatnya lebih kuat, semuanya tunduk pada aturan akhir game."
         },
         {
           "title": "Lingkaran Peningkatan",
-          "body": "Balapan untuk mengumpulkan hadiah, gunakan hadiah untuk meningkatkan, dan tingkatkan untuk mengikuti balapan lebih besar dengan hadiah dalam game yang lebih besar. Salurkan hadiah itu ke kendaraan balap dan pesawat luar angkasa Anda. Semakin baik pesawat Anda, semakin jauh Anda menjelajah dan semakin berbahaya sekaligus memuaskan sirkuitnya. Ini adalah siklus progres yang menghargai dedikasi dan keterampilan di setiap tingkat."
+          "body": "Kumpulkan hadiah dalam game yang direncanakan, yang dapat mengarah pada peningkatan untuk mengikuti balapan lebih besar dengan hadiah dalam game lebih besar. Salurkan hadiah itu ke kendaraan balap dan pesawat luar angkasa Anda. Semakin baik kapal Anda, semakin jauh Anda melaju dan semakin berbahaya serta bermanfaat sirkuitnya. Ini adalah siklus progresi yang direncanakan yang menghargai dedikasi dan keterampilan di setiap tingkat, semuanya tunduk pada aturan akhir game."
         },
         {
           "title": "Dampak Lintas Game",
-          "body": "Setiap keterampilan pilot yang Anda kembangkan di lintasan dan setiap peningkatan yang Anda pasang di pesawat ruang angkasa Anda dibawa langsung ke Hyper Quest dan Overlord of the 7 Realms. Satu alam semesta, banyak permainan, perkembangan mulus. Apa yang Anda bangun di Hyper Racing mendukung segalanya."
+          "body": "Setiap keterampilan pilot yang direncanakan yang Anda kembangkan di lintasan dan setiap peningkatan yang Anda pasang pada pesawat luar angkasa Anda terbawa langsung ke Hyper Quest dan Overlord of the 7 Realms. Satu semesta, banyak game, progresi mulus. Apa yang Anda bangun di Hyper Racing menggerakkan semua yang lain, semuanya tunduk pada aturan akhir game."
         }
       ],
       "faqTitle": "Hyper Racing — Pertanyaan yang Sering Diajukan",
       "faq": [
         {
           "q": "Apa itu Hyper Racing?",
-          "a": "Game balap kendaraan terbang berintensitas tinggi yang berlatar dunia-dunia asing. Bangun, tingkatkan, dan pacu kendaraan yang sepenuhnya dapat dikustomisasi melintasi sirkuit fiksi ilmiah yang berbahaya sambil bersaing untuk hadiah dalam game."
+          "a": "Game balap kendaraan terbang berintensitas tinggi yang direncanakan, sedang dikembangkan dan berlatar dunia alien. Pemain mungkin dapat membangun, meningkatkan, dan membalapkan kendaraan yang dapat disesuaikan sepenuhnya melalui sirkuit fiksi ilmiah yang berbahaya sambil bersaing untuk hadiah dalam game."
         },
         {
           "q": "Bisakah saya mengupgrade kendaraan balap saya?",
-          "a": "Setiap komponen dapat diupgrade: lambung kapal, pendorong, pelindung, kulit terluar, mesin, stabilisator, sistem pendingin, dan permukaan aerodinamis. Setiap peningkatan mengubah cara kendaraan Anda menangani trek dan kondisi yang berbeda."
+          "a": "Setiap komponen direncanakan dapat ditingkatkan: lambung, pendorong, perisai, cangkang luar, mesin, penstabil, sistem pendingin, dan permukaan aerodinamis. Setiap peningkatan dapat mengubah cara kendaraan Anda bereaksi di lintasan dan kondisi yang berbeda."
         },
         {
           "q": "Apa yang dilakukan kru pit?",
-          "a": "Anggota kru pit memberikan bonus unik: pengisian bahan bakar lebih cepat, diagnostik lambung kapal, perbaikan darurat, dan penyesuaian kinerja antar putaran. Mereka naik level seiring waktu, membuka kemampuan yang lebih kuat yang dapat digabungkan dengan peningkatan kendaraan."
+          "a": "Anggota kru pit yang direncanakan dapat memberi bonus unik: pengisian bahan bakar lebih cepat, diagnostik lambung, perbaikan darurat, dan penyesuaian performa antar putaran. Mereka direncanakan naik level seiring waktu, membuka kemampuan lebih kuat yang menumpuk dengan peningkatan kendaraan."
         },
         {
           "q": "Bagaimana cara kerja manajer pit?",
-          "a": "Manajer pit mengoordinasikan operasi kru, menentukan strategi balapan, dan membuka peningkatan kinerja seluruh tim. Manajer defensif melindungi kendaraan Anda dalam kondisi sulit; manajer yang agresif mendorong setiap sistem untuk mencapai kecepatan maksimum."
+          "a": "Manajer pit yang direncanakan dapat mengoordinasikan operasi kru, menentukan strategi balapan, dan membuka peningkatan performa seluruh tim. Manajer defensif dapat melindungi kendaraan Anda dalam kondisi berat; manajer agresif dapat mendorong setiap sistem ke kecepatan maksimum."
         },
         {
           "q": "Apakah ada hadiah untuk acara berperingkat?",
-          "a": "Acara berperingkat dan turnamen direncanakan menawarkan hadiah dalam game, gelar, dan posisi di papan peringkat. Tidak ada hadiah berupa uang tunai atau uang."
+          "a": "Acara peringkat dan turnamen yang direncanakan dirancang menawarkan hadiah dalam game, gelar, dan posisi papan peringkat. Acara tersebut tidak menawarkan hadiah uang tunai atau uang."
         },
         {
           "q": "Bagaimana cara kerja imbalan perlombaan?",
-          "a": "Setiap balapan dirancang untuk memberi hadiah berupa kredit, material peningkatan, dan token kru dalam game. Kemenangan bisa melipatgandakan hadiah Anda. Koleksi kendaraan, tingkatkan menjadi mesin balap, menangkan balapan, dan tukarkan dengan pemain lain sambil terus mengejar peningkatan lanjutan dan peningkatan pesawat luar angkasa."
+          "a": "Setiap balapan direncanakan memberi hadiah dalam game: kredit dalam game, material peningkatan, dan token kru dalam game. Kemenangan dapat melipatgandakan hadiah dalam game Anda. Ini adalah fitur yang direncanakan, tunduk pada aturan akhir game."
         },
         {
           "q": "Bisakah saya meningkatkan pesawat luar angkasa utama saya juga?",
-          "a": "Tentu saja. Garasi balap Anda adalah tempat hanggar pesawat ruang angkasa Anda. Kemenangan lomba mendanai peningkatan mesin, senjata, navigasi, dan penguatan lambung kapal utama Anda, memperkuat perjalanan antarplanet dan pertempuran luar angkasa."
+          "a": "Itulah rencananya. Garasi balap Anda dirancang sebagai hanggar pesawat luar angkasa Anda. Hadiah dalam game dari balapan dapat membantu peningkatan mesin, senjata, navigasi, dan penguatan lambung pada kapal utama Anda."
         },
         {
           "q": "Apakah kemajuan berlanjut ke game lain?",
-          "a": "Setiap keterampilan pilot dan peningkatan pesawat ruang angkasa ditransfer langsung ke Hyper Quest dan Overlord of the 7 Realms. Satu alam semesta, banyak permainan, perkembangan mulus. Apa yang Anda bangun di Hyper Racing mendukung segalanya."
+          "a": "Keterampilan pilot dan peningkatan pesawat luar angkasa yang direncanakan dapat berpindah ke Hyper Quest dan Overlord of the 7 Realms. Satu semesta, beberapa game yang direncanakan, progresi bersama, tunduk pada aturan akhir game."
         },
         {
           "q": "Lingkungan balap apa yang ada di sana?",
-          "a": "Sirkuitnya mencakup formasi batuan terapung, tabung lava, dataran gurun, dan pegunungan di dunia asing. Bahaya atmosfer termasuk hujan asam, atmosfer radioaktif, gravitasi yang bervariasi, dan angin turbulen. Setiap sirkuit menuntut pengaturan kendaraan yang berbeda."
+          "a": "Sirkuit yang direncanakan mencakup formasi batuan melayang, tabung lava, dataran gurun, dan pegunungan di dunia alien. Bahaya atmosfer yang direncanakan termasuk hujan asam, atmosfer radioaktif, gravitasi yang berubah-ubah, dan angin turbulen. Setiap sirkuit mungkin menuntut pengaturan kendaraan yang berbeda."
         }
       ]
     },
     "quest": {
       "label": "PERTANYAAN",
       "heading": "Pencarian Hiper",
-      "subtitle": "Galaksi Anda. Aturan Anda. keberuntunganmu.",
+      "subtitle": "Galaksimu. Aturanmu. Ceritamu.",
       "intro": [
-        "Hyper Quest adalah petualangan luar angkasa dunia terbuka di mana Anda memimpin pesawat luar angkasa Anda yang sepenuhnya dapat diupgrade, Quest Racer, melintasi galaksi yang luas dan berbahaya. Anda meninggalkan peradaban rumah Anda bertahun-tahun yang lalu untuk mencari kekuasaan, kekayaan, dan ketenaran. Sekarang seluruh alam semesta adalah taman bermain Anda, dan setiap misi yang Anda selesaikan membawa Anda lebih dekat ke dominasi galaksi.",
-        "Hyper Quest direncanakan sebagai lebih dari sekadar game: selesaikan quest, taklukkan tantangan, dan kumpulkan hadiah dalam game. Dari misi cepat yang hanya beberapa menit hingga ekspedisi epik berhari-hari, makin berat tantangannya, makin besar hadiah dalam game-nya.",
-        "Tingkatkan pesawat ruang angkasa Anda dari lambung ke kokpit. Persenjatai dengan sistem senjata yang menghancurkan. Rekrut spesialis yang memberikan bonus kuat pada kinerja dan tingkat kekuatan kapal Anda. Menambang asteroid, mengangkut kargo berbahaya, berburu harta karun, menculik target bernilai tinggi, atau menjadi senjata sewaan. Cara Anda mengatur alam semesta sepenuhnya merupakan pilihan Anda.",
-        "Segala sesuatu yang Anda bangun di Hyper Quest dimasukkan langsung ke Hyper Racing dan Overlord of the 7 Realms. Satu alam semesta, kemajuan mulus, potensi tak terbatas. Baca terus untuk mengetahui cara kerja pencarian, apa yang bisa Anda peroleh, dan bagaimana Anda dan pesawat luar angkasa Anda menjadi kapal yang paling ditakuti di galaksi."
+        "Hyper Quest adalah petualangan luar angkasa dunia terbuka yang direncanakan di mana Anda mungkin dapat memimpin pesawat luar angkasa Anda sendiri yang dapat ditingkatkan sepenuhnya, Quest Racer, melintasi galaksi yang luas dan berbahaya. Anda meninggalkan peradaban asal Anda bertahun-tahun lalu untuk mencari kekuasaan dan ketenaran. Kini seluruh semesta adalah taman bermain Anda, dan setiap quest yang Anda selesaikan dapat membawa Anda lebih dekat ke dominasi galaksi, tunduk pada pengembangan akhir game dan aturan game.",
+        "Hyper Quest direncanakan sebagai lebih dari sekadar game: selesaikan quest, taklukkan tantangan, dan kumpulkan hadiah dalam game. Dari misi cepat beberapa menit hingga ekspedisi epik berhari-hari, semakin sulit tantangannya, semakin besar hadiah dalam game yang mungkin diperoleh, tunduk pada pengembangan akhir game dan aturan game.",
+        "Dalam game yang direncanakan, Anda mungkin dapat meningkatkan pesawat dari lambung hingga kokpit, mempersenjatainya dengan sistem senjata dahsyat, dan memperoleh spesialis yang menumpuk bonus kuat pada performa dan tingkat kekuatan kapal Anda. Aktivitas yang direncanakan meliputi menambang asteroid, mengangkut kargo berbahaya, berburu harta karun tersembunyi, melacak target bernilai tinggi, atau menjadi tentara bayaran. Cara Anda menguasai semesta direncanakan menjadi pilihan Anda, tunduk pada pengembangan akhir game dan aturan game.",
+        "Semua yang Anda bangun di Hyper Quest direncanakan mengalir ke Hyper Racing dan Overlord of the 7 Realms. Satu semesta, progresi mulus, potensi tanpa batas. Baca terus untuk mengetahui bagaimana quest yang direncanakan dapat bekerja, hadiah dalam game apa yang dapat Anda peroleh, dan bagaimana Anda dan pesawat Anda dapat menjadi kapal paling ditakuti di galaksi, semuanya tunduk pada pengembangan akhir game dan aturan game."
       ],
-      "calloutLine1": "Pencarian untuk Menghasilkan. Hasilkan untuk Meningkatkan.",
+      "calloutLine1": "Quest untuk mendapatkan. Dapatkan untuk meningkatkan.",
       "calloutLine2": "Tingkatkan ke Taklukkan.",
-      "howItWorksTitle": "Cara Kerja Hyper Quest",
+      "howItWorksTitle": "Bagaimana Hyper Quest yang Direncanakan Dapat Bekerja, Tunduk pada Pengembangan Akhir Game dan Aturan Game",
       "howItWorks": [
         {
           "num": "01",
           "title": "Terima Quests Dari Dewan Misi",
-          "body": "Papan pencarian dalam game adalah pintu gerbang Anda menuju petualangan. Jelajahi misi yang tersedia mulai dari pengiriman kargo cepat yang hanya membutuhkan beberapa menit hingga ekspedisi epik multi-hari jauh ke luar angkasa yang belum dipetakan. Setiap pencarian dilengkapi dengan tujuan yang jelas, peringkat bahaya, dan tingkatan hadiah. Pilih misi yang sesuai dengan gaya bermain Anda, apakah itu mengangkut kargo berbahaya, berburu harta karun, menambang ladang asteroid, atau menyamar untuk memulihkan artefak yang hilang."
+          "body": "Misi dapat diterima dari papan quest dalam game yang direncanakan. Misi yang direncanakan berkisar dari pengiriman kargo cepat hanya beberapa menit hingga ekspedisi epik berhari-hari jauh ke luar angkasa yang belum dijelajahi. Setiap quest direncanakan hadir dengan tujuan yang jelas, tingkat bahaya, dan tingkat hadiah dalam game. Anda mungkin dapat memilih misi yang sesuai gaya bermain Anda, baik itu mengangkut kargo berbahaya, berburu harta karun tersembunyi, menambang medan asteroid, atau menyamar untuk memulihkan artefak yang hilang."
         },
         {
           "num": "02",
           "title": "Jelajahi Galaksi",
-          "body": "Bepergian melalui portal ke planet-planet jauh, masing-masing dengan lingkungan unik, material berharga, dan sirkuit balap baru. Ikuti peta galaksi untuk memetakan wilayah yang belum terjamah dan dapatkan hak menamai planet yang pertama kali Anda temukan. Tambang sumber daya dari ladang asteroid, pulihkan suku cadang dari relik kuno dan kapal yang ditinggalkan, serta kumpulkan petunjuk yang mengarah ke harta tersembunyi yang tersebar di antara bintang-bintang."
+          "body": "Anda mungkin dapat bepergian melalui portal ke planet-planet jauh, masing-masing dengan lingkungan unik yang direncanakan, material dalam game, dan sirkuit balap baru. Peta galaksi yang direncanakan dapat membiarkan Anda memetakan wilayah yang belum dijelajahi dan memperoleh hak penamaan planet yang Anda temukan pertama kali. Anda mungkin dapat menambang sumber daya dalam game dari medan asteroid, memulihkan suku cadang dari peninggalan kuno dan kapal terbengkalai, dan mengumpulkan petunjuk yang mengarah ke item dalam game tersembunyi yang tersebar di antara bintang-bintang."
         },
         {
           "num": "03",
           "title": "Bangun Kerajaan Anda Dari Dalam Kapal Anda",
-          "body": "Quest Racer Anda lebih dari sekadar transportasi. Tanam makanan di teluk hidroponik, sempurnakan bahan yang ditambang dari planet yang jauh, dan bangun pasukan dari dalam laboratorium kloning Anda. Perbaiki pasukan Anda dan senjata mereka, pertahankan diri Anda dari bajak laut, dan kelola pangkalan bergerak mandiri yang tumbuh lebih kuat dengan setiap misi yang Anda selesaikan."
+          "body": "Quest Racer Anda yang direncanakan dirancang menjadi lebih dari sekadar transportasi. Anda mungkin dapat menanam makanan di ruang hidroponik, memurnikan material yang ditambang dari planet jauh, dan membangun pasukan dari laboratorium kloning Anda. Basis bergerak yang mandiri direncanakan dan dapat menjadi lebih kuat dengan setiap misi yang Anda selesaikan."
         },
         {
           "num": "04",
           "title": "Mainkan Sesuai Keinginan Anda",
-          "body": "Tidak ada jalan tunggal menuju dominasi. Menjadi pemburu hadiah yang ditakuti, penyelundup licik, penambang ulung, atau penjelajah legendaris. Menculik target bernilai tinggi, menjadi senjata sewaan, atau membentuk aliansi untuk mengendalikan seluruh sektor. Galaksi tunduk pada keinginan Anda, dan setiap keputusan membentuk reputasi dan kekayaan Anda."
+          "body": "Tidak ada satu jalur yang direncanakan menuju dominasi. Anda mungkin dapat menjadi pemburu bounty yang ditakuti, penyelundup licik, penambang ulung, atau penjelajah legendaris, atau menjalin aliansi untuk menguasai seluruh sektor. Setiap keputusan dapat membentuk reputasi Anda, tunduk pada aturan akhir game."
         }
       ],
-      "rewardsTitle": "Hadiah Pencarian; Dapatkan Bayaran untuk Bermain!",
+      "rewardsTitle": "Hadiah dalam Game Quest yang Direncanakan dan Bagaimana Dapat Bekerja",
       "rewards": [
         {
           "title": "Hadiah Dalam Game",
-          "body": "Setiap quest yang Anda selesaikan dirancang untuk memberi Anda hadiah dalam game. Kredit, material peningkatan, komponen langka, token perekrutan spesialis, dan item eksklusif masuk ke inventaris Anda di setiap misi yang berhasil. Makin berat quest-nya, makin kaya hasilnya. Temukan material langka di planet-planet jauh, pulihkan suku cadang bernilai tinggi dari relik kuno, dan timbun sumber daya yang mendorong Anda menuju supremasi galaksi."
+          "body": "Setiap quest yang Anda selesaikan direncanakan memberi Anda hadiah dalam game. Kredit dalam game, material peningkatan, komponen langka, token spesialis dalam game, dan item dalam game eksklusif dapat mengalir ke inventaris Anda dengan setiap misi yang berhasil. Semakin sulit quest-nya, semakin besar hadiah dalam game yang mungkin diperoleh."
         },
         {
-          "title": "Hadiah Kejuaraan",
-          "body": "Quest dan tantangan berperingkat tertentu mungkin menawarkan hadiah dalam game premium. Misi tingkat tinggi, acara papan peringkat, dan kejuaraan quest musiman sedang direncanakan, dan makin terampil serta berani Anda, makin baik hadiah dalam game yang mungkin didapat."
+          "title": "Hadiah dalam Game Kejuaraan",
+          "body": "Quest tertentu yang direncanakan dan tantangan peringkat dapat menawarkan hadiah dalam game premium. Misi tingkat tinggi, acara papan peringkat, dan kejuaraan quest musiman direncanakan, dan semakin terampil dan berani Anda, semakin baik hadiah dalam game yang mungkin diperoleh."
         },
         {
-          "title": "Cara Kerja Hadiah Quest",
-          "body": "Pemain mungkin dapat lolos ke quest premium dengan membangun reputasi dan memenuhi ambang performa. Tingkat kesulitan, durasi, dan tingkat bahaya quest menentukan hadiah dalam game, yang dimaksudkan untuk ditampilkan sebelum Anda menerima misi apa pun. Entah Anda menjalankan pengangkutan kargo sepuluh menit atau ekspedisi luar angkasa selama seminggu, hadiahnya dirancang agar sepadan dengan risikonya."
+          "title": "Bagaimana Hadiah dalam Game Quest Dapat Bekerja",
+          "body": "Pemain dapat memenuhi syarat untuk quest premium dengan membangun reputasi dan memenuhi ambang performa. Tingkat kesulitan, durasi, dan tingkat bahaya quest direncanakan menentukan hadiah dalam game, yang dimaksudkan ditampilkan sebelum Anda menerima misi apa pun. Baik Anda menjalankan pengangkutan kargo sepuluh menit atau ekspedisi luar angkasa sepekan, hadiah dalam game dirancang sebanding dengan risikonya."
         },
         {
-          "title": "Kemajuan yang Membayar Ke Depan",
-          "body": "Hadiah quest langsung mengalir ke peningkatan kapal, sistem senjata, dan perekrutan spesialis Anda. Setiap hadiah membuat Anda lebih kuat, yang membuka quest yang lebih berat. Progres juga direncanakan terbawa ke Hyper Racing dan Overlord of the 7 Realms."
+          "title": "Progresi yang Terbawa ke Depan",
+          "body": "Hadiah dalam game quest dapat mengalir ke peningkatan kapal, sistem senjata, dan spesialis Anda. Setiap hadiah dalam game dapat membuat Anda lebih kuat, yang dapat membuka quest yang lebih sulit. Progres juga direncanakan terbawa ke Hyper Racing dan Overlord of the 7 Realms, tunduk pada aturan akhir game."
         }
       ],
-      "upgradesTitle": "Tingkatkan Kapal Anda, Persenjatai Arsenal Anda, Rekrut Kru Anda",
+      "upgradesTitle": "Tingkatkan Kapal Anda, Persenjatai Arsenal Anda, Bangun Kru Anda",
       "upgrades": [
         {
-          "title": "Peningkatan Pesawat Luar Angkasa",
-          "body": "Quest Racer Anda sepenuhnya modular dari ruang mesin hingga kokpit. Tingkatkan lambung untuk daya tahan maksimum, perkuat kulit terluar agar tahan terhadap lingkungan yang tidak bersahabat, tingkatkan generator perisai untuk kemampuan bertahan tempur, dan perombakan sistem tenaga untuk kinerja puncak. Mesin yang lebih baik berarti perjalanan antarplanet yang lebih cepat. Sistem navigasi yang lebih kuat mengungkap rute tersembunyi dan dunia yang belum dipetakan. Setiap peningkatan mengubah kapal Anda menjadi kapal yang lebih kuat dan lebih ditakuti."
+          "title": "Peningkatan Pesawat Luar Angkasa yang Direncanakan",
+          "body": "Quest Racer Anda yang direncanakan dirancang modular sepenuhnya dari ruang mesin hingga kokpit. Anda mungkin dapat meningkatkan lambung untuk daya tahan, memperkuat cangkang luar agar tahan lingkungan bermusuhan, memperkuat generator perisai untuk bertahan dalam pertempuran, dan merombak sistem tenaga untuk performa puncak. Mesin yang lebih baik dapat berarti perjalanan antarplanet lebih cepat, dan sistem navigasi yang lebih kuat dapat mengungkap rute tersembunyi dan dunia yang belum dijelajahi."
         },
         {
-          "title": "Sistem Senjata",
-          "body": "Galaksi itu berbahaya, dan Anda harus lebih berbahaya. Tingkatkan dan sempurnakan sistem senjata Anda untuk melindungi diri Anda dari bajak laut, pemain saingan, dan kekuatan musuh. Pilih antara konfigurasi defensif yang membuat Anda tetap hidup dalam situasi terburuk atau pemuatan ofensif yang dirancang untuk menimbulkan kerusakan maksimum. Susunan laser, baterai rudal, meriam plasma, dan senjata energi eksperimental semuanya tersedia saat Anda melanjutkan melalui pohon peningkatan."
+          "title": "Sistem Senjata yang Direncanakan",
+          "body": "Galaksi yang direncanakan itu berbahaya. Anda mungkin dapat meningkatkan dan menyempurnakan sistem senjata untuk melindungi diri dari bajak laut, pemain saingan, dan pasukan musuh, dengan memilih antara konfigurasi bertahan dan perlengkapan menyerang. Susunan laser, baterai rudal, meriam plasma, dan senjata energi eksperimental semuanya direncanakan seiring Anda maju di pohon peningkatan."
         },
         {
-          "title": "Rekrut Spesialis",
-          "body": "Spesialis adalah pengubah permainan. Masing-masing membawa keterampilan unik yang menambah bonus kuat pada keseluruhan kinerja dan tingkat kekuatan kapal Anda. Spesialis navigasi mengungkap jalur tersembunyi dan mengurangi waktu perjalanan. Spesialis tempur meningkatkan akurasi senjata dan hasil kerusakan. Spesialis teknik meningkatkan integritas lambung dan kecepatan perbaikan. Spesialis sains meningkatkan ekstraksi sumber daya dan penyempurnaan material. Tumpuk beberapa spesialis untuk menciptakan kombinasi dahsyat yang melipatgandakan efektivitas kapal Anda."
+          "title": "Memperoleh Spesialis",
+          "body": "Spesialis yang direncanakan dapat masing-masing membawa keterampilan unik yang menambah bonus pada performa keseluruhan dan tingkat kekuatan kapal Anda. Spesialis navigasi dapat mengungkap jalur tersembunyi dan mengurangi waktu perjalanan. Spesialis tempur dapat meningkatkan akurasi dan kerusakan senjata. Spesialis teknik dapat meningkatkan integritas lambung dan kecepatan perbaikan. Spesialis sains dapat meningkatkan ekstraksi sumber daya dan pemurnian material. Menumpuk beberapa spesialis direncanakan, tunduk pada aturan akhir game."
         },
         {
-          "title": "Lingkaran Kekuatan",
-          "body": "Pencarian untuk menghasilkan, hasilkan untuk meningkatkan, dan tingkatkan untuk menaklukkan misi yang lebih sulit dengan hadiah lebih besar. Rekrut spesialis untuk memperkuat setiap sistem di kapal Anda. Semakin kuat Anda, semakin banyak galaksi yang terbuka, dan semakin besar keberuntungan yang menanti. Peningkatan kapal dan bonus spesialis juga diterapkan langsung ke pertempuran luar angkasa selama transit Hyper Racing dan pertempuran melintasi Overlord of the 7 Realms."
+          "title": "Siklus Kekuatan yang Direncanakan",
+          "body": "Quest untuk mendapatkan, dapatkan untuk meningkatkan, dan tingkatkan untuk menghadapi quest lebih sulit dengan hadiah dalam game lebih besar. Spesialis yang direncanakan dapat memperkuat setiap sistem pada kapal Anda. Semakin kuat Anda, semakin banyak bagian galaksi yang mungkin terbuka. Peningkatan kapal dan bonus spesialis juga direncanakan terbawa ke Hyper Racing dan Overlord of the 7 Realms, tunduk pada pengembangan akhir dan aturan game."
         }
       ],
       "faqTitle": "Hyper Quest — Pertanyaan yang Sering Diajukan",
       "faq": [
         {
           "q": "Apa itu Hyper Quest?",
-          "a": "Petualangan luar angkasa dunia terbuka di mana Anda mengomandoi pesawat luar angkasa yang sepenuhnya dapat ditingkatkan melintasi galaksi yang luas. Selesaikan quest, jelajahi dunia asing, tingkatkan kapal Anda, rekrut spesialis, dan kumpulkan hadiah dalam game."
+          "a": "Petualangan luar angkasa dunia terbuka yang direncanakan, sedang dikembangkan, di mana Anda mungkin dapat memimpin pesawat luar angkasa yang dapat ditingkatkan sepenuhnya melintasi galaksi yang luas. Aktivitas yang direncanakan meliputi menyelesaikan quest, menjelajahi dunia alien, meningkatkan kapal Anda, memperoleh spesialis, dan mengumpulkan hadiah dalam game."
         },
         {
           "q": "Bagaimana cara kerja misi?",
-          "a": "Terima misi dari papan pencarian dalam game. Misi berkisar dari perjalanan kargo cepat yang hanya memakan waktu beberapa menit hingga ekspedisi epik multi-hari jauh ke luar angkasa yang belum dipetakan. Setiap misi memiliki tujuan yang jelas, peringkat bahaya, dan tingkat hadiah yang ditampilkan sebelum Anda menerimanya."
+          "a": "Misi dapat diterima dari papan quest dalam game yang direncanakan. Quest yang direncanakan berkisar dari pengiriman kargo cepat hanya beberapa menit hingga ekspedisi epik berhari-hari jauh ke luar angkasa yang belum dijelajahi. Setiap quest direncanakan menampilkan tujuan, tingkat bahaya, dan tingkat hadiah dalam game sebelum Anda menerima."
         },
         {
-          "q": "Bisakah saya mendapatkan uang dari quest?",
-          "a": "Tidak. Quest, tantangan berperingkat, dan kejuaraan musiman direncanakan hanya menawarkan hadiah dalam game, bukan uang tunai atau uang."
-        },
-        {
-          "q": "Hadiah dalam game apa yang bisa saya peroleh?",
-          "a": "Setiap quest yang selesai dirancang untuk memberi hadiah berupa kredit, material peningkatan, komponen langka, token perekrutan spesialis, dan item eksklusif. Makin berat dan lama quest-nya, makin kaya hadiahnya. Temukan material langka di planet-planet jauh dan pulihkan suku cadang bernilai tinggi dari relik kuno."
+          "q": "Hadiah dalam game apa yang dapat ditawarkan quest?",
+          "a": "Setiap quest yang diselesaikan direncanakan memberi hadiah atau item dalam game: kredit dalam game, material peningkatan, komponen langka, token spesialis dalam game, dan item dalam game eksklusif. Quest yang lebih sulit dan lebih panjang dapat menawarkan hadiah dalam game lebih besar."
         },
         {
           "q": "Bisakah saya meningkatkan pesawat luar angkasa saya?",
-          "a": "Setiap sistem dapat diupgrade: lambung kapal, kulit terluar, generator pelindung, sistem tenaga, mesin, kokpit, dan navigasi. Mesin yang lebih baik berarti perjalanan yang lebih cepat, lambung kapal yang lebih kuat bertahan dari benturan yang tidak bersahabat, dan navigasi yang ditingkatkan mengungkap rute tersembunyi dan dunia yang belum dipetakan."
+          "a": "Setiap sistem direncanakan dapat ditingkatkan: lambung, cangkang luar, generator perisai, sistem tenaga, mesin, kokpit, dan navigasi. Mesin yang lebih baik dapat berarti perjalanan lebih cepat, dan navigasi yang ditingkatkan dapat mengungkap rute tersembunyi dan dunia yang belum dijelajahi."
         },
         {
-          "q": "Senjata apa saja yang tersedia?",
-          "a": "Meningkatkan dan menyempurnakan sistem senjata termasuk susunan laser, baterai rudal, meriam plasma, dan senjata energi eksperimental. Pilih konfigurasi defensif untuk bertahan hidup atau pemuatan ofensif untuk kerusakan maksimum terhadap bajak laut, saingan, dan kekuatan musuh."
+          "q": "Senjata apa yang tersedia?",
+          "a": "Sistem senjata yang direncanakan meliputi susunan laser, baterai rudal, meriam plasma, dan senjata energi eksperimental. Anda mungkin dapat memilih konfigurasi bertahan untuk bertahan hidup atau perlengkapan menyerang melawan bajak laut, saingan, dan pasukan musuh."
         },
         {
-          "q": "Bagaimana cara kerja spesialis?",
-          "a": "Rekrut spesialis dengan keterampilan unik yang menambah bonus kuat pada kinerja dan tingkat kekuatan kapal Anda. Spesialis navigasi mengungkap jalur tersembunyi, spesialis tempur meningkatkan kerusakan senjata, spesialis teknik meningkatkan integritas lambung kapal, dan spesialis sains meningkatkan ekstraksi sumber daya. Tumpuk beberapa spesialis untuk kombinasi yang menghancurkan."
+          "q": "Bagaimana spesialis bekerja?",
+          "a": "Spesialis yang direncanakan dapat diperoleh atau didapatkan, masing-masing dengan keterampilan unik yang menambah bonus pada performa dan tingkat kekuatan kapal Anda. Spesialis navigasi dapat mengungkap jalur tersembunyi, spesialis tempur dapat meningkatkan kerusakan senjata, spesialis teknik dapat meningkatkan integritas lambung, dan spesialis sains dapat meningkatkan ekstraksi sumber daya."
         },
         {
-          "q": "Jenis misi apa yang tersedia?",
-          "a": "Pengangkutan kargo, penambangan asteroid, perburuan harta karun, perburuan bounty, pemulihan artefak, operasi penyamaran, eksplorasi planet, pertahanan dari bajak laut, misi pemulihan, dan banyak lagi. Quest berkisar dari perjalanan cepat sepuluh menit hingga ekspedisi luar angkasa berhari-hari."
+          "q": "Jenis quest apa yang tersedia?",
+          "a": "Jenis quest yang direncanakan meliputi pengangkutan kargo, penambangan asteroid, perburuan harta karun, perburuan bounty, pemulihan artefak, operasi penyamaran, eksplorasi planet, pertahanan dari bajak laut, dan misi pemulihan. Quest direncanakan berkisar dari perjalanan cepat sepuluh menit hingga ekspedisi luar angkasa dalam berhari-hari."
         },
         {
           "q": "Bisakah saya menemukan planet baru?",
-          "a": "Ya. Ikuti peta galaksi ke wilayah yang belum dipetakan dan temukan dunia baru. Penemu pertama mendapatkan hak penamaan untuk planet yang mereka temukan. Dunia baru menawarkan material, lingkungan, dan sirkuit balap unik yang belum pernah diakses pemain lain sebelumnya."
+          "a": "Itu direncanakan. Peta galaksi dapat membawa Anda ke wilayah yang belum dijelajahi dan dunia baru, dan penemu pertama dapat memperoleh hak penamaan planet yang mereka temukan. Dunia baru direncanakan menawarkan material, lingkungan, dan sirkuit balap dalam game yang unik."
         },
         {
           "q": "Apa yang bisa saya lakukan di dalam kapal saya?",
-          "a": "Quest Racer Anda adalah basis seluler. Menanam makanan di teluk hidroponik, menyempurnakan bahan yang ditambang dari planet yang jauh, membangun dan melatih pasukan di laboratorium kloning, meningkatkan senjata dan pertahanan, dan mengelola operasi mandiri yang semakin kuat di setiap misi."
+          "a": "Quest Racer Anda yang direncanakan dirancang sebagai basis bergerak. Anda mungkin dapat menanam makanan di ruang hidroponik, memurnikan material yang ditambang dari planet jauh, membangun dan melatih pasukan di laboratorium kloning, serta meningkatkan senjata dan pertahanan."
         },
         {
           "q": "Bagaimana cara kerja peta galaksi?",
-          "a": "Peta galaksi memandu penjelajahan Anda melintasi alam semesta. Tingkatkan peta Anda untuk mengungkap sektor baru, lokasi portal, dan zona pencarian tersembunyi. Saat Anda menjelajah lebih jauh, peta akan meluas, membuka wilayah ruang angkasa yang semakin berbahaya dan bermanfaat."
+          "a": "Peta galaksi yang direncanakan dirancang untuk memandu eksplorasi Anda. Anda mungkin dapat meningkatkan peta untuk mengungkap sektor baru, lokasi portal, dan zona quest tersembunyi, membuka wilayah luar angkasa yang lebih berbahaya seiring Anda menjelajah lebih jauh."
         },
         {
-          "q": "Apakah kemajuan saya terbawa ke game lain?",
-          "a": "Segala sesuatu yang Anda bangun di Hyper Quest dimasukkan langsung ke Hyper Racing dan Overlord of the 7 Realms. Peningkatan kapal, bonus spesialis, keterampilan tempur, dan sumber daya semuanya ditransfer dengan lancar. Satu alam semesta, banyak permainan, perkembangan tak terbatas."
+          "q": "Apakah progres saya terbawa ke game lain?",
+          "a": "Apa yang Anda bangun di Hyper Quest direncanakan terbawa ke Hyper Racing dan Overlord of the 7 Realms. Peningkatan kapal, bonus spesialis, keterampilan tempur, dan sumber daya dalam game dapat semuanya dipindahkan, tunduk pada pengembangan akhir dan aturan game."
         },
         {
           "q": "Bisakah saya bermain sebagai penjahat?",
-          "a": "Tentu saja. Menyamar, menculik target bernilai tinggi, menjadi senjata sewaan, menyelundupkan kargo berbahaya, atau menyerang pemain lain. Tidak ada jalan tunggal menuju dominasi. Cara Anda mengatur galaksi sepenuhnya merupakan pilihan Anda, dan setiap keputusan akan menentukan reputasi Anda."
+          "a": "Itu direncanakan. Anda mungkin dapat menyamar, melacak target bernilai tinggi, menyelundupkan kargo berbahaya, atau menjarah pemain lain. Tidak ada satu jalur yang direncanakan menuju dominasi, dan setiap keputusan dapat membentuk reputasi Anda."
         }
       ]
     },
@@ -249,148 +245,148 @@
       "heading": "Tuan dari 7 Alam",
       "subtitle": "Tanah kecelakaan. Membangun kembali. Menaklukkan. Menjadi Tuan.",
       "intro": [
-        "Overlord of the 7 Realms adalah game strategi pertempuran tiga level yang berbeda dari game lainnya. Anda berkelana melalui portal ke alam semesta paralel dan mendarat di planet asing yang bermusuhan. Kapal Anda rusak, sistem Anda rusak, dan makhluk-makhluk di planet ini semakin mendekat. Kelangsungan hidup hanyalah permulaan. Dominasi adalah tujuannya.",
-        "Bangun kembali kapal Anda dari reruntuhan. Kloning dan latih pasukan di laboratorium di kapal Anda. Jinakkan satwa liar di planet ini untuk menciptakan kavaleri berkuda yang menghancurkan. Kemudian lakukan pertarungan dalam tiga dimensi pertempuran: pertarungan darat ke darat melawan monster dan pemain lawan, serangan darat ke luar angkasa terhadap target orbital atau darat, dan peperangan antariksa di atas Battle Ring besar yang mengorbit planet ini.",
-        "Ini bukan sekadar game strategi biasa. Seperti Hyper Racing dan Hyper Quest, Overlord menghadirkan interaksi VR waktu nyata dan hadiah dalam game untuk menyelesaikan acara, quest, dan invasi dua mingguan oleh Hammerong yang menakutkan, spesies alien terkuat yang ada. Setiap dua minggu mereka datang untuk mengeruk planet, dan setiap dua minggu pemain pemberani dapat menantang mereka demi bonus besar dan hadiah legendaris.",
-        "Tingkatkan pesawat luar angkasa Anda, lengkapi dengan senjata penghancur, rekrut spesialis yang akan memperkuat tingkat kekuatan Anda, dan bentuk aliansi untuk mengendalikan seluruh wilayah. Segala sesuatu yang Anda bangun terhubung langsung ke Hyper Racing dan Hyper Quest melalui ekosistem Hyper Tek bersama. Satu alam semesta, tiga permainan, peperangan tanpa batas. Baca terus untuk mengetahui cara kerja sistem pertarungan dan mengapa Overlord mengubah segalanya."
+        "Overlord of the 7 Realms adalah game strategi pertempuran tiga tingkat yang direncanakan, sedang dikembangkan. Dalam cerita yang direncanakan, Anda melewati portal ke semesta paralel dan mendarat darurat di planet alien yang bermusuhan. Kapal Anda hancur, sistem Anda gagal, dan makhluk planet itu sudah mendekat. Bertahan hidup hanyalah awal. Dominasi adalah tujuannya.",
+        "Dalam game yang direncanakan, Anda mungkin dapat membangun kembali kapal dari puing-puing, mengkloning dan melatih pasukan di laboratorium onboard, dan menjinakkan satwa planet untuk menciptakan kavaleri tunggangan. Pertempuran yang direncanakan berlangsung di tiga dimensi pertempuran: tempur darat-ke-darat melawan monster dan pemain saingan, serangan darat-ke-luar-angkasa terhadap target orbital atau darat, dan perang luar-angkasa-ke-luar-angkasa di atas Battle Ring raksasa yang mengorbit planet.",
+        "Seperti Hyper Racing dan Hyper Quest, Overlord direncanakan menampilkan interaksi VR real-time dan hadiah dalam game untuk menyelesaikan acara, quest, dan invasi dua mingguan yang direncanakan oleh Hammerong yang menakutkan, spesies alien paling kuat dalam cerita. Setiap dua minggu mereka direncanakan datang untuk menguras planet, dan setiap dua minggu pemain pemberani mungkin dapat menantang mereka demi bonus dalam game dan hadiah dalam game legendaris.",
+        "Anda mungkin dapat meningkatkan pesawat luar angkasa, mempersenjatainya, memperoleh spesialis yang memperkuat tingkat kekuatan Anda, dan menjalin aliansi untuk menguasai seluruh wilayah. Apa yang Anda bangun direncanakan terhubung dengan Hyper Racing dan Hyper Quest melalui ekosistem Hyper Tek bersama. Satu semesta, tiga game yang direncanakan, peperangan tanpa batas. Baca terus untuk mengetahui bagaimana sistem pertempuran yang direncanakan dapat bekerja dan mengapa Overlord dapat mengubah segalanya, semuanya tunduk pada pengembangan akhir dan aturan game."
       ],
       "calloutLine1": "Kelangsungan Hidup hanyalah Permulaan.",
       "calloutLine2": "Dominasi adalah Tujuannya.",
-      "howItWorksTitle": "Sistem Pertempuran Tiga Tingkat; Perang Tiga Dimensi",
+      "howItWorksTitle": "Sistem Pertempuran Tiga Tingkat yang Direncanakan; Tiga Dimensi Perang",
       "howItWorks": [
         {
           "num": "01",
           "title": "Pertarungan Darat ke Darat",
-          "body": "Permukaan planet ini adalah zona perang. Kerahkan pasukan kloning Anda melawan makhluk asing yang bermusuhan, binatang buas, dan pemain saingan yang memperebutkan wilayah dan sumber daya. Jinakkan dan latih satwa liar di planet ini untuk menciptakan unit kavaleri berkuda yang memberikan keunggulan dahsyat bagi pasukan darat Anda. Peperangan darat bersifat mentah, taktis, dan tanpa henti. Setiap pertempuran yang Anda menangkan menghasilkan sumber daya, wilayah, dan reputasi."
+          "body": "Permukaan planet direncanakan sebagai zona perang. Anda mungkin dapat mengerahkan pasukan kloning Anda melawan makhluk alien yang bermusuhan, binatang monster, dan pemain saingan yang memperebutkan wilayah dan sumber daya dalam game. Menjinakkan dan melatih satwa planet dapat menciptakan unit kavaleri tunggangan yang dapat memberi pasukan darat Anda keunggulan. Perang darat direncanakan mentah, taktis, dan tanpa henti, dan pertempuran yang Anda menangkan dapat memberi sumber daya dalam game, wilayah, dan reputasi, tunduk pada pengembangan akhir dan aturan game."
         },
         {
           "num": "02",
           "title": "Serangan Darat ke Luar Angkasa",
-          "body": "Di sinilah Overlord menambahkan dimensi yang tidak, atau hampir tidak ada, yang ditawarkan game lain. Buat kelompok pasukan khusus yang dirancang untuk melancarkan serangan antara permukaan planet dan Cincin Pertempuran orbital. Serang kapal yang ditempatkan di luar angkasa dari posisi darat Anda atau koordinasikan serangan gabungan yang mengenai musuh dari atas dan bawah secara bersamaan. Lapisan pertempuran vertikal ini mengubah strategi standar menjadi pertandingan catur multidimensi di mana posisi di lapangan dan ruang menentukan kemenangan."
+          "body": "Ini adalah dimensi yang direncanakan yang jarang ditawarkan game lain. Anda mungkin dapat membuat kelompok pasukan khusus yang dirancang meluncurkan serangan antara permukaan planet dan Battle Ring orbital, menyerang kapal yang ditempatkan di luar angkasa dari posisi darat Anda atau mengoordinasikan serangan gabungan yang menghantam musuh dari atas dan bawah sekaligus. Lapisan pertempuran vertikal yang direncanakan ini dimaksudkan mengubah strategi standar menjadi permainan catur multidimensi di mana penempatan di darat dan luar angkasa dapat menentukan kemenangan, tunduk pada pengembangan akhir dan aturan game."
         },
         {
           "num": "03",
           "title": "Perang Antariksa ke Luar Angkasa",
-          "body": "Pindahkan kapal Anda ke orbit dan mendarat di Battle Ring, sebuah struktur orbit besar yang mengelilingi planet ini. Dari sini, berburu kapal tanpa pelindung dan sasaran yang rentan. Teleportasi pasukan melintasi ruang angkasa dan langsung ke kapal musuh untuk menimbulkan kerusakan internal maksimum menggunakan serangan naik yang dikembangkan secara khusus. Hadiah pertempuran luar angkasa termasuk yang tertinggi dalam game ini, dan mengendalikan wilayah orbit memberi Anda keuntungan strategis yang tidak dapat ditandingi oleh pemain darat mana pun."
+          "body": "Anda mungkin dapat membawa kapal ke orbit dan mendarat di Battle Ring, struktur orbital masif yang direncanakan yang mengelilingi planet. Dari sana Anda dapat memburu kapal tanpa perisai dan target rentan, dan mentransportasikan pasukan melalui ruang angkasa langsung ke dalam kapal musuh menggunakan serangan penyergapan yang dikembangkan khusus. Pertempuran luar angkasa direncanakan menawarkan beberapa hadiah dalam game terbesar, dan menguasai wilayah orbital dapat memberi keunggulan strategis yang tidak dapat disamai pemain yang hanya di darat, tunduk pada pengembangan akhir dan aturan game."
         },
         {
           "num": "04",
-          "title": "Mengapa Tri-Level Mengubah Segalanya",
-          "body": "Kebanyakan permainan strategi beroperasi pada satu bidang. Overlord beroperasi pada tiga. Kemampuan menyerang dari darat ke darat, darat ke luar angkasa, dan luar angkasa ke luar angkasa menciptakan medan perang dengan kedalaman taktis yang tak tertandingi. Keterampilan adalah segalanya. Kekerasan saja tidak akan menjadikan Anda Tuan. Penguasaan strategis di ketiga tingkatan inilah yang membedakan pihak yang dominan dan pihak yang kalah."
+          "title": "Mengapa Tiga Tingkat Dapat Mengubah Segalanya",
+          "body": "Sebagian besar game strategi beroperasi pada satu bidang. Overlord direncanakan beroperasi pada tiga. Kemampuan yang direncanakan untuk menyerang dari darat ke darat, darat ke luar angkasa, dan luar angkasa ke luar angkasa dimaksudkan menciptakan medan tempur dengan kedalaman taktis yang nyata. Keterampilan direncanakan menjadi segalanya: kekuatan kasar saja tidak seharusnya menjadikan Anda Overlord, dan penguasaan strategis di ketiga tingkat dapat menjadi pembeda antara yang dominan dan yang kalah, tunduk pada pengembangan akhir dan aturan game."
         }
       ],
       "extraSection": {
-        "title": "Cincin Pertempuran dan Interaksi VR",
+        "title": "Battle Ring yang Direncanakan dan Interaksi VR",
         "items": [
           {
             "title": "Mendarat di Battle Ring",
-            "body": "Battle Ring adalah struktur orbit kolosal yang mengelilingi sistem planet. Saat Anda memindahkan kapal Anda ke luar angkasa, Anda dapat berlabuh di Battle Ring untuk mendapatkan keuntungan strategis yang sangat besar. Dari posisi tinggi ini, Anda dapat berburu kapal tanpa pelindung, melancarkan rombongan ke kapal lawan, dan mengoordinasikan serangan dahsyat terhadap sasaran darat di bawah. Mendarat di Battle Ring membuka dimensi gameplay yang benar-benar baru yang tidak ditawarkan oleh sebagian besar game strategi, memberikan Overlord keunggulan taktis dibandingkan game lain yang ada di pasar."
+            "body": "Battle Ring adalah struktur orbital kolosal yang direncanakan yang mengelilingi sistem planet. Saat Anda membawa kapal ke luar angkasa, Anda mungkin dapat bersandar di Battle Ring untuk mendapatkan keunggulan strategis. Dari posisi tinggi ini Anda dapat memburu kapal tanpa perisai, meluncurkan pasukan penyergap ke kapal saingan, dan mengoordinasikan serangan ke target darat di bawah. Mendarat di Battle Ring direncanakan membuka dimensi gameplay baru yang tidak ditawarkan sebagian besar game strategi, tunduk pada pengembangan akhir dan aturan game."
           },
           {
             "title": "Di dalam Cincin Pertempuran",
-            "body": "Battle Ring bukan sekadar platform docking. Jika Anda dapat mengetahui cara menembus bagian dalamnya, misi tersembunyi, bonus tambahan, dan hadiah eksklusif menunggu di dalam. Bagian dalam cincin adalah labirin koridor, ruangan, dan teknologi kuno. Jalankan misi pencarian dan berburu di dalam ring itu sendiri, temukan rahasia yang tidak akan pernah bisa diakses oleh pemain di permukaan. Battle Ring memberi penghargaan kepada mereka yang berani, licik, dan tak kenal lelah."
+            "body": "Battle Ring direncanakan lebih dari sekadar platform sandar. Jika Anda dapat mengetahui cara menembus interiornya, quest tersembunyi, bonus dalam game tambahan, dan hadiah dalam game eksklusif mungkin menanti di dalam. Interior cincin itu direncanakan sebagai labirin lorong, ruang, dan teknologi kuno, dengan quest dan misi perburuan yang direncanakan di dalam cincin itu sendiri, serta rahasia yang tidak akan pernah dapat diakses pemain yang terikat di permukaan. Semuanya tunduk pada pengembangan akhir dan aturan game."
           },
           {
             "title": "Interaksi VR Waktu Nyata",
-            "body": "Seperti semua rangkaian game Hyper Tek, Overlord of the 7 Realms mendukung interaksi VR penuh secara real-time. Masuklah ke dalam kapal Anda, berjalanlah di koridor Battle Ring, pimpin pasukan Anda ke pertempuran darat, dan rasakan peperangan luar angkasa dari kokpit kapal Anda. VR mengubah Overlord dari game strategi menjadi pengalaman medan perang yang sangat mendalam. Perintahkan pasukan Anda, jelajahi medan asing, dan terlibat dalam pertempuran dengan tingkat kehadiran dan intensitas yang tidak dapat ditiru oleh game layar datar."
+            "body": "Seperti semua game Hyper Tek yang direncanakan, Overlord of the 7 Realms direncanakan mendukung interaksi VR secara real-time. Anda mungkin dapat masuk ke dalam kapal, berjalan di lorong-lorong Battle Ring, memimpin pasukan ke pertempuran darat, dan merasakan perang luar angkasa dari kokpit kapal Anda. VR dimaksudkan mengubah Overlord dari game strategi menjadi pengalaman medan perang yang imersif, di mana Anda dapat memimpin pasukan, menjelajahi medan alien, dan bertempur dengan kehadiran yang mungkin tidak dapat ditiru game layar datar. Tunduk pada pengembangan akhir dan aturan game."
           },
           {
-            "title": "Keunggulan Dibandingkan Game Lainnya",
-            "body": "Tidak ada game lain yang menggabungkan peperangan tiga tingkat, stasiun tempur orbit yang bisa dijelajahi, VR waktu nyata, dan hadiah dalam game dalam satu pengalaman. Battle Ring saja sudah menambah dimensi gameplay yang tidak bisa ditandingi pesaing. Jika digabungkan dengan pertempuran darat, peperangan luar angkasa, imersi VR, dan ekosistem Hyper Tek yang saling terhubung, Overlord berada di kategorinya sendiri."
+            "title": "Keunggulan yang Direncanakan Dibanding Game Lain",
+            "body": "Overlord bermaksud menggabungkan perang tiga tingkat, stasiun tempur orbital yang dapat dijelajahi, VR real-time, dan hadiah dalam game dalam satu pengalaman. Battle Ring saja direncanakan menambah dimensi gameplay yang mungkin tidak dapat disamai pesaing. Dipadukan dengan pertempuran darat, perang luar angkasa, imersi VR, dan ekosistem Hyper Tek yang saling terhubung yang direncanakan, inilah pengalaman yang sedang kami kembangkan, tunduk pada pengembangan akhir dan aturan game."
           }
         ]
       },
-      "upgradesTitle": "Bangun kembali, Persenjatai kembali, Rekrut; Bersiaplah untuk Perang",
+      "upgradesTitle": "Bangun Kembali, Persenjatai Ulang, Peroleh; Bersiap untuk Perang",
       "upgrades": [
         {
-          "title": "Peningkatan Pesawat Luar Angkasa",
-          "body": "Kapal Anda yang jatuh adalah tempat semuanya dimulai. Bangun kembali sistem demi sistem, dari ruang mesin hingga dek perintah. Setiap komponen dapat ditingkatkan sepenuhnya: penguatan lambung kapal, integritas struktural, komposisi kulit terluar, generator pelindung, sistem tenaga, dan susunan navigasi. Di Overlord, Anda membangun bukan untuk kecepatan tetapi untuk pertempuran. Kapal perang yang ditingkatkan sepenuhnya adalah fondasi dari setiap kampanye yang sukses, dan semakin dalam Anda berinvestasi, semakin tangguh pula kapal Anda."
+          "title": "Peningkatan Pesawat Luar Angkasa yang Direncanakan",
+          "body": "Kapal Anda yang jatuh adalah tempat semuanya direncanakan dimulai. Anda mungkin dapat membangunnya kembali sistem demi sistem, dari ruang mesin hingga dek komando. Setiap komponen direncanakan dapat ditingkatkan: penguatan lambung, integritas struktural, komposisi cangkang luar, generator perisai, sistem tenaga, dan susunan navigasi. Di Overlord, Anda akan membangun bukan untuk kecepatan melainkan untuk pertempuran. Kapal perang yang sepenuhnya ditingkatkan direncanakan menjadi fondasi setiap kampanye, dan semakin Anda mengembangkan kapal, semakin tangguh kapal itu dapat menjadi, tunduk pada pengembangan akhir dan aturan game."
         },
         {
-          "title": "Sistem Senjata dan Tingkat Teknologi",
-          "body": "Tingkatkan dan sempurnakan senjata, keterampilan, dan level teknologi Anda untuk mendominasi ketiga level pertempuran. Artileri berbasis darat untuk peperangan planet, baterai anti-orbital untuk serangan darat ke luar angkasa, dan susunan senjata yang dipasang di kapal untuk pertempuran antariksa. Setiap sistem senjata dapat disempurnakan untuk peran taktis tertentu. Baik Anda berspesialisasi dalam pemboman jarak jauh, aksi pendaratan jarak dekat, atau tindakan pencegahan defensif, pemuatan senjata Anda menentukan identitas tempur Anda."
+          "title": "Sistem Senjata dan Tingkat Teknologi yang Direncanakan",
+          "body": "Anda mungkin dapat meningkatkan dan menyempurnakan senjata, keterampilan, dan tingkat teknologi di ketiga tingkat pertempuran: artileri darat untuk perang planet, baterai anti-orbital untuk serangan darat-ke-luar-angkasa, dan susunan senjata di kapal untuk pertempuran luar-angkasa-ke-luar-angkasa. Setiap sistem senjata yang direncanakan dapat disempurnakan untuk peran taktis tertentu. Baik Anda berspesialisasi dalam pengeboman jarak jauh, aksi penyergapan jarak dekat, atau tindakan penangkal defensif, perlengkapan senjata Anda direncanakan menentukan identitas tempur Anda, tunduk pada pengembangan akhir dan aturan game."
         },
         {
-          "title": "Rekrut Spesialis",
-          "body": "Spesialis adalah pengganda kekuatan dan, digabung dengan keahlian, inilah yang membedakan pemain bagus dari para Overlord. Dapatkan spesialis unik yang membawa bonus kuat untuk performa keseluruhan dan tingkat kekuatan kapal Anda. Spesialis taktis meningkatkan efisiensi pengerahan pasukan, spesialis teknik mempercepat perbaikan dan peningkatan kapal, spesialis senjata menaikkan daya rusak di semua sistem, dan spesialis intelijen mengungkap posisi serta kelemahan musuh. Gabungkan beberapa spesialis untuk menciptakan upaya terpadu yang dahsyat dan memperkuat setiap aspek operasi Anda. Namun, pemain yang tidak mengeluarkan uang boleh tenang karena Hyper Tek dibuat untuk mengatasi masalah di dunia game. Walau penggabungan bisa dilakukan, mekanisme permainan yang adil memastikan penumpukan bukan sekadar sistem poin demi poin. Sistemnya memakai skala menurun agar kekuatan mentah tidak mengalahkan pentingnya keahlian. Game ini menekankan kekuatan dan keahlian, bukan keberuntungan!"
+          "title": "Memperoleh Spesialis",
+          "body": "Spesialis yang direncanakan dirancang sebagai pengali kekuatan dan, dipadukan dengan keterampilan, dapat menjadi pembeda pemain baik dari Overlord. Anda mungkin dapat memperoleh spesialis unik yang membawa bonus pada performa keseluruhan dan tingkat kekuatan kapal Anda. Spesialis taktis dapat meningkatkan efisiensi penempatan pasukan, spesialis teknik dapat mempercepat perbaikan dan peningkatan kapal, spesialis senjata dapat meningkatkan kerusakan di semua sistem, dan spesialis intelijen dapat mengungkap posisi dan kelemahan musuh. Menumpuk beberapa spesialis dapat menciptakan upaya terpadu yang memperkuat setiap aspek operasi Anda. Pemain yang tidak berbelanja dapat tenang: Hyper Tek dibuat untuk mengatasi masalah dalam dunia game. Meskipun penumpukan direncanakan, mekanika game yang direncanakan dirancang agar penumpukan bukan sistem sederhana poin-demi-poin. Sistem ini direncanakan beroperasi pada skala geser agar kekuatan mentah tidak menutupi pentingnya keterampilan. Game ini direncanakan menekankan baik kekuatan maupun keterampilan, bukan mengandalkan keberuntungan. Semuanya tunduk pada pengembangan akhir dan aturan game."
         },
         {
           "title": "Bangun Pasukan Anda",
-          "body": "Kloning pasukan di dalam laboratorium kloning di kapal Anda, lalu tingkatkan dan sempurnakan mereka serta senjatanya hingga siap bertempur. Namun pasukan saja tidak cukup. Jinakkan dan latih makhluk liar di planet ini untuk menciptakan kavaleri binatang buas, sebuah kekuatan yang tidak dapat dikloning atau diproduksi dan harus diperoleh melalui keterampilan dan kesabaran. Komposisi pasukan Anda di darat, udara, dan luar angkasa menentukan dominasi Anda."
+          "body": "Anda mungkin dapat mengkloning pasukan di laboratorium kloning onboard kapal Anda, lalu meningkatkan dan menyempurnakan mereka beserta senjatanya hingga siap bertempur. Namun pasukan saja mungkin tidak cukup. Menjinakkan dan melatih makhluk liar planet dapat menciptakan kavaleri binatang tunggangan, pasukan yang direncanakan yang tidak dapat dikloning atau diproduksi dan harus diperoleh lewat keterampilan dan kesabaran. Komposisi pasukan Anda di darat, udara, dan luar angkasa direncanakan menentukan dominasi Anda, tunduk pada pengembangan akhir dan aturan game."
         }
       ],
-      "rewardsTitle": "Ekosistem Hammerong, Reward, dan Hyper Tek",
+      "rewardsTitle": "Hammerong, Hadiah dalam Game, dan Ekosistem Hyper Tek",
       "rewards": [
         {
-          "title": "The Hammerongs: Spesies Paling Kuat yang Pernah Ada",
-          "body": "Setiap dua minggu, medan kekuatan di arena tengah turun, dan Hammerong tiba. Mereka adalah spesies alien terkuat di alam semesta, dipersenjatai dengan teknologi canggih yang jauh melampaui apa pun yang dimiliki pemain. Mereka datang untuk merampas sumber daya planet ini, dan mereka mempertahankan arena dengan kekuatan penuh dan luar biasa. Menyerang Hammerong adalah tantangan paling berbahaya di Overlord, tetapi mereka yang berhasil akan mendapatkan bonus besar, jarahan legendaris, material peningkatan langka, dan hadiah eksklusif yang tidak dapat diperoleh dengan cara lain. Invasi Hammerong setiap dua minggu adalah ujian akhir kekuatan Anda."
+          "title": "Hammerong: Spesies Paling Kuat dalam Cerita",
+          "body": "Setiap dua minggu, medan gaya arena pusat direncanakan runtuh, dan Hammerong tiba. Dalam cerita, mereka adalah spesies alien terkuat di semesta, dipersenjatai teknologi canggih jauh melampaui apa yang dimiliki pemain. Mereka datang untuk menguras sumber daya planet dan mempertahankan arena dengan kekuatan penuh yang luar biasa. Menyerang Hammerong direncanakan sebagai tantangan paling berbahaya di Overlord, dan mereka yang berhasil dapat menerima bonus dalam game, jarahan dalam game legendaris, material peningkatan langka, dan hadiah dalam game eksklusif yang tidak dapat diperoleh dengan cara lain. Invasi Hammerong dua mingguan direncanakan sebagai ujian akhir kekuatan Anda, tunduk pada pengembangan akhir dan aturan game."
         },
         {
-          "title": "Acara Harian, Misi, dan Hadiah Pertempuran",
-          "body": "Tuan memberikan hadiah terus-menerus. Selesaikan tugas harian untuk mendapatkan kredit, meningkatkan materi, dan bonus perkembangan. Ikuti acara khusus untuk mendapatkan hadiah premium. Jalankan misi melintasi permukaan planet dan di dalam Battle Ring untuk mendapatkan jarahan eksklusif. Menangkan pertempuran melawan monster, makhluk asing, dan pemain saingan untuk menimbun sumber daya. Jelajahi permukaan untuk menemukan artefak dan harta karun tersembunyi. Struktur hadiah dirancang sedemikian rupa sehingga setiap tindakan yang Anda lakukan membuat Anda semakin dekat untuk menjadi Penguasa tertinggi di server."
+          "title": "Acara Harian, Quest, dan Hadiah dalam Game Pertempuran",
+          "body": "Overlord direncanakan memberikan hadiah dalam game secara teratur. Tugas harian yang direncanakan dapat memberi kredit dalam game, material peningkatan, dan bonus progresi. Acara khusus dapat menawarkan hadiah dalam game premium. Quest di permukaan planet dan di dalam Battle Ring dapat memberi jarahan dalam game eksklusif. Memenangkan pertempuran melawan monster, makhluk alien, dan pemain saingan dapat menambah sumber daya dalam game Anda, dan menjelajahi permukaan dapat mengungkap artefak tersembunyi dan item dalam game. Struktur hadiah dalam game direncanakan sedemikian rupa sehingga setiap tindakan Anda dapat membawa Anda lebih dekat menjadi Overlord tertinggi di server, tunduk pada pengembangan akhir dan aturan game."
         },
         {
           "title": "Terhubung dengan Ekosistem Hyper Tek",
-          "body": "Overlord of the 7 Realms tidak berdiri sendiri. Game ini terintegrasi penuh ke dalam semesta Hyper Tek bersama Hyper Racing dan Hyper Quest. Sumber daya yang diperoleh di Overlord dapat dipakai di ketiga game. Peningkatan kapal, bonus spesialis, keahlian tempur, dan material mengalir mulus antarjudul. Kemampuan balap yang didapat di Hyper Racing meningkatkan keahlian pilot Anda dalam pertempuran luar angkasa Overlord. Material yang dikumpulkan di Hyper Quest menggerakkan peningkatan Anda di planet. Marketplace Hyper Tek menghubungkan semuanya, menciptakan satu semesta terhubung di mana progres di satu game mendorong kemajuan di ketiganya."
+          "body": "Overlord of the 7 Realms tidak direncanakan berdiri sendiri. Game ini direncanakan terintegrasi ke semesta Hyper Tek bersama Hyper Racing dan Hyper Quest. Sumber daya dalam game yang diperoleh di Overlord dapat digunakan di ketiga game yang direncanakan. Peningkatan kapal, bonus spesialis, keterampilan tempur, dan material dapat mengalir antar judul. Kemampuan balap yang diperoleh di Hyper Racing dapat meningkatkan keterampilan pilot Anda dalam pertempuran luar angkasa Overlord, dan material yang dikumpulkan di Hyper Quest dapat menggerakkan peningkatan Anda di planet. Marketplace Hyper Tek direncanakan menghubungkan semuanya, menciptakan satu semesta terhubung di mana progres di satu game dapat mendorong kemajuan di ketiganya, tunduk pada pengembangan akhir dan aturan game."
         },
         {
-          "title": "Satu Alam Semesta, Tiga Permainan, Kekuatan Tak Terbatas",
-          "body": "Pemain yang terlibat dalam ketiga game Hyper Tek membangun kekuatan lebih cepat, mengakses hadiah lintas game eksklusif, dan mendominasi melalui beragam keterampilan dan sumber daya yang tidak dapat ditandingi oleh pemain game tunggal. Ekosistem yang saling terhubung adalah keunggulan kompetitif utama."
+          "title": "Satu Semesta, Tiga Game yang Direncanakan",
+          "body": "Pemain yang berpartisipasi di ketiga game Hyper Tek yang direncanakan dapat membangun kekuatan lebih cepat dan dapat mengakses hadiah dalam game lintas game, dengan memanfaatkan beragam keterampilan dan sumber daya dalam game yang mungkin tidak dimiliki pemain satu game. Semua ini direncanakan dan tunduk pada pengembangan akhir dan aturan game."
         }
       ],
       "faqTitle": "Penguasa 7 Alam — Pertanyaan yang Sering Diajukan",
       "faq": [
         {
           "q": "Apa itu Penguasa 7 Alam?",
-          "a": "Game strategi pertempuran tiga tingkat di mana Anda mendarat darurat di planet asing, membangun kembali kapal, mengkloning pasukan, dan bertempur di tiga dimensi: darat-ke-darat, darat-ke-angkasa, dan angkasa-ke-angkasa. Fitur yang direncanakan mencakup interaksi VR, hadiah dalam game, dan invasi Hammerong dua mingguan."
+          "a": "Game strategi pertempuran tiga tingkat yang direncanakan, sedang dikembangkan, di mana Anda mendarat darurat di planet alien, membangun kembali kapal, mengkloning pasukan, dan bertempur di tiga dimensi: darat-ke-darat, darat-ke-luar-angkasa, dan luar-angkasa-ke-luar-angkasa. Fitur yang direncanakan meliputi interaksi VR, hadiah dalam game, dan invasi Hammerong dua mingguan."
         },
         {
           "q": "Apa sistem pertarungan tiga tingkat itu?",
-          "a": "Pertarungan beroperasi dalam tiga tingkatan: serangan darat ke darat melawan monster dan pemain lawan, serangan darat ke luar angkasa yang menargetkan kapal orbital, dan peperangan antariksa di Battle Ring. Pendekatan multi-dimensi ini menciptakan kedalaman taktis yang tidak dapat ditandingi oleh game strategi satu bidang pun."
+          "a": "Pertempuran direncanakan beroperasi di tiga tingkat: darat-ke-darat melawan monster dan pemain saingan, serangan darat-ke-luar-angkasa terhadap kapal orbital, dan perang luar-angkasa-ke-luar-angkasa di Battle Ring. Pendekatan multidimensi yang direncanakan ini dimaksudkan menciptakan kedalaman taktis, tunduk pada pengembangan akhir dan aturan game."
         },
         {
           "q": "Apa itu Cincin Pertempuran?",
-          "a": "Struktur orbit besar yang mengelilingi planet ini. Mendaratkan kapal Anda di atasnya untuk berburu target yang tidak terlindungi, melancarkan rombongan asrama ke kapal musuh, dan mengakses misi tersembunyi di dalam interiornya. Mengontrol Battle Ring memberi Anda keuntungan strategis dibandingkan pemain yang hanya berada di darat."
+          "a": "Struktur orbital masif yang direncanakan yang mengelilingi planet. Anda mungkin dapat mendaratkan kapal di sana untuk memburu target tanpa perisai, meluncurkan pasukan penyergap ke kapal musuh, dan mengakses quest tersembunyi di interiornya. Menguasai Battle Ring dapat memberi keunggulan strategis atas pemain yang hanya di darat."
         },
         {
           "q": "Bisakah saya meningkatkan pesawat luar angkasa saya?",
-          "a": "Setiap sistem dapat ditingkatkan dari ruang mesin hingga dek komando: lambung kapal, struktur, kulit terluar, generator pelindung, sistem tenaga, dan navigasi. Di Overlord, Anda membangun untuk pertempuran, bukan kecepatan. Kapal perang yang ditingkatkan sepenuhnya adalah fondasi dari setiap kampanye."
+          "a": "Setiap sistem direncanakan dapat ditingkatkan dari ruang mesin hingga dek komando: lambung, struktur, cangkang luar, generator perisai, sistem tenaga, dan navigasi. Di Overlord Anda direncanakan membangun untuk pertempuran, bukan kecepatan. Kapal perang yang sepenuhnya ditingkatkan direncanakan menjadi fondasi setiap kampanye."
         },
         {
           "q": "Bagaimana cara kerja spesialis?",
-          "a": "Rekrut spesialis unik yang menambahkan bonus kuat pada kinerja dan tingkat kekuatan kapal Anda. Spesialis taktis, teknik, senjata, dan intelijen masing-masing meningkatkan sistem yang berbeda. Tumpuk banyak spesialis untuk menghasilkan sinergi yang menghancurkan di semua level pertempuran."
+          "a": "Spesialis yang direncanakan dapat diperoleh, menambah bonus pada performa dan tingkat kekuatan kapal Anda. Spesialis taktis, teknik, senjata, dan intelijen dapat masing-masing memperkuat sistem yang berbeda, dan menumpuk beberapa spesialis dapat menciptakan sinergi kuat di semua tingkat pertempuran, tunduk pada pengembangan akhir dan aturan game."
         },
         {
           "q": "Siapakah keluarga Hammerong?",
-          "a": "Spesies alien paling kuat yang pernah ada. Setiap dua minggu mereka tiba di arena tengah untuk menguras sumber daya planet ini, yang dipertahankan oleh kekuatan luar biasa dan teknologi canggih. Menyerang mereka sangat berbahaya tetapi memberi pemain bonus besar dan jarahan legendaris."
+          "a": "Spesies alien paling kuat dalam cerita. Setiap dua minggu mereka direncanakan tiba di arena pusat untuk menguras sumber daya planet, dibela oleh kekuatan luar biasa dan teknologi canggih. Menyerang mereka direncanakan sangat berbahaya, dan pemain yang berhasil dapat menerima bonus dalam game dan jarahan dalam game legendaris."
         },
         {
-          "q": "Imbalan apa yang bisa saya peroleh?",
-          "a": "Tugas harian, quest, pertempuran, dan acara dirancang untuk memberi hadiah berupa kredit, material peningkatan, dan bonus progres. Acara khusus dan invasi Hammerong mungkin menawarkan hadiah dalam game premium dan eksklusif. Tantangan dengan kesulitan lebih tinggi dan kompetisi berperingkat direncanakan menawarkan hadiah dalam game yang lebih besar."
+          "q": "Hadiah dalam game apa yang dapat ditawarkan?",
+          "a": "Tugas harian, quest, pertempuran, dan acara yang direncanakan dirancang memberi kredit dalam game, material peningkatan, dan bonus progresi. Acara khusus dan invasi Hammerong dapat menawarkan hadiah dalam game premium dan eksklusif. Tantangan berkesulitan lebih tinggi dan kompetisi peringkat direncanakan menawarkan hadiah dalam game lebih besar."
         },
         {
           "q": "Apakah Overlord mendukung VR?",
-          "a": "Ya. Interaksi VR real-time penuh memungkinkan Anda berjalan di koridor kapal, menjelajahi interior Battle Ring, memimpin pasukan ke pertempuran darat, dan mengemudikan kapal Anda dalam peperangan luar angkasa. VR mengubah Overlord dari strategi menjadi pengalaman medan perang yang sepenuhnya mendalam."
+          "a": "VR direncanakan. Interaksi VR real-time dapat membiarkan Anda berjalan di lorong kapal, menjelajahi interior Battle Ring, memimpin pasukan ke pertempuran darat, dan menerbangkan kapal Anda dalam perang luar angkasa, tunduk pada pengembangan akhir dan aturan game."
         },
         {
           "q": "Bagaimana cara membangun pasukan saya?",
-          "a": "Kloning pasukan di laboratorium kapal Anda, lalu tingkatkan dan sempurnakan mereka beserta senjatanya. Untuk kavaleri berkuda, Anda harus menjinakkan dan melatih makhluk liar di planet ini, karena hewan tidak dapat dikloning. Komposisi pasukan di darat, udara, dan luar angkasa menentukan dominasi Anda."
+          "a": "Dalam game yang direncanakan, Anda mungkin dapat mengkloning pasukan di laboratorium onboard kapal Anda, lalu meningkatkan dan menyempurnakan mereka beserta senjatanya. Untuk kavaleri tunggangan, rencananya Anda menjinakkan dan melatih makhluk liar planet, karena hewan tidak dapat dikloning. Komposisi pasukan Anda di darat, udara, dan luar angkasa direncanakan menentukan dominasi Anda."
         },
         {
           "q": "Bisakah saya bergabung dengan aliansi?",
-          "a": "Ya. Lakukan sendiri atau bergabunglah dengan aliansi yang meningkatkan kekuatan Anda dan membantu Anda berkembang. Aliansi menawarkan sumber daya bersama, serangan terkoordinasi, dan pertahanan kolektif. Selesaikan tugas harian untuk meningkatkan kapal Anda dan aset bersama aliansi."
+          "a": "Aliansi direncanakan. Anda dapat bermain sendiri atau bergabung dengan aliansi yang dapat meningkatkan kekuatan Anda dan membantu Anda berkembang. Fitur aliansi yang direncanakan meliputi sumber daya dalam game bersama, serangan terkoordinasi, dan pertahanan kolektif, dan menyelesaikan tugas harian dapat membantu meningkatkan baik kapal Anda maupun item bersama aliansi."
         },
         {
           "q": "Apakah Overlord terhubung dengan game Hyper Tek lainnya?",
-          "a": "Terintegrasi penuh. Sumber daya, peningkatan kapal, bonus spesialis, dan keahlian tempur direncanakan mengalir antara Overlord, Hyper Racing, dan Hyper Quest. Kemampuan balap meningkatkan pertempuran luar angkasa Anda, material Quest menggerakkan peningkatan Anda, dan marketplace Hyper Tek menghubungkan ketiga game."
+          "a": "Itu direncanakan. Sumber daya dalam game, peningkatan kapal, bonus spesialis, dan keterampilan tempur direncanakan mengalir antara Overlord, Hyper Racing, dan Hyper Quest. Kemampuan balap dapat meningkatkan pertempuran luar angkasa Anda, material Quest dapat menggerakkan peningkatan Anda, dan marketplace Hyper Tek direncanakan menghubungkan ketiga game, tunduk pada pengembangan akhir dan aturan game."
         },
         {
           "q": "Senjata apa saja yang tersedia?",
-          "a": "Artileri berbasis darat, baterai anti-orbital, susunan senjata yang dipasang di kapal, dan peralatan aksi naik pesawat khusus. Setiap sistem dapat disempurnakan untuk peran taktis tertentu termasuk pemboman jarak jauh, pertempuran jarak dekat, dan tindakan pencegahan defensif."
+          "a": "Senjata yang direncanakan meliputi artileri darat, baterai anti-orbital, susunan senjata di kapal, dan perlengkapan khusus untuk aksi penyergapan. Setiap sistem dapat disempurnakan untuk peran taktis tertentu termasuk pengeboman jarak jauh, pertempuran jarak dekat, dan tindakan penangkal defensif."
         },
         {
           "q": "Bisakah saya menjelajahi permukaan planet ini?",
-          "a": "Ya. Planet ini kaya akan hadiah tersembunyi, artefak, sumber daya, dan satwa liar berbahaya yang harus dijinakkan. Jelajahi permukaan untuk menemukan harta karun, bertarung melawan makhluk asing dan monster, dan temukan keuntungan strategis yang memperkuat kampanye Anda untuk dominasi Overlord."
+          "a": "Itu direncanakan. Planet yang direncanakan memiliki hadiah dalam game tersembunyi, artefak, sumber daya dalam game, dan satwa berbahaya untuk dijinakkan, dengan makhluk alien dan monster untuk dilawan, serta keunggulan strategis untuk ditemukan yang dapat memperkuat kampanye Anda, tunduk pada pengembangan akhir dan aturan game."
         }
       ]
     }
@@ -496,7 +492,7 @@
       "sd": "Pusat logistik utama untuk perbatasan barat. Memelihara cadangan ransum darurat.",
       "res": "Lab xenobiologi dan material luar angkasa dalam. Menampung 40 ilmuwan residen.",
       "agri": "Kompleks pertanian hidroponik. Sumber makanan utama untuk sektor barat.",
-      "trade": "Zona perdagangan bebas. Lebih dari 200 pedagang terdaftar. Mata uang: Kredit Universal.",
+      "trade": "Zona perdagangan bebas. Lebih dari 200 pedagang terdaftar. Kredit dalam game: Universal Credits.",
       "fuel": "Depot bahan bakar berkapasitas tinggi. Mendukung penggerak ion, inti plasma, dan sel materi gelap.",
       "ship": "Stasiun pemeliharaan dan perakitan armada. Kapasitas: 18 kapal.",
       "ind": "Zona manufaktur berat. Diperlukan penyaring atmosfer. Output: 8,4 ribu unit/siklus.",
@@ -861,11 +857,11 @@
       },
       "stables_ss": {
         "title": "Kandang SS",
-        "desc": "Teluk aset biologis sisi kanan. Menampung tunggangan asing dan makhluk rekayasa bio yang digunakan dalam operasi permukaan planet."
+        "desc": "Ruang biologis kanan kapal. Menampung tunggangan alien dan makhluk hasil rekayasa hayati yang digunakan dalam operasi permukaan planet."
       },
       "stable_ps": {
         "title": "Kandang PS",
-        "desc": "Teluk aset biologis sisi kiri. Mencerminkan kandang SS untuk beban makhluk yang seimbang dan distribusi berat yang simetris."
+        "desc": "Ruang biologis kiri kapal. Mencerminkan kandang SS untuk beban makhluk yang seimbang dan distribusi berat yang simetris."
       },
       "transporter": {
         "title": "Teluk Transporter",
@@ -1165,7 +1161,7 @@
       "ggLastRace": "GG di balapan terakhir, kecepatan luar biasa",
       "tradingPlasma": "Menukar batang plasma untuk buku teknologi",
       "needHelpAsteroid": "Butuh bantuan misi asteroid",
-      "allianceRecruiting": "Aliansi kami sedang merekrut, DM saya",
+      "allianceRecruiting": "Aliansi kami sedang mencari anggota, kirim DM",
       "donationGoalsPlasma": "Target kontribusi: butuh batang plasma!",
       "warStarts2Hours": "Perang mulai 2 jam lagi, bersiaplah",
       "handleMedicalSupport": "Saya akan menangani dukungan medis",

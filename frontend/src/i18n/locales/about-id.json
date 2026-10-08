@@ -12,13 +12,13 @@
         "l": "Programmatic Trade-In Value"
       },
       {
-        "v": "P2E",
-        "l": "Play-to-Own"
+        "v": "P2O",
+        "l": "Play-To-Own"
       }
     ],
     "subtitle": [
-      "Misi Hyper Tek adalah untuk mengatasi berbagai masalah dalam industri gaming dan mendefinisikan ulang bagaimana ekosistem gaming beroperasi dengan menciptakan semesta yang saling terhubung di mana para pemain tidak terbatas pada satu gaya bermain. Dengan menggabungkan berbagai genre ke dalam satu sistem perkembangan, proyek Hyper Tek menyediakan lingkungan dinamis di mana para pemain dapat menjelajah, bersaing, dan berkembang dalam dunia yang terpadu.",
-      "Tujuannya memberi pemain kepemilikan sejati atas item digital mereka, masing-masing dengan kegunaan dalam game dan Programmatic Trade-In Value, di dalam ekosistem yang ikut dibentuk oleh para pemain.",
+      "Misi Hyper Tek adalah mengatasi berbagai masalah dalam industri game dan mendefinisikan ulang cara kerja ekosistem game dengan menciptakan semesta game yang saling terhubung dan direncanakan, di mana pemain tidak dibatasi pada satu gaya bermain. Dengan menggabungkan beberapa genre ke dalam satu sistem progresi, proyek Hyper Tek bertujuan menyediakan lingkungan dinamis tempat pemain dapat menjelajah, bersaing, dan berkembang dalam dunia yang menyatu.",
+      "Proyek Hyper Tek bertujuan memberi pemain kepemilikan nyata atas item digital mereka, masing-masing dengan fungsionalitas dalam game dan Programmatic Trade-In Value, dalam ekosistem yang ikut dibentuk oleh para pemain.",
       "Proyek ini bertujuan untuk memberdayakan pemain dengan memberikan kepemilikan yang bermakna atas kemajuan dan hadiah mereka sambil mendorong kreativitas, kolaborasi, dan kompetisi.",
       "Tujuan jangka panjang Hyper Tek adalah membangun semesta digital tempat berbagai game dan komunitas dapat hidup berdampingan dalam satu platform yang saling terhubung."
     ],
@@ -27,7 +27,7 @@
       "heading1": "Mendefinisikan Ulang Apa",
       "heading2": "Gaming Bisa Menjadi",
       "paras": [
-        "Proyek Hyper Tek didirikan oleh Don Bennett, yang membayangkan lingkungan gaming di mana berbagai genre dapat hidup berdampingan dalam satu sistem perkembangan. Daripada memaksa pemain untuk tetap dalam satu lingkaran gameplay, Hyper Tek memungkinkan mereka menjelajahi berbagai aktivitas sambil membangun karakter, sumber daya, dan reputasi mereka di seluruh ekosistem, dengan perkembangan, material, hadiah, dan pencapaian mengalir dengan mulus di semua game.",
+        "Proyek Hyper Tek didirikan oleh Don Bennett, mantan teknisi kedirgantaraan, yang membayangkan lingkungan game di mana beberapa genre dapat hidup berdampingan dalam satu sistem progresi. Alih-alih memaksa pemain tetap berada dalam satu siklus permainan, Hyper Tek direncanakan memungkinkan mereka menjelajahi berbagai aktivitas sambil membangun karakter, sumber daya, dan reputasi di seluruh ekosistem, dengan progresi, material, hadiah, dan pencapaian mengalir mulus di semua game.",
         "Proyek ini merencanakan tiga lingkungan game: Hyper Racing, Hyper Quest, dan Overlord of the Seven Realms. Setiap game menawarkan gaya bermain yang berbeda, tetapi semuanya dirancang untuk berada di semesta yang sama dan berbagi progres pemain yang sama. Rancangan ini dimaksudkan agar pemain bisa menikmati gaya bermain yang paling mereka sukai sambil tetap menjadi bagian dari ekosistem yang lebih besar, dengan lingkungan game yang lebih dalam dan lebih imersif daripada game mandiri tradisional."
       ]
     },
@@ -46,7 +46,7 @@
         "quote": "...untuk mengatasi berbagai masalah dalam industri gaming dan mendefinisikan ulang bagaimana ekosistem gaming beroperasi...",
         "paras": [
           "Misi Hyper Tek adalah untuk mengatasi berbagai masalah dalam industri gaming dan mendefinisikan ulang bagaimana ekosistem gaming beroperasi dengan menciptakan semesta yang saling terhubung di mana para pemain tidak terbatas pada satu gaya bermain.",
-          "Dengan menggabungkan beberapa genre ke dalam satu sistem progres, tujuannya adalah lingkungan dinamis tempat pemain dapat menjelajah, bersaing, dan berkembang dalam satu dunia yang menyatu, dengan kepemilikan sejati atas item digital mereka dan Programmatic Trade-In Value pada NFA yang memenuhi syarat.",
+          "Dengan menggabungkan beberapa genre ke dalam satu sistem progresi, tujuannya adalah lingkungan dinamis tempat pemain dapat menjelajah, bersaing, dan berkembang dalam dunia yang menyatu, dengan kepemilikan nyata atas item digital mereka dan Programmatic Trade-In Value pada item yang memenuhi syarat.",
           "Semesta digital tempat berbagai game dan komunitas hidup berdampingan dalam satu platform yang saling terhubung. Alih-alih mengisolasi pengalaman bermain online dan realitas virtual, Hyper Tek bertujuan membangun ekosistem bersama di mana tindakan dan interaksi pemain dapat memengaruhi dunia di sekitar mereka."
         ]
       }
@@ -77,8 +77,8 @@
     },
     "section04": {
       "label": "Karya Seni Digital Tidak Dapat Diganti",
-      "heading": "Seni Digital dengan Kegunaan dalam Game",
-      "subtitle": "Ringkasan 60 Detik",
+      "heading": "Seni Digital dengan Fungsi dalam Game yang Direncanakan",
+      "subtitle": "NFA, Non-Fungible Articles. Ini adalah Item atau Spesialis yang tidak memiliki kunci DNA dan dapat digunakan oleh spesies mana pun",
       "quote": "Satu Semesta. Tiga Game. Kepemilikan Sejati. Masa Depan Kepemilikan Digital Dimulai dari Hyper Tek.",
       "cards": [
         {
@@ -87,37 +87,37 @@
           "items": [
             {
               "label": "NFA...",
-              "desc": "Dibuat oleh arsitek, bonus dalam game tertinggi, semi hingga sangat langka"
+              "desc": "Dibuat oleh arsitek, bonus dalam game tertinggi yang direncanakan, semi hingga ultra langka"
             },
             {
               "label": "NFC...",
-              "desc": "Kolektibel dengan bonus dalam game, dapat dibuat oleh pemain"
+              "desc": "Barang koleksi yang direncanakan dengan bonus dalam game, dapat dibuat pemain"
             },
             {
               "label": "NFT...",
-              "desc": "Sepenuhnya dibuat pemain, hiasi basis Anda untuk bonus kekuatan"
+              "desc": "Sepenuhnya buatan pemain, hias basis Anda untuk bonus/hadiah kekuatan dalam game yang direncanakan"
             }
           ]
         },
         {
-          "title": "Mengapa Nilainya Bertahan",
+          "title": "Item On-Chain yang Dapat Didaur Ulang",
           "bullets": [
-            "Programmatic Trade-In Value pada setiap karya seni yang memenuhi syarat",
-            "Setiap penjualan ulang menambah alokasi tukar tambah item",
-            "Diindeks inflasi dua kali per tahun",
+            "Programmatic Trade-In Value yang direncanakan pada setiap karya seni yang memenuhi syarat",
+            "Setiap penjualan kembali menambah alokasi trade-in item sesuai ketentuan akhir",
             "Nilai Anda selalu tumbuh, tidak pernah menyusut"
           ]
         },
         {
           "title": "Adil Berdasarkan Desain",
-          "body": "Sebagian besar komisi dari setiap penjualan tidak tinggal di Hyper Tek 100. Komisi itu kembali ke ekosistem: ke alokasi tukar tambah item itu sendiri, yang disimpan di escrow, dan ke royalti seniman. Pembeli yang memasang quest dapat menurunkan komisinya sebagai diskon, sedangkan pemain yang menyelesaikan quest menerima hadiah dalam game."
+          "body": "Sebagian besar komisi direncanakan kembali ke ekosistem: pembeli yang memposting quest dapat menurunkan komisi mereka sebagai diskon, sedangkan pemain yang menyelesaikan quest menerima hadiah dalam game."
         },
         {
           "title": "Terlibat Sekarang",
-          "body": "Setiap karya seni adalah edisi terbatas: begitu persediaannya habis, habis untuk selamanya. Karena jumlahnya dibatasi, setiap karya tetap langka. Miliki karya seni koleksi dengan kegunaan dalam game yang mungkin berlaku jika game dirilis.",
-          "link": "[www.hypertek.com] — Jelajahi. Beli. Buat. Miliki Masa Depan."
+          "body": "Infrastruktur sudah dibangun dan marketplace sudah aktif. Seiring kami terus mengembangkan game, kami akan merilis item edisi terbatas dalam jumlah terbatas dengan bonus dalam game yang direncanakan lebih tinggi dari biasanya dan tidak akan diulang.",
+          "link": "[www.hypertek.com] — Jelajahi. Beli. Ciptakan. Miliki Item Anda."
         }
-      ]
+      ],
+      "pageHeading": "Seni Digital dengan Fungsionalitas dalam Game"
     },
     "section05": {
       "label": "Akses Awal — Item Edisi Terbatas",
@@ -155,11 +155,11 @@
       "helpItems": [
         {
           "bold": "Beli NFA, NFC, atau NFT",
-          "text": "Temukan karya seni digital dengan bonus dalam game yang mungkin berlaku jika game dirilis, ditambah Programmatic Trade-In Value. Tersedia selama persediaan masih ada."
+          "text": "Temukan karya seni digital dengan Programmatic Trade-In Value dan bonus dalam game yang direncanakan dan dapat berlaku jika game diselesaikan."
         },
         {
           "bold": "Buat NFT Anda sendiri",
-          "text": "— jadilah kreator di marketplace dan tawarkan karya seni Anda sendiri kepada pemain lain"
+          "text": "— jadilah kreator di marketplace dan tawarkan karya seni Anda sendiri kepada orang lain sekarang juga"
         },
         {
           "bold": "Bagikan dan sebarkan beritanya",
@@ -174,25 +174,25 @@
       "subtitle": "Menjembatani game yang imersif, marketplace digital yang digerakkan pemain, dan para pemain yang mengoleksi.",
       "cards": [
         {
-          "label": "Hadiah Nyata & Kewirausahaan",
+          "label": "Kepemilikan Item",
           "bullets": [
-            "Kepemilikan NFA/NFC/NFT sejati dengan Programmatic Trade-In Value",
+            "Kepemilikan nyata NFA/NFC/NFT dengan Programmatic Trade-In Value yang direncanakan",
             "Perdagangan antarpemain di marketplace",
-            "Kegunaan dalam game yang mungkin berlaku di game-game yang direncanakan",
+            "Bonus dalam game yang dapat berlaku di seluruh game yang direncanakan",
             "Rancangan item Play-to-Own"
           ]
         },
         {
           "label": "Item Loyalty Program",
-          "body": "Simpan item yang memenuhi syarat lebih lama, dan tingkat tukar tambahnya naik sesuai Tiered Loyalty Return Schedule, dari 80% alokasinya di tahun pertama menjadi 97% setelah tahun kelima. Jumlah yang dikembalikan selalu lebih kecil dari jumlah yang dialokasikan, jadi ini fitur produk, bukan cara menghasilkan uang."
+          "body": "Simpan item yang memenuhi syarat lebih lama dan tingkat trade-in-nya naik sesuai Tiered Loyalty Return Schedule, dari 80% alokasinya di tahun pertama hingga 97% setelah tahun kelima. Jumlah yang dikembalikan selalu lebih kecil dari jumlah yang dialokasikan, jadi ini adalah fitur daur ulang produk, bukan cara menghasilkan uang."
         },
         {
           "label": "Gameplay Tanpa Batas Di Seluruh Dunia yang Saling Terhubung",
           "bullets": [
-            "Tiga genre game unik dalam satu semesta terpadu",
-            "Perkembangan, hadiah, dan pencapaian bersama di semua game",
-            "Ekosistem yang hidup di mana setiap pilihan berdampak pada seluruh semesta",
-            "Pemain VR/AR dapat bergabung dalam misi dan pertempuran epik secara real-time"
+            "Tiga genre game unik yang direncanakan dalam satu semesta yang menyatu",
+            "Progresi bersama yang direncanakan, termasuk hadiah dan pencapaian yang diusulkan di seluruh game",
+            "Ekosistem hidup yang direncanakan di mana setiap pilihan memengaruhi seluruh semesta",
+            "VR direncanakan dan dapat memungkinkan pemain bergabung dalam misi dan pertempuran epik secara real-time"
           ]
         }
       ]
