@@ -13,6 +13,10 @@ const SECTION_IDS = [
   "conclusion",
 ];
 
+// The PDF still carries the pre-compliance wording. Keep the download hidden
+// until a rewritten PDF replaces frontend/public/whitepaper.pdf.
+const PDF_DOWNLOAD_ENABLED = false;
+
 function SectionHeading({ number, title }) {
   return (
     <div className="flex items-center gap-4 mb-6">
@@ -50,7 +54,8 @@ function WorldCard({ title, genre, tagline, color, features }) {
       <h3 className="font-[Goldman] text-xl font-bold text-white">{title}</h3>
       <p className="text-xs font-semibold tracking-widest uppercase" style={{ color }}>{genre}</p>
       <p className="text-white/70 text-sm leading-relaxed">{tagline}</p>
-      <ul className="space-y-2 mt-2">
+      <p className="text-white/30 text-xs font-semibold tracking-widest uppercase mt-2">Planned features</p>
+      <ul className="space-y-2">
         {features.map((f, i) => (
           <li key={i} className="flex items-start gap-2 text-sm text-white/60">
             <span className="mt-0.5 shrink-0" style={{ color }}>▸</span>
@@ -204,7 +209,7 @@ export default function WhitepaperPage() {
               </button>
             ))}
           </nav>
-          <div className="mt-6">
+          {PDF_DOWNLOAD_ENABLED && <div className="mt-6">
             <a
               href="/whitepaper.pdf"
               download="Hyper Tek-Whitepaper.pdf"
@@ -213,7 +218,7 @@ export default function WhitepaperPage() {
             >
               {t("whitepaper.download")}
             </a>
-          </div>
+          </div>}
         </aside>
 
         {/* Main content */}
@@ -236,9 +241,9 @@ export default function WhitepaperPage() {
             <div className="grid md:grid-cols-2 gap-4 mb-6">
               {[
                 { title: "Blockchain Gaming Failed", body: "After reaching a peak of $5B in NFT gaming sales in 2021, the sector experienced a decline of over 90%. Most blockchain games prioritised cryptocurrency mechanics at the expense of substantive gameplay." },
-                { title: "Pay-to-Win Problem", body: "More than 60% of gamers report frustration with pay-to-win models. Only 8% of players have ever earned tangible value through gameplay, and over 95% of in-game currencies remain non-exchangeable." },
-                { title: "Closed Ecosystems", body: "Established companies like Sony, Microsoft, and Nintendo maintain closed ecosystems, restricting asset transferability and confining players' purchases to individual game titles." },
-                { title: "The Solution: Hyper Tek", body: "A 3-in-1 interconnected gaming universe built on Unreal Engine 5 with planned cross-platform support, fair-play design, and NFA/NFC/NFTs with a Programmatic Trade-In Value." },
+                { title: "Pay-to-Win Problem", body: "More than 60% of gamers report frustration with pay-to-win models." },
+                { title: "Closed Ecosystems", body: "Established companies like Sony, Microsoft, and Nintendo maintain closed ecosystems, restricting item transferability and confining players' purchases to individual game titles." },
+                { title: "The Solution: Hyper Tek", body: "A proposed 3-in-1 interconnected gaming universe, in development on Unreal Engine 5 with planned cross-platform support, fair-play design, and NFA/NFC/NFTs with a Programmatic Trade-In Value." },
               ].map(({ title, body }) => (
                 <Card key={title}>
                   <h4 className="font-semibold text-white text-sm mb-2">{title}</h4>
@@ -250,13 +255,13 @@ export default function WhitepaperPage() {
             <Card>
               <h3 className="font-semibold text-white mb-4">Enter Hyper Tek</h3>
               <p className="text-white/60 text-sm leading-relaxed mb-4">
-                Hyper Tek represents the next evolution: a 3-in-1 interconnected gaming universe where strategy, racing, and exploration exist as distinct experiences within a unified ecosystem. Built on Unreal Engine 5 with cross-platform support, your character, items, and progression flow seamlessly between three immersive worlds.
+                Hyper Tek is a proposed 3-in-1 interconnected gaming universe where strategy, racing, and exploration are planned as distinct experiences within a unified ecosystem. In development on Unreal Engine 5 with planned cross-platform support, your character, items, and progression may flow between three immersive worlds, subject to final game development and game rules.
               </p>
               <div className="grid sm:grid-cols-3 gap-3">
                 {[
-                  { name: "Overlord Realm", desc: "MMORTS: command alien civilisations, build colonies, wage strategic warfare" },
-                  { name: "Hyper Racing 100", desc: "Futuristic racing simulator: build anti-gravity vehicles, manage racing teams" },
-                  { name: "Hyper Quest 100", desc: "RPG exploration: pilot customisable ships, accept delivery contracts, explore alien worlds" },
+                  { name: "Overlord Realm", desc: "Proposed MMORTS: players may command alien civilisations, build colonies, and wage strategic warfare" },
+                  { name: "Hyper Racing 100", desc: "Proposed futuristic racing simulator: players may build anti-gravity vehicles and manage racing teams" },
+                  { name: "Hyper Quest 100", desc: "Proposed RPG exploration: players may pilot customisable ships, accept delivery contracts, and explore alien worlds" },
                 ].map(({ name, desc }) => (
                   <div key={name} className="rounded-xl p-4" style={{ background: "rgba(0,42,168,0.15)", border: "1px solid rgba(0,42,168,0.3)" }}>
                     <p className="font-semibold text-blue-300 text-sm mb-1">{name}</p>
@@ -272,7 +277,7 @@ export default function WhitepaperPage() {
             <SectionHeading number="02" title="The Three Worlds" />
 
             <p className="text-white/50 text-sm leading-relaxed mb-8">
-              Hyper Tek isn't just one game. It's an interconnected universe where three distinct gaming experiences share a unified foundation. Each game offers unique gameplay while contributing to your overall progression.
+              Hyper Tek isn't planned as just one game. It's a proposed interconnected universe where three distinct gaming experiences may share a unified foundation. Each planned game is designed to offer unique gameplay while contributing to your overall progression. Everything described below is proposed and subject to final game development and game rules.
             </p>
 
             <div className="grid md:grid-cols-3 gap-5 mb-8">
@@ -280,7 +285,7 @@ export default function WhitepaperPage() {
                 title="Overlord Realm"
                 genre="MMORTS"
                 color="#3b82f6"
-                tagline="Command one of seven alien civilisations, each with unique bonuses. Your journey begins with a crashed spaceship on a hostile planet."
+                tagline="Players may command one of seven proposed alien civilisations, each with planned unique bonuses. Your journey is planned to begin with a crashed spaceship on a hostile planet."
                 features={[
                   "7 civilisations to command",
                   "Land bases up to Grade A (+40% production)",
@@ -293,7 +298,7 @@ export default function WhitepaperPage() {
                 title="Hyper Racing 100"
                 genre="Racing Simulator"
                 color="#f59e0b"
-                tagline="Combines Gran Turismo's depth with futuristic anti-gravity racing. Your garage lives in the lower deck of your Quest Runner spaceship."
+                tagline="Planned to combine Gran Turismo's depth with futuristic anti-gravity racing. Your garage may live in the lower deck of your Quest Runner spaceship."
                 features={[
                   "Anti-gravity hover vehicles",
                   "8 tech skill categories, 20–25 levels each",
@@ -306,7 +311,7 @@ export default function WhitepaperPage() {
                 title="Hyper Quest 100"
                 genre="RPG Exploration"
                 color="#10b981"
-                tagline="Your Quest Runner becomes a fully functional spaceship. Accept delivery contracts, navigate the lawless Dead Zone, mine asteroids for rare materials."
+                tagline="Your Quest Runner may become a fully functional spaceship. Players may accept delivery contracts, navigate the lawless Dead Zone, and mine asteroids for rare materials."
                 features={[
                   "7 off-world planets to explore",
                   "Pirate encounters (PvP in Dead Zone)",
@@ -322,13 +327,13 @@ export default function WhitepaperPage() {
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <p className="text-white/60 text-sm leading-relaxed mb-3">
-                    Hyper Tek's three games share a unified player profile and item database. This isn't superficial. It's deep mechanical integration.
+                    Hyper Tek's three planned games are designed to share a unified player profile and item database. This isn't superficial. It's planned as deep mechanical integration.
                   </p>
                   <div className="space-y-3">
                     {[
-                      { label: "Shared Resources", body: "Materials mined in Overlord (Furuseth Crystals, rare minerals) are the exact resources needed for vehicle upgrades in Racing and ship defences in Hyper Quest." },
-                      { label: "Unified Progression", body: "Your character level, wealth, and XP persist across all three worlds. Reaching Level 15 in Racing unlocks new ship capabilities." },
-                      { label: "Cross-Game NFAs", body: "A Legendary Fuel Specialist provides +30% fuel efficiency in Overlord, +25% tank capacity in Racing, and +20% thruster efficiency in Quest." },
+                      { label: "Shared Resources", body: "Materials mined in Overlord (Furuseth Crystals, rare minerals) may be the resources needed for vehicle upgrades in Racing and ship defences in Hyper Quest." },
+                      { label: "Unified Progression", body: "Your character level and XP may persist across all three worlds. For example, reaching Level 15 in Racing could unlock new ship capabilities." },
+                      { label: "Cross-Game NFAs", body: "A Legendary Fuel Specialist may provide +30% fuel efficiency in Overlord, +25% tank capacity in Racing, and +20% thruster efficiency in Quest, subject to final game rules." },
                     ].map(({ label, body }) => (
                       <div key={label}>
                         <p className="text-blue-300 text-xs font-semibold mb-1">{label}</p>
@@ -338,7 +343,7 @@ export default function WhitepaperPage() {
                   </div>
                 </div>
                 <div className="rounded-xl p-5" style={{ background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                  <p className="text-white/30 text-xs font-semibold tracking-widest uppercase mb-3">Resource Flow</p>
+                  <p className="text-white/30 text-xs font-semibold tracking-widest uppercase mb-3">Proposed Resource Flow</p>
                   {[
                     { step: "Overlord Realm", action: "Mine rare minerals" },
                     { step: "Hyper Quest", action: "Refine into advanced alloys" },
@@ -381,7 +386,7 @@ export default function WhitepaperPage() {
               <Card>
                 <h3 className="font-semibold text-white mb-3">Unreal Engine 5</h3>
                 <p className="text-white/60 text-sm leading-relaxed mb-3">
-                  Hyper Tek is built on Unreal Engine 5, providing photorealistic graphics via Nanite virtualised geometry and Lumen global illumination. A single codebase deploys across PC, PlayStation 5, Xbox Series X/S, iOS, Android, and VR headsets.
+                  Hyper Tek is in development on Unreal Engine 5, which provides photorealistic graphics via Nanite virtualised geometry and Lumen global illumination. A single codebase is planned to deploy across PC, PlayStation 5, Xbox Series X/S, iOS, Android, and VR headsets.
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {["PC (Win/Mac/Linux)", "PS5 / Xbox Series X", "iOS / Android", "Meta Quest / PSVR2"].map((p) => (
@@ -390,15 +395,15 @@ export default function WhitepaperPage() {
                 </div>
               </Card>
               <Card>
-                <h3 className="font-semibold text-white mb-3">Cloud Infrastructure (AWS)</h3>
+                <h3 className="font-semibold text-white mb-3">Planned Cloud Infrastructure (AWS)</h3>
                 <ul className="space-y-2 text-sm text-white/60">
                   <li><span className="text-white/80">EC2 Compute</span>: Auto-scaling instances by player demand</li>
                   <li><span className="text-white/80">RDS PostgreSQL</span>: Multi-region replication</li>
                   <li><span className="text-white/80">ElastiCache Redis</span>: Real-time leaderboards & listings</li>
-                  <li><span className="text-white/80">S3 + CloudFront</span>: Global asset delivery</li>
+                  <li><span className="text-white/80">S3 + CloudFront</span>: Global content delivery</li>
                   <li><span className="text-white/80">Kubernetes</span>: Containerised service orchestration</li>
                 </ul>
-                <p className="text-white/40 text-xs mt-3">Validated at 100,000+ simultaneous players per region • &lt;50ms latency</p>
+                <p className="text-white/40 text-xs mt-3">Design target: 100,000+ simultaneous players per region • &lt;50ms latency</p>
               </Card>
             </div>
 
@@ -419,17 +424,17 @@ export default function WhitepaperPage() {
                   </div>
                 ))}
               </div>
-              <p className="text-white/30 text-xs mt-4">All contracts are open-source, audited by third-party firms, and multi-signature controlled (3 of 5 team members for critical changes).</p>
+              <p className="text-white/30 text-xs mt-4">Contracts are planned to be open-source and independently audited before launch.</p>
             </Card>
 
             <Card>
-              <h3 className="font-semibold text-white mb-4">Security & Anti-Cheat</h3>
+              <h3 className="font-semibold text-white mb-4">Planned Security & Anti-Cheat</h3>
               <div className="grid sm:grid-cols-2 gap-4">
                 {[
-                  { label: "Server-Side Validation", body: "All critical game actions calculated on servers: combat results, resource generation, marketplace transactions. Players cannot manipulate outcomes." },
-                  { label: "BattleEye Integration", body: "Industry-standard anti-cheat (Rainbow Six Siege, PUBG, Fortnite) detects memory injection and manipulation." },
-                  { label: "DDoS Protection", body: "Cloudflare enterprise infrastructure: automatic mitigation within seconds of detection ensuring 24/7 uptime." },
-                  { label: "Data Privacy", body: "GDPR & COPPA compliant. TLS 1.3 transmission, AES-256 storage, annual third-party security audits, bug bounty program." },
+                  { label: "Server-Side Validation", body: "All critical game actions are planned to be calculated on servers: combat results, resource generation, marketplace transactions. This is designed so players cannot manipulate outcomes." },
+                  { label: "BattleEye Integration", body: "Planned: industry-standard anti-cheat (used by Rainbow Six Siege, PUBG, Fortnite) to detect memory injection and manipulation." },
+                  { label: "DDoS Protection", body: "Planned: Cloudflare enterprise infrastructure with automatic mitigation within seconds of detection, designed for 24/7 uptime." },
+                  { label: "Data Privacy", body: "Designed for GDPR & COPPA compliance. TLS 1.3 transmission, AES-256 storage, with planned third-party security audits and a planned bug bounty program." },
                 ].map(({ label, body }) => (
                   <div key={label}>
                     <p className="text-white/80 text-sm font-semibold mb-1">{label}</p>
@@ -466,11 +471,11 @@ export default function WhitepaperPage() {
             <Card className="mb-6">
               <h3 className="font-semibold text-white mb-4">The Item Loyalty Program</h3>
               <p className="text-white/60 text-sm leading-relaxed mb-4">
-                Each eligible item has its own <strong className="text-white">Item Reserve</strong>, an allocation held in an on-chain escrow and funded as a percentage of the item's sales. The owner may trade the item in at any time: the item is surrendered and recycled back into the game, and the owner receives an amount set by the Tiered Loyalty Return Schedule. The amount returned is always less than the amount allocated, so this is a product feature, not an investment.
+                Each eligible item has its own <strong className="text-white">Item Reserve</strong>, an allocation held in an on-chain escrow and set aside as a percentage of the item's sales. The owner may trade the item in at any time: the item is surrendered and recycled back into the game, and the owner receives an amount set by the Tiered Loyalty Return Schedule. The amount returned is always less than the amount allocated, so this is a product feature, not an investment.
               </p>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <p className="text-white/30 text-xs font-semibold tracking-widest uppercase mb-3">How It's Funded</p>
+                  <p className="text-white/30 text-xs font-semibold tracking-widest uppercase mb-3">How the Allocation Is Built</p>
                   <ul className="space-y-1.5">
                     {[
                       "Up to 70% of sale price when a user lists their own item",
@@ -541,11 +546,11 @@ export default function WhitepaperPage() {
             <Card className="mb-6">
               <h3 className="font-semibold text-white mb-3">What Are Gems?</h3>
               <p className="text-white/60 text-sm leading-relaxed mb-4">
-                Gems are an in-game consumable. Players buy Gems and use them for in-game purchases. Gems are not a currency: they cannot be cashed out, exchanged for money, or given out as rewards for playing.
+                Gems are an in-game consumable. Players may buy Gems and use them for planned in-game purchases. Gems are not a currency: they cannot be cashed out, exchanged for money, or given out as rewards for playing.
               </p>
               <ul className="space-y-1.5">
                 {[
-                  "Bought with a card or USDC, from $1",
+                  "Bought with a card or USDC",
                   "Used for in-game purchases, packages and items",
                   "No cash-out and no conversion back to money",
                   "In-game rewards for quests, events and letting are separate from Gems",
@@ -622,7 +627,6 @@ export default function WhitepaperPage() {
                   "Technology stack selected (Unreal Engine 5, cloud infrastructure)",
                   "Over two years of development, prototypes & content",
                   "Website established and social media presence initiated",
-                  "Kickstarter campaign preparation underway",
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-2 text-sm text-white/60">
                     <span className="text-green-400 mt-0.5 shrink-0">✓</span>{item}
@@ -634,10 +638,10 @@ export default function WhitepaperPage() {
             <div className="pl-2">
               <RoadmapPhase
                 phase="1"
-                title="Near-Term: Early-Access Deployment & Core Development"
+                title="Near-Term (Planned): Early-Access Deployment & Core Development"
                 period="Next 6–12 months"
                 items={[
-                  "Launch early-access deployment campaign targeting $440K",
+                  "Planned early-access release",
                   "Expand the development team",
                   "Build functional versions of all three games",
                   "Implement multiplayer infrastructure",
@@ -648,7 +652,7 @@ export default function WhitepaperPage() {
               />
               <RoadmapPhase
                 phase="2"
-                title="Medium-Term: Content & Public Launch"
+                title="Medium-Term (Planned): Content & Public Launch"
                 period="12–24 months"
                 items={[
                   "Expand racing circuits and vehicle options",
@@ -662,15 +666,15 @@ export default function WhitepaperPage() {
               />
               <RoadmapPhase
                 phase="3"
-                title="Long-Term: VR/AR & Platform Maturation"
+                title="Long-Term (Proposed): VR/AR & Platform Maturation"
                 period="24+ months"
                 items={[
                   "VR/AR integration (Meta Quest, PSVR2, PC VR)",
                   "GETs (Gaming Engagement Technology Systems) devices",
-                  "$2–5M targeted for wearable VR device development",
-                  "500,000+ monthly active users",
-                  "Established esports ecosystem",
-                  "Proven Gaming for Good model",
+                  "Proposed wearable VR device development",
+                  "Target: 500,000+ monthly active users",
+                  "Proposed esports ecosystem",
+                  "Proposed Gaming for Good model",
                   "Sustainable operations",
                 ]}
               />
@@ -678,7 +682,7 @@ export default function WhitepaperPage() {
 
             <Card>
               <p className="text-white/50 text-sm leading-relaxed italic">
-                "This roadmap represents our current vision. Timelines, priorities, and specific features are subject to change based on resources, community feedback, and technical discoveries. We are committed to the destination. The exact route may evolve. Quality over speed."
+                "This roadmap represents our current vision. Every item is proposed or planned and subject to final game development and game rules. Timelines, priorities, and specific features are subject to change based on resources, community feedback, and technical discoveries. We are committed to the destination. The exact route may evolve. Quality over speed."
               </p>
             </Card>
           </section>
@@ -690,7 +694,7 @@ export default function WhitepaperPage() {
             <Card className="mb-6">
               <h3 className="font-semibold text-white mb-4">The Hyper Tek Vision</h3>
               <p className="text-white/60 text-sm leading-relaxed mb-4">
-                Hyper Tek 100 is an ambitious vision to create an interconnected gaming ecosystem with a driven marketplace that addresses real problems in the industry. Three interconnected games: <strong className="text-white">Overlord Realm</strong> (MMORTS), <strong className="text-white">Hyper Racing 100</strong> (futuristic racing), and <strong className="text-white">Hyper Quest 100</strong> (RPG exploration), where progress, assets, and identity persist across all experiences.
+                Hyper Tek 100 is an ambitious vision to create an interconnected gaming ecosystem with a driven marketplace that addresses real problems in the industry. Three proposed interconnected games: <strong className="text-white">Overlord Realm</strong> (MMORTS), <strong className="text-white">Hyper Racing 100</strong> (futuristic racing), and <strong className="text-white">Hyper Quest 100</strong> (RPG exploration), where progress, items, and identity are planned to persist across all experiences.
               </p>
               <p className="text-white/60 text-sm leading-relaxed mb-4">
                 Players may enjoy fair-play design, NFAs with a <strong className="text-white">Programmatic Trade-In Value</strong>, and items they truly own.
@@ -704,14 +708,14 @@ export default function WhitepaperPage() {
             </Card>
 
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center pt-4">
-              <a
+              {PDF_DOWNLOAD_ENABLED && <a
                 href="/whitepaper.pdf"
                 download="Hyper Tek-Whitepaper.pdf"
                 className="inline-flex items-center gap-2 px-8 py-3 rounded-lg font-semibold text-sm text-white transition-all duration-300 border border-white/20 hover:border-white/40 hover:bg-[#003BD4]"
                 style={{ background: "#002AA8" }}
               >
                 {t("whitepaper.downloadFull")}
-              </a>
+              </a>}
               <Link
                 to="/waitlist"
                 onClick={() => window.scrollTo(0, 0)}
